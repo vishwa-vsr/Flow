@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Blocked &mdash; FocusFlow</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;color:#fff;font-family:system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.bar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(10,10,10,.9);backdrop-filter:blur(8px);z-index:10}
+.pulse{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:p 1.5s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.card{position:relative;z-index:1;width:100%;max-width:420px;background:linear-gradient(135deg,#141414,#0f0f0f);border:1px solid rgba(255,255,255,.06);border-radius:26px;padding:2.25rem;text-align:center;box-shadow:0 32px 64px rgba(0,0,0,.8)}
+.pill{display:inline-block;font-size:.65rem;letter-spacing:.15em;color:#737373;text-transform:uppercase;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:.25rem .9rem;margin-bottom:1.25rem;font-family:monospace}
+.emoji{font-size:3rem;margin-bottom:.75rem}
+h1{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem;background:linear-gradient(180deg,#fff,#a3a3a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:.85rem;color:#525252;line-height:1.6;margin-bottom:1.25rem}
+.badge{display:inline-block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .8rem;border-radius:7px;margin-bottom:1.25rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#737373}
+.badge.time_limit{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#f87171}
+.badge.schedule{background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.2);color:#fb923c}
+.badge.instant{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#f87171}
+.btn-back{display:block;width:100%;padding:.8rem;border-radius:13px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;font-weight:600;font-size:.875rem;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(34,197,94,.25);transition:transform .15s,box-shadow .15s;margin-bottom:.6rem}
+.btn-back:hover{transform:scale(1.02);box-shadow:0 6px 28px rgba(34,197,94,.35)}
+.btn-set{display:block;width:100%;padding:.65rem;background:none;border:none;color:#404040;font-size:.78rem;cursor:pointer;letter-spacing:.04em;transition:color .15s}
+.btn-set:hover{color:#737373}
+.quote{margin-top:1.75rem;z-index:1;position:relative;font-size:.65rem;color:#222;letter-spacing:.04em;text-transform:uppercase;max-width:280px;line-height:1.6;text-align:center}
+.gl{position:fixed;pointer-events:none}
+.gl1{bottom:0;right:0;width:14rem;height:14rem;background:radial-gradient(circle at 100% 100%,rgba(74,222,128,.05),transparent 70%)}
+.gl2{top:0;left:0;width:14rem;height:14rem;background:radial-gradient(circle at 0% 0%,rgba(74,222,128,.03),transparent 70%)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div style="display:flex;align-items:center;gap:8px"><div class="pulse"></div><span style="font-size:.6rem;color:#404040;letter-spacing:.2em;font-family:monospace">FOCUSFLOW</span></div>
+  <span id="bar-reason" style="font-size:.6rem;color:#991b1b;letter-spacing:.15em;text-transform:uppercase"></span>
+</div>
+<div class="card">
+  <div class="pill" id="domain-pill">this site</div>
+  <div class="emoji" id="emoji">&#x26D4;</div>
+  <h1 id="headline">Not today.</h1>
+  <p class="sub" id="sub">You blocked this. Past-you was smarter than you right now.</p>
+  <div class="badge" id="badge">Blocked by FocusFlow</div>
+  <button class="btn-back" id="btn-back">&#x2190; Take me back</button>
+  <button class="btn-set" id="btn-set">Manage block rules &#x2192;</button>
+</div>
+<p class="quote">&ldquo;Discipline is choosing between what you want now and what you want most.&rdquo;</p>
+<div class="gl gl1"></div>
+<div class="gl gl2"></div>
+<script src="blocked.js"></script>
+</body>
+</html>

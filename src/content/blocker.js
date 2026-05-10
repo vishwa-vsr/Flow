@@ -1,0 +1,1 @@
+(async()=>{const e=location.href;if(!e.startsWith("http://")&&!e.startsWith("https://"))return;if(e.startsWith(chrome.runtime.getURL("")))return;location.hostname.replace(/^www\./,"")&&setInterval(()=>{Array.from(document.querySelectorAll("video, audio")).some(e=>!e.paused&&!e.ended)&&chrome.runtime?.id&&chrome.runtime.sendMessage({type:"MEDIA_PING"}).catch(()=>{})},5e3)})();
