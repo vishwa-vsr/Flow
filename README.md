@@ -41,7 +41,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 ## 📸 Screenshots
 
-> **Note:** Screenshots coming soon. Want to contribute? See [Contributing](#-contributing) below.
+![Flow Preview](focusflow_preview.jpg)
 
 ---
 
