@@ -7,7 +7,7 @@ Copies the extension to a 'dist' folder with:
   - Everything else copied as-is (icons, fonts, CSS, manifest, etc.)
 
 Usage:  python build.py
-Output: ../focusflow-dist/  (sibling folder next to source)
+Output: ../flow-dist/  (sibling folder next to source)
 """
 
 import os
@@ -18,7 +18,7 @@ import json
 
 # --- Config ---
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
-DIST_DIR = os.path.join(os.path.dirname(SRC_DIR), "focusflow-dist")
+DIST_DIR = os.path.join(os.path.dirname(SRC_DIR), "flow-dist")
 
 # Files/folders to skip copying
 SKIP = {"build.py", "node_modules", ".git", ".gitignore", "__pycache__", "project_rules.md"}
@@ -274,6 +274,12 @@ def build_target(target_name, is_firefox=False):
                 if "permissions" in manifest and "favicon" in manifest["permissions"]:
                     manifest["permissions"].remove("favicon")
                 
+                # Remove Firefox-unsupported '_favicon/*' from web_accessible_resources
+                if "web_accessible_resources" in manifest:
+                    for war in manifest["web_accessible_resources"]:
+                        if "resources" in war and "_favicon/*" in war["resources"]:
+                            war["resources"].remove("_favicon/*")
+                
                 with open(dst_path, 'w', encoding='utf-8') as f:
                     json.dump(manifest, f, indent=2)
                 
@@ -396,7 +402,39 @@ if __name__ == "__main__":
             sys.exit(0)
             
     if should_build:
-        build_target("focusflow-dist", is_firefox=False)
-        build_target("focusflow-firefox", is_firefox=True)
+        build_target("flow-dist", is_firefox=False)
+        build_target("flow-firefox", is_firefox=True)
+        
+        # Get current version from manifest.json
+        manifest_path = os.path.join(SRC_DIR, "manifest.json")
+        try:
+            with open(manifest_path, "r", encoding="utf-8") as f:
+                manifest = json.load(f)
+            version = manifest.get("version", "6.9.0")
+        except Exception:
+            version = "6.9.0"
+            
+        import zipfile
+        def zip_target(name):
+            target_dir = os.path.join(os.path.dirname(SRC_DIR), name)
+            zip_file_path = os.path.join(os.path.dirname(SRC_DIR), f"{name}-v{version}.zip")
+            if os.path.exists(zip_file_path):
+                os.remove(zip_file_path)
+            with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                for root, _, files in os.walk(target_dir):
+                    for file in files:
+                        abs_p = os.path.join(root, file)
+                        rel_p = os.path.relpath(abs_p, target_dir)
+                        # Force standard forward slash for archive path names (fixes Firefox validator error!)
+                        archive_name = rel_p.replace(os.sep, '/')
+                        zipf.write(abs_p, archive_name)
+            print(f"  [Zip] Packaged {name} into {os.path.basename(zip_file_path)}")
+
+        print("=" * 60)
+        print("  Packaging Zip Archives for Store Uploads")
+        print("=" * 60)
+        zip_target("flow-dist")
+        zip_target("flow-firefox")
+        print("=" * 60 + "\n")
     else:
         print("Skipping distribution builds. Your source code changes are saved in 'flow-source'.")

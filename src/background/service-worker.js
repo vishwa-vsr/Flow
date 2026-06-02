@@ -801,7 +801,7 @@ function saveFocus() {
 // Battery optimization: track active port connections to avoid broadcasting when popup/newtab are closed
 let _activePorts = new Set();
 chrome.runtime.onConnect.addListener((port) => {
-    if (port.name === "focusflow-tracker") {
+    if (port.name === "flow-tracker") {
         _activePorts.add(port);
         port.onDisconnect.addListener(() => {
             _activePorts.delete(port);
@@ -1114,6 +1114,13 @@ async function handle(t, e) {
                     focusPresets: sync.focusPresets || []
                 }
             };
+        }
+        case "INVALIDATE_CACHES": {
+            _streakCache = null;
+            _todayDataCache = null;
+            _todayDataCacheKey = "";
+            _allTimeTotalsCache = null;
+            return { ok: true };
         }
         case "BACKUP_IMPORT": {
             // Bug #7 fix: invalidate streak cache on import since all data changes
@@ -1862,7 +1869,14 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     try { await init(); } catch (e) { console.warn("[FF] onInstalled init failed", e); }
 });
 chrome.runtime.onStartup.addListener(async () => {
-    try { await init(); } catch (e) { console.warn("[FF] onStartup init failed", e); }
+    try {
+        try {
+            await sSession({
+                activeSession: { domain: null, startTime: null }
+            });
+        } catch (_) {}
+        await init();
+    } catch (e) { console.warn("[FF] onStartup init failed", e); }
 });
 
 

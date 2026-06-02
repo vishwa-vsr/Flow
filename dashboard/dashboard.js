@@ -607,11 +607,11 @@ function renderCategories() {
 
 function renderFocus(e, t = 25) {
     if (!e || !e.active) {
-        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = "0 cycles"), $("fpb") && ($("fpb").textContent = "Work", $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("sfd") && ($("sfd").className = "bdot"), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
+        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = "0 cycles"), $("fpb") && ($("fpb").textContent = "Work", $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
         let e = document.getElementById("dynamic-favicon");
         return void (e && (e.href = "../icons/icon128.png"))
     }
-    $("sfd") && ($("sfd").className = "bdot on");
+    $("logo-img") && ($("logo-img").className = "on");
     var a = "work" === e.phase,
         n = e.fullDuration || (a ? 1500 : "long_break" === e.phase ? 900 : 300),
         i = Math.max(0, 1 - Math.min(1, (e.remaining || 0) / n));
@@ -1065,7 +1065,6 @@ document.querySelectorAll(".ni").forEach(e => {
             allowList: allowList
         }), await msg("TRIGGER_DNR_UPDATE"), isBulkMode = !1, bulkSelected.clear(), $("btn-bulk-edit").style.display = "", $("bulk-actions").style.display = "none", renderCombined(), toast("Rules deleted", "ok")
     }), $("btn-add-block") && $("btn-add-block").addEventListener("click", async function () {
-        if (!await promptPinIfEnabled("lockRules")) return;
         var e = $("cat-inp").value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
         if (!e) return toast("Enter a domain", "er");
 
@@ -1932,9 +1931,9 @@ function renderWhitelist(e) {
 // Bug #5 fix: accept pre-loaded settings to avoid double gSync when called alongside loadSettings
 async function loadExtendedSettings(preloadedSettings) {
     var e = preloadedSettings || (await gSync(["settings"])).settings || {};
-    if ($("tog-pc") && ($("tog-pc").checked = !!e.passcodeEnabled), $("tog-fun") && ($("tog-fun").checked = !1 !== e.funnyBlocked), $("block-msg") && ($("block-msg").value = e.customBlockMsg || ""), $("tab-limit-input") && ($("tab-limit-input").value = e.tabLimit || 0), $("tog-time-warn") && ($("tog-time-warn").checked = !1 !== e.timeWarningEnabled), $("time-warn-secs") && ($("time-warn-secs").value = e.timeWarningSecs || 60), $("tog-badge") && ($("tog-badge").checked = !1 !== e.showBadge), $("tog-newtab") && ($("tog-newtab").checked = !0 === e.customNewTab), $("idle-timeout-sel") && ($("idle-timeout-sel").value = e.idleTimeout || 30), $("welcome-back-thresh-sel") && ($("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10), renderWhitelist((await gLocal(["idleWhitelist"])).idleWhitelist || []), $("pin-status-badge"))
+    if ($("tog-pc") && ($("tog-pc").checked = !!e.passcodeEnabled), $("tog-fun") && ($("tog-fun").checked = !1 !== e.funnyBlocked), $("tab-limit-input") && ($("tab-limit-input").value = e.tabLimit || 0), $("tog-time-warn") && ($("tog-time-warn").checked = !1 !== e.timeWarningEnabled), $("time-warn-secs") && ($("time-warn-secs").value = e.timeWarningSecs || 60), $("tog-badge") && ($("tog-badge").checked = !1 !== e.showBadge), $("tog-newtab") && ($("tog-newtab").checked = !0 === e.customNewTab), $("idle-timeout-sel") && ($("idle-timeout-sel").value = e.idleTimeout || 30), $("welcome-back-thresh-sel") && ($("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10), renderWhitelist((await gLocal(["idleWhitelist"])).idleWhitelist || []), $("pin-status-badge"))
         if (e.passcodeHash) {
-            $("pin-status-badge").textContent = "🔒 PIN Active", $("pin-status-badge").style.color = "var(--green)";
+            $("pin-status-badge").innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>PIN Active', $("pin-status-badge").style.color = "var(--green)";
             var t = $("pin-status-badge").parentElement;
             t.style.display = "flex", t.style.justifyContent = "space-between", t.style.alignItems = "center", (a = document.getElementById("pin-actions-div")) || ((a = document.createElement("div")).id = "pin-actions-div", a.style.display = "flex", a.style.gap = "12px", $("btn-change-pin") && a.appendChild($("btn-change-pin")), $("btn-remove-pin") && a.appendChild($("btn-remove-pin")), t.appendChild(a)), $("granular-locks") && ($("granular-locks").style.display = "block"), $("granular-locks-overlay") && ($("granular-locks-overlay").style.display = "none"), $("pin-setup-box").style.display = "none", $("pin-manage-box").style.display = "flex";
 
@@ -1946,7 +1945,7 @@ async function loadExtendedSettings(preloadedSettings) {
             $("lock-tweaks") && ($("lock-tweaks").checked = !1 !== e.lockTweaks);
         } else {
             var a;
-            $("pin-status-badge").textContent = "🔓 Not Set", $("pin-status-badge").style.color = "var(--tx2)";
+            $("pin-status-badge").innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set', $("pin-status-badge").style.color = "var(--tx2)";
             if ($("granular-locks")) $("granular-locks").style.display = "block";
             if ($("granular-locks-overlay")) { $("granular-locks-overlay").style.display = "flex"; }
             (a = document.getElementById("pin-actions-div")) && ($("btn-change-pin") && $("pin-manage-box").insertBefore($("btn-change-pin"), $("pin-manage-box").firstChild), $("btn-remove-pin") && $("pin-manage-box").insertBefore($("btn-remove-pin"), $("pin-manage-box").firstChild), a.remove()), $("pin-setup-box").style.display = "flex", $("pin-manage-box").style.display = "none"
@@ -2189,7 +2188,7 @@ async function loadFocusHistory() {
     }
 }), $("btn-save-set") && $("btn-save-set").addEventListener("click", async () => {
     var e = (await gSync(["settings"])).settings || {};
-    e.passcodeEnabled = $("tog-pc")?.checked || !1, e.funnyBlocked = !1 !== $("tog-fun")?.checked, e.customBlockMsg = $("block-msg")?.value?.trim() || "", e.tabLimit = parseInt($("tab-limit-input")?.value) || 0, e.timeWarningEnabled = !1 !== $("tog-time-warn")?.checked, e.timeWarningSecs = parseInt($("time-warn-secs")?.value) || 60, e.showBadge = !1 !== $("tog-badge")?.checked, e.customNewTab = !0 === $("tog-newtab")?.checked, e.idleTimeout = parseInt($("idle-timeout-sel")?.value) || 60, e.welcomeBackThresh = parseInt($("welcome-back-thresh-sel")?.value) || 10, e.passcodeHash && (e.lockStop = !1 !== $("lock-stop")?.checked, e.lockRules = !1 !== $("lock-rules")?.checked, e.lockFreetime = !1 !== $("lock-freetime")?.checked, e.lockFocusPresets = !$("lock-focus-presets") || $("lock-focus-presets").checked, e.lockFocusScheds = !$("lock-focus-scheds") || $("lock-focus-scheds").checked, e.lockDanger = !1 !== $("lock-danger")?.checked, e.lockTweaks = !1 !== $("lock-tweaks")?.checked);
+    e.passcodeEnabled = $("tog-pc")?.checked || !1, e.funnyBlocked = !1 !== $("tog-fun")?.checked, e.tabLimit = parseInt($("tab-limit-input")?.value) || 0, e.timeWarningEnabled = !1 !== $("tog-time-warn")?.checked, e.timeWarningSecs = parseInt($("time-warn-secs")?.value) || 60, e.showBadge = !1 !== $("tog-badge")?.checked, e.customNewTab = !0 === $("tog-newtab")?.checked, e.idleTimeout = parseInt($("idle-timeout-sel")?.value) || 60, e.welcomeBackThresh = parseInt($("welcome-back-thresh-sel")?.value) || 10, e.passcodeHash && (e.lockStop = !1 !== $("lock-stop")?.checked, e.lockRules = !1 !== $("lock-rules")?.checked, e.lockFreetime = !1 !== $("lock-freetime")?.checked, e.lockFocusPresets = !$("lock-focus-presets") || $("lock-focus-presets").checked, e.lockFocusScheds = !$("lock-focus-scheds") || $("lock-focus-scheds").checked, e.lockDanger = !1 !== $("lock-danger")?.checked, e.lockTweaks = !1 !== $("lock-tweaks")?.checked);
     await sSync({
         settings: e
     }), toast("Settings saved", "ok"), loadExtendedSettings(), msg("UPDATE_IDLE")
@@ -2320,7 +2319,7 @@ if ($("btn-export")) $("btn-export").addEventListener("click", async () => {
     const blob = new Blob([JSON.stringify(r.payload, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "focusflow-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = "flow-backup-" + new Date().toISOString().slice(0, 10) + ".json";
     a.click();
     URL.revokeObjectURL(a.href);
     toast("Backup downloaded", "ok");
@@ -2341,6 +2340,628 @@ if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
     } catch (err) {
         toast("Invalid JSON file", "err");
     }
+    e.target.value = "";
+});
+
+let isMigrationRunning = false;
+if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", async (e) => {
+    if (isMigrationRunning) return;
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!confirm("This will merge Web Activity Time Tracker logs into Flow's history.\n\nWarning: If you import the same spreadsheet twice, it will add the tracked time twice. Click OK to proceed.")) {
+        e.target.value = "";
+        return;
+    }
+
+    isMigrationRunning = true;
+    const statusEl = $("migration-status");
+    const statusTextEl = $("migration-status-text");
+    const progressBarEl = $("migration-progress-bar");
+
+    if (statusEl) statusEl.style.display = "block";
+    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (progressBarEl) progressBarEl.style.width = "0%";
+
+    try {
+        const text = await file.text();
+        if (statusTextEl) statusTextEl.textContent = "Parsing CSV data...";
+
+        const lines = text.split(/\r?\n/);
+        if (lines.length < 2) {
+            throw new Error("The file is empty or has no rows.");
+        }
+
+        const parseCSVLine = (line) => {
+            const result = [];
+            let cell = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(cell.trim());
+                    cell = '';
+                } else {
+                    cell += char;
+                }
+            }
+            result.push(cell.trim());
+            return result;
+        };
+
+        const headers = parseCSVLine(lines[0]);
+        let dateIdx = -1;
+        let siteIdx = -1;
+        let timeIdx = -1;
+
+        for (let i = 0; i < headers.length; i++) {
+            const h = headers[i].toLowerCase();
+            if (h === 'date' || h === 'day') dateIdx = i;
+            else if (h === 'website' || h === 'site' || h === 'domain' || h === 'url') siteIdx = i;
+            else if (h === 'time(sec)' || h === 'time' || h === 'seconds' || h.includes('sec')) timeIdx = i;
+        }
+
+        if (dateIdx === -1) dateIdx = 0;
+        if (siteIdx === -1) siteIdx = 1;
+        if (timeIdx === -1) timeIdx = 2;
+
+        const grouped = {};
+        let skippedRows = 0;
+        let totalRows = 0;
+
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+
+            const cells = parseCSVLine(line);
+            if (cells.length <= Math.max(dateIdx, siteIdx, timeIdx)) {
+                skippedRows++;
+                continue;
+            }
+
+            const rawDate = cells[dateIdx];
+            const rawSite = cells[siteIdx];
+            const rawTime = cells[timeIdx];
+
+            if (!rawDate) { skippedRows++; continue; }
+            let parts = rawDate.split(/[\/\-.]/);
+            if (parts.length !== 3) {
+                skippedRows++;
+                continue;
+            }
+
+            let m = parseInt(parts[0], 10);
+            let d = parseInt(parts[1], 10);
+            let y = parseInt(parts[2], 10);
+
+            if (isNaN(m) || isNaN(d) || isNaN(y)) {
+                skippedRows++;
+                continue;
+            }
+
+            if (m > 12 && d <= 12) {
+                const temp = m;
+                m = d;
+                d = temp;
+            }
+
+            if (y < 100) {
+                y = 2000 + y;
+            }
+
+            const dayKey = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) {
+                skippedRows++;
+                continue;
+            }
+
+            if (!rawSite) { skippedRows++; continue; }
+            let site = rawSite.trim().toLowerCase();
+
+            if (site.startsWith("file:///")) {
+                const parts = site.split("/");
+                const filename = decodeURIComponent(parts[parts.length - 1] || "local-file");
+                site = "local:" + filename.toLowerCase();
+            } else {
+                site = site.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+            }
+
+            if (!site) {
+                skippedRows++;
+                continue;
+            }
+
+            let secs = parseInt(rawTime, 10);
+            if (isNaN(secs) || secs <= 0) {
+                skippedRows++;
+                continue;
+            }
+
+            if (!grouped[dayKey]) grouped[dayKey] = {};
+            grouped[dayKey][site] = (grouped[dayKey][site] || 0) + secs;
+            totalRows++;
+        }
+
+        const dateKeys = Object.keys(grouped);
+        if (dateKeys.length === 0) {
+            throw new Error("No valid website history rows were found in the file.");
+        }
+
+        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+
+        const batchSize = 50;
+        let processed = 0;
+
+        const processBatch = async () => {
+            if (processed >= dateKeys.length) {
+                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (progressBarEl) progressBarEl.style.width = "100%";
+
+                await msg("INVALIDATE_CACHES");
+
+                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                setTimeout(() => location.reload(), 1500);
+                return;
+            }
+
+            const batchKeys = dateKeys.slice(processed, processed + batchSize);
+            const currentDB = await FFDB.getDays(batchKeys);
+            const writeMap = {};
+
+            for (const day of batchKeys) {
+                const importedSites = grouped[day];
+                let entry = currentDB[day];
+
+                if (!entry) {
+                    entry = {
+                        sites: {},
+                        timeline: [],
+                        productivity: 0,
+                        learning: 0,
+                        distraction: 0,
+                        communication: 0,
+                        uncategorized: 0
+                    };
+                } else {
+                    entry.sites = entry.sites || {};
+                    entry.timeline = entry.timeline || [];
+                }
+
+                for (const [dom, secs] of Object.entries(importedSites)) {
+                    entry.sites[dom] = (entry.sites[dom] || 0) + secs;
+                }
+
+                entry.productivity = 0;
+                entry.learning = 0;
+                entry.distraction = 0;
+                entry.communication = 0;
+                entry.uncategorized = 0;
+
+                for (const [dom, secs] of Object.entries(entry.sites)) {
+                    const cat = getEffectiveCat(dom).cat;
+                    entry[cat] = (entry[cat] || 0) + secs;
+                }
+
+                writeMap[day] = entry;
+            }
+
+            await FFDB.bulkSetDays(writeMap);
+            processed += batchKeys.length;
+
+            const percent = Math.round((processed / dateKeys.length) * 100);
+            if (progressBarEl) progressBarEl.style.width = `${percent}%`;
+            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+
+            setTimeout(processBatch, 20);
+        };
+
+        await processBatch();
+
+    } catch (err) {
+        console.error("[Migration] Error importing CSV file", err);
+        if (statusTextEl) statusTextEl.innerHTML = `<span style="color:var(--red)">Failed: ${err.message || err}</span>`;
+        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        isMigrationRunning = false;
+    }
+
+    e.target.value = "";
+});
+
+if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!confirm("This will merge Time Tracker JSON logs into Flow's history.\n\nWarning: If you import the same JSON file twice, it will add the tracked time twice. Click OK to proceed.")) {
+        e.target.value = "";
+        return;
+    }
+
+    if (isMigrationRunning) return;
+    isMigrationRunning = true;
+
+    const statusEl = $("migration-status");
+    const statusTextEl = $("migration-status-text");
+    const progressBarEl = $("migration-progress-bar");
+
+    if (statusEl) statusEl.style.display = "block";
+    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (progressBarEl) progressBarEl.style.width = "0%";
+
+    try {
+        const text = await file.text();
+        if (statusTextEl) statusTextEl.textContent = "Parsing JSON data...";
+
+        const payload = JSON.parse(text);
+        if (!payload || !Array.isArray(payload.__stat__)) {
+            throw new Error("Invalid format. Missing time-tracker list data (__stat__).");
+        }
+
+        const stats = payload.__stat__;
+        const grouped = {};
+        let skippedRows = 0;
+        let newtabFiltered = 0;
+        let totalRows = 0;
+
+        for (const item of stats) {
+            const host = item.host;
+            const dateStr = item.date;
+            const focusMs = item.focus;
+
+            if (!host || !dateStr || focusMs === undefined) {
+                skippedRows++;
+                continue;
+            }
+
+            let site = host.trim().toLowerCase();
+            if (site === "newtab") {
+                newtabFiltered++;
+                continue;
+            }
+
+            site = site.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+            if (!site) {
+                skippedRows++;
+                continue;
+            }
+
+            if (dateStr.length !== 8) {
+                skippedRows++;
+                continue;
+            }
+
+            const y = dateStr.slice(0, 4);
+            const m = dateStr.slice(4, 6);
+            const d = dateStr.slice(6, 8);
+            const dayKey = `${y}-${m}-${d}`;
+
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) {
+                skippedRows++;
+                continue;
+            }
+
+            let secs = Math.round(parseInt(focusMs, 10) / 1000);
+            if (isNaN(secs) || secs <= 0) {
+                skippedRows++;
+                continue;
+            }
+
+            if (!grouped[dayKey]) grouped[dayKey] = {};
+            grouped[dayKey][site] = (grouped[dayKey][site] || 0) + secs;
+            totalRows++;
+        }
+
+        const dateKeys = Object.keys(grouped);
+        if (dateKeys.length === 0) {
+            throw new Error("No valid website history entries were found in the file.");
+        }
+
+        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+
+        const batchSize = 50;
+        let processed = 0;
+
+        const processBatch = async () => {
+            if (processed >= dateKeys.length) {
+                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (progressBarEl) progressBarEl.style.width = "100%";
+
+                await msg("INVALIDATE_CACHES");
+
+                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                setTimeout(() => location.reload(), 1500);
+                return;
+            }
+
+            const batchKeys = dateKeys.slice(processed, processed + batchSize);
+            const currentDB = await FFDB.getDays(batchKeys);
+            const writeMap = {};
+
+            for (const day of batchKeys) {
+                const importedSites = grouped[day];
+                let entry = currentDB[day];
+
+                if (!entry) {
+                    entry = {
+                        sites: {},
+                        timeline: [],
+                        productivity: 0,
+                        learning: 0,
+                        distraction: 0,
+                        communication: 0,
+                        uncategorized: 0
+                    };
+                } else {
+                    entry.sites = entry.sites || {};
+                    entry.timeline = entry.timeline || [];
+                }
+
+                for (const [dom, secs] of Object.entries(importedSites)) {
+                    entry.sites[dom] = (entry.sites[dom] || 0) + secs;
+                }
+
+                entry.productivity = 0;
+                entry.learning = 0;
+                entry.distraction = 0;
+                entry.communication = 0;
+                entry.uncategorized = 0;
+
+                for (const [dom, secs] of Object.entries(entry.sites)) {
+                    const cat = getEffectiveCat(dom).cat;
+                    entry[cat] = (entry[cat] || 0) + secs;
+                }
+
+                writeMap[day] = entry;
+            }
+
+            await FFDB.bulkSetDays(writeMap);
+            processed += batchKeys.length;
+
+            const percent = Math.round((processed / dateKeys.length) * 100);
+            if (progressBarEl) progressBarEl.style.width = `${percent}%`;
+            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+
+            setTimeout(processBatch, 20);
+        };
+
+        await processBatch();
+
+    } catch (err) {
+        console.error("[Migration] Error importing JSON file", err);
+        if (statusTextEl) statusTextEl.innerHTML = `<span style="color:var(--red)">Failed: ${err.message || err}</span>`;
+        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        isMigrationRunning = false;
+    }
+
+    e.target.value = "";
+});
+
+if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!confirm("This will merge Webtime Tracker CSV logs into Flow's history.\n\nWarning: If you import the same CSV file twice, it will add the tracked time twice. Click OK to proceed.")) {
+        e.target.value = "";
+        return;
+    }
+
+    if (isMigrationRunning) return;
+    isMigrationRunning = true;
+
+    const statusEl = $("migration-status");
+    const statusTextEl = $("migration-status-text");
+    const progressBarEl = $("migration-progress-bar");
+
+    if (statusEl) statusEl.style.display = "block";
+    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (progressBarEl) progressBarEl.style.width = "0%";
+
+    try {
+        const text = await file.text();
+        if (statusTextEl) statusTextEl.textContent = "Parsing CSV data...";
+
+        const lines = text.split(/\r?\n/);
+        if (lines.length < 2) {
+            throw new Error("The file is empty or has no rows.");
+        }
+
+        const parseCSVLine = (line) => {
+            const result = [];
+            let cell = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(cell.trim());
+                    cell = '';
+                } else {
+                    cell += char;
+                }
+            }
+            result.push(cell.trim());
+            return result;
+        };
+
+        const headers = parseCSVLine(lines[0]);
+        if (headers.length < 2) {
+            throw new Error("Invalid CSV format. Missing columns.");
+        }
+
+        if (headers[0].toLowerCase() !== "domain") {
+            throw new Error("Invalid CSV format. First column must be 'Domain'.");
+        }
+
+        // Extract dates and check which column they are in
+        const dates = [];
+        for (let i = 1; i < headers.length; i++) {
+            const rawDate = headers[i].trim();
+            if (!rawDate) continue;
+
+            // Check if date is YYYY-MM-DD
+            if (/^\d{4}-\d{2}-\d{2}$/.test(rawDate)) {
+                dates.push({ colIndex: i, dayKey: rawDate });
+            } else {
+                let parts = rawDate.split(/[\/\-.]/);
+                if (parts.length === 3) {
+                    let m = parseInt(parts[0], 10);
+                    let d = parseInt(parts[1], 10);
+                    let y = parseInt(parts[2], 10);
+                    if (!isNaN(m) && !isNaN(d) && !isNaN(y)) {
+                        if (m > 12 && d <= 12) {
+                            const temp = m; m = d; d = temp;
+                        }
+                        if (y < 100) y = 2000 + y;
+                        const dayKey = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+                        if (/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) {
+                            dates.push({ colIndex: i, dayKey });
+                        }
+                    }
+                }
+            }
+        }
+
+        if (dates.length === 0) {
+            throw new Error("No valid date columns were found in the header row.");
+        }
+
+        const grouped = {};
+        let skippedRows = 0;
+        let totalRows = 0;
+
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+
+            const cells = parseCSVLine(line);
+            if (cells.length < 2) {
+                skippedRows++;
+                continue;
+            }
+
+            const rawSite = cells[0];
+            if (!rawSite) {
+                skippedRows++;
+                continue;
+            }
+
+            let site = rawSite.trim().toLowerCase();
+            if (site.startsWith("file:///")) {
+                const parts = site.split("/");
+                const filename = decodeURIComponent(parts[parts.length - 1] || "local-file");
+                site = "local:" + filename.toLowerCase();
+            } else {
+                site = site.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+            }
+
+            if (!site) {
+                skippedRows++;
+                continue;
+            }
+
+            // Loop over dates
+            for (const dateObj of dates) {
+                const colIndex = dateObj.colIndex;
+                const dayKey = dateObj.dayKey;
+
+                if (colIndex >= cells.length) continue;
+
+                const rawTime = cells[colIndex];
+                if (!rawTime) continue;
+
+                const secs = parseInt(rawTime, 10);
+                if (isNaN(secs) || secs <= 0) continue;
+
+                if (!grouped[dayKey]) grouped[dayKey] = {};
+                grouped[dayKey][site] = (grouped[dayKey][site] || 0) + secs;
+                totalRows++;
+            }
+        }
+
+        const dateKeys = Object.keys(grouped);
+        if (dateKeys.length === 0) {
+            throw new Error("No valid website history entries were found in the CSV file.");
+        }
+
+        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+
+        const batchSize = 50;
+        let processed = 0;
+
+        const processBatch = async () => {
+            if (processed >= dateKeys.length) {
+                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (progressBarEl) progressBarEl.style.width = "100%";
+
+                await msg("INVALIDATE_CACHES");
+
+                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                setTimeout(() => location.reload(), 1500);
+                return;
+            }
+
+            const batchKeys = dateKeys.slice(processed, processed + batchSize);
+            const currentDB = await FFDB.getDays(batchKeys);
+            const writeMap = {};
+
+            for (const day of batchKeys) {
+                const importedSites = grouped[day];
+                let entry = currentDB[day];
+
+                if (!entry) {
+                    entry = {
+                        sites: {},
+                        timeline: [],
+                        productivity: 0,
+                        learning: 0,
+                        distraction: 0,
+                        communication: 0,
+                        uncategorized: 0
+                    };
+                } else {
+                    entry.sites = entry.sites || {};
+                    entry.timeline = entry.timeline || [];
+                }
+
+                for (const [dom, secs] of Object.entries(importedSites)) {
+                    entry.sites[dom] = (entry.sites[dom] || 0) + secs;
+                }
+
+                entry.productivity = 0;
+                entry.learning = 0;
+                entry.distraction = 0;
+                entry.communication = 0;
+                entry.uncategorized = 0;
+
+                for (const [dom, secs] of Object.entries(entry.sites)) {
+                    const cat = getEffectiveCat(dom).cat;
+                    entry[cat] = (entry[cat] || 0) + secs;
+                }
+
+                writeMap[day] = entry;
+            }
+
+            await FFDB.bulkSetDays(writeMap);
+            processed += batchKeys.length;
+
+            const percent = Math.round((processed / dateKeys.length) * 100);
+            if (progressBarEl) progressBarEl.style.width = `${percent}%`;
+            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+
+            setTimeout(processBatch, 20);
+        };
+
+        await processBatch();
+
+    } catch (err) {
+        console.error("[Migration] Error importing Webtime Tracker CSV file", err);
+        if (statusTextEl) statusTextEl.innerHTML = `<span style="color:var(--red)">Failed: ${err.message || err}</span>`;
+        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        isMigrationRunning = false;
+    }
+
     e.target.value = "";
 });
 
@@ -2456,7 +3077,7 @@ if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
                 card.innerHTML = `
           ${emojiOrIcon}
           <div style="font-size: 13px; font-weight: 800; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">${p.name}</div>
-          <div style="font-size: 11px; font-weight: 700; color: var(--tx2); margin-top: 2px;">${p.work}m · ${p.brk}m · ${p.cycles || 4} 🔄</div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--tx2); margin-top: 2px; display: flex; align-items: center; gap: 4px;">${p.work}m · ${p.brk}m · ${p.cycles || 4} <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M17 1l4 4-4 4"></path><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><path d="M7 23l-4-4 4-4"></path><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></div>
           
           <div class="preset-card-actions" style="display: flex; gap: 8px; margin-top: 10px; width: 100%; justify-content: center;">
             <button class="preset-play-btn" title="Quick Start" style="
@@ -3376,7 +3997,8 @@ if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
     const btnCloseAddModal = document.getElementById("btn-close-add-modal");
 
     if (addRuleModal && btnOpenAddModal) {
-        btnOpenAddModal.addEventListener("click", () => {
+        btnOpenAddModal.addEventListener("click", async () => {
+            if (!await promptPinIfEnabled("lockRules")) return;
             const qDomain = $("quick-domain") ? $("quick-domain").value.trim() : "";
             const qRedir = $("quick-redir") ? $("quick-redir").value.trim() : "";
             if ($("m-id")) $("m-id").value = "";
@@ -3393,7 +4015,8 @@ if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
         });
     }
     if (addRuleModal && btnOpenTagModal) {
-        btnOpenTagModal.addEventListener("click", () => {
+        btnOpenTagModal.addEventListener("click", async () => {
+            if (!await promptPinIfEnabled("lockRules")) return;
             if ($("m-id")) $("m-id").value = "";
             if ($("cat-inp")) $("cat-inp").value = "";
             if ($("cat-redir")) $("cat-redir").value = "";

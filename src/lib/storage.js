@@ -2,6 +2,11 @@
 // Loaded via importScripts() in the service worker AND via <script src> in pages.
 // Exposes: gSync, sSync, gLocal, sLocal, todayKey on globalThis.
 (function (root) {
+  // Polyfill chrome.storage.session with chrome.storage.local if session storage is unsupported (like in Firefox)
+  if (typeof chrome !== "undefined" && chrome.storage && !chrome.storage.session) {
+    chrome.storage.session = chrome.storage.local;
+  }
+
   function _logErr(label) {
     try {
       const err = chrome.runtime.lastError;

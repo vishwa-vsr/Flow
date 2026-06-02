@@ -2,10 +2,29 @@
 
 All notable changes to **Flow** (formerly FocusFlow) will be documented in this file.
 
+## [6.9.0] - 2026-06-02
+
+- Added history migration uploader row for **Webtime Tracker** CSV exports with its authentic multicolored doughnut chart SVG logo
+- Added history migration uploader row for **Time Tracker - Web Habit Builder** JSON exports with its authentic circular hourglass SVG logo
+- Added history migration uploader row for **Web Activity Time Tracker** CSV exports with its authentic dark-teal stopwatch SVG logo
+- Programmed dynamic column parsing for Webtime Tracker CSV to map time spent on websites over multiple dates
+- Programmed JSON parsing for Time Tracker format (converting milliseconds `focus` to standard tracking seconds and formatting YYYYMMDD date strings)
+- Automatically filtered out blank `newtab` page statistics from the imported logs
+- Added automatic date format guessing (Month/Day/Year vs Day/Month/Year) for Web Activity CSV
+- Added automatic mapping of local file URLs (e.g. `file:///` links) into Flow's tracking format (`local:`)
+- Programmed asynchronous batch database merging (50 days at a time) to prevent browser freezes
+- Added automatic categorization/re-indexing of imported history logs using active tag rules
+- Replaced 3D lock emojis with custom, high-resolution SVG lock icons in settings, status badges, and passcode overlays
+- Fixed the "Show funny blocked page" setting toggle so disabling it correctly falls back to a standard block notice
+- Removed the deprecated and non-functional "Custom blocked message" text input from settings
+- Replaced the refresh/recycle emoji `🔄` in quick presets with a clean inline SVG icon
+- Fixed double PIN verification prompts in the Rule Manager; users are now only prompted once when opening the edit/tag modals
+- Converted focus indicator dots in popup and dashboard into clickable Flow brand logos that redirect users to the Flow product website
+
 ## [6.8.6] - 2026-05-29
 
-- Fixed a bug where YouTube Shorts thumbnails would still show on page refreshes
-- Fixed a bug where clicking a YouTube Short would lead to a blank page with audio playing instead of redirecting
+- Updated Firefox Add-on URL to the new slug (`flow-website-manager`) across README, popup, and project links
+- Fixed incorrect GitHub repository link in the dashboard settings page
 
 ## [6.8.5] - 2026-05-29
 

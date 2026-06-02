@@ -187,14 +187,16 @@
       gap: 12px
     }
 
-    .bdot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--green)
+    #logo-img {
+      cursor: pointer;
+      transition: var(--trans)
     }
 
-    .bdot.on {
+    #logo-img:hover {
+      transform: scale(1.08)
+    }
+
+    #logo-img.on {
       animation: pulse 2s infinite;
       box-shadow: 0 0 12px var(--green)
     }

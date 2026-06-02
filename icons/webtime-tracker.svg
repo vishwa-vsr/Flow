@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Red segment (bottom-right area) -->
+  <circle cx="64" cy="64" r="44" fill="none" stroke="#ff5f56" stroke-width="24" stroke-dasharray="158.7 117.8" stroke-dashoffset="-2" transform="rotate(-90 64 64)" />
+  <!-- Green segment (left-bottom area) -->
+  <circle cx="64" cy="64" r="44" fill="none" stroke="#4bae4f" stroke-width="24" stroke-dasharray="66.1 210.4" stroke-dashoffset="-164.7" transform="rotate(-90 64 64)" />
+  <!-- Blue segment (top-left area) -->
+  <circle cx="64" cy="64" r="44" fill="none" stroke="#3296fa" stroke-width="24" stroke-dasharray="39.7 236.8" stroke-dashoffset="-234.8" transform="rotate(-90 64 64)" />
+</svg>

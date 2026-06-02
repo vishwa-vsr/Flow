@@ -38,11 +38,21 @@ var blockedDomain = P("domain", "d") || "this site";
 var reason = P("reason", "r") || "rule";
 var limit = Number(P("limit", "l") || 0);
 
-// ── Randomise message ─────────────────────────────────────────────────────────
-var m = MSGS[Math.floor(Math.random() * MSGS.length)];
-document.getElementById("emoji").textContent = m.e;
-document.getElementById("headline").textContent = m.h;
-document.getElementById("sub").textContent = m.s;
+// ── Randomise message (Funny vs. Neutral) ─────────────────────────────────────
+gSync(["settings"]).then(function (res) {
+  var settings = res.settings || {};
+  var funnyBlocked = settings.funnyBlocked !== false;
+  if (funnyBlocked) {
+    var m = MSGS[Math.floor(Math.random() * MSGS.length)];
+    document.getElementById("emoji").textContent = m.e;
+    document.getElementById("headline").textContent = m.h;
+    document.getElementById("sub").textContent = m.s;
+  } else {
+    document.getElementById("emoji").textContent = "⛔";
+    document.getElementById("headline").innerHTML = "This site is <em>blocked</em>";
+    document.getElementById("sub").textContent = "Access is restricted by your Flow rules.";
+  }
+});
 document.querySelector(".quote").textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
 // ── Domain pill & bar reason ──────────────────────────────────────────────────
@@ -82,8 +92,8 @@ if (ruleDetail) {
 
 // ── Last productive site suggestion ──────────────────────────────────────────
 try {
-  chrome.runtime.sendMessage({ type: "GET_LAST_PRODUCTIVE" }, function (res) {
-    if (chrome.runtime.lastError || !res || !res.domain) return;
+  msg("GET_LAST_PRODUCTIVE").then(function (res) {
+    if (!res || !res.domain) return;
     var el = document.getElementById("productive-suggestion");
     if (!el) return;
     var safeDom = String(res.domain).replace(/[&<>'"]/g, function(tag) { return ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag] || tag); });

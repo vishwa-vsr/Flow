@@ -354,7 +354,7 @@ function renderDynamicList(e, t) {
         if (a.length > 10 && !n) {
             const isFirefox = navigator.userAgent.includes("Firefox") || chrome.runtime.getURL("").startsWith("moz-extension:");
             const rateUrl = isFirefox 
-                ? "https://addons.mozilla.org/en-US/firefox/addon/focusflow-website-blocker/" 
+                ? "https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/" 
                 : "https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic";
             let overlayHtml = `
               <div id="feedback-overlay" style="display:flex; justify-content:center; gap:8px; align-items:center; width:100%; background:var(--bg2); border-radius:12px; padding:4px;">
@@ -411,8 +411,8 @@ async function loadWeeklyGoal() {
 }
 
 function renderFocus(e) {
-    if (!e || !e.active) return $("focus-card") && ($("focus-card").className = "focus-section"), $("fr-fill") && ($("fr-fill").className = "fr-fill work", $("fr-fill").setAttribute("stroke-dashoffset", FR_C)), $("fr-time") && ($("fr-time").textContent = window._focusWorkMins + ":00"), $("fr-cycles") && ($("fr-cycles").textContent = "0 done"), $("focus-title") && ($("focus-title").textContent = "Ready to focus?"), $("focus-sub") && ($("focus-sub").textContent = window._focusWorkMins + " min work · " + window._focusBreakMins + " min break"), $("focus-phase") && ($("focus-phase").textContent = "Pomodoro", $("focus-phase").className = "focus-phase"), $("logo-dot") && ($("logo-dot").className = "logo-dot"), $("btn-start") && ($("btn-start").style.display = ""), $("btn-stop") && ($("btn-stop").style.display = "none"), $("btn-pause") && ($("btn-pause").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), void ($("btn-focus-set") && ($("btn-focus-set").style.display = "flex"));
-    $("logo-dot") && ($("logo-dot").className = "logo-dot focus-on");
+    if (!e || !e.active) return $("focus-card") && ($("focus-card").className = "focus-section"), $("fr-fill") && ($("fr-fill").className = "fr-fill work", $("fr-fill").setAttribute("stroke-dashoffset", FR_C)), $("fr-time") && ($("fr-time").textContent = window._focusWorkMins + ":00"), $("fr-cycles") && ($("fr-cycles").textContent = "0 done"), $("focus-title") && ($("focus-title").textContent = "Ready to focus?"), $("focus-sub") && ($("focus-sub").textContent = window._focusWorkMins + " min work · " + window._focusBreakMins + " min break"), $("focus-phase") && ($("focus-phase").textContent = "Pomodoro", $("focus-phase").className = "focus-phase"), $("logo-img") && ($("logo-img").className = ""), $("btn-start") && ($("btn-start").style.display = ""), $("btn-stop") && ($("btn-stop").style.display = "none"), $("btn-pause") && ($("btn-pause").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), void ($("btn-focus-set") && ($("btn-focus-set").style.display = "flex"));
+    $("logo-img") && ($("logo-img").className = "focus-on");
     var t = "work" === e.phase,
         s = $("focus-card");
     s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
@@ -492,7 +492,7 @@ $("p-save-focus") && $("p-save-focus").addEventListener("click", async () => {
 chrome.runtime.onMessage.addListener(e => {
     "FOCUS_TICK" === e.type && renderFocus(e.focusState)
 });
-chrome.runtime.connect({ name: "focusflow-tracker" });
+chrome.runtime.connect({ name: "flow-tracker" });
 var _origRF = renderFocus,
     _focusTick = null;
 
@@ -517,6 +517,10 @@ async function initPopup() {
     window._focusCycles = ap ? ap.cycles : 4;
     renderPresetRail(pres);
     await Promise.all([loadViewData(), loadFocus(), checkCurrentTabForGranularRules()]);
+    $("logo-img") && $("logo-img").addEventListener("click", () => {
+        chrome.tabs.create({ url: "https://vishwa-vsr.github.io/flow-website/" });
+        window.close();
+    });
 
     // The Streak Badge Fix
     try {

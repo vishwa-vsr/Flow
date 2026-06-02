@@ -126,7 +126,7 @@ chrome.runtime.onMessage.addListener((m) => {
     else stopLiveTimer();
   }
 });
-chrome.runtime.connect({ name: "focusflow-tracker" });
+chrome.runtime.connect({ name: "flow-tracker" });
 
 (async function init() {
   // FF v6.18: No need to check customNewTab here — the service worker only
