@@ -4,8 +4,6 @@
 
 *Formerly known as FocusFlow.*
 
-### 🔗 [Changelog](./CHANGELOG.md) | [Privacy Policy](./PRIVACY.md) | [License](./LICENSE)
-
 <p>
   <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
   <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
