@@ -2,7 +2,10 @@
 
 All notable changes to **Flow** (formerly FocusFlow) will be documented in this file.
 
-## [6.9.0] - 2026-06-02
+## [6.9.1] - 2026-06-02
+
+- Fixed Firefox custom new tab hijack bug by listening to tab updates instead of tab creation
+- (Includes all version 6.9.0 features including history migration uploaders and visual refinements)
 
 - Added history migration uploader row for **Webtime Tracker** CSV exports with its authentic multicolored doughnut chart SVG logo
 - Added history migration uploader row for **Time Tracker - Web Habit Builder** JSON exports with its authentic circular hourglass SVG logo
