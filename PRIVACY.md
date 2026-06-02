@@ -1,7 +1,7 @@
 # Flow — Privacy Policy
 
 **Effective Date:** May 21, 2026
-**Last Updated:** May 28, 2026
+**Last Updated:** June 2, 2026
 
 Flow ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how our browser extension collects, uses, and safeguards your information.
 
@@ -33,7 +33,7 @@ To function properly, Flow requires certain browser permissions. We only request
 - **Notifications:** To alert you when a focus session ends or a time limit is approaching.
 - **Declarative Net Request:** To instantly block access to distracting websites at the network level, based on your rules.
 - **Tabs / Scripting:** To accurately track active time spent on the websites you visit.
-- **Favicon:** To display site icons next to tracked websites in the popup and dashboard.
+- **Favicon (Chrome/Edge only):** To display site icons next to tracked websites in the popup and dashboard.
 - **Host Permissions (`<all_urls>`):** Required to apply blocking and tracking functionality across all websites you navigate to.
 
 ---
@@ -52,4 +52,4 @@ We may update this Privacy Policy from time to time as we add new features. If w
 
 ## 5. Contact Us
 
-If you have any questions or concerns about this Privacy Policy or how Flow handles your data, please open an issue on our [GitHub repository](https://github.com/vishwa-vsr/FocusFlow/issues).
+If you have any questions or concerns about this Privacy Policy or how Flow handles your data, please open an issue on our [GitHub repository](https://github.com/vishwa-vsr/Flow/issues).
