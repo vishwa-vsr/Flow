@@ -47,11 +47,11 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 ## 📥 Download
 
-| Store | Status |
-|---|---|
-| [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | ✅ Approved |
-| [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | ✅ Approved |
-| Chrome Web Store | 🔜 Coming Soon |
+| Store | Version | Rating | User Count |
+|---|---|---|---|
+| [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=latest)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/rating/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/users/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) |
+| [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=latest&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) |
+| Chrome Web Store | 🔜 Coming Soon | 🔜 Coming Soon | 🔜 Coming Soon |
 
 ---
 
