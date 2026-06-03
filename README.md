@@ -41,7 +41,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 ## 📸 Screenshots
 
-![Flow Preview](focusflow_preview.jpg)
+![Flow Preview](flow_preview.jpg)
 
 ---
 
