@@ -51,7 +51,6 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 |---|---|
 | [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | ✅ Approved |
 | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | ✅ Approved |
-| Opera Add-ons | ⏳ Pending Moderation |
 | Chrome Web Store | 🔜 Coming Soon |
 
 ---
