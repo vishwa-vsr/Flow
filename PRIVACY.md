@@ -1,7 +1,7 @@
 # Flow — Privacy Policy
 
 **Effective Date:** May 21, 2026
-**Last Updated:** June 2, 2026
+**Last Updated:** June 14, 2026
 
 Flow ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how our browser extension collects, uses, and safeguards your information.
 
@@ -28,13 +28,14 @@ All of the data mentioned above is stored locally within your browser's built-in
 
 To function properly, Flow requires certain browser permissions. We only request permissions that are absolutely necessary for the core features of the extension:
 
-- **Storage / Unlimited Storage:** To save your settings and historical time-tracking data locally.
-- **Alarms / Idle:** To run focus timers accurately and pause tracking when you step away from your computer.
-- **Notifications:** To alert you when a focus session ends or a time limit is approaching.
+- **Storage / Unlimited Storage:** To save your settings, rules, and daily time-tracking statistics locally on your device.
+- **Alarms / Idle:** To run focus timers and schedules accurately, and automatically pause tracking when your computer goes idle.
+- **Notifications:** To show you reminders when a focus session ends or warning/cooldown nudges when approaching time limits.
 - **Declarative Net Request:** To instantly block access to distracting websites at the network level, based on your rules.
-- **Tabs / Scripting:** To accurately track active time spent on the websites you visit.
-- **Favicon (Chrome/Edge only):** To display site icons next to tracked websites in the popup and dashboard.
-- **Host Permissions (`<all_urls>`):** Required to apply blocking and tracking functionality across all websites you navigate to.
+- **Scripting:** To inject custom CSS styles to apply advanced user-defined site tweaks (such as hiding specific distracting page elements).
+- **Downloads:** To allow you to export and download your historical productivity statistics and rules as a JSON backup file.
+- **Favicon (Chrome/Edge only):** To retrieve and display site icons next to tracked websites in the popup and dashboard.
+- **Host Permissions (`<all_urls>`):** Required to apply blocking rules and run the content script across websites to track active time spent for productivity analytics.
 
 ---
 
