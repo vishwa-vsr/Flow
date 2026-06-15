@@ -27,15 +27,16 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 |---|---|
 | ⏱️ **Premium Pomodoro Timer** | Fully customizable work sessions, short breaks, and long breaks with a glowing ring that fills as your session progresses. |
 | 📊 **Visual Time Tracking** | Circular donut chart displays your top-visited websites and shows exactly where your minutes went. |
-| 🚫 **Smart Site Blocker** | Network-level blocking with time limits, daily schedules, cool-down timers, and a custom redirect. |
-| 🔒 **6-Digit PIN Lock** | Granular locks for Timer Stop, Rule Editing, Free-time Hours, Focus Presets, Schedules, and Danger Zone. |
+| 🚫 **Smart Site Blocker** | Network-level blocking with daily time limits, focus schedules, per-session limits, and custom redirects. |
+| 🔒 **6-Digit PIN Lock** | Granular locks for Timer Stop, Rule Editing, Free-time Hours, Focus Presets, Schedules, and Settings Danger Zone. |
 | 🎯 **Weekly Goals & Streaks** | Set focus targets, track your progress, and earn a glowing streak badge for consecutive days. |
 | 🗺️ **365-Day Heatmap** | GitHub-style consistency heatmap with customizable thresholds. Green = focused. Red = wasted. |
 | 📈 **Study vs Distraction Trends** | Color-coded trend charts with per-category toggles (Productivity, Learning, Communication, Distraction). |
 | 🏷️ **Site Categorization** | Tag every website as Productivity, Learning, Communication, Distraction, or Uncategorized. |
 | ⏰ **Focus Schedules** | Set recurring daily/weekly focus sessions that auto-start. |
 | 🌗 **Dark, Light & Cinematic Themes** | Three premium themes including a glassmorphic cinematic mode with animated gradient blurs. |
-| 🆕 **Custom New Tab (Beta)** | Replace your browser's default new tab with Flow's clock and stats. |
+| 🆕 **Custom New Tab Page** | Replace your browser's default blank new tab page with a clean clock, daily widgets, and quick-access stats. |
+| 💾 **Data Backup & Import** | Export your rules and history as a JSON file, or import past logs from Webtime Tracker, Time Tracker, and Web Activity Tracker. |
 
 ---
 
@@ -73,17 +74,23 @@ This repository contains the original, un-minified source code for Flow.
 
 To generate the minified code submitted to browser add-on stores:
 
-1. Ensure **Python 3** is installed on your system.
+1. Ensure **Python 3** and **Node.js (npm)** are installed on your system.
 2. Open a terminal and navigate into the `flow-source` directory.
-3. Run:
+3. Install the dependencies (like `esbuild`) by running:
+   ```bash
+   npm install
+   ```
+4. Run the build script:
    ```bash
    python build.py
    ```
-4. The script will create a `flow-firefox` directory (and a `flow-dist` directory for Chromium) containing the final, minified extension code.
+   *(Note: The script is interactive by default and will ask you if you want to bump the version number and build the Chrome/Firefox folders. You can pass the `-y` or `--skip-prompt` flag to bypass these prompts. You can also pass the `--zip` flag to package the distribution folders into `.zip` archives for store upload.)*
+5. The script will create a `flow-firefox` directory (and a `flow-dist` directory for Chromium) containing the final, minified extension code.
 
 ### Notes on the Build Process
 * The `build.py` script does **not** use complex bundlers like Webpack, Rollup, or Vite.
-* It uses basic Regular Expressions to cleanly strip whitespace, newlines, and comments.
+* It primarily uses `esbuild` to optimize and minify the JavaScript files.
+* If `esbuild` (or the `node_modules` folder) is not found, the script gracefully falls back to basic Regular Expressions to strip whitespace, newlines, and comments.
 * The code is **not** obfuscated.
 
 ---
@@ -126,6 +133,7 @@ This project is licensed under the [MIT License](./LICENSE).
 
 ## 🔗 Links
 
+* [Product Website](https://vishwa-vsr.github.io/flow-website/)
 * [Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic)
 * [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
 * [Privacy Policy](./PRIVACY.md)
