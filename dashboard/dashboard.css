@@ -1,46 +1,16 @@
     /* FF v6.7.0: @font-face removed — fonts now loaded exclusively from global.css (Problem 10). 
          All :root variables below intentionally removed too — they live in global.css now. */
-    .cinematic-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1s ease;
-      background: radial-gradient(circle at 15% 50%, rgba(92, 156, 252, 0.15), transparent 50%), radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15), transparent 50%);
-      animation: cinematicDrift 18s infinite alternate ease-in-out
-    }
-
-    html.cinematic .cinematic-bg {
-      opacity: 1
-    }
-
-    @keyframes cinematicDrift {
-      0% {
-        transform: scale(1) translate(0, 0)
-      }
-
-      100% {
-        transform: scale(1.08) translate(-2%, 2%)
-      }
-    }
+    /* .cinematic-bg, html.cinematic, @keyframes cinematicDrift → defined in global.css */
 
     html,
     body {
       height: 100%
     }
 
+    /* Base body styles (background, font, color, etc.) → defined in global.css */
     body {
-      background: var(--bg);
-      color: var(--tx);
-      font-family: 'Manrope', system-ui, sans-serif;
       display: flex;
-      flex-direction: column;
-      font-size: 15px;
-      line-height: 1.5;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      transition: background 0.3s ease
+      flex-direction: column
     }
 
     .ptit,
@@ -57,15 +27,25 @@
       inset: 0;
       z-index: 9000;
       background: rgba(0, 0, 0, .8);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px
+      padding: 20px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity 0.15s ease, visibility 0.15s ease, backdrop-filter 0.15s ease, -webkit-backdrop-filter 0.15s ease;
     }
 
     .overlay.hide {
-      display: none
+      display: flex !important;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
     }
 
     .num,
@@ -117,22 +97,18 @@
       border-left: none
     }
 
-    @keyframes spin {
-      100% {
-        transform: rotate(360deg)
-      }
-    }
+    /* @keyframes spin → defined in global.css */
 
     .navbar {
       display: flex;
       justify-content: center;
-      background: rgba(24, 24, 24, 0.65);
+      background: var(--glass-bg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid var(--bd-subtle);
       padding: 16px 24px;
       transition: var(--trans)
     }
@@ -140,10 +116,10 @@
     .card,
     .ac,
     .at-card {
-      background: rgba(24, 24, 24, 0.65);
+      background: var(--glass-bg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-bd);
       box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       border-radius: var(--card-radius);
       position: relative;
@@ -154,14 +130,14 @@
     html.light .card,
     html.light .ac,
     html.light .at-card {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
       box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.6)
     }
 
     html.light .navbar {
-      background: rgba(255, 255, 255, 0.75);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+      background: var(--glass-bg);
+      border-bottom: 1px solid var(--glass-bd)
     }
 
     html.light .ni:hover {
@@ -246,9 +222,91 @@
       transition: var(--trans)
     }
 
+    .privacy-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg3);
+      border: 1px solid var(--bd);
+      color: var(--tx2);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .privacy-btn:hover {
+      color: var(--tx);
+      background: var(--surface-elevated);
+      transform: scale(1.06);
+    }
+
+    html.light .privacy-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--tx)
+    }
+
+    .privacy-btn.active {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #A855F7;
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+      animation: pulse-purple 2s infinite;
+    }
+
+    @keyframes pulse-purple {
+      0% {
+        box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+      }
+    }
+
+    .privacy-choice-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--bg3);
+      border: 1px solid var(--bd);
+      color: var(--tx);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+
+    .privacy-choice-btn:hover {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .privacy-choice-btn.danger {
+      background: rgba(244, 107, 122, 0.08);
+      border: 1px solid rgba(244, 107, 122, 0.2);
+      color: var(--red);
+    }
+
+    .privacy-choice-btn.danger:hover {
+      background: linear-gradient(135deg, #f46b7a, #dc2626);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(244, 107, 122, 0.35);
+      transform: translateY(-2px);
+    }
+
     .ni:hover {
       color: var(--tx);
-      background: rgba(255, 255, 255, 0.03)
+      background: var(--surface-elevated)
     }
 
     .ni.act {
@@ -317,11 +375,11 @@
     }
 
     .ctit {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--tx3);
+      color: var(--tx2);
       margin-bottom: 20px;
       display: flex;
       align-items: center;
@@ -371,56 +429,8 @@
       color: var(--tx)
     }
 
-    .bp,
-    .bs,
-    .bd-btn {
-      border-radius: var(--btn-radius);
-      padding: 12px 24px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--trans);
-      white-space: nowrap;
-      border: none
-    }
+    /* Buttons (.bp, .bs, .bd-btn) defined in global.css */
 
-    .bp {
-      background: var(--green);
-      color: #000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1)
-    }
-
-    .bp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-      filter: brightness(1.05)
-    }
-
-    .bs {
-      background: var(--bg4);
-      color: var(--tx);
-      border: 1px solid var(--bd2)
-    }
-
-    .bs:hover {
-      background: var(--bg3);
-      border-color: var(--bd3);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md)
-    }
-
-    .bd-btn {
-      background: var(--red-bg);
-      color: var(--red);
-      border: 1px solid var(--red-bd)
-    }
-
-    .bd-btn:hover {
-      background: rgba(244, 107, 122, 0.15);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm)
-    }
 
     .bic {
       width: 36px;
@@ -478,6 +488,18 @@
       color: var(--red)
     }
 
+    .daily-site-rule-btn {
+      color: var(--tx3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .daily-site-rule-btn:hover {
+      color: var(--tx);
+      opacity: 1 !important;
+    }
+
     .view-tabs {
       display: flex;
       gap: 6px;
@@ -510,7 +532,7 @@
 
     .vtab:hover:not(.act) {
       color: var(--tx);
-      background: rgba(255, 255, 255, 0.03)
+      background: var(--surface-elevated)
     }
 
     .compact-grid {
@@ -533,7 +555,7 @@
 
     .acv,
     .at-val {
-      font-family: monospace;
+      font-family: 'Manrope', system-ui, sans-serif;
       font-size: 20px;
       font-weight: 800;
       margin-bottom: 4px;
@@ -563,7 +585,7 @@
 
     .aclbl,
     .at-lbl {
-      font-size: 10px;
+      font-size: 11px;
       color: var(--tx3);
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -638,7 +660,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      bottom: 55px;
+      bottom: 35px;
       width: 50px;
       background: rgba(24, 24, 24, 0.85);
       backdrop-filter: blur(6px);
@@ -650,6 +672,15 @@
       padding: 20px 10px 0 0;
       pointer-events: none;
       z-index: 10
+    }
+
+    .y-axis-right {
+      left: auto;
+      right: 0;
+      border-right: none;
+      border-left: 1px solid var(--bd);
+      align-items: flex-start;
+      padding: 20px 0 0 10px
     }
 
     html.light .y-axis {
@@ -669,6 +700,7 @@
       overflow-y: hidden;
       flex: 1;
       padding-left: 50px;
+      padding-right: 50px;
       padding-bottom: 8px
     }
 
@@ -691,23 +723,26 @@
     }
 
     .chart-tooltip {
-      position: absolute;
-      background: var(--bg3);
-      border: 1px solid var(--bd2);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 13px;
+      position: fixed;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-bd);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--tx);
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.15s ease;
-      box-shadow: var(--shadow-md);
-      z-index: 1000;
-      display: flex;
+      box-shadow: var(--shadow-lg);
+      z-index: 2147483647;
+      display: none;
       flex-direction: column;
       gap: 4px;
-      white-space: nowrap
+      white-space: nowrap;
+      font-family: 'Manrope', system-ui, sans-serif;
     }
 
 
@@ -716,10 +751,10 @@
          ========================================================================== */
     .db-card {
       padding: 32px;
-      background: rgba(24, 24, 24, 0.4);
+      background: var(--glass-bg);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-bd);
       border-radius: 20px;
       margin-bottom: 28px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
@@ -727,18 +762,18 @@
     }
 
     html.light .db-card {
-      background: rgba(255, 255, 255, 0.45);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
     }
 
     .db-card:hover {
-      border-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--bd2);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
     }
 
     html.light .db-card:hover {
-      border-color: rgba(0, 0, 0, 0.08);
+      border-color: var(--bd2);
       box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
     }
 
@@ -791,8 +826,8 @@
 
     .db-stat-box {
       position: relative;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--surface-subtle);
+      border: 1px solid var(--bd-subtle);
       border-radius: 16px;
       padding: 16px 20px;
       display: flex;
@@ -816,18 +851,9 @@
 
     .db-stat-box:hover {
       transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.03);
-      border-color: var(--glow-border, rgba(255, 255, 255, 0.1));
+      background: var(--surface-elevated);
+      border-color: var(--glow-border, var(--glass-bd));
       box-shadow: 0 8px 24px var(--glow-shadow, rgba(0, 0, 0, 0.15));
-    }
-
-    html.light .db-stat-box {
-      background: rgba(0, 0, 0, 0.015);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    html.light .db-stat-box:hover {
-      background: rgba(0, 0, 0, 0.03);
     }
 
     .db-stat-info {
@@ -860,8 +886,8 @@
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      background: var(--icon-bg, rgba(255, 255, 255, 0.03));
-      border: 1px solid var(--icon-bd, rgba(255, 255, 255, 0.06));
+      background: var(--icon-bg, var(--surface-elevated));
+      border: 1px solid var(--icon-bd, var(--glass-bd));
       color: var(--icon-color, var(--tx2));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
@@ -875,16 +901,10 @@
       border-radius: 99px;
       overflow: hidden;
       display: flex;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--surface-elevated);
+      border: 1px solid var(--bd-subtle);
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
       transition: var(--trans);
-    }
-
-    html.light .db-bar-wrap {
-      background: rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.03);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     .db-bar-segment {
@@ -944,17 +964,11 @@
     .db-timeline-container {
       position: relative;
       height: 32px;
-      background: rgba(255, 255, 255, 0.015);
+      background: var(--surface-subtle);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bd-subtle);
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
-    }
-
-    html.light .db-timeline-container {
-      background: rgba(0, 0, 0, 0.015);
-      border-color: rgba(0, 0, 0, 0.05);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     .db-timeline-gridline {
@@ -1010,30 +1024,19 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 18px;
-      background: rgba(255, 255, 255, 0.015);
+      background: var(--surface-subtle);
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bd-subtle);
       border-left: 4px solid var(--border-color, transparent);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       transition: var(--trans);
     }
 
-    html.light .db-site-pill {
-      background: rgba(0, 0, 0, 0.015);
-      border-color: rgba(0, 0, 0, 0.04);
-    }
-
     .db-site-pill:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.03);
-      border-color: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+      background: var(--surface-elevated);
+      border-color: var(--glass-bd);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-
-    html.light .db-site-pill:hover {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.06);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     }
 
     .db-site-left {
@@ -1060,21 +1063,21 @@
       font-weight: 800;
       color: var(--tx2);
       flex-shrink: 0;
-      font-family: monospace;
+      font-family: 'Manrope', system-ui, sans-serif;
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--surface-elevated);
       padding: 4px 8px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bd-subtle);
     }
-
-    html.light .db-site-time {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.03);
-    }
+    .top-site-pin-btn { color: var(--tx3); }
+    .top-site-pin-btn.pinned-true { color: var(--tx); }
     .top-site-pin-btn:hover { color: var(--tx); }
+    .top-site-visit-btn { color: var(--tx3); }
     .top-site-visit-btn:hover { color: var(--tx); }
+    .top-site-rule-btn { color: var(--tx3); }
+    .top-site-rule-btn:hover { color: var(--tx); }
 
     .lhdr,
     .brow,
@@ -1114,13 +1117,15 @@
 
     .lhdr-rules,
     .brow-rules {
-      grid-template-columns: minmax(180px, 2.5fr) 140px 180px 120px minmax(120px, 1fr) 80px;
-      transition: var(--trans)
+      grid-template-columns: 220px 100px 180px 120px 1fr 80px;
+      transition: var(--trans);
+      gap: 16px
     }
 
     .bulk-mode .lhdr-rules,
     .bulk-mode .brow-rules {
-      grid-template-columns: 30px minmax(180px, 2.5fr) 140px 180px 120px minmax(120px, 1fr)
+      grid-template-columns: 30px 220px 100px 180px 120px 1fr;
+      gap: 16px
     }
 
     .bulk-cb {
@@ -1217,7 +1222,7 @@
       border: 1px solid var(--bd2);
       border-radius: 8px;
       padding: 6px 4px;
-      font-family: monospace;
+      font-family: 'Manrope', system-ui, sans-serif;
       font-weight: 800;
       color: var(--tx);
       font-size: 13px;
@@ -1251,50 +1256,8 @@
       line-height: 1.5
     }
 
-    .tog {
-      position: relative;
-      display: inline-flex;
-      cursor: pointer
-    }
+    /* .tog / .ttrack duplicate styling removed — defined in global.css via .tog-lg modifier */
 
-    .tog input {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0
-    }
-
-    .ttrack {
-      width: 50px;
-      height: 28px;
-      background: var(--bg3);
-      border-radius: 14px;
-      border: 1px solid var(--bd2);
-      transition: var(--trans);
-      position: relative
-    }
-
-    .ttrack::after {
-      content: "";
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--tx3);
-      transition: var(--trans)
-    }
-
-    .tog input:checked+.ttrack {
-      background: var(--green-bg);
-      border-color: var(--green)
-    }
-
-    .tog input:checked+.ttrack::after {
-      background: var(--green);
-      transform: translateX(22px)
-    }
 
     .cat-squares {
       display: grid;
@@ -1314,7 +1277,7 @@
 
     .cat-sq:hover {
       border-color: var(--bd3);
-      transform: translateY(-4px);
+      transform: translateY(-2px);
       background: var(--bg4)
     }
 
@@ -1366,8 +1329,8 @@
       justify-content: center;
       gap: 8px;
       padding: 6px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--surface-elevated);
+      border: 1px solid var(--glass-bd);
       border-radius: 99px;
       font-size: 12px;
       font-weight: 700;
@@ -1375,11 +1338,6 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 24px
-    }
-
-    html.light .day-label-badge {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.08)
     }
 
     .day-dot {
@@ -1664,18 +1622,7 @@
       box-sizing: border-box;
     }
 
-    /* FF v6.7: floating save button animation */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
+    /* @keyframes fadeIn — uses the definition above (line ~283), removed duplicate */
 
     #floating-save-btn {
       animation: fadeIn 0.2s;
@@ -1687,14 +1634,10 @@
     }
 
     .preset-card:hover {
-      background: rgba(255, 255, 255, 0.04) !important;
+      background: var(--surface-elevated) !important;
       border-color: var(--bd3) !important;
-      transform: translateY(-4px);
+      transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
-    }
-
-    html.light .preset-card:hover {
-      background: rgba(0, 0, 0, 0.02) !important;
     }
 
     .preset-card.is-active {
@@ -1757,4 +1700,92 @@
     html.light #ff-preset-edit-modal .card {
       background: rgba(255, 255, 255, 0.88) !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+
+    @keyframes preset-edit-glow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(5, 213, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(5, 213, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(5, 213, 129, 0);
+      }
+    }
+
+    .glowing-edit-btn {
+      animation: preset-edit-glow 1.5s infinite !important;
+      transform: scale(1.1) !important;
+      background: var(--green-bg) !important;
+      border-color: var(--green) !important;
+      color: var(--green) !important;
+    }
+
+    /* Reusable utility classes (extracted from inline styles) */
+    .range-selector {
+      display: flex;
+      gap: 4px;
+      background: var(--bg3);
+      border-radius: 12px;
+      padding: 6px;
+      border: 1px solid var(--bd);
+      width: fit-content;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .custom-date-panel {
+      display: none;
+      background: var(--bg3);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .date-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--tx2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card-flush {
+      padding: 0 !important;
+    }
+
+    .card-spacious {
+      padding: 32px !important;
+    }
+
+    .card-padded-lg {
+      padding: 40px !important;
+    }
+
+    .rule-tab {
+      background: transparent;
+      color: var(--tx2);
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .rule-tab:hover {
+      color: var(--tx1);
+      background: var(--bg2);
+    }
+    .rule-tab.act {
+      background: var(--bg3);
+      color: var(--tx1);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid var(--bd);
     }
