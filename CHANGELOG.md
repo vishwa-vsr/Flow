@@ -2,9 +2,69 @@
 
 All notable changes to **Flow** (formerly FocusFlow) will be documented in this file.
 
+## [6.9.8] - 2026-06-14
+
+- Fixed infinite loading/redirect loop when opening blocked sites (e.g. reddit.com) by base64 obfuscating domain parameters in the URL
+- Updated the "Manage block rules" button on the blocked page to redirect directly to the Site Manager section rather than general Analytics
+- Fixed active tracking sessions falsely going idle by ignoring browser idle transitions if tab interactions were detected within the last 20 seconds
+- Restored missing warning and explanation descriptions for all Settings 'Danger Zone' options
+
+## [6.9.7] - 2026-06-13
+
+- Configured official new tab override in manifest to load the custom page natively and reliably
+- Cleaned up the URL bar so that it is blank and hidden, removing the messy `chrome-extension://...` link
+- Removed programmatic new tab redirect listeners from the background script to fix tab hijacking issues
+- Implemented a gorgeous glassmorphic fallback Google Search page with quick shortcuts (Web, YouTube, GitHub, Gmail) that displays when the Custom New Tab setting is toggled OFF
+- Set up automatic text cursor focus on the search input and smart domain detection for direct site navigation
+- Implemented a quick settings gear button and slide-out glassmorphic panel directly on the custom New Tab page
+- Allowed instant page element toggling (Clock, Greeting, Productivity Stats, Focus Buttons, Quotes) and direct wallpaper upload/clear from inside the new tab settings drawer
+- Synchronized settings edits made inside the new tab quick settings drawer instantly to sync storage
+- Programmed settings drawer to automatically slide closed if user clicks anywhere outside of it
+- Increased width of Domain Name and Redirect To (Optional) inputs to 260px in Rule Manager to utilize available space
+- Swapped list headers negative margins and added 16px column gaps to align list column headers and cell rows precisely
+- Configured fixed column widths for Domain (220px), Type (100px), Mode (180px), and Daily Limit (120px) to shift elements left, making Schedule (1fr) flexible to fill the remaining space
+- Swapped fields order in Add/Edit Rule and Add/Edit Preset modals, displaying Per-Session Limit directly beneath Daily time limit
+- Centered the Add Rule and Add Preset modals vertically and horizontally on the screen by removing absolute top-margin offsets
+- Replaced emojis with styled SVG icons (🔔 in Focus Schedules, and ⏱️ in Adjust Time popups)
+- Appended the "Adjust Time in Top Sites" feature idea to IDEAS.md
+
+## [6.9.6] - 2026-06-10
+
+- Audited and deleted duplicate styles to clean up the stylesheet
+- Added design colors for glass panels and dark/light modes
+- Swapped plain text emojis (play, pause, stop, skip, warning, settings, and shields) with crisp SVG icons in the focus panel, lists, and managers
+- Redesigned empty states for lists with clean dashed borders, title text, and descriptions
+- Added accessibility support including keyboard navigation labels, proper tab focus elements, and form labels
+- Removed overriding inline color styles from Top Sites action buttons (pin, visit, rule) and moved them to the stylesheet to fix hover glow highlights
+- Added a beautiful animated "Ethereal Shadow" background option for dark mode
+
+## [6.9.5] - 2026-06-06
+
+- Undid the left-shifted text centering of the main circular donut chart in the popup
+- Shifted the right-aligned category and website time text inside the popup slightly to the left to avoid touching the borders
+- Added dynamic hover states to category legend rows in the popup to show category-specific times and label titles with matching colors inside the circular chart
+- Restructured the popup timer settings panel to group inputs side-by-side (Work + Short Break, and Long Break + Cycles)
+- Added the active preset name dynamically as a subtitle in the popup Timer Settings header (e.g. "Timer Settings · Pomodoro")
+- Placed the "Save Settings" and "Advanced Settings" options side-by-side as primary and secondary buttons on a single horizontal line in the popup settings panel
+- Added an "Advanced Settings" navigation button in the popup settings panel that redirects to the Focus tab in the dashboard and triggers a pulsing glow on the edit icon of the active preset
+- Fixed contrast ratio for dark mode text variables (`--tx3` and `--tx4`) on dark backgrounds, meeting WCAG AA accessibility requirements
+- Fixed keyboard accessibility on settings file inputs by replacing `display: none` with a focusable visually hidden CSS utility (`.sr-only`)
+- Added explicit labeling and programmatically linked labels to inputs/select elements across popup and dashboard forms
+- Linked toggle switch checkboxes programmatically to their text titles using `aria-labelledby`
+- Added text alternative descriptions (aria-labels) to symbol/icon buttons like Settings gear, Close settings '✕', and Delete '⌫'
+- Added main content skip links for quick keyboard navigation on the dashboard
+- Fixed dashboard `.focus-layout` grid columns configuration so it collapses properly into a single column on mobile/smaller screens
+- Replaced classic Georgia serif font on blocked and quote page elements with the official brand font (Manrope)
+- Consolidated monospace font-family declarations across all stylesheets, HTML documents, and dynamic JS templates to use the new `--font-mono` design token
+- Cleaned up informal "e.g. " prefixes from text input placeholders in the dashboard layout and JS configuration templates
+
+
+## [6.9.2] - 2026-06-02
+
+- Fixed Firefox custom new tab hijack bug: resolved issues with genuine new tabs not redirecting and programmatic extension pages (like dashboard/settings) getting hijacked.
+
 ## [6.9.1] - 2026-06-02
 
-- Fixed Firefox custom new tab hijack bug by listening to tab updates instead of tab creation
 - (Includes all version 6.9.0 features including history migration uploaders and visual refinements)
 
 - Added history migration uploader row for **Webtime Tracker** CSV exports with its authentic multicolored doughnut chart SVG logo
