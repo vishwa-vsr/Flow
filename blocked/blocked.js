@@ -18,6 +18,7 @@ const RULE_LABELS = {
   instant: "Instant Block Active",
   schedule: "Schedule Block Active",
   time_limit: "Daily Limit Reached",
+  session_limit: "Session Limit Reached",
   manual: "Manually Blocked",
   tweak: "Distracting Section Blocked",
 };
@@ -26,15 +27,30 @@ const RULE_DETAIL = {
   instant: "This site is set to always block.",
   schedule: "This site is blocked during your scheduled block hours.",
   time_limit: "You have hit your daily time limit for this site.",
+  session_limit: "You have hit your per-session limit for this site. Take a break!",
   manual: "You added this site to your block list.",
   tweak: "Access to this specific section is blocked by your Advanced Site Tweaks.",
 };
 
 // ── Parse params ──────────────────────────────────────────────────────────────
+function safeAtob(str) {
+  try {
+    return atob(str);
+  } catch (e) {
+    return str;
+  }
+}
 var qs = new URLSearchParams(window.location.search || "");
 var hs = new URLSearchParams((window.location.hash || "").replace(/^#/, ""));
 function P(k1, k2) { return qs.get(k1) || qs.get(k2) || hs.get(k1) || hs.get(k2) || ""; }
-var blockedDomain = P("domain", "d") || "this site";
+var rawDomain = P("domain", "d") || "this site";
+var blockedDomain = rawDomain;
+if (rawDomain && rawDomain !== "this site") {
+  var decoded = safeAtob(rawDomain);
+  if (decoded && decoded.includes(".")) {
+    blockedDomain = decoded;
+  }
+}
 var reason = P("reason", "r") || "rule";
 var limit = Number(P("limit", "l") || 0);
 
@@ -71,10 +87,26 @@ function formatTime12(timeStr) {
 
 var badge = document.getElementById("badge");
 var schedEnd = P("sched_end");
+var cooldownEnds = Number(P("cooldown_ends") || 0);
+
 if (reason === "time_limit" && limit > 0) {
   badge.textContent = "Daily limit · " + Math.round(limit / 60) + " min spent";
 } else if (reason === "schedule" && schedEnd) {
   badge.textContent = "Blocked until " + formatTime12(schedEnd);
+} else if (reason === "session_limit" && cooldownEnds > 0) {
+  function tickCooldown() {
+    var diff = Math.max(0, Math.round((cooldownEnds - Date.now()) / 1000));
+    if (diff <= 0) {
+      badge.textContent = "Cooldown over! Refresh page to visit.";
+      badge.style.color = "var(--green)";
+    } else {
+      var m = Math.floor(diff / 60);
+      var s = diff % 60;
+      badge.textContent = "Take a break · unblocking in " + m + "m " + String(s).padStart(2, "0") + "s";
+      setTimeout(tickCooldown, 1000);
+    }
+  }
+  tickCooldown();
 } else {
   badge.textContent = RULE_LABELS[reason] || "Blocked by Flow";
 }
@@ -96,7 +128,7 @@ try {
     if (!res || !res.domain) return;
     var el = document.getElementById("productive-suggestion");
     if (!el) return;
-    var safeDom = String(res.domain).replace(/[&<>'"]/g, function(tag) { return ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag] || tag); });
+    var safeDom = escHTML(res.domain);
     el.innerHTML = 'Go do something useful: <a href="https://' + safeDom + '" class="prod-link">' + safeDom + ' →</a>';
     el.style.display = "block";
   });
@@ -117,5 +149,20 @@ document.getElementById("btn-back").addEventListener("click", function () {
 });
 
 document.getElementById("btn-set").addEventListener("click", function () {
-  chrome.runtime.openOptionsPage();
+  if (typeof chrome !== "undefined" && chrome.tabs && chrome.tabs.query) {
+    chrome.tabs.query({ url: chrome.runtime.getURL("dashboard/index.html*") }, function (tabs) {
+      if (tabs && tabs.length > 0) {
+        chrome.tabs.update(tabs[0].id, { url: chrome.runtime.getURL("dashboard/index.html#sitemanager"), active: true });
+        if (tabs[0].windowId) {
+          chrome.windows.update(tabs[0].windowId, { focused: true });
+        }
+      } else {
+        chrome.tabs.create({ url: chrome.runtime.getURL("dashboard/index.html#sitemanager") });
+      }
+    });
+  } else {
+    chrome.runtime.openOptionsPage();
+  }
 });
+
+
