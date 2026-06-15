@@ -161,6 +161,8 @@
   root.FALLBACK_ICON =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E";
 
+  root.COOLDOWN_FREQS = ["everyVisit", "every10min", "oncePerDay"];
+
   root.QUOTES = [
     '"Future you is watching. Make them proud."',
     '"Discipline is choosing between what you want now and what you want most."',
@@ -174,4 +176,29 @@
     '"Be so good they cannot ignore you."',
     '"Discipline equals freedom."'
   ];
+  root.getEffectiveCat = function (domainStr, customCats, hiddenSites) {
+    const cats = customCats || root.siteCategories || root.siteCats || (typeof siteCategories !== "undefined" ? siteCategories : (typeof siteCats !== "undefined" ? siteCats : {}));
+    const hidden = hiddenSites || root.hiddenDefaultSites || (typeof hiddenDefaultSites !== "undefined" ? hiddenDefaultSites : []);
+    const auto = root.AUTO_CATEGORIES || {};
+
+    if (cats[domainStr]) return { cat: cats[domainStr], auto: false };
+    
+    const parts = domainStr.split(".");
+    for (let i = 1; i < parts.length - 1; i++) {
+        const sub = parts.slice(i).join(".");
+        if (cats[sub]) return { cat: cats[sub], auto: false };
+    }
+
+    if (hidden.includes(domainStr)) return { cat: "uncategorized", auto: false };
+    for (let i = 1; i < parts.length - 1; i++) {
+        const sub = parts.slice(i).join(".");
+        if (hidden.includes(sub)) return { cat: "uncategorized", auto: false };
+    }
+
+    if (auto[domainStr]) return { cat: auto[domainStr], auto: true };
+    const subAuto = parts.length > 2 ? parts.slice(1).join(".") : domainStr;
+    if (auto[subAuto]) return { cat: auto[subAuto], auto: true };
+
+    return { cat: "uncategorized", auto: false };
+  };
 })(typeof self !== "undefined" ? self : this);

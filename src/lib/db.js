@@ -18,6 +18,7 @@
 
 (function (root) {
   let dbPromise = null;
+  let _isMigratedInMemory = false;
 
   function getDB() {
     if (dbPromise) return dbPromise;
@@ -174,6 +175,15 @@
       });
     },
 
+    async clearDays() {
+      const store = await getStore("daily_logs", "readwrite");
+      return new Promise((resolve, reject) => {
+        const req = store.clear();
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    },
+
     async getRollups() {
       const store = await getStore("monthly_rollups", "readonly");
       return new Promise((resolve, reject) => {
@@ -231,11 +241,53 @@
       });
     },
 
+    async deleteMeta(key) {
+      const store = await getStore("meta", "readwrite");
+      return new Promise((resolve, reject) => {
+        const req = store.delete(key);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    },
+
+    async getLocalBackupsList() {
+      return await FFDB.getMeta("backup_list", []);
+    },
+
+    async saveLocalBackup(id, label, payload) {
+      const list = await FFDB.getLocalBackupsList();
+      const sizeBytes = JSON.stringify(payload).length;
+      const filtered = list.filter(item => item.id !== id);
+      filtered.push({
+        id,
+        timestamp: Date.now(),
+        label: label || "Manual Backup",
+        size: sizeBytes
+      });
+      await FFDB.setMeta("backup_list", filtered);
+      await FFDB.setMeta("backup_data_" + id, payload);
+    },
+
+    async deleteLocalBackup(id) {
+      const list = await FFDB.getLocalBackupsList();
+      const filtered = list.filter(item => item.id !== id);
+      await FFDB.setMeta("backup_list", filtered);
+      await FFDB.deleteMeta("backup_data_" + id);
+    },
+
+    async getLocalBackupData(id) {
+      return await FFDB.getMeta("backup_data_" + id, null);
+    },
+
     async ensureMigrated() {
+      if (_isMigratedInMemory) return;
       if (FFDB._migrating) return FFDB._migrating;
       FFDB._migrating = (async () => {
         const done = await FFDB.getMeta("migrated_v1", false);
-        if (done) return;
+        if (done) {
+          _isMigratedInMemory = true;
+          return;
+        }
         const data = await new Promise((res) =>
           chrome.storage.local.get(["daily", "monthly_rollups"], (r) => res(r || {}))
         );
@@ -252,6 +304,7 @@
             chrome.storage.local.remove(["daily", "monthly_rollups"], resolve);
           });
         } catch (_) {}
+        _isMigratedInMemory = true;
       })();
       try {
         await FFDB._migrating;
