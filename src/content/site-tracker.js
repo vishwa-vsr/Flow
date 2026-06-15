@@ -9,6 +9,14 @@
   if (href.startsWith(chrome.runtime.getURL(""))) return;
   const host = location.hostname.replace(/^www\./, "");
 
+  const safeBtoa = (str) => {
+    try {
+      return btoa(str);
+    } catch (e) {
+      return str;
+    }
+  };
+
 // Bug 1 fix: guard against double-injection on fast refresh in SPAs
   if (window.__ffCooldownActive) return;
   window.__ffCooldownActive = true;
@@ -33,8 +41,20 @@
   // Fast check: is this current website actually tracked or governed by any rules?
   // Bug 6 fix: read only blockRules + cooldownConfig (1 read instead of 3)
   const fastCfg = await new Promise((res) =>
-    chrome.storage.local.get(["cooldownConfig", "blockRules", "granularRules"], (r) => res(r || {}))
+    chrome.storage.local.get(["cooldownConfig", "blockRules", "granularRules", "neverTrackDomains", "privacyModeActive", "allowList"], (r) => res(r || {}))
   );
+
+  const allowList = fastCfg.allowList || [];
+  const isAllowListed = allowList.some((d) => {
+    const lowerD = String(d).toLowerCase().trim();
+    return host === lowerD || host.endsWith("." + lowerD);
+  });
+
+  if (fastCfg.privacyModeActive === true || isAllowListed) {
+    window.__ffCooldownActive = false;
+    return;
+  }
+
   const cdConf1 = fastCfg.cooldownConfig || {};
   const cooldowns = (cdConf1.activeDomains || []).map((d) => String(d).toLowerCase().trim()).filter(Boolean);
   const blockRules = fastCfg.blockRules || [];
@@ -50,8 +70,8 @@
   }
 
   // ---- Advanced Reddit Shadow DOM Hiding ----
-  if (host === "reddit.com" && fastCfg.granularRules && fastCfg.granularRules["reddit.com"]) {
-    const rdRules = fastCfg.granularRules["reddit.com"];
+  if (host === "reddit.com") {
+    let rdRules = (fastCfg.granularRules && fastCfg.granularRules["reddit.com"]) || {};
 
     const findInShadows = (selector) => {
       const found = [];
@@ -87,9 +107,42 @@
              id === 'left-sidebar';
     };
 
+    const showRedditElements = () => {
+      const recents = findInShadows('reddit-recent-pages, #recent-communities-section');
+      recents.forEach(recent => {
+        recent.style.removeProperty('display');
+        if (recent.parentElement && recent.parentElement.parentElement) {
+          recent.parentElement.parentElement.style.removeProperty('display');
+          recent.parentElement.style.removeProperty('display');
+        }
+      });
+
+      const comms = findInShadows('#communities_section');
+      comms.forEach(comm => {
+        comm.style.removeProperty('display');
+        if (comm.parentElement && comm.parentElement.parentElement) {
+          comm.parentElement.parentElement.style.removeProperty('display');
+          comm.parentElement.style.removeProperty('display');
+        }
+      });
+
+      const pops = findInShadows('#popular-posts');
+      pops.forEach(pop => pop.style.removeProperty('display'));
+
+      const exps = findInShadows('#explore-communities');
+      exps.forEach(exp => exp.style.removeProperty('display'));
+
+      const leftTops = findInShadows('left-nav-top-section');
+      leftTops.forEach(host => {
+        if (host.shadowRoot) {
+          const items = host.shadowRoot.querySelectorAll('faceplate-tracker');
+          items.forEach(item => item.style.removeProperty('display'));
+        }
+      });
+    };
+
     const hideRedditTweaks = () => {
       if (rdRules["rd-recent-communities"]) {
-        // Target and hide the Recent section elements
         const recents = findInShadows('reddit-recent-pages, #recent-communities-section');
         recents.forEach(recent => {
           recent.style.setProperty('display', 'none', 'important');
@@ -102,7 +155,6 @@
           }
         });
 
-        // Target and hide the Communities section elements
         const comms = findInShadows('#communities_section');
         comms.forEach(comm => {
           if (comm.parentElement && comm.parentElement.parentElement) {
@@ -141,19 +193,67 @@
         });
       }
     };
-    setInterval(hideRedditTweaks, 1000);
-    document.addEventListener("DOMContentLoaded", hideRedditTweaks);
+
+    let hideTimeout = null;
+    const triggerHide = () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(hideRedditTweaks, 200);
+    };
+
+    let observer = null;
+    const startObserving = () => {
+      if (observer) return;
+      observer = new MutationObserver(() => triggerHide());
+      observer.observe(document.documentElement || document.body, {
+        childList: true,
+        subtree: true
+      });
+    };
+
+    const stopObserving = () => {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+    };
+
+    const updateState = () => {
+      const anyActive = rdRules["rd-recent-communities"] || rdRules["rd-popular"];
+      if (anyActive) {
+        startObserving();
+        triggerHide();
+      } else {
+        stopObserving();
+        showRedditElements();
+      }
+    };
+
+    // Initialize
+    updateState();
+    document.addEventListener("DOMContentLoaded", () => updateState());
+
+    // Listen for rule changes
+    chrome.storage.onChanged.addListener((changes, area) => {
+      if (area === "local" && changes.granularRules) {
+        const newRules = changes.granularRules.newValue || {};
+        rdRules = newRules["reddit.com"] || {};
+        updateState();
+      }
+    });
   }
 
   // ---- Active Interaction Heartbeats & Nudge Listeners (Always enabled if rules exist) ----
-  const showNudgePopup = () => {
+  const showNudgePopup = (seconds) => {
     if (document.getElementById("ff-nudge")) return;
     if (!document.body || !document.head) return;
     const t = document.createElement("div");
     t.id = "ff-nudge";
     t.style.cssText = "position:fixed;top:0;left:0;width:100%;background:#121212;color:#f8fafc;text-align:center;padding:12px;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:14px;z-index:2147483647;border-bottom:2px solid #F46B7A;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:ff-slide 0.5s ease;";
     const e = document.createElement("span");
-    e.textContent = "Flow: 1 minute remaining for this site. Wrap it up!";
+    
+    let timeText = seconds >= 60 ? `${Math.round(seconds / 60)} minute${Math.round(seconds / 60) > 1 ? "s" : ""}` : `${seconds} seconds`;
+    e.textContent = `Flow: ${timeText} remaining for this site. Wrap it up!`;
+    
     const a = document.createElement("button");
     a.id = "ff-nudge-x";
     a.textContent = "✕";
@@ -170,7 +270,33 @@
 
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === "SHOW_NUDGE") {
-      showNudgePopup();
+      showNudgePopup(msg.seconds || 60);
+    }
+  });
+
+  const neverTrack = fastCfg.neverTrackDomains || [];
+  let isNeverTracked = neverTrack.some((d) => host === d.toLowerCase() || host.endsWith("." + d.toLowerCase()));
+  let isPrivacyActive = fastCfg.privacyModeActive === true;
+
+  chrome.storage.onChanged.addListener((changes, area) => {
+    let changed = false;
+    if (area === "local") {
+      if (changes.neverTrackDomains) {
+        const newNever = changes.neverTrackDomains.newValue || [];
+        isNeverTracked = newNever.some((d) => host === d.toLowerCase() || host.endsWith("." + d.toLowerCase()));
+        changed = true;
+      }
+      if (changes.privacyModeActive) {
+        isPrivacyActive = changes.privacyModeActive.newValue === true;
+        changed = true;
+      }
+      if (changed) {
+        if (isNeverTracked || isPrivacyActive) {
+          stopHeartbeat();
+        } else if (document.visibilityState === "visible") {
+          startHeartbeat();
+        }
+      }
     }
   });
 
@@ -191,8 +317,13 @@
 
   let heartbeatTimer = null;
   const startHeartbeat = () => {
+    if (isNeverTracked || isPrivacyActive) return;
     if (heartbeatTimer) return;
     heartbeatTimer = setInterval(() => {
+      if (isNeverTracked || isPrivacyActive) {
+        stopHeartbeat();
+        return;
+      }
       const now = Date.now();
       if (document.visibilityState === "visible" && (now - lastInteract < 30000)) {
         const elapsed = Math.round((now - lastHeartbeat) / 1000);
@@ -225,6 +356,7 @@
   }
 
   document.addEventListener("visibilitychange", () => {
+    if (isNeverTracked) return;
     if (document.visibilityState === "visible") {
       lastHeartbeat = Date.now();
       startHeartbeat();
@@ -233,6 +365,31 @@
     }
   });
 
+  // ---- Media Playback Detection (Passive Tab Tracking) ----
+  let lastMediaPingTime = 0;
+  const sendMediaPing = () => {
+    if (isNeverTracked) return;
+    try {
+      if (chrome?.runtime?.id) {
+        chrome.runtime.sendMessage({ type: "MEDIA_PING" }).catch(() => {});
+      }
+    } catch (_) {}
+  };
+  document.addEventListener("play", (e) => {
+    if (e.target instanceof HTMLMediaElement) {
+      sendMediaPing();
+    }
+  }, { capture: true, passive: true });
+  document.addEventListener("timeupdate", (e) => {
+    if (e.target instanceof HTMLMediaElement && !e.target.paused) {
+      const now = Date.now();
+      if (now - lastMediaPingTime >= 10000) {
+        lastMediaPingTime = now;
+        sendMediaPing();
+      }
+    }
+  }, { capture: true, passive: true });
+
   // ---- 2. Cool-down overlay (Isolated check) ----
   const matchedBlockDomain = Object.keys(cdConf1.blockActive || {}).find(d => host === d || host.endsWith("." + d));
   if (matchedBlockDomain) {
@@ -240,7 +397,7 @@
     if (blockTarget) {
       if (blockTarget.startsWith("/blocked/")) {
         const separator = blockTarget.includes("?") ? "&" : "?";
-        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + host;
+        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
       } else if (!blockTarget.startsWith("http")) {
         blockTarget = "https://" + blockTarget;
       }
@@ -263,7 +420,13 @@
 
   const siteCfg   = allSettings[matchedDomain] || {};
   const timerSecs = Math.max(1, Math.min(120, Number(siteCfg.timer) || 10));
-  const frequency = siteCfg.frequency || "every10min";
+  let frequency = siteCfg.frequency || "every10min";
+  if (frequency === "always") frequency = "everyVisit";
+  if (frequency === "daily") frequency = "oncePerDay";
+  if (frequency === "session") frequency = "every10min";
+  if (!["everyVisit", "every10min", "oncePerDay"].includes(frequency)) {
+    frequency = "every10min";
+  }
 
   const lastPassed = passed[host] || 0;
   const now = Date.now();
@@ -279,7 +442,7 @@
     if (blockTarget) {
       if (blockTarget.startsWith("/blocked/")) {
         const separator = blockTarget.includes("?") ? "&" : "?";
-        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + host;
+        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
       } else if (!blockTarget.startsWith("http")) {
         blockTarget = "https://" + blockTarget;
       }
@@ -328,7 +491,17 @@
     const num         = document.getElementById("ff-cd-num");
     const go          = document.getElementById("ff-cd-go");
 
-    document.getElementById("ff-cd-back").onclick = () => history.back();
+    document.getElementById("ff-cd-back").onclick = () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        try {
+          if (chrome?.runtime?.id) {
+            chrome.runtime.sendMessage({ type: "CLOSE_CURRENT_TAB" }).catch(() => {});
+          }
+        } catch (_) {}
+      }
+    };
 
     let n = timerSecs;
     const tick = setInterval(() => {
@@ -362,7 +535,7 @@
           if (blockTarget) {
             if (blockTarget.startsWith("/blocked/")) {
               const separator = blockTarget.includes("?") ? "&" : "?";
-              blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + host;
+              blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
             } else if (!blockTarget.startsWith("http")) {
               blockTarget = "https://" + blockTarget;
             }
