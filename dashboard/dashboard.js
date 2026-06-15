@@ -550,13 +550,13 @@ async function renderCombined() {
         allowList.forEach(function (t) {
             var a = document.createElement("div");
             const _sa = sanitizeDomain(t);
-            a.className = "brow brow-rules allow-row", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-d="${_sa}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t)} ${_sa}</span>\n      <span><span class="cbadge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)">Allowed</span></span>\n      <span class="mtxt" style="color:var(--tx3)">Always accessible</span><span class="ltxt">—</span><span class="stxt">—</span>\n      <span class="ract"><button class="bic del del-a" data-d="${_sa}" title="Delete Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></span>`, document.getElementById("combined-list-rows").appendChild(a)
+            a.className = "brow brow-rules allow-row", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-d="${_sa}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t)} ${_sa}</span>\n      <span><span class="cbadge" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)">Allowed</span></span>\n      <span class="mtxt" style="color:var(--tx3)">Always accessible</span><span class="ltxt">—</span><span class="stxt">—</span>\n      <span class="ract"><button class="bic del del-a" data-d="${_sa}" title="Delete Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></span>`), document.getElementById("combined-list-rows").appendChild(a)
         });
     } else if (window.activeRuleTab === "never") {
         neverTrackDomains.forEach(function (t) {
             var a = document.createElement("div");
             const _sn = sanitizeDomain(t);
-            a.className = "brow brow-rules never-row", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-n="${_sn}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t)} ${_sn}</span>\n      <span><span class="cbadge" style="background:rgba(168,85,247,0.15);color:#A855F7;border:1px solid rgba(168,85,247,0.3)">Never Track</span></span>\n      <span class="mtxt" style="color:var(--tx3)">Privacy: Never tracked</span><span class="ltxt">—</span><span class="stxt">—</span>\n      <span class="ract"><button class="bic del del-n" data-n="${_sn}" title="Delete Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></span>`, document.getElementById("combined-list-rows").appendChild(a)
+            a.className = "brow brow-rules never-row", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-n="${_sn}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t)} ${_sn}</span>\n      <span><span class="cbadge" style="background:rgba(168,85,247,0.15);color:#A855F7;border:1px solid rgba(168,85,247,0.3)">Never Track</span></span>\n      <span class="mtxt" style="color:var(--tx3)">Privacy: Never tracked</span><span class="ltxt">—</span><span class="stxt">—</span>\n      <span class="ract"><button class="bic del del-n" data-n="${_sn}" title="Delete Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></span>`), document.getElementById("combined-list-rows").appendChild(a)
         });
     }
 
@@ -2653,7 +2653,16 @@ async function renderTrend() {
         return 0 === e ? '<span style="color:var(--tx3)">No change</span>' : `<span style="color:${(t ? e > 0 : e < 0) ? "var(--green)" : "var(--red)"};font-weight:800">${e > 0 ? "↗" : "↘"} ${Math.abs(e)}%</span> <span style="font-size:12px;color:var(--tx2);font-weight:600">vs prev ${_windowDays}d</span>`
     }
     let x = $("trend-study-total")?.parentElement?.parentElement;
-    x && !x.dataset.modified && (x.dataset.modified = "true", setSafeHTML(x, \'\1\')), $("pop-prod") && setSafeHTML($("pop-prod"), k(y, !0) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(i)}</span>`), $("pop-dist") && setSafeHTML($("pop-dist"), k(b, !1) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(s)}</span>`);
+    x && !x.dataset.modified && (x.dataset.modified = "true", setSafeHTML(x, `
+          <div style="flex:1;background:var(--bg3);padding:20px;border-radius:16px;border:1px solid var(--bd);">
+              <div style="font-size:12px;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Productivity Focus</div>
+              <div id="pop-prod" style="font-size:24px;font-family:monospace;font-weight:800;line-height:1.2;">—</div>
+          </div>
+          <div style="flex:1;background:var(--bg3);padding:20px;border-radius:16px;border:1px solid var(--bd);">
+              <div style="font-size:12px;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Distraction Tracking</div>
+              <div id="pop-dist" style="font-size:24px;font-family:monospace;font-weight:800;line-height:1.2;">—</div>
+          </div>
+      `)), $("pop-prod") && setSafeHTML($("pop-prod"), k(y, !0) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(i)}</span>`), $("pop-dist") && setSafeHTML($("pop-dist"), k(b, !1) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(s)}</span>`);
     var w = !$("tog-trend-prod") || $("tog-trend-prod").checked,
         E = !$("tog-trend-lrn") || $("tog-trend-lrn").checked,
         S = !$("tog-trend-comm") || $("tog-trend-comm").checked,
@@ -2896,7 +2905,7 @@ async function loadExtendedSettings(preloadedSettings) {
                     ">${name}</span>`;
                 }).join("");
 
-                a.innerHTML = `
+                setSafeHTML(a, `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div style="display:flex; flex-direction:column; gap:2px;">
                             <span style="font-size:11px; font-weight:800; color:var(--tx3); text-transform:uppercase; letter-spacing:0.05em;">Free-time Hours</span>
@@ -4759,7 +4768,7 @@ document.body.appendChild(overlay);
                 else if (isWeekdays) daysText = "Weekdays";
                 else daysText = DAY_LABELS.filter((d, i) => activeDays.includes(i)).map(d => d.substring(0,1)).join(", ");
 
-                a.innerHTML = `
+                setSafeHTML(a, `
                     <div style="display:flex; flex-direction:column; justify-content:center;">
                         <div style="font-size:13px; font-weight:800; color:var(--tx);">${sanitizeDomain(sched.label || "Focus Session")}</div>
                         <div style="font-size:10px; font-weight:700; color:var(--tx2); margin-top:2px; display:flex; gap:6px; align-items:center;">
@@ -4771,10 +4780,11 @@ document.body.appendChild(overlay);
                     <div style="display:flex; align-items:center; gap:10px;">
                         <label class="tog" style="transform:scale(0.85); transform-origin:right center; margin:0;"><input type="checkbox" class="sched-enabled-cb" data-idx="${t}" ${sched.enabled !== false ? "checked" : ""}><span class="ttrack"></span></label>
                         <button class="preset-edit-btn edit-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
-                        <button class="preset-edit-btn rm-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+                        <button class="preset-edit-btn rm-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
                     </div>
                 `);
-} list.appendChild(a);
+            }
+            list.appendChild(a);
         }
 
         list.querySelectorAll(".sched-enabled-cb").forEach(cb => {
