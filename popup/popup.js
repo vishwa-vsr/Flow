@@ -4,6 +4,7 @@ var FR_C = 2 * Math.PI * 34,
     currentView = "today",
     siteCats = {},
     AUTO_CATEGORIES = {};
+var hiddenDefaultSites = [];
 
 var pcRes = null,
     pcBuf = "";
@@ -39,20 +40,22 @@ $("pclr") && $("pclr").addEventListener("click", () => {
 $("pcok") && $("pcok").addEventListener("click", async () => {
     if (pcBuf.length >= 4) {
         var e = await gSync(["settings"]);
-        await hashPin(pcBuf) === (e.settings || {}).passcodeHash ? ($("pcOverlay").classList.add("hide"), pcRes && pcRes(!0)) : ($("pcerr") && $("pcerr").classList.remove("hide"), pcBuf = "", updDots())
+        const settings = e.settings || {};
+        const res = await verifyAndMigratePin(pcBuf, settings.passcodeHash);
+        if (res.success) {
+            if (res.migratedHash) {
+                settings.passcodeHash = res.migratedHash;
+                await sSync({ settings });
+            }
+            $("pcOverlay").classList.add("hide");
+            pcRes && pcRes(!0);
+        } else {
+            $("pcerr") && $("pcerr").classList.remove("hide");
+            pcBuf = "";
+            updDots();
+        }
     }
 });
-
-function getEffectiveCat(e) {
-    if (siteCats[e]) return siteCats[e];
-    for (var t = e.split("."), s = 1; s < t.length - 1; s++) {
-        var a = t.slice(s).join(".");
-        if (siteCats[a]) return siteCats[a]
-    }
-    if (AUTO_CATEGORIES[e]) return AUTO_CATEGORIES[e];
-    var n = t.length > 2 ? t.slice(1).join(".") : e;
-    return AUTO_CATEGORIES[n] ? AUTO_CATEGORIES[n] : "uncategorized"
-}
 $("btn-analytics") && $("btn-analytics").addEventListener("click", () => chrome.tabs.create({
     url: chrome.runtime.getURL("dashboard/index.html#analytics")
 }));
@@ -102,25 +105,26 @@ async function checkCurrentTabForGranularRules() {
             a = Object.keys(GRANULAR_SITES).find(e => s === e || s.endsWith("." + e));
 
         let displayName = a || s;
-        $("current-site-card") && ($("current-site-card").style.display = "block"), $("current-site-name") && ($("current-site-name").textContent = displayName), $("current-site-icon") && ($("current-site-icon").src = `https://www.google.com/s2/favicons?sz=32&domain=${displayName.trim().toLowerCase().replace(/^www\./, "")}`);
+        let cleanDom = displayName.trim().toLowerCase().replace(/^www\./, "");
+        let iconUrl = FALLBACK_ICON;
+
+        if (shouldFetchFavicon(cleanDom)) {
+            const apex = getApexDomain(cleanDom);
+            let cachedUrl = window.savedFavicons ? (window.savedFavicons[cleanDom] || window.savedFavicons[apex]) : null;
+            if (cachedUrl) {
+                iconUrl = cachedUrl;
+            } else {
+                const isFirefox = chrome.runtime.getURL("").startsWith("moz-extension://");
+                iconUrl = isFirefox 
+                    ? FALLBACK_ICON 
+                    : chrome.runtime.getURL(`_favicon/?pageUrl=http://${apex}&size=32`);
+            }
+        }
+        $("current-site-card") && ($("current-site-card").style.display = "block"), $("current-site-name") && ($("current-site-name").textContent = displayName), $("current-site-icon") && ($("current-site-icon").src = iconUrl);
 
         let { blockRules = [] } = await gLocal(["blockRules"]);
         let existingRule = blockRules.find(r => s === r.domain || s.endsWith("." + r.domain));
         let isBlocked = !!existingRule;
-
-        let btnClass = isBlocked ? "bs-danger-sm" : "bp-sm";
-        let btnText = isBlocked ? "Unblock" : "Block Site";
-
-        // FF v6.7.0: use .bp-sm and .bs-danger-sm classes instead of raw inline styles (Problem 3)
-        let btnHTML = `
-            <button id="btn-popup-block" class="${btnClass}">
-              ${btnText}
-            </button>
-        `;
-        const actionContainer = $("current-site-action");
-        if (actionContainer) {
-            actionContainer.innerHTML = btnHTML;
-        }
 
         const siteHeader = $("current-site-header");
         if (siteHeader) {
@@ -152,47 +156,130 @@ async function checkCurrentTabForGranularRules() {
 
         $("current-site-toggles") && ($("current-site-toggles").innerHTML = sHTML);
 
-        const blockBtn = $("btn-popup-block");
-        if (blockBtn) {
-            blockBtn.addEventListener("click", async () => {
-                let { blockRules = [] } = await gLocal(["blockRules"]);
-                let ruleToToggle = blockRules.find(r => s === r.domain || s.endsWith("." + r.domain));
+        const actionContainer = $("current-site-action");
+        const dropdownMenu = $("popup-preset-dropdown");
 
-                if (ruleToToggle) {
+        if (isBlocked) {
+            if (dropdownMenu) {
+                dropdownMenu.style.display = "none";
+                dropdownMenu.innerHTML = "";
+            }
+            if (actionContainer) {
+                actionContainer.innerHTML = `
+                    <button id="btn-popup-block" class="bs-danger-sm">
+                      Unblock
+                    </button>
+                `;
+            }
+            const blockBtn = $("btn-popup-block");
+            if (blockBtn) {
+                blockBtn.addEventListener("click", async () => {
                     if (await promptPinIfEnabled("lockRules")) {
-                        blockRules = blockRules.filter(r => r.id !== ruleToToggle.id);
+                        let { blockRules = [] } = await gLocal(["blockRules"]);
+                        blockRules = blockRules.filter(r => r.id !== existingRule.id);
                         await sLocal({ blockRules });
                         await msg("TRIGGER_DNR_UPDATE");
                         chrome.tabs.reload(e[0].id);
                         window.close();
                     }
-                } else {
-                    const confirmed = confirm(`Are you sure you want to block ${s}? This will reload the tab and block access to this site.`);
-                    if (!confirmed) return;
+                });
+            }
+        } else {
+            if (dropdownMenu) {
+                dropdownMenu.style.display = "none";
+                dropdownMenu.innerHTML = "";
+            }
+            if (actionContainer) {
+                actionContainer.innerHTML = `
+                    <button id="btn-popup-block" class="bp-sm">
+                      Block Site
+                    </button>
+                `;
+            }
+            
+            // Build preset options
+            let { blockPresets = [] } = await gLocal(["blockPresets"]);
+            blockPresets = (blockPresets || []).filter(p => p && p.id && p.name);
+            
+            // Prepare items array
+            const items = [
+                { id: "default_block", name: "Default (Instant)", config: { instantBlock: true } }
+            ];
+            blockPresets.forEach(p => {
+                items.push(p);
+            });
 
-                    let { allowList = [] } = await gLocal(["allowList"]);
-                    if (allowList.includes(s)) {
-                        allowList = allowList.filter(item => item !== s);
-                        await sLocal({ allowList });
+            if (dropdownMenu) {
+                dropdownMenu.addEventListener("click", (evt) => {
+                    evt.stopPropagation();
+                });
+                dropdownMenu.innerHTML = items.map(item => `
+                    <button class="preset-dropdown-item" data-id="${item.id}" style="width:100%; text-align:left; background:none; border:none; color:var(--tx); padding:8px 12px; font-size:13px; font-weight:600; cursor:pointer; display:block; transition: all 0.2s; border-radius:8px;">
+                      ${escHTML(item.name)}
+                    </button>
+                `).join("");
+
+                dropdownMenu.querySelectorAll(".preset-dropdown-item").forEach(btn => {
+                    btn.addEventListener("mouseenter", () => btn.style.background = "rgba(255,255,255,0.06)");
+                    btn.addEventListener("mouseleave", () => btn.style.background = "none");
+                    btn.addEventListener("click", async () => {
+                        const confirmed = confirm(`Are you sure you want to block ${s}? This will reload the tab and block access to this site.`);
+                        if (!confirmed) return;
+
+                        let { allowList = [] } = await gLocal(["allowList"]);
+                        if (allowList.includes(s)) {
+                            allowList = allowList.filter(item => item !== s);
+                            await sLocal({ allowList });
+                        }
+
+                        const selectedId = btn.getAttribute("data-id");
+                        const selectedPreset = items.find(p => p.id === selectedId);
+                        const presetConfig = selectedPreset ? selectedPreset.config : { instantBlock: true };
+
+                        const newRule = {
+                            id: Math.random().toString(36).substring(2, 9),
+                            domain: s,
+                            category: getEffectiveCat(s).cat || "distraction",
+                            redirectUrl: presetConfig.redirectUrl || null,
+                            instantBlock: !!presetConfig.instantBlock,
+                            focusOnly: !!presetConfig.focusOnly,
+                            timeLimitEnabled: !!presetConfig.timeLimitEnabled,
+                            dailyLimitSecs: Number(presetConfig.dailyLimitSecs) || 0,
+                            scheduleEnabled: !!presetConfig.scheduleEnabled,
+                            schedules: presetConfig.schedules || [],
+                            sessionLimitEnabled: !!presetConfig.sessionLimitEnabled,
+                            sessionLimitSecs: Number(presetConfig.sessionLimitSecs) || 300,
+                            sessionCooldownSecs: Number(presetConfig.sessionCooldownSecs) || 600,
+                            cooldownEnabled: !!presetConfig.cooldownEnabled,
+                            cooldownTimer: Number(presetConfig.cooldownTimer) || 10,
+                            cooldownFrequency: presetConfig.cooldownFrequency || "always",
+                            activeDays: presetConfig.activeDays !== undefined ? presetConfig.activeDays : [0, 1, 2, 3, 4, 5, 6]
+                        };
+
+                        let { blockRules = [] } = await gLocal(["blockRules"]);
+                        blockRules.push(newRule);
+                        await sLocal({ blockRules });
+                        await msg("TRIGGER_DNR_UPDATE");
+                        chrome.tabs.reload(e[0].id);
+                        window.close();
+                    });
+                });
+            }
+
+            const blockBtn = $("btn-popup-block");
+            if (blockBtn) {
+                blockBtn.addEventListener("click", (evt) => {
+                    evt.stopPropagation();
+                    if (dropdownMenu) {
+                        const isHidden = dropdownMenu.style.display === "none" || !dropdownMenu.style.display;
+                        dropdownMenu.style.display = isHidden ? "flex" : "none";
                     }
+                });
+            }
 
-                    const newRule = {
-                        id: Math.random().toString(36).substring(2, 9),
-                        domain: s,
-                        category: getEffectiveCat(s) || "distraction",
-                        redirectUrl: null,
-                        instantBlock: true,
-                        focusOnly: false,
-                        timeLimitEnabled: false,
-                        dailyLimitSecs: 0,
-                        scheduleEnabled: false,
-                        schedules: []
-                    };
-                    blockRules.push(newRule);
-                    await sLocal({ blockRules });
-                    await msg("TRIGGER_DNR_UPDATE");
-                    chrome.tabs.reload(e[0].id);
-                    window.close();
+            document.addEventListener("click", () => {
+                if (dropdownMenu) {
+                    dropdownMenu.style.display = "none";
                 }
             });
         }
@@ -221,8 +308,26 @@ async function checkCurrentTabForGranularRules() {
         console.error("[FF checkCurrentTabForGranularRules]", e);
     }
 }
+function recalculateDayStats(entry) {
+    if (entry && entry.sites) {
+        entry.productivity = 0;
+        entry.learning = 0;
+        entry.communication = 0;
+        entry.distraction = 0;
+        entry.uncategorized = 0;
+        Object.entries(entry.sites).forEach(([dom, secs]) => {
+            const cat = getEffectiveCat(dom).cat;
+            entry[cat] = (entry[cat] || 0) + secs;
+        });
+    }
+}
 async function loadViewData() {
     $("donut-sublbl") && ($("donut-sublbl").textContent = "total" === currentView ? "all time" : "today");
+    
+    // Load hiddenDefaultSites
+    const storageData = await gLocal(["hiddenDefaultSites"]);
+    hiddenDefaultSites = storageData.hiddenDefaultSites || [];
+    
     var e = await msg("GET_SITE_CATEGORIES");
     siteCats = e && e.siteCategories || {};
     var t = await msg("GET_AUTO_CATEGORIES");
@@ -235,7 +340,9 @@ async function loadViewData() {
         var n = await msg("STATS_GET_DAY", {
             day: todayKey()
         });
-        s = n && n.data || {}, a = s.sites || {}
+        let rawData = n && n.data || {};
+        recalculateDayStats(rawData);
+        s = rawData, a = rawData.sites || {}
     } else {
         $("today-widgets") && ($("today-widgets").style.display = "none");
         $("total-widgets") && ($("total-widgets").style.display = "block");
@@ -245,7 +352,7 @@ async function loadViewData() {
         // Synthesize a category breakdown for the donut from the per-site totals.
         s = {};
         Object.entries(a).forEach(([dom, secs]) => {
-            var c = getEffectiveCat(dom);
+            var c = getEffectiveCat(dom).cat;
             s[c] = (s[c] || 0) + secs;
         });
     }
@@ -281,19 +388,19 @@ function renderDonut(e, t) {
         var a = 2 * Math.PI * 50,
             n = [{
                 cat: "productivity",
-                color: "#05D581"
+                color: "var(--green)"
             }, {
                 cat: "learning",
-                color: "#a855f7"
+                color: "var(--purple)"
             }, {
                 cat: "communication",
-                color: "#5C9CFC"
+                color: "var(--blue)"
             }, {
                 cat: "distraction",
-                color: "#F46B7A"
+                color: "var(--red)"
             }, {
                 cat: "uncategorized",
-                color: "#555555"
+                color: "var(--tx3)"
             }].filter(t => (e[t.cat] || 0) > 0),
             o = 0;
         n.forEach(n => {
@@ -303,31 +410,86 @@ function renderDonut(e, t) {
             r.setAttribute("cx", 65), r.setAttribute("cy", 65), r.setAttribute("r", 50), r.setAttribute("fill", "none"), r.setAttribute("stroke", n.color), r.setAttribute("stroke-width", 16), r.setAttribute("stroke-dasharray", i.toFixed(2) + " " + (a - i + .5).toFixed(2)), r.setAttribute("stroke-dashoffset", (-o).toFixed(2)), s.appendChild(r), o += i
         }), $("donut-total") && ($("donut-total").textContent = fmt(t.total));
         var c = $("donut-legend");
-        if (c)
-            if (c.innerHTML = "", t.total) [{
-                label: "Productivity",
-                secs: t.prod,
-                color: "#05D581"
-            }, {
-                label: "Learning",
-                secs: t.lrn,
-                color: "#a855f7"
-            }, {
-                label: "Communication",
-                secs: t.comms,
-                color: "#5C9CFC"
-            }, {
-                label: "Distraction",
-                secs: t.dist,
-                color: "#F46B7A"
-            }, {
-                label: "Uncategorized",
-                secs: t.other,
-                color: "#555555"
-            }].filter(e => e.secs > 0).forEach(e => {
-                c.innerHTML += `<div class="legend-row">\n      <div class="leg-dot" style="background:${e.color};box-shadow:0 0 6px ${e.color}"></div>\n      <div class="leg-info"><span class="leg-name">${e.label}</span><span class="leg-time num">${fmt(e.secs)}</span></div>\n    </div>`
-            });
-            else c.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;"><span style="font-size:13px;font-weight:600">No data yet.</span></div>'
+        if (c) {
+            c.innerHTML = "";
+            if (t.total) {
+                [{
+                    label: "Productivity",
+                    secs: t.prod,
+                    color: "var(--green)"
+                }, {
+                    label: "Learning",
+                    secs: t.lrn,
+                    color: "var(--purple)"
+                }, {
+                    label: "Communication",
+                    secs: t.comms,
+                    color: "var(--blue)"
+                }, {
+                    label: "Distraction",
+                    secs: t.dist,
+                    color: "var(--red)"
+                }, {
+                    label: "Uncategorized",
+                    secs: t.other,
+                    color: "var(--tx3)"
+                }].filter(e => e.secs > 0).forEach(e => {
+                    var row = document.createElement("div");
+                    row.className = "legend-row";
+                    
+                    var dot = document.createElement("div");
+                    dot.className = "leg-dot";
+                    dot.style.background = e.color;
+                    dot.style.boxShadow = "0 0 6px " + e.color;
+                    
+                    var info = document.createElement("div");
+                    info.className = "leg-info";
+                    
+                    var nameSpan = document.createElement("span");
+                    nameSpan.className = "leg-name";
+                    nameSpan.textContent = e.label;
+                    
+                    var timeSpan = document.createElement("span");
+                    timeSpan.className = "leg-time num";
+                    timeSpan.textContent = fmt(e.secs);
+                    
+                    info.appendChild(nameSpan);
+                    info.appendChild(timeSpan);
+                    row.appendChild(dot);
+                    row.appendChild(info);
+                    
+                    row.addEventListener("mouseenter", function() {
+                        var totalEl = $("donut-total");
+                        var sublblEl = $("donut-sublbl");
+                        if (totalEl) {
+                            totalEl.textContent = fmt(e.secs);
+                            totalEl.style.color = e.color;
+                        }
+                        if (sublblEl) {
+                            sublblEl.textContent = e.label.toLowerCase();
+                            sublblEl.style.color = e.color;
+                        }
+                    });
+                    
+                    row.addEventListener("mouseleave", function() {
+                        var totalEl = $("donut-total");
+                        var sublblEl = $("donut-sublbl");
+                        if (totalEl) {
+                            totalEl.textContent = fmt(t.total);
+                            totalEl.style.color = "";
+                        }
+                        if (sublblEl) {
+                            sublblEl.textContent = "total" === currentView ? "all time" : "today";
+                            sublblEl.style.color = "";
+                        }
+                    });
+                    
+                    c.appendChild(row);
+                });
+            } else {
+                c.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;"><span style="font-size:13px;font-weight:600">No data yet.</span></div>';
+            }
+        }
     }
 }
 
@@ -344,13 +506,16 @@ function renderDynamicList(e, t) {
         var a = Object.entries(e).sort((e, t) => t[1] - e[1]);
         var n = s._showAll || !1;
         var isToday = "today" === currentView;
-        s.innerHTML = '<div class="list-hdr">' + (isToday ? "All Sites Today" : "All Time Site Usage") + ' (Click Tag to Edit)</div>';
+        
+        let htmlParts = [];
+        htmlParts.push('<div class="list-hdr">' + (isToday ? "All Sites Today" : "All Time Site Usage") + ' (Click Tag to Edit)</div>');
         
         (n ? a : a.slice(0, 10)).forEach(([e, t]) => {
-            var a = getEffectiveCat(e),
+            var a = getEffectiveCat(e).cat,
                 n = CAT_COLORS[a] || "#555555";
-            s.innerHTML += `<div class="siterow"><span class="sitedom">${getFav(e)}${escHTML(e)}</span>${buildCatSelector(e, a, n)}<span class="sitetm num">${fmt(t)}</span></div>`
+            htmlParts.push(`<div class="siterow"><span class="sitedom">${getFav(e)}${escHTML(e)}</span>${buildCatSelector(e, a, n)}<span class="sitetm num">${fmt(t)}</span></div>`);
         });
+        
         if (a.length > 10 && !n) {
             const isFirefox = navigator.userAgent.includes("Firefox") || chrome.runtime.getURL("").startsWith("moz-extension:");
             const rateUrl = isFirefox 
@@ -363,12 +528,15 @@ function renderDynamicList(e, t) {
                 <button id="feedback-close-btn" class="icon-btn" style="width:24px;height:24px;border:none;flex-shrink:0;">✕</button>
               </div>
             `;
-            s.innerHTML += `
+            htmlParts.push(`
             <div style="text-align:center;padding:12px;display:flex;justify-content:center;">
               <div id="feedback-overlay-container" style="width:100%;">${overlayHtml}</div>
               <button id="show-all-btn" class="bs bs-sm" style="display:none;">Show all ${a.length} sites</button>
             </div>
-            `;
+            `);
+            
+            s.innerHTML = htmlParts.join("");
+            
             setTimeout(() => {
                 var btn = document.getElementById("show-all-btn");
                 if (btn) btn.addEventListener("click", () => {
@@ -383,6 +551,8 @@ function renderDynamicList(e, t) {
                     });
                 }
             }, 0);
+        } else {
+            s.innerHTML = htmlParts.join("");
         }
         
         s.querySelectorAll(".sel-cat").forEach(e => {
@@ -413,6 +583,7 @@ async function loadWeeklyGoal() {
 function renderFocus(e) {
     if (!e || !e.active) return $("focus-card") && ($("focus-card").className = "focus-section"), $("fr-fill") && ($("fr-fill").className = "fr-fill work", $("fr-fill").setAttribute("stroke-dashoffset", FR_C)), $("fr-time") && ($("fr-time").textContent = window._focusWorkMins + ":00"), $("fr-cycles") && ($("fr-cycles").textContent = "0 done"), $("focus-title") && ($("focus-title").textContent = "Ready to focus?"), $("focus-sub") && ($("focus-sub").textContent = window._focusWorkMins + " min work · " + window._focusBreakMins + " min break"), $("focus-phase") && ($("focus-phase").textContent = "Pomodoro", $("focus-phase").className = "focus-phase"), $("logo-img") && ($("logo-img").className = ""), $("btn-start") && ($("btn-start").style.display = ""), $("btn-stop") && ($("btn-stop").style.display = "none"), $("btn-pause") && ($("btn-pause").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), void ($("btn-focus-set") && ($("btn-focus-set").style.display = "flex"));
     $("logo-img") && ($("logo-img").className = "focus-on");
+
     var t = "work" === e.phase,
         s = $("focus-card");
     s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
@@ -460,8 +631,19 @@ $("btn-skip") && $("btn-skip").addEventListener("click", async () => {
     try { renderFocus((await msg("FOCUS_SKIP"))?.focusState); }
     finally { _focusBusy = false; }
 });
-$("btn-focus-set") && $("btn-focus-set").addEventListener("click", () => {
-    $("p-sw") && ($("p-sw").value = window._focusWorkMins), $("p-sb") && ($("p-sb").value = window._focusBreakMins), $("p-sl") && ($("p-sl").value = window._focusLongBreakMins), $("p-sc") && ($("p-sc").value = window._focusCycles), $("focus-set-panel") && ($("focus-set-panel").style.display = "flex"), $("focus-card") && ($("focus-card").style.minHeight = "360px")
+async function updatePresetNameInSettings() {
+    var pres = await msg("PRESETS_GET");
+    if (pres && pres.presets) {
+        var ap = pres.presets.find(p => p.id === pres.activeId) || pres.presets[0];
+        var nameEl = $("p-settings-preset-name");
+        if (nameEl && ap) {
+            nameEl.textContent = " · " + ap.name;
+        }
+    }
+}
+$("btn-focus-set") && $("btn-focus-set").addEventListener("click", async () => {
+    await updatePresetNameInSettings();
+    $("p-sw") && ($("p-sw").value = window._focusWorkMins), $("p-sb") && ($("p-sb").value = window._focusBreakMins), $("p-sl") && ($("p-sl").value = window._focusLongBreakMins), $("p-sc") && ($("p-sc").value = window._focusCycles), $("focus-set-panel") && ($("focus-set-panel").style.display = "flex"), $("focus-card") && ($("focus-card").style.minHeight = "280px")
 });
 $("p-close-focus") && $("p-close-focus").addEventListener("click", () => {
     $("focus-set-panel") && ($("focus-set-panel").style.display = "none"), $("focus-card") && ($("focus-card").style.minHeight = "")
@@ -508,17 +690,40 @@ renderFocus = function (e) {
 };
 
 async function initPopup() {
+    // CSP-compliant global fallback for broken favicon images
+    document.addEventListener("error", function (e) {
+        if (e.target && e.target.tagName === "IMG") {
+            if (e.target.dataset.domain || e.target.id === "current-site-icon" || e.target.src.includes("icons.duckduckgo.com") || e.target.src.includes("google.com/s2/favicons")) {
+                if (e.target.src !== window.FALLBACK_ICON) {
+                    e.target.src = window.FALLBACK_ICON;
+                }
+            }
+        }
+    }, true);
+
     var pres = await msg("PRESETS_GET");
     var ap = null;
     if (pres && pres.presets) ap = pres.presets.find(p => p.id === pres.activeId) || pres.presets[0];
+    var nameEl = $("p-settings-preset-name");
+    if (nameEl && ap) {
+        nameEl.textContent = " · " + ap.name;
+    }
     window._focusWorkMins = ap ? ap.work : 25;
     window._focusBreakMins = ap ? ap.brk : 5;
     window._focusLongBreakMins = ap ? ap.longBrk : 15;
     window._focusCycles = ap ? ap.cycles : 4;
     renderPresetRail(pres);
     await Promise.all([loadViewData(), loadFocus(), checkCurrentTabForGranularRules()]);
+
     $("logo-img") && $("logo-img").addEventListener("click", () => {
         chrome.tabs.create({ url: "https://vishwa-vsr.github.io/flow-website/" });
+        window.close();
+    });
+    $("p-adv-focus") && $("p-adv-focus").addEventListener("click", async (e) => {
+        e.preventDefault();
+        var pres = await msg("PRESETS_GET");
+        var activeId = (pres && pres.activeId) || "pomodoro";
+        chrome.tabs.create({ url: chrome.runtime.getURL("dashboard/index.html#focus?preset=" + activeId) });
         window.close();
     });
 
@@ -543,6 +748,124 @@ async function initPopup() {
         }
     } catch (e) { }
 
+    // --- Privacy Mode / Pause Tracking UI ---
+    const btnPrivacy = document.getElementById("btn-privacy");
+    const privacyPanel = document.getElementById("privacy-panel");
+    const btnClosePrivacy = document.getElementById("btn-close-privacy");
+    const privacyStatusCard = document.getElementById("privacy-status-card");
+    const privacyStatusDesc = document.getElementById("privacy-status-desc");
+    const btnResumeTracking = document.getElementById("btn-resume-tracking");
+    const btnPrivacy30 = document.getElementById("btn-privacy-30");
+    const btnPrivacy60 = document.getElementById("btn-privacy-60");
+    const btnPrivacyAlways = document.getElementById("btn-privacy-always");
+
+    const updatePrivacyUI = async () => {
+        const state = await msg("GET_PRIVACY_STATE");
+        const fs = await msg("FOCUS_GET_STATE");
+        const focusActive = !!(fs && fs.focusState && fs.focusState.active);
+
+        if (focusActive) {
+            if (btnPrivacy) {
+                btnPrivacy.style.opacity = "0.3";
+                btnPrivacy.style.cursor = "not-allowed";
+                btnPrivacy.title = "Privacy Mode (disabled during Focus Mode)";
+            }
+        } else {
+            if (btnPrivacy) {
+                btnPrivacy.style.opacity = "";
+                btnPrivacy.style.cursor = "";
+                btnPrivacy.title = "Privacy Mode / Pause Tracking";
+            }
+        }
+
+        if (state && state.active) {
+            if (privacyStatusCard) privacyStatusCard.style.display = "block";
+            if (privacyPanel) privacyPanel.style.display = "none";
+            
+            if (state.until > 0) {
+                if (window._privacyCountdownTick) clearInterval(window._privacyCountdownTick);
+                const tick = () => {
+                    const diff = state.until - Date.now();
+                    if (diff <= 0) {
+                        clearInterval(window._privacyCountdownTick);
+                        updatePrivacyUI();
+                    } else {
+                        const m = Math.floor(diff / 60000);
+                        const s = Math.floor((diff % 60000) / 1000);
+                        if (privacyStatusDesc) {
+                            privacyStatusDesc.textContent = `Tracking & blocking paused for ${m}m ${String(s).padStart(2, '0')}s`;
+                        }
+                    }
+                };
+                tick();
+                window._privacyCountdownTick = setInterval(tick, 1000);
+            } else {
+                if (privacyStatusDesc) {
+                    privacyStatusDesc.textContent = "Tracking & blocking paused indefinitely";
+                }
+            }
+        } else {
+            if (privacyStatusCard) privacyStatusCard.style.display = "none";
+            if (window._privacyCountdownTick) clearInterval(window._privacyCountdownTick);
+        }
+    };
+
+    if (btnPrivacy) {
+        btnPrivacy.addEventListener("click", async () => {
+            const fs = await msg("FOCUS_GET_STATE");
+            if (fs && fs.focusState && fs.focusState.active) {
+                return;
+            }
+            if (privacyPanel) {
+                const isOpening = privacyPanel.style.display !== "block";
+                if (isOpening) {
+                    if (!await promptPinIfEnabled("lockPrivacy")) return;
+                }
+                privacyPanel.style.display = isOpening ? "block" : "none";
+            }
+        });
+    }
+
+    if (btnClosePrivacy && privacyPanel) {
+        btnClosePrivacy.addEventListener("click", () => {
+            privacyPanel.style.display = "none";
+        });
+    }
+
+    if (btnPrivacy30) {
+        btnPrivacy30.addEventListener("click", async () => {
+            await msg("START_PRIVACY_MODE", { duration: 30 });
+            if (privacyPanel) privacyPanel.style.display = "none";
+            updatePrivacyUI();
+        });
+    }
+
+    if (btnPrivacy60) {
+        btnPrivacy60.addEventListener("click", async () => {
+            await msg("START_PRIVACY_MODE", { duration: 60 });
+            if (privacyPanel) privacyPanel.style.display = "none";
+            updatePrivacyUI();
+        });
+    }
+
+    if (btnPrivacyAlways) {
+        btnPrivacyAlways.addEventListener("click", async () => {
+            await msg("START_PRIVACY_MODE", { duration: 0 });
+            if (privacyPanel) privacyPanel.style.display = "none";
+            updatePrivacyUI();
+        });
+    }
+
+    if (btnResumeTracking) {
+        btnResumeTracking.addEventListener("click", async () => {
+            if (!await promptPinIfEnabled("lockPrivacy")) return;
+            await msg("STOP_PRIVACY_MODE");
+            updatePrivacyUI();
+        });
+    }
+
+    updatePrivacyUI();
+
 }
 
 initPopup();
@@ -552,6 +875,7 @@ const _popupRefreshInterval = setInterval(loadViewData, 6e4);
 window.addEventListener("unload", () => {
     clearInterval(_popupRefreshInterval);
     if (window._pauseCountdownTick) clearInterval(window._pauseCountdownTick);
+    if (window._privacyCountdownTick) clearInterval(window._privacyCountdownTick);
     if (window._focusTick) clearInterval(window._focusTick);
 });
 
@@ -564,14 +888,14 @@ async function renderPresetRail(pres) {
     var locked = !!(fs && fs.focusState && fs.focusState.active);
     rail.innerHTML = pres.presets.map(p => {
         var isAct = p.id === active;
-        return '<button title="' + p.name + (locked ? ' (locked while focus is running)' : '') +
-            '" data-pid="' + p.id + '" ' + (locked ? 'disabled' : '') +
+        return '<button title="' + escHTML(p.name || '') + (locked ? ' (locked while focus is running)' : '') +
+            '" data-pid="' + escHTML(p.id || '') + '" ' + (locked ? 'disabled' : '') +
             ' style="background:' + (isAct ? 'var(--bg3)' : 'transparent') +
             ';border:1px solid ' + (isAct ? 'var(--bd2)' : 'transparent') +
             ';border-radius:8px;width:26px;height:26px;font-size:14px;cursor:' +
             (locked ? 'not-allowed' : 'pointer') + ';opacity:' + (locked ? '0.4' : '1') +
             ';display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1;">' +
-            p.emoji + '</button>';
+            escHTML(p.emoji || '') + '</button>';
     }).join("");
     rail.querySelectorAll("button[data-pid]").forEach(b => {
         b.addEventListener("click", async () => {
@@ -587,6 +911,8 @@ async function renderPresetRail(pres) {
             }
             renderPresetRail(pres2);
             loadFocus();
+            updatePresetNameInSettings();
         });
     });
 }
+
