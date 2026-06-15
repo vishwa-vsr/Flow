@@ -1,16 +1,35 @@
 // FF v4.2: shared constants + Custom/IDB storage layer.
 // AUTO_CATEGORIES, CSS_MAP, CAT_COLORS, CAT_LABELS, DEFAULT_CATS, FALLBACK_ICON now live in lib/constants.js
 // FFDB replaces the chrome.storage.local "daily" blob — see lib/db.js.
-try {
-    importScripts(
-        "../lib/constants.js",
-        "../lib/storage.js",
-        "../lib/db.js"
-    );
-} catch (e) {
-    console.error("[FF] importScripts failed", e);
+if (typeof importScripts !== "undefined") {
+    try {
+        importScripts(
+            "../lib/constants.js",
+            "../lib/storage.js",
+            "../lib/db.js"
+        );
+    } catch (e) {
+        console.error("[FF] importScripts failed", e);
+    }
 }
 const BLOCKED_PAGE = "/blocked/index.html";
+
+function safeBtoa(str) {
+    try {
+        return btoa(str);
+    } catch (e) {
+        return str;
+    }
+}
+
+function safeAtob(str) {
+    try {
+        return atob(str);
+    } catch (e) {
+        return str;
+    }
+}
+
 let focusState = {
     active: !1,
     phase: "work",
@@ -54,13 +73,64 @@ function domain(t) {
         const e = new URL(t);
         // FF v6.7: track local PDF/HTML files opened in the browser
         if (e.protocol === "file:") {
+            const cache = typeof getSyncCache === "function" ? getSyncCache() : null;
+            const trackLocal = (cache && cache.settings) ? cache.settings.trackLocalFiles : false;
+            if (!trackLocal) return null;
+
             const fname = decodeURIComponent(e.pathname.split("/").pop() || "local-file");
-            return ("local:" + fname).slice(0, 80).toLowerCase();
+            const sanitized = fname.replace(/[<>"'&`\/\\#?%]/g, "_");
+            return ("local:" + sanitized).slice(0, 80).toLowerCase();
         }
         return ["http:", "https:"].includes(e.protocol) ? e.hostname.replace(/^www\./, "") : null
     } catch {
         return null
     }
+}
+
+function capElapsed(secs) {
+    const cache = typeof getSyncCache === "function" ? getSyncCache() : null;
+    const maxGap = (cache && cache.settings && typeof cache.settings.maxGapSecs === "number") ? cache.settings.maxGapSecs : 300;
+    return secs < maxGap ? secs : 0;
+}
+
+let isSessionUpdating = false;
+const sessionUpdateQueue = [];
+
+async function safeUpdateSession(fn) {
+    return new Promise((resolve, reject) => {
+        sessionUpdateQueue.push({ fn, resolve, reject });
+        processSessionQueue();
+    });
+}
+
+async function processSessionQueue() {
+    if (isSessionUpdating) return;
+    isSessionUpdating = true;
+    try {
+        while (sessionUpdateQueue.length > 0) {
+            const { fn, resolve, reject } = sessionUpdateQueue.shift();
+            try {
+                const res = await fn();
+                resolve(res);
+            } catch (err) {
+                reject(err);
+            }
+        }
+    } finally {
+        isSessionUpdating = false;
+    }
+}
+
+async function saveFavicon(dom, favIconUrl) {
+    if (!dom || !favIconUrl) return;
+    if (favIconUrl.startsWith("chrome://") || favIconUrl.startsWith("about:") || favIconUrl.startsWith("chrome-extension://") || favIconUrl.startsWith("moz-extension://")) return;
+    try {
+        const data = await gLocal(["favicons"]);
+        const favicons = data.favicons || {};
+        if (favicons[dom] === favIconUrl) return;
+        favicons[dom] = favIconUrl;
+        await sLocal({ favicons });
+    } catch (_) {}
 }
 
 let flushQueue = [],
@@ -92,7 +162,7 @@ const _storCache = {
     sync: { data: null, ts: 0 },
 };
 const _CACHE_TTL_MS = 3600000; // 1 hour (invalidated instantly on storage change)
-const _LOCAL_CACHE_KEYS = ["blockRules", "allowList", "siteCategories", "granularRules"];
+const _LOCAL_CACHE_KEYS = ["blockRules", "allowList", "siteCategories", "granularRules", "hiddenDefaultSites", "neverTrackDomains", "privacyModeActive", "privacyModeUntil", "lastBackupAt"];
 const _SYNC_CACHE_KEYS = ["settings"];
 
 async function getCachedLocal() {
@@ -140,7 +210,6 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
         await FFDB.ensureMigrated();
         while (flushQueue.length > 0) {
             const { domainStr, elapsedSecs, startTimeMs } = flushQueue.shift();
-            const cats = await getAllCats();
             const start = new Date(startTimeMs);
             const end = new Date(startTimeMs + 1e3 * elapsedSecs);
             const cat = await categorize(domainStr);
@@ -154,8 +223,6 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
                 const entry = cache[key];
                 if (!entry.sites) entry.sites = {};
                 if (!entry.timeline) entry.timeline = [];
-                cats.forEach(c => { if (entry[c] === undefined) entry[c] = 0; });
-                entry[cat] = (entry[cat] || 0) + secs;
                 entry.sites[domainStr] = (entry.sites[domainStr] || 0) + secs;
                 if (s) entry.timeline.push({ start: sMs, end: eMs, cat });
                 dirtyDays.add(key);
@@ -180,6 +247,51 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
             await FFDB.bulkSetDays(writeMap);
             // Bug fix #3: invalidate all-time totals cache since we just wrote new data
             _allTimeTotalsCache = null;
+
+            // Session Limit Check
+            try {
+              const localData = await getCachedLocal();
+              const blockRules = localData.blockRules || [];
+              const rule = blockRules.find(r => r.domain && r.sessionLimitEnabled && (domainStr === r.domain || domainStr.endsWith("." + r.domain)));
+              if (rule) {
+                const sessionLimitsState = (await gSession(["sessionLimitsState"])).sessionLimitsState || {};
+                const state = sessionLimitsState[rule.domain] || { spentSecs: 0, lastActiveAt: 0, cooldownActiveUntil: 0 };
+                const now = Date.now();
+                
+                // If away for more than 60 seconds, reset session spent time
+                if (now - state.lastActiveAt > 60 * 1000) {
+                  state.spentSecs = 0;
+                }
+                
+                state.spentSecs += elapsedSecs;
+                state.lastActiveAt = now;
+                
+                if (state.spentSecs >= rule.sessionLimitSecs && (!state.cooldownActiveUntil || now >= state.cooldownActiveUntil)) {
+                  state.cooldownActiveUntil = now + (rule.sessionCooldownSecs * 1000);
+                  sessionLimitsState[rule.domain] = state;
+                  await sSession({ sessionLimitsState });
+                  await updateDNRRules();
+                  chrome.tabs.query({}).then(tabs => {
+                    tabs.forEach(tab => {
+                      if (tab.url) {
+                        const tabDomain = domain(tab.url);
+                        if (tabDomain && (tabDomain === rule.domain || tabDomain.endsWith("." + rule.domain))) {
+                          chrome.tabs.update(tab.id, {
+                            url: chrome.runtime.getURL("blocked/index.html") + "?r=session_limit&d=" + safeBtoa(rule.domain) + "&cooldown_ends=" + state.cooldownActiveUntil
+                          }).catch(() => {});
+                        }
+                      }
+                    });
+                  });
+                } else {
+                  sessionLimitsState[rule.domain] = state;
+                  await sSession({ sessionLimitsState });
+                }
+              }
+            } catch (errLimit) {
+              console.warn("[FF] safeFlush session limit check error:", errLimit);
+            }
+
             persistFlushQueue();
         }
     } finally {
@@ -190,6 +302,15 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
 // FF v6.18: removed dead scanPageForKeywords() — it referenced document/location
 // which don't exist in a service worker. Was never called after Bug#10 cleanup.
 
+
+function isNeverTrack(domainStr, neverTrackDomains) {
+    if (!domainStr || !neverTrackDomains || !neverTrackDomains.length) return false;
+    const lowerDom = domainStr.toLowerCase();
+    return neverTrackDomains.some(d => {
+        const lowerD = d.toLowerCase().trim();
+        return lowerDom === lowerD || lowerDom.endsWith("." + lowerD);
+    });
+}
 
 async function handleTabChange() {
     try {
@@ -203,13 +324,28 @@ async function handleTabChange() {
                 active: !0,
                 windowId: t.id
             }).catch(() => []);
-            e && e.length && e[0].url && (a = domain(e[0].url), s = e[0].id)
+            if (e && e.length && e[0].url) {
+                a = domain(e[0].url);
+                s = e[0].id;
+                if (e[0].favIconUrl) {
+                    saveFavicon(a, e[0].favIconUrl);
+                }
+            }
         }
-        const o = (await gSession(["activeSession"])).activeSession || {
-            domain: null,
-            startTime: null
-        };
-        if (a && s) {
+        
+        let localData = await getCachedLocal();
+        let isPrivacyActive = localData.privacyModeActive === true;
+        if (isPrivacyActive && localData.privacyModeUntil > 0) {
+            if (Date.now() >= localData.privacyModeUntil) {
+                isPrivacyActive = false;
+                await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+                await updateDNRRules();
+            }
+        }
+        const neverTrack = localData.neverTrackDomains || [];
+        const trackingDomain = (isPrivacyActive || isNeverTrack(a, neverTrack)) ? null : a;
+
+        if (a && s && !isPrivacyActive) {
             if (!_injectedCSSTabs[s] || _injectedCSSTabs[s].domain !== a) {
                 _injectedCSSTabs[s] = { domain: a, rules: {} };
             }
@@ -231,49 +367,82 @@ async function handleTabChange() {
                 }
             }
         }
-        if (o.domain === a) return;
-        if (o.domain && o.startTime) {
-            const t = Math.floor((Date.now() - o.startTime) / 1e3);
-            if (t > 0) {
-                // Laptop Closed / Sleep Bug Fix: Cap ghost gaps at 5 minutes (300s)
-                const elapsed = Math.min(t, 300);
-                safeFlush(o.domain, elapsed, o.startTime);
-            }
-        }
-        if (a) {
-            // Bug#4 fix: write lastProductiveSite when domain is a productive/learning category
-            const _domCat = AUTO_CATEGORIES[a];
-            if (_domCat === "productivity" || _domCat === "learning") {
-                await sLocal({ lastProductiveSite: a });
-            }
-            await ensureHeartbeatAlarm();
-            if (await sSession({
-                activeSession: {
-                    domain: a,
-                    startTime: Date.now()
-                }
-            }), updateBadge(), s) {
-                // Granular CSS injection handled above
-            }
-        } else await sSession({
-            activeSession: {
+        await safeUpdateSession(async () => {
+            const o = (await gSession(["activeSession"])).activeSession || {
                 domain: null,
-                startTime: null
+                startTime: null,
+                visitStartTime: null,
+                accumulatedTime: 0
+            };
+            if (o.domain === trackingDomain) return;
+            if (o.domain && o.startTime) {
+                const t = Math.floor((Date.now() - o.startTime) / 1e3);
+                if (t > 0) {
+                    const elapsed = capElapsed(t);
+                    if (elapsed > 0) {
+                        const syncData = await getCachedSync();
+                        const settings = syncData.settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (o.visitStartTime || o.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = elapsed + (o.accumulatedTime || 0);
+                            await safeFlush(o.domain, flushSecs, o.startTime);
+                        }
+                    }
+                }
             }
-        }), updateBadge()
+            if (trackingDomain) {
+                // Bug#4 fix: write lastProductiveSite when domain is a productive/learning category
+                const _domCat = await categorize(trackingDomain);
+                if (_domCat === "productivity" || _domCat === "learning") {
+                    await sLocal({ lastProductiveSite: trackingDomain });
+                }
+                await ensureHeartbeatAlarm();
+                await sSession({
+                    activeSession: {
+                        domain: trackingDomain,
+                        startTime: Date.now(),
+                        visitStartTime: Date.now(),
+                        accumulatedTime: 0,
+                        tabId: s
+                    }
+                });
+                updateBadge();
+            } else {
+                await sSession({
+                    activeSession: {
+                        domain: null,
+                        startTime: null,
+                        visitStartTime: null,
+                        accumulatedTime: 0,
+                        tabId: null
+                    }
+                });
+                updateBadge();
+            }
+        });
     } catch (t) {
         // Bug fix #5: log instead of silently swallowing — makes debugging possible
         console.warn("[FF] handleTabChange error", t);
     }
 }
 async function compressOldData() {
-    // FF v4.2 (Dexie edition): roll up days older than 90 days into monthly_rollups,
+    // FF v4.2 (Dexie edition): roll up old days (default 1 year / 365 days) into monthly_rollups,
     // strip heavy `timeline` + `sites` fields but KEEP the day row so streaks + heatmap survive.
     // FF v6.17: throttle to once-per-day so onStartup doesn't iterate every key on every Chrome launch.
     const { lastCompressedAt = 0 } = await gLocal(["lastCompressedAt"]);
     if (Date.now() - lastCompressedAt < 864e5) return; // 24h
     await FFDB.ensureMigrated();
-    const cutoff = Date.now() - 7776e6; // 90 days
+    
+    const _ss = await getCachedSync();
+    const settings = _ss.settings || {};
+    const retentionDays = typeof settings.dataRetentionDays === "number" ? settings.dataRetentionDays : 365;
+    if (retentionDays === 0) {
+        // 0 means Keep Forever
+        await sLocal({ lastCompressedAt: Date.now() });
+        return;
+    }
+    const cutoff = Date.now() - (retentionDays * 864e5);
     const allKeys = await FFDB.getDayKeys();
     const oldKeys = allKeys.filter(k => {
         const pK = k.split("-");
@@ -290,6 +459,16 @@ async function compressOldData() {
         if (!entry) continue;
         // Already rolled up? (no sites/timeline) — skip.
         if (!entry.sites && !entry.timeline) continue;
+        if (entry.sites) {
+            const catsList = await getAllCats();
+            catsList.forEach(c => {
+                if (entry[c] === undefined) entry[c] = 0;
+            });
+            for (const [dom, secs] of Object.entries(entry.sites)) {
+                const cat = await categorize(dom);
+                entry[cat] = (entry[cat] || 0) + secs;
+            }
+        }
         const month = day.slice(0, 7);
         if (!rollups[month]) rollups[month] = { days: 0, sites: {} };
         rollups[month].days = (rollups[month].days || 0) + 1;
@@ -312,6 +491,67 @@ async function compressOldData() {
         await FFDB.bulkSetDays(writeBack);
         await FFDB.setRollups(rollups);
     }
+
+    try {
+        const { favicons = {} } = await gLocal(["favicons"]);
+        if (Object.keys(favicons).length > 0) {
+            const visitedDomains = new Set();
+            const allDayKeys = await FFDB.getDayKeys();
+            const allDaysData = await FFDB.getDays(allDayKeys);
+            for (const dayKey of Object.keys(allDaysData)) {
+                const dayEntry = allDaysData[dayKey];
+                if (dayEntry && dayEntry.sites) {
+                    for (const dom of Object.keys(dayEntry.sites)) {
+                        visitedDomains.add(dom.toLowerCase().trim());
+                    }
+                }
+            }
+            const currentRollups = await FFDB.getRollups();
+            for (const month of Object.keys(currentRollups)) {
+                const rollupEntry = currentRollups[month];
+                if (rollupEntry && rollupEntry.sites) {
+                    for (const dom of Object.keys(rollupEntry.sites)) {
+                        visitedDomains.add(dom.toLowerCase().trim());
+                    }
+                }
+            }
+            const { cooldownConfig = {}, granularRules = {}, blockRules = [] } = await gLocal(["cooldownConfig", "granularRules", "blockRules"]);
+            blockRules.forEach(r => { if (r.domain) visitedDomains.add(r.domain.toLowerCase().trim()); });
+            if (cooldownConfig.domains) {
+                cooldownConfig.domains.forEach(d => visitedDomains.add(String(d).toLowerCase().trim()));
+            }
+            if (cooldownConfig.activeDomains) {
+                cooldownConfig.activeDomains.forEach(d => visitedDomains.add(String(d).toLowerCase().trim()));
+            }
+            Object.keys(granularRules).forEach(d => visitedDomains.add(d.toLowerCase().trim()));
+            let prunedCount = 0;
+            const newFavicons = {};
+            for (const [dom, url] of Object.entries(favicons)) {
+                const cleanDom = dom.toLowerCase().trim();
+                let keep = visitedDomains.has(cleanDom);
+                if (!keep) {
+                    for (const vDom of visitedDomains) {
+                        if (vDom.endsWith("." + cleanDom) || cleanDom.endsWith("." + vDom)) {
+                            keep = true;
+                            break;
+                        }
+                    }
+                }
+                if (keep) {
+                    newFavicons[dom] = url;
+                } else {
+                    prunedCount++;
+                }
+            }
+            if (prunedCount > 0) {
+                await sLocal({ favicons: newFavicons });
+                console.log(`[FF] Pruned ${prunedCount} unused favicons from storage cache.`);
+            }
+        }
+    } catch (favErr) {
+        console.warn("[FF] Failed to prune favicons map:", favErr);
+    }
+
     await sLocal({ lastCompressedAt: Date.now() });
 }
 
@@ -354,10 +594,38 @@ async function updateDNRRules() {
     await ensureHeartbeatAlarm();
     // FF v6.16 perf: cached reads (was 2 storage round-trips per call).
     const _loc = await getCachedLocal();
-    const t = _loc.blockRules || [];
+const sessionLimitsState = (await gSession(["sessionLimitsState"])).sessionLimitsState || {};
+let sessionLimitsChanged = false;
+const now = Date.now();
+for (const [dom, state] of Object.entries(sessionLimitsState)) {
+  if (state.cooldownActiveUntil && now >= state.cooldownActiveUntil) {
+    state.cooldownActiveUntil = 0;
+    state.spentSecs = 0;
+    sessionLimitsChanged = true;
+  }
+}
+if (sessionLimitsChanged) {
+  await sSession({ sessionLimitsState });
+}
+let isPrivacyActive = _loc.privacyModeActive === true;
+    if (isPrivacyActive && _loc.privacyModeUntil > 0 && Date.now() >= _loc.privacyModeUntil) {
+        isPrivacyActive = false;
+        await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+    }
+    const t = isPrivacyActive ? [] : (_loc.blockRules || []);
     const e = _loc.allowList || [];
     const effectiveAllowList = [...e];
     const a = _loc.siteCategories || {};
+    
+    const isAllowListed = (dom) => {
+        if (!dom) return false;
+        const lower = dom.toLowerCase();
+        return effectiveAllowList.some(allow => {
+            const lowerAllow = allow.toLowerCase();
+            return lower === lowerAllow || lower.endsWith("." + lowerAllow);
+        });
+    };
+    
     const _syn = await getCachedSync();
     const o = _syn.settings || {};
     // FF v4.2: pull only today's row from IDB instead of the entire daily blob.
@@ -367,8 +635,7 @@ async function updateDNRRules() {
     let activeCooldowns = [];
     let cooldownBlockActive = {};
     // FF v6.8: free-time now supports per-window day-of-week
-    const _nowDay = new Date().getDay();
-    if (!(o.freeTimeHours || []).some(t => {
+    if (!isPrivacyActive && !(o.freeTimeHours || []).some(t => {
         return isTimeWindowActive(t.start, t.end, t.days);
     })) {
         if (focusState.active && "work" === focusState.phase && !focusState.paused) {
@@ -385,42 +652,49 @@ async function updateDNRRules() {
                 t = (ap2 && Array.isArray(ap2.blockCats)) ? ap2.blockCats : (o.focusBlockCats || ["distraction"]);
             }
             Object.entries(AUTO_CATEGORIES).forEach(([e, a]) => {
-                t.includes(a) && (i[e] = BLOCKED_PAGE + "?r=strict")
+                if (!isAllowListed(e)) {
+                    t.includes(a) && (i[e] = BLOCKED_PAGE + "?r=strict");
+                }
             }), Object.entries(a).forEach(([e, a]) => {
-                t.includes(a) ? i[e] = BLOCKED_PAGE + "?r=strict" : delete i[e]
+                if (!isAllowListed(e)) {
+                    t.includes(a) ? i[e] = BLOCKED_PAGE + "?r=strict" : delete i[e];
+                }
             })
         }
         const e = todayKey();
         lastWarnDate !== e && (warnedSitesMemory = {}, lastWarnDate = e);
         const n = s[e]?.sites || {};
-        await Promise.all(t.map(async t => {
+        await Promise.all(t.map(async rule => {
+            if (rule.domain && isAllowListed(rule.domain)) {
+                return;
+            }
             // Determine if we are in an active focus work session
             const isFocusActive = focusState.active && focusState.phase === "work" && !focusState.paused;
             let shouldBlock = false; // Prevent clashing with outer 'e' constant scope variable!
             let reason = "strict";   // Declare locally to prevent scope bleeding
             let schedEnd = "";
 
-            if ((t.focusOnly || "focus_only" === t.mode) && isFocusActive) {
+            if ((rule.focusOnly || "focus_only" === rule.mode) && isFocusActive) {
                 shouldBlock = !0;
                 reason = "strict";
             }
 
-            if (!shouldBlock && (t.instantBlock || "always" === t.mode)) {
+            if (!shouldBlock && (rule.instantBlock || "always" === rule.mode)) {
                 shouldBlock = !0;
                 reason = "instant";
             }
 
-            if (!shouldBlock && (t.scheduleEnabled || "schedule" === t.mode)) {
+            if (!shouldBlock && (rule.scheduleEnabled || "schedule" === rule.mode)) {
                 let activeSchedEnd = "";
-                const isScheduled = Array.isArray(t.schedules) && t.schedules.length
-                    ? t.schedules.some(s => {
+                const isScheduled = Array.isArray(rule.schedules) && rule.schedules.length
+                    ? rule.schedules.some(s => {
                         if (inSchedule(s.start, s.end)) {
                             activeSchedEnd = s.end;
                             return true;
                         }
                         return false;
                     })
-                    : inSchedule(t.scheduleStart, t.scheduleEnd || "23:59") && (activeSchedEnd = t.scheduleEnd || "23:59", true);
+                    : inSchedule(rule.scheduleStart, rule.scheduleEnd || "23:59") && (activeSchedEnd = rule.scheduleEnd || "23:59", true);
                 if (isScheduled) {
                     shouldBlock = !0;
                     reason = "schedule";
@@ -428,60 +702,75 @@ async function updateDNRRules() {
                 }
             }
 
-            if (!shouldBlock && (t.timeLimitEnabled || "time_limit" === t.mode) && t.dailyLimitSecs >= 0) {
-                const spent = n[t.domain] || 0;
-                const remaining = t.dailyLimitSecs - spent;
-                if (remaining > 0 && remaining <= 60 && !warnedSitesMemory[t.domain]) {
-                    warnedSitesMemory[t.domain] = !0;
-                    (await chrome.tabs.query({
-                        url: [`*://${t.domain}/*`, `*://*.${t.domain}/*`]
-                    })).forEach(tab => {
-                        chrome.tabs.sendMessage(tab.id, {
-                            type: "SHOW_NUDGE"
-                        }).catch(() => { })
+            if (!shouldBlock && (rule.timeLimitEnabled || "time_limit" === rule.mode) && rule.dailyLimitSecs >= 0) {
+                const spent = n[rule.domain] || 0;
+                const remaining = rule.dailyLimitSecs - spent;
+                const timeWarningEnabled = o.timeWarningEnabled !== false;
+                const timeWarningSecs = typeof o.timeWarningSecs === "number" ? o.timeWarningSecs : 60;
+                
+                if (timeWarningEnabled && remaining > 0 && remaining <= timeWarningSecs && !warnedSitesMemory[rule.domain]) {
+                    warnedSitesMemory[rule.domain] = !0;
+                    (await chrome.tabs.query({})).forEach(tab => {
+                        if (tab.url) {
+                            const tabDomain = domain(tab.url);
+                            if (tabDomain && (tabDomain === rule.domain || tabDomain.endsWith("." + rule.domain))) {
+                                chrome.tabs.sendMessage(tab.id, {
+                                    type: "SHOW_NUDGE",
+                                    seconds: timeWarningSecs
+                                }).catch(() => { })
+                            }
+                        }
                     });
                 }
-                if (spent >= t.dailyLimitSecs) {
+                if (spent >= rule.dailyLimitSecs) {
                     shouldBlock = !0;
                     reason = "time_limit";
                 }
             }
 
-            let cooldownShouldApply = t.cooldownEnabled;
-            if (cooldownShouldApply && Array.isArray(t.activeDays) && t.activeDays.length > 0) {
+            if (!shouldBlock && rule.sessionLimitEnabled) {
+                const state = sessionLimitsState[rule.domain];
+                if (state && state.cooldownActiveUntil && Date.now() < state.cooldownActiveUntil) {
+                    shouldBlock = !0;
+                    reason = "session_limit";
+                }
+            }
+
+            let cooldownShouldApply = rule.cooldownEnabled;
+            if (cooldownShouldApply && Array.isArray(rule.activeDays) && rule.activeDays.length > 0) {
                 const _todayDow = new Date().getDay();
-                if (!t.activeDays.includes(_todayDow)) cooldownShouldApply = false;
-            } else if (cooldownShouldApply && Array.isArray(t.activeDays) && t.activeDays.length === 0) {
+                if (!rule.activeDays.includes(_todayDow)) cooldownShouldApply = false;
+            } else if (cooldownShouldApply && Array.isArray(rule.activeDays) && rule.activeDays.length === 0) {
                 cooldownShouldApply = false;
             }
 
             if (cooldownShouldApply) {
                 // Determine if this rule would result in a hard block right now based on active conditions
                 let isRuleBlocked = shouldBlock;
-                if (isRuleBlocked && Array.isArray(t.activeDays) && t.activeDays.length > 0) {
+                if (isRuleBlocked && Array.isArray(rule.activeDays) && rule.activeDays.length > 0) {
                     const _todayDow = new Date().getDay();
-                    if (!t.activeDays.includes(_todayDow)) isRuleBlocked = false;
-                } else if (Array.isArray(t.activeDays) && t.activeDays.length === 0) {
+                    if (!rule.activeDays.includes(_todayDow)) isRuleBlocked = false;
+                } else if (Array.isArray(rule.activeDays) && rule.activeDays.length === 0) {
                     isRuleBlocked = false;
                 }
 
                 // Only apply the cool-down screen if the site is NOT currently hard-blocked!
                 // If it is hard-blocked, we skip the cool-down and let the DNR rule block it immediately.
                 if (!isRuleBlocked) {
-                    activeCooldowns.push(t.domain);
+                    activeCooldowns.push(rule.domain);
                 }
             }
 
-            if (shouldBlock && Array.isArray(t.activeDays) && t.activeDays.length > 0) {
+            if (shouldBlock && Array.isArray(rule.activeDays) && rule.activeDays.length > 0) {
                 const _todayDow = new Date().getDay();
-                if (!t.activeDays.includes(_todayDow)) shouldBlock = false;
-            } else if (Array.isArray(t.activeDays) && t.activeDays.length === 0) {
+                if (!rule.activeDays.includes(_todayDow)) shouldBlock = false;
+            } else if (Array.isArray(rule.activeDays) && rule.activeDays.length === 0) {
                 shouldBlock = false; // Bug fix: empty activeDays = no days selected — never fire
             }
             if (shouldBlock) {
-                const tgt = t.redirectUrl || (BLOCKED_PAGE + "?r=" + reason + (reason === "time_limit" ? "&l=" + t.dailyLimitSecs : "") + (reason === "schedule" && schedEnd ? "&sched_end=" + schedEnd : ""));
-                i[t.domain] = tgt;
-                cooldownBlockActive[t.domain] = tgt;
+                const tgt = rule.redirectUrl || (BLOCKED_PAGE + "?r=" + reason + (reason === "time_limit" ? "&l=" + rule.dailyLimitSecs : "") + (reason === "session_limit" ? "&cooldown_ends=" + (sessionLimitsState[rule.domain]?.cooldownActiveUntil || 0) : "") + (reason === "schedule" && schedEnd ? "&sched_end=" + schedEnd : ""));
+                i[rule.domain] = tgt;
+                cooldownBlockActive[rule.domain] = tgt;
             }
         }))
     }
@@ -494,7 +783,7 @@ async function updateDNRRules() {
         let targetUrl = e;
         if (e.startsWith(BLOCKED_PAGE)) {
             const separator = e.includes("?") ? "&" : "?";
-            targetUrl = chrome.runtime.getURL(e) + separator + "d=" + t;
+            targetUrl = chrome.runtime.getURL(e) + separator + "d=" + safeBtoa(t);
         } else if (!e.startsWith("http")) {
             targetUrl = "https://" + e;
         }
@@ -546,7 +835,7 @@ async function updateDNRRules() {
                     let redirectUrl = i[a];
                     if (redirectUrl.startsWith(BLOCKED_PAGE)) {
                         const separator = redirectUrl.includes("?") ? "&" : "?";
-                        redirectUrl = chrome.runtime.getURL(redirectUrl) + separator + "d=" + a;
+                        redirectUrl = chrome.runtime.getURL(redirectUrl) + separator + "d=" + safeBtoa(a);
                     } else if (!redirectUrl.startsWith("http")) {
                         redirectUrl = "https://" + redirectUrl;
                     }
@@ -555,13 +844,68 @@ async function updateDNRRules() {
                     }).catch(() => { })
                 }
             }
+            // Check if tab is already on the blocked page but needs its reason updated
+            const isBlockedPage = t.url.includes(chrome.runtime.id) && t.url.includes("blocked/index.html");
+            if (isBlockedPage) {
+                try {
+                    const uObj = new URL(t.url);
+                    const rawTabDom = uObj.searchParams.get("d") || uObj.searchParams.get("domain");
+                    if (rawTabDom) {
+                        const tabDom = safeAtob(rawTabDom);
+                        let ruleDom = Object.keys(i).find(domain => tabDom === domain || tabDom.endsWith("." + domain));
+                        if (ruleDom) {
+                            let redirectUrl = i[ruleDom];
+                            if (redirectUrl.startsWith(BLOCKED_PAGE)) {
+                                const separator = redirectUrl.includes("?") ? "&" : "?";
+                                redirectUrl = chrome.runtime.getURL(redirectUrl) + separator + "d=" + safeBtoa(ruleDom);
+                            } else if (!redirectUrl.startsWith("http")) {
+                                redirectUrl = "https://" + redirectUrl;
+                            }
+                            const newUObj = new URL(redirectUrl);
+                            const oldR = uObj.searchParams.get("r") || uObj.searchParams.get("reason");
+                            const newR = newUObj.searchParams.get("r") || newUObj.searchParams.get("reason");
+                            if (oldR !== newR) {
+                                chrome.tabs.update(t.id, { url: redirectUrl }).catch(() => {});
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.warn("[FF] Error updating blocked tab reason:", err);
+                }
+            }
         }
     }
     try {
         const { cooldownConfig = {} } = await gLocal(["cooldownConfig"]);
-        cooldownConfig.activeDomains = activeCooldowns;
-        cooldownConfig.blockActive = cooldownBlockActive;
-        await sLocal({ cooldownConfig });
+
+        const activeDomainsChanged = (arr1, arr2) => {
+            const a1 = arr1 || [];
+            const a2 = arr2 || [];
+            if (a1.length !== a2.length) return true;
+            const s1 = [...a1].sort();
+            const s2 = [...a2].sort();
+            return s1.some((val, idx) => val !== s2[idx]);
+        };
+
+        const blockActiveChanged = (obj1, obj2) => {
+            const o1 = obj1 || {};
+            const o2 = obj2 || {};
+            const k1 = Object.keys(o1).sort();
+            const k2 = Object.keys(o2).sort();
+            if (k1.length !== k2.length) return true;
+            for (let i = 0; i < k1.length; i++) {
+                const k = k1[i];
+                if (k !== k2[i] || o1[k] !== o2[k]) return true;
+            }
+            return false;
+        };
+
+        if (activeDomainsChanged(cooldownConfig.activeDomains, activeCooldowns) ||
+            blockActiveChanged(cooldownConfig.blockActive, cooldownBlockActive)) {
+            cooldownConfig.activeDomains = activeCooldowns;
+            cooldownConfig.blockActive = cooldownBlockActive;
+            await sLocal({ cooldownConfig });
+        }
     } catch (_) {}
 }
 async function categorize(t) {
@@ -570,11 +914,17 @@ async function categorize(t) {
     const _loc = await getCachedLocal();
     const e = _loc.siteCategories || {};
     const a = _loc.blockRules || [];
-    if (e[t]) return e[t];
+    const hidden = _loc.hiddenDefaultSites || [];
     const s = t.split(".");
+    if (e[t]) return e[t];
     for (let t = 1; t < s.length - 1; t++) {
         const a = s.slice(t).join(".");
         if (e[a]) return e[a]
+    }
+    if (hidden.includes(t)) return "uncategorized";
+    for (let t = 1; t < s.length - 1; t++) {
+        const a = s.slice(t).join(".");
+        if (hidden.includes(a)) return "uncategorized";
     }
     // Bug#8 fix: guard empty domain so t.endsWith(".") doesn't match everything
     const o = a.find(e => e.domain && (t === e.domain || t.endsWith("." + e.domain)));
@@ -592,6 +942,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const dom = domain(url);
     if (!dom) return;
 
+    if (tab.favIconUrl) {
+        saveFavicon(dom, tab.favIconUrl);
+    }
+
     // 1. Dynamic path blocking/redirection for tweaks (Shorts & Reels)
     if (changeInfo.status === "loading" || changeInfo.url) {
         if (dom === "youtube.com" && url.includes("/shorts")) {
@@ -599,7 +953,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             let gr = r.granularRules || {};
             if (gr["youtube.com"] && gr["youtube.com"]["yt-shorts"] === true) {
                 chrome.tabs.update(tabId, {
-                    url: chrome.runtime.getURL("blocked/index.html") + "?r=tweak&d=youtube.com"
+                    url: chrome.runtime.getURL("blocked/index.html") + "?r=tweak&d=" + safeBtoa("youtube.com")
                 }).catch(() => {});
                 return;
             }
@@ -609,7 +963,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             let gr = r.granularRules || {};
             if (gr["instagram.com"] && gr["instagram.com"]["ig-reels"] === true) {
                 chrome.tabs.update(tabId, {
-                    url: chrome.runtime.getURL("blocked/index.html") + "?r=tweak&d=instagram.com"
+                    url: chrome.runtime.getURL("blocked/index.html") + "?r=tweak&d=" + safeBtoa("instagram.com")
                 }).catch(() => {});
                 return;
             }
@@ -652,16 +1006,20 @@ chrome.windows.onFocusChanged.addListener(async (windowId) => {
     await restoreState();
     if (windowId === chrome.windows.WINDOW_ID_NONE) {
         // OS focus lost completely (user switched to another app). Stop the timer.
-        const o = (await gSession(["activeSession"])).activeSession;
-        if (o && o.domain && o.startTime) {
-            const t = Math.floor((Date.now() - o.startTime) / 1000);
-            if (t > 0) {
-                const elapsed = t < 300 ? t : 0;
-                safeFlush(o.domain, elapsed, o.startTime);
+        await safeUpdateSession(async () => {
+            const o = (await gSession(["activeSession"])).activeSession;
+            if (o && o.domain && o.startTime) {
+                const t = Math.floor((Date.now() - o.startTime) / 1000);
+                if (t > 0) {
+                    const elapsed = capElapsed(t);
+                    if (elapsed > 0) {
+                        await safeFlush(o.domain, elapsed, o.startTime);
+                    }
+                }
             }
-        }
-        await sSession({
-            activeSession: { domain: null, startTime: null }
+            await sSession({
+                activeSession: { domain: null, startTime: null }
+            });
         });
         updateBadge();
     } else {
@@ -670,70 +1028,78 @@ chrome.windows.onFocusChanged.addListener(async (windowId) => {
         handleTabChange();
     }
 });
-// FF v6.18: Programmatic new tab redirect. The manifest no longer has chrome_url_overrides
-// so Edge won't show "Is this the new tab you expected?" on install.
-// When customNewTab is ON, we redirect new tabs to our custom page.
-// When OFF (the default), the user gets Edge's normal new tab — zero interference.
-chrome.tabs.onCreated.addListener(async (tab) => {
-    try {
-        const url = tab.pendingUrl || tab.url || "";
-        // Only intercept genuine new-tab pages (Edge + Chrome variants)
-        const isNewTab = url === "edge://newtab/" || url === "chrome://newtab/" ||
-                         url === "edge://newtab" || url === "chrome://newtab" ||
-                         url === "" || url === "about:blank";
-        if (!isNewTab) return;
-        const _ss = await getCachedSync();
-        const settings = _ss.settings || {};
-        if (settings.customNewTab !== true) return; // OFF by default — do nothing
-        chrome.tabs.update(tab.id, {
-            url: chrome.runtime.getURL("newtab/index.html")
-        }).catch(() => {});
-    } catch (_) {}
-});
-chrome.idle.onStateChanged.addListener(async t => {
-    if ("active" === t) {
+
+
+chrome.idle.onStateChanged.addListener(async state => {
+    if ("active" === state) {
         await sSession({ wentIdleAt: 0 });
         handleTabChange();
     } else {
-        const t = await chrome.windows.getLastFocused().catch(() => null);
-        if (t) {
-            const e = await chrome.tabs.query({
-                active: !0,
-                windowId: t.id
-            }).catch(() => []);
-            if (e.length > 0 && e[0].audible) return
-        }
-        const {
-            lastMediaPing: e = 0
-        } = await gSession(["lastMediaPing"]);
-        if (Date.now() - e < 15e3) return;
-        const [_idleSess, _idleLocal, _idleSync] = await Promise.all([
+        const syncData = await getCachedSync();
+        const settings = syncData.settings || {};
+        const trackMedia = settings.trackMedia !== false;
+        
+        const [_idleSess, _idleLocal, _sessionInfo] = await Promise.all([
             gSession(["activeSession"]),
             gLocal(["idleWhitelist"]),
-            getCachedSync()
+            gSession(["lastHeartbeatReceivedAt"])
         ]);
-        const s = _idleLocal.idleWhitelist || [];
-        const settings = _idleSync.settings || {};
-        const idleTimeout = settings.idleTimeout || 30;
-        if (_idleSess.activeSession && _idleSess.activeSession.domain) {
-            if (s.includes(_idleSess.activeSession.domain)) return;
-            const t = Math.floor((Date.now() - _idleSess.activeSession.startTime) / 1e3);
-            let elapsed = 0;
-            if (t > idleTimeout + 60) {
-                // Sleep/Suspension occurred. Cap the active time before sleep to 0 seconds.
-                elapsed = 0;
-            } else {
-                // Normal idle detection. Subtract the idleTimeout from total elapsed since they were inactive.
-                elapsed = Math.max(0, t - idleTimeout);
-            }
-            if (elapsed > 0) {
-                await safeFlush(_idleSess.activeSession.domain, elapsed, _idleSess.activeSession.startTime);
+        
+        const lastHeartbeat = _sessionInfo.lastHeartbeatReceivedAt || 0;
+        if (state === "idle" && Date.now() - lastHeartbeat < 20000) {
+            return;
+        }
+
+        if (trackMedia) {
+            const t = await chrome.windows.getLastFocused().catch(() => null);
+            if (t) {
+                const e = await chrome.tabs.query({
+                    active: !0,
+                    windowId: t.id
+                }).catch(() => []);
+                if (e.length > 0 && e[0].audible) {
+                    const activeDom = domain(e[0].url);
+                    if (activeDom && _idleSess.activeSession && _idleSess.activeSession.domain === activeDom) {
+                        return;
+                    }
+                }
             }
         }
-        await sSession({
-            activeSession: { domain: null, startTime: null },
-            wentIdleAt: Date.now()
-        })
+
+        await safeUpdateSession(async () => {
+            const s = _idleLocal.idleWhitelist || [];
+            const idleTimeout = settings.idleTimeout || 30;
+            const minVisitSecs = settings.minVisitSecs || 0;
+            if (_idleSess.activeSession && _idleSess.activeSession.domain) {
+                if (s.includes(_idleSess.activeSession.domain)) return;
+                const totalElapsed = Math.floor((Date.now() - _idleSess.activeSession.startTime) / 1e3);
+                let elapsed = 0;
+                if (state === "locked") {
+                    // Lock event: record all time up to the lock without subtracting idle threshold
+                    elapsed = totalElapsed;
+                } else {
+                    // Idle event: subtract the idle threshold
+                    if (totalElapsed > idleTimeout + 60) {
+                        // Sleep/Suspension occurred. Cap the active time before sleep to 0 seconds.
+                        elapsed = 0;
+                    } else {
+                        // Normal idle detection. Subtract the idleTimeout since they were inactive.
+                        elapsed = Math.max(0, totalElapsed - idleTimeout);
+                    }
+                }
+                const finalElapsed = capElapsed(elapsed);
+                if (finalElapsed > 0) {
+                    const visitDuration = Math.floor((Date.now() - (_idleSess.activeSession.visitStartTime || _idleSess.activeSession.startTime)) / 1000);
+                    if (visitDuration >= minVisitSecs) {
+                        await safeFlush(_idleSess.activeSession.domain, finalElapsed, _idleSess.activeSession.startTime);
+                    }
+                }
+            }
+            await sSession({
+                activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0, tabId: null },
+                wentIdleAt: Date.now()
+            });
+        });
     }
 });
 const FOCUS_ALARM = "focus_phase_end",
@@ -778,7 +1144,12 @@ async function updateBadge() {
                     color: "#5C9CFC"
                 });
             } else {
-                chrome.action.setBadgeText({ text: "" });
+                if (!1 !== cfg.showIdleBadge) {
+                    chrome.action.setBadgeText({ text: "idl" });
+                    chrome.action.setBadgeBackgroundColor({ color: "#9CA3AF" });
+                } else {
+                    chrome.action.setBadgeText({ text: "" });
+                }
             }
         } else {
             chrome.action.setBadgeText({ text: "" });
@@ -826,7 +1197,11 @@ function broadcastFocus() {
 }
 async function startFocus(scheduledDurationMins = null) {
     // FF v6.7: clear zombie-stop flag so scheduled sessions can start fresh
-    try { await chrome.storage.local.set({ userStoppedFocus: false }); } catch (_) { }
+    try { 
+        await chrome.storage.local.set({ userStoppedFocus: false }); 
+        await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+        await chrome.alarms.clear("privacy_mode_end");
+    } catch (_) { }
     // FF v5.0: if a preset is active, use its work/break durations + cycles; else fall back to 25.
     const preset = await getActivePreset();
     const workMins = scheduledDurationMins !== null ? scheduledDurationMins : (preset ? (preset.work ?? 25) : 25);
@@ -923,17 +1298,162 @@ async function skipFocus() {
         when: focusState.phaseEndsAt
     }), updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules()
 }
+
+async function handleFocusPhaseEnd() {
+    if (!focusState.active || focusState.paused || !focusState.phaseEndsAt) return;
+    const ap = await getActivePreset();
+    const e = 60 * ((ap && ap.work) ?? 25),
+        a = 60 * ((ap && ap.brk) ?? 5),
+        s = 60 * ((ap && ap.longBrk) ?? 15),
+        o = (ap && ap.cycles) ?? 4;
+    const endFocusSession = async () => {
+        if (await chrome.alarms.clear(FOCUS_ALARM), await chrome.alarms.clear(PAUSE_EXPLOIT_ALARM), focusState.durationMins > 0 || focusState.cyclesCompleted > 0) {
+            const {
+                focusHistory: t = []
+            } = await gLocal(["focusHistory"]);
+            t.push({
+                date: todayKey(),
+                startedAt: focusState.startedAt,
+                durationMins: focusState.durationMins || 0,
+                cyclesCompleted: focusState.cyclesCompleted || 0,
+                presetId: focusState.presetId || "pomodoro",
+                isSchedule: focusState.isSchedule || false
+            });
+            await sLocal({ focusHistory: t.slice(-365) });
+        }
+        focusState.active = !1, focusState.paused = !1, focusState.phaseEndsAt = null;
+        try { await chrome.storage.local.set({ userStoppedFocus: true, userStoppedAt: Date.now() }); } catch (_) { }
+        try {
+            if (!ap || ap.notify !== false) {
+                let t = chrome.runtime.getURL("icons/icon128.png");
+                chrome.notifications.create("focus_done_" + Date.now(), {
+                    type: "basic",
+                    iconUrl: t,
+                    title: "Session Complete! 🎉",
+                    message: focusState.isSchedule ? "Your scheduled session has ended. Great work!" : "All " + focusState.cyclesCompleted + " cycle(s) done. Great work!"
+                });
+            }
+        } catch (t) { }
+        updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules();
+    };
+
+    if ("work" === focusState.phase) {
+        focusState.durationMins += Math.round(focusState.fullDuration / 60);
+        focusState.cyclesCompleted++;
+
+
+
+        if (focusState.isSchedule) {
+            return await endFocusSession();
+        }
+
+        if (focusState.cyclesCompleted % o === 0) {
+            if (s > 0) {
+                focusState.phase = "long_break";
+                focusState.fullDuration = s;
+                focusState.remaining = s;
+                try {
+                    if (!ap || ap.notify !== false) {
+                        let t = chrome.runtime.getURL("icons/icon128.png");
+                        chrome.notifications.create("focus_break_start_" + Date.now(), {
+                            type: "basic",
+                            iconUrl: t,
+                            title: "Work Period Over! ☕",
+                            message: "Time for a well-deserved long break!"
+                        });
+                    }
+                } catch (t) { }
+            } else {
+                return await endFocusSession();
+            }
+        } else {
+            if (a > 0) {
+                focusState.phase = "short_break";
+                focusState.fullDuration = a;
+                focusState.remaining = a;
+                try {
+                    if (!ap || ap.notify !== false) {
+                        let t = chrome.runtime.getURL("icons/icon128.png");
+                        chrome.notifications.create("focus_break_start_" + Date.now(), {
+                            type: "basic",
+                            iconUrl: t,
+                            title: "Work Period Over! ☕",
+                            message: "Time for a short break."
+                        });
+                    }
+                } catch (t) { }
+            } else {
+                focusState.phase = "work";
+                focusState.fullDuration = e;
+                focusState.remaining = e;
+                focusState.startedAt = Date.now();
+            }
+        }
+    } else {
+        if ("long_break" === focusState.phase && focusState.cyclesCompleted >= o) {
+            return await endFocusSession();
+        } else {
+            focusState.phase = "work";
+            focusState.fullDuration = e;
+            focusState.remaining = e;
+            focusState.startedAt = Date.now();
+            try {
+                if (!ap || ap.notify !== false) {
+                    let t = chrome.runtime.getURL("icons/icon128.png");
+                    chrome.notifications.create("focus_work_" + Date.now(), {
+                        type: "basic",
+                        iconUrl: t,
+                        title: "Break Over!",
+                        message: "Time to focus."
+                    });
+                }
+            } catch (t) { }
+        }
+    }
+    if (!focusState.active) return;
+    if (ap && ap.autoStart) {
+        focusState.paused = !1;
+        focusState.startedAt = Date.now();
+        focusState.phaseEndsAt = Date.now() + 1e3 * focusState.fullDuration;
+        await chrome.alarms.create(FOCUS_ALARM, {
+            when: focusState.phaseEndsAt
+        });
+    } else {
+        focusState.paused = !0;
+        focusState.phaseEndsAt = null;
+    }
+    updateBadge();
+    await saveFocus();
+    broadcastFocus();
+    await updateDNRRules();
+}
+
 async function computeStreak(dat) {
     const _ss = await getCachedSync();
     const st = _ss.settings || {};
     const cats = st.goalCats || ["productivity", "learning"], req = 60 * (st.streakMinMinutes || 30), days = Object.keys(dat).sort();
+
+    const getGoalSecsForDay = async (dKey) => {
+        const entry = dat[dKey];
+        if (!entry) return 0;
+        if (entry.sites) {
+            let sum = 0;
+            for (const [dom, s] of Object.entries(entry.sites)) {
+                const cat = await categorize(dom);
+                if (cats.includes(cat)) sum += s;
+            }
+            return sum;
+        }
+        return cats.reduce((sum, c) => sum + (entry[c] || 0), 0);
+    };
+
     let bs = 0,
         bd = null,
         ms = 0,
         tmp = 0,
         lst = null;
     for (const d of days) {
-        let secs = cats.reduce((sum, c) => sum + (dat[d]?.[c] || 0), 0);
+        let secs = await getGoalSecsForDay(d);
         if (secs > ms && (ms = secs, bd = d), secs >= req) {
             if (!lst) tmp = 1;
             else {
@@ -951,8 +1471,8 @@ async function computeStreak(dat) {
     yd.setDate(yd.getDate() - 1);
     let tdS = `${td.getFullYear()}-${String(td.getMonth() + 1).padStart(2, "0")}-${String(td.getDate()).padStart(2, "0")}`,
         ydS = `${yd.getFullYear()}-${String(yd.getMonth() + 1).padStart(2, "0")}-${String(yd.getDate()).padStart(2, "0")}`,
-        tdSecs = cats.reduce((s, c) => s + (dat[tdS]?.[c] || 0), 0),
-        ydSecs = cats.reduce((s, c) => s + (dat[ydS]?.[c] || 0), 0),
+        tdSecs = await getGoalSecsForDay(tdS),
+        ydSecs = await getGoalSecsForDay(ydS),
         chk = new Date;
     if (tdSecs >= req) chk = td;
     else {
@@ -965,7 +1485,8 @@ async function computeStreak(dat) {
     }
     for (; ;) {
         let str = `${chk.getFullYear()}-${String(chk.getMonth() + 1).padStart(2, "0")}-${String(chk.getDate()).padStart(2, "0")}`;
-        if (!(cats.reduce((s, c) => s + (dat[str]?.[c] || 0), 0) >= req)) break;
+        const secs = await getGoalSecsForDay(str);
+        if (!(secs >= req)) break;
         cur++, chk.setDate(chk.getDate() - 1);
         if (cur > 3650) break; // FF v4.2: hard safety bound (10 years) against runaway loop
     }
@@ -983,11 +1504,54 @@ async function handle(t, e) {
             const domainStr = t.domain;
             const elapsed = Math.min(15, Math.max(1, t.elapsed || 10));
             if (!domainStr) return { ok: !1 };
-            const sess = (await gSession(["activeSession"])).activeSession;
-            if (sess && sess.domain === domainStr && sess.startTime) {
-                await sSession({ activeSession: { domain: domainStr, startTime: Date.now() } });
+            await sSession({ lastHeartbeatReceivedAt: Date.now() });
+            const localData = await getCachedLocal();
+            let isPrivacyActive = localData.privacyModeActive === true;
+            if (isPrivacyActive) {
+                if (localData.privacyModeUntil > 0 && Date.now() >= localData.privacyModeUntil) {
+                    isPrivacyActive = false;
+                    await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+                    await updateDNRRules();
+                } else {
+                    return { ok: !0 };
+                }
             }
-            await safeFlush(domainStr, elapsed, Date.now() - elapsed * 1000);
+            const senderTabId = e.tab ? e.tab.id : null;
+            await safeUpdateSession(async () => {
+                const sess = (await gSession(["activeSession"])).activeSession;
+                if (sess && sess.domain === domainStr && sess.startTime && (!senderTabId || sess.tabId === senderTabId)) {
+                    const elapsedReal = Math.floor((Date.now() - sess.startTime) / 1000);
+                    const finalElapsed = Math.min(elapsed, elapsedReal);
+                    if (finalElapsed > 0) {
+                        const settings = (await getCachedSync()).settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (sess.visitStartTime || sess.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = finalElapsed + (sess.accumulatedTime || 0);
+                            await sSession({
+                                activeSession: {
+                                    domain: domainStr,
+                                    startTime: Date.now(),
+                                    visitStartTime: sess.visitStartTime || sess.startTime,
+                                    accumulatedTime: 0,
+                                    tabId: sess.tabId
+                                }
+                            });
+                            await safeFlush(domainStr, flushSecs, Date.now() - finalElapsed * 1000);
+                        } else {
+                            await sSession({
+                                activeSession: {
+                                    domain: domainStr,
+                                    startTime: Date.now(),
+                                    visitStartTime: sess.visitStartTime || sess.startTime,
+                                    accumulatedTime: (sess.accumulatedTime || 0) + finalElapsed,
+                                    tabId: sess.tabId
+                                }
+                            });
+                        }
+                    }
+                }
+            });
             updateBadge();
             return { ok: !0 };
         }
@@ -995,15 +1559,29 @@ async function handle(t, e) {
         // FF v6.18: Content script fires this the instant the browser is minimized.
         // Stops the timer immediately without waiting for the 60s heartbeat.
         case "TRACKING_VISIBILITY_HIDDEN": {
-            const o = (await gSession(["activeSession"])).activeSession;
-            if (o && o.domain && o.startTime) {
-                const elapsed = Math.floor((Date.now() - o.startTime) / 1000);
-                if (elapsed > 0 && elapsed < 300) {
-                    await safeFlush(o.domain, elapsed, o.startTime);
+            await safeUpdateSession(async () => {
+                const o = (await gSession(["activeSession"])).activeSession;
+                if (o && o.domain && o.startTime) {
+                    const elapsed = Math.floor((Date.now() - o.startTime) / 1000);
+                    const finalElapsed = capElapsed(elapsed);
+                    if (finalElapsed > 0) {
+                        const settings = (await getCachedSync()).settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (o.visitStartTime || o.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = finalElapsed + (o.accumulatedTime || 0);
+                            await safeFlush(o.domain, flushSecs, o.startTime);
+                        }
+                    }
+                    await sSession({ activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0, tabId: null } });
                 }
-                await sSession({ activeSession: { domain: null, startTime: null } });
-                updateBadge();
-            }
+            });
+            updateBadge();
+            return { ok: !0 };
+        }
+
+        case "MEDIA_PING": {
+            await sSession({ lastMediaPing: Date.now() });
             return { ok: !0 };
         }
 
@@ -1078,9 +1656,10 @@ async function handle(t, e) {
             _todayDataCache = null;
             _todayDataCacheKey = "";
             _allTimeTotalsCache = null; // Bug fix #3: invalidate all-time cache on full reset
+            _streakCache = null;        // Invalidate streak cache on full reset
+            _streakCacheDay = "";
             await FFDB.ensureMigrated();
-            const keys = await FFDB.getDayKeys();
-            for (const k of keys) await FFDB.deleteDay(k, { skipTotals: true });
+            await FFDB.clearDays();
             await FFDB.setRollups({});
             // FF v6.17: also clear running totals + allow re-migration after backup restore.
             // Bug#9 fix: remove legacy ghost keys instead of writing empty objects
@@ -1090,7 +1669,7 @@ async function handle(t, e) {
                 lastCompressedAt: 0,
             });
             await chrome.storage.local.remove([
-                "focusHistory", "lastProductiveSite", "visitedSites"
+                "focusHistory", "lastProductiveSite"
             ]);
             await updateDNRRules();
             return { ok: !0 };
@@ -1102,18 +1681,27 @@ async function handle(t, e) {
             const local = await gLocal(["blockRules", "allowList", "siteCategories", "granularRules",
                 "focusHistory", "cooldownConfig"]);
             const sync = await gSync(["settings", "focusPresets"]);
+            const payload = {
+                version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
+                exportedAt: Date.now(),
+                daily, rollups,
+                local,
+                settings: sync.settings || {},
+                focusPresets: sync.focusPresets || []
+            };
+            const id = "backup_" + Math.floor(Date.now() / 1000);
+            await FFDB.saveLocalBackup(id, "Exported Backup", payload);
             return {
                 ok: !0,
-                payload: {
-                    // FF v6.16: pull live extension version from manifest instead of a stale literal.
-                    version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
-                    exportedAt: Date.now(),
-                    daily, rollups,
-                    local,
-                    settings: sync.settings || {},
-                    focusPresets: sync.focusPresets || []
-                }
+                payload
             };
+        }
+        case "CLOSE_CURRENT_TAB": {
+            if (e && e.tab && e.tab.id) {
+                await chrome.tabs.remove(e.tab.id).catch(() => {});
+                return { ok: !0 };
+            }
+            return { ok: !1 };
         }
         case "INVALIDATE_CACHES": {
             _streakCache = null;
@@ -1159,19 +1747,65 @@ async function handle(t, e) {
             }
             try {
                 await FFDB.ensureMigrated();
-                // Wipe Dexie
-                const keys = await FFDB.getDayKeys();
-                for (const k of keys) await FFDB.deleteDay(k, { skipTotals: true });
-                
-                // Fresh start: wipe local and sync storage before importing
-                await chrome.storage.local.clear();
-                await chrome.storage.sync.clear();
 
+                // Snapshot current configuration before clearing storage
+                const snapshotSync = await gSync(["settings", "focusPresets"]);
+                const snapshotLocal = await gLocal([
+                    "blockRules", "allowList", "siteCategories", "granularRules",
+                    "focusHistory", "cooldownConfig", "favicons", "hiddenDefaultSites"
+                ]);
+
+                // Auto-save current state as a local backup named "Pre-Import Backup"
+                try {
+                    const preDaily = await FFDB.getAllDays();
+                    const preRollups = await FFDB.getRollups();
+                    const prePayload = {
+                        version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
+                        exportedAt: Date.now(),
+                        daily: preDaily,
+                        rollups: preRollups,
+                        local: snapshotLocal,
+                        settings: snapshotSync.settings || {},
+                        focusPresets: snapshotSync.focusPresets || []
+                    };
+                    const preId = "backup_preimport_" + Math.floor(Date.now() / 1000);
+                    await FFDB.saveLocalBackup(preId, "Pre-Import Backup", prePayload);
+                } catch (errBackup) {
+                    console.warn("Failed to create pre-import backup:", errBackup);
+                }
+
+                // Wipe and import days first (if writing fails, local storage won't be cleared)
+                await FFDB.clearDays();
                 if (isPlainObj(p.daily)) await FFDB.bulkSetDays(p.daily);
                 if (isPlainObj(p.rollups)) await FFDB.setRollups(p.rollups);
-                if (isPlainObj(p.local)) await sLocal(p.local);
-                if (isPlainObj(p.settings)) await sSync({ settings: p.settings });
-                if (Array.isArray(p.focusPresets)) await sSync({ focusPresets: p.focusPresets });
+
+
+
+                // Merge local configurations
+                const mergedLocal = {
+                    blockRules: p.local?.blockRules ?? snapshotLocal.blockRules ?? [],
+                    allowList: p.local?.allowList ?? snapshotLocal.allowList ?? [],
+                    siteCategories: p.local?.siteCategories ?? snapshotLocal.siteCategories ?? {},
+                    granularRules: p.local?.granularRules ?? snapshotLocal.granularRules ?? {},
+                    focusHistory: p.local?.focusHistory ?? snapshotLocal.focusHistory ?? [],
+                    cooldownConfig: p.local?.cooldownConfig ?? snapshotLocal.cooldownConfig ?? {},
+                    favicons: p.local?.favicons ?? snapshotLocal.favicons ?? {},
+                    hiddenDefaultSites: p.local?.hiddenDefaultSites ?? snapshotLocal.hiddenDefaultSites ?? []
+                };
+                await sLocal(mergedLocal);
+
+                // Merge settings
+                const mergedSettings = {
+                    ...(snapshotSync.settings || {}),
+                    ...(p.settings || {})
+                };
+                await sSync({ settings: mergedSettings });
+
+                // Merge presets
+                const mergedPresets = (p.focusPresets && p.focusPresets.length > 0)
+                    ? p.focusPresets
+                    : (snapshotSync.focusPresets || []);
+                await sSync({ focusPresets: mergedPresets });
 
                 // Return success immediately to avoid message port timeout on heavy JSON files
                 const response = { ok: !0 };
@@ -1179,7 +1813,7 @@ async function handle(t, e) {
                 // FF v6.17: rebuild allTimeTotals from imported days in background.
                 (async () => {
                     try {
-                        await sLocal({ allTimeTotals: {}, allTimeMigrated: false, lastCompressedAt: 0 });
+                        await sLocal({ lastCompressedAt: 0 });
                         _allTimeTotalsCache = null;
                         await updateDNRRules();
                     } catch (err) {
@@ -1190,6 +1824,123 @@ async function handle(t, e) {
                 return response;
             } catch (err) {
                 return { ok: !1, error: "import failed: " + (err && err.message || err) };
+            }
+        }
+        case "BACKUP_LIST_GET": {
+            const list = await FFDB.getLocalBackupsList();
+            return { ok: true, list };
+        }
+        case "BACKUP_CREATE_LOCAL": {
+            await FFDB.ensureMigrated();
+            const daily = await FFDB.getAllDays();
+            const rollups = await FFDB.getRollups();
+            const local = await gLocal(["blockRules", "allowList", "siteCategories", "granularRules",
+                "focusHistory", "cooldownConfig"]);
+            const sync = await gSync(["settings", "focusPresets"]);
+            const payload = {
+                version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
+                exportedAt: Date.now(),
+                daily, rollups,
+                local,
+                settings: sync.settings || {},
+                focusPresets: sync.focusPresets || []
+            };
+            const id = "backup_" + Math.floor(Date.now() / 1000);
+            await FFDB.saveLocalBackup(id, t.label || "Manual Backup", payload);
+            return { ok: true, id };
+        }
+        case "BACKUP_DELETE_LOCAL": {
+            if (!t.id) return { ok: false, error: "Missing backup ID" };
+            await FFDB.deleteLocalBackup(t.id);
+            return { ok: true };
+        }
+        case "BACKUP_RESTORE_LOCAL": {
+            if (!t.id) return { ok: false, error: "Missing backup ID" };
+            const payload = await FFDB.getLocalBackupData(t.id);
+            if (!payload) return { ok: false, error: "Backup data not found" };
+
+            // Invalidate caches
+            _streakCache = null;
+            _todayDataCache = null;
+            _todayDataCacheKey = "";
+            _allTimeTotalsCache = null;
+
+            const p = payload || {};
+            const isPlainObj = (v) => v && typeof v === "object" && !Array.isArray(v);
+            if (!isPlainObj(p)) return { ok: !1, error: "invalid payload" };
+            const fields = ["daily", "rollups", "local", "settings"];
+            for (const f of fields) {
+                if (p[f] !== undefined && !isPlainObj(p[f])) {
+                    return { ok: !1, error: `invalid field: ${f}` };
+                }
+            }
+            if (p.focusPresets !== undefined && !Array.isArray(p.focusPresets)) {
+                return { ok: !1, error: "invalid field: focusPresets" };
+            }
+            if (isPlainObj(p.daily)) {
+                for (const [day, entry] of Object.entries(p.daily)) {
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || !isPlainObj(entry)) {
+                        return { ok: !1, error: `invalid daily entry: ${day}` };
+                    }
+                }
+            }
+            if (isPlainObj(p.rollups)) {
+                for (const month of Object.keys(p.rollups)) {
+                    if (!/^\d{4}-\d{2}$/.test(month) || !isPlainObj(p.rollups[month])) {
+                        return { ok: !1, error: `invalid rollup: ${month}` };
+                    }
+                }
+            }
+
+            try {
+                await FFDB.ensureMigrated();
+                const snapshotSync = await gSync(["settings", "focusPresets"]);
+                const snapshotLocal = await gLocal([
+                    "blockRules", "allowList", "siteCategories", "granularRules",
+                    "focusHistory", "cooldownConfig", "favicons", "hiddenDefaultSites"
+                ]);
+
+                // Wipe and import days first (if writing fails, local storage won't be cleared)
+                await FFDB.clearDays();
+                if (isPlainObj(p.daily)) await FFDB.bulkSetDays(p.daily);
+                if (isPlainObj(p.rollups)) await FFDB.setRollups(p.rollups);
+
+                const mergedLocal = {
+                    blockRules: p.local?.blockRules ?? snapshotLocal.blockRules ?? [],
+                    allowList: p.local?.allowList ?? snapshotLocal.allowList ?? [],
+                    siteCategories: p.local?.siteCategories ?? snapshotLocal.siteCategories ?? {},
+                    granularRules: p.local?.granularRules ?? snapshotLocal.granularRules ?? {},
+                    focusHistory: p.local?.focusHistory ?? snapshotLocal.focusHistory ?? [],
+                    cooldownConfig: p.local?.cooldownConfig ?? snapshotLocal.cooldownConfig ?? {},
+                    favicons: p.local?.favicons ?? snapshotLocal.favicons ?? {},
+                    hiddenDefaultSites: p.local?.hiddenDefaultSites ?? snapshotLocal.hiddenDefaultSites ?? []
+                };
+                await sLocal(mergedLocal);
+
+                const mergedSettings = {
+                    ...(snapshotSync.settings || {}),
+                    ...(p.settings || {})
+                };
+                await sSync({ settings: mergedSettings });
+
+                const mergedPresets = (p.focusPresets && p.focusPresets.length > 0)
+                    ? p.focusPresets
+                    : (snapshotSync.focusPresets || []);
+                await sSync({ focusPresets: mergedPresets });
+
+                (async () => {
+                    try {
+                        await sLocal({ lastCompressedAt: 0 });
+                        _allTimeTotalsCache = null;
+                        await updateDNRRules();
+                    } catch (err) {
+                        console.error("Post-import migration failed", err);
+                    }
+                })();
+
+                return { ok: true };
+            } catch (err) {
+                return { ok: false, error: err.message };
             }
         }
         case "GET_COOLDOWNS": {
@@ -1219,7 +1970,7 @@ async function handle(t, e) {
                 autoCategories: AUTO_CATEGORIES
             };
         case "FOCUS_START":
-            return await startFocus(), {
+            return await startFocus(null), {
                 ok: !0,
                 focusState: {
                     ...focusState
@@ -1347,8 +2098,24 @@ async function handle(t, e) {
                 days.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
             }
             const e = await FFDB.getDays(days);
+            let studySecs = 0;
+            for (const k of days) {
+                const entry = e[k];
+                if (entry) {
+                    if (entry.sites) {
+                        for (const [dom, secs] of Object.entries(entry.sites)) {
+                            const cat = await categorize(dom);
+                            if (s.includes(cat)) {
+                                studySecs += secs;
+                            }
+                        }
+                    } else {
+                        studySecs += s.reduce((u, c) => u + (entry[c] || 0), 0);
+                    }
+                }
+            }
             return {
-                studySecs: days.reduce((t, k) => t + s.reduce((u, c) => u + (e[k]?.[c] || 0), 0), 0),
+                studySecs,
                 goalSecs: 3600 * (a.weeklyGoalHours || 0),
                 goalHours: a.weeklyGoalHours || 0,
                 weekStart: days[0] || null,
@@ -1420,7 +2187,9 @@ async function handle(t, e) {
         case "UPDATE_IDLE": {
             const _ss = await getCachedSync();
             const t = _ss.settings || {};
-            return chrome.idle.setDetectionInterval(t.idleTimeout || 30), {
+            chrome.idle.setDetectionInterval(t.idleTimeout || 30);
+            updateBadge();
+            return {
                 ok: !0
             }
         }
@@ -1446,12 +2215,116 @@ async function handle(t, e) {
             await sLocal({ focusHistory: hist });
             return { ok: true };
         }
+        case "START_PRIVACY_MODE": {
+            if (focusState.active) return { ok: false, error: "focus_active" };
+            const duration = parseInt(t.duration) || 0;
+            const until = duration > 0 ? Date.now() + duration * 60 * 1000 : 0;
+            await sLocal({ privacyModeActive: true, privacyModeUntil: until });
+            if (duration > 0) {
+                await chrome.alarms.create("privacy_mode_end", { delayInMinutes: duration });
+            } else {
+                await chrome.alarms.clear("privacy_mode_end");
+            }
+            await safeUpdateSession(async () => {
+                const o = (await gSession(["activeSession"])).activeSession;
+                if (o && o.domain && o.startTime) {
+                    const elapsed = Math.floor((Date.now() - o.startTime) / 1000);
+                    const finalElapsed = capElapsed(elapsed);
+                    if (finalElapsed > 0) {
+                        const settings = (await getCachedSync()).settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (o.visitStartTime || o.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = finalElapsed + (o.accumulatedTime || 0);
+                            await safeFlush(o.domain, flushSecs, o.startTime);
+                        }
+                    }
+                }
+                await sSession({ activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0 } });
+            });
+            await updateDNRRules();
+            updateBadge();
+            return { ok: true };
+        }
+        case "STOP_PRIVACY_MODE": {
+            await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+            await chrome.alarms.clear("privacy_mode_end");
+            await updateDNRRules();
+            await handleTabChange();
+            updateBadge();
+            return { ok: true };
+        }
+        case "GET_PRIVACY_STATE": {
+            const localData = await gLocal(["privacyModeActive", "privacyModeUntil"]);
+            let active = localData.privacyModeActive === true;
+            let until = localData.privacyModeUntil || 0;
+            if (active && until > 0 && Date.now() >= until) {
+                active = false;
+                until = 0;
+                await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+                await updateDNRRules();
+            }
+            return { active, until };
+        }
         default:
             return {
                 ok: !0
             }
     }
 }
+
+async function triggerAutoBackup() {
+    try {
+        await FFDB.ensureMigrated();
+        const daily = await FFDB.getAllDays();
+        const rollups = await FFDB.getRollups();
+        const local = await gLocal(["blockRules", "allowList", "siteCategories", "granularRules",
+            "focusHistory", "cooldownConfig"]);
+        const sync = await gSync(["settings", "focusPresets"]);
+        const payload = {
+            version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
+            exportedAt: Date.now(),
+            daily, rollups,
+            local,
+            settings: sync.settings || {},
+            focusPresets: sync.focusPresets || []
+        };
+        
+        const jsonString = JSON.stringify(payload);
+        const base64 = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+            return String.fromCharCode(parseInt(p1, 16));
+        }));
+        const dataUrl = 'data:application/json;base64,' + base64;
+        
+        const dStr = todayKey();
+        await chrome.downloads.download({
+            url: dataUrl,
+            filename: 'FocusFlow_Backup_' + dStr + '.json',
+            saveAs: false
+        });
+        
+        await sLocal({ lastBackupAt: Date.now() });
+        
+        try {
+            const id = "backup_" + Math.floor(Date.now() / 1000);
+            await FFDB.saveLocalBackup(id, "Weekly Auto-Backup", payload);
+        } catch (errLocalBackup) {
+            console.warn("Failed to auto-save backup locally:", errLocalBackup);
+        }
+        
+        try {
+            chrome.notifications.create("ff-auto-backup-" + Date.now(), {
+                type: "basic",
+                iconUrl: chrome.runtime.getURL("icons/icon128.png"),
+                title: "Flow - Auto Backup Saved",
+                message: "Your weekly auto-backup has been saved to your Downloads folder."
+            });
+        } catch (_) {}
+    } catch (err) {
+        console.warn("[FF] Auto-backup failed:", err);
+    }
+}
+
 async function restoreState() {
     const t = await gLocal(["focusSession"]);
     if (t && t.focusSession) {
@@ -1588,6 +2461,17 @@ async function init() {
         ]);
     } catch (_) {}
     await compressOldData();
+    try {
+        const syncData = await getCachedSync();
+        const settings = syncData.settings || {};
+        if (settings.autoBackupEnabled) {
+            const localData = await gLocal(["lastBackupAt"]);
+            const lastBackup = localData.lastBackupAt || 0;
+            if (Date.now() - lastBackup >= 7 * 864e5) {
+                setTimeout(triggerAutoBackup, 5000);
+            }
+        }
+    } catch (_) {}
     const _scRes = await gLocal(["siteCategories", "presetsPreApplied"]);
     if (!_scRes.presetsPreApplied) {
         const scMap = _scRes.siteCategories || {};
@@ -1606,26 +2490,56 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
     error: t.message
 })), !0)), chrome.alarms.onAlarm.addListener(async t => {
     await restoreState();
+    if ("privacy_mode_end" === t.name) {
+        await sLocal({ privacyModeActive: false, privacyModeUntil: 0 });
+        await updateDNRRules();
+        await handleTabChange();
+        updateBadge();
+        return;
+    }
     if ("tracker_heartbeat" === t.name) {
-        const _today = todayKey();
-        const t = (await gSession(["activeSession"])).activeSession;
-        if (t && t.domain && t.startTime) {
-            // Content script handles minimize instantly via TRACKING_VISIBILITY_HIDDEN.
-            // Heartbeat only runs here as a safety net (e.g. extension pages with no content script).
-            const e = Date.now(),
-                a = Math.floor((e - t.startTime) / 1e3);
-            if (a > 0) {
-                // Laptop Closed / Sleep Bug Fix: Discard ghost gaps > 5 minutes (300s)
-                const elapsed = a < 300 ? a : 0;
-                await safeFlush(t.domain, elapsed, t.startTime);
-            }
-            await sSession({
-                activeSession: {
-                    domain: t.domain,
-                    startTime: e
+        try {
+            const syncData = await getCachedSync();
+            const settings = syncData.settings || {};
+            if (settings.autoBackupEnabled) {
+                const localData = await gLocal(["lastBackupAt"]);
+                const lastBackup = localData.lastBackupAt || 0;
+                if (Date.now() - lastBackup >= 7 * 864e5) {
+                    await triggerAutoBackup();
                 }
-            });
-        }
+            }
+        } catch (_) {}
+        const _today = todayKey();
+        await safeUpdateSession(async () => {
+            const t = (await gSession(["activeSession"])).activeSession;
+            if (t && t.domain && t.startTime) {
+                // Content script handles minimize instantly via TRACKING_VISIBILITY_HIDDEN.
+                // Heartbeat only runs here as a safety net (e.g. extension pages with no content script).
+                const e = Date.now(),
+                    a = Math.floor((e - t.startTime) / 1e3);
+                if (a > 0) {
+                    const elapsed = capElapsed(a);
+                    if (elapsed > 0) {
+                        const settings = (await getCachedSync()).settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (t.visitStartTime || t.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = elapsed + (t.accumulatedTime || 0);
+                            await safeFlush(t.domain, flushSecs, t.startTime);
+                        }
+                    }
+                }
+                await sSession({
+                    activeSession: {
+                        domain: t.domain,
+                        startTime: e,
+                        visitStartTime: t.visitStartTime || t.startTime,
+                        accumulatedTime: Math.floor((Date.now() - (t.visitStartTime || t.startTime)) / 1000) >= ((await getCachedSync()).settings?.minVisitSecs || 0) ? 0 : (t.accumulatedTime || 0) + (a > 0 ? capElapsed(a) : 0),
+                        tabId: t.tabId
+                    }
+                });
+            }
+        });
         await updateDNRRules(), await restoreState(), updateBadge(), focusState.active && !focusState.paused && (syncFocusRemaining(), broadcastFocus());
         if (!focusState.active) {
             try {
@@ -1714,132 +2628,7 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
         }
 
     }
-async function handleFocusPhaseEnd() {
-        if (!focusState.active || focusState.paused || !focusState.phaseEndsAt) return;
-        const ap = await getActivePreset();
-        const e = 60 * ((ap && ap.work) ?? 25),
-            a = 60 * ((ap && ap.brk) ?? 5),
-            s = 60 * ((ap && ap.longBrk) ?? 15),
-            o = (ap && ap.cycles) ?? 4;
-        const endFocusSession = async () => {
-            if (await chrome.alarms.clear(FOCUS_ALARM), await chrome.alarms.clear(PAUSE_EXPLOIT_ALARM), focusState.durationMins > 0 || focusState.cyclesCompleted > 0) {
-                const {
-                    focusHistory: t = []
-                } = await gLocal(["focusHistory"]);
-                t.push({
-                    date: todayKey(),
-                    startedAt: focusState.startedAt,
-                    durationMins: focusState.durationMins || 0,
-                    cyclesCompleted: focusState.cyclesCompleted || 0,
-                    presetId: focusState.presetId || "pomodoro",
-                    isSchedule: focusState.isSchedule || false
-                });
-                await sLocal({ focusHistory: t.slice(-365) });
-            }
-            focusState.active = !1, focusState.paused = !1, focusState.phaseEndsAt = null;
-            try { await chrome.storage.local.set({ userStoppedFocus: true, userStoppedAt: Date.now() }); } catch (_) { }
-            try {
-                if (!ap || ap.notify !== false) {
-                    let t = chrome.runtime.getURL("icons/icon128.png");
-                    chrome.notifications.create("focus_done_" + Date.now(), {
-                        type: "basic",
-                        iconUrl: t,
-                        title: "Session Complete! 🎉",
-                        message: focusState.isSchedule ? "Your scheduled session has ended. Great work!" : "All " + focusState.cyclesCompleted + " cycle(s) done. Great work!"
-                    });
-                }
-            } catch (t) { }
-            updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules();
-        };
 
-        if ("work" === focusState.phase) {
-            focusState.durationMins += Math.round(focusState.fullDuration / 60);
-            focusState.cyclesCompleted++;
-
-            if (focusState.isSchedule) {
-                return await endFocusSession();
-            }
-
-            if (focusState.cyclesCompleted % o === 0) {
-                if (s > 0) {
-                    focusState.phase = "long_break";
-                    focusState.fullDuration = s;
-                    focusState.remaining = s;
-                    try {
-                        if (!ap || ap.notify !== false) {
-                            let t = chrome.runtime.getURL("icons/icon128.png");
-                            chrome.notifications.create("focus_break_start_" + Date.now(), {
-                                type: "basic",
-                                iconUrl: t,
-                                title: "Work Period Over! ☕",
-                                message: "Time for a well-deserved long break!"
-                            });
-                        }
-                    } catch (t) { }
-                } else {
-                    return await endFocusSession();
-                }
-            } else {
-                if (a > 0) {
-                    focusState.phase = "short_break";
-                    focusState.fullDuration = a;
-                    focusState.remaining = a;
-                    try {
-                        if (!ap || ap.notify !== false) {
-                            let t = chrome.runtime.getURL("icons/icon128.png");
-                            chrome.notifications.create("focus_break_start_" + Date.now(), {
-                                type: "basic",
-                                iconUrl: t,
-                                title: "Work Period Over! ☕",
-                                message: "Time for a short break."
-                            });
-                        }
-                    } catch (t) { }
-                } else {
-                    focusState.phase = "work";
-                    focusState.fullDuration = e;
-                    focusState.remaining = e;
-                    focusState.startedAt = Date.now();
-                }
-            }
-        } else {
-            if ("long_break" === focusState.phase && focusState.cyclesCompleted >= o) {
-                return await endFocusSession();
-            } else {
-                focusState.phase = "work";
-                focusState.fullDuration = e;
-                focusState.remaining = e;
-                focusState.startedAt = Date.now();
-                try {
-                    if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("icons/icon128.png");
-                        chrome.notifications.create("focus_work_" + Date.now(), {
-                            type: "basic",
-                            iconUrl: t,
-                            title: "Break Over!",
-                            message: "Time to focus."
-                        });
-                    }
-                } catch (t) { }
-            }
-        }
-        if (!focusState.active) return;
-        if (ap && ap.autoStart) {
-            focusState.paused = !1;
-            focusState.startedAt = Date.now();
-            focusState.phaseEndsAt = Date.now() + 1e3 * focusState.fullDuration;
-            await chrome.alarms.create(FOCUS_ALARM, {
-                when: focusState.phaseEndsAt
-            });
-        } else {
-            focusState.paused = !0;
-            focusState.phaseEndsAt = null;
-        }
-        updateBadge();
-        await saveFocus();
-        broadcastFocus();
-        await updateDNRRules();
-}
 
     if (t.name === PAUSE_EXPLOIT_ALARM) {
         await restoreState();
@@ -1872,7 +2661,7 @@ chrome.runtime.onStartup.addListener(async () => {
     try {
         try {
             await sSession({
-                activeSession: { domain: null, startTime: null }
+                activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0, tabId: null }
             });
         } catch (_) {}
         await init();
@@ -1893,9 +2682,9 @@ chrome.runtime.onStartup.addListener(async () => {
 // them as a 4th "⚙️ Custom" preset so nothing they configured is lost.
 // =====================================================================
 const FF_DEFAULT_PRESETS = [
-    { id: "pomodoro", emoji: "🍅", name: "Pomodoro", work: 25, brk: 5, longBrk: 15, cycles: 4, strict: false, blockCats: ["distraction"], notify: true, autoStart: true },
-    { id: "deep_work", emoji: "🧠", name: "Deep Work", work: 90, brk: 15, longBrk: 30, cycles: 2, strict: false, blockCats: ["distraction", "communication", "uncategorized"], notify: true, autoStart: true },
-    { id: "sprint", emoji: "⚡", name: "Short Sprint", work: 15, brk: 2, longBrk: 10, cycles: 4, strict: false, blockCats: ["distraction"], notify: true, autoStart: true },
+    { id: "pomodoro", emoji: "🍅", name: "Pomodoro", work: 25, brk: 5, longBrk: 15, cycles: 4, strict: false, blockCats: [], notify: true, autoStart: true },
+    { id: "deep_work", emoji: "🧠", name: "Deep Work", work: 90, brk: 15, longBrk: 30, cycles: 2, strict: false, blockCats: [], notify: true, autoStart: true },
+    { id: "sprint", emoji: "⚡", name: "Short Sprint", work: 15, brk: 2, longBrk: 10, cycles: 4, strict: false, blockCats: [], notify: true, autoStart: true },
 ];
 
 async function ensurePresets() {
@@ -1928,7 +2717,7 @@ async function ensurePresets() {
                     customPreset.brk = s.focusBreak ?? customPreset.brk ?? 5;
                     customPreset.longBrk = s.focusLongBreak ?? customPreset.longBrk ?? 15;
                     customPreset.cycles = s.focusCycles ?? customPreset.cycles ?? 4;
-                    customPreset.blockCats = s.focusBlockCats ?? customPreset.blockCats ?? ["distraction"];
+                    customPreset.blockCats = s.focusBlockCats ?? customPreset.blockCats ?? [];
                     changed = true;
                 }
             }
@@ -1938,6 +2727,17 @@ async function ensurePresets() {
             delete s.focusLongBreak;
             delete s.focusCycles;
             delete s.focusBlockCats;
+            await sSync({ settings: s });
+        }
+
+        // One-time migration: Clear all default blockCats from presets so they are unselected by default
+        if (!s.presets_blockcats_cleared_v2) {
+            focusPresets.forEach(p => {
+                p.blockCats = [];
+                if (p.cats) p.cats = [];
+            });
+            s.presets_blockcats_cleared_v2 = true;
+            changed = true;
             await sSync({ settings: s });
         }
 
@@ -1968,7 +2768,7 @@ async function ensurePresets() {
             longBrk: s.focusLongBreak ?? 15,
             cycles: s.focusCycles ?? 4,
             strict: false,
-            blockCats: s.focusBlockCats || ["distraction"],
+            blockCats: s.focusBlockCats || [],
             notify: true,
             autoStart: true,
         });
@@ -1983,13 +2783,14 @@ async function ensurePresets() {
             longBrk: 15,
             cycles: 4,
             strict: false,
-            blockCats: ["distraction"],
+            blockCats: [],
             notify: true,
             autoStart: true,
         });
     }
 
     s.settings_migrated_v1 = true;
+    s.presets_blockcats_cleared_v2 = true;
     delete s.focusWork;
     delete s.focusBreak;
     delete s.focusLongBreak;
