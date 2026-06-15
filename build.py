@@ -15,13 +15,14 @@ import re
 import shutil
 import sys
 import json
+import subprocess
 
 # --- Config ---
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 DIST_DIR = os.path.join(os.path.dirname(SRC_DIR), "flow-dist")
 
 # Files/folders to skip copying
-SKIP = {"build.py", "node_modules", ".git", ".gitignore", "__pycache__", "project_rules.md"}
+SKIP = {"build.py", "node_modules", "package.json", "package-lock.json", ".git", ".gitignore", "__pycache__", "project_rules.md"}
 
 
 def strip_js_comments(code):
@@ -162,6 +163,19 @@ def minify_css(css):
     return css.strip()
 
 
+def minify_js_esbuild(src_path, dst_path):
+    """Minify JavaScript using local esbuild if available, with a fallback to custom logic."""
+    esbuild_cmd = os.path.join(SRC_DIR, "node_modules", ".bin", "esbuild.cmd")
+    if not os.path.exists(esbuild_cmd):
+        esbuild_cmd = "esbuild"
+    try:
+        subprocess.run([esbuild_cmd, src_path, "--minify", "--target=chrome90", "--outfile=" + dst_path],
+                       capture_output=True, check=True, shell=True)
+        return True
+    except Exception:
+        return False
+
+
 def process_file(src_path, dst_path):
     """Process a single file: minify JS/HTML/CSS or copy as-is."""
     ext = os.path.splitext(src_path)[1].lower()
@@ -170,11 +184,18 @@ def process_file(src_path, dst_path):
         with open(src_path, 'r', encoding='utf-8', errors='replace') as f:
             code = f.read()
         original_size = len(code.encode('utf-8'))
-        code = strip_js_comments(code)
-        code = collapse_whitespace_js(code)
-        new_size = len(code.encode('utf-8'))
-        with open(dst_path, 'w', encoding='utf-8') as f:
-            f.write(code)
+        
+        success = minify_js_esbuild(src_path, dst_path)
+        if success:
+            new_size = os.path.getsize(dst_path)
+        else:
+            # Fallback to custom comment/whitespace remover if esbuild fails
+            code = strip_js_comments(code)
+            code = collapse_whitespace_js(code)
+            new_size = len(code.encode('utf-8'))
+            with open(dst_path, 'w', encoding='utf-8') as f:
+                f.write(code)
+                
         saved = original_size - new_size
         if saved > 100:
             print(f"  JS  {os.path.basename(src_path):30s}  {original_size:>8,} -> {new_size:>8,}  (saved {saved:,} bytes)")
@@ -289,6 +310,43 @@ def build_target(target_name, is_firefox=False):
             total_new += new
             file_count += 1
 
+    # Write custom RESTORE_INSTRUCTIONS.txt with browser-specific loading steps
+    manifest_path = os.path.join(SRC_DIR, "manifest.json")
+    try:
+        with open(manifest_path, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+        version = manifest.get("version", "6.9.0")
+    except Exception:
+        version = "6.9.0"
+
+    readme_path = os.path.join(target_dir, "RESTORE_INSTRUCTIONS.txt")
+    if is_firefox:
+        instructions = f"""FocusFlow Firefox Build - Version {version}
+========================================
+
+How to load/restore this extension temporarily in Mozilla Firefox:
+1. Open Mozilla Firefox.
+2. Go to the Debugging page by typing 'about:debugging#/runtime/this-firefox' in the URL address bar.
+3. Click the "Load Temporary Add-on..." button.
+4. Select the 'manifest.json' file inside this folder ('{target_name}') to load the extension.
+"""
+    else:
+        instructions = f"""FocusFlow Chrome Build - Version {version}
+========================================
+
+How to load/restore this extension in Google Chrome:
+1. Open Google Chrome.
+2. Go to the Extensions page by typing 'chrome://extensions/' in the URL address bar.
+3. Turn on the "Developer mode" switch in the top right corner.
+4. Click the "Load unpacked" button in the top left corner.
+5. Select this folder ('{target_name}') to load the extension.
+"""
+    try:
+        with open(readme_path, "w", encoding="utf-8") as rf:
+            rf.write(instructions)
+    except Exception as e:
+        print(f"  [Warning] Could not write restore instructions: {e}")
+
     saved = total_original - total_new
     print(f"\n{'=' * 60}")
     print(f"  Done! {file_count} files processed.")
@@ -327,11 +385,15 @@ def check_version_and_backup():
         next_version = current_version + ".1"
 
     # Ask the user
-    try:
-        ans = input(f"Would you like to bump the version from {current_version} to {next_version} and create a backup of the old code? (y/n) [n]: ").strip().lower()
-    except (KeyboardInterrupt, EOFError):
-        print("\nBuild cancelled.")
-        sys.exit(0)
+    skip_prompt = len(sys.argv) > 1 and sys.argv[1] in ("--skip-prompt", "--yes", "-y")
+    if skip_prompt:
+        ans = "n"
+    else:
+        try:
+            ans = input(f"Would you like to bump the version from {current_version} to {next_version} and create a backup of the old code? (y/n) [n]: ").strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            print("\nBuild cancelled.")
+            sys.exit(0)
 
     if ans in ("y", "yes"):
         parent_dir = os.path.dirname(SRC_DIR)
@@ -405,6 +467,16 @@ if __name__ == "__main__":
         build_target("flow-dist", is_firefox=False)
         build_target("flow-firefox", is_firefox=True)
         
+        # Remove any existing zip files in the parent directory to keep workspace clean
+        parent_dir = os.path.dirname(SRC_DIR)
+        for item in os.listdir(parent_dir):
+            if item.endswith(".zip") and (item.startswith("flow-dist-v") or item.startswith("flow-firefox-v")):
+                try:
+                    os.remove(os.path.join(parent_dir, item))
+                    print(f"  [Cleanup] Removed old archive: {item}")
+                except Exception as e:
+                    print(f"  [Warning] Could not remove old archive {item}: {e}")
+        
         # Get current version from manifest.json
         manifest_path = os.path.join(SRC_DIR, "manifest.json")
         try:
@@ -414,27 +486,32 @@ if __name__ == "__main__":
         except Exception:
             version = "6.9.0"
             
-        import zipfile
-        def zip_target(name):
-            target_dir = os.path.join(os.path.dirname(SRC_DIR), name)
-            zip_file_path = os.path.join(os.path.dirname(SRC_DIR), f"{name}-v{version}.zip")
-            if os.path.exists(zip_file_path):
-                os.remove(zip_file_path)
-            with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-                for root, _, files in os.walk(target_dir):
-                    for file in files:
-                        abs_p = os.path.join(root, file)
-                        rel_p = os.path.relpath(abs_p, target_dir)
-                        # Force standard forward slash for archive path names (fixes Firefox validator error!)
-                        archive_name = rel_p.replace(os.sep, '/')
-                        zipf.write(abs_p, archive_name)
-            print(f"  [Zip] Packaged {name} into {os.path.basename(zip_file_path)}")
+        if "--zip" in sys.argv:
+            import zipfile
+            def zip_target(name):
+                target_dir = os.path.join(os.path.dirname(SRC_DIR), name)
+                zip_file_path = os.path.join(os.path.dirname(SRC_DIR), f"{name}-v{version}.zip")
+                if os.path.exists(zip_file_path):
+                    os.remove(zip_file_path)
+                with zipfile.ZipFile(zip_file_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                    for root, _, files in os.walk(target_dir):
+                        for file in files:
+                            if file == "RESTORE_INSTRUCTIONS.txt":
+                                continue
+                            abs_p = os.path.join(root, file)
+                            rel_p = os.path.relpath(abs_p, target_dir)
+                            # Force standard forward slash for archive path names (fixes Firefox validator error!)
+                            archive_name = rel_p.replace(os.sep, '/')
+                            zipf.write(abs_p, archive_name)
+                print(f"  [Zip] Packaged {name} into {os.path.basename(zip_file_path)}")
 
-        print("=" * 60)
-        print("  Packaging Zip Archives for Store Uploads")
-        print("=" * 60)
-        zip_target("flow-dist")
-        zip_target("flow-firefox")
-        print("=" * 60 + "\n")
+            print("=" * 60)
+            print("  Packaging Zip Archives for Store Uploads")
+            print("=" * 60)
+            zip_target("flow-dist")
+            zip_target("flow-firefox")
+            print("=" * 60 + "\n")
+        else:
+            print("  [Build] Skipping zip packaging (run with '--zip' flag if you want to generate store upload zip packages).")
     else:
         print("Skipping distribution builds. Your source code changes are saved in 'flow-source'.")

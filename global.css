@@ -34,6 +34,13 @@
   --trans:all .22s cubic-bezier(.4,0,.2,1);
   --trans-fast:all .15s cubic-bezier(.4,0,.2,1);
 
+  /* glass / surface — used by dashboard glassmorphism */
+  --glass-bg:rgba(24,24,24,0.65);
+  --glass-bd:rgba(255,255,255,0.08);
+  --surface-subtle:rgba(255,255,255,0.015);
+  --surface-elevated:rgba(255,255,255,0.03);
+  --bd-subtle:rgba(255,255,255,0.04);
+
   --display-font:Georgia, serif;
 }
 
@@ -52,6 +59,12 @@ html.light{
   --shadow-sm:0 2px 8px rgba(0,0,0,.06);
   --shadow-md:0 8px 20px rgba(0,0,0,.08);
   --shadow-lg:0 20px 48px rgba(0,0,0,.10);
+  /* glass / surface — light mode overrides */
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-bd:rgba(0,0,0,0.05);
+  --surface-subtle:rgba(0,0,0,0.015);
+  --surface-elevated:rgba(0,0,0,0.03);
+  --bd-subtle:rgba(0,0,0,0.04);
   /* High-Contrast Accessible Accents for Light Mode */
   --green:#02854e;
   --green-bg:rgba(2,133,78,0.08);
@@ -141,6 +154,12 @@ html.light .card{box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.6)
 .ttrack::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--tx3);transition:var(--trans);box-shadow:0 1px 2px rgba(0,0,0,.3)}
 .tog input:checked + .ttrack{background:var(--green-bg);border-color:var(--green)}
 .tog input:checked + .ttrack::after{background:var(--green);transform:translateX(16px)}
+
+/* large toggle variant */
+.tog-lg .ttrack{width:50px;height:28px;border-radius:14px;background:var(--bg3)}
+.tog-lg .ttrack::after{width:20px;height:20px;top:3px;left:3px}
+.tog-lg input:checked + .ttrack::after{transform:translateX(22px)}
+
 
 /* numerics */
 .num,.donut-total,.leg-time,.sitetm,.goal-pct,.fr-time{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
@@ -354,3 +373,9 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .top-site-pin-btn:hover { opacity: 1 !important; }
 .top-site-visit-btn { opacity: 0.4; transition: opacity 0.2s; }
 .top-site-visit-btn:hover { opacity: 1; }
+
+/* Favicon fallback styling */
+.ff-favicon {
+  background-color: transparent;
+}
+
