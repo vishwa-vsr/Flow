@@ -23,6 +23,10 @@ function escHTML(e) {
     return String(e).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c] || c));
 }
 
+function setSafeHTML(el, html) {
+    if (el) el.innerHTML = html;
+}
+
 function fmt(e) {
     if (!e || e <= 0) return "0m";
     const m = Math.floor(e / 60);
@@ -246,10 +250,14 @@ function msg(e, t, retries = 3) {
 async function applyTheme(e) {
     const t = await gLocal(["theme"]),
         n = "light" === t.theme,
-        r = "cinematic" === t.theme;
-    document.documentElement.classList.toggle("light", n), document.documentElement.classList.toggle("cinematic", r);
+        r = "cinematic" === t.theme,
+        o = "rain" === t.theme;
+    document.documentElement.classList.toggle("light", n);
+    document.documentElement.classList.toggle("cinematic", r);
+    document.documentElement.classList.toggle("rain", o);
     const i = e ? $(e) : null;
-    i && (i.innerHTML = n ? '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' : r ? '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>')
+    i && (i.innerHTML = n ? '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' : r ? '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' : o ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:middle;" aria-hidden="true" focusable="false"><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path><line x1="8" y1="19" x2="8" y2="21"></line><line x1="8" y1="13" x2="8" y2="15"></line><line x1="16" y1="19" x2="16" y2="21"></line><line x1="16" y1="13" x2="16" y2="15"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="12" y1="15" x2="12" y2="17"></line></svg>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>');
+    syncCinematicParticles();
 }
 document.addEventListener("error", e => {
     if (e.target.tagName === "IMG") {
@@ -265,3 +273,106 @@ document.addEventListener("error", e => {
         }
     }
 }, !0);
+
+let cinematicAnimationId = null;
+let particleCanvases = [];
+
+function syncCinematicParticles() {
+    const isRain = document.documentElement.classList.contains("rain");
+    const bgContainers = document.querySelectorAll(".cinematic-bg");
+    
+    if (cinematicAnimationId) {
+        cancelAnimationFrame(cinematicAnimationId);
+        cinematicAnimationId = null;
+    }
+
+    if (!isRain) {
+        bgContainers.forEach(bg => {
+            const canvas = bg.querySelector("canvas.cinematic-particles");
+            if (canvas) canvas.remove();
+        });
+        particleCanvases = [];
+        return;
+    }
+
+    particleCanvases = [];
+
+    bgContainers.forEach(bg => {
+        let canvas = bg.querySelector("canvas.cinematic-particles");
+        if (!canvas) {
+            canvas = document.createElement("canvas");
+            canvas.className = "cinematic-particles";
+            canvas.style.position = "absolute";
+            canvas.style.inset = "0";
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.pointerEvents = "none";
+            bg.appendChild(canvas);
+        }
+
+        const resizeCanvas = () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        };
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        const particles = [];
+        const count = Math.min(30, Math.floor((canvas.width * canvas.height) / 40000));
+        
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                length: Math.random() * 10 + 6,
+                speed: Math.random() * 1.5 + 1.5,
+                opacity: Math.random() * 0.35 + 0.15,
+                wind: (Math.random() - 0.5) * 0.05 - 0.1
+            });
+        }
+
+        particleCanvases.push({ canvas, ctx: canvas.getContext("2d"), particles });
+    });
+
+    if (particleCanvases.length === 0) return;
+
+    function animate() {
+        if (!document.documentElement.classList.contains("rain")) {
+            return;
+        }
+
+        particleCanvases.forEach(({ canvas, ctx, particles }) => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p.x + p.wind * 2, p.y + p.length);
+                
+                const hue = 200 + (p.x % 60);
+                ctx.strokeStyle = `hsla(${hue}, 80%, 75%, ${p.opacity})`;
+                ctx.lineWidth = 1.0;
+                ctx.lineCap = "round";
+                ctx.stroke();
+
+                p.y += p.speed;
+                p.x += p.wind;
+
+                if (p.y > canvas.height) {
+                    p.y = -p.length;
+                    p.x = Math.random() * canvas.width;
+                    p.speed = Math.random() * 1.5 + 1.5;
+                }
+                if (p.x < 0) {
+                    p.x = canvas.width;
+                } else if (p.x > canvas.width) {
+                    p.x = 0;
+                }
+            });
+        });
+
+        cinematicAnimationId = requestAnimationFrame(animate);
+    }
+
+    animate();
+}

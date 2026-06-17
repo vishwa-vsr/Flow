@@ -83,14 +83,23 @@ html.light{
   --purple-bd:rgba(126,34,206,0.2);
 }
 
-html.cinematic body{background:#070310}
-html.cinematic .cinematic-bg{opacity:1}
+html.cinematic body, html.rain body{background:#070310}
+html.cinematic .cinematic-bg, html.rain .cinematic-bg{opacity:1}
 html.light .cinematic-bg{display:none}
 .cinematic-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1s ease;
+  animation:cinematicDrift 18s infinite alternate ease-in-out}
+html.cinematic .cinematic-bg{
   background:
     radial-gradient(circle at 15% 50%,rgba(92,156,252,.18),transparent 50%),
     radial-gradient(circle at 85% 30%,rgba(168,85,247,.18),transparent 50%);
-  animation:cinematicDrift 18s infinite alternate ease-in-out}
+}
+html.rain .cinematic-bg{
+  background:
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.35), transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.35), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.25), transparent 60%),
+    radial-gradient(circle at 80% 10%, rgba(20, 184, 166, 0.25), transparent 40%);
+}
 @keyframes cinematicDrift{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.08) translate(-2%,2%)}}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
