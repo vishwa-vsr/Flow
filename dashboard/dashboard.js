@@ -75,8 +75,15 @@ function hideAnalyticsHeader() {
 async function applyTheme() {
     const e = await gLocal(["theme"]),
         t = "light" === e.theme,
-        a = "cinematic" === e.theme;
-    document.documentElement.classList.toggle("light", t), document.documentElement.classList.toggle("cinematic", a), document.documentElement.setAttribute("data-os-theme", "nothing")
+        a = "cinematic" === e.theme,
+        r = "rain" === e.theme;
+    document.documentElement.classList.toggle("light", t);
+    document.documentElement.classList.toggle("cinematic", a);
+    document.documentElement.classList.toggle("rain", r);
+    document.documentElement.setAttribute("data-os-theme", "nothing");
+    if (typeof syncCinematicParticles === "function") {
+        syncCinematicParticles();
+    }
 }
 function catColor(e) {
     return (CAT_META[e] || {
@@ -153,6 +160,8 @@ chrome.storage.onChanged.addListener((e, t) => {
     theme: "light"
 })), $("btn-cinematic-mode") && $("btn-cinematic-mode").addEventListener("click", () => sLocal({
     theme: "cinematic"
+})), $("btn-rain-mode") && $("btn-rain-mode").addEventListener("click", () => sLocal({
+    theme: "rain"
 }));
 var fmtT = fmtTimer;
 
@@ -1169,26 +1178,9 @@ async function renderInsights() {
     if (!tip) {
         tip = document.createElement("div");
         tip.id = "heatmap-tooltip-live";
+        tip.className = "chart-tooltip";
         document.body.appendChild(tip);
     }
-    tip.style.cssText = [
-        "position:fixed",
-        "display:none",
-        "left:0",
-        "top:0",
-        "background:#161618",
-        "border:1px solid rgba(255,255,255,0.16)",
-        "color:#F4F4F5",
-        "padding:8px 12px",
-        "border-radius:8px",
-        "font:700 12px Manrope, system-ui, sans-serif",
-        "line-height:1.45",
-        "pointer-events:none",
-        "opacity:1",
-        "z-index:2147483647",
-        "box-shadow:0 8px 24px rgba(0,0,0,0.45)",
-        "white-space:nowrap"
-    ].join(";") + ";";
     const oldTip = $("heatmap-tooltip");
     if (oldTip) oldTip.style.display = "none";
     canvas.onmousemove = null;
@@ -1213,7 +1205,10 @@ async function renderInsights() {
     canvas.style.position = "relative";
     canvas.style.zIndex = "1";
 
-    const hideHeatmapTip = () => { tip.style.display = "none"; };
+    const hideHeatmapTip = () => {
+        tip.style.display = "none";
+        tip.style.opacity = "0";
+    };
     const showHeatmapTip = (ev, hit) => {
         let dateLabel = hit.k;
         try {
@@ -1221,11 +1216,12 @@ async function renderInsights() {
             const dObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
             dateLabel = dObj.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
         } catch (e) {}
-        setSafeHTML(tip, `<div style="font-weight:800;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px">${dateLabel}</div>
+        setSafeHTML(tip, `<div style="font-weight:800;margin-bottom:8px;border-bottom:1px solid var(--bd2);padding-bottom:6px">${dateLabel}</div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:4px;color:#05D581"><span>Productivity:</span> <span class="num">${fmt(hit.prod)}</span></div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:4px;color:#A855F7"><span>Learning:</span> <span class="num">${fmt(hit.learn)}</span></div>
             <div style="display:flex;justify-content:space-between;align-items:center;color:#F46B7A"><span>Distraction:</span> <span class="num">${fmt(hit.distract)}</span></div>`);
-tip.style.display = "block";
+        tip.style.display = "flex";
+        tip.style.opacity = "1";
         const tipRect = tip.getBoundingClientRect();
         let tx = ev.clientX + 12;
         let ty = ev.clientY + 12;
@@ -2070,7 +2066,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
             if (val > maxVal) maxVal = val;
         });
     });
-    maxVal = Math.max(60, maxVal);
+    maxVal = Math.max(60, Math.ceil(maxVal * 1.05));
 
     // Dynamic Y-axis alignment plugin (populates both left and right stationary axes)
     const alignYAxisPlugin = {
@@ -2649,20 +2645,46 @@ async function renderTrend() {
     var y = h > 0 ? Math.round((i - h) / h * 100) : i > 0 ? 100 : 0,
         b = f > 0 ? Math.round((s - f) / f * 100) : s > 0 ? 100 : 0;
 
-    function k(e, t) {
-        return 0 === e ? '<span style="color:var(--tx3)">No change</span>' : `<span style="color:${(t ? e > 0 : e < 0) ? "var(--green)" : "var(--red)"};font-weight:800">${e > 0 ? "↗" : "↘"} ${Math.abs(e)}%</span> <span style="font-size:12px;color:var(--tx2);font-weight:600">vs prev ${_windowDays}d</span>`
+    function buildTrendBadge(percentChange, isProductivity) {
+        if (0 === percentChange) {
+            return `<span class="stat-trend-badge" style="background:var(--bg4);color:var(--tx3);border:1px solid var(--bd2)">No change</span>`;
+        }
+        let isGood = isProductivity ? percentChange > 0 : percentChange < 0;
+        let badgeClass = isGood ? "stat-trend-badge up-good" : "stat-trend-badge up-bad";
+        let arrowSymbol = percentChange > 0 ? "↗" : "↘";
+        return `<span class="${badgeClass}">${arrowSymbol} ${Math.abs(percentChange)}%</span> <span class="stat-trend-meta">vs prev ${_windowDays}d</span>`;
     }
     let x = $("trend-study-total")?.parentElement?.parentElement;
     x && !x.dataset.modified && (x.dataset.modified = "true", setSafeHTML(x, `
-          <div style="flex:1;background:var(--bg3);padding:20px;border-radius:16px;border:1px solid var(--bd);">
-              <div style="font-size:12px;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Productivity Focus</div>
-              <div id="pop-prod" style="font-size:24px;font-family:monospace;font-weight:800;line-height:1.2;">—</div>
+          <div class="stat-card prod-stat-card">
+              <div class="stat-card-hdr">
+                  <span class="stat-card-title">Productivity Focus</span>
+                  <span class="stat-card-icon prod-icon">
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                  </span>
+              </div>
+              <div class="stat-card-body">
+                  <div class="stat-card-val" id="pop-prod-val">—</div>
+                  <div id="pop-prod-trend" class="stat-card-trend">—</div>
+              </div>
           </div>
-          <div style="flex:1;background:var(--bg3);padding:20px;border-radius:16px;border:1px solid var(--bd);">
-              <div style="font-size:12px;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Distraction Tracking</div>
-              <div id="pop-dist" style="font-size:24px;font-family:monospace;font-weight:800;line-height:1.2;">—</div>
+          <div class="stat-card dist-stat-card">
+              <div class="stat-card-hdr">
+                  <span class="stat-card-title">Distraction Tracking</span>
+                  <span class="stat-card-icon dist-icon">
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+              </div>
+              <div class="stat-card-body">
+                  <div class="stat-card-val" id="pop-dist-val">—</div>
+                  <div id="pop-dist-trend" class="stat-card-trend">—</div>
+              </div>
           </div>
-      `)), $("pop-prod") && setSafeHTML($("pop-prod"), k(y, !0) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(i)}</span>`), $("pop-dist") && setSafeHTML($("pop-dist"), k(b, !1) + `<br><span style="font-size:13px;color:var(--tx);font-family:\'Inter\',sans-serif;font-weight:700">Current: ${fmt(s)}</span>`);
+    `));
+    $("pop-prod-val") && setSafeHTML($("pop-prod-val"), fmt(i));
+    $("pop-prod-trend") && setSafeHTML($("pop-prod-trend"), buildTrendBadge(y, true));
+    $("pop-dist-val") && setSafeHTML($("pop-dist-val"), fmt(s));
+    $("pop-dist-trend") && setSafeHTML($("pop-dist-trend"), buildTrendBadge(b, false));
     var w = !$("tog-trend-prod") || $("tog-trend-prod").checked,
         E = !$("tog-trend-lrn") || $("tog-trend-lrn").checked,
         S = !$("tog-trend-comm") || $("tog-trend-comm").checked,
@@ -3992,10 +4014,6 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
                 const card = document.createElement("div");
                 card.className = "preset-card" + (isActive ? " is-active" : "");
                 card.style.cssText = `
-          background: var(--bg3);
-          border: 1px solid ${isActive ? 'var(--green)' : 'var(--bd2)'};
-          box-shadow: ${isActive ? '0 0 8px rgba(5, 213, 129, 0.15)' : 'none'};
-          border-radius: 12px;
           padding: 14px 12px;
           display: flex;
           flex-direction: column;
@@ -4003,7 +4021,6 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
           justify-content: center;
           position: relative;
           cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
           text-align: center;
         `;
 
@@ -4116,49 +4133,52 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             const overlay = document.createElement("div");
             overlay.id = "ff-preset-edit-modal";
             overlay.className = "overlay";
+            overlay.setAttribute("role", "dialog");
+            overlay.setAttribute("aria-modal", "true");
+            overlay.setAttribute("aria-labelledby", "ep-title");
             setSafeHTML(overlay, `
         <div class="card" style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
           <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
               ${modalHeaderIcon}
-              <span>Edit Preset</span>
+              <span id="ep-title">Edit Preset</span>
             </div>
-            <button id="ep-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
+            <button id="ep-close" aria-label="Close Edit Preset Modal" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
           
           <div style="padding:24px 32px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; flex:1;">
             <div class="srow">
-              <label class="slbl">Preset Name</label>
+              <label for="ep-name" class="slbl">Preset Name</label>
               <input type="text" id="ep-name" class="inp" style="width:100%" value="${sanitizeDomain(p.name || '')}"/>
             </div>
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
               <div class="srow">
-                <label class="slbl">Work Time (min)</label>
+                <label for="ep-work" class="slbl">Work Time (min)</label>
                 <input type="number" id="ep-work" class="num inp" min="1" max="180" style="width:100%" value="${p.work}"/>
               </div>
               <div class="srow">
-                <label class="slbl">Break Time (min)</label>
+                <label for="ep-brk" class="slbl">Break Time (min)</label>
                 <input type="number" id="ep-brk" class="num inp" min="0" max="60" style="width:100%" value="${p.brk}"/>
               </div>
               <div class="srow">
-                <label class="slbl">Long Break (min)</label>
+                <label for="ep-long" class="slbl">Long Break (min)</label>
                 <input type="number" id="ep-long" class="num inp" min="0" max="120" style="width:100%" value="${p.long}"/>
               </div>
               <div class="srow">
-                <label class="slbl">Cycles</label>
+                <label for="ep-cyc" class="slbl">Cycles</label>
                 <input type="number" id="ep-cyc" class="num inp" min="1" max="12" style="width:100%" value="${p.cycles}"/>
               </div>
             </div>
 
             <div class="trow" style="padding:16px 0; border-top:none; border-bottom:1px solid var(--bd); margin-top:-10px;">
               <div style="flex:1;">
-                <div class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px;">
+                <label for="ep-notify" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                   Enable Notifications
-                </div>
+                </label>
                 <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">Receive push alerts when focus periods or breaks end.</div>
               </div>
               <label class="tog">
@@ -4169,10 +4189,10 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
             <div class="trow" style="padding:16px 0; border-top:none; border-bottom:1px solid var(--bd); margin-top:-10px;">
               <div style="flex:1;">
-                <div class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px;">
+                <label for="ep-autostart" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
                   Auto-Start Next Cycle
-                </div>
+                </label>
                 <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">Automatically transition to the next work cycle or break.</div>
               </div>
               <label class="tog">
@@ -4829,6 +4849,9 @@ document.body.appendChild(overlay);
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.style.zIndex = "9999";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.setAttribute("aria-labelledby", "nsched-title");
         const schedDays = sched.days || [1, 2, 3, 4, 5];
         const DAY_CBS = DAY_LABELS.map((d, i) =>
             `<label class="nsched-day-lbl" style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg3)"><input type="checkbox" class="nsched-day" value="${i}" ${schedDays.includes(i) ? "checked" : ""}> ${d}</label>`
@@ -4838,17 +4861,17 @@ document.body.appendChild(overlay);
         <div style="padding:24px 32px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
           <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:10px;">
             <span>⏰</span>
-            <span>${isEdit ? "Edit" : "Add"} Focus Schedule</span>
+            <span id="nsched-title">${isEdit ? "Edit" : "Add"} Focus Schedule</span>
           </div>
-          <button id="nsched-close" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+          <button id="nsched-close" aria-label="Close Schedule Modal" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         <div style="padding:24px 32px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:20px;">
-          <div><label class="slbl" style="margin-bottom:6px;display:block">Label</label><input type="text" id="nsched-label" class="inp" placeholder="e.g. Morning Focus" value="${sanitizeDomain(sched.label || "")}" style="width:100%"/></div>
+          <div><label for="nsched-label" class="slbl" style="margin-bottom:6px;display:block">Label</label><input type="text" id="nsched-label" class="inp" placeholder="e.g. Morning Focus" value="${sanitizeDomain(sched.label || "")}" style="width:100%"/></div>
           <div style="display:flex;gap:12px;align-items:center;">
-            <div style="flex:1"><label class="slbl" style="margin-bottom:6px;display:block">Start</label><input type="time" id="nsched-start" class="inp" value="${sched.startTime || "09:00"}"/></div>
-            <div style="flex:1"><label class="slbl" style="margin-bottom:6px;display:block">End</label><input type="time" id="nsched-end" class="inp" value="${sched.endTime || "10:00"}"/></div>
+            <div style="flex:1"><label for="nsched-start" class="slbl" style="margin-bottom:6px;display:block">Start</label><input type="time" id="nsched-start" class="inp" value="${sched.startTime || "09:00"}"/></div>
+            <div style="flex:1"><label for="nsched-end" class="slbl" style="margin-bottom:6px;display:block">End</label><input type="time" id="nsched-end" class="inp" value="${sched.endTime || "10:00"}"/></div>
           </div>
           <div>
             <label class="slbl" style="margin-bottom:8px;display:block">Active Days</label>
@@ -4865,7 +4888,7 @@ document.body.appendChild(overlay);
           </div>
           <div class="pb-strict-row" style="padding-top:16px;border-top:1px solid var(--bd)">
             <div>
-              <div class="tlbl" style="font-size:14px; display:inline-flex; align-items:center; gap:6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber); vertical-align:middle; display:inline-block;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span>Pre-Schedule Notification</span></div>
+              <label for="nsched-notify-time" class="tlbl" style="font-size:14px; display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber); vertical-align:middle; display:inline-block;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span>Pre-Schedule Notification</span></label>
               <div class="tdesc">Get notified before the session starts.</div>
             </div>
             <select id="nsched-notify-time" class="inp" style="width:140px;padding:6px 12px">
@@ -5342,14 +5365,14 @@ document.body.appendChild(overlay);
                     </div>
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <button class="bs btn-restore-backup" data-id="${backup.id}" title="Restore this backup" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                    <button class="bs btn-restore-backup" data-id="${backup.id}" title="Restore this backup" aria-label="Restore this backup" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
                         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
                         Restore
                     </button>
-                    <button class="bs btn-download-backup" data-id="${backup.id}" title="Download JSON file" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
+                    <button class="bs btn-download-backup" data-id="${backup.id}" title="Download JSON file" aria-label="Download JSON file" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
                         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     </button>
-                    <button class="bs-danger btn-delete-backup" data-id="${backup.id}" title="Delete this backup" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
+                    <button class="bs-danger btn-delete-backup" data-id="${backup.id}" title="Delete this backup" aria-label="Delete this backup" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
                         <svg viewBox="0 0 24 24" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                     </button>
                 </div>
@@ -5521,8 +5544,8 @@ listContainer.appendChild(row);
                 setSafeHTML(slot, `
                     <span class="preset-name-text" style="max-width: 95px; overflow: hidden; text-overflow: ellipsis; display: inline-block;">${escHTML(p.name)}</span>
                     <div class="preset-slot-actions" style="display: flex; gap: 4px; align-items: center;">
-                        <button class="edit-preset-slot-btn" title="Edit" style="background: none; border: none; color: var(--tx2); cursor: pointer; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 2px;">✎</button>
-                        <button class="delete-preset-slot-btn" title="Delete" style="background: none; border: none; color: var(--red); cursor: pointer; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 2px;">✕</button>
+                        <button class="edit-preset-slot-btn" title="Edit" aria-label="Edit block preset slot" style="background: none; border: none; color: var(--tx2); cursor: pointer; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 2px;">✎</button>
+                        <button class="delete-preset-slot-btn" title="Delete" aria-label="Delete block preset slot" style="background: none; border: none; color: var(--red); cursor: pointer; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 2px;">✕</button>
                     </div>
                 `);
 // Add hover style changes
@@ -5746,7 +5769,7 @@ listContainer.appendChild(row);
                 <input type="time" class="inp sched-start" value="${s.start}" style="flex:1; padding:8px;" />
                 <span style="color:var(--tx3)">to</span>
                 <input type="time" class="inp sched-end" value="${s.end}" style="flex:1; padding:8px;" />
-                <button class="bs btn-del-p-sched" style="padding:8px 12px; font-size:13px; color:var(--red); font-weight:bold;">✕</button>
+                <button class="bs btn-del-p-sched" style="padding:8px 12px; font-size:13px; color:var(--red); font-weight:bold;" aria-label="Delete time window">✕</button>
             `);
 slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
                 slot.remove();
@@ -5861,7 +5884,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
                 <input type="time" class="inp sched-start" value="09:00" style="flex:1; padding:8px;" />
                 <span style="color:var(--tx3)">to</span>
                 <input type="time" class="inp sched-end" value="17:00" style="flex:1; padding:8px;" />
-                <button class="bs btn-del-p-sched" style="padding:8px 12px; font-size:13px; color:var(--red); font-weight:bold;">✕</button>
+                <button class="bs btn-del-p-sched" style="padding:8px 12px; font-size:13px; color:var(--red); font-weight:bold;" aria-label="Delete time window">✕</button>
             `);
 slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
                 slot.remove();

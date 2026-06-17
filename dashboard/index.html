@@ -22,7 +22,7 @@
           <img id="logo-img" src="../icons/icon128.png" alt="Logo" style="width:28px;height:28px;border-radius:6px; transition:var(--trans);">
           <span class="bname" style="margin-left:4px;">Flow</span>
         </a>
-        <button id="btn-dashboard-privacy" class="privacy-btn" title="Privacy Mode / Pause Tracking">
+        <button id="btn-dashboard-privacy" class="privacy-btn" title="Privacy Mode / Pause Tracking" aria-label="Privacy Mode / Pause Tracking">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </button>
         <div id="dashboard-privacy-status" class="hide" style="font-size:12px; font-weight:700; color:#A855F7; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); padding:6px 12px; border-radius:10px; font-family:monospace; white-space:nowrap; letter-spacing:0.02em;">
@@ -31,7 +31,7 @@
       </div>
       <div style="display:flex; align-items:center; gap:12px;">
         <div class="nav-links" role="tablist">
-          <button class="ni act" data-tab="analytics" role="tab" aria-selected="true" aria-current="page">
+          <button class="ni act" id="tab-btn-analytics" data-tab="analytics" role="tab" aria-selected="true" aria-controls="tab-analytics" aria-current="page">
             <span class="nic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -40,7 +40,7 @@
               </svg></span>
             <span>Analytics</span>
           </button>
-          <button class="ni" data-tab="focus" role="tab" aria-selected="false">
+          <button class="ni" id="tab-btn-focus" data-tab="focus" role="tab" aria-selected="false" aria-controls="tab-focus">
             <span class="nic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="13" r="8"></circle>
@@ -49,7 +49,7 @@
               </svg></span>
             <span>Focus Mode</span>
           </button>
-          <button class="ni" data-tab="sitemanager" role="tab" aria-selected="false">
+          <button class="ni" id="tab-btn-sitemanager" data-tab="sitemanager" role="tab" aria-selected="false" aria-controls="tab-sitemanager">
             <span class="nic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -57,7 +57,7 @@
             <span>Site Manager</span>
           </button>
 
-          <button class="ni" data-tab="settings" role="tab" aria-selected="false">
+          <button class="ni" id="tab-btn-settings" data-tab="settings" role="tab" aria-selected="false" aria-controls="tab-settings">
             <span class="nic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="3"></circle>
@@ -72,7 +72,7 @@
     </div>
   </nav>
 
-  <div id="pcOverlay" class="overlay hide" style="z-index: 100000;">
+  <div id="pcOverlay" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="pc-title" aria-describedby="pc-desc">
     <div class="card" style="text-align:center;min-width:380px;padding:40px;">
       <div style="display:flex; justify-content:center; margin-bottom:16px;">
         <svg viewBox="0 0 24 24" width="56" height="56" stroke="var(--amber)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -90,7 +90,7 @@
           data-n="6">6</button>
         <button class="bs pk" data-n="7">7</button><button class="bs pk" data-n="8">8</button><button class="bs pk"
           data-n="9">9</button>
-        <button class="bs pk" id="pclr">⌫</button><button class="bs pk" data-n="0">0</button><button class="bp pk"
+        <button class="bs pk" id="pclr" aria-label="Delete last digit">⌫</button><button class="bs pk" data-n="0">0</button><button class="bp pk"
           id="pcok">OK</button>
       </div>
       <div class="hide" id="pcerr" style="font-size:14px;color:var(--red);margin-top:16px;font-weight:700">Incorrect PIN
@@ -102,7 +102,7 @@
   </div>
 
   <main class="main">
-    <section class="tab act" id="tab-analytics" role="tabpanel">
+    <section class="tab act" id="tab-analytics" role="tabpanel" aria-labelledby="tab-btn-analytics">
       <div class="ph">
         <div>
           <h1 class="ptit">Analytics</h1>
@@ -198,7 +198,7 @@
           </div>
           <div class="chart-wrapper">
             <div id="ov-y-axis" class="y-axis"></div>
-            <div class="chart-scroll" id="ov-scroll"><canvas id="ov-chart" height="450"></canvas></div>
+            <div class="chart-scroll" id="ov-scroll"><canvas id="ov-chart" height="450" role="img" aria-label="Overview chart showing tracking time breakdown by category."></canvas></div>
             <div id="ov-y-axis-right" class="y-axis y-axis-right"></div>
           </div>
         </div>
@@ -232,7 +232,7 @@
             <button class="vtab" data-siterange="30">30 days</button>
             <button class="vtab" data-siterange="all">All time</button>
           </div>
-          <input type="text" id="top-sites-search" class="ff-search" placeholder="Search sites…" autocomplete="off" style="width:240px; margin:0;">
+          <input type="text" id="top-sites-search" class="ff-search" placeholder="Search sites…" autocomplete="off" style="width:240px; margin:0;" aria-label="Search top sites">
         </div>
         <div class="card card-flush">
           <div class="lhdr"
@@ -296,7 +296,7 @@
           </div>
           <div class="chart-wrapper">
             <div id="trend-y-axis" class="y-axis"></div>
-            <div class="chart-scroll" id="trend-scroll"><canvas id="trend-chart" height="450"></canvas></div>
+            <div class="chart-scroll" id="trend-scroll"><canvas id="trend-chart" height="450" role="img" aria-label="Study vs distraction trend chart showing focus hours compared to distraction hours."></canvas></div>
             <div id="trend-y-axis-right" class="y-axis y-axis-right"></div>
           </div>
         </div>
@@ -344,7 +344,7 @@
           </div>
           <div id="heatmap-wrap" style="overflow-x:auto; position:relative;">
             <div id="heatmap-loading" class="ff-loading" style="padding:40px 0;">Building heatmap…</div>
-            <canvas id="heatmap-canvas" style="display:none"></canvas>
+            <canvas id="heatmap-canvas" style="display:none" role="img" aria-label="365-day consistency heatmap showing your productivity levels for each day of the past year."></canvas>
           </div>
         </div>
         <div class="compact-grid" style="grid-template-columns:repeat(2,1fr);margin-top:24px">
@@ -360,7 +360,7 @@
       </div>
     </section>
 
-    <section class="tab" id="tab-focus" role="tabpanel">
+    <section class="tab" id="tab-focus" role="tabpanel" aria-labelledby="tab-btn-focus">
       <div class="ph">
         <div>
           <h1 class="ptit">Focus Mode</h1>
@@ -442,21 +442,21 @@
             </div>
             <div class="trow" style="padding-bottom:16px">
               <div>
-                <div class="tlbl" style="font-size:14px">Weekly Goal (hrs)</div>
+                <label for="weekly-goal-input" class="tlbl" style="font-size:14px; cursor:pointer;">Weekly Goal (hrs)</label>
               </div>
               <input type="number" id="weekly-goal-input" class="num inp" min="0" max="168" value="0"
                 style="width:80px" />
             </div>
             <div class="trow" style="padding-bottom:16px">
               <div>
-                <div class="tlbl" style="font-size:14px">Daily Streak Min (m)</div>
+                <label for="streak-min-input" class="tlbl" style="font-size:14px; cursor:pointer;">Daily Streak Min (m)</label>
               </div>
               <input type="number" id="streak-min-input" class="num inp" min="5" max="240" value="30"
                 style="width:80px" />
             </div>
             <div class="trow" style="padding-bottom:16px">
               <div>
-                <div class="tlbl" style="font-size:14px">Start Week On</div>
+                <label for="week-start-select" class="tlbl" style="font-size:14px; cursor:pointer;">Start Week On</label>
               </div>
               <select id="week-start-select" class="sel" style="width:100px; padding:6px; background:var(--bg3); border:1px solid var(--bd); color:var(--tx); border-radius:8px; outline:none;">
                 <option value="mon">Monday</option>
@@ -495,7 +495,7 @@
           <!-- History Card -->
           <div class="card ff-history-card" style="margin:0; display:flex; flex-direction:column;">
             <div class="ctit" style="justify-content:space-between"><span>History</span><button class="bic del"
-                id="btn-clear-history" title="Clear History" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                id="btn-clear-history" title="Clear History" aria-label="Clear History" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
             </div>
             <div class="history-scroll" id="history-list">
               <div class="empty" style="padding:40px 10px">
@@ -508,7 +508,7 @@
       </div>
     </section>
 
-    <section class="tab" id="tab-sitemanager" role="tabpanel">
+    <section class="tab" id="tab-sitemanager" role="tabpanel" aria-labelledby="tab-btn-sitemanager">
       <div class="ph">
         <div>
           <h1 class="ptit">Site Manager</h1>
@@ -527,18 +527,18 @@
             <button type="button" class="rule-tab" data-ruletab="allow">Allowlist</button>
             <button type="button" class="rule-tab" data-ruletab="never">Never Track</button>
           </div>
-          <input type="text" id="rules-search" class="ff-search" placeholder="Search rules…" autocomplete="off" style="width:240px; margin:0;">
+          <input type="text" id="rules-search" class="ff-search" placeholder="Search rules…" autocomplete="off" style="width:240px; margin:0;" aria-label="Search rules">
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
             <!-- BLOCK FORM -->
             <div id="rule-form-block" style="display:flex; gap:12px; align-items:flex-end; flex:1;">
               <div style="flex:1; max-width:260px;">
-                <label class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name</label>
+                <label for="quick-domain" class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name</label>
                 <input type="text" id="quick-domain" class="inp" placeholder="e.g. reddit.com" autocomplete="off" />
               </div>
               <div style="flex:1; max-width:260px;">
-                <label class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Redirect To (Optional)</label>
+                <label for="quick-redir" class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Redirect To (Optional)</label>
                 <input type="text" id="quick-redir" class="inp" placeholder="e.g. pw.live" autocomplete="off" />
               </div>
               <div style="display:flex; gap:8px; align-items:center;">
@@ -551,7 +551,7 @@
             <!-- ALLOW FORM -->
             <div id="rule-form-allow" style="display:none; gap:12px; align-items:flex-end; flex:1;">
               <div style="flex:1; max-width:300px;">
-                <label class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name</label>
+                <label for="allow-domain-input" class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name</label>
                 <input type="text" id="allow-domain-input" class="inp" placeholder="e.g. gmail.com" autocomplete="off" />
               </div>
               <div style="display:flex; gap:8px; align-items:center;">
@@ -563,7 +563,7 @@
             <!-- NEVER TRACK FORM -->
             <div id="rule-form-never" style="display:none; gap:12px; align-items:flex-end; flex:1;">
               <div style="flex:1; max-width:350px;">
-                <label class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name(s)</label>
+                <label for="never-track-input" class="slbl" style="margin-bottom:6px; display:block; font-size:12px; padding-left:4px;">Domain Name(s)</label>
                 <input type="text" id="never-track-input" class="inp" placeholder="e.g. bank.com, private.com" autocomplete="off" />
               </div>
               <div style="display:flex; gap:8px; align-items:center;">
@@ -610,7 +610,7 @@
           style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
           <span>🔍 Filter by Category</span>
           <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-            <input type="text" id="cat-sites-search" class="ff-search" placeholder="Search sites in categories…" autocomplete="off" style="width:240px; margin:0;">
+            <input type="text" id="cat-sites-search" class="ff-search" placeholder="Search sites in categories…" autocomplete="off" style="width:240px; margin:0;" aria-label="Search sites in categories">
             <button class="bp" id="btn-open-tag-modal" style="font-size:12px; padding:6px 12px;">+ Track / Label Site</button>
           </div>
         </div>
@@ -621,7 +621,7 @@
 
     </section>
 
-    <section class="tab" id="tab-settings" role="tabpanel">
+    <section class="tab" id="tab-settings" role="tabpanel" aria-labelledby="tab-btn-settings">
       <div class="ph">
         <div>
           <h1 class="ptit">Settings</h1>
@@ -637,409 +637,444 @@
 
       <!-- ═══════ SUB-TAB 1: Tracking & Blocking ═══════ -->
       <div id="settab-tracking" style="display:none;">
+        <div class="settings-two-col-layout">
+          <!-- Column 1: Tracking Engine & Blocking Behavior -->
+          <div class="settings-col">
+            
+            <!-- Card 1: Tracking Engine -->
+            <div class="card">
+              <div class="ctit">Tracking Engine</div>
+              
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <label for="idle-timeout-sel" class="tlbl" style="display:block; cursor:pointer;">Idle Timeout</label>
+                  <div class="tdesc">Stop tracking time if you stop moving your mouse.</div>
+                </div>
+                <select id="idle-timeout-sel" class="sel" style="width:200px">
+                  <option value="30">After 30 seconds</option>
+                  <option value="60">After 1 minute</option>
+                  <option value="120">After 2 minutes</option>
+                  <option value="300">After 5 minutes</option>
+                </select>
+              </div>
 
-        <div class="card">
-          <div class="ctit">Analytics & Tracking</div>
+              <div class="trow">
+                <div>
+                  <label for="max-gap-sel" class="tlbl" style="display:block; cursor:pointer;">Computer Sleep Gap</label>
+                  <div class="tdesc">Capping active time calculation if you put the computer to sleep.</div>
+                </div>
+                <select id="max-gap-sel" class="sel" style="width:200px">
+                  <option value="60">1 minute</option>
+                  <option value="300">5 minutes</option>
+                  <option value="600">10 minutes</option>
+                  <option value="900">15 minutes</option>
+                  <option value="999999999">Never</option>
+                </select>
+              </div>
 
-          <div class="trow" style="border-top:none;padding-top:0">
-            <div>
-              <div class="tlbl">Show time spent on extension badge</div>
-              <div class="tdesc">Displays minutes spent on the current site.</div>
-            </div>
-            <label class="tog tog-lg"><input type="checkbox" id="tog-badge" checked /><span class="ttrack"></span></label>
-          </div>
+              <div class="trow">
+                <div>
+                  <div class="tlbl">Media Playback Tracking</div>
+                  <div class="tdesc">Keep tracking time if audio or video is playing (even when idle).</div>
+                </div>
+                <label class="tog tog-lg"><input type="checkbox" id="tog-media" checked /><span class="ttrack"></span></label>
+              </div>
 
-          <div class="trow" id="idle-badge-row" style="padding-left:24px; border-top:none;">
-            <div>
-              <div class="tlbl">Show "idl" when idle / not tracking</div>
-              <div class="tdesc">Displays "idl" on the extension badge when time tracking is paused or inactive.</div>
-            </div>
-            <label class="tog tog-lg"><input type="checkbox" id="tog-idle-badge" checked /><span class="ttrack"></span></label>
-          </div>
+              <div class="trow">
+                <div>
+                  <label for="min-visit-sel" class="tlbl" style="display:block; cursor:pointer;">Ignore Quick Visits</label>
+                  <div class="tdesc">Ignore visits shorter than this duration to keep data clean.</div>
+                </div>
+                <select id="min-visit-sel" class="sel" style="width:200px">
+                  <option value="0">Off (track everything)</option>
+                  <option value="3">3 seconds</option>
+                  <option value="5">5 seconds</option>
+                  <option value="10">10 seconds</option>
+                  <option value="30">30 seconds</option>
+                </select>
+              </div>
 
-
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Idle Timeout</div>
-              <div class="tdesc">Stop tracking time if you stop moving your mouse.</div>
-            </div>
-            <select id="idle-timeout-sel" class="sel" style="width:200px">
-              <option value="30">After 30 seconds</option>
-              <option value="60">After 1 minute</option>
-              <option value="120">After 2 minutes</option>
-              <option value="300">After 5 minutes</option>
-            </select>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Computer Sleep Gap</div>
-              <div class="tdesc">Capping active time calculation if you put the computer to sleep.</div>
-            </div>
-            <select id="max-gap-sel" class="sel" style="width:200px">
-              <option value="60">1 minute</option>
-              <option value="300">5 minutes</option>
-              <option value="600">10 minutes</option>
-              <option value="900">15 minutes</option>
-              <option value="999999999">Never</option>
-            </select>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Media Playback Tracking</div>
-              <div class="tdesc">Keep tracking time if audio or video is playing (even when idle).</div>
-            </div>
-            <label class="tog tog-lg"><input type="checkbox" id="tog-media" checked /><span class="ttrack"></span></label>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Ignore Quick Visits</div>
-              <div class="tdesc">Ignore visits shorter than this duration to keep data clean.</div>
-            </div>
-            <select id="min-visit-sel" class="sel" style="width:200px">
-              <option value="0">Off (track everything)</option>
-              <option value="3">3 seconds</option>
-              <option value="5">5 seconds</option>
-              <option value="10">10 seconds</option>
-              <option value="30">30 seconds</option>
-            </select>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Track Local Files</div>
-              <div class="tdesc">Track local HTML or PDF files opened in your browser.</div>
-            </div>
-            <label class="tog tog-lg"><input type="checkbox" id="tog-track-local" /><span class="ttrack"></span></label>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Night Owl Day Rollover</div>
-              <div class="tdesc">Define when your new tracking day starts. Useful if you work late.</div>
-            </div>
-            <select id="day-rollover-sel" class="sel" style="width:200px">
-              <option value="0">Midnight (12:00 AM)</option>
-              <option value="1">1:00 AM</option>
-              <option value="2">2:00 AM</option>
-              <option value="3">3:00 AM</option>
-              <option value="4">4:00 AM</option>
-              <option value="5">5:00 AM</option>
-              <option value="6">6:00 AM</option>
-            </select>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Data History Retention</div>
-              <div class="tdesc">Automatically delete detailed tracking logs older than this duration to save space.</div>
-            </div>
-            <select id="data-retention-sel" class="sel" style="width:200px">
-              <option value="30">After 30 days</option>
-              <option value="90">After 90 days</option>
-              <option value="180">After 180 days</option>
-              <option value="365" selected>After 1 year</option>
-              <option value="730">After 2 years</option>
-              <option value="1095">After 3 years</option>
-              <option value="0">Forever (keep all)</option>
-            </select>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Weekly Auto-Backup</div>
-              <div class="tdesc">Automatically export and download your tracking stats and rules once a week.</div>
-            </div>
-            <label class="tog tog-lg"><input type="checkbox" id="tog-auto-backup" /><span class="ttrack"></span></label>
-          </div>
-
-          <div class="trow" style="padding-bottom:12px; flex-direction:column; align-items:flex-start;">
-            <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div class="tlbl">Always track (even when idle)</div>
-                <div class="tdesc">Sites that always track time even when you walk away (e.g., pw.live)</div>
+              <div class="trow" style="border-bottom:none;padding-bottom:0">
+                <div>
+                  <div class="tlbl">Track Local Files</div>
+                  <div class="tdesc">Track local HTML or PDF files opened in your browser.</div>
+                </div>
+                <label class="tog tog-lg"><input type="checkbox" id="tog-track-local" /><span class="ttrack"></span></label>
               </div>
             </div>
-            <div style="display:flex; gap:10px; width:100%; margin-top:12px;">
-              <input type="text" id="whitelist-inp" class="inp" placeholder="e.g. pw.live" style="flex:1" />
-              <button class="bs" id="btn-add-whitelist">+ Add Exception</button>
+
+            <!-- Card 2: Blocking Behavior -->
+            <div class="card">
+              <div class="ctit">Blocking Behavior</div>
+              
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <label for="tog-fun" class="tlbl" style="display:block; cursor:pointer;">Show funny blocked page</label>
+                </div><label class="tog tog-lg"><input type="checkbox" id="tog-fun" checked /><span class="ttrack"></span></label>
+              </div>
+
+              <div class="trow">
+                <div>
+                  <label for="time-warn-secs" class="tlbl" style="display:block; cursor:pointer;">Time limit warning before block</label>
+                  <div class="tdesc">Show a warning this many seconds before a site is blocked.</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px"><input type="number" id="time-warn-secs"
+                    class="num inp" min="5" max="300" value="60" style="width:72px" title="Seconds before block" /><span
+                    style="font-size:13px;color:var(--tx2);font-weight:700">sec</span><label class="tog tog-lg"><input
+                      type="checkbox" id="tog-time-warn" checked /><span class="ttrack"></span></label></div>
+              </div>
+              
+              <div class="trow" style="border-bottom:none;padding-bottom:0">
+                <div>
+                  <label for="tab-limit-input" class="tlbl" style="display:block; cursor:pointer;">Tab limiter per domain</label>
+                  <div class="tdesc">Set 0 to disable.</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px"><input type="number" id="tab-limit-input"
+                    class="num inp" min="0" max="20" value="0" /><span
+                    style="font-size:15px;color:var(--tx2);font-weight:700">tabs max</span></div>
+              </div>
             </div>
-            <div id="whitelist-container"
-              style="display:flex; flex-direction:column; gap:8px; width:100%; margin-top:12px;"></div>
+
           </div>
 
+          <!-- Column 2: Exceptions, Badge Display, Data & Rollover -->
+          <div class="settings-col">
+            
+            <!-- Card 3: Tracking Exceptions -->
+            <div class="card">
+              <div class="ctit">Tracking Exceptions</div>
+              <div class="trow" style="border-top:none;padding-top:0;padding-bottom:12px; flex-direction:column; align-items:flex-start; border-bottom:none;">
+                <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <label for="whitelist-inp" class="tlbl" style="display:block; cursor:pointer;">Always track (even when idle)</label>
+                    <div class="tdesc">Sites that always track time even when you walk away (e.g., pw.live)</div>
+                  </div>
+                </div>
+                <div style="display:flex; gap:10px; width:100%; margin-top:12px;">
+                  <input type="text" id="whitelist-inp" class="inp" placeholder="e.g. pw.live" style="flex:1" />
+                  <button class="bs" id="btn-add-whitelist">+ Add Exception</button>
+                </div>
+                <div id="whitelist-container"
+                  style="display:flex; flex-direction:column; gap:8px; width:100%; margin-top:12px;"></div>
+              </div>
+            </div>
 
+            <!-- Card 4: Badge Display -->
+            <div class="card">
+              <div class="ctit">Badge Display</div>
+              
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <div class="tlbl">Show time spent on extension badge</div>
+                  <div class="tdesc">Displays minutes spent on the current site.</div>
+                </div>
+                <label class="tog tog-lg"><input type="checkbox" id="tog-badge" checked /><span class="ttrack"></span></label>
+              </div>
+
+              <div class="trow" id="idle-badge-row" style="padding-left:24px; border-top:none; border-bottom:none; padding-bottom:0">
+                <div>
+                  <div class="tlbl">Show "idl" when idle / not tracking</div>
+                  <div class="tdesc">Displays "idl" on the extension badge when time tracking is paused or inactive.</div>
+                </div>
+                <label class="tog tog-lg"><input type="checkbox" id="tog-idle-badge" checked /><span class="ttrack"></span></label>
+              </div>
+            </div>
+
+            <!-- Card 5: Data & Rollover -->
+            <div class="card">
+              <div class="ctit">Data &amp; Rollover</div>
+              
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <label for="day-rollover-sel" class="tlbl" style="display:block; cursor:pointer;">Night Owl Day Rollover</label>
+                  <div class="tdesc">Define when your new tracking day starts. Useful if you work late.</div>
+                </div>
+                <select id="day-rollover-sel" class="sel" style="width:200px">
+                  <option value="0">Midnight (12:00 AM)</option>
+                  <option value="1">1:00 AM</option>
+                  <option value="2">2:00 AM</option>
+                  <option value="3">3:00 AM</option>
+                  <option value="4">4:00 AM</option>
+                  <option value="5">5:00 AM</option>
+                  <option value="6">6:00 AM</option>
+                </select>
+              </div>
+
+              <div class="trow">
+                <div>
+                  <label for="data-retention-sel" class="tlbl" style="display:block; cursor:pointer;">Data History Retention</label>
+                  <div class="tdesc">Automatically delete detailed tracking logs older than this duration to save space.</div>
+                </div>
+                <select id="data-retention-sel" class="sel" style="width:200px">
+                  <option value="30">After 30 days</option>
+                  <option value="90">After 90 days</option>
+                  <option value="180">After 180 days</option>
+                  <option value="365" selected>After 1 year</option>
+                  <option value="730">After 2 years</option>
+                  <option value="1095">After 3 years</option>
+                  <option value="0">Forever (keep all)</option>
+                </select>
+              </div>
+
+              <div class="trow" style="border-bottom:none;padding-bottom:0">
+                <div>
+                  <label for="tog-auto-backup" class="tlbl" style="display:block; cursor:pointer;">Weekly Auto-Backup</label>
+                  <div class="tdesc">Automatically export and download your tracking stats and rules once a week.</div>
+                </div>
+                <label class="tog tog-lg"><input type="checkbox" id="tog-auto-backup" /><span class="ttrack"></span></label>
+              </div>
+            </div>
+
+          </div>
         </div>
-
-        <div class="card">
-          <div class="ctit">Blocking Behavior</div>
-          <div class="trow" style="border-top:none;padding-top:0">
-            <div>
-              <div class="tlbl">Show funny blocked page</div>
-            </div><label class="tog tog-lg"><input type="checkbox" id="tog-fun" checked /><span class="ttrack"></span></label>
-          </div>
-
-          <div class="trow">
-            <div>
-              <div class="tlbl">Time limit warning before block</div>
-              <div class="tdesc">Show a warning this many seconds before a site is blocked.</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px"><input type="number" id="time-warn-secs"
-                class="num inp" min="5" max="300" value="60" style="width:72px" title="Seconds before block" /><span
-                style="font-size:13px;color:var(--tx2);font-weight:700">sec</span><label class="tog tog-lg"><input
-                  type="checkbox" id="tog-time-warn" checked /><span class="ttrack"></span></label></div>
-          </div>
-          <div class="trow">
-            <div>
-              <div class="tlbl">Tab limiter per domain</div>
-              <div class="tdesc">Set 0 to disable.</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px"><input type="number" id="tab-limit-input"
-                class="num inp" min="0" max="20" value="0" /><span
-                style="font-size:15px;color:var(--tx2);font-weight:700">tabs max</span></div>
-          </div>
-
-        </div>
-
-
-
-
       </div><!-- end settab-tracking -->
 
       <!-- ═══════ SUB-TAB 2: Security & System ═══════ -->
       <div id="settab-security">
-
-        <div class="card">
-          <div class="ctit"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Security</div>
-
-          <div
-            style="margin-bottom:24px; padding:16px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd);">
-            <div class="tlbl" style="margin-bottom:8px">PIN Protection Status: <span id="pin-status-badge"
-                style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:var(--bg4); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set</span></div>
-          </div>
-
-          <div id="pin-setup-box" class="ar" style="margin-top:20px; display:flex; gap:12px; align-items:center;">
-            <input type="password" id="pin1" class="inp num" maxlength="6" placeholder="Set 6-digit PIN"
-              style="max-width:180px" />
-            <input type="password" id="pin2" class="inp num" maxlength="6" placeholder="Confirm 6-digit PIN"
-              style="max-width:180px" />
-            <button class="bp" id="btn-pin">Save PIN</button>
-          </div>
-          <div id="pin-manage-box" class="ar" style="margin-top:20px; display:none; gap:12px; align-items:center;">
-            <button class="bs" id="btn-change-pin">Change PIN</button>
-            <button class="bs-danger" id="btn-remove-pin">Remove PIN</button>
-          </div>
-
-          <div id="pin-msg" style="font-size:14px;font-weight:700;margin-top:12px; margin-bottom:12px;"></div>
-
-          <div id="granular-locks"
-            style="margin-top:24px; padding:20px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd); position:relative;">
-            <div id="granular-locks-overlay"
-              style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg3); opacity:0.85; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:center; margin-bottom:8px;">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              </div>
-              <div style="font-size:13px;font-weight:800;color:var(--tx2)">Set a PIN to enable these locks</div>
-            </div>
-            <div class="ctit" style="margin-bottom:16px; color:var(--tx)">What to Lock</div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Timer Stop Button</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-stop" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Editing/Deleting Rules</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-rules" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Free-time Hours</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-freetime" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Editing Focus Presets</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-presets" /><span
-                  class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Editing/Deleting Focus Schedules</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-scheds" /><span
-                  class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Advanced Site Tweaks</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-tweaks" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Privacy Mode (Pause Tracking)</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-privacy" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px">Lock Adjust Time (Daily Breakdown)</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-adjust-time" /><span class="ttrack"></span></label>
-            </div>
-            <div class="trow" style="padding:8px 0; border:none;">
-              <div>
-                <div class="tlbl" style="font-size:14px; color:var(--red)">Lock Danger Zone (Clear Data)</div>
-              </div><label class="tog tog-lg"><input type="checkbox" id="lock-danger" /><span class="ttrack"></span></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ctit">Appearance</div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <button id="btn-dark-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>Dark</button>
-            <button id="btn-light-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>Light</button>
-            <button id="btn-cinematic-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Cinematic</button>
-          </div>
-
-        </div>
-
-        <div class="card">
-          <div class="ctit" style="color:var(--green)">Backup &amp; Restore</div>
-          <div class="trow" style="border-top:none;padding-top:0">
-            <div>
-              <div class="tlbl">Export all data as JSON</div>
-              <div class="tdesc">Stats, rules, categories, settings.</div>
-            </div><button class="bp" id="btn-export">Download JSON</button>
-          </div>
-          <div class="trow">
-            <div>
-              <div class="tlbl">Restore from JSON</div>
-              <div class="tdesc">Replaces ALL current data. Confirm before restoring.</div>
-            </div><label class="bp" style="cursor:pointer"><input type="file" id="file-import"
-                accept="application/json,.json" style="display:none" />Choose File…</label>
-          </div>
-          <div class="trow" style="border-bottom:none;padding-bottom:0;flex-direction:column;align-items:stretch;gap:12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div class="tlbl">Local Storage Usage</div>
-                <div class="tdesc">Space used by settings, history, and rules (out of 10MB limit).</div>
-              </div>
-              <div id="storage-usage-text" style="font-size:13px; font-weight:700; color:var(--tx2); font-family:monospace;">0.00 KB / 10 MB (0.00%)</div>
-            </div>
-            <div style="height:8px; background:var(--bg4); border-radius:99px; overflow:hidden; width:100%;">
-              <div id="storage-usage-fill" style="height:100%; border-radius:99px; background:var(--green); width:0%; transition:width 0.5s ease;"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="border-color: var(--green-bd) !important;">
-          <div class="ctit" style="color:var(--green)">Migration &amp; Imports</div>
-          <div class="trow" style="border-top:none;padding-top:0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
-            <div style="display:flex;align-items:center;gap:16px;">
-              <img class="mig-icon" src="../icons/web-activity.svg" width="36" height="36" style="flex-shrink:0;" />
-              <div>
-                <div class="tlbl">Import from Web Activity Time Tracker</div>
-                <div class="tdesc">Upload your exported CSV file to merge your past tracking history.</div>
+        <div class="settings-two-col-layout">
+          <!-- Column 1: Appearance, Access Control, Danger Zone -->
+          <div class="settings-col">
+            
+            <!-- Appearance Card -->
+            <div class="card">
+              <div class="ctit">Appearance</div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap">
+                <button id="btn-dark-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>Dark</button>
+                <button id="btn-light-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>Light</button>
+                <button id="btn-cinematic-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Cinematic</button>
+                <button id="btn-rain-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path><line x1="8" y1="19" x2="8" y2="21"></line><line x1="8" y1="13" x2="8" y2="15"></line><line x1="16" y1="19" x2="16" y2="21"></line><line x1="16" y1="13" x2="16" y2="15"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="12" y1="15" x2="12" y2="17"></line></svg>Rain</button>
               </div>
             </div>
-            <label class="bp" style="cursor:pointer;flex-shrink:0;">
-              <input type="file" id="file-migrate-watt" accept=".csv" style="display:none" />
-              Choose File…
-            </label>
-          </div>
 
-          <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-            <div style="display:flex;align-items:center;gap:16px;">
-              <img class="mig-icon" src="../icons/time-tracker.svg" width="36" height="36" style="flex-shrink:0;" />
-              <div>
-                <div class="tlbl">Import from Time Tracker - Web Habit Builder</div>
-                <div class="tdesc">Upload your exported JSON file to merge your past tracking history.</div>
+            <!-- Merged Access Control & Safety Card -->
+            <div class="card">
+              <div class="ctit"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3); margin-right: 8px; vertical-align: middle;" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Access Control &amp; Safety</div>
+
+              <div style="margin-bottom:24px; padding:16px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd);">
+                <div class="tlbl" style="margin-bottom:8px">PIN Protection Status: <span id="pin-status-badge"
+                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:var(--bg4); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set</span></div>
+              </div>
+
+              <div id="pin-setup-box" class="ar" style="margin-top:20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <input type="password" id="pin1" class="inp num" maxlength="6" placeholder="Set 6-digit PIN"
+                  style="max-width:180px" aria-label="Set 6-digit PIN" />
+                <input type="password" id="pin2" class="inp num" maxlength="6" placeholder="Confirm 6-digit PIN"
+                  style="max-width:180px" aria-label="Confirm 6-digit PIN" />
+                <button class="bp" id="btn-pin">Save PIN</button>
+              </div>
+              <div id="pin-manage-box" class="ar" style="margin-top:20px; display:none; gap:12px; align-items:center;">
+                <button class="bs" id="btn-change-pin">Change PIN</button>
+                <button class="bs-danger" id="btn-remove-pin">Remove PIN</button>
+              </div>
+
+              <div id="pin-msg" style="font-size:14px;font-weight:700;margin-top:12px; margin-bottom:12px;"></div>
+
+              <div id="granular-locks"
+                style="margin-top:24px; padding:20px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd); position:relative;">
+                <div id="granular-locks-overlay"
+                  style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg3); opacity:0.85; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                  <div style="display:flex; justify-content:center; margin-bottom:8px;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  </div>
+                  <div style="font-size:13px;font-weight:800;color:var(--tx2)">Set a PIN to enable these locks</div>
+                </div>
+                <div class="ctit" style="margin-bottom:16px; color:var(--tx)">What to Lock</div>
+                <div class="trow" style="border-top:none; padding-top:0;">
+                  <div>
+                    <label for="lock-stop" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Timer Stop Button</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-stop" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-rules" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Editing/Deleting Rules</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-rules" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-freetime" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Free-time Hours</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-freetime" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-focus-presets" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Editing Focus Presets</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-presets" /><span
+                      class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-focus-scheds" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Editing/Deleting Focus Schedules</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-scheds" /><span
+                      class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-tweaks" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Advanced Site Tweaks</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-tweaks" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-privacy" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Privacy Mode (Pause Tracking)</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-privacy" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-adjust-time" class="tlbl" style="font-size:14px; cursor:pointer; display:block;">Lock Adjust Time (Daily Breakdown)</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-adjust-time" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow" style="border-bottom:none; padding-bottom:0;">
+                  <div>
+                    <label for="lock-danger" class="tlbl" style="font-size:14px; color:var(--red); cursor:pointer; display:block;">Lock Danger Zone (Clear Data)</label>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-danger" /><span class="ttrack"></span></label>
+                </div>
               </div>
             </div>
-            <label class="bp" style="cursor:pointer;flex-shrink:0;">
-              <input type="file" id="file-migrate-tt" accept=".json" style="display:none" />
-              Choose File…
-            </label>
-          </div>
 
-          <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-            <div style="display:flex;align-items:center;gap:16px;">
-              <img class="mig-icon" src="../icons/webtime-tracker.svg" width="36" height="36" style="flex-shrink:0;" />
-              <div>
-                <div class="tlbl">Import from Webtime Tracker</div>
-                <div class="tdesc">Upload your exported CSV file to merge your past tracking history.</div>
+            <!-- Danger Zone Card -->
+            <div class="card" style="border-color:var(--red-bd) !important">
+              <div class="ctit red" style="color:var(--red)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--red); margin-right:8px; vertical-align:middle;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Danger Zone</div>
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <div class="tlbl">Reset all statistics</div>
+                  <div class="tdesc">Wipe all recorded website tracking history and analytics. This cannot be undone.</div>
+                </div><button class="bs-danger" id="btn-rst-stats">Reset Stats</button>
+              </div>
+              <div class="trow">
+                <div>
+                  <div class="tlbl">Clear all block & allow rules</div>
+                  <div class="tdesc">Remove all custom website blocking lists, schedules, limits, and allowlists.</div>
+                </div><button class="bs-danger" id="btn-clr-rules">Clear Rules</button>
+              </div>
+              <div class="trow" style="border-bottom:none;padding-bottom:0">
+                <div>
+                  <div class="tlbl">Clear all manual categories</div>
+                  <div class="tdesc">Reset all custom website category tags back to default.</div>
+                </div><button class="bs-danger" id="btn-clr-cats">Clear Categories</button>
               </div>
             </div>
-            <label class="bp" style="cursor:pointer;flex-shrink:0;">
-              <input type="file" id="file-migrate-wt" accept=".csv" style="display:none" />
-              Choose File…
-            </label>
+
           </div>
 
-          <div id="migration-status" style="display:none; font-size:13px; margin-top:12px; padding:12px 16px; border-radius:12px; background:var(--bg3); border:1px solid var(--bd);">
-            <div id="migration-status-text" style="font-weight:700; margin-bottom:8px; color:var(--tx)"></div>
-            <div id="migration-progress" style="width:100%; height:6px; background:var(--bd2); border-radius:3px; overflow:hidden;">
-              <div id="migration-progress-bar" style="width:0%; height:100%; background:var(--green); border-radius:3px; transition:width 0.1s ease;"></div>
+          <!-- Column 2: Support & Feedback, Backup & Restore, Migration & Imports -->
+          <div class="settings-col">
+            
+            <!-- Support & Feedback Card -->
+            <div class="card" style="border-color:var(--blue-bd) !important">
+              <div class="ctit" style="color:var(--blue)">Support &amp; Feedback</div>
+              <div class="trow"
+                style="border-top:none; padding-top:0; border-bottom:none; padding-bottom:0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+                <div>
+                  <div class="tlbl">Submit Feature Requests &amp; Bug Reports</div>
+                  <div class="tdesc">Help us improve Flow! Share your ideas, suggestions, or report any bugs.</div>
+                </div>
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <a href="https://github.com/vishwa-vsr/Flow"
+                    target="_blank" class="bp"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.2s ease, box-shadow 0.2s ease;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                  </a>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog"
+                    target="_blank" class="bp"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--blue) !important; color:#ffffff !important; box-shadow:0 4px 12px rgba(29,78,216,0.15); transition:transform 0.2s ease, box-shadow 0.2s ease;">
+                    <span>💡 Submit Feedback</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-          
-          <div style="border-top: 1px solid var(--bd); margin-top: 24px; padding-top: 20px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-              <div class="tlbl" style="font-size:15px; font-weight:800; color:var(--tx)">Backup History</div>
-              <button class="bp" id="btn-create-local-backup" style="font-size:12px; padding:6px 12px;">+ Create Local Backup</button>
+
+            <!-- Backup & Restore Card -->
+            <div class="card">
+              <div class="ctit" style="color:var(--green)">Backup &amp; Restore</div>
+              <div class="trow" style="border-top:none;padding-top:0">
+                <div>
+                  <div class="tlbl">Export all data as JSON</div>
+                  <div class="tdesc">Stats, rules, categories, settings.</div>
+                </div><button class="bp" id="btn-export">Download JSON</button>
+              </div>
+              <div class="trow">
+                <div>
+                  <div class="tlbl">Restore from JSON</div>
+                  <div class="tdesc">Replaces ALL current data. Confirm before restoring.</div>
+                </div><label class="bp" style="cursor:pointer"><input type="file" id="file-import"
+                    accept="application/json,.json" style="display:none" />Choose File…</label>
+              </div>
+              <div class="trow" style="border-bottom:none;padding-bottom:0;flex-direction:column;align-items:stretch;gap:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <div class="tlbl">Local Storage Usage</div>
+                    <div class="tdesc">Space used by settings, history, and rules (out of 10MB limit).</div>
+                  </div>
+                  <div id="storage-usage-text" style="font-size:13px; font-weight:700; color:var(--tx2); font-family:monospace;">0.00 KB / 10 MB (0.00%)</div>
+                </div>
+                <div style="height:8px; background:var(--bg4); border-radius:99px; overflow:hidden; width:100%;">
+                  <div id="storage-usage-fill" style="height:100%; border-radius:99px; background:var(--green); width:0%; transition:width 0.5s ease;"></div>
+                </div>
+              </div>
             </div>
-            <div id="local-backups-list" style="display:flex; flex-direction:column; gap:10px;"></div>
+
+            <!-- Migration & Imports Card -->
+            <div class="card" style="border-color: var(--green-bd) !important;">
+              <div class="ctit" style="color:var(--green)">Migration &amp; Imports</div>
+              <div class="trow" style="border-top:none;padding-top:0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <img class="mig-icon" src="../icons/web-activity.svg" width="36" height="36" style="flex-shrink:0;" alt="Web Activity Time Tracker logo" />
+                  <div>
+                    <div class="tlbl">Import from Web Activity Time Tracker</div>
+                    <div class="tdesc">Upload your exported CSV file to merge your past tracking history.</div>
+                  </div>
+                </div>
+                <label class="bp" style="cursor:pointer;flex-shrink:0;">
+                  <input type="file" id="file-migrate-watt" accept=".csv" style="display:none" />
+                  Choose File…
+                </label>
+              </div>
+
+              <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <img class="mig-icon" src="../icons/time-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Time Tracker - Web Habit Builder logo" />
+                  <div>
+                    <div class="tlbl">Import from Time Tracker - Web Habit Builder</div>
+                    <div class="tdesc">Upload your exported JSON file to merge your past tracking history.</div>
+                  </div>
+                </div>
+                <label class="bp" style="cursor:pointer;flex-shrink:0;">
+                  <input type="file" id="file-migrate-tt" accept=".json" style="display:none" />
+                  Choose File…
+                </label>
+              </div>
+
+              <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+                <div style="display:flex;align-items:center;gap:16px;">
+                  <img class="mig-icon" src="../icons/webtime-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Webtime Tracker logo" />
+                  <div>
+                    <div class="tlbl">Import from Webtime Tracker</div>
+                    <div class="tdesc">Upload your exported CSV file to merge your past tracking history.</div>
+                  </div>
+                </div>
+                <label class="bp" style="cursor:pointer;flex-shrink:0;">
+                  <input type="file" id="file-migrate-wt" accept=".csv" style="display:none" />
+                  Choose File…
+                </label>
+              </div>
+
+              <div id="migration-status" style="display:none; font-size:13px; margin-top:12px; padding:12px 16px; border-radius:12px; background:var(--bg3); border:1px solid var(--bd);">
+                <div id="migration-status-text" style="font-weight:700; margin-bottom:8px; color:var(--tx)"></div>
+                <div id="migration-progress" style="width:100%; height:6px; background:var(--bd2); border-radius:3px; overflow:hidden;">
+                  <div id="migration-progress-bar" style="width:0%; height:100%; background:var(--green); border-radius:3px; transition:width 0.1s ease;"></div>
+                </div>
+              </div>
+              
+              <div style="border-top: 1px solid var(--bd); margin-top: 24px; padding-top: 20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                  <div class="tlbl" style="font-size:15px; font-weight:800; color:var(--tx)">Backup History</div>
+                  <button class="bp" id="btn-create-local-backup" style="font-size:12px; padding:6px 12px;">+ Create Local Backup</button>
+                </div>
+                <div id="local-backups-list" style="display:flex; flex-direction:column; gap:10px;"></div>
+              </div>
+            </div>
+
           </div>
         </div>
-
-        <div class="card" style="border-color:var(--blue-bd) !important">
-          <div class="ctit" style="color:var(--blue)">Support &amp; Feedback</div>
-          <div class="trow"
-            style="border-top:none; padding-top:0; border-bottom:none; padding-bottom:0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-            <div>
-              <div class="tlbl">Submit Feature Requests &amp; Bug Reports</div>
-              <div class="tdesc">Help us improve Flow! Share your ideas, suggestions, or report any bugs.</div>
-            </div>
-            <div style="display:flex; gap:12px; align-items:center;">
-              <a href="https://github.com/vishwa-vsr/Flow"
-                target="_blank" class="bp"
-                style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.2s ease, box-shadow 0.2s ease;">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span>GitHub</span>
-              </a>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog"
-                target="_blank" class="bp"
-                style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--blue) !important; color:#ffffff !important; box-shadow:0 4px 12px rgba(29,78,216,0.15); transition:transform 0.2s ease, box-shadow 0.2s ease;">
-                <span>💡 Submit Feedback</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="border-color:var(--red-bd) !important">
-          <div class="ctit red" style="color:var(--red)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--red); margin-right:8px; vertical-align:middle;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Danger Zone</div>
-          <div class="trow" style="border-top:none;padding-top:0">
-            <div>
-              <div class="tlbl">Reset all statistics</div>
-              <div class="tdesc">Wipe all recorded website tracking history and analytics. This cannot be undone.</div>
-            </div><button class="bs-danger" id="btn-rst-stats">Reset Stats</button>
-          </div>
-          <div class="trow">
-            <div>
-              <div class="tlbl">Clear all block & allow rules</div>
-              <div class="tdesc">Remove all custom website blocking lists, schedules, limits, and allowlists.</div>
-            </div><button class="bs-danger" id="btn-clr-rules">Clear Rules</button>
-          </div>
-          <div class="trow" style="border-bottom:none;padding-bottom:0">
-            <div>
-              <div class="tlbl">Clear all manual categories</div>
-              <div class="tdesc">Reset all custom website category tags back to default.</div>
-            </div><button class="bs-danger" id="btn-clr-cats">Clear Categories</button>
-          </div>
-        </div>
-
       </div><!-- end settab-security -->
 
     </section>
@@ -1053,14 +1088,14 @@
 
 
   <!-- ═══════ FREE TIME EDIT MODAL ═══════ -->
-  <div id="free-time-modal" class="overlay hide" style="z-index: 9999;">
+  <div id="free-time-modal" class="overlay hide" style="z-index: 9999;" role="dialog" aria-modal="true" aria-labelledby="ft-modal-title">
     <div class="card" style="width: 100%; max-width: 440px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg2); border: 1px solid var(--bd);">
       <div style="padding: 24px 32px 16px; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
         <div style="font-size: 20px; font-weight: 800; color: var(--tx); display: flex; align-items: center; gap: 10px;">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--tx);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           <span id="ft-modal-title">Edit Free-time</span>
         </div>
-        <button id="ft-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
+        <button id="ft-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;" aria-label="Close Edit Free-time Modal">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
@@ -1068,11 +1103,11 @@
       <div style="padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; flex: 1;">
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
           <div class="srow">
-            <label class="slbl">From Time</label>
+            <label for="ft-start" class="slbl">From Time</label>
             <input type="time" id="ft-start" class="inp" style="width:100%" value="18:00" />
           </div>
           <div class="srow">
-            <label class="slbl">To Time</label>
+            <label for="ft-end" class="slbl">To Time</label>
             <input type="time" id="ft-end" class="inp" style="width:100%" value="22:00" />
           </div>
         </div>
@@ -1099,13 +1134,13 @@
   </div>
 
   <!-- ═══════ UNIFIED ADD RULE MODAL ═══════ -->
-  <div id="add-rule-modal" class="overlay hide" style="z-index:9000;">
+  <div id="add-rule-modal" class="overlay hide" style="z-index:9000;" role="dialog" aria-modal="true" aria-labelledby="add-rule-modal-title">
     <div class="card"
       style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
       <div
         style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-rule-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;">Add New Rule</h2>
-        <button class="bic del" id="btn-close-add-modal"
+        <button class="bic del" id="btn-close-add-modal" aria-label="Close Add Rule Modal"
           style="width:32px; height:32px; background:transparent; border:none; color:var(--tx2); cursor:pointer; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <div style="padding:24px 32px; overflow-y:auto; flex:1;">
@@ -1123,13 +1158,13 @@
           <input type="hidden" id="m-id" />
           <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:24px;">
             <div id="m-preset-container">
-              <label class="slbl" style="margin-bottom:8px; display:block;">Quick Apply Preset</label>
+              <label for="m-apply-preset" class="slbl" style="margin-bottom:8px; display:block;">Quick Apply Preset</label>
               <select id="m-apply-preset" class="sel" style="width:100%">
                 <option value="">-- Select a Preset to Apply --</option>
               </select>
             </div>
             <div>
-              <label class="slbl" style="margin-bottom:8px; display:block;">Domain Name</label>
+              <label for="cat-inp" class="slbl" style="margin-bottom:8px; display:block;">Domain Name</label>
               <div
                 style="display:flex; background:var(--bg3); border:1px solid var(--bd2); border-radius:12px; overflow:hidden;">
                 <span
@@ -1153,7 +1188,7 @@
                       style="font-weight:700;font-size:15px">Daily time limit</span></label>
                   <div id="mf-tl"
                     style="display:none;padding:16px;border-top:1px solid var(--bd);background:var(--bg2)"><label
-                      class="slbl" style="margin-bottom:8px; display:block;">Daily limit (minutes) <span
+                      for="m-lim" class="slbl" style="margin-bottom:8px; display:block;">Daily limit (minutes) <span
                         style="font-weight:normal;color:var(--tx3);font-size:12px;margin-left:4px">(0 = always
                         blocked)</span></label><input type="number" id="m-lim" class="num inp" min="0" max="1440"
                       value="30" style="width:100%" /></div>
@@ -1168,13 +1203,13 @@
                     <label class="slbl" style="margin-bottom:8px; display:block;">Session Settings</label>
                     <div style="display:flex; gap:16px;">
                       <div style="flex:1;">
-                        <label class="slbl"
+                        <label for="m-session-limit" class="slbl"
                           style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Time Limit (minutes)</label>
                         <input type="number" id="m-session-limit" class="inp num" min="1" max="180" value="5"
                           style="width:100%" />
                       </div>
                       <div style="flex:1;">
-                        <label class="slbl"
+                        <label for="m-session-cooldown" class="slbl"
                           style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Break / Cooldown (minutes)</label>
                         <input type="number" id="m-session-cooldown" class="inp num" min="1" max="180" value="10"
                           style="width:100%" />
@@ -1206,14 +1241,14 @@
                     <label class="slbl" style="margin-bottom:8px; display:block;">Cool-down Settings</label>
                     <div style="display:flex; gap:16px;">
                       <div style="flex:1;">
-                        <label class="slbl"
+                        <label for="m-cd-wait" class="slbl"
                           style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Wait Time
                           (sec)</label>
                         <input type="number" id="m-cd-wait" class="inp num" min="1" max="120" value="10"
                           style="width:100%" />
                       </div>
                       <div style="flex:1;">
-                        <label class="slbl"
+                        <label for="m-cd-freq" class="slbl"
                           style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Frequency</label>
                         <select id="m-cd-freq" class="sel" style="width:100%">
                           <option value="everyVisit">Every visit</option>
@@ -1255,7 +1290,7 @@
 
               <div style="display:flex; gap:16px;">
                 <div style="flex:1;">
-                  <label class="slbl" style="margin-bottom:8px; display:block;">Redirect To (Optional)</label>
+                  <label for="cat-redir" class="slbl" style="margin-bottom:8px; display:block;">Redirect To (Optional)</label>
                   <input type="text" id="cat-redir" class="inp" placeholder="e.g. pw.live" autocomplete="off" />
                 </div>
               </div>
@@ -1267,11 +1302,11 @@
           <div id="add-form-monitor" class="add-form-pane" style="display:none;">
             <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:24px;">
               <div>
-                <label class="slbl" style="margin-bottom:8px; display:block;">Domain Name</label>
+                <label for="mon-inp-domain" class="slbl" style="margin-bottom:8px; display:block;">Domain Name</label>
                 <input type="text" id="mon-inp-domain" class="inp" placeholder="e.g. reddit.com">
               </div>
               <div>
-                <label class="slbl" style="margin-bottom:8px; display:block;">Category</label>
+                <label for="mon-cat" class="slbl" style="margin-bottom:8px; display:block;">Category</label>
                 <select id="mon-cat" class="sel" style="width:100%">
                   <option value="distraction">⚡ Distraction</option>
                   <option value="productivity">💻 Productivity</option>
@@ -1294,7 +1329,7 @@
   </div>
 
     <!-- ═══════ CUSTOM CONFIRMATION MODAL ═══════ -->
-    <div id="confirm-modal" class="overlay hide" style="z-index: 100000;">
+    <div id="confirm-modal" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-describedby="confirm-modal-message">
       <div class="card"
         style="width:100%; max-width:400px; padding:32px; display:flex; flex-direction:column; gap:20px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); background:var(--bg2); border:1px solid var(--bd);">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1302,7 +1337,7 @@
             <span id="confirm-modal-icon">⚠️</span>
             <span id="confirm-modal-title">Are you sure?</span>
           </div>
-          <button id="confirm-modal-close"
+          <button id="confirm-modal-close" aria-label="Close Confirmation Modal"
             style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
         <div id="confirm-modal-message">This action cannot be undone.</div>
@@ -1314,7 +1349,7 @@
     </div>
 
     <!-- ═══════ PRIVACY MODE MODAL ═══════ -->
-    <div id="privacy-modal" class="overlay hide" style="z-index: 100000;">
+    <div id="privacy-modal" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
       <div class="card"
         style="width:100%; max-width:400px; padding:32px; display:flex; flex-direction:column; gap:20px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); background:var(--bg2); border:1px solid var(--bd);">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1322,9 +1357,9 @@
             <span style="color:#A855F7; display:inline-flex; align-items:center;">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </span>
-            <span>Privacy Mode</span>
+            <span id="privacy-modal-title">Privacy Mode</span>
           </div>
-          <button id="privacy-modal-close"
+          <button id="privacy-modal-close" aria-label="Close Privacy Modal"
             style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
         <div style="font-size:14px; color:var(--tx2); line-height:1.5;">
@@ -1342,11 +1377,11 @@
     </div>
 
   <!-- ═══════ ADD/EDIT BLOCK PRESET MODAL ═══════ -->
-  <div id="add-preset-modal" class="overlay hide" style="z-index:9000;">
+  <div id="add-preset-modal" class="overlay hide" style="z-index:9000;" role="dialog" aria-modal="true" aria-labelledby="add-preset-modal-title">
     <div class="card" style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2);">
       <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-preset-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;">Create Block Preset</h2>
-        <button id="add-preset-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
+        <button id="add-preset-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;" aria-label="Close Add/Edit Block Preset Modal">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
@@ -1355,7 +1390,7 @@
         <input type="hidden" id="p-id" />
         <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:24px;">
           <div>
-            <label class="slbl" style="margin-bottom:8px; display:block;">Preset Name</label>
+            <label for="p-preset-name" class="slbl" style="margin-bottom:8px; display:block;">Preset Name</label>
             <input type="text" id="p-preset-name" class="inp" placeholder="e.g. Strict Mode" autocomplete="off" />
           </div>
 
@@ -1373,7 +1408,7 @@
                   <span style="font-weight:700; font-size:15px">Daily time limit</span>
                 </label>
                 <div id="pf-tl" style="display:none; padding:16px; border-top:1px solid var(--bd); background:var(--bg2)">
-                  <label class="slbl" style="margin-bottom:8px; display:block;">Daily limit (minutes) <span style="font-weight:normal; color:var(--tx3); font-size:12px; margin-left:4px">(0 = always blocked)</span></label>
+                  <label for="p-lim" class="slbl" style="margin-bottom:8px; display:block;">Daily limit (minutes) <span style="font-weight:normal; color:var(--tx3); font-size:12px; margin-left:4px">(0 = always blocked)</span></label>
                   <input type="number" id="p-lim" class="num inp" min="0" max="1440" value="30" style="width:100%" />
                 </div>
               </div>
@@ -1387,11 +1422,11 @@
                   <label class="slbl" style="margin-bottom:8px; display:block;">Session Settings</label>
                   <div style="display:flex; gap:16px;">
                     <div style="flex:1;">
-                      <label class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Time Limit (minutes)</label>
+                      <label for="p-session-limit" class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Time Limit (minutes)</label>
                       <input type="number" id="p-session-limit" class="inp num" min="1" max="180" value="5" style="width:100%" />
                     </div>
                     <div style="flex:1;">
-                      <label class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Break / Cooldown (minutes)</label>
+                      <label for="p-session-cooldown" class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Break / Cooldown (minutes)</label>
                       <input type="number" id="p-session-cooldown" class="inp num" min="1" max="180" value="10" style="width:100%" />
                     </div>
                   </div>
@@ -1419,11 +1454,11 @@
                   <label class="slbl" style="margin-bottom:8px; display:block;">Cool-down Settings</label>
                   <div style="display:flex; gap:16px;">
                     <div style="flex:1;">
-                      <label class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Wait Time (sec)</label>
+                      <label for="p-cd-wait" class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Wait Time (sec)</label>
                       <input type="number" id="p-cd-wait" class="inp num" min="1" max="120" value="10" style="width:100%" />
                     </div>
                     <div style="flex:1;">
-                      <label class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Frequency</label>
+                      <label for="p-cd-freq" class="slbl" style="margin-bottom:8px; display:block; font-size:12px; color:var(--tx2);">Frequency</label>
                       <select id="p-cd-freq" class="sel" style="width:100%">
                         <option value="everyVisit">Every visit</option>
                         <option value="oncePerDay">Once a day</option>
@@ -1450,7 +1485,7 @@
 
             <div style="display:flex; gap:16px;">
               <div style="flex:1;">
-                <label class="slbl" style="margin-bottom:8px; display:block;">Redirect To (Optional)</label>
+                <label for="p-redir" class="slbl" style="margin-bottom:8px; display:block;">Redirect To (Optional)</label>
                 <input type="text" id="p-redir" class="inp" placeholder="e.g. pw.live" autocomplete="off" />
               </div>
             </div>
@@ -1464,7 +1499,7 @@
     </div>
   </div>
 
-    <div id="toast" class="toast hide"></div>
+    <div id="toast" class="toast hide" role="status" aria-live="polite"></div>
     <div id="heatmap-tooltip"></div>
 
     <script src="../src/lib/constants.js"></script>
