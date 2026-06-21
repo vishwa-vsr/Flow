@@ -66,9 +66,14 @@ applyTheme("theme-icon");
 $("btn-theme") && $("btn-theme").addEventListener("click", async function () {
     const e = await gLocal(["theme"]);
     let t = "dark";
-    "dark" !== e.theme && e.theme ? "light" === e.theme && (t = "cinematic") : t = "light", await sLocal({
+    if (e.theme === "dark") t = "light";
+    else if (e.theme === "light") t = "cinematic";
+    else if (e.theme === "cinematic") t = "custom";
+    else t = "dark";
+    await sLocal({
         theme: t
-    }), applyTheme("theme-icon")
+    });
+    applyTheme("theme-icon");
 });
 document.querySelectorAll(".ttab").forEach(function (e) {
     e.addEventListener("click", function () {
@@ -78,8 +83,8 @@ document.querySelectorAll(".ttab").forEach(function (e) {
             leg = $("donut-legend");
         t && t.classList.remove("fade-in"), s && s.classList.remove("fade-in"), t && t.offsetWidth;
         const spinnerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--tx3);gap:10px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.5; animation:spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg><span style="font-size:13px;font-weight:600">Loading data...</span></div>';
-        if (t) t.innerHTML = spinnerHTML;
-        if (leg) leg.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">' + spinnerHTML + '</div>';
+        if (t) setSafeHTML(t, spinnerHTML);
+        if (leg) setSafeHTML(leg, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">' + spinnerHTML + '</div>');
         if ($("donut-total")) $("donut-total").textContent = "—";
         loadViewData().then(() => {
             t && t.classList.add("fade-in");
@@ -154,7 +159,7 @@ async function checkCurrentTabForGranularRules() {
             });
         }
 
-        $("current-site-toggles") && ($("current-site-toggles").innerHTML = sHTML);
+        $("current-site-toggles") && setSafeHTML($("current-site-toggles"), sHTML);
 
         const actionContainer = $("current-site-action");
         const dropdownMenu = $("popup-preset-dropdown");
@@ -162,14 +167,14 @@ async function checkCurrentTabForGranularRules() {
         if (isBlocked) {
             if (dropdownMenu) {
                 dropdownMenu.style.display = "none";
-                dropdownMenu.innerHTML = "";
+                dropdownMenu.textContent = "";
             }
             if (actionContainer) {
-                actionContainer.innerHTML = `
+                setSafeHTML(actionContainer, `
                     <button id="btn-popup-block" class="bs-danger-sm">
                       Unblock
                     </button>
-                `;
+                `);
             }
             const blockBtn = $("btn-popup-block");
             if (blockBtn) {
@@ -187,14 +192,14 @@ async function checkCurrentTabForGranularRules() {
         } else {
             if (dropdownMenu) {
                 dropdownMenu.style.display = "none";
-                dropdownMenu.innerHTML = "";
+                dropdownMenu.textContent = "";
             }
             if (actionContainer) {
-                actionContainer.innerHTML = `
+                setSafeHTML(actionContainer, `
                     <button id="btn-popup-block" class="bp-sm">
                       Block Site
                     </button>
-                `;
+                `);
             }
             
             // Build preset options
@@ -213,11 +218,11 @@ async function checkCurrentTabForGranularRules() {
                 dropdownMenu.addEventListener("click", (evt) => {
                     evt.stopPropagation();
                 });
-                dropdownMenu.innerHTML = items.map(item => `
+                setSafeHTML(dropdownMenu, items.map(item => `
                     <button class="preset-dropdown-item" data-id="${item.id}" style="width:100%; text-align:left; background:none; border:none; color:var(--tx); padding:8px 12px; font-size:13px; font-weight:600; cursor:pointer; display:block; transition: all 0.2s; border-radius:8px;">
                       ${escHTML(item.name)}
                     </button>
-                `).join("");
+                `).join(""));
 
                 dropdownMenu.querySelectorAll(".preset-dropdown-item").forEach(btn => {
                     btn.addEventListener("mouseenter", () => btn.style.background = "rgba(255,255,255,0.06)");
@@ -411,7 +416,7 @@ function renderDonut(e, t) {
         }), $("donut-total") && ($("donut-total").textContent = fmt(t.total));
         var c = $("donut-legend");
         if (c) {
-            c.innerHTML = "";
+            c.textContent = "";
             if (t.total) {
                 [{
                     label: "Productivity",
@@ -487,7 +492,7 @@ function renderDonut(e, t) {
                     c.appendChild(row);
                 });
             } else {
-                c.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;"><span style="font-size:13px;font-weight:600">No data yet.</span></div>';
+                setSafeHTML(c, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;"><span style="font-size:13px;font-weight:600">No data yet.</span></div>');
             }
         }
     }
@@ -502,7 +507,7 @@ function buildCatSelector(e, t, s) {
 
 function renderDynamicList(e, t) {
     var s = $("dynamic-list");
-    if (s && (s.innerHTML = "", t.total)) {
+    if (s && (s.textContent = "", t.total)) {
         var a = Object.entries(e).sort((e, t) => t[1] - e[1]);
         var n = s._showAll || !1;
         var isToday = "today" === currentView;
@@ -535,7 +540,7 @@ function renderDynamicList(e, t) {
             </div>
             `);
             
-            s.innerHTML = htmlParts.join("");
+            setSafeHTML(s, htmlParts.join(""));
             
             setTimeout(() => {
                 var btn = document.getElementById("show-all-btn");
@@ -552,7 +557,7 @@ function renderDynamicList(e, t) {
                 }
             }, 0);
         } else {
-            s.innerHTML = htmlParts.join("");
+            setSafeHTML(s, htmlParts.join(""));
         }
         
         s.querySelectorAll(".sel-cat").forEach(e => {
@@ -886,7 +891,7 @@ async function renderPresetRail(pres) {
     var active = pres.activeId;
     var fs = await msg("FOCUS_GET_STATE");
     var locked = !!(fs && fs.focusState && fs.focusState.active);
-    rail.innerHTML = pres.presets.map(p => {
+    setSafeHTML(rail, pres.presets.map(p => {
         var isAct = p.id === active;
         return '<button title="' + escHTML(p.name || '') + (locked ? ' (locked while focus is running)' : '') +
             '" data-pid="' + escHTML(p.id || '') + '" ' + (locked ? 'disabled' : '') +
@@ -896,7 +901,7 @@ async function renderPresetRail(pres) {
             (locked ? 'not-allowed' : 'pointer') + ';opacity:' + (locked ? '0.4' : '1') +
             ';display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1;">' +
             escHTML(p.emoji || '') + '</button>';
-    }).join("");
+    }).join(""));
     rail.querySelectorAll("button[data-pid]").forEach(b => {
         b.addEventListener("click", async () => {
             if (b.disabled) return;
