@@ -782,8 +782,10 @@ let isPrivacyActive = _loc.privacyModeActive === true;
     const n = Object.entries(i).map(([t, e], a) => {
         let targetUrl = e;
         if (e.startsWith(BLOCKED_PAGE)) {
-            const separator = e.includes("?") ? "&" : "?";
-            targetUrl = chrome.runtime.getURL(e) + separator + "d=" + safeBtoa(t);
+            const [path, query] = e.split("?");
+            const relativePath = path.startsWith("/") ? path.slice(1) : path;
+            const separator = query ? "&" : "?";
+            targetUrl = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(t);
         } else if (!e.startsWith("http")) {
             targetUrl = "https://" + e;
         }
@@ -834,8 +836,10 @@ let isPrivacyActive = _loc.privacyModeActive === true;
                 if (a && !t.url.includes(chrome.runtime.id)) {
                     let redirectUrl = i[a];
                     if (redirectUrl.startsWith(BLOCKED_PAGE)) {
-                        const separator = redirectUrl.includes("?") ? "&" : "?";
-                        redirectUrl = chrome.runtime.getURL(redirectUrl) + separator + "d=" + safeBtoa(a);
+                        const [path, query] = redirectUrl.split("?");
+                        const relativePath = path.startsWith("/") ? path.slice(1) : path;
+                        const separator = query ? "&" : "?";
+                        redirectUrl = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(a);
                     } else if (!redirectUrl.startsWith("http")) {
                         redirectUrl = "https://" + redirectUrl;
                     }
@@ -856,8 +860,10 @@ let isPrivacyActive = _loc.privacyModeActive === true;
                         if (ruleDom) {
                             let redirectUrl = i[ruleDom];
                             if (redirectUrl.startsWith(BLOCKED_PAGE)) {
-                                const separator = redirectUrl.includes("?") ? "&" : "?";
-                                redirectUrl = chrome.runtime.getURL(redirectUrl) + separator + "d=" + safeBtoa(ruleDom);
+                                const [path, query] = redirectUrl.split("?");
+                                const relativePath = path.startsWith("/") ? path.slice(1) : path;
+                                const separator = query ? "&" : "?";
+                                redirectUrl = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(ruleDom);
                             } else if (!redirectUrl.startsWith("http")) {
                                 redirectUrl = "https://" + redirectUrl;
                             }
