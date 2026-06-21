@@ -31,8 +31,8 @@
   --shadow-lg:0 20px 56px rgba(0,0,0,.6);
   --card-radius:18px;
   --btn-radius:12px;
-  --trans:all .22s cubic-bezier(.4,0,.2,1);
-  --trans-fast:all .15s cubic-bezier(.4,0,.2,1);
+  --trans:background .22s cubic-bezier(.4,0,.2,1), color .22s cubic-bezier(.4,0,.2,1), border-color .22s cubic-bezier(.4,0,.2,1), box-shadow .22s cubic-bezier(.4,0,.2,1), transform .22s cubic-bezier(.4,0,.2,1), opacity .22s cubic-bezier(.4,0,.2,1);
+  --trans-fast:background .15s cubic-bezier(.4,0,.2,1), color .15s cubic-bezier(.4,0,.2,1), border-color .15s cubic-bezier(.4,0,.2,1), box-shadow .15s cubic-bezier(.4,0,.2,1), transform .15s cubic-bezier(.4,0,.2,1), opacity .15s cubic-bezier(.4,0,.2,1);
 
   /* glass / surface — used by dashboard glassmorphism */
   --glass-bg:rgba(24,24,24,0.65);
@@ -83,22 +83,17 @@ html.light{
   --purple-bd:rgba(126,34,206,0.2);
 }
 
-html.cinematic body, html.rain body{background:#070310}
-html.cinematic .cinematic-bg, html.rain .cinematic-bg{opacity:1}
-html.light .cinematic-bg{display:none}
-.cinematic-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1s ease;
+html.cinematic body{background:#070310}
+.cinematic-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity 1s ease, visibility 1s ease}
+html.cinematic .cinematic-bg{opacity:1;visibility:visible;
   animation:cinematicDrift 18s infinite alternate ease-in-out}
+html.light .cinematic-bg{display:none}
+html.tab-hidden .cinematic-bg{animation-play-state:paused !important}
 html.cinematic .cinematic-bg{
   background:
     radial-gradient(circle at 15% 50%,rgba(92,156,252,.18),transparent 50%),
     radial-gradient(circle at 85% 30%,rgba(168,85,247,.18),transparent 50%);
-}
-html.rain .cinematic-bg{
-  background:
-    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.35), transparent 45%),
-    radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.35), transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.25), transparent 60%),
-    radial-gradient(circle at 80% 10%, rgba(20, 184, 166, 0.25), transparent 40%);
 }
 @keyframes cinematicDrift{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.08) translate(-2%,2%)}}
 
@@ -232,7 +227,7 @@ textarea:focus {
 .card::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  background-size:128px 128px;mix-blend-mode:overlay;
+  background-size:128px 128px;mix-blend-mode:overlay;contain:strict;
 }
 .card>*{position:relative;z-index:1}
 
