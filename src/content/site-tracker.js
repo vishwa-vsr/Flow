@@ -396,8 +396,10 @@
     let blockTarget = cdConf1.blockActive[matchedBlockDomain];
     if (blockTarget) {
       if (blockTarget.startsWith("/blocked/")) {
-        const separator = blockTarget.includes("?") ? "&" : "?";
-        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
+        const [path, query] = blockTarget.split("?");
+        const relativePath = path.startsWith("/") ? path.slice(1) : path;
+        const separator = query ? "&" : "?";
+        blockTarget = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(host);
       } else if (!blockTarget.startsWith("http")) {
         blockTarget = "https://" + blockTarget;
       }
@@ -441,8 +443,10 @@
     let blockTarget = blockActive[matchedDomain];
     if (blockTarget) {
       if (blockTarget.startsWith("/blocked/")) {
-        const separator = blockTarget.includes("?") ? "&" : "?";
-        blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
+        const [path, query] = blockTarget.split("?");
+        const relativePath = path.startsWith("/") ? path.slice(1) : path;
+        const separator = query ? "&" : "?";
+        blockTarget = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(host);
       } else if (!blockTarget.startsWith("http")) {
         blockTarget = "https://" + blockTarget;
       }
@@ -463,14 +467,14 @@
       "display:flex;flex-direction:column;align-items:center;justify-content:center;" +
       "font-family:system-ui,-apple-system,sans-serif;color:#fff;text-align:center;padding:24px;";
 
-    wrap.innerHTML =
+    const htmlString =
       '<div style="font-size:64px;margin-bottom:16px;">⏳</div>' +
       '<div style="font-size:28px;font-weight:800;margin-bottom:12px;">Take a breath…</div>' +
       '<div style="font-size:16px;color:#a1a1aa;margin-bottom:20px;max-width:420px;line-height:1.5;">' +
-        'You set a cool-down on <strong style="color:#fff">' + host + '</strong>. Still want to continue?' +
+        'You set a cool-down on <strong style="color:#fff" id="ff-cd-host"></strong>. Still want to continue?' +
       '</div>' +
       '<div id="ff-cd-num" style="font-size:88px;font-weight:900;color:#F46B7A;line-height:1;' +
-        'margin-bottom:24px;font-variant-numeric:tabular-nums;">' + timerSecs + '</div>' +
+        'margin-bottom:24px;font-variant-numeric:tabular-nums;"></div>' +
       '<div style="display:flex;gap:12px;box-sizing:border-box !important;">' +
         '<div id="ff-cd-back" role="button" tabindex="0" style="' +
           'all:initial !important;box-sizing:border-box !important;font-family:system-ui,-apple-system,sans-serif !important;' +
@@ -485,6 +489,18 @@
           'cursor:not-allowed !important;opacity:0.4 !important;display:inline-flex !important;align-items:center !important;' +
           'justify-content:center !important;line-height:1.2 !important;height:auto !important;min-height:unset !important;user-select:none !important;">Continue anyway</div>' +
       '</div>';
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, "text/html");
+    while (doc.body.firstChild) {
+      wrap.appendChild(doc.body.firstChild);
+    }
+
+    const hostEl = wrap.querySelector("#ff-cd-host");
+    if (hostEl) hostEl.textContent = host;
+
+    const numEl = wrap.querySelector("#ff-cd-num");
+    if (numEl) numEl.textContent = timerSecs;
 
     (document.body || document.documentElement).appendChild(wrap);
 
@@ -534,8 +550,10 @@
           let blockTarget = blockActive[matchedDomain];
           if (blockTarget) {
             if (blockTarget.startsWith("/blocked/")) {
-              const separator = blockTarget.includes("?") ? "&" : "?";
-              blockTarget = chrome.runtime.getURL(blockTarget) + separator + "d=" + safeBtoa(host);
+              const [path, query] = blockTarget.split("?");
+              const relativePath = path.startsWith("/") ? path.slice(1) : path;
+              const separator = query ? "&" : "?";
+              blockTarget = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(host);
             } else if (!blockTarget.startsWith("http")) {
               blockTarget = "https://" + blockTarget;
             }
