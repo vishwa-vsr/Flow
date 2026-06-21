@@ -65,7 +65,7 @@ gSync(["settings"]).then(function (res) {
     document.getElementById("sub").textContent = m.s;
   } else {
     document.getElementById("emoji").textContent = "⛔";
-    document.getElementById("headline").innerHTML = "This site is <em>blocked</em>";
+    setSafeHTML(document.getElementById("headline"), "This site is <em>blocked</em>");
     document.getElementById("sub").textContent = "Access is restricted by your Flow rules.";
   }
 });
@@ -129,7 +129,7 @@ try {
     var el = document.getElementById("productive-suggestion");
     if (!el) return;
     var safeDom = escHTML(res.domain);
-    el.innerHTML = 'Go do something useful: <a href="https://' + safeDom + '" class="prod-link">' + safeDom + ' →</a>';
+    setSafeHTML(el, 'Go do something useful: <a href="https://' + safeDom + '" class="prod-link">' + safeDom + ' →</a>');
     el.style.display = "block";
   });
 } catch (_) { }
