@@ -3,6 +3,9 @@ var $ = function (e) {
 },
     _barChartInstance = null,
     _trendChartInstance = null,
+    _currentFocusState = null,
+    _lastFavPct = -1,
+    _tabHidden = false,
     // Bug #5 fix: single reusable off-screen canvas for favicon painting
     _favCanvas = (() => { const c = document.createElement("canvas"); c.width = 32; c.height = 32; return c; })(),
     // Bug #8 fix: undo toast stack counter
@@ -12,7 +15,6 @@ var $ = function (e) {
     neverTrackDomains = [],
     siteCategories = {},
     visitedSites = [],
-    AUTO_CATEGORIES = {},
     hiddenDefaultSites = [],
     FCIRC = 2 * Math.PI * 106,
     selectedCat = "all",
@@ -35,29 +37,28 @@ var $ = function (e) {
     // live in src/lib/constants.js so popup.js + dashboard.js stay in sync.
     CAT_META = self.CAT_META || {};
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
-// Auto-generate Smart Presets from AUTO_CATEGORIES (single source of truth in constants.js).
-// If you add a site to AUTO_CATEGORIES, it automatically shows up here too.
-var PRESETS = (function () {
-    var packNames = { distraction: "Distraction Pack", communication: "Communication Pack", productivity: "Productivity Pack", learning: "Study Pack" };
-    var packs = {};
-    Object.entries(AUTO_CATEGORIES).forEach(function (entry) {
-        var domain = entry[0], cat = entry[1];
-        var name = packNames[cat];
-        if (!name) return;
-        if (!packs[name]) packs[name] = [];
-        packs[name].push({ d: domain, c: cat });
-    });
-    return packs;
-})();
 
-// FF v6.18: msg() now lives in utils.js (shared with popup.js).
-// Removed the duplicate that used to live here. See utils.js for the
-// improved version with transient-error-only retries.
-
-
-function easeOutQuart(e) {
-    return 1 - Math.pow(1 - e, 4)
+async function applyTheme() {
+    const e = await gLocal(["theme"]);
+    let currentTheme = e.theme;
+    
+    // Fallback to dark if custom is chosen, since we completely removed custom appearance
+    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain") {
+        currentTheme = "dark";
+        await sLocal({ theme: "dark" });
+    }
+    
+    const t = "light" === currentTheme,
+          a = "cinematic" === currentTheme;
+          
+    document.documentElement.classList.toggle("light", t);
+    document.documentElement.classList.toggle("cinematic", a);
+    document.documentElement.classList.remove("custom");
+    document.documentElement.setAttribute("data-os-theme", "nothing");
 }
+
+
+
 
 function hideAnalyticsHeader() {
     const _desc = $("analytics-page-header-desc");
@@ -72,19 +73,7 @@ function hideAnalyticsHeader() {
     }
     document.querySelectorAll('[data-atab="trend"]').forEach(e => e.textContent = "Comparison");
 }
-async function applyTheme() {
-    const e = await gLocal(["theme"]),
-        t = "light" === e.theme,
-        a = "cinematic" === e.theme,
-        r = "rain" === e.theme;
-    document.documentElement.classList.toggle("light", t);
-    document.documentElement.classList.toggle("cinematic", a);
-    document.documentElement.classList.toggle("rain", r);
-    document.documentElement.setAttribute("data-os-theme", "nothing");
-    if (typeof syncCinematicParticles === "function") {
-        syncCinematicParticles();
-    }
-}
+
 function catColor(e) {
     return (CAT_META[e] || {
         color: "#555555"
@@ -160,8 +149,6 @@ chrome.storage.onChanged.addListener((e, t) => {
     theme: "light"
 })), $("btn-cinematic-mode") && $("btn-cinematic-mode").addEventListener("click", () => sLocal({
     theme: "cinematic"
-})), $("btn-rain-mode") && $("btn-rain-mode").addEventListener("click", () => sLocal({
-    theme: "rain"
 }));
 var fmtT = fmtTimer;
 
@@ -348,7 +335,7 @@ function injectScrubModal() {
         var e = document.createElement("div");
         e.id = "scrubModal";
         e.className = "overlay hide";
-        e.innerHTML = `
+        setSafeHTML(e, `
         <div class="card" style="width: 100%; max-width: 400px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg2); border: 1px solid var(--bd);">
           <div style="padding: 24px 32px 16px; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
             <div style="font-size: 20px; font-weight: 800; color: var(--tx); display: flex; align-items: center; gap: 10px;">
@@ -368,7 +355,7 @@ function injectScrubModal() {
             <button class="bp" id="scrub-save" style="padding: 10px 20px; background: var(--red); color: #fff; border-color: var(--red); font-size: 13px; font-weight: 700;">Remove</button>
           </div>
         </div>
-        `;
+        `);
         document.body.appendChild(e);
         $("scrub-cancel").onclick = () => $("scrubModal").classList.add("hide");
         $("scrub-close").onclick = () => $("scrubModal").classList.add("hide");
@@ -393,10 +380,10 @@ async function renderGranularBlocksUI() {
     let e = document.getElementById("tab-sitemanager");
     if (!e) return;
     let t = document.getElementById("granular-ui-wrapper");
-    t || (t = document.createElement("div"), t.id = "granular-ui-wrapper", t.innerHTML = '\n           <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:24px 0 12px;display:flex;align-items:center;gap:8px">\n               <span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Advanced Site Tweaks\n           </div>\n           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:32px;"></div>\n        ', e.insertBefore(t, e.firstChild));
+    t || (t = document.createElement("div"), t.id = "granular-ui-wrapper", setSafeHTML(t, '\n           <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:24px 0 12px;display:flex;align-items:center;gap:8px">\n               <span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Advanced Site Tweaks\n           </div>\n           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:32px;"></div>\n        '), e.insertBefore(t, e.firstChild));
     let a = document.getElementById("granular-blocks-grid");
 
-    a.innerHTML = "";
+    a.textContent = "";
     var n = (await gLocal(["granularRules"])).granularRules || {};
     Object.keys(GRANULAR_SITES_DASHBOARD).forEach(e => {
         var t = document.createElement("div");
@@ -525,11 +512,11 @@ async function renderCombined() {
         } else {
             empty.style.display = "flex";
             if (window.activeRuleTab === "block") {
-                empty.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No rules yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Block distracting sites to get started.</p></div>';
+                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No rules yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Block distracting sites to get started.</p></div>');
             } else if (window.activeRuleTab === "allow") {
-                empty.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No exceptions yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Allow sites that bypass all blocking rules.</p></div>';
+                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No exceptions yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Allow sites that bypass all blocking rules.</p></div>');
             } else {
-                empty.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No domains ignored</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Domains on this list will never be tracked for analytics.</p></div>';
+                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No domains ignored</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Domains on this list will never be tracked for analytics.</p></div>');
             }
         }
     }
@@ -604,7 +591,7 @@ async function delNever(e) {
     const _bottomPxN = 80 + _stackIdxN * 62;
     const _tdN = document.createElement("div");
     _tdN.style.cssText = `display:flex;align-items:center;gap:4px;position:fixed;bottom:${_bottomPxN}px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--bd2);color:var(--tx);padding:10px 18px;border-radius:12px;font-size:14px;font-weight:700;z-index:9999;box-shadow:var(--shadow-md);`;
-    _tdN.innerHTML = "<span>Never-track removed</span>"; _tdN.appendChild(_undoBtnN);
+    setSafeHTML(_tdN, "<span>Never-track removed</span>"); _tdN.appendChild(_undoBtnN);
     document.body.appendChild(_tdN);
     let _secs = 10;
     const _cdown = setInterval(() => { _secs--; if (!_undoneNever && _undoBtnN.parentNode) _undoBtnN.textContent = `Undo (${_secs}s)`; if (_secs <= 0) clearInterval(_cdown); }, 1000);
@@ -633,7 +620,7 @@ async function delRule(e) {
         const _bottomPx = 80 + _stackIdx * 62;
         const _td = document.createElement("div");
         _td.style.cssText = `display:flex;align-items:center;gap:4px;position:fixed;bottom:${_bottomPx}px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--bd2);color:var(--tx);padding:10px 18px;border-radius:12px;font-size:14px;font-weight:700;z-index:9999;box-shadow:var(--shadow-md);animation:fadeIn .2s;`;
-        _td.innerHTML = "<span>Rule deleted</span>"; _td.appendChild(_undoBtn);
+        setSafeHTML(_td, "<span>Rule deleted</span>"); _td.appendChild(_undoBtn);
         document.body.appendChild(_td);
         let _secs = 10;
         const _cdown = setInterval(() => { _secs--; if (!_undone && _undoBtn.parentNode) _undoBtn.textContent = `Undo (${_secs}s)`; if (_secs <= 0) clearInterval(_cdown); }, 1000);
@@ -662,7 +649,7 @@ async function delAllow(e) {
     const _bottomPxA = 80 + _stackIdxA * 62;
     const _tdA = document.createElement("div");
     _tdA.style.cssText = `display:flex;align-items:center;gap:4px;position:fixed;bottom:${_bottomPxA}px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--bd2);color:var(--tx);padding:10px 18px;border-radius:12px;font-size:14px;font-weight:700;z-index:9999;box-shadow:var(--shadow-md);`;
-    _tdA.innerHTML = "<span>Allow-rule removed</span>"; _tdA.appendChild(_undoBtnA);
+    setSafeHTML(_tdA, "<span>Allow-rule removed</span>"); _tdA.appendChild(_undoBtnA);
     document.body.appendChild(_tdA);
     let _secsA = 10;
     const _cdownA = setInterval(() => { _secsA--; if (!_undoneAllow && _undoBtnA.parentNode) _undoBtnA.textContent = `Undo (${_secsA}s)`; if (_secsA <= 0) clearInterval(_cdownA); }, 1000);
@@ -671,7 +658,7 @@ async function delAllow(e) {
 
 function renderScheduleSlots(e) {
     var t = $("schedule-slots");
-    t.innerHTML = "", (e || []).forEach((e, a) => {
+    t.textContent = "", (e || []).forEach((e, a) => {
         var n = document.createElement("div");
         n.className = "sched-slot", n.style.cssText = "display:flex;align-items:center;gap:12px;margin-bottom:12px;background:var(--bg3);padding:12px 16px;border-radius:12px;border:1px solid var(--bd)", setSafeHTML(n, `<span style="font-size:13px;color:var(--tx2);font-weight:700">From</span><input type="time" class="inp sched-start" value="${e.start || "09:00"}" style="flex:1"/>\n      <span style="font-size:13px;color:var(--tx2);font-weight:700">to</span><input type="time" class="inp sched-end" value="${e.end || "21:00"}" style="flex:1"/>\n      <button class="bic del rm-slot" data-idx="${a}">✕</button>`), t.appendChild(n)
     }), t.querySelectorAll(".rm-slot").forEach(e => e.addEventListener("click", () => {
@@ -804,7 +791,7 @@ async function loadVisitedSites() {
 function renderCatSquares() {
     var e = $("cat-squares");
     if (!e) return;
-    e.innerHTML = "";
+    e.textContent = "";
     const t = Array.from(new Set([...visitedSites, ...Object.keys(siteCategories)]))
         .filter(d => !isDefaultSiteHidden(d));
     // Feature: include "uncategorized" in Filter by Category and Smart Presets
@@ -846,7 +833,7 @@ function renderCategories() {
     renderCatSquares();
     var e = $("cat-groups");
     if (!e) return;
-    e.innerHTML = "";
+    e.textContent = "";
     const searchInput = $("cat-sites-search");
     const q = searchInput ? searchInput.value.toLowerCase().trim() : "";
     var t = {};
@@ -899,7 +886,7 @@ function renderCategories() {
                 }
             })), n.appendChild(i), e.appendChild(n)
         }
-    }) : e.innerHTML = '<div class="card"><div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>\n      <p>No sites visited yet.</p>\n    </div></div>'
+    }) : setSafeHTML(e, '<div class="card"><div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>\n      <p>No sites visited yet.</p>\n    </div></div>')
 }
 
 function renderFocus(e, t = 25) {
@@ -947,21 +934,6 @@ async function loadFocusUI() {
 // Bug #5 fix: accept pre-loaded settings to avoid double gSync when called alongside loadExtendedSettings
 async function loadSettings(preloadedSettings) {
     var e = preloadedSettings || (await gSync(["settings"])).settings || {};
-    if ($("focus-sched-start")) {
-        const fscheds = e.focusSchedules || [];
-        if (fscheds.length > 0) {
-            const s = fscheds[0];
-            $("focus-sched-start").value = s.startTime || "09:00";
-            $("focus-sched-end").value = s.endTime || "17:00";
-            const d = s.days || [1,2,3,4,5];
-            document.querySelectorAll(".focus-sched-day-cb").forEach(cb => {
-                cb.checked = d.includes(parseInt(cb.value));
-            });
-        }
-    }
-    if ($("thresh-focus")) $("thresh-focus").value = e.threshFocus || 75;
-    if ($("thresh-balanced")) $("thresh-balanced").value = e.threshBalanced || 40;
-    if ($("thresh-distract")) $("thresh-distract").value = e.threshDistract || 60;
     if ($("tog-badge")) $("tog-badge").checked = !1 !== e.showBadge;
     if ($("idle-timeout-sel")) $("idle-timeout-sel").value = e.idleTimeout || 30;
     if ($("welcome-back-thresh-sel")) $("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10;
@@ -1140,9 +1112,7 @@ async function renderInsights() {
     // KPI cards (FF v4.4: streak cards replaced by Good Days + Wasted)
     $("ins-good-days") && ($("ins-good-days").textContent = active);
     $("ins-wasted-days") && ($("ins-wasted-days").textContent = wasted);
-    // Back-compat in case any orphan IDs still exist in the DOM:
-    $("ins-active-days") && ($("ins-active-days").textContent = active);
-    $("ins-broken-days") && ($("ins-broken-days").textContent = wasted);
+
 
     // Weekday vs weekend split + best DOW
     const dowFocus = [0, 0, 0, 0, 0, 0, 0], dowCount = [0, 0, 0, 0, 0, 0, 0];
@@ -1192,7 +1162,7 @@ async function renderInsights() {
         hoverLayer.id = "heatmap-hover-layer";
     }
     if (wrap && hoverLayer.parentElement !== wrap) wrap.appendChild(hoverLayer);
-    hoverLayer.innerHTML = "";
+    hoverLayer.textContent = "";
     hoverLayer.style.cssText = [
         "position:absolute",
         "left:0",
@@ -1294,8 +1264,7 @@ document.body.appendChild(overlay);
                 sv.streakMinMinutes = parseInt(document.getElementById("hm-min-focus").value) || 30;
                 sv.threshDistract = parseInt(document.getElementById("hm-dist-thresh").value) || 60;
                 await sSync({ settings: sv });
-                if ($("thresh-distract")) $("thresh-distract").value = sv.threshDistract;
-                if ($("streak-min-input")) $("streak-min-input").value = sv.streakMinMinutes;
+
                 overlay.remove();
                 renderInsights();
                 if (typeof toast === "function") toast("Thresholds updated", "ok");
@@ -1474,41 +1443,10 @@ document.querySelectorAll(".ni").forEach(e => {
             $("mf-cd").style.display = $("m-mode-cooldown").checked ? "block" : "none";
             $("mf-session").style.display = $("m-mode-session").checked ? "block" : "none";
         })
-    }), $("btn-add-cat") && $("btn-add-cat").addEventListener("click", async () => {
-        var e = $("cat-inp").value.trim().toLowerCase().split("/")[0];
-        if (e) {
-            var t = $("block-cat").value;
-            await tagSite(e, t), $("cat-inp").value = "", $("cat-inp").blur(), toast(e + " tagged as " + CAT_META[t].label, "ok")
-        }
     }), $("btn-fs") && $("btn-fs").addEventListener("click", async () => {
         if ($("btn-fs").disabled) return; $("btn-fs").disabled = true;
         try { renderFocus((await msg("FOCUS_START"))?.focusState, await getActiveWorkMins()); }
         finally { $("btn-fs").disabled = false; }
-    }),
-    // FF v6.7: + Add Schedule shortcut below the timer
-    $("btn-save-focus-sched") && $("btn-save-focus-sched").addEventListener("click", async () => {
-        if (!(await promptPinIfEnabled("lockFocusScheds"))) return;
-        const sv = (await gSync(["settings"])).settings || {};
-        const start = $("focus-sched-start").value;
-        const end = $("focus-sched-end").value;
-        const days = [];
-        document.querySelectorAll(".focus-sched-day-cb").forEach(cb => {
-            if (cb.checked) days.push(parseInt(cb.value));
-        });
-        if (!days.length) return toast("Select at least one day", "er");
-
-        sv.focusSchedules = [{
-            id: Date.now().toString(),
-            label: "Daily Focus",
-            startTime: start,
-            endTime: end,
-            days: days,
-            enabled: true,
-            strict: true,
-            blockCats: ["distraction", "communication", "uncategorized"]
-        }];
-        await sSync({ settings: sv });
-        toast("Focus schedule saved", "ok");
     }), $("btn-fst") && $("btn-fst").addEventListener("click", async () => {
         if ($("btn-fst").disabled) return; $("btn-fst").disabled = true;
         try {
@@ -1723,7 +1661,6 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
 
     const isLight = document.documentElement.classList.contains("light");
     const textColor = isLight ? "#0f172a" : "#ffffff";
-    const docStyle = getComputedStyle(document.documentElement);
     const gridColor = isLight ? "rgba(15, 23, 42, 0.04)" : "rgba(255, 255, 255, 0.04)";
 
     const datasets = [];
@@ -1784,7 +1721,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
         afterLayout: (chart) => {
             const yAxisEl = document.getElementById(yAxisId);
             if (yAxisEl) {
-                yAxisEl.innerHTML = "";
+                yAxisEl.textContent = "";
                 yAxisEl.style.display = 'flex';
                 yAxisEl.style.position = "absolute";
                 yAxisEl.style.left = "0px";
@@ -1797,7 +1734,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
             const rightYAxisId = yAxisId + "-right";
             const yAxisElRight = document.getElementById(rightYAxisId);
             if (yAxisElRight) {
-                yAxisElRight.innerHTML = "";
+                yAxisElRight.textContent = "";
                 yAxisElRight.style.display = 'flex';
                 yAxisElRight.style.position = "absolute";
                 yAxisElRight.style.right = "0px";
@@ -2012,7 +1949,6 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
 
     const isLight = document.documentElement.classList.contains("light");
     const textColor = isLight ? "#0f172a" : "#ffffff";
-    const docStyle = getComputedStyle(document.documentElement);
     const gridColor = isLight ? "rgba(15, 23, 42, 0.04)" : "rgba(255, 255, 255, 0.04)";
 
     const catGradients = {
@@ -2074,7 +2010,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
         afterLayout: (chart) => {
             const yAxisEl = document.getElementById(yAxisId);
             if (yAxisEl) {
-                yAxisEl.innerHTML = "";
+                yAxisEl.textContent = "";
                 yAxisEl.style.display = 'flex';
                 yAxisEl.style.position = "absolute";
                 yAxisEl.style.left = "0px";
@@ -2087,7 +2023,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
             const rightYAxisId = yAxisId + "-right";
             const yAxisElRight = document.getElementById(rightYAxisId);
             if (yAxisElRight) {
-                yAxisElRight.innerHTML = "";
+                yAxisElRight.textContent = "";
                 yAxisElRight.style.display = 'flex';
                 yAxisElRight.style.position = "absolute";
                 yAxisElRight.style.right = "0px";
@@ -2349,7 +2285,7 @@ async function renderDailyBreakdown() {
     var e = (await msg("STATS_GET_RANGE", { days: rangeKeys }))?.data || {};
     recalculateRangeStats(e);
     if (t) {
-        t.innerHTML = "";
+        t.textContent = "";
         var a = (await gSync(["settings"])).settings || {},
             n = rangeKeys.filter(k => e[k]); // newest-first already
         n.length ? (n.forEach(n => {
@@ -2497,7 +2433,7 @@ async function renderDailyBreakdown() {
                     window.openAddOrEditModal(e.getAttribute("data-domain"));
                 }
             })
-        })) : t.innerHTML = '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <p>No activity data available yet.</p>\n    </div>'
+        })) : setSafeHTML(t, '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <p>No activity data available yet.</p>\n    </div>')
     }
 }
 async function renderTopSites() {
@@ -2583,7 +2519,7 @@ a.querySelector(".sel")?.addEventListener("change", async function () {
 
                 r.appendChild(a)
             })
-        } else r.innerHTML = '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z"></path></svg>\n      <p>No sites tracked for this period.</p>\n    </div>'
+        } else setSafeHTML(r, '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z"></path></svg>\n      <p>No sites tracked for this period.</p>\n    </div>')
 }
 async function renderTrend() {
     var _trendCustom = trendCustomFrom && trendCustomTo;
@@ -2737,12 +2673,12 @@ function renderWhitelist(e) {
     var t = $("whitelist-container");
     t && (setSafeHTML(t, ""), e.length ? (e.forEach((e, a) => {
         var n = document.createElement("div");
-        n.style.cssText = "display:flex;align-items:center;justify-content:space-between;background:var(--bg3);padding:10px 16px;border-radius:10px;border:1px solid var(--bd2);", n.innerHTML = `<span style="font-family:monospace;font-size:14px;color:var(--tx);font-weight:700">${sanitizeDomain(e)}</span><button class="bic del rm-wl" data-idx="${a}" style="width:28px;height:28px;font-size:12px">✕</button>`, t.appendChild(n)
+        n.style.cssText = "display:flex;align-items:center;justify-content:space-between;background:var(--bg3);padding:10px 16px;border-radius:10px;border:1px solid var(--bd2);", setSafeHTML(n, `<span style="font-family:monospace;font-size:14px;color:var(--tx);font-weight:700">${sanitizeDomain(e)}</span><button class="bic del rm-wl" data-idx="${a}" style="width:28px;height:28px;font-size:12px">✕</button>`), t.appendChild(n)
     }), t.querySelectorAll(".rm-wl").forEach(t => t.addEventListener("click", async () => {
         e.splice(parseInt(t.getAttribute("data-idx")), 1), await sLocal({
             idleWhitelist: e
         }), renderWhitelist(e), toast("Removed exception", "ok")
-    }))) : t.innerHTML = '<span style="font-size:13px;color:var(--tx3)">No exceptions added.</span>')
+    }))) : setSafeHTML(t, '<span style="font-size:13px;color:var(--tx3)">No exceptions added.</span>'))
 }
 // Storage Usage Indicator Helper
 async function updateStorageUsageIndicator() {
@@ -2803,8 +2739,7 @@ async function updateStorageUsageIndicator() {
 async function loadExtendedSettings(preloadedSettings) {
     updateStorageUsageIndicator();
     var e = preloadedSettings || (await gSync(["settings"])).settings || {};
-    if ($("tog-pc") && ($("tog-pc").checked = !!e.passcodeEnabled), 
-        $("tog-fun") && ($("tog-fun").checked = !1 !== e.funnyBlocked), 
+    if ($("tog-fun") && ($("tog-fun").checked = !1 !== e.funnyBlocked), 
         $("tab-limit-input") && ($("tab-limit-input").value = e.tabLimit || 0), 
         $("tog-time-warn") && ($("tog-time-warn").checked = !1 !== e.timeWarningEnabled), 
         $("time-warn-secs") && ($("time-warn-secs").value = e.timeWarningSecs || 60), 
@@ -2834,9 +2769,27 @@ async function loadExtendedSettings(preloadedSettings) {
         updateIdleBadgeVisibility();
 
         if (e.passcodeHash) {
-            $("pin-status-badge").innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>PIN Active', $("pin-status-badge").style.color = "var(--green)";
-            var t = $("pin-status-badge").parentElement;
-            t.style.display = "flex", t.style.justifyContent = "space-between", t.style.alignItems = "center", (a = document.getElementById("pin-actions-div")) || ((a = document.createElement("div")).id = "pin-actions-div", a.style.display = "flex", a.style.gap = "12px", $("btn-change-pin") && a.appendChild($("btn-change-pin")), $("btn-remove-pin") && a.appendChild($("btn-remove-pin")), t.appendChild(a)), $("granular-locks") && ($("granular-locks").style.display = "block"), $("granular-locks-overlay") && ($("granular-locks-overlay").style.display = "none"), $("pin-setup-box").style.display = "none", $("pin-manage-box").style.display = "flex";
+            setSafeHTML($("pin-status-badge"), '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>PIN Active'), $("pin-status-badge").style.color = "var(--green)";
+            var t = $("pin-status-wrapper") || $("pin-status-badge").parentElement;
+            t.style.display = "flex";
+            t.style.justifyContent = "space-between";
+            t.style.alignItems = "center";
+            a = document.getElementById("pin-actions-div");
+            if (a) {
+                a.style.display = "flex";
+            } else {
+                a = document.createElement("div");
+                a.id = "pin-actions-div";
+                a.style.display = "flex";
+                a.style.gap = "12px";
+                if ($("btn-change-pin")) a.appendChild($("btn-change-pin"));
+                if ($("btn-remove-pin")) a.appendChild($("btn-remove-pin"));
+                t.appendChild(a);
+            }
+            $("granular-locks") && ($("granular-locks").style.display = "block");
+            $("granular-locks-overlay") && ($("granular-locks-overlay").style.display = "none");
+            $("pin-setup-box").style.display = "none";
+            $("pin-manage-box").style.display = "flex";
 
             $("lock-stop") && ($("lock-stop").checked = !1 !== e.lockStop);
             $("lock-rules") && ($("lock-rules").checked = !1 !== e.lockRules);
@@ -2849,7 +2802,7 @@ async function loadExtendedSettings(preloadedSettings) {
             $("lock-adjust-time") && ($("lock-adjust-time").checked = !1 !== e.lockAdjustTime);
         } else {
             var a;
-            $("pin-status-badge").innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set', $("pin-status-badge").style.color = "var(--tx2)";
+            setSafeHTML($("pin-status-badge"), '<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set'), $("pin-status-badge").style.color = "var(--tx2)";
             if ($("granular-locks")) $("granular-locks").style.display = "block";
             if ($("granular-locks-overlay")) { $("granular-locks-overlay").style.display = "flex"; }
             (a = document.getElementById("pin-actions-div")) && ($("btn-change-pin") && $("pin-manage-box").insertBefore($("btn-change-pin"), $("pin-manage-box").firstChild), $("btn-remove-pin") && $("pin-manage-box").insertBefore($("btn-remove-pin"), $("pin-manage-box").firstChild), a.remove()), $("pin-setup-box").style.display = "flex", $("pin-manage-box").style.display = "none"
@@ -2886,10 +2839,10 @@ async function loadExtendedSettings(preloadedSettings) {
                 a.style.cursor = "pointer";
                 a.style.justifyContent = "center";
                 a.style.alignItems = "center";
-                a.innerHTML = `
+                setSafeHTML(a, `
                     <div style="font-size:24px; color:var(--tx3); margin-bottom:4px;">+</div>
                     <div style="font-size:13px; font-weight:800; color:var(--tx3);">Add Free-time</div>
-                `;
+                `);
                 a.addEventListener("mouseover", () => {
                     a.style.borderColor = "var(--green)";
                     a.querySelector("div:nth-child(2)").style.color = "var(--green)";
@@ -3028,7 +2981,7 @@ async function loadFocusHistory() {
         if (!t.length) return setSafeHTML(a, '<div class="empty" style="padding:40px 10px">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>\n      <p>No focus sessions yet.</p>\n      <button class="bp" id="btn-empty-start-focus" style="margin-top:16px;padding:10px 24px;">🚀 Start First Session</button>\n    </div>'), void ($("btn-empty-start-focus") && $("btn-empty-start-focus").addEventListener("click", () => {
             $("btn-fs").click()
         }));
-        a.innerHTML = "";
+        a.textContent = "";
         let histWithIdx = t.map((item, idx) => { item._idx = idx; return item; });
         histWithIdx.sort((a, b) => (b.startedAt || 0) - (a.startedAt || 0)).forEach(e => {
             var t = document.createElement("div");
@@ -3087,7 +3040,6 @@ if ($("btn-save-set")) {
     $("btn-save-set").addEventListener("click", async () => {
     try {
         var e = (await gSync(["settings"])).settings || {};
-        e.passcodeEnabled = $("tog-pc")?.checked || !1;
         e.funnyBlocked = !1 !== $("tog-fun")?.checked;
         e.tabLimit = parseInt($("tab-limit-input")?.value) || 0;
         e.timeWarningEnabled = !1 !== $("tog-time-warn")?.checked;
@@ -3147,7 +3099,12 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
         }), toast("PIN Removed", "ok"), loadExtendedSettings()
     }
 }), $("btn-change-pin") && $("btn-change-pin").addEventListener("click", async () => {
-    await showPass(!0, "Verification Required", "Enter current PIN to change it.") && ($("pin-manage-box").style.display = "none", $("pin-setup-box").style.display = "flex")
+    if (await showPass(!0, "Verification Required", "Enter current PIN to change it.")) {
+        $("pin-manage-box").style.display = "none";
+        $("pin-setup-box").style.display = "flex";
+        const actionDiv = document.getElementById("pin-actions-div");
+        if (actionDiv) actionDiv.style.display = "none";
+    }
 }), $("btn-rst-stats") && $("btn-rst-stats").addEventListener("click", async () => {
     if (!(await promptPinIfEnabled("lockDanger"))) return;
     if (!(await showConfirm("Reset Stats", "Delete ALL statistics? This cannot be undone.", { isDestructive: true, confirmText: "Reset" }))) return;
@@ -3184,29 +3141,64 @@ function startSmoothFocusTick(e) {
     const i = _favCanvas;
     i.width = 32; i.height = 32;
     const s = i.getContext("2d");
-    _focusTick = setInterval(function () {
+    const tick = () => {
         var t = Math.max(0, Math.round((e.phaseEndsAt - Date.now()) / 1e3)),
             a = "work" === e.phase,
             n = e.fullDuration || (a ? 1500 : "long_break" === e.phase ? 900 : 300);
         $("frf") && $("frf").setAttribute("stroke-dashoffset", (FCIRC * Math.max(0, 1 - t / n)).toFixed(1)), $("ftb") && ($("ftb").textContent = fmtT(t));
-        s.clearRect(0, 0, 32, 32);
-        const o = document.documentElement.classList.contains("light");
-        s.fillStyle = o ? "#f1f5f9" : "#121212", s.beginPath(), s.arc(16, 16, 16, 0, 2 * Math.PI), s.fill(), s.strokeStyle = "#2E2E2E", s.lineWidth = 4, s.beginPath(), s.arc(16, 16, 12, 0, 2 * Math.PI), s.stroke(), s.strokeStyle = a ? "#05D581" : "#F6B846", s.lineCap = "round", s.beginPath(), s.arc(16, 16, 12, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * (1 - t / n)), s.stroke();
-        let r = document.getElementById("dynamic-favicon");
-        r && (r.href = i.toDataURL()), t <= 0 && (clearInterval(_focusTick), _focusTick = null, setTimeout(async () => {
+        
+        let pct = Math.max(0, 1 - t / n);
+        let pctRounded = Math.floor(pct * 100);
+        if (pctRounded !== _lastFavPct && !_tabHidden) {
+            _lastFavPct = pctRounded;
+            s.clearRect(0, 0, 32, 32);
+            const o = document.documentElement.classList.contains("light");
+            s.fillStyle = o ? "#f1f5f9" : "#121212", s.beginPath(), s.arc(16, 16, 16, 0, 2 * Math.PI), s.fill(), s.strokeStyle = "#2E2E2E", s.lineWidth = 4, s.beginPath(), s.arc(16, 16, 12, 0, 2 * Math.PI), s.stroke(), s.strokeStyle = a ? "#05D581" : "#F6B846", s.lineCap = "round", s.beginPath(), s.arc(16, 16, 12, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * pct), s.stroke();
+            let r = document.getElementById("dynamic-favicon");
+            r && (r.href = i.toDataURL());
+        }
+
+        t <= 0 && (clearInterval(_focusTick), _focusTick = null, setTimeout(async () => {
             var e = await msg("FOCUS_GET_STATE");
             renderFocus(e?.focusState, await getActiveWorkMins()), loadFocusHistory()
         }, 1500))
-    }, 1e3);
+    };
+    tick();
+    _focusTick = setInterval(tick, 1e3);
 }
 renderFocus = function (e, t) {
-    if (_origRF(e, t), e && e.active && !e.paused && e.phaseEndsAt) startSmoothFocusTick(e);
-    else {
+    _currentFocusState = e;
+    if (_origRF(e, t), e && e.active && !e.paused && e.phaseEndsAt) {
+        if (!_tabHidden) {
+            startSmoothFocusTick(e);
+        }
+    } else {
         _focusTick && (clearInterval(_focusTick), _focusTick = null);
         let e = document.getElementById("dynamic-favicon");
         e && (e.href = "../icons/icon128.png")
     }
-}, async function () {
+}, document.addEventListener("visibilitychange", async () => {
+    if (document.hidden) {
+        _tabHidden = true;
+        document.documentElement.classList.add("tab-hidden");
+        if (_focusTick) {
+            clearInterval(_focusTick);
+            _focusTick = null;
+        }
+    } else {
+        _tabHidden = false;
+        document.documentElement.classList.remove("tab-hidden");
+        _lastFavPct = -1;
+        try {
+            const state = await msg("FOCUS_GET_STATE");
+            renderFocus(state?.focusState, await getActiveWorkMins());
+            loadFocusHistory();
+        } catch (_) {}
+        if (typeof window.updateDashboardPrivacyUI === "function") {
+            window.updateDashboardPrivacyUI();
+        }
+    }
+}), async function () {
     hideAnalyticsHeader();
     const e = await msg("GET_AUTO_CATEGORIES");
     e && e.autoCategories && (AUTO_CATEGORIES = e.autoCategories), await checkGate();
@@ -3241,7 +3233,7 @@ renderFocus = function (e, t) {
         const _fab = document.createElement("button");
         _fab.id = "floating-save-btn";
         _fab.textContent = "Save All Settings";
-        _fab.style.cssText = "display:none;position:fixed;bottom:28px;right:28px;z-index:9000;background:var(--green);color:#000;font-weight:800;font-size:16px;padding:12px 22px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(5,213,129,.4);transition:opacity .2s,transform .2s;font-family:inherit;";
+        _fab.style.cssText = "display:none;position:fixed;bottom:28px;right:28px;z-index:9000;background:var(--green);color:#000;font-weight:800;font-size:16px;padding:12px 22px;border-radius:14px;border:none;cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s,transform .2s;font-family:inherit;";
         document.body.appendChild(_fab);
         _fab.addEventListener("click", () => { $("btn-save-set") && $("btn-save-set").click(); });
         // Show only on settings tab
@@ -3516,6 +3508,13 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
             setTimeout(processBatch, 20);
         };
 
+        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        try {
+            await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Web Activity Time Tracker)" });
+        } catch (errBackup) {
+            console.warn("Failed to create pre-import backup:", errBackup);
+        }
+
         await processBatch();
 
     } catch (err) {
@@ -3683,6 +3682,13 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
 
             setTimeout(processBatch, 20);
         };
+
+        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        try {
+            await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Time Tracker - Web Habit Builder)" });
+        } catch (errBackup) {
+            console.warn("Failed to create pre-import backup:", errBackup);
+        }
 
         await processBatch();
 
@@ -3912,6 +3918,13 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             setTimeout(processBatch, 20);
         };
 
+        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        try {
+            await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Webtime Tracker)" });
+        } catch (errBackup) {
+            console.warn("Failed to create pre-import backup:", errBackup);
+        }
+
         await processBatch();
 
     } catch (err) {
@@ -4026,7 +4039,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
                 const emojiOrIcon = `<div style="font-size: 24px; margin-bottom: 6px;">${sanitizeDomain(p.emoji || '')}</div>`;
 
-                card.innerHTML = `
+                setSafeHTML(card, `
           ${emojiOrIcon}
           <div style="font-size: 13px; font-weight: 800; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">${sanitizeDomain(p.name || '')}</div>
           <div style="font-size: 11px; font-weight: 700; color: var(--tx2); margin-top: 2px; display: flex; align-items: center; gap: 4px;">${p.work}m · ${p.brk}m · ${p.cycles || 4} <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M17 1l4 4-4 4"></path><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><path d="M7 23l-4-4 4-4"></path><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></div>
@@ -4061,7 +4074,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
               transition: all 0.2s;
             ">✎</button>
           </div>
-        `;
+        `);
 
                 // Click main card to select
                 card.addEventListener("click", (e) => {
@@ -4307,11 +4320,11 @@ document.body.appendChild(overlay);
         // Build tab nav
         const nav = document.createElement("div");
         nav.className = "sm-tabs";
-        nav.innerHTML = `
+        setSafeHTML(nav, `
       <button type="button" class="sm-tab is-active" data-pane="sites">Site List</button>
       <button type="button" class="sm-tab" data-pane="presets">Smart Presets & Categories</button>
       <button type="button" class="sm-tab" data-pane="tweaks">Advanced Tweaks</button>
-    `;
+    `);
         const ph = sm.querySelector(".ph");
         ph.parentNode.insertBefore(nav, ph.nextSibling);
 
@@ -4327,13 +4340,13 @@ document.body.appendChild(overlay);
 
         // Tweaks pane gets a host for the granular blocks UI (existing
         // renderGranularBlocksUI() targets #tab-sitemanager — give it a hook).
-        paneT.innerHTML = `
+        setSafeHTML(paneT, `
       <div class="card">
         <div class="ctit" style="display:flex;align-items:center;gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;flex-shrink:0;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Advanced Site Tweaks</div>
         <p style="font-size:13px;color:var(--tx2);margin:-12px 0 16px">Hide distracting UI elements on supported sites (YouTube Shorts, Reddit feed, X timeline, etc.).</p>
         <div id="ff-granular-host"></div>
       </div>
-    `;
+    `);
 
         // Wire tab switching
         nav.querySelectorAll(".sm-tab").forEach((b) => {
@@ -4361,6 +4374,7 @@ document.body.appendChild(overlay);
     }
 
     // ---------- Mid-flight lockdown polling --------------------------
+    let _pollInterval = null;
     async function pollFocusState() {
         try {
             const r = await new Promise((res) => {
@@ -4392,8 +4406,25 @@ document.body.appendChild(overlay);
 
         buildPresetBuilder();
         buildSiteManagerTabs();
-        pollFocusState();
-        setInterval(pollFocusState, 2000);
+
+        const startFocusPolling = () => {
+            if (_pollInterval) clearInterval(_pollInterval);
+            if (document.hidden) return;
+            pollFocusState();
+            _pollInterval = setInterval(pollFocusState, 2000);
+        };
+        const stopFocusPolling = () => {
+            if (_pollInterval) {
+                clearInterval(_pollInterval);
+                _pollInterval = null;
+            }
+        };
+
+        startFocusPolling();
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) stopFocusPolling();
+            else startFocusPolling();
+        });
     }
 
     if (document.readyState === "loading") {
@@ -4734,7 +4765,7 @@ document.body.appendChild(overlay);
     function renderSchedules(schedules) {
         const list = document.getElementById("focus-schedules-list");
         if (!list) return;
-        list.innerHTML = "";
+        list.textContent = "";
         const schedList = schedules || [];
         for (let t = 0; t < 3; t++) {
             const sched = schedList[t];
@@ -4760,12 +4791,12 @@ document.body.appendChild(overlay);
                 a.style.borderStyle = "dashed";
                 a.style.cursor = "pointer";
                 a.style.justifyContent = "center";
-                a.innerHTML = `
+                setSafeHTML(a, `
                     <div style="display:flex; align-items:center; gap:8px;">
                         <div style="font-size:18px; color:var(--tx3); font-weight:800;">+</div>
                         <div style="font-size:13px; font-weight:800; color:var(--tx3);">Add Schedule</div>
                     </div>
-                `;
+                `);
                 a.addEventListener("mouseover", () => {
                     a.style.borderColor = "var(--green)";
                     a.querySelector("div > div:nth-child(2)").style.color = "var(--green)";
@@ -4941,16 +4972,7 @@ document.body.appendChild(overlay);
     async function init() {
         const sv = (await gSync(["settings"])).settings || {};
         renderSchedules(sv.focusSchedules || []);
-        const addBtn = document.getElementById("btn-add-schedule") || document.getElementById("btn-add-sched-shortcut");
-        if (addBtn) {
-            addBtn.addEventListener("click", async () => {
-                if (!(await promptPinIfEnabled("lockFocusScheds"))) return;
-                const sv2 = (await gSync(["settings"])).settings || {};
-                // FF v6.8: 3-schedule cap
-                if ((sv2.focusSchedules || []).length >= 3) { if (typeof toast === "function") toast("You can only have 3 focus schedules.", "er"); return; }
-                openScheduleModal(sv2.focusSchedules || []);
-            });
-        }
+
 
 
     }
@@ -4975,7 +4997,6 @@ document.body.appendChild(overlay);
             if ($("m-id")) $("m-id").value = "";
             if ($("cat-inp")) $("cat-inp").value = qDomain;
             if ($("cat-redir")) $("cat-redir").value = qRedir;
-            if ($("cd-inp-domain")) $("cd-inp-domain").value = qDomain;
             if ($("mon-inp-domain")) $("mon-inp-domain").value = qDomain;
             if ($("btn-add-block")) $("btn-add-block").textContent = "Add Block Rule";
             if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Add Block Rule";
@@ -4992,7 +5013,6 @@ document.body.appendChild(overlay);
             if ($("m-id")) $("m-id").value = "";
             if ($("cat-inp")) $("cat-inp").value = "";
             if ($("cat-redir")) $("cat-redir").value = "";
-            if ($("cd-inp-domain")) $("cd-inp-domain").value = "";
             if ($("mon-inp-domain")) $("mon-inp-domain").value = "";
             if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Track / Label Site";
             if (typeof switchRuleModalTab === "function") switchRuleModalTab("monitor");
@@ -5323,17 +5343,17 @@ document.body.appendChild(overlay);
         
         const res = await msg("BACKUP_LIST_GET");
         if (!res || !res.list) {
-            listContainer.innerHTML = '<div style="font-size:13px;color:var(--tx3);text-align:center;padding:12px 0;">Failed to load backup list.</div>';
+            setSafeHTML(listContainer, '<div style="font-size:13px;color:var(--tx3);text-align:center;padding:12px 0;">Failed to load backup list.</div>');
             return;
         }
         
         if (res.list.length === 0) {
-            listContainer.innerHTML = '<div style="font-size:13px;color:var(--tx3);text-align:center;padding:24px 0;">No backups created yet.</div>';
+            setSafeHTML(listContainer, '<div style="font-size:13px;color:var(--tx3);text-align:center;padding:24px 0;">No backups created yet.</div>');
             return;
         }
         
         const sorted = res.list.sort((a, b) => b.timestamp - a.timestamp);
-        listContainer.innerHTML = "";
+        listContainer.textContent = "";
         
         sorted.forEach(backup => {
             const row = document.createElement("div");
@@ -5778,10 +5798,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
         });
     }
 
-    function escHTML(str) {
-        if (!str) return "";
-        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
+
 
     // Modal save action
     async function savePreset() {
