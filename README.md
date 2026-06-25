@@ -118,7 +118,7 @@ There are several ways to contribute to Flow:
 Describe your problem or idea in [GitHub Issues](https://github.com/vishwa-vsr/Flow/issues).
 
 #### 2. Help Translate
-We plan to add multi-language support in the future. If you want to help translate Flow into your native language, please start a thread in the [Discussions](https://github.com/vishwa-vsr/Flow/discussions) tab!
+Flow supports multi-language translations (starting with English and Spanish!). If you want to help translate Flow into your native language, please join the translation thread in our [GitHub Discussions](https://github.com/vishwa-vsr/Flow/discussions/4)!
 
 #### 3. Rate 5 Stars ⭐
 Leave a review on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) or [Edge](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic). It's simple and incredibly helpful!

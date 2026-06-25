@@ -2,6 +2,13 @@
 
 All notable updates and improvements to **Flow** are documented below.
 
+## [7.0.0] - 2026-06-25
+- **Removed "Downloads" Permission**: Completely removed the weekly auto-backup feature and its associated `"downloads"` browser permission to protect user privacy and avoid scary browser warnings. Manual backups can still be downloaded instantly without any permissions.
+- **Internationalization (i18n) Support**: Added a robust translation framework for localizing the main popup, options dashboard, blocked pages, and extension metadata.
+- **Spanish Language Translation**: Added direct, informal, and blunt Spanish translations for all options dashboard screens, status panels, configuration sliders, daily limit badges, and rotating motivational quotes.
+- **Fixed CPU Usage Spike**: Optimized the Reddit layout-hiding code to stop scanning every single element on the webpage. This fixes browser freezing on infinite-scroll pages and drastically reduces CPU usage.
+- **Fixed Brave Redirection Bug**: Resolved an issue where Brave browser hung indefinitely on blocked websites by using declarativeNetRequest block actions combined with a tab-level redirect fallback.
+
 ## [6.9.9] - 2026-06-18
 - **New Dashboard Design**: Redesigned analytics cards with a premium look, bold typography, and interactive animations.
 - **Trend Indicators**: Added color-coded badges that show if your productivity is improving or if distractions are increasing.

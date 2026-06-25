@@ -1,7 +1,7 @@
 # Flow — Privacy Policy
 
 **Effective Date:** May 21, 2026
-**Last Updated:** June 14, 2026
+**Last Updated:** June 25, 2026
 
 Flow ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how our browser extension collects, uses, and safeguards your information.
 
@@ -33,7 +33,6 @@ To function properly, Flow requires certain browser permissions. We only request
 - **Notifications:** To show you reminders when a focus session ends or warning/cooldown nudges when approaching time limits.
 - **Declarative Net Request:** To instantly block access to distracting websites at the network level, based on your rules.
 - **Scripting:** To inject custom CSS styles to apply advanced user-defined site tweaks (such as hiding specific distracting page elements).
-- **Downloads:** To allow you to export and download your historical productivity statistics and rules as a JSON backup file.
 - **Favicon (Chrome/Edge only):** To retrieve and display site icons next to tracked websites in the popup and dashboard.
 - **Host Permissions (`<all_urls>`):** Required to apply blocking rules and run the content script across websites to track active time spent for productivity analytics.
 
