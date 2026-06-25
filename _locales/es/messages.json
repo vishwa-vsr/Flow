@@ -1,0 +1,2410 @@
+{
+  "extName": {
+    "message": "Flow - Gestor de Sitios y Rastreador de Hábitos",
+    "description": "Extension name shown in the Chrome Web Store and browser toolbar."
+  },
+  "extDescription": {
+    "message": "Rastreador de productividad avanzado y bloqueador de distracciones a nivel de red.",
+    "description": "Extension description shown in the Chrome Web Store listing."
+  },
+  "verification": {
+    "message": "Verificación",
+    "description": "Title for the PIN verification dialog."
+  },
+  "enterPin": {
+    "message": "Ingresa tu PIN de 6 dígitos para continuar",
+    "description": "Instruction shown in the PIN verification dialog."
+  },
+  "incorrectPin": {
+    "message": "PIN incorrecto",
+    "description": "Error message when the user enters a wrong PIN."
+  },
+  "cancel": {
+    "message": "Cancelar",
+    "description": "Label for the cancel button."
+  },
+  "analytics": {
+    "message": "Analíticas",
+    "description": "Label for the analytics section or button."
+  },
+  "toggleTheme": {
+    "message": "Cambiar tema",
+    "description": "Tooltip for the theme toggle button."
+  },
+  "privacyMode": {
+    "message": "Modo Privado / Pausar Rastreo",
+    "description": "Label for the privacy mode toggle that pauses tracking."
+  },
+  "settings": {
+    "message": "Ajustes",
+    "description": "Label for the settings button or section."
+  },
+  "pauseTrackingBlocking": {
+    "message": "Pausar Rastreo y Bloqueo",
+    "description": "Title for the pause tracking and blocking panel."
+  },
+  "pauseFor30Min": {
+    "message": "Pausar por 30 minutos",
+    "description": "Option to pause tracking for 30 minutes."
+  },
+  "pauseFor1Hour": {
+    "message": "Pausar por 1 hora",
+    "description": "Option to pause tracking for 1 hour."
+  },
+  "pauseUntilResumed": {
+    "message": "Pausar hasta reanudar",
+    "description": "Option to pause tracking indefinitely until manually resumed."
+  },
+  "privacyModeActive": {
+    "message": "Modo Privado Activo",
+    "description": "Status indicator when privacy mode is currently on."
+  },
+  "trackingBlockingPaused": {
+    "message": "Rastreo y bloqueo en pausa",
+    "description": "Status message when tracking and blocking are paused."
+  },
+  "resume": {
+    "message": "Reanudar",
+    "description": "Label for the resume button to restart tracking."
+  },
+  "tabToday": {
+    "message": "Hoy",
+    "description": "Tab label for today's data view."
+  },
+  "tabAllTime": {
+    "message": "Total",
+    "description": "Tab label for all-time data view."
+  },
+  "weeklyGoal": {
+    "message": "Meta Semanal",
+    "description": "Label for the weekly productivity goal section."
+  },
+  "goalDone": {
+    "message": "$h$h $m$m hechos",
+    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m hechos.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "2"
+      },
+      "m": {
+        "content": "$2",
+        "example": "30"
+      }
+    }
+  },
+  "setGoalInSettings": {
+    "message": "Configura tu meta en Ajustes",
+    "description": "Prompt shown when the user has not configured a weekly goal."
+  },
+  "goalHit": {
+    "message": "¡Meta cumplida! ✓",
+    "description": "Message shown when the weekly goal has been reached."
+  },
+  "timerSettings": {
+    "message": "Ajustes del Temporizador",
+    "description": "Title for the Pomodoro timer settings panel."
+  },
+  "workMin": {
+    "message": "Trabajo (min)",
+    "description": "Label for the work duration input in minutes."
+  },
+  "shortBreak": {
+    "message": "Descanso Corto",
+    "description": "Label for the short break duration input."
+  },
+  "longBreak": {
+    "message": "Descanso Largo",
+    "description": "Label for the long break duration input."
+  },
+  "cycles": {
+    "message": "Ciclos",
+    "description": "Label for the number of Pomodoro cycles input."
+  },
+  "saveSettings": {
+    "message": "Guardar Ajustes",
+    "description": "Label for the save settings button."
+  },
+  "advancedSettings": {
+    "message": "Ajustes Avanzados",
+    "description": "Label for the advanced settings link or button."
+  },
+  "focusMode": {
+    "message": "Modo Enfoque",
+    "description": "Label for the focus mode toggle or section."
+  },
+  "pomodoro": {
+    "message": "Pomodoro",
+    "description": "Label for the Pomodoro timer section."
+  },
+  "readyToFocus": {
+    "message": "¿Listo para concentrarte?",
+    "description": "Prompt shown before a focus session begins."
+  },
+  "autoStopsIn": {
+    "message": "⏱ Se detiene en",
+    "description": "Label indicating when focus mode will automatically stop."
+  },
+  "btnStart": {
+    "message": "▶ Iniciar",
+    "description": "Label for the start button."
+  },
+  "btnStop": {
+    "message": "■ Detener",
+    "description": "Label for the stop button."
+  },
+  "btnSkip": {
+    "message": "⏭ Saltar",
+    "description": "Label for the skip button."
+  },
+  "btnPause": {
+    "message": "⏸ Pausar",
+    "description": "Label for the pause button."
+  },
+  "btnResume": {
+    "message": "▶ Reanudar",
+    "description": "Label for the resume button."
+  },
+  "loading": {
+    "message": "Cargando...",
+    "description": "Generic loading indicator text."
+  },
+  "loadingData": {
+    "message": "Cargando datos...",
+    "description": "Loading indicator when fetching analytics data."
+  },
+  "noDataYet": {
+    "message": "Sin datos todavía.",
+    "description": "Placeholder shown when there is no tracking data to display."
+  },
+  "sublblToday": {
+    "message": "hoy",
+    "description": "Lowercase sub-label for the today tab."
+  },
+  "sublblAllTime": {
+    "message": "total",
+    "description": "Lowercase sub-label for the all-time tab."
+  },
+  "catProductivity": {
+    "message": "Productividad",
+    "description": "Display name for the Productivity category."
+  },
+  "catLearning": {
+    "message": "Aprendizaje",
+    "description": "Display name for the Learning category."
+  },
+  "catCommunication": {
+    "message": "Comunicación",
+    "description": "Display name for the Communication category."
+  },
+  "catDistraction": {
+    "message": "Distracción",
+    "description": "Display name for the Distraction category."
+  },
+  "catUncategorized": {
+    "message": "Sin categoría",
+    "description": "Display name for the Uncategorized category."
+  },
+  "allSitesToday": {
+    "message": "Todos los Sitios Hoy",
+    "description": "Heading for the list of all sites visited today."
+  },
+  "allTimeSiteUsage": {
+    "message": "Uso Total de Sitios",
+    "description": "Heading for the list of all-time site usage."
+  },
+  "clickTagToEdit": {
+    "message": "(Haz clic en la etiqueta para editar)",
+    "description": "Hint text telling the user they can click a category tag to change it."
+  },
+  "showAllSites": {
+    "message": "Mostrar los $count$ sitios",
+    "description": "Button to expand and show all sites in the list.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
+  },
+  "rateUs": {
+    "message": "⭐ Califícanos",
+    "description": "Link to rate the extension on the Chrome Web Store."
+  },
+  "feedback": {
+    "message": "💬 Opiniones",
+    "description": "Link to send feedback about the extension."
+  },
+  "unblock": {
+    "message": "Desbloquear",
+    "description": "Button to unblock a currently blocked site."
+  },
+  "blockSite": {
+    "message": "Bloquear Sitio",
+    "description": "Button to block the current site."
+  },
+  "defaultInstant": {
+    "message": "Por defecto (Instantáneo)",
+    "description": "Label for the default instant-block mode."
+  },
+  "confirmBlock": {
+    "message": "¿Seguro que quieres bloquear $domain$? Se recargará la pestaña y se bloqueará el acceso a este sitio.",
+    "description": "Confirmation dialog when blocking a site.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "youtube.com"
+      }
+    }
+  },
+  "deepWork": {
+    "message": "Trabajo profundo.",
+    "description": "Status text during a Pomodoro work phase."
+  },
+  "shortBreakPhase": {
+    "message": "Descanso corto.",
+    "description": "Status text during a Pomodoro short break phase."
+  },
+  "longBreakPhase": {
+    "message": "¡Descanso largo!",
+    "description": "Status text during a Pomodoro long break phase."
+  },
+  "scheduledSession": {
+    "message": "Sesión Programada",
+    "description": "Label for a focus session that was triggered by a schedule."
+  },
+  "schedule": {
+    "message": "Horario",
+    "description": "Label for the schedule section or button."
+  },
+  "work": {
+    "message": "Trabajo",
+    "description": "Label for the work phase in the Pomodoro timer."
+  },
+  "cyclesDone": {
+    "message": "$count$ hechos",
+    "description": "Shows number of Pomodoro cycles completed. Example: 3 hechos.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "cyclesCompleted": {
+    "message": "$count$ ciclo completado",
+    "description": "Singular: one Pomodoro cycle completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "cyclesCompletedPlural": {
+    "message": "$count$ ciclos completados",
+    "description": "Plural: multiple Pomodoro cycles completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "active": {
+    "message": "Activo",
+    "description": "Status label indicating something is currently active."
+  },
+  "minWorkBreak": {
+    "message": "$work$ min trabajo · $break$ min descanso",
+    "description": "Shows the current work and break durations.",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "trackingPausedFor": {
+    "message": "Rastreo y bloqueo en pausa por $time$",
+    "description": "Status message showing how long tracking is paused.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "30 minutos"
+      }
+    }
+  },
+  "trackingPausedIndefinitely": {
+    "message": "Rastreo y bloqueo en pausa indefinidamente",
+    "description": "Status message when tracking is paused with no time limit."
+  },
+  "privacyDisabledDuringFocus": {
+    "message": "Modo Privado (desactivado durante Modo Enfoque)",
+    "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
+  },
+  "hDone": {
+    "message": "$h$h $m$m hechos",
+    "description": "Hours and minutes completed. Example: 1h 45m hechos.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "1"
+      },
+      "m": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "hLeft": {
+    "message": "$h$h $m$m restantes",
+    "description": "Hours and minutes remaining. Example: 0h 15m restantes.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "0"
+      },
+      "m": {
+        "content": "$2",
+        "example": "15"
+      }
+    }
+  },
+  "blockedPageTitle": {
+    "message": "Bloqueado — Flow",
+    "description": "Page title for the blocked site page."
+  },
+  "blockedMsg1Emoji": {
+    "message": "🧱",
+    "description": "Emoji for blocked message variant 1."
+  },
+  "blockedMsg1Head": {
+    "message": "Hoy no, campeón.",
+    "description": "Heading for blocked message variant 1."
+  },
+  "blockedMsg1Sub": {
+    "message": "Tu yo del futuro dijo que NO. Y fue muy claro al respecto.",
+    "description": "Subtext for blocked message variant 1."
+  },
+  "blockedMsg2Emoji": {
+    "message": "🤖",
+    "description": "Emoji for blocked message variant 2."
+  },
+  "blockedMsg2Head": {
+    "message": "ACCESO DENEGADO.",
+    "description": "Heading for blocked message variant 2."
+  },
+  "blockedMsg2Sub": {
+    "message": "El bot de productividad ha hablado. Resistirse es inútil.",
+    "description": "Subtext for blocked message variant 2."
+  },
+  "blockedMsg3Emoji": {
+    "message": "🧠",
+    "description": "Emoji for blocked message variant 3."
+  },
+  "blockedMsg3Head": {
+    "message": "Jugada maestra.",
+    "description": "Heading for blocked message variant 3."
+  },
+  "blockedMsg3Sub": {
+    "message": "Tú bloqueaste esto. El tú del pasado era más listo que el de ahora.",
+    "description": "Subtext for blocked message variant 3."
+  },
+  "blockedMsg4Emoji": {
+    "message": "🚪",
+    "description": "Emoji for blocked message variant 4."
+  },
+  "blockedMsg4Head": {
+    "message": "La puerta está cerrada.",
+    "description": "Heading for blocked message variant 4."
+  },
+  "blockedMsg4Sub": {
+    "message": "Tú pusiste el candado. Tú me diste la llave. No te la voy a devolver.",
+    "description": "Subtext for blocked message variant 4."
+  },
+  "blockedMsg5Emoji": {
+    "message": "🏋️",
+    "description": "Emoji for blocked message variant 5."
+  },
+  "blockedMsg5Head": {
+    "message": "Tu disciplina llamó.",
+    "description": "Heading for blocked message variant 5."
+  },
+  "blockedMsg5Sub": {
+    "message": "Te extraña. Quiere que vuelvas. Ve a hacer lo que debes.",
+    "description": "Subtext for blocked message variant 5."
+  },
+  "blockedMsg6Emoji": {
+    "message": "⛔",
+    "description": "Emoji for blocked message variant 6."
+  },
+  "blockedMsg6Head": {
+    "message": "NEL. Ni de broma.",
+    "description": "Heading for blocked message variant 6."
+  },
+  "blockedMsg6Sub": {
+    "message": "Vuelve cuando te lo hayas ganado. Sabes lo que tienes que hacer.",
+    "description": "Subtext for blocked message variant 6."
+  },
+  "blockedMsg7Emoji": {
+    "message": "🦾",
+    "description": "Emoji for blocked message variant 7."
+  },
+  "blockedMsg7Head": {
+    "message": "Sin excusas.",
+    "description": "Heading for blocked message variant 7."
+  },
+  "blockedMsg7Sub": {
+    "message": "El trabajo no se hace solo. Vuelve a lo tuyo.",
+    "description": "Subtext for blocked message variant 7."
+  },
+  "blockedMsg8Emoji": {
+    "message": "🐤",
+    "description": "Emoji for blocked message variant 8."
+  },
+  "blockedMsg8Head": {
+    "message": "¡Clo clo clo!",
+    "description": "Heading for blocked message variant 8."
+  },
+  "blockedMsg8Sub": {
+    "message": "Ese es el sonido de la procrastinación. No seas gallina.",
+    "description": "Subtext for blocked message variant 8."
+  },
+  "neutralBlockHead": {
+    "message": "Este sitio está bloqueado",
+    "description": "Neutral heading when a site is blocked without a fun message."
+  },
+  "neutralBlockSub": {
+    "message": "El acceso está restringido por tus reglas de Flow.",
+    "description": "Neutral subtext for blocked site."
+  },
+  "ruleInstantBlock": {
+    "message": "Bloqueo Instantáneo Activo",
+    "description": "Badge text for an instant block rule."
+  },
+  "ruleScheduleBlock": {
+    "message": "Bloqueo por Horario Activo",
+    "description": "Badge text for a schedule-based block rule."
+  },
+  "ruleTimeLimitReached": {
+    "message": "Límite Diario Alcanzado",
+    "description": "Badge text when the daily time limit is reached."
+  },
+  "ruleSessionLimitReached": {
+    "message": "Límite de Sesión Alcanzado",
+    "description": "Badge text when the per-session time limit is reached."
+  },
+  "ruleManuallyBlocked": {
+    "message": "Bloqueado Manualmente",
+    "description": "Badge text when a site was manually blocked by the user."
+  },
+  "ruleTweakBlocked": {
+    "message": "Sección Distractora Bloqueada",
+    "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
+  },
+  "ruleDetailInstant": {
+    "message": "Este sitio está configurado para bloquearse siempre.",
+    "description": "Detail text explaining an instant block rule."
+  },
+  "ruleDetailSchedule": {
+    "message": "Este sitio está bloqueado durante tus horas de bloqueo programadas.",
+    "description": "Detail text explaining a schedule block rule."
+  },
+  "ruleDetailTimeLimit": {
+    "message": "Llegaste al límite de tiempo diario para este sitio.",
+    "description": "Detail text explaining the daily time limit was reached."
+  },
+  "ruleDetailSessionLimit": {
+    "message": "Llegaste al límite por sesión para este sitio. ¡Tómate un descanso!",
+    "description": "Detail text explaining the session limit was reached."
+  },
+  "ruleDetailManual": {
+    "message": "Tú añadiste este sitio a tu lista de bloqueo.",
+    "description": "Detail text explaining the site was manually blocked."
+  },
+  "ruleDetailTweak": {
+    "message": "El acceso a esta sección está bloqueado por tus Ajustes Avanzados de Sitio.",
+    "description": "Detail text explaining a site tweak block."
+  },
+  "blockRuleActive": {
+    "message": "Regla de Bloqueo Activa",
+    "description": "Generic badge for any active block rule."
+  },
+  "blockedByFlow": {
+    "message": "Bloqueado por Flow",
+    "description": "Generic blocked indicator."
+  },
+  "dailyLimitBadge": {
+    "message": "Límite diario · $mins$ min usados",
+    "description": "Badge showing daily limit and time spent.",
+    "placeholders": {
+      "mins": {
+        "content": "$1",
+        "example": "45"
+      }
+    }
+  },
+  "blockedUntil": {
+    "message": "Bloqueado hasta las $time$",
+    "description": "Shows when the block will be lifted.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "cooldownOver": {
+    "message": "¡Se acabó la espera! Recarga la página para entrar.",
+    "description": "Message shown when the cooldown timer has expired."
+  },
+  "takeABreak": {
+    "message": "Tómate un descanso · se desbloquea en $time$",
+    "description": "Cooldown message showing time until unblock.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2:30"
+      }
+    }
+  },
+  "blockedUntilSchedule": {
+    "message": "Este sitio está bloqueado hasta las $time$ por tu horario.",
+    "description": "Tells user when the schedule block lifts.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "defaultRuleDetail": {
+    "message": "Este sitio fue bloqueado por una de tus reglas.",
+    "description": "Fallback detail text for an unknown block rule."
+  },
+  "goDoSomethingUseful": {
+    "message": "Ve a hacer algo útil:",
+    "description": "Heading above helpful link suggestions on the blocked page."
+  },
+  "takeBackBtn": {
+    "message": "← Llévame de vuelta",
+    "description": "Button to navigate back to the previous page."
+  },
+  "manageBlockRules": {
+    "message": "Administrar reglas de bloqueo →",
+    "description": "Link to the dashboard to manage block rules."
+  },
+  "thisSite": {
+    "message": "este sitio",
+    "description": "Generic label referring to the current site."
+  },
+  "quote1": {
+    "message": "\"Tu futuro yo te está vigilando. Haz que se sienta orgulloso.\"",
+    "description": "Motivational quote 1."
+  },
+  "quote2": {
+    "message": "\"Disciplina es elegir entre lo que quieres ahora y lo que más deseas.\"",
+    "description": "Motivational quote 2."
+  },
+  "quote3": {
+    "message": "\"El trabajo profundo aplasta al estar ocupado haciendo nada.\"",
+    "description": "Motivational quote 3."
+  },
+  "quote4": {
+    "message": "\"Pequeños pasos todos los días construyen grandes resultados.\"",
+    "description": "Motivational quote 4."
+  },
+  "quote5": {
+    "message": "\"No necesitas más tiempo. Lo que necesitas es concentrarte de verdad.\"",
+    "description": "Motivational quote 5."
+  },
+  "quote6": {
+    "message": "\"Lo que haces hoy importa mucho más de lo que crees.\"",
+    "description": "Motivational quote 6."
+  },
+  "quote7": {
+    "message": "\"El obstáculo es el camino.\"",
+    "description": "Motivational quote 7."
+  },
+  "quote8": {
+    "message": "\"Sufre el dolor de la disciplina o sufre el dolor del arrepentimiento.\"",
+    "description": "Motivational quote 8."
+  },
+  "quote9": {
+    "message": "\"Tu enfoque determina tu realidad.\"",
+    "description": "Motivational quote 9."
+  },
+  "quote10": {
+    "message": "\"Sé tan jodidamente bueno que no puedan ignorarte.\"",
+    "description": "Motivational quote 10."
+  },
+  "quote11": {
+    "message": "\"Disciplina es igual a libertad.\"",
+    "description": "Motivational quote 11."
+  },
+  "privacyModeTitle": {
+    "message": "Modo Privado / Pausar Rastreo",
+    "description": "Tooltip for privacy mode toggle."
+  },
+  "pausedTime": {
+    "message": "Pausado: $time$",
+    "description": "Paused timer display.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "29:30"
+      }
+    }
+  },
+  "siteManager": {
+    "message": "Gestor de Sitios",
+    "description": "Label for the site manager button or section."
+  },
+  "settingsLocked": {
+    "message": "Ajustes Bloqueados",
+    "description": "Title when settings are passcode locked."
+  },
+  "incorrectPinTryAgain": {
+    "message": "PIN incorrecto. Ni de broma entras así. Inténtalo otra vez.",
+    "description": "PIN mismatch warning."
+  },
+  "analyticsDesc": {
+    "message": "Tu panorama de productividad completo.",
+    "description": "Analytics section description."
+  },
+  "overview": {
+    "message": "Resumen",
+    "description": "Overview tab title."
+  },
+  "dailyBreakdown": {
+    "message": "Desglose Diario",
+    "description": "Daily breakdown tab title."
+  },
+  "topSites": {
+    "message": "Sitios Top",
+    "description": "Top sites tab title."
+  },
+  "studyVsDistraction": {
+    "message": "Estudio vs Distracción",
+    "description": "Study vs Distraction tab title."
+  },
+  "comparison": {
+    "message": "Comparación",
+    "description": "Alternative title for trend tab."
+  },
+  "insights": {
+    "message": "Análisis",
+    "description": "Insights tab title."
+  },
+  "7days": {
+    "message": "7 días",
+    "description": "Range selection button label."
+  },
+  "30days": {
+    "message": "30 días",
+    "description": "Range selection button label."
+  },
+  "customRange": {
+    "message": "Rango Personalizado",
+    "description": "Custom date range selection."
+  },
+  "last7Days": {
+    "message": "Últimos 7 días",
+    "description": "Default range display label."
+  },
+  "from": {
+    "message": "Desde",
+    "description": "Start date label."
+  },
+  "to": {
+    "message": "Hasta",
+    "description": "End date label."
+  },
+  "apply": {
+    "message": "Aplicar",
+    "description": "Submit date range selection."
+  },
+  "total": {
+    "message": "Total",
+    "description": "Sum of tracked minutes."
+  },
+  "bestStreak": {
+    "message": "Mejor racha",
+    "description": "Best consecutive focus days."
+  },
+  "bestDay": {
+    "message": "Mejor día",
+    "description": "Single day with highest focus time."
+  },
+  "allTimeTotal": {
+    "message": "Total acumulado",
+    "description": "Total tracked focus time since install."
+  },
+  "dailyAverage": {
+    "message": "Promedio diario",
+    "description": "Mean focus time per day."
+  },
+  "daysTracked": {
+    "message": "Días rastreados",
+    "description": "Total number of tracked days."
+  },
+  "searchSites": {
+    "message": "Buscar sitios…",
+    "description": "Filter placeholder."
+  },
+  "domain": {
+    "message": "Dominio",
+    "description": "Site manager table header."
+  },
+  "actions": {
+    "message": "Acciones",
+    "description": "Site manager table header."
+  },
+  "category": {
+    "message": "Categoría",
+    "description": "Site manager table header."
+  },
+  "avgDay": {
+    "message": "Promedio/Día",
+    "description": "Average usage per day table header."
+  },
+  "loadingSites": {
+    "message": "Cargando sitios…",
+    "description": "Loader text."
+  },
+  "totalWorkStudy": {
+    "message": "Total Trabajo/Estudio",
+    "description": "Focus category sum label."
+  },
+  "totalDistraction": {
+    "message": "Total Distracción",
+    "description": "Distraction category sum label."
+  },
+  "productivityRatio": {
+    "message": "Ratio de Productividad",
+    "description": "Comparison ratio label."
+  },
+  "goodDays365d": {
+    "message": "Días Buenos (365d)",
+    "description": "Number of high productivity days."
+  },
+  "wastedDays365d": {
+    "message": "Desperdiciados (365d)",
+    "description": "Number of low productivity days."
+  },
+  "consistency365": {
+    "message": "Consistencia de 365 Días",
+    "description": "Yearly consistency calendar label."
+  },
+  "heatmapHelp": {
+    "message": "Cada cuadro es un día. Más verde = más tiempo de enfoque. Rojo = día desperdiciado.",
+    "description": "Description of yearly heatmap."
+  },
+  "clickToCustomizeThresholds": {
+    "message": "Haz clic para personalizar límites",
+    "description": "Legend customization tooltip."
+  },
+  "less": {
+    "message": "Menos",
+    "description": "Heatmap legend lower label."
+  },
+  "more": {
+    "message": "Más",
+    "description": "Heatmap legend higher label."
+  },
+  "wasted": {
+    "message": "Desperdiciado",
+    "description": "Heatmap legend wasted day label."
+  },
+  "buildingHeatmap": {
+    "message": "Creando mapa de calor…",
+    "description": "Heatmap builder indicator."
+  },
+  "weekdayVsWeekend": {
+    "message": "Día de semana vs Fin de semana",
+    "description": "Split comparison chart label."
+  },
+  "mostProductiveDay": {
+    "message": "Día Más Productivo",
+    "description": "Day of week with highest productivity."
+  },
+  "focusDesc": {
+    "message": "Concéntrate, sigue tus metas y construye tu racha.",
+    "description": "Focus section subtitle."
+  },
+  "zeroCycles": {
+    "message": "0 ciclos",
+    "description": "Zero completed cycles."
+  },
+  "startFocus": {
+    "message": "Iniciar Enfoque",
+    "description": "Action button label."
+  },
+  "quickPresets": {
+    "message": "Ajustes Rápidos",
+    "description": "Group title."
+  },
+  "focusSchedules": {
+    "message": "Horarios de Enfoque",
+    "description": "Group title."
+  },
+  "goalsStreak": {
+    "message": "Metas y Racha",
+    "description": "Group title."
+  },
+  "weeklyGoalHrs": {
+    "message": "Meta Semanal (hrs)",
+    "description": "Config label."
+  },
+  "dailyStreakMin": {
+    "message": "Mínimo Racha Diaria (m)",
+    "description": "Config label."
+  },
+  "startWeekOn": {
+    "message": "Iniciar Semana En",
+    "description": "Config label."
+  },
+  "monday": {
+    "message": "Lunes",
+    "description": "Weekday name."
+  },
+  "sunday": {
+    "message": "Domingo",
+    "description": "Weekday name."
+  },
+  "countTowardsGoals": {
+    "message": "Contar Para Metas",
+    "description": "Checkbox group label."
+  },
+  "saveGoals": {
+    "message": "Guardar Metas",
+    "description": "Action button label."
+  },
+  "weekProgress": {
+    "message": "Progreso Semanal",
+    "description": "Stats display."
+  },
+  "zeroGoalDone": {
+    "message": "0h 0m hechos",
+    "description": "No progress yet."
+  },
+  "noGoal": {
+    "message": "Sin meta",
+    "description": "Missing goal config text."
+  },
+  "history": {
+    "message": "Historial",
+    "description": "Focus history table title."
+  },
+  "clearHistory": {
+    "message": "Borrar Historial",
+    "description": "Delete history tooltip."
+  },
+  "noFocusSessions": {
+    "message": "Sin sesiones de enfoque aún.",
+    "description": "Empty state label."
+  },
+  "siteManagerDesc": {
+    "message": "Etiqueta sitios para analíticas, o bloquéalos por completo.",
+    "description": "Site manager subtitle."
+  },
+  "ruleManager": {
+    "message": "Gestor de Reglas",
+    "description": "Block page inner card title."
+  },
+  "blockList": {
+    "message": "Lista de Bloqueo",
+    "description": "Config category."
+  },
+  "allowlist": {
+    "message": "Lista de Permitidos",
+    "description": "Config category."
+  },
+  "neverTrack": {
+    "message": "No Rastrear",
+    "description": "Config category."
+  },
+  "searchRules": {
+    "message": "Buscar reglas…",
+    "description": "Rules filter placeholder."
+  },
+  "domainName": {
+    "message": "Nombre de Dominio",
+    "description": "Input field label."
+  },
+  "egDomain": {
+    "message": "ej. reddit.com",
+    "description": "Placeholder."
+  },
+  "redirectToOptional": {
+    "message": "Redirigir A (Opcional)",
+    "description": "Input field label."
+  },
+  "egRedirect": {
+    "message": "ej. pw.live",
+    "description": "Placeholder."
+  },
+  "addNewRule": {
+    "message": "+ Nueva Regla",
+    "description": "Action button."
+  },
+  "bulkEdit": {
+    "message": "Edición Masiva",
+    "description": "Action button."
+  },
+  "egAllowDomain": {
+    "message": "ej. gmail.com",
+    "description": "Placeholder."
+  },
+  "addToAllowlist": {
+    "message": "+ Permitir Sitio",
+    "description": "Action button."
+  },
+  "domainNamePlural": {
+    "message": "Nombre(s) de Dominio",
+    "description": "Input field label."
+  },
+  "egNeverTrackDomain": {
+    "message": "ej. banco.com, privado.com",
+    "description": "Placeholder."
+  },
+  "addToNeverTrack": {
+    "message": "+ No Rastrear Sitio",
+    "description": "Action button."
+  },
+  "tipClick": {
+    "message": "Tip: Haz clic en ",
+    "description": "Helpful hint start."
+  },
+  "tipRuleDetails": {
+    "message": " en cualquier regla para poner límites de tiempo, horarios o un temporizador de espera.",
+    "description": "Helpful hint body."
+  },
+  "deleteSelected": {
+    "message": "Eliminar Seleccionados",
+    "description": "Bulk action button."
+  },
+  "type": {
+    "message": "Tipo",
+    "description": "Table column header."
+  },
+  "mode": {
+    "message": "Modo",
+    "description": "Table column header."
+  },
+  "dailyLimit": {
+    "message": "Límite Diario",
+    "description": "Table column header."
+  },
+  "noBlockingRules": {
+    "message": "Sin reglas de bloqueo aún.",
+    "description": "Empty state label."
+  },
+  "freeTimeHours": {
+    "message": "Horas libres (sin bloqueo)",
+    "description": "Card sub-title."
+  },
+  "filterByCategory": {
+    "message": "🔍 Filtrar por Categoría",
+    "description": "Card title."
+  },
+  "searchSitesInCategories": {
+    "message": "Buscar sitios en categorías…",
+    "description": "Placeholder."
+  },
+  "trackLabelSite": {
+    "message": "+ Rastrear / Etiquetar Sitio",
+    "description": "Action button."
+  },
+  "settingsDesc": {
+    "message": "Personaliza tu experiencia Flow.",
+    "description": "Settings section subtitle."
+  },
+  "saveAllSettings": {
+    "message": "Guardar Todos los Ajustes",
+    "description": "Action button."
+  },
+  "securitySystem": {
+    "message": "Seguridad y Sistema",
+    "description": "Settings sub-tab label."
+  },
+  "trackingBlocking": {
+    "message": "Rastreo y Bloqueo",
+    "description": "Settings sub-tab label."
+  },
+  "trackingEngine": {
+    "message": "Motor de Rastreo",
+    "description": "Settings card label."
+  },
+  "idleTimeout": {
+    "message": "Tiempo de Inactividad",
+    "description": "Settings config option."
+  },
+  "idleTimeoutDesc": {
+    "message": "Deja de rastrear si no mueves el ratón.",
+    "description": "Settings config option description."
+  },
+  "after30Sec": {
+    "message": "Tras 30 segundos",
+    "description": "Dropdown choice."
+  },
+  "after1Min": {
+    "message": "Tras 1 minuto",
+    "description": "Dropdown choice."
+  },
+  "after2Min": {
+    "message": "Tras 2 minutos",
+    "description": "Dropdown choice."
+  },
+  "after5Min": {
+    "message": "Tras 5 minutos",
+    "description": "Dropdown choice."
+  },
+  "computerSleepGap": {
+    "message": "Límite de Suspensión del Equipo",
+    "description": "Settings config option."
+  },
+  "computerSleepGapDesc": {
+    "message": "Límite para calcular el tiempo si suspendes la computadora.",
+    "description": "Settings config option description."
+  },
+  "1minute": {
+    "message": "1 minuto",
+    "description": "Dropdown choice."
+  },
+  "5minutes": {
+    "message": "5 minutos",
+    "description": "Dropdown choice."
+  },
+  "10minutes": {
+    "message": "10 minutos",
+    "description": "Dropdown choice."
+  },
+  "15minutes": {
+    "message": "15 minutos",
+    "description": "Dropdown choice."
+  },
+  "mediaPlaybackTracking": {
+    "message": "Rastreo de Reproducción de Multimedia",
+    "description": "Settings config option."
+  },
+  "mediaPlaybackTrackingDesc": {
+    "message": "Sigue rastreando si se reproduce audio o video (aunque estés inactivo).",
+    "description": "Settings config option description."
+  },
+  "ignoreQuickVisits": {
+    "message": "Ignorar Visitas Rápidas",
+    "description": "Settings config option."
+  },
+  "ignoreQuickVisitsDesc": {
+    "message": "Ignora visitas más cortas que esto para limpiar tus datos.",
+    "description": "Settings config option description."
+  },
+  "offTrackEverything": {
+    "message": "Apagado (rastrear todo)",
+    "description": "Dropdown choice."
+  },
+  "3seconds": {
+    "message": "3 segundos",
+    "description": "Dropdown choice."
+  },
+  "5seconds": {
+    "message": "5 segundos",
+    "description": "Dropdown choice."
+  },
+  "10seconds": {
+    "message": "10 segundos",
+    "description": "Dropdown choice."
+  },
+  "dataHistoryRetention": {
+    "message": "Retención del Historial de Datos",
+    "description": "Settings config option."
+  },
+  "dataHistoryRetentionDesc": {
+    "message": "Borra historial de rastreo más antiguo que esto para ahorrar espacio.",
+    "description": "Settings config option description."
+  },
+  "after30Days": {
+    "message": "Tras 30 días",
+    "description": "Dropdown choice."
+  },
+  "after90Days": {
+    "message": "Tras 90 días",
+    "description": "Dropdown choice."
+  },
+  "after180Days": {
+    "message": "Tras 180 días",
+    "description": "Dropdown choice."
+  },
+  "after1Year": {
+    "message": "Tras 1 año",
+    "description": "Dropdown choice."
+  },
+  "after2Years": {
+    "message": "Tras 2 años",
+    "description": "Dropdown choice."
+  },
+  "after3Years": {
+    "message": "Tras 3 años",
+    "description": "Dropdown choice."
+  },
+  "foreverKeepAll": {
+    "message": "Para siempre (guardar todo)",
+    "description": "Dropdown choice."
+  },
+  "weeklyAutoBackup": {
+    "message": "Copia de Seguridad Semanal Automática",
+    "description": "Settings config option."
+  },
+  "weeklyAutoBackupDesc": {
+    "message": "Exporta y descarga tus estadísticas y reglas automáticamente una vez por semana.",
+    "description": "Settings config option description."
+  },
+  "appearance": {
+    "message": "Apariencia",
+    "description": "Settings card label."
+  },
+  "themeDark": {
+    "message": "Oscuro",
+    "description": "Dropdown choice."
+  },
+  "themeLight": {
+    "message": "Claro",
+    "description": "Dropdown choice."
+  },
+  "themeCinematic": {
+    "message": "Cinemático",
+    "description": "Dropdown choice."
+  },
+  "languageOverride": {
+    "message": "Language / Idioma",
+    "description": "Settings config option."
+  },
+  "languageOverrideDesc": {
+    "message": "Fuerza el idioma de la extensión en lugar del predeterminado del navegador.",
+    "description": "Settings config option description."
+  },
+  "systemDefault": {
+    "message": "Predeterminado del Sistema",
+    "description": "Dropdown choice."
+  },
+  "langEnglish": {
+    "message": "English",
+    "description": "Language choice."
+  },
+  "langSpanish": {
+    "message": "Español (Informal/Blunt)",
+    "description": "Language choice."
+  },
+  "accessControlSafety": {
+    "message": "Control de Acceso y Seguridad",
+    "description": "Settings card label."
+  },
+  "pinProtectionStatus": {
+    "message": "Estado de Protección PIN:",
+    "description": "Settings config option."
+  },
+  "notSet": {
+    "message": "No Configurado",
+    "description": "PIN status."
+  },
+  "set6DigitPin": {
+    "message": "Configurar PIN de 6 dígitos",
+    "description": "Input placeholder."
+  },
+  "confirm6DigitPin": {
+    "message": "Confirmar PIN de 6 dígitos",
+    "description": "Input placeholder."
+  },
+  "savePin": {
+    "message": "Guardar PIN",
+    "description": "Action button."
+  },
+  "changePin": {
+    "message": "Cambiar PIN",
+    "description": "Action button."
+  },
+  "removePin": {
+    "message": "Quitar PIN",
+    "description": "Action button."
+  },
+  "setPinToEnableLocks": {
+    "message": "Configura un PIN para activar estos bloqueos",
+    "description": "Helper block message."
+  },
+  "whatToLock": {
+    "message": "Qué Bloquear",
+    "description": "Settings block header."
+  },
+  "lockTimerStop": {
+    "message": "Bloquear Botón Detener Temporizador",
+    "description": "Settings config option."
+  },
+  "lockTimerStopDesc": {
+    "message": "Pide PIN para detener o pausar una sesión de enfoque activa.",
+    "description": "Settings config option description."
+  },
+  "lockEditingRules": {
+    "message": "Bloquear Edición/Eliminación de Reglas",
+    "description": "Settings config option."
+  },
+  "lockEditingRulesDesc": {
+    "message": "Pide PIN para modificar, borrar o vaciar reglas y listas de bloqueo.",
+    "description": "Settings config option description."
+  },
+  "lockFreeTime": {
+    "message": "Bloquear Horas Libres",
+    "description": "Settings config option."
+  },
+  "lockFreeTimeDesc": {
+    "message": "Pide PIN para cambiar tus horarios libres.",
+    "description": "Settings config option description."
+  },
+  "lockFocusPresets": {
+    "message": "Bloquear Edición de Ajustes de Enfoque",
+    "description": "Settings config option."
+  },
+  "lockFocusPresetsDesc": {
+    "message": "Pide PIN para editar o borrar ajustes de enfoque personalizados.",
+    "description": "Settings config option description."
+  },
+  "lockFocusSchedules": {
+    "message": "Bloquear Edición de Horarios de Enfoque",
+    "description": "Settings config option."
+  },
+  "lockFocusSchedulesDesc": {
+    "message": "Pide PIN para cambiar o borrar horarios de enfoque.",
+    "description": "Settings config option description."
+  },
+  "lockAdvancedTweaks": {
+    "message": "Bloquear Modificaciones de Sitio Avanzadas",
+    "description": "Settings config option."
+  },
+  "lockAdvancedTweaksDesc": {
+    "message": "Pide PIN para acceder a estilos personalizados o modificaciones avanzadas.",
+    "description": "Settings config option description."
+  },
+  "lockPrivacyMode": {
+    "message": "Bloquear Modo Privado (Pausar Rastreo)",
+    "description": "Settings config option."
+  },
+  "lockPrivacyModeDesc": {
+    "message": "Pide PIN para pausar el rastreo o activar modo privado.",
+    "description": "Settings config option description."
+  },
+  "lockAdjustTime": {
+    "message": "Bloquear Ajuste de Tiempo (Desglose Diario)",
+    "description": "Settings config option."
+  },
+  "lockAdjustTimeDesc": {
+    "message": "Pide PIN para cambiar a mano el tiempo rastreado en desglose diario.",
+    "description": "Settings config option description."
+  },
+  "lockDangerZone": {
+    "message": "Bloquear Zona de Peligro (Borrar Datos)",
+    "description": "Settings config option."
+  },
+  "lockDangerZoneDesc": {
+    "message": "Pide PIN para reiniciar estadísticas, reglas o categorías.",
+    "description": "Settings config option description."
+  },
+  "dangerZone": {
+    "message": "Zona de Peligro",
+    "description": "Settings card label."
+  },
+  "resetAllStats": {
+    "message": "Reiniciar todas las estadísticas",
+    "description": "Settings config option."
+  },
+  "resetAllStatsDesc": {
+    "message": "Borra todo tu historial de rastreo y analíticas. No se puede deshacer.",
+    "description": "Settings config option description."
+  },
+  "btnResetStats": {
+    "message": "Borrar Estadísticas",
+    "description": "Action button."
+  },
+  "clearAllRules": {
+    "message": "Borrar todas las reglas de bloqueo/permiso",
+    "description": "Settings config option."
+  },
+  "clearAllRulesDesc": {
+    "message": "Elimina listas de bloqueo, horarios, límites y permitidos.",
+    "description": "Settings config option description."
+  },
+  "btnClearRules": {
+    "message": "Borrar Reglas",
+    "description": "Action button."
+  },
+  "clearAllCategories": {
+    "message": "Borrar categorías manuales",
+    "description": "Settings config option."
+  },
+  "clearAllCategoriesDesc": {
+    "message": "Restaura las categorías de sitios a las predeterminadas.",
+    "description": "Settings config option description."
+  },
+  "btnClearCategories": {
+    "message": "Borrar Categorías",
+    "description": "Action button."
+  },
+  "supportFeedbackHeader": {
+    "message": "Soporte y Opiniones",
+    "description": "Settings card label."
+  },
+  "submitFeedbackHeader": {
+    "message": "Enviar Sugerencias y Reportes de Errores",
+    "description": "Settings config option."
+  },
+  "submitFeedbackDesc": {
+    "message": "¡Ayúdanos a mejorar Flow! Comparte tus ideas o reporta fallos.",
+    "description": "Settings config option description."
+  },
+  "submitFeedbackBtn": {
+    "message": "💡 Enviar Opiniones",
+    "description": "Action button."
+  },
+  "helpTranslateBtn": {
+    "message": "🌐 Ayuda a Traducir",
+    "description": "Action button."
+  },
+  "backupRestoreHeader": {
+    "message": "Copia de Seguridad y Restauración",
+    "description": "Settings card label."
+  },
+  "exportDataJson": {
+    "message": "Exportar todos los datos a JSON",
+    "description": "Settings config option."
+  },
+  "exportDataJsonDesc": {
+    "message": "Estadísticas, reglas, categorías y ajustes.",
+    "description": "Settings config option description."
+  },
+  "downloadJson": {
+    "message": "Descargar JSON",
+    "description": "Action button."
+  },
+  "restoreFromJson": {
+    "message": "Restaurar desde JSON",
+    "description": "Settings config option."
+  },
+  "restoreFromJsonDesc": {
+    "message": "Reemplaza TODOS los datos actuales. Confirma antes de restaurar.",
+    "description": "Settings config option description."
+  },
+  "chooseFile": {
+    "message": "Elegir Archivo…",
+    "description": "Input file label."
+  },
+  "localStorageUsage": {
+    "message": "Uso de Almacenamiento Local",
+    "description": "Settings config option."
+  },
+  "localStorageUsageDesc": {
+    "message": "Espacio usado por ajustes, historial y reglas (de 10MB máximo).",
+    "description": "Settings config option description."
+  },
+  "migrationImportsHeader": {
+    "message": "Migración e Importaciones",
+    "description": "Settings card label."
+  },
+  "importFromWatt": {
+    "message": "Importar desde Web Activity Time Tracker",
+    "description": "Settings config option."
+  },
+  "importFromWattDesc": {
+    "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
+    "description": "Settings config option description."
+  },
+  "importFromTt": {
+    "message": "Importar desde Time Tracker - Web Habit Builder",
+    "description": "Settings config option."
+  },
+  "importFromTtDesc": {
+    "message": "Sube el archivo JSON exportado para unir tu historial de rastreo.",
+    "description": "Settings config option description."
+  },
+  "importFromWt": {
+    "message": "Importar desde Webtime Tracker",
+    "description": "Settings config option."
+  },
+  "importFromWtDesc": {
+    "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
+    "description": "Settings config option description."
+  },
+  "backupHistory": {
+    "message": "Historial de Respaldos",
+    "description": "Settings block title."
+  },
+  "btnCreateLocalBackup": {
+    "message": "+ Crear Respaldo Local",
+    "description": "Action button."
+  },
+  "editFreeTime": {
+    "message": "Editar Horas Libres",
+    "description": "Modal title."
+  },
+  "fromTime": {
+    "message": "Hora de Inicio",
+    "description": "Input field label."
+  },
+  "toTime": {
+    "message": "Hora de Fin",
+    "description": "Input field label."
+  },
+  "activeDays": {
+    "message": "Días Activos",
+    "description": "Input field label."
+  },
+  "saveChanges": {
+    "message": "Guardar Cambios",
+    "description": "Action button."
+  },
+  "tagMonitor": {
+    "message": "Etiquetar / Monitorear",
+    "description": "Tab segment title."
+  },
+  "quickApplyPreset": {
+    "message": "Aplicar Ajuste Rápido",
+    "description": "Select label."
+  },
+  "selectPresetToApply": {
+    "message": "-- Selecciona un ajuste para aplicar --",
+    "description": "Option label."
+  },
+  "egDomainNoPrefix": {
+    "message": "reddit.com",
+    "description": "Placeholder."
+  },
+  "activeRulesSelectMultiple": {
+    "message": "Reglas Activas (Selecciona varias)",
+    "description": "Sub-header label."
+  },
+  "dailyTimeLimit": {
+    "message": "Límite de tiempo diario",
+    "description": "Rule mode option."
+  },
+  "dailyLimitMinutes": {
+    "message": "Límite diario (minutos) (0 = siempre bloqueado)",
+    "description": "Input field label."
+  },
+  "perSessionLimit": {
+    "message": "Límite por Sesión",
+    "description": "Rule mode option."
+  },
+  "sessionSettings": {
+    "message": "Ajustes de Sesión",
+    "description": "Input block title."
+  },
+  "timeLimitMinutes": {
+    "message": "Límite de Tiempo (minutos)",
+    "description": "Input field label."
+  },
+  "breakCooldownMinutes": {
+    "message": "Descanso / Espera (minutos)",
+    "description": "Input field label."
+  },
+  "scheduleBased": {
+    "message": "Por horario",
+    "description": "Rule mode option."
+  },
+  "timeWindows": {
+    "message": "Ventanas de tiempo",
+    "description": "Input field label."
+  },
+  "addWindow": {
+    "message": "+ Añadir ventana",
+    "description": "Action button."
+  },
+  "cooldownSite": {
+    "message": "Sitio de espera",
+    "description": "Rule mode option."
+  },
+  "cooldownSettings": {
+    "message": "Ajustes de Espera",
+    "description": "Input block title."
+  },
+  "waitTimeSec": {
+    "message": "Espera (seg)",
+    "description": "Input field label."
+  },
+  "frequency": {
+    "message": "Frecuencia",
+    "description": "Input field label."
+  },
+  "everyVisit": {
+    "message": "Cada visita",
+    "description": "Option choice."
+  },
+  "oncePerDay": {
+    "message": "Una vez al día",
+    "description": "Option choice."
+  },
+  "every10min": {
+    "message": "Cada 10 min",
+    "description": "Option choice."
+  },
+  "optDistraction": {
+    "message": "⚡ Distracción",
+    "description": "Category choice."
+  },
+  "optProductivity": {
+    "message": "💻 Productividad",
+    "description": "Category choice."
+  },
+  "optLearning": {
+    "message": "📚 Aprendizaje",
+    "description": "Category choice."
+  },
+  "optCommunication": {
+    "message": "💬 Comunicación",
+    "description": "Category choice."
+  },
+  "optUncategorized": {
+    "message": "❓ Sin categoría",
+    "description": "Category choice."
+  },
+  "assignCategoryDesc": {
+    "message": "Esto asigna una categoría para estadísticas sin bloquear el sitio.",
+    "description": "Explanation text."
+  },
+  "saveTag": {
+    "message": "Guardar Etiqueta",
+    "description": "Action button."
+  },
+  "areYouSure": {
+    "message": "¿Seguro?",
+    "description": "Modal title."
+  },
+  "cannotBeUndone": {
+    "message": "Esta acción no se puede deshacer.",
+    "description": "Modal sub-text warning."
+  },
+  "confirm": {
+    "message": "Confirmar",
+    "description": "Action button."
+  },
+  "privacyModalDesc": {
+    "message": "Pausa el rastreo y el bloqueo. Elige cuánto tiempo pausar:",
+    "description": "Modal sub-text warning."
+  },
+  "createBlockPreset": {
+    "message": "Crear Ajuste de Bloqueo",
+    "description": "Modal title."
+  },
+  "presetName": {
+    "message": "Nombre del Ajuste",
+    "description": "Input field label."
+  },
+  "egPresetName": {
+    "message": "ej. Modo Estricto",
+    "description": "Placeholder."
+  },
+  "rulesConfiguration": {
+    "message": "Configuración de Reglas",
+    "description": "Sub-header label."
+  },
+  "savePreset": {
+    "message": "Guardar Ajuste",
+    "description": "Action button."
+  },
+  "timeAdjusted": {
+    "message": "Tiempo ajustado",
+    "description": "Toast notice."
+  },
+  "adjustFailed": {
+    "message": "Fallo al ajustar",
+    "description": "Toast notice."
+  },
+  "undoNeverTrackRestored": {
+    "message": "Deshacer: 'No Rastrear' restaurado",
+    "description": "Toast notice."
+  },
+  "undoRuleRestored": {
+    "message": "Deshacer: regla restaurada",
+    "description": "Toast notice."
+  },
+  "undoAllowRuleRestored": {
+    "message": "Deshacer: regla de permitidos restaurada",
+    "description": "Toast notice."
+  },
+  "removed": {
+    "message": "Eliminado",
+    "description": "Toast notice."
+  },
+  "thresholdsUpdated": {
+    "message": "Límites actualizados",
+    "description": "Toast notice."
+  },
+  "noItemsSelected": {
+    "message": "No seleccionaste nada, genio.",
+    "description": "Toast notice."
+  },
+  "deleteRules": {
+    "message": "Borrar Reglas",
+    "description": "Confirm title."
+  },
+  "deleteRulesConfirm": {
+    "message": "¿Borrar $count$ reglas?",
+    "description": "Confirm body.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "itemsDeleted": {
+    "message": "Elementos eliminados",
+    "description": "Toast notice."
+  },
+  "enterDomain": {
+    "message": "Escribe un dominio real, no inventes.",
+    "description": "Toast notice."
+  },
+  "taggedSuccessfully": {
+    "message": "$domain$ etiquetado con éxito",
+    "description": "Toast notice.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "reddit.com"
+      }
+    }
+  },
+  "studyGoalsSaved": {
+    "message": "Metas de estudio guardadas",
+    "description": "Toast notice."
+  },
+  "pickBothDates": {
+    "message": "Elige ambas fechas",
+    "description": "Toast notice."
+  },
+  "endDateBeforeStart": {
+    "message": "A ver, la fecha de fin no puede ser antes de la de inicio. Piensa un poco.",
+    "description": "Toast notice."
+  },
+  "removedException": {
+    "message": "Excepción eliminada",
+    "description": "Toast notice."
+  },
+  "selectAtLeastOneDay": {
+    "message": "Elige al menos un día, no seas flojo.",
+    "description": "Toast notice."
+  },
+  "freeTimeSaved": {
+    "message": "¡Horario libre guardado con éxito!",
+    "description": "Toast notice."
+  },
+  "sessionDeleted": {
+    "message": "Sesión eliminada",
+    "description": "Toast notice."
+  },
+  "alreadyAdded": {
+    "message": "Eso ya está en la lista. No dupliques cosas.",
+    "description": "Toast notice."
+  },
+  "exceptionAdded": {
+    "message": "Excepción añadida",
+    "description": "Toast notice."
+  },
+  "settingsSaved": {
+    "message": "Ajustes guardados",
+    "description": "Toast notice."
+  },
+  "errorSavingSettings": {
+    "message": "Valió gorro al guardar los ajustes: $error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Unknown error"
+      }
+    }
+  },
+  "pinSavedActive": {
+    "message": "PIN guardado. No te lo vayas a olvidar.",
+    "description": "Toast notice."
+  },
+  "pinRemoved": {
+    "message": "PIN eliminado",
+    "description": "Toast notice."
+  },
+  "resetStatsConfirm": {
+    "message": "¿Borrar TODO? ¿En serio? Luego no llores, que no se puede recuperar.",
+    "description": "Confirm body."
+  },
+  "resetConfirmBtn": {
+    "message": "Borrar",
+    "description": "Confirm action."
+  },
+  "clearRules": {
+    "message": "Borrar Reglas",
+    "description": "Confirm title."
+  },
+  "clearRulesConfirm": {
+    "message": "¿Seguro que quieres quitar todas las reglas de bloqueo? No te rindas tan fácil.",
+    "description": "Confirm body."
+  },
+  "clearConfirmBtn": {
+    "message": "Borrar",
+    "description": "Confirm action."
+  },
+  "rulesCleared": {
+    "message": "Reglas borradas",
+    "description": "Toast notice."
+  },
+  "clearCategories": {
+    "message": "Borrar Categorías",
+    "description": "Confirm title."
+  },
+  "clearCategoriesConfirm": {
+    "message": "¿Eliminar todas las categorías personalizadas?",
+    "description": "Confirm body."
+  },
+  "categoriesCleared": {
+    "message": "Categorías borradas",
+    "description": "Toast notice."
+  },
+  "clearHistoryConfirm": {
+    "message": "¿Borrar historial? ¿Quieres borrar tus pecados?",
+    "description": "Confirm body."
+  },
+  "cleared": {
+    "message": "Borrado",
+    "description": "Toast notice."
+  },
+  "exportFailed": {
+    "message": "Error al exportar",
+    "description": "Toast notice."
+  },
+  "backupDownloaded": {
+    "message": "Copia de seguridad descargada",
+    "description": "Toast notice."
+  },
+  "restoreBackup": {
+    "message": "Restaurar Copia de Seguridad",
+    "description": "Confirm title."
+  },
+  "restoreBackupConfirm": {
+    "message": "La restauración REEMPLAZARÁ todos los datos actuales. ¿Continuar?",
+    "description": "Confirm body."
+  },
+  "restoreConfirmBtn": {
+    "message": "Restaurar",
+    "description": "Confirm action."
+  },
+  "restoredReloading": {
+    "message": "Restaurado — recargando…",
+    "description": "Toast notice."
+  },
+  "invalidJsonFile": {
+    "message": "Ese archivo JSON no sirve. Sube algo real.",
+    "description": "Toast notice."
+  },
+  "importLogsWattConfirm": {
+    "message": "Esto unirá los registros de Web Activity Time Tracker con el historial de Flow.\n\nAtención: Si importas la misma hoja de cálculo dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "description": "Confirm body."
+  },
+  "importConfirmBtn": {
+    "message": "Importar",
+    "description": "Confirm action."
+  },
+  "successfullyImportedDays": {
+    "message": "¡Se importaron con éxito $count$ días! Recargando...",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "importFailedErr": {
+    "message": "Fallo al importar: $error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "File missing"
+      }
+    }
+  },
+  "invalidFile": {
+    "message": "Archivo no válido",
+    "description": "Default error."
+  },
+  "importLogsTtConfirm": {
+    "message": "Esto unirá los registros JSON de Time Tracker con el historial de Flow.\n\nAtención: Si importas el mismo archivo JSON dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "description": "Confirm body."
+  },
+  "importLogsWtConfirm": {
+    "message": "Esto unirá los registros CSV de Webtime Tracker con el historial de Flow.\n\nAtención: Si importas el mismo archivo CSV dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "description": "Confirm body."
+  },
+  "activatedPreset": {
+    "message": "Ajuste activado: $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetSavedSuccessfully": {
+    "message": "¡Ajuste guardado con éxito!",
+    "description": "Toast notice."
+  },
+  "scheduleDeleted": {
+    "message": "Horario eliminado",
+    "description": "Toast notice."
+  },
+  "scheduleUpdated": {
+    "message": "Horario actualizado",
+    "description": "Toast notice."
+  },
+  "scheduleAdded": {
+    "message": "Horario añadido",
+    "description": "Toast notice."
+  },
+  "enterValidDomain": {
+    "message": "Ingresa un dominio que sirva, por favor.",
+    "description": "Toast notice."
+  },
+  "domainAlreadyAllowed": {
+    "message": "Ese ya estaba en la lista de permitidos. No insistas.",
+    "description": "Toast notice."
+  },
+  "addedToAllowlist": {
+    "message": "Sitio libre. Ojalá no sea para procrastinar.",
+    "description": "Toast notice."
+  },
+  "enterValidDomains": {
+    "message": "Por favor ingresa dominio(s) válido(s)",
+    "description": "Toast notice."
+  },
+  "addedDomainsToNeverTrack": {
+    "message": "Se añadieron $count$ dominio(s) a 'No Rastrear'",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "domainsAlreadyInList": {
+    "message": "Los dominios ya están en la lista",
+    "description": "Toast notice."
+  },
+  "trackingResumed": {
+    "message": "Rastreo reanudado",
+    "description": "Toast notice."
+  },
+  "privacyModeEnabled": {
+    "message": "Modo Privado activado",
+    "description": "Toast notice."
+  },
+  "backupRestoredReloading": {
+    "message": "Copia de seguridad restaurada — recargando...",
+    "description": "Toast notice."
+  },
+  "downloadStarted": {
+    "message": "Descarga iniciada",
+    "description": "Toast notice."
+  },
+  "failedDownloadData": {
+    "message": "Fallo al descargar datos",
+    "description": "Toast notice."
+  },
+  "deleteBackupConfirm": {
+    "message": "¿Borrar de forma permanente este respaldo del historial?",
+    "description": "Confirm body."
+  },
+  "deleteConfirmBtn": {
+    "message": "Borrar",
+    "description": "Confirm action."
+  },
+  "backupDeleted": {
+    "message": "Respaldo eliminado",
+    "description": "Toast notice."
+  },
+  "deleteFailed": {
+    "message": "Fallo al borrar",
+    "description": "Toast notice."
+  },
+  "localBackupCreated": {
+    "message": "Respaldo local creado",
+    "description": "Toast notice."
+  },
+  "backupCreationFailed": {
+    "message": "Fallo al crear respaldo",
+    "description": "Toast notice."
+  },
+  "enterDomainFirstToBlockInstantly": {
+    "message": "Escribe un dominio primero si quieres bloquearlo al instante.",
+    "description": "Toast notice."
+  },
+  "siteBlockedUnderPreset": {
+    "message": "Sitio bloqueado bajo el ajuste $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "deletePresetConfirm": {
+    "message": "¿De verdad quieres borrar el ajuste \"$name$\"?",
+    "description": "Confirm body.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetDeleted": {
+    "message": "Ajuste eliminado",
+    "description": "Toast notice."
+  },
+  "presetNameRequired": {
+    "message": "Ponle un nombre al ajuste, no lo dejes en blanco.",
+    "description": "Toast notice."
+  },
+  "maxCustomPresetsLimit": {
+    "message": "Ya tienes 3 ajustes personalizados. Deja de inventar tanto.",
+    "description": "Toast notice."
+  },
+  "presetCreated": {
+    "message": "Ajuste creado",
+    "description": "Toast notice."
+  },
+  "presetUpdated": {
+    "message": "Ajuste modificado",
+    "description": "Toast notice."
+  },
+  "appliedPreset": {
+    "message": "Ajuste aplicado: $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "undo10s": {
+    "message": "Deshacer (10s)",
+    "description": "Undo text label."
+  },
+  "undoXs": {
+    "message": "Deshacer ($secs$s)",
+    "description": "Undo countdown.",
+    "placeholders": {
+      "secs": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "editBlockRule": {
+    "message": "Editar Regla de Bloqueo",
+    "description": "Modal title."
+  },
+  "startWork": {
+    "message": "▶ Iniciar Trabajo",
+    "description": "Action button."
+  },
+  "startBreak": {
+    "message": "▶ Iniciar Descanso",
+    "description": "Action button."
+  },
+  "scheduledFocus": {
+    "message": "Enfoque Programado",
+    "description": "Focus mode timer subtext."
+  },
+  "pinLengthError": {
+    "message": "El PIN debe tener exactamente 6 dígitos.",
+    "description": "PIN configuration error."
+  },
+  "pinsDoNotMatch": {
+    "message": "Los PINs no coinciden.",
+    "description": "PIN configuration error."
+  },
+  "readingFile": {
+    "message": "Leyendo archivo...",
+    "description": "Migration progress status."
+  },
+  "parsingCsvData": {
+    "message": "Analizando datos CSV...",
+    "description": "Migration progress status."
+  },
+  "mergingDaysOfHistory": {
+    "message": "Uniendo $count$ días de historial...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "finalizingAndReloading": {
+    "message": "Finalizando y recargando...",
+    "description": "Migration progress status."
+  },
+  "importingDataDayOf": {
+    "message": "Importando datos: Día $current$ de $total$...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "10"
+      },
+      "total": {
+        "content": "$2",
+        "example": "100"
+      }
+    }
+  },
+  "creatingPreImportBackup": {
+    "message": "Creando respaldo antes de importar...",
+    "description": "Migration progress status."
+  },
+  "parsingJsonData": {
+    "message": "Analizando datos JSON...",
+    "description": "Migration progress status."
+  },
+  "creating": {
+    "message": "Creando...",
+    "description": "Button progress indicator."
+  },
+  "editBlockPreset": {
+    "message": "Editar Ajuste de Bloqueo",
+    "description": "Modal title."
+  },
+  "pausedAlways": {
+    "message": "Pausado (Siempre)",
+    "description": "Indefinite pause status."
+  },
+  "delete": {
+    "message": "Eliminar",
+    "description": "Generic tooltip or button."
+  },
+  "edit": {
+    "message": "Editar",
+    "description": "Generic tooltip or button."
+  },
+  "restoreThisBackup": {
+    "message": "Restaurar este respaldo",
+    "description": "Tooltip."
+  },
+  "downloadJsonFile": {
+    "message": "Descargar archivo JSON",
+    "description": "Tooltip."
+  },
+  "deleteThisBackup": {
+    "message": "Eliminar este respaldo",
+    "description": "Tooltip."
+  },
+  "egMorningFocus": {
+    "message": "ej. Enfoque Matutino",
+    "description": "Schedule input placeholder."
+  },
+  "quickStart": {
+    "message": "Inicio Rápido",
+    "description": "Button tooltip."
+  },
+  "editSettings": {
+    "message": "Editar Ajustes",
+    "description": "Button tooltip."
+  },
+  "daySundayLetter": {
+    "message": "D",
+    "description": "Sunday letter."
+  },
+  "dayMondayLetter": {
+    "message": "L",
+    "description": "Monday letter."
+  },
+  "dayTuesdayLetter": {
+    "message": "M",
+    "description": "Tuesday letter."
+  },
+  "dayWednesdayLetter": {
+    "message": "M",
+    "description": "Wednesday letter."
+  },
+  "dayThursdayLetter": {
+    "message": "J",
+    "description": "Thursday letter."
+  },
+  "dayFridayLetter": {
+    "message": "V",
+    "description": "Friday letter."
+  },
+  "daySaturdayLetter": {
+    "message": "S",
+    "description": "Saturday letter."
+  },
+  "range7d": {
+    "message": "7d",
+    "description": "7 days range label shortcut"
+  },
+  "range14d": {
+    "message": "14d",
+    "description": "14 days range label shortcut"
+  },
+  "range30d": {
+    "message": "30d",
+    "description": "30 days range label shortcut"
+  },
+  "range45d": {
+    "message": "45d",
+    "description": "45 days range label shortcut"
+  },
+  "trackLocalFiles": {
+    "message": "Rastrear Archivos Locales",
+    "description": "Track local files option"
+  },
+  "trackLocalFilesDesc": {
+    "message": "Rastrea los PDF o archivos locales que abres. No te escondas.",
+    "description": "Track local files option description"
+  },
+  "blockingBehavior": {
+    "message": "Comportamiento de Bloqueo",
+    "description": "Blocking behavior card header"
+  },
+  "showFunnyBlockedPage": {
+    "message": "Mostrar página de bloqueo con frases chidas",
+    "description": "Show funny blocked page option"
+  },
+  "timeLimitWarning": {
+    "message": "Aviso antes de que te bloquee",
+    "description": "Warning duration option"
+  },
+  "timeLimitWarningDesc": {
+    "message": "Te avisa estos segundos antes de que te bloquee la página. Prepárate.",
+    "description": "Warning duration description"
+  },
+  "sec": {
+    "message": "seg",
+    "description": "seconds abbreviation"
+  },
+  "tabLimiter": {
+    "message": "Límite de pestañas por dominio",
+    "description": "Tab limiter option"
+  },
+  "tabLimiterDesc": {
+    "message": "Pon 0 para desactivar. Si puedes controlarte.",
+    "description": "Tab limiter description"
+  },
+  "tabsMax": {
+    "message": "pestañas máx",
+    "description": "tabs limit label"
+  },
+  "trackingExceptions": {
+    "message": "Excepciones de Rastreo",
+    "description": "Tracking exceptions card header"
+  },
+  "alwaysTrackEvenIdle": {
+    "message": "Rastrear siempre (incluso inactivo)",
+    "description": "Always track option"
+  },
+  "alwaysTrackEvenIdleDesc": {
+    "message": "Sitios que seguirán contando tiempo aunque te vayas a hacer un café.",
+    "description": "Always track description"
+  },
+  "btnAddException": {
+    "message": "+ Añadir Excepción",
+    "description": "Add exception button"
+  },
+  "badgeDisplay": {
+    "message": "Contador del Icono",
+    "description": "Badge display card header"
+  },
+  "showTimeSpentBadge": {
+    "message": "Mostrar tiempo en el icono",
+    "description": "Show time spent option"
+  },
+  "showTimeSpentBadgeDesc": {
+    "message": "Muestra los minutos que llevas perdiendo en el sitio actual.",
+    "description": "Show time spent description"
+  },
+  "showIdlWhenIdle": {
+    "message": "Mostrar \"idl\" al estar inactivo",
+    "description": "Show idle status option"
+  },
+  "showIdlWhenIdleDesc": {
+    "message": "Muestra \"idl\" en el icono para que sepas que no está contando nada.",
+    "description": "Show idle status description"
+  },
+  "dataRollover": {
+    "message": "Datos e Inicio del Día",
+    "description": "Data and rollover card header"
+  },
+  "nightOwlRollover": {
+    "message": "Reinicio del Día para Búhos",
+    "description": "Night owl rollover option"
+  },
+  "nightOwlRolloverDesc": {
+    "message": "Define a qué hora empieza tu nuevo día de rastreo. Útil si eres de los que no duermen.",
+    "description": "Night owl description"
+  },
+  "midnight": {
+    "message": "Medianoche (12:00 AM)",
+    "description": "Midnight option"
+  },
+  "lastXDays": {
+    "message": "Últimos $ días",
+    "description": "Last X days label",
+    "placeholders": {
+      "count": {
+        "content": "",
+        "example": "7"
+      }
+    }
+  },
+  "tuesday": {
+    "message": "Martes",
+    "description": "Weekday name."
+  },
+  "wednesday": {
+    "message": "Miércoles",
+    "description": "Weekday name."
+  },
+  "thursday": {
+    "message": "Jueves",
+    "description": "Weekday name."
+  },
+  "friday": {
+    "message": "Viernes",
+    "description": "Weekday name."
+  },
+  "saturday": {
+    "message": "Sábado",
+    "description": "Weekday name."
+  },
+  "sun": {
+    "message": "Dom",
+    "description": "Abbreviated weekday name."
+  },
+  "mon": {
+    "message": "Lun",
+    "description": "Abbreviated weekday name."
+  },
+  "tue": {
+    "message": "Mar",
+    "description": "Abbreviated weekday name."
+  },
+  "wed": {
+    "message": "Mié",
+    "description": "Abbreviated weekday name."
+  },
+  "thu": {
+    "message": "Jue",
+    "description": "Abbreviated weekday name."
+  },
+  "fri": {
+    "message": "Vie",
+    "description": "Abbreviated weekday name."
+  },
+  "sat": {
+    "message": "Sáb",
+    "description": "Abbreviated weekday name."
+  },
+  "everyday": {
+    "message": "Todos los días",
+    "description": "Schedule frequency label."
+  },
+  "weekdays": {
+    "message": "Días laborables",
+    "description": "Schedule frequency label."
+  },
+  "focusSession": {
+    "message": "Sesión de enfoque",
+    "description": "Default focus session name."
+  },
+  "addSchedule": {
+    "message": "Añadir horario",
+    "description": "Add schedule button."
+  },
+  "notEnoughDataYet": {
+    "message": "Aún no hay suficientes datos",
+    "description": "Empty state analytics label."
+  },
+  "label": {
+    "message": "Etiqueta",
+    "description": "Text input label."
+  },
+  "start": {
+    "message": "Inicio",
+    "description": "Time input label."
+  },
+  "end": {
+    "message": "Fin",
+    "description": "Time input label."
+  },
+  "categoriesToBlock": {
+    "message": "Categorías a bloquear",
+    "description": "Categories select section header."
+  },
+  "preScheduleNotification": {
+    "message": "Notificación previa",
+    "description": "Option label."
+  },
+  "preScheduleNotificationDesc": {
+    "message": "Recibe un aviso antes de que empiece la sesión.",
+    "description": "Option sublabel."
+  },
+  "disabled": {
+    "message": "Desactivado",
+    "description": "Option setting selection."
+  },
+  "oneMinBefore": {
+    "message": "1 min antes",
+    "description": "Option setting selection."
+  },
+  "fiveMinsBefore": {
+    "message": "5 min antes",
+    "description": "Option setting selection."
+  },
+  "tenMinsBefore": {
+    "message": "10 min antes",
+    "description": "Option setting selection."
+  },
+  "fifteenMinsBefore": {
+    "message": "15 min antes",
+    "description": "Option setting selection."
+  },
+  "editFocusSchedule": {
+    "message": "Editar horario de enfoque",
+    "description": "Dialog title."
+  },
+  "addFocusSchedule": {
+    "message": "Añadir horario de enfoque",
+    "description": "Dialog title."
+  },
+  "bestDowStat": {
+    "message": "$day$ — prom. $time$ de enfoque",
+    "description": "Best day of week performance metric.",
+    "placeholders": {
+      "day": {
+        "content": "$1",
+        "example": "Lunes"
+      },
+      "time": {
+        "content": "$2",
+        "example": "2h 15m"
+      }
+    }
+  }
+}
