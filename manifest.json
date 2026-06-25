@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Flow - Website Manager & Habit Tracker",
-  "version": "6.9.9",
-  "description": "Advanced productivity tracker and network-level distraction blocker.",
+  "name": "__MSG_extName__",
+  "version": "7.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -16,8 +17,7 @@
     "notifications",
     "declarativeNetRequest",
     "scripting",
-    "favicon",
-    "downloads"
+    "favicon"
   ],
   "host_permissions": [
     "<all_urls>"

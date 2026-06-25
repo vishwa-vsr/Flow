@@ -176,6 +176,19 @@ def minify_js_esbuild(src_path, dst_path):
         return False
 
 
+def minify_css_esbuild(src_path, dst_path):
+    """Minify CSS using local esbuild if available, with a fallback to custom logic."""
+    esbuild_cmd = os.path.join(SRC_DIR, "node_modules", ".bin", "esbuild.cmd")
+    if not os.path.exists(esbuild_cmd):
+        esbuild_cmd = "esbuild"
+    try:
+        subprocess.run([esbuild_cmd, src_path, "--minify", "--outfile=" + dst_path],
+                       capture_output=True, check=True, shell=True)
+        return True
+    except Exception:
+        return False
+
+
 def process_file(src_path, dst_path):
     """Process a single file: minify JS/HTML/CSS or copy as-is."""
     ext = os.path.splitext(src_path)[1].lower()
@@ -218,10 +231,17 @@ def process_file(src_path, dst_path):
         with open(src_path, 'r', encoding='utf-8', errors='replace') as f:
             css = f.read()
         original_size = len(css.encode('utf-8'))
-        css = minify_css(css)
-        new_size = len(css.encode('utf-8'))
-        with open(dst_path, 'w', encoding='utf-8') as f:
-            f.write(css)
+        
+        success = minify_css_esbuild(src_path, dst_path)
+        if success:
+            new_size = os.path.getsize(dst_path)
+        else:
+            # Fallback to custom comment/whitespace remover if esbuild fails
+            css = minify_css(css)
+            new_size = len(css.encode('utf-8'))
+            with open(dst_path, 'w', encoding='utf-8') as f:
+                f.write(css)
+                
         saved = original_size - new_size
         if saved > 100:
             print(f"  CSS  {os.path.basename(src_path):30s}  {original_size:>8,} -> {new_size:>8,}  (saved {saved:,} bytes)")
