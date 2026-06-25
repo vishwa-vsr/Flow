@@ -136,7 +136,8 @@ async function saveFavicon(dom, favIconUrl) {
 let flushQueue = [],
     isFlushing = !1,
     warnedSitesMemory = {},
-    lastWarnDate = "";
+    lastWarnDate = "",
+    _activeRedirects = {};
 
 
 // Bug#3 fix: persist flushQueue to session storage
@@ -779,28 +780,39 @@ let isPrivacyActive = _loc.privacyModeActive === true;
         delete i[t];
         Object.keys(i).filter(k => k.endsWith("." + t)).forEach(k => delete i[k]);
     });
+    _activeRedirects = { ...i };
     const n = Object.entries(i).map(([t, e], a) => {
-        let targetUrl = e;
-        if (e.startsWith(BLOCKED_PAGE)) {
-            const [path, query] = e.split("?");
-            const relativePath = path.startsWith("/") ? path.slice(1) : path;
-            const separator = query ? "&" : "?";
-            targetUrl = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(t);
-        } else if (!e.startsWith("http")) {
-            targetUrl = "https://" + e;
-        }
-        return {
-            id: a + 1,
-            priority: 1,
-            action: {
-                type: "redirect",
-                redirect: {
-                    url: targetUrl
+        const isLocal = e.startsWith(BLOCKED_PAGE);
+        if (isLocal) {
+            return {
+                id: a + 1,
+                priority: 1,
+                action: {
+                    type: "block"
+                },
+                condition: {
+                    urlFilter: `||${t}`,
+                    resourceTypes: ["main_frame"]
                 }
-            },
-            condition: {
-                urlFilter: `||${t}`,
-                resourceTypes: ["main_frame"]
+            }
+        } else {
+            let targetUrl = e;
+            if (!e.startsWith("http")) {
+                targetUrl = "https://" + e;
+            }
+            return {
+                id: a + 1,
+                priority: 1,
+                action: {
+                    type: "redirect",
+                    redirect: {
+                        url: targetUrl
+                    }
+                },
+                condition: {
+                    urlFilter: `||${t}`,
+                    resourceTypes: ["main_frame"]
+                }
             }
         }
     }),
@@ -815,6 +827,7 @@ let isPrivacyActive = _loc.privacyModeActive === true;
             if (or.priority !== nr.priority) return false;
             if (or.action?.type !== nr.action?.type) return false;
             if (or.action?.redirect?.url !== nr.action?.redirect?.url) return false;
+            if (or.action?.redirect?.extensionPath !== nr.action?.redirect?.extensionPath) return false;
             if (or.condition?.urlFilter !== nr.condition?.urlFilter) return false;
             const oEx = (or.condition?.excludedRequestDomains || []).slice().sort().join(",");
             const nEx = (nr.condition?.excludedRequestDomains || []).slice().sort().join(",");
@@ -950,6 +963,26 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 
     if (tab.favIconUrl) {
         saveFavicon(dom, tab.favIconUrl);
+    }
+
+    // 0.5. Intercept blocked pages and redirect using chrome.tabs.update (avoids Brave's network redirect hang bug)
+    if (changeInfo.status === "loading" || changeInfo.url) {
+        if (typeof _activeRedirects !== "undefined" && _activeRedirects) {
+            const matchedDom = Object.keys(_activeRedirects).find(d => dom === d || dom.endsWith("." + d));
+            if (matchedDom && !url.includes(chrome.runtime.id)) {
+                let redirectUrl = _activeRedirects[matchedDom];
+                if (redirectUrl.startsWith(BLOCKED_PAGE)) {
+                    const [path, query] = redirectUrl.split("?");
+                    const relativePath = path.startsWith("/") ? path.slice(1) : path;
+                    const separator = query ? "&" : "?";
+                    redirectUrl = chrome.runtime.getURL(relativePath) + (query ? "?" + query : "") + separator + "d=" + safeBtoa(matchedDom);
+                } else if (!redirectUrl.startsWith("http")) {
+                    redirectUrl = "https://" + redirectUrl;
+                }
+                chrome.tabs.update(tabId, { url: redirectUrl }).catch(() => {});
+                return;
+            }
+        }
     }
 
     // 1. Dynamic path blocking/redirection for tweaks (Shorts & Reels)
@@ -2279,57 +2312,6 @@ async function handle(t, e) {
     }
 }
 
-async function triggerAutoBackup() {
-    try {
-        await FFDB.ensureMigrated();
-        const daily = await FFDB.getAllDays();
-        const rollups = await FFDB.getRollups();
-        const local = await gLocal(["blockRules", "allowList", "siteCategories", "granularRules",
-            "focusHistory", "cooldownConfig"]);
-        const sync = await gSync(["settings", "focusPresets"]);
-        const payload = {
-            version: (chrome.runtime.getManifest && chrome.runtime.getManifest().version) || "unknown",
-            exportedAt: Date.now(),
-            daily, rollups,
-            local,
-            settings: sync.settings || {},
-            focusPresets: sync.focusPresets || []
-        };
-        
-        const jsonString = JSON.stringify(payload);
-        const base64 = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, (match, p1) => {
-            return String.fromCharCode(parseInt(p1, 16));
-        }));
-        const dataUrl = 'data:application/json;base64,' + base64;
-        
-        const dStr = todayKey();
-        await chrome.downloads.download({
-            url: dataUrl,
-            filename: 'FocusFlow_Backup_' + dStr + '.json',
-            saveAs: false
-        });
-        
-        await sLocal({ lastBackupAt: Date.now() });
-        
-        try {
-            const id = "backup_" + Math.floor(Date.now() / 1000);
-            await FFDB.saveLocalBackup(id, "Weekly Auto-Backup", payload);
-        } catch (errLocalBackup) {
-            console.warn("Failed to auto-save backup locally:", errLocalBackup);
-        }
-        
-        try {
-            chrome.notifications.create("ff-auto-backup-" + Date.now(), {
-                type: "basic",
-                iconUrl: chrome.runtime.getURL("icons/icon128.png"),
-                title: "Flow - Auto Backup Saved",
-                message: "Your weekly auto-backup has been saved to your Downloads folder."
-            });
-        } catch (_) {}
-    } catch (err) {
-        console.warn("[FF] Auto-backup failed:", err);
-    }
-}
 
 async function restoreState() {
     const t = await gLocal(["focusSession"]);
@@ -2467,17 +2449,6 @@ async function init() {
         ]);
     } catch (_) {}
     await compressOldData();
-    try {
-        const syncData = await getCachedSync();
-        const settings = syncData.settings || {};
-        if (settings.autoBackupEnabled) {
-            const localData = await gLocal(["lastBackupAt"]);
-            const lastBackup = localData.lastBackupAt || 0;
-            if (Date.now() - lastBackup >= 7 * 864e5) {
-                setTimeout(triggerAutoBackup, 5000);
-            }
-        }
-    } catch (_) {}
     const _scRes = await gLocal(["siteCategories", "presetsPreApplied"]);
     if (!_scRes.presetsPreApplied) {
         const scMap = _scRes.siteCategories || {};
@@ -2504,17 +2475,6 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
         return;
     }
     if ("tracker_heartbeat" === t.name) {
-        try {
-            const syncData = await getCachedSync();
-            const settings = syncData.settings || {};
-            if (settings.autoBackupEnabled) {
-                const localData = await gLocal(["lastBackupAt"]);
-                const lastBackup = localData.lastBackupAt || 0;
-                if (Date.now() - lastBackup >= 7 * 864e5) {
-                    await triggerAutoBackup();
-                }
-            }
-        } catch (_) {}
         const _today = todayKey();
         await safeUpdateSession(async () => {
             const t = (await gSession(["activeSession"])).activeSession;

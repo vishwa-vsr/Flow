@@ -75,6 +75,12 @@
 
     const findInShadows = (selector) => {
       const found = [];
+      // Optimization: Instead of searching every element on the page with '*',
+      // we only look inside custom elements that are known to host shadow roots.
+      const targetTags = [
+        'shreddit-app', 'reddit-sidebar-nav', 'left-nav-top-section', 
+        'reddit-recent-pages', 'faceplate-tracker'
+      ];
       const search = (root) => {
         if (!root) return;
         try {
@@ -84,11 +90,13 @@
           });
         } catch (e) {}
         try {
-          const all = root.querySelectorAll('*');
-          all.forEach(el => {
-            if (el.shadowRoot) {
-              search(el.shadowRoot);
-            }
+          targetTags.forEach(tag => {
+            const elements = root.querySelectorAll(tag);
+            elements.forEach(el => {
+              if (el.shadowRoot) {
+                search(el.shadowRoot);
+              }
+            });
           });
         } catch (e) {}
       };

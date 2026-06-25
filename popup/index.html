@@ -14,8 +14,8 @@
     <div style="display:flex; justify-content:center; margin-bottom:12px;">
       <svg viewBox="0 0 24 24" width="40" height="40" stroke="var(--amber)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
     </div>
-    <div style="font-size:20px;font-weight:800;margin-bottom:8px">Verification</div>
-    <div style="font-size:13px;color:var(--tx2);margin-bottom:24px">Enter your 6-digit PIN to continue</div>
+    <div style="font-size:20px;font-weight:800;margin-bottom:8px" data-i18n="verification">Verification</div>
+    <div style="font-size:13px;color:var(--tx2);margin-bottom:24px" data-i18n="enterPin">Enter your 6-digit PIN to continue</div>
     <div class="pdots" id="pdots" style="display:flex;justify-content:center;gap:12px;margin-bottom:24px">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -25,9 +25,9 @@
       <button class="bs pk" data-n="7">7</button><button class="bs pk" data-n="8">8</button><button class="bs pk" data-n="9">9</button>
       <button class="bs pk" id="pclr">⌫</button><button class="bs pk" data-n="0">0</button><button class="bp pk" id="pcok">OK</button>
     </div>
-    <div id="pcerr" class="hide" style="font-size:13px;color:var(--red);margin-top:12px;font-weight:700;">Incorrect PIN</div>
+    <div id="pcerr" class="hide" style="font-size:13px;color:var(--red);margin-top:12px;font-weight:700;" data-i18n="incorrectPin">Incorrect PIN</div>
     <div style="display:flex; justify-content:center; margin-top:16px;">
-      <button class="bs hide" id="pccancel" style="width:100%; max-width:240px; padding:10px;">Cancel</button>
+      <button class="bs hide" id="pccancel" style="width:100%; max-width:240px; padding:10px;" data-i18n="cancel">Cancel</button>
     </div>
   </div>
 </div>
@@ -39,16 +39,16 @@
     <span class="streak-badge" id="streak-badge"></span>
   </div>
   <div class="header-right">
-    <button class="icon-btn" id="btn-analytics" title="Analytics">
+    <button class="icon-btn" id="btn-analytics" data-i18n-title="analytics" title="Analytics">
       <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
     </button>
-    <button class="icon-btn" id="btn-theme" title="Toggle theme">
+    <button class="icon-btn" id="btn-theme" data-i18n-title="toggleTheme" title="Toggle theme">
       <svg viewBox="0 0 24 24" id="theme-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
-    <button class="icon-btn" id="btn-privacy" title="Privacy Mode / Pause Tracking">
+    <button class="icon-btn" id="btn-privacy" data-i18n-title="privacyMode" title="Privacy Mode / Pause Tracking">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </button>
-    <button class="icon-btn" id="btn-settings" title="Settings">
+    <button class="icon-btn" id="btn-settings" data-i18n-title="settings" title="Settings">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
   </div>
@@ -56,13 +56,13 @@
 
 <div class="focus-section" id="privacy-panel" style="display:none; margin:16px 16px 0; padding:16px; min-height:auto;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-    <span style="font-weight:800; font-size:14px; color:var(--tx)">Pause Tracking & Blocking</span>
+    <span style="font-weight:800; font-size:14px; color:var(--tx)" data-i18n="pauseTrackingBlocking">Pause Tracking & Blocking</span>
     <button id="btn-close-privacy" style="background:none; border:none; color:var(--tx2); cursor:pointer; font-size:18px;">✕</button>
   </div>
   <div style="display:flex; flex-direction:column; gap:8px;">
-    <button class="fbtn" id="btn-privacy-30" style="padding:10px; font-size:13px;">Pause for 30 minutes</button>
-    <button class="fbtn" id="btn-privacy-60" style="padding:10px; font-size:13px;">Pause for 1 hour</button>
-    <button class="fbtn" id="btn-privacy-always" style="padding:10px; font-size:13px; background:rgba(244,107,122,.15); color:var(--red);">Pause until resumed</button>
+    <button class="fbtn" id="btn-privacy-30" style="padding:10px; font-size:13px;" data-i18n="pauseFor30Min">Pause for 30 minutes</button>
+    <button class="fbtn" id="btn-privacy-60" style="padding:10px; font-size:13px;" data-i18n="pauseFor1Hour">Pause for 1 hour</button>
+    <button class="fbtn" id="btn-privacy-always" style="padding:10px; font-size:13px; background:rgba(244,107,122,.15); color:var(--red);" data-i18n="pauseUntilResumed">Pause until resumed</button>
   </div>
 </div>
 
@@ -72,16 +72,16 @@
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </div>
     <div style="flex:1;">
-      <div style="font-weight:800; font-size:14px; color:var(--tx);">Privacy Mode Active</div>
-      <div style="font-size:12px; color:var(--tx2);" id="privacy-status-desc">Tracking & blocking paused</div>
+      <div style="font-weight:800; font-size:14px; color:var(--tx);" data-i18n="privacyModeActive">Privacy Mode Active</div>
+      <div style="font-size:12px; color:var(--tx2);" id="privacy-status-desc" data-i18n="trackingBlockingPaused">Tracking & blocking paused</div>
     </div>
-    <button class="bp" id="btn-resume-tracking" style="padding:8px 14px; font-size:12px; background:#A855F7; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">Resume</button>
+    <button class="bp" id="btn-resume-tracking" style="padding:8px 14px; font-size:12px; background:#A855F7; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold;" data-i18n="resume">Resume</button>
   </div>
 </div>
 
 <div class="time-tabs">
-  <button class="ttab act" data-view="today">Today</button>
-  <button class="ttab" data-view="total">All Time</button>
+  <button class="ttab act" data-view="today" data-i18n="tabToday">Today</button>
+  <button class="ttab" data-view="total" data-i18n="tabAllTime">All Time</button>
 </div>
 
 <div class="focus-section" id="current-site-card" style="display:none; margin:16px 16px 0; padding:16px; min-height:auto; position:relative; overflow:visible !important;">
@@ -99,12 +99,12 @@
     <svg width="130" height="130" viewBox="0 0 130 130" id="donut-svg">
       <circle cx="65" cy="65" r="50" fill="none" stroke="var(--bg4)" stroke-width="16"/>
     </svg>
-    <div class="donut-center"><span class="donut-total" id="donut-total">0m</span><span class="donut-sublbl" id="donut-sublbl">today</span></div>
+    <div class="donut-center"><span class="donut-total" id="donut-total">0m</span><span class="donut-sublbl" id="donut-sublbl" data-i18n="sublblToday">today</span></div>
   </div>
   <div class="donut-right" id="donut-legend">
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">
        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.5; animation:spin 2s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
-       <span style="font-size:13px;font-weight:600">Loading...</span>
+       <span style="font-size:13px;font-weight:600" data-i18n="loading">Loading...</span>
     </div>
   </div>
 </div>
@@ -112,13 +112,13 @@
   <div id="total-widgets" class="fade-in" style="display:none">
     <div class="focus-section" id="goal-section" style="display:none; min-height:auto; padding:16px; margin:0 16px 16px;">
       <div class="goal-header">
-        <span class="goal-lbl">Weekly Goal</span>
+        <span class="goal-lbl" data-i18n="weeklyGoal">Weekly Goal</span>
         <div style="display:flex;align-items:center;gap:8px">
           <span class="goal-pct" id="goal-pct" style="color:var(--green)">—</span>
         </div>
       </div>
       <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%;background:var(--green);"></div></div>
-      <div class="goal-sub"><span id="goal-done" style="color:var(--tx);font-weight:700">0h 0m done</span><span id="goal-target">Set goal in Settings</span></div>
+      <div class="goal-sub"><span id="goal-done" style="color:var(--tx);font-weight:700">0h 0m done</span><span id="goal-target" data-i18n="setGoalInSettings">Set goal in Settings</span></div>
     </div>
   </div>
 
@@ -127,46 +127,46 @@
     
     <div class="focus-settings-panel" id="focus-set-panel">
        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <span style="font-weight:800;font-size:18px;color:var(--tx)">Timer Settings<span id="p-settings-preset-name" style="font-size:14px;color:var(--tx2);font-weight:600;margin-left:6px;text-transform:none;"></span></span>
+          <span style="font-weight:800;font-size:18px;color:var(--tx)"><span data-i18n="timerSettings">Timer Settings</span><span id="p-settings-preset-name" style="font-size:14px;color:var(--tx2);font-weight:600;margin-left:6px;text-transform:none;"></span></span>
           <button id="p-close-focus" style="background:none;border:none;color:var(--tx2);cursor:pointer;font-size:22px;line-height:1;transition:var(--trans);">✕</button>
        </div>
        <div class="fsp-grid">
           <div class="fsp-grid-row">
              <div class="fsp-col">
-                <label>Work (min)</label>
+                <label data-i18n="workMin">Work (min)</label>
                 <input type="number" id="p-sw" min="1" max="120">
              </div>
              <div class="fsp-col">
-                <label>Short Break</label>
+                <label data-i18n="shortBreak">Short Break</label>
                 <input type="number" id="p-sb" min="0" max="60">
              </div>
           </div>
           <div class="fsp-grid-row">
              <div class="fsp-col">
-                <label>Long Break</label>
+                <label data-i18n="longBreak">Long Break</label>
                 <input type="number" id="p-sl" min="0" max="60">
              </div>
              <div class="fsp-col">
-                <label>Cycles</label>
+                <label data-i18n="cycles">Cycles</label>
                 <input type="number" id="p-sc" min="1" max="10">
              </div>
           </div>
        </div>
        <div style="display:flex;gap:12px;margin-top:16px;width:100%">
-          <button class="bp" id="p-save-focus" style="flex:1;padding:12px 6px;font-size:14px;">Save Settings</button>
-          <button class="bs" id="p-adv-focus" style="flex:1;padding:12px 6px;font-size:14px;">Advanced Settings</button>
+          <button class="bp" id="p-save-focus" style="flex:1;padding:12px 6px;font-size:14px;" data-i18n="saveSettings">Save Settings</button>
+          <button class="bs" id="p-adv-focus" style="flex:1;padding:12px 6px;font-size:14px;" data-i18n="advancedSettings">Advanced Settings</button>
        </div>
     </div>
 
     <div class="focus-top">
       <div class="focus-lbl-group">
-        <span class="focus-lbl">Focus Mode</span>
+        <span class="focus-lbl" data-i18n="focusMode">Focus Mode</span>
         <button class="focus-settings-btn" id="btn-focus-set" title="Timer Settings">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
         </button>
         <div id="preset-rail" style="display:flex;gap:4px;margin-left:4px;"></div>
       </div>
-      <span class="focus-phase" id="focus-phase">Pomodoro</span>
+      <span class="focus-phase" id="focus-phase" data-i18n="pomodoro">Pomodoro</span>
     </div>
 
     <div class="focus-body">
@@ -175,20 +175,20 @@
           <circle class="fr-bg" cx="40" cy="40" r="34"/>
           <circle class="fr-fill work" id="fr-fill" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
         </svg>
-        <div class="fr-inner"><span class="fr-time" id="fr-time">25:00</span><span class="fr-cycles" id="fr-cycles">0 done</span></div>
+        <div class="fr-inner"><span class="fr-time" id="fr-time">25:00</span><span class="fr-cycles" id="fr-cycles" data-i18n="cyclesDone" data-i18n-sub="0">0 done</span></div>
       </div>
       <div class="focus-info">
-        <div class="focus-title" id="focus-title">Ready to focus?</div>
+        <div class="focus-title" id="focus-title" data-i18n="readyToFocus">Ready to focus?</div>
         <div class="focus-sub" id="focus-sub">25 min work · 5 min break</div>
       </div>
     </div>
 
-    <div id="pause-warning" class="pause-warning">⏱ Auto-stops in <span id="pause-countdown"></span></div>
+    <div id="pause-warning" class="pause-warning"><span data-i18n="autoStopsIn">⏱ Auto-stops in</span> <span id="pause-countdown"></span></div>
     <div class="focus-btns">
-      <button class="fbtn go" id="btn-start">▶ Start</button>
-      <button class="fbtn stop" id="btn-stop" style="display:none">■ Stop</button>
-      <button class="fbtn skip" id="btn-skip" style="display:none">⏭ Skip</button>
-      <button class="fbtn" id="btn-pause" style="display:none">⏸ Pause</button>
+      <button class="fbtn go" id="btn-start" data-i18n="btnStart">▶ Start</button>
+      <button class="fbtn stop" id="btn-stop" style="display:none" data-i18n="btnStop">■ Stop</button>
+      <button class="fbtn skip" id="btn-skip" style="display:none" data-i18n="btnSkip">⏭ Skip</button>
+      <button class="fbtn" id="btn-pause" style="display:none" data-i18n="btnPause">⏸ Pause</button>
     </div>
   </div>
 
@@ -198,6 +198,7 @@
 <div id="dynamic-list" class="fade-in"></div>
 
 <script src="../src/lib/constants.js"></script>
+<script src="../src/lib/i18n.js"></script>
 <script src="../src/lib/storage.js"></script>
 <script src="../utils.js"></script>
 <script src="popup.js"></script>

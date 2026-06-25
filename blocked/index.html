@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<title>Blocked — Flow</title>
+<title data-i18n="blockedPageTitle">Blocked — Flow</title>
 <link rel="stylesheet" href="../global.css">
 <style>
 body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative}
@@ -41,21 +41,22 @@ h1 em{font-style:italic;color:var(--green)}
   <span id="bar-reason" class="bar-reason"></span>
 </div>
 <div class="card scale-in">
-  <div class="pill" id="domain-pill">this site</div>
+  <div class="pill" id="domain-pill" data-i18n="thisSite">this site</div>
   <div class="emoji" id="emoji">⛔</div>
   <h1 id="headline">Not <em>today.</em></h1>
   <p class="sub" id="sub">You blocked this. Past-you was smarter than you right now.</p>
-  <div class="badge" id="badge">Blocked by Flow</div>
+  <div class="badge" id="badge" data-i18n="blockedByFlow">Blocked by Flow</div>
   <div class="rule-detail" id="rule-detail"></div>
     <div class="prod-suggestion" id="productive-suggestion"></div>
-    <button class="bp btn-back" id="btn-back">← Take me back</button>
+    <button class="bp btn-back" id="btn-back" data-i18n="takeBackBtn">← Take me back</button>
 
-  <button class="bs btn-set" id="btn-set">Manage block rules →</button>
+  <button class="bs btn-set" id="btn-set" data-i18n="manageBlockRules">Manage block rules →</button>
 </div>
 <p class="quote">"Discipline is choosing between what you want now and what you want most."</p>
 <div class="gl gl1"></div>
 <div class="gl gl2"></div>
 <script src="../src/lib/constants.js"></script>
+<script src="../src/lib/i18n.js"></script>
 <script src="../src/lib/storage.js"></script>
 <script src="../utils.js"></script>
 <script src="blocked.js"></script>

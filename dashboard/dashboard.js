@@ -38,6 +38,15 @@ var $ = function (e) {
     CAT_META = self.CAT_META || {};
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
 
+function getLocale() {
+    const sel = document.getElementById("lang-sel")?.value;
+    if (sel && sel !== "default") return sel;
+    if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
+        return chrome.i18n.getUILanguage();
+    }
+    return navigator.language || "en-US";
+}
+
 async function applyTheme() {
     const e = await gLocal(["theme"]);
     let currentTheme = e.theme;
@@ -71,7 +80,7 @@ function hideAnalyticsHeader() {
             });
         }
     }
-    document.querySelectorAll('[data-atab="trend"]').forEach(e => e.textContent = "Comparison");
+    document.querySelectorAll('[data-atab="trend"]').forEach(e => e.textContent = t_("comparison"));
 }
 
 function catColor(e) {
@@ -87,9 +96,11 @@ function catEmoji(e) {
 }
 
 function catLabel(e, t) {
-    var a = (CAT_META[e] || {
-        label: e
-    }).label;
+    var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
+    var a = t_(key);
+    if (a === key) {
+        a = (CAT_META[e] || { label: e }).label;
+    }
     return t ? a + " ✨" : a
 }
 
@@ -366,8 +377,8 @@ function injectScrubModal() {
             t > activeScrubSecs && (t = activeScrubSecs);
             // FF v4.4: Dexie-aware scrub. Writes to IndexedDB via SW message instead of legacy chrome.storage.local.daily.
             const res = await msg("STATS_SCRUB_DAY", { day: activeScrubDay, domain: activeScrubDom, secs: t });
-            if (res && res.ok) { toast("Time adjusted", "ok"); loadAnalytics(); }
-            else { toast("Adjust failed", "er"); }
+            if (res && res.ok) { toast(t_("timeAdjusted"), "ok"); loadAnalytics(); }
+            else { toast(t_("adjustFailed"), "er"); }
             $("scrubModal").classList.add("hide");
         };
     }
@@ -579,13 +590,13 @@ async function delNever(e) {
     renderCombined();
     let _undoneNever = false;
     const _undoBtnN = document.createElement("button");
-    _undoBtnN.textContent = "Undo (10s)"; _undoBtnN.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
+    _undoBtnN.textContent = t_("undo10s"); _undoBtnN.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
     _undoBtnN.onclick = async () => {
         if (_undoneNever) return; _undoneNever = true;
         const _r2 = await gLocal(["neverTrackDomains"]); const _arr = _r2.neverTrackDomains || [];
         if (!_arr.includes(_deletedNever)) _arr.push(_deletedNever);
         neverTrackDomains = _arr; await sLocal({ neverTrackDomains: neverTrackDomains });
-        renderCombined(); toast("Undo: never-track restored", "ok");
+        renderCombined(); toast(t_("undoNeverTrackRestored"), "ok");
     };
     const _stackIdxN = _toastStackCount++;
     const _bottomPxN = 80 + _stackIdxN * 62;
@@ -594,7 +605,7 @@ async function delNever(e) {
     setSafeHTML(_tdN, "<span>Never-track removed</span>"); _tdN.appendChild(_undoBtnN);
     document.body.appendChild(_tdN);
     let _secs = 10;
-    const _cdown = setInterval(() => { _secs--; if (!_undoneNever && _undoBtnN.parentNode) _undoBtnN.textContent = `Undo (${_secs}s)`; if (_secs <= 0) clearInterval(_cdown); }, 1000);
+    const _cdown = setInterval(() => { _secs--; if (!_undoneNever && _undoBtnN.parentNode) _undoBtnN.textContent = t_("undoXs", [_secs]); if (_secs <= 0) clearInterval(_cdown); }, 1000);
     setTimeout(() => { clearInterval(_cdown); _tdN.remove(); _toastStackCount = Math.max(0, _toastStackCount - 1); }, 10000);
 }
 
@@ -609,12 +620,12 @@ async function delRule(e) {
     if (_deleted) {
         let _undone = false;
         const _undoBtn = document.createElement("button");
-        _undoBtn.textContent = "Undo (10s)"; _undoBtn.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
+        _undoBtn.textContent = t_("undo10s"); _undoBtn.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
         _undoBtn.onclick = async () => {
             if (_undone) return; _undone = true;
             rules.push(_deleted);
             await saveRulesAndSync(rules);
-            await msg("TRIGGER_DNR_UPDATE"); renderCombined(); toast("Undo: rule restored", "ok");
+            await msg("TRIGGER_DNR_UPDATE"); renderCombined(); toast(t_("undoRuleRestored"), "ok");
         };
         const _stackIdx = _toastStackCount++;
         const _bottomPx = 80 + _stackIdx * 62;
@@ -623,7 +634,7 @@ async function delRule(e) {
         setSafeHTML(_td, "<span>Rule deleted</span>"); _td.appendChild(_undoBtn);
         document.body.appendChild(_td);
         let _secs = 10;
-        const _cdown = setInterval(() => { _secs--; if (!_undone && _undoBtn.parentNode) _undoBtn.textContent = `Undo (${_secs}s)`; if (_secs <= 0) clearInterval(_cdown); }, 1000);
+        const _cdown = setInterval(() => { _secs--; if (!_undone && _undoBtn.parentNode) _undoBtn.textContent = t_("undoXs", [_secs]); if (_secs <= 0) clearInterval(_cdown); }, 1000);
         setTimeout(() => { clearInterval(_cdown); _td.remove(); _toastStackCount = Math.max(0, _toastStackCount - 1); }, 10000);
     }
 }
@@ -637,13 +648,13 @@ async function delAllow(e) {
     // FF v6.18: undo allow-rule — 10 seconds with live countdown
     let _undoneAllow = false;
     const _undoBtnA = document.createElement("button");
-    _undoBtnA.textContent = "Undo (10s)"; _undoBtnA.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
+    _undoBtnA.textContent = t_("undo10s"); _undoBtnA.style.cssText = "margin-left:12px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx);border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer;";
     _undoBtnA.onclick = async () => {
         if (_undoneAllow) return; _undoneAllow = true;
         const _r2 = await gLocal(["allowList"]); const _arr = _r2.allowList || [];
         if (!_arr.includes(_deletedAllow)) _arr.push(_deletedAllow);
         allowList = _arr; await sLocal({ allowList: _arr });
-        await msg("TRIGGER_DNR_UPDATE"); renderCombined(); toast("Undo: allow-rule restored", "ok");
+        await msg("TRIGGER_DNR_UPDATE"); renderCombined(); toast(t_("undoAllowRuleRestored"), "ok");
     };
     const _stackIdxA = _toastStackCount++;
     const _bottomPxA = 80 + _stackIdxA * 62;
@@ -652,8 +663,8 @@ async function delAllow(e) {
     setSafeHTML(_tdA, "<span>Allow-rule removed</span>"); _tdA.appendChild(_undoBtnA);
     document.body.appendChild(_tdA);
     let _secsA = 10;
-    const _cdownA = setInterval(() => { _secsA--; if (!_undoneAllow && _undoBtnA.parentNode) _undoBtnA.textContent = `Undo (${_secsA}s)`; if (_secsA <= 0) clearInterval(_cdownA); }, 1000);
-    setTimeout(() => { clearInterval(_cdownA); if (!_undoneAllow) toast("Removed", "ok"); _tdA.remove(); _toastStackCount = Math.max(0, _toastStackCount - 1); }, 10000);
+    const _cdownA = setInterval(() => { _secsA--; if (!_undoneAllow && _undoBtnA.parentNode) _undoBtnA.textContent = t_("undoXs", [_secsA]); if (_secsA <= 0) clearInterval(_cdownA); }, 1000);
+    setTimeout(() => { clearInterval(_cdownA); if (!_undoneAllow) toast(t_("removed"), "ok"); _tdA.remove(); _toastStackCount = Math.max(0, _toastStackCount - 1); }, 10000);
 }
 
 function renderScheduleSlots(e) {
@@ -743,8 +754,8 @@ function openModal(e) {
             }
         });
     });
-    if ($("btn-add-block")) $("btn-add-block").textContent = "Save Changes";
-    if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Edit Block Rule";
+    if ($("btn-add-block")) $("btn-add-block").textContent = t_("saveChanges");
+    if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = t_("editBlockRule");
     if (typeof switchRuleModalTab === "function") switchRuleModalTab("block");
     if ($("add-rule-modal")) $("add-rule-modal").classList.remove("hide");
 }
@@ -891,7 +902,7 @@ function renderCategories() {
 
 function renderFocus(e, t = 25) {
     if (!e || !e.active) {
-        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = "0 cycles"), $("fpb") && ($("fpb").textContent = "Work", $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
+        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = t_("zeroCycles")), $("fpb") && ($("fpb").textContent = t_("work"), $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
         let e = document.getElementById("dynamic-favicon");
         return void (e && (e.href = "../icons/icon128.png"))
     }
@@ -899,7 +910,7 @@ function renderFocus(e, t = 25) {
     var a = "work" === e.phase,
         n = e.fullDuration || (a ? 1500 : "long_break" === e.phase ? 900 : 300),
         i = Math.max(0, 1 - Math.min(1, (e.remaining || 0) / n));
-    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? "Work" : "long_break" === e.phase ? "Long Break" : "Short Break"), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0)), $("fcyc") && ($("fcyc").textContent = e.isSchedule ? "Scheduled Focus" : ((e.cyclesCompleted || 0) + " " + ((e.cyclesCompleted === 1) ? "cycle" : "cycles"))), $("btn-fs") && ($("btn-fs").style.display = "none"), $("btn-fst") && ($("btn-fst").style.display = ""), $("btn-fp") && ($("btn-fp").style.display = "", e.paused ? (e.remaining === n ? $("btn-fp").textContent = "work" === e.phase ? "▶ Start Work" : "▶ Start Break" : $("btn-fp").textContent = "▶ Resume", $("frf") && ($("frf").style.opacity = "0.5")) : ($("btn-fp").textContent = "⏸ Pause", $("frf") && ($("frf").style.opacity = "1"))), $("btn-skip") && ($("btn-skip").style.display = a ? "none" : "");
+    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? t_("work") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase")), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0)), $("fcyc") && ($("fcyc").textContent = e.isSchedule ? t_("scheduledFocus") : (e.cyclesCompleted === 1 ? t_("cyclesCompleted", [e.cyclesCompleted]) : t_("cyclesCompletedPlural", [e.cyclesCompleted]))), $("btn-fs") && ($("btn-fs").style.display = "none"), $("btn-fst") && ($("btn-fst").style.display = ""), $("btn-fp") && ($("btn-fp").style.display = "", e.paused ? (e.remaining === n ? $("btn-fp").textContent = "work" === e.phase ? t_("startWork") : t_("startBreak") : $("btn-fp").textContent = t_("btnResume"), $("frf") && ($("frf").style.opacity = "0.5")) : ($("btn-fp").textContent = t_("btnPause"), $("frf") && ($("frf").style.opacity = "1"))), $("btn-skip") && ($("btn-skip").style.display = a ? "none" : "");
     // Bug #5 fix: reuse the single off-screen canvas instead of allocating each tick
     const s = _favCanvas;
     s.width = 32; s.height = 32; // resetting width clears the canvas
@@ -1103,8 +1114,8 @@ async function renderInsights() {
     // Weekday labels
     ctx.fillStyle = textStyle;
     const weekdayLabels = (settings.weekStartsOn || "mon") === "sun"
-        ? ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        ? [t_("sun"), t_("mon"), t_("tue"), t_("wed"), t_("thu"), t_("fri"), t_("sat")]
+        : [t_("mon"), t_("tue"), t_("wed"), t_("thu"), t_("fri"), t_("sat"), t_("sun")];
     weekdayLabels.forEach((lbl, idx) => {
         ctx.fillText(lbl, 0, 28 + idx * rowH + 20);
     });
@@ -1128,14 +1139,14 @@ async function renderInsights() {
     const wknAvg = wknSecs / Math.max(1, dowCount[0] + dowCount[6]);
     $("ins-wkd-split") && setSafeHTML($("ins-wkd-split"),
         `Weekdays avg: <strong style="color:var(--green)">${fmt(wkdAvg)}</strong>/day<br>Weekends avg: <strong style="color:var(--green)">${fmt(wknAvg)}</strong>/day`);
-    const dowNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dowNames = [t_("sunday"), t_("monday"), t_("tuesday"), t_("wednesday"), t_("thursday"), t_("friday"), t_("saturday")];
     let bestDow = 0, bestAvg = 0;
     for (let i = 0; i < 7; i++) {
         const a = dowFocus[i] / Math.max(1, dowCount[i]);
         if (a > bestAvg) { bestAvg = a; bestDow = i; }
     }
     $("ins-best-dow") && setSafeHTML($("ins-best-dow"),
-        bestAvg > 0 ? `<strong style="color:var(--green)">${dowNames[bestDow]}</strong> — avg ${fmt(bestAvg)} of focus` : "Not enough data yet");
+        bestAvg > 0 ? t_("bestDowStat", [dowNames[bestDow], fmt(bestAvg)]) : t_("notEnoughDataYet"));
 
     // Hide loading state and display canvas (FF v6.18)
     if (loader) loader.style.display = "none";
@@ -1184,7 +1195,7 @@ async function renderInsights() {
         try {
             const parts = hit.k.split("-");
             const dObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-            dateLabel = dObj.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+            dateLabel = dObj.toLocaleDateString(getLocale(), { weekday: "short", month: "short", day: "numeric" });
         } catch (e) {}
         setSafeHTML(tip, `<div style="font-weight:800;margin-bottom:8px;border-bottom:1px solid var(--bd2);padding-bottom:6px">${dateLabel}</div>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:4px;color:#05D581"><span>Productivity:</span> <span class="num">${fmt(hit.prod)}</span></div>
@@ -1267,7 +1278,7 @@ document.body.appendChild(overlay);
 
                 overlay.remove();
                 renderInsights();
-                if (typeof toast === "function") toast("Thresholds updated", "ok");
+                if (typeof toast === "function") toast(t_("thresholdsUpdated"), "ok");
             };
         });
     }
@@ -1288,7 +1299,7 @@ function getDays(e) {
                 o = String(cursor.getMonth() + 1).padStart(2, "0"),
                 r = String(cursor.getDate()).padStart(2, "0");
             t.push(`${s}-${o}-${r}`);
-            a.push(cursor.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+            a.push(cursor.toLocaleDateString(getLocale(), { month: "short", day: "numeric" }));
             cursor.setDate(cursor.getDate() + 1);
         }
         return { days: t, labels: a };
@@ -1301,7 +1312,7 @@ function getDays(e) {
             o = String(i.getMonth() + 1).padStart(2, "0"),
             r = String(i.getDate()).padStart(2, "0");
         t.push(`${s}-${o}-${r}`);
-        a.push(i.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+        a.push(i.toLocaleDateString(getLocale(), { month: "short", day: "numeric" }));
     }
     return { days: t, labels: a };
 }
@@ -1341,8 +1352,8 @@ document.querySelectorAll(".ni").forEach(e => {
     }), $("btn-bulk-cancel") && $("btn-bulk-cancel").addEventListener("click", () => {
         isBulkMode = !1, bulkSelected.clear(), $("btn-bulk-edit").style.display = "", $("bulk-actions").style.display = "none", renderCombined()
     }), $("btn-bulk-delete") && $("btn-bulk-delete").addEventListener("click", async () => {
-        if (0 === bulkSelected.size) return void toast("No items selected", "er");
-        if (!(await showConfirm("Delete Rules", `Delete ${bulkSelected.size} rules?`, { isDestructive: true, confirmText: "Delete" }))) return;
+        if (0 === bulkSelected.size) return void toast(t_("noItemsSelected"), "er");
+        if (!(await showConfirm(t_("deleteRules"), t_("deleteRulesConfirm", [bulkSelected.size]), { isDestructive: true, confirmText: t_("deleteConfirmBtn") }))) return;
         rules = rules.filter(e => !bulkSelected.has(e.id));
         allowList = allowList.filter(e => !bulkSelected.has(e));
         neverTrackDomains = neverTrackDomains.filter(e => !bulkSelected.has(e));
@@ -1357,10 +1368,10 @@ document.querySelectorAll(".ni").forEach(e => {
         document.querySelectorAll("#btn-bulk-edit, .btn-bulk-edit-shared").forEach(btn => btn.style.display = "");
         $("bulk-actions").style.display = "none";
         renderCombined();
-        toast("Items deleted", "ok");
+        toast(t_("itemsDeleted"), "ok");
     }), $("btn-add-block") && $("btn-add-block").addEventListener("click", async function () {
         var e = $("cat-inp").value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
-        if (!e) return toast("Enter a domain", "er");
+        if (!e) return toast(t_("enterDomain"), "er");
 
         var t = "distraction";
         var a = $("cat-redir").value.trim();
@@ -1420,10 +1431,10 @@ document.querySelectorAll(".ni").forEach(e => {
             $("mon-inp-domain").value = "";
             $("mon-inp-domain").blur();
             $("add-rule-modal") && $("add-rule-modal").classList.add("hide");
-            toast(e + " tagged successfully", "ok");
+            toast(t_("taggedSuccessfully", [e]), "ok");
             if (typeof renderTopSites === "function") renderTopSites();
             if (typeof loadAnalytics === "function") loadAnalytics();
-        } else toast("Enter a domain", "er")
+        } else toast(t_("enterDomain"), "er")
     }), $("cat-inp") && $("cat-inp").addEventListener("keydown", e => {
         // FF v4.9 — "Just Tag" removed from Rule Manager. Enter now triggers Block.
         if ("Enter" === e.key) {
@@ -1472,7 +1483,7 @@ document.querySelectorAll(".ni").forEach(e => {
         let t = [];
         document.querySelectorAll(".goal-cb-cat:checked").forEach(e => t.push(e.value)), e.goalCats = t.length ? t : ["productivity", "learning"], await sSync({
             settings: e
-        }), toast("Study goals saved", "ok"), loadWeeklyGoalSettings(), loadAnalytics()
+        }), toast(t_("studyGoalsSaved"), "ok"), loadWeeklyGoalSettings(), loadAnalytics()
     }), document.querySelectorAll("[data-atab]").forEach(e => {
         e.addEventListener("click", () => {
             document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend", "insights"].forEach(e => {
@@ -1507,7 +1518,7 @@ document.querySelectorAll(".ni").forEach(e => {
             if (panel) panel.style.display = "none";
             analyticsRange = parseInt(v) || 7;
             overviewCustomFrom = null; overviewCustomTo = null;
-            $("ov-range-lbl") && ($("ov-range-lbl").textContent = "Last " + analyticsRange + " days");
+            $("ov-range-lbl") && ($("ov-range-lbl").textContent = t_("lastXDays", [analyticsRange]));
             renderOverview();
         })
     }), document.querySelectorAll("[data-siterange]").forEach(e => {
@@ -1563,7 +1574,7 @@ const dbApplyBtn = $("db-apply");
 if (dbApplyBtn) {
     dbApplyBtn.addEventListener("click", () => {
         const f = $("db-from")?.value, tt = $("db-to")?.value;
-        if (!f || !tt) { toast && toast("Pick both dates", "err"); return; }
+        if (!f || !tt) { toast && toast(t_("pickBothDates"), "err"); return; }
         dailyRange = "custom"; dailyCustomFrom = f; dailyCustomTo = tt;
         renderDailyBreakdown();
     });
@@ -1573,8 +1584,8 @@ const ovApplyBtn = $("ov-apply");
 if (ovApplyBtn) {
     ovApplyBtn.addEventListener("click", () => {
         const f = $("ov-from")?.value, tt = $("ov-to")?.value;
-        if (!f || !tt) { toast && toast("Pick both dates", "err"); return; }
-        if (new Date(tt) < new Date(f)) { toast && toast("End date is before start", "err"); return; }
+        if (!f || !tt) { toast && toast(t_("pickBothDates"), "err"); return; }
+        if (new Date(tt) < new Date(f)) { toast && toast(t_("endDateBeforeStart"), "err"); return; }
         overviewCustomFrom = f; overviewCustomTo = tt;
         $("ov-range-lbl") && ($("ov-range-lbl").textContent = f + " → " + tt);
         renderOverview();
@@ -1584,8 +1595,8 @@ const trendApplyBtn = $("trend-apply");
 if (trendApplyBtn) {
     trendApplyBtn.addEventListener("click", () => {
         const f = $("trend-from")?.value, tt = $("trend-to")?.value;
-        if (!f || !tt) { toast && toast("Pick both dates", "err"); return; }
-        if (new Date(tt) < new Date(f)) { toast && toast("End date is before start", "err"); return; }
+        if (!f || !tt) { toast && toast(t_("pickBothDates"), "err"); return; }
+        if (new Date(tt) < new Date(f)) { toast && toast(t_("endDateBeforeStart"), "err"); return; }
         trendCustomFrom = f; trendCustomTo = tt;
         renderTrend();
     });
@@ -2253,7 +2264,7 @@ async function renderOverview() {
     $("at-days") && ($("at-days").textContent = l);
     var c = await msg("STATS_GET_STREAK"),
         d = c && c.streak || {};
-    $("an-bs") && ($("an-bs").textContent = (d.bestStreak || 0) + "d"), $("an-bd") && ($("an-bd").textContent = d.bestDay ? new Date(d.bestDay + "T00:00:00").toLocaleDateString("en-US", {
+    $("an-bs") && ($("an-bs").textContent = (d.bestStreak || 0) + "d"), $("an-bd") && ($("an-bd").textContent = d.bestDay ? new Date(d.bestDay + "T00:00:00").toLocaleDateString(getLocale(), {
         month: "short",
         day: "numeric"
     }) : "—");
@@ -2396,7 +2407,7 @@ async function renderDailyBreakdown() {
               <div class="db-hero" style="margin-bottom: 24px;">
                 <div class="db-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
                   <div class="db-card-header-txt">
-                    ${new Date(n + "T00:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+                    ${new Date(n + "T00:00:00").toLocaleDateString(getLocale(), { weekday: "long", month: "long", day: "numeric" })}
                   </div>
                   ${hasTimeline ? `
                     <div class="db-card-header-txt">
@@ -2677,7 +2688,7 @@ function renderWhitelist(e) {
     }), t.querySelectorAll(".rm-wl").forEach(t => t.addEventListener("click", async () => {
         e.splice(parseInt(t.getAttribute("data-idx")), 1), await sLocal({
             idleWhitelist: e
-        }), renderWhitelist(e), toast("Removed exception", "ok")
+        }), renderWhitelist(e), toast(t_("removedException"), "ok")
     }))) : setSafeHTML(t, '<span style="font-size:13px;color:var(--tx3)">No exceptions added.</span>'))
 }
 // Storage Usage Indicator Helper
@@ -2753,7 +2764,7 @@ async function loadExtendedSettings(preloadedSettings) {
         $("tog-track-local") && ($("tog-track-local").checked = !!e.trackLocalFiles),
         $("day-rollover-sel") && ($("day-rollover-sel").value = e.dayRolloverHour !== undefined ? e.dayRolloverHour : 0),
         $("data-retention-sel") && ($("data-retention-sel").value = e.dataRetentionDays !== undefined ? e.dataRetentionDays : 365),
-        $("tog-auto-backup") && ($("tog-auto-backup").checked = !!e.autoBackupEnabled),
+        $("lang-sel") && ($("lang-sel").value = e.language || "default"),
         renderWhitelist((await gLocal(["idleWhitelist"])).idleWhitelist || []), 
         $("pin-status-badge")) {
         const updateIdleBadgeVisibility = () => {
@@ -2953,7 +2964,7 @@ async function loadExtendedSettings(preloadedSettings) {
                 .filter(cb => cb.checked)
                 .map(cb => parseInt(cb.value));
             if (!checkedDays.length) {
-                toast("Please select at least one day", "er");
+                toast(t_("selectAtLeastOneDay"), "er");
                 return;
             }
             var settingsData = (await gSync(["settings"])).settings || {};
@@ -2969,7 +2980,7 @@ async function loadExtendedSettings(preloadedSettings) {
             closeModal();
             loadExtendedSettings();
             await msg("UPDATE_IDLE");
-            toast("Free-time slot saved successfully!", "ok");
+            toast(t_("freeTimeSaved"), "ok");
         };
     }
 }
@@ -2992,8 +3003,8 @@ async function loadFocusHistory() {
                 custom: { emoji: "🌊", name: "Flow" }
             };
             const pObj = presetMeta[e.presetId] || { emoji: "🎯", name: "Focus" };
-            const dateStr = new Date(e.date + "T00:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
-            const timeStr = e.startedAt ? new Date(e.startedAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) : "—";
+            const dateStr = new Date(e.date + "T00:00:00").toLocaleDateString(getLocale(), { weekday: "short", month: "short", day: "numeric" });
+            const timeStr = e.startedAt ? new Date(e.startedAt).toLocaleTimeString(getLocale(), { hour: "2-digit", minute: "2-digit" }) : "—";
             t.style.cssText = "display:flex;align-items:center;padding:14px 16px;background:var(--bg3);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;transition:var(--trans)";
             t.onmouseover = () => t.style.borderColor = "var(--bd2)";
             t.onmouseout = () => t.style.borderColor = "var(--bd)";
@@ -3015,7 +3026,7 @@ a.appendChild(t)
             btn.addEventListener("click", async () => {
                 const idx = parseInt(btn.getAttribute("data-idx"));
                 await msg("DELETE_FOCUS_SESSION", { idx: idx });
-                if (typeof toast === "function") toast("Session deleted", "ok");
+                if (typeof toast === "function") toast(t_("sessionDeleted"), "ok");
                 loadFocusHistory();
             });
         });
@@ -3030,9 +3041,9 @@ a.appendChild(t)
     var e = $("whitelist-inp").value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
     if (e) {
         var t = (await gLocal(["idleWhitelist"])).idleWhitelist || [];
-        t.includes(e) ? toast("Already added", "er") : (t.push(e), await sLocal({
+        t.includes(e) ? toast(t_("alreadyAdded"), "er") : (t.push(e), await sLocal({
             idleWhitelist: t
-        }), $("whitelist-inp").value = "", renderWhitelist(t), toast("Exception added", "ok"))
+        }), $("whitelist-inp").value = "", renderWhitelist(t), toast(t_("exceptionAdded"), "ok"))
     }
 });
 
@@ -3056,7 +3067,11 @@ if ($("btn-save-set")) {
         
         let retentionDays = parseInt($("data-retention-sel")?.value);
         e.dataRetentionDays = isNaN(retentionDays) ? 365 : retentionDays;
-        e.autoBackupEnabled = $("tog-auto-backup")?.checked || false;
+
+        var oldLang = e.language || "default";
+        var newLang = $("lang-sel")?.value || "default";
+        var langChanged = oldLang !== newLang;
+        e.language = newLang;
 
         if (e.passcodeHash) {
             e.lockStop = !1 !== $("lock-stop")?.checked;
@@ -3072,11 +3087,14 @@ if ($("btn-save-set")) {
         await sSync({
             settings: e
         });
-        toast("Settings saved", "ok");
+        toast(t_("settingsSaved"), "ok");
+        if (langChanged) {
+            setTimeout(() => window.location.reload(), 1000);
+        }
         loadExtendedSettings();
         msg("UPDATE_IDLE");
     } catch (err) {
-        toast("Error saving settings: " + err.message, "er");
+        toast(t_("errorSavingSettings", [err.message]), "er");
     }
     });
 }
@@ -3085,18 +3103,18 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
     var e = $("pin1").value,
         t = $("pin2").value,
         a = $("pin-msg");
-    if (6 !== e.length || !/^\d{6}$/.test(e)) return a.textContent = "PIN must be exactly 6 digits", void (a.style.color = "var(--red)");
-    if (e !== t) return a.textContent = "PINs do not match", void (a.style.color = "var(--red)");
+    if (6 !== e.length || !/^\d{6}$/.test(e)) return a.textContent = t_("pinLengthError"), void (a.style.color = "var(--red)");
+    if (e !== t) return a.textContent = t_("pinsDoNotMatch"), void (a.style.color = "var(--red)");
     var n = (await gSync(["settings"])).settings || {};
     n.passcodeHash || (n.lockSettings = !1, n.lockStop = !0, n.lockRules = !0, n.lockFreetime = !0, n.lockDanger = !0, n.lockTweaks = !0, n.lockFocusScheds = !0, n.lockFocusPresets = !0, n.lockPrivacy = !0, n.lockAdjustTime = !0), n.passcodeHash = await hashPin(e), n.passcodeEnabled = !0, await sSync({
         settings: n
-    }), $("pin1").value = "", $("pin2").value = "", a.textContent = "", toast("PIN saved & active", "ok"), loadExtendedSettings()
+    }), $("pin1").value = "", $("pin2").value = "", a.textContent = "", toast(t_("pinSavedActive"), "ok"), loadExtendedSettings()
 }), $("btn-remove-pin") && $("btn-remove-pin").addEventListener("click", async () => {
     if (await showPass(!0, "Verification Required", "Enter current PIN to remove it.")) {
         var e = (await gSync(["settings"])).settings || {};
         e.passcodeHash = null, e.passcodeEnabled = !1, await sSync({
             settings: e
-        }), toast("PIN Removed", "ok"), loadExtendedSettings()
+        }), toast(t_("pinRemoved"), "ok"), loadExtendedSettings()
     }
 }), $("btn-change-pin") && $("btn-change-pin").addEventListener("click", async () => {
     if (await showPass(!0, "Verification Required", "Enter current PIN to change it.")) {
@@ -3107,28 +3125,28 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
     }
 }), $("btn-rst-stats") && $("btn-rst-stats").addEventListener("click", async () => {
     if (!(await promptPinIfEnabled("lockDanger"))) return;
-    if (!(await showConfirm("Reset Stats", "Delete ALL statistics? This cannot be undone.", { isDestructive: true, confirmText: "Reset" }))) return;
+    if (!(await showConfirm(t_("resetStats"), t_("resetStatsConfirm"), { isDestructive: true, confirmText: t_("resetConfirmBtn") }))) return;
     await msg("STATS_RESET_ALL");
     await sLocal({ daily: {} });
-    toast("Stats reset", "ok");
+    toast(t_("statsReset"), "ok");
     loadAnalytics();
 }), $("btn-clr-rules") && $("btn-clr-rules").addEventListener("click", async () => {
-    if (await promptPinIfEnabled("lockDanger") && await showConfirm("Clear Rules", "Remove all block/allow rules?", { isDestructive: true, confirmText: "Clear" })) {
+    if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearRules"), t_("clearRulesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
         rules = [], allowList = [], await sLocal({
             blockRules: [],
             allowList: []
-        }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), toast("Rules cleared", "ok")
+        }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), toast(t_("rulesCleared"), "ok")
     }
 }), $("btn-clr-cats") && $("btn-clr-cats").addEventListener("click", async () => {
-    if (await promptPinIfEnabled("lockDanger") && await showConfirm("Clear Categories", "Remove all custom categories?", { isDestructive: true, confirmText: "Clear" })) {
+    if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearCategories"), t_("clearCategoriesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
         siteCategories = {}, hiddenDefaultSites = [], await sLocal({
             siteCategories: {},
             hiddenDefaultSites: []
-        }), renderCategories(), loadAnalytics(), toast("Categories cleared", "ok")
+        }), renderCategories(), loadAnalytics(), toast(t_("categoriesCleared"), "ok")
     }
 }), $("btn-clear-history") && $("btn-clear-history").addEventListener("click", async () => {
-    if (await showConfirm("Clear History", "Clear history?", { isDestructive: true, confirmText: "Clear" })) {
-        await msg("CLEAR_FOCUS_HISTORY"), loadFocusHistory(), toast("Cleared", "ok")
+    if (await showConfirm(t_("clearHistory"), t_("clearHistoryConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
+        await msg("CLEAR_FOCUS_HISTORY"), loadFocusHistory(), toast(t_("cleared"), "ok")
     }
 });
 
@@ -3199,6 +3217,8 @@ renderFocus = function (e, t) {
         }
     }
 }), async function () {
+    await initI18n();
+    translatePage();
     hideAnalyticsHeader();
     const e = await msg("GET_AUTO_CATEGORIES");
     e && e.autoCategories && (AUTO_CATEGORIES = e.autoCategories), await checkGate();
@@ -3232,7 +3252,7 @@ renderFocus = function (e, t) {
     (function initFloatingSave() {
         const _fab = document.createElement("button");
         _fab.id = "floating-save-btn";
-        _fab.textContent = "Save All Settings";
+        _fab.textContent = t_("saveAllSettings");
         _fab.style.cssText = "display:none;position:fixed;bottom:28px;right:28px;z-index:9000;background:var(--green);color:#000;font-weight:800;font-size:16px;padding:12px 22px;border-radius:14px;border:none;cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s,transform .2s;font-family:inherit;";
         document.body.appendChild(_fab);
         _fab.addEventListener("click", () => { $("btn-save-set") && $("btn-save-set").click(); });
@@ -3266,19 +3286,19 @@ function switchRuleModalTab(type) {
 
 if ($("btn-export")) $("btn-export").addEventListener("click", async () => {
     const r = await msg("BACKUP_EXPORT");
-    if (!r || !r.ok) return toast("Export failed", "err");
+    if (!r || !r.ok) return toast(t_("exportFailed"), "err");
     const blob = new Blob([JSON.stringify(r.payload, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "flow-backup-" + new Date().toISOString().slice(0, 10) + ".json";
     a.click();
     URL.revokeObjectURL(a.href);
-    toast("Backup downloaded", "ok");
+    toast(t_("backupDownloaded"), "ok");
 });
 if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (!(await showConfirm("Restore Backup", "Restoring will REPLACE all current data. Continue?", { isDestructive: true, confirmText: "Restore" }))) {
+    if (!(await showConfirm(t_("restoreBackup"), t_("restoreBackupConfirm"), { isDestructive: true, confirmText: t_("restoreConfirmBtn") }))) {
         e.target.value = "";
         return;
     }
@@ -3287,9 +3307,9 @@ if ($("file-import")) $("file-import").addEventListener("change", async (e) => {
         const payload = JSON.parse(text);
         const r = await msg("BACKUP_IMPORT", { payload });
         if (r && r.ok) { toast("Restored — reloading…", "ok"); setTimeout(() => location.reload(), 800); }
-        else toast("Restore failed", "err");
+        else toast(t_("restoreFailed"), "err");
     } catch (err) {
-        toast("Invalid JSON file", "err");
+        toast(t_("invalidJsonFile"), "err");
     }
     e.target.value = "";
 });
@@ -3300,7 +3320,7 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!(await showConfirm("Import Logs", "This will merge Web Activity Time Tracker logs into Flow's history.\n\nWarning: If you import the same spreadsheet twice, it will add the tracked time twice. Click OK to proceed.", { isDestructive: false, confirmText: "Import" }))) {
+    if (!(await showConfirm(t_("importLogs"), t_("importLogsWattConfirm"), { isDestructive: false, confirmText: t_("importConfirmBtn") }))) {
         e.target.value = "";
         return;
     }
@@ -3311,12 +3331,12 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
     const progressBarEl = $("migration-progress-bar");
 
     if (statusEl) statusEl.style.display = "block";
-    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (statusTextEl) statusTextEl.textContent = t_("readingFile");
     if (progressBarEl) progressBarEl.style.width = "0%";
 
     try {
         const text = await file.text();
-        if (statusTextEl) statusTextEl.textContent = "Parsing CSV data...";
+        if (statusTextEl) statusTextEl.textContent = t_("parsingCsvData");
 
         const lines = text.split(/\r?\n/);
         if (lines.length < 2) {
@@ -3440,19 +3460,19 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
             throw new Error("No valid website history rows were found in the file.");
         }
 
-        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+        if (statusTextEl) statusTextEl.textContent = t_("mergingDaysOfHistory", [dateKeys.length]);
 
         const batchSize = 50;
         let processed = 0;
 
         const processBatch = async () => {
             if (processed >= dateKeys.length) {
-                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (statusTextEl) statusTextEl.textContent = t_("finalizingAndReloading");
                 if (progressBarEl) progressBarEl.style.width = "100%";
 
                 await msg("INVALIDATE_CACHES");
 
-                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                toast(t_("successfullyImportedDays", [dateKeys.length]), "ok");
                 setTimeout(() => location.reload(), 1500);
                 return;
             }
@@ -3503,12 +3523,12 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
 
             const percent = Math.round((processed / dateKeys.length) * 100);
             if (progressBarEl) progressBarEl.style.width = `${percent}%`;
-            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+            if (statusTextEl) statusTextEl.textContent = t_("importingDataDayOf", [processed, dateKeys.length]);
 
             setTimeout(processBatch, 20);
         };
 
-        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        if (statusTextEl) statusTextEl.textContent = t_("creatingPreImportBackup");
         try {
             await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Web Activity Time Tracker)" });
         } catch (errBackup) {
@@ -3520,7 +3540,7 @@ if ($("file-migrate-watt")) $("file-migrate-watt").addEventListener("change", as
     } catch (err) {
         console.error("[Migration] Error importing CSV file", err);
         if (statusTextEl) setSafeHTML(statusTextEl, `<span style="color:var(--red)">Failed: ${sanitizeDomain(err.message || err)}</span>`);
-        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        toast(t_("importFailedErr", [err.message || t_("invalidFile")]), "er");
         isMigrationRunning = false;
     }
 
@@ -3531,7 +3551,7 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!(await showConfirm("Import Logs", "This will merge Time Tracker JSON logs into Flow's history.\n\nWarning: If you import the same JSON file twice, it will add the tracked time twice. Click OK to proceed.", { isDestructive: false, confirmText: "Import" }))) {
+    if (!(await showConfirm(t_("importLogs"), t_("importLogsTtConfirm"), { isDestructive: false, confirmText: t_("importConfirmBtn") }))) {
         e.target.value = "";
         return;
     }
@@ -3544,12 +3564,12 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
     const progressBarEl = $("migration-progress-bar");
 
     if (statusEl) statusEl.style.display = "block";
-    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (statusTextEl) statusTextEl.textContent = t_("readingFile");
     if (progressBarEl) progressBarEl.style.width = "0%";
 
     try {
         const text = await file.text();
-        if (statusTextEl) statusTextEl.textContent = "Parsing JSON data...";
+        if (statusTextEl) statusTextEl.textContent = t_("parsingJsonData");
 
         const payload = JSON.parse(text);
         if (!payload || !Array.isArray(payload.__stat__)) {
@@ -3615,19 +3635,19 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
             throw new Error("No valid website history entries were found in the file.");
         }
 
-        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+        if (statusTextEl) statusTextEl.textContent = t_("mergingDaysOfHistory", [dateKeys.length]);
 
         const batchSize = 50;
         let processed = 0;
 
         const processBatch = async () => {
             if (processed >= dateKeys.length) {
-                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (statusTextEl) statusTextEl.textContent = t_("finalizingAndReloading");
                 if (progressBarEl) progressBarEl.style.width = "100%";
 
                 await msg("INVALIDATE_CACHES");
 
-                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                toast(t_("successfullyImportedDays", [dateKeys.length]), "ok");
                 setTimeout(() => location.reload(), 1500);
                 return;
             }
@@ -3678,12 +3698,12 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
 
             const percent = Math.round((processed / dateKeys.length) * 100);
             if (progressBarEl) progressBarEl.style.width = `${percent}%`;
-            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+            if (statusTextEl) statusTextEl.textContent = t_("importingDataDayOf", [processed, dateKeys.length]);
 
             setTimeout(processBatch, 20);
         };
 
-        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        if (statusTextEl) statusTextEl.textContent = t_("creatingPreImportBackup");
         try {
             await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Time Tracker - Web Habit Builder)" });
         } catch (errBackup) {
@@ -3695,7 +3715,7 @@ if ($("file-migrate-tt")) $("file-migrate-tt").addEventListener("change", async 
     } catch (err) {
         console.error("[Migration] Error importing JSON file", err);
         if (statusTextEl) setSafeHTML(statusTextEl, `<span style="color:var(--red)">Failed: ${sanitizeDomain(err.message || err)}</span>`);
-        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        toast(t_("importFailedErr", [err.message || t_("invalidFile")]), "er");
         isMigrationRunning = false;
     }
 
@@ -3706,7 +3726,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!(await showConfirm("Import Logs", "This will merge Webtime Tracker CSV logs into Flow's history.\n\nWarning: If you import the same CSV file twice, it will add the tracked time twice. Click OK to proceed.", { isDestructive: false, confirmText: "Import" }))) {
+    if (!(await showConfirm(t_("importLogs"), t_("importLogsWtConfirm"), { isDestructive: false, confirmText: t_("importConfirmBtn") }))) {
         e.target.value = "";
         return;
     }
@@ -3719,12 +3739,12 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     const progressBarEl = $("migration-progress-bar");
 
     if (statusEl) statusEl.style.display = "block";
-    if (statusTextEl) statusTextEl.textContent = "Reading file...";
+    if (statusTextEl) statusTextEl.textContent = t_("readingFile");
     if (progressBarEl) progressBarEl.style.width = "0%";
 
     try {
         const text = await file.text();
-        if (statusTextEl) statusTextEl.textContent = "Parsing CSV data...";
+        if (statusTextEl) statusTextEl.textContent = t_("parsingCsvData");
 
         const lines = text.split(/\r?\n/);
         if (lines.length < 2) {
@@ -3850,19 +3870,19 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             throw new Error("No valid website history entries were found in the CSV file.");
         }
 
-        if (statusTextEl) statusTextEl.textContent = `Merging ${dateKeys.length} days of history...`;
+        if (statusTextEl) statusTextEl.textContent = t_("mergingDaysOfHistory", [dateKeys.length]);
 
         const batchSize = 50;
         let processed = 0;
 
         const processBatch = async () => {
             if (processed >= dateKeys.length) {
-                if (statusTextEl) statusTextEl.textContent = `Finalizing and reloading...`;
+                if (statusTextEl) statusTextEl.textContent = t_("finalizingAndReloading");
                 if (progressBarEl) progressBarEl.style.width = "100%";
 
                 await msg("INVALIDATE_CACHES");
 
-                toast(`Successfully imported ${dateKeys.length} days! Reloading...`, "ok");
+                toast(t_("successfullyImportedDays", [dateKeys.length]), "ok");
                 setTimeout(() => location.reload(), 1500);
                 return;
             }
@@ -3913,12 +3933,12 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
             const percent = Math.round((processed / dateKeys.length) * 100);
             if (progressBarEl) progressBarEl.style.width = `${percent}%`;
-            if (statusTextEl) statusTextEl.textContent = `Importing data: Day ${processed} of ${dateKeys.length}...`;
+            if (statusTextEl) statusTextEl.textContent = t_("importingDataDayOf", [processed, dateKeys.length]);
 
             setTimeout(processBatch, 20);
         };
 
-        if (statusTextEl) statusTextEl.textContent = "Creating pre-import backup...";
+        if (statusTextEl) statusTextEl.textContent = t_("creatingPreImportBackup");
         try {
             await msg("BACKUP_CREATE_LOCAL", { label: "Pre-Import Backup (Webtime Tracker)" });
         } catch (errBackup) {
@@ -3930,7 +3950,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     } catch (err) {
         console.error("[Migration] Error importing Webtime Tracker CSV file", err);
         if (statusTextEl) setSafeHTML(statusTextEl, `<span style="color:var(--red)">Failed: ${sanitizeDomain(err.message || err)}</span>`);
-        toast("Import failed: " + (err.message || "Invalid file"), "er");
+        toast(t_("importFailedErr", [err.message || t_("invalidFile")]), "er");
         isMigrationRunning = false;
     }
 
@@ -4089,7 +4109,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
                     syncPresetsToSW(state).then(() => {
                         msg("TRIGGER_DNR_UPDATE");
                         if (typeof loadFocusUI === "function") loadFocusUI();
-                        if (typeof toast === "function") toast(`Activated preset: ${p.name}`, "ok");
+                        if (typeof toast === "function") toast(t_("activatedPreset", [p.name]), "ok");
                     });
                 });
 
@@ -4281,7 +4301,7 @@ document.body.appendChild(overlay);
                 }
 
                 overlay.remove();
-                if (typeof toast === "function") toast("Preset saved successfully!", "ok");
+                if (typeof toast === "function") toast(t_("presetSavedSuccessfully"), "ok");
             });
         }
 
@@ -4760,7 +4780,7 @@ document.body.appendChild(overlay);
 // =====================================================================
 (function initFocusSchedules() {
     "use strict";
-    const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const DAY_LABELS = [t_("sun"), t_("mon"), t_("tue"), t_("wed"), t_("thu"), t_("fri"), t_("sat")];
 
     function renderSchedules(schedules) {
         const list = document.getElementById("focus-schedules-list");
@@ -4794,7 +4814,7 @@ document.body.appendChild(overlay);
                 setSafeHTML(a, `
                     <div style="display:flex; align-items:center; gap:8px;">
                         <div style="font-size:18px; color:var(--tx3); font-weight:800;">+</div>
-                        <div style="font-size:13px; font-weight:800; color:var(--tx3);">Add Schedule</div>
+                        <div style="font-size:13px; font-weight:800; color:var(--tx3);">${t_("addSchedule")}</div>
                     </div>
                 `);
                 a.addEventListener("mouseover", () => {
@@ -4815,13 +4835,16 @@ document.body.appendChild(overlay);
                 const isEveryday = DAY_LABELS.every((d, i) => activeDays.includes(i));
                 const isWeekdays = [1,2,3,4,5].every(i => activeDays.includes(i)) && !activeDays.includes(0) && !activeDays.includes(6);
                 let daysText = "";
-                if (isEveryday) daysText = "Everyday";
-                else if (isWeekdays) daysText = "Weekdays";
-                else daysText = DAY_LABELS.filter((d, i) => activeDays.includes(i)).map(d => d.substring(0,1)).join(", ");
+                if (isEveryday) daysText = t_("everyday");
+                else if (isWeekdays) daysText = t_("weekdays");
+                else {
+                    const DAY_LETTERS = [t_("daySundayLetter"), t_("dayMondayLetter"), t_("dayTuesdayLetter"), t_("dayWednesdayLetter"), t_("dayThursdayLetter"), t_("dayFridayLetter"), t_("daySaturdayLetter")];
+                    daysText = [0,1,2,3,4,5,6].filter(i => activeDays.includes(i)).map(i => DAY_LETTERS[i]).join(", ");
+                }
 
                 setSafeHTML(a, `
                     <div style="display:flex; flex-direction:column; justify-content:center;">
-                        <div style="font-size:13px; font-weight:800; color:var(--tx);">${sanitizeDomain(sched.label || "Focus Session")}</div>
+                        <div style="font-size:13px; font-weight:800; color:var(--tx);">${sanitizeDomain(sched.label || t_("focusSession"))}</div>
                         <div style="font-size:10px; font-weight:700; color:var(--tx2); margin-top:2px; display:flex; gap:6px; align-items:center;">
                             <span>${formatTime12(sched.startTime || "09:00")} - ${formatTime12(sched.endTime || "10:00")}</span>
                             <span style="opacity:0.5">•</span>
@@ -4868,7 +4891,7 @@ document.body.appendChild(overlay);
                 scheds.splice(parseInt(btn.getAttribute("data-idx")), 1);
                 await sSync({ settings: { ...sv, focusSchedules: scheds } });
                 renderSchedules(scheds);
-                if (typeof toast === "function") toast("Schedule deleted", "ok");
+                if (typeof toast === "function") toast(t_("scheduleDeleted"), "ok");
             });
         });
     }
@@ -4892,52 +4915,53 @@ document.body.appendChild(overlay);
         <div style="padding:24px 32px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
           <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:10px;">
             <span>⏰</span>
-            <span id="nsched-title">${isEdit ? "Edit" : "Add"} Focus Schedule</span>
+            <span id="nsched-title">${isEdit ? t_("editFocusSchedule") : t_("addFocusSchedule")}</span>
           </div>
           <button id="nsched-close" aria-label="Close Schedule Modal" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         <div style="padding:24px 32px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:20px;">
-          <div><label for="nsched-label" class="slbl" style="margin-bottom:6px;display:block">Label</label><input type="text" id="nsched-label" class="inp" placeholder="e.g. Morning Focus" value="${sanitizeDomain(sched.label || "")}" style="width:100%"/></div>
+          <div><label for="nsched-label" class="slbl" style="margin-bottom:6px;display:block" data-i18n="label">Label</label><input type="text" id="nsched-label" class="inp" placeholder="e.g. Morning Focus" value="${sanitizeDomain(sched.label || "")}" style="width:100%"/></div>
           <div style="display:flex;gap:12px;align-items:center;">
-            <div style="flex:1"><label for="nsched-start" class="slbl" style="margin-bottom:6px;display:block">Start</label><input type="time" id="nsched-start" class="inp" value="${sched.startTime || "09:00"}"/></div>
-            <div style="flex:1"><label for="nsched-end" class="slbl" style="margin-bottom:6px;display:block">End</label><input type="time" id="nsched-end" class="inp" value="${sched.endTime || "10:00"}"/></div>
+            <div style="flex:1"><label for="nsched-start" class="slbl" style="margin-bottom:6px;display:block" data-i18n="start">Start</label><input type="time" id="nsched-start" class="inp" value="${sched.startTime || "09:00"}"/></div>
+            <div style="flex:1"><label for="nsched-end" class="slbl" style="margin-bottom:6px;display:block" data-i18n="end">End</label><input type="time" id="nsched-end" class="inp" value="${sched.endTime || "10:00"}"/></div>
           </div>
           <div>
-            <label class="slbl" style="margin-bottom:8px;display:block">Active Days</label>
+            <label class="slbl" style="margin-bottom:8px;display:block" data-i18n="activeDays">Active Days</label>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">${DAY_CBS}</div>
           </div>
 
           <div class="pb-cats-section" id="nsched-cats-sec">
-            <div class="pb-cats-title" style="font-size:13px;font-weight:800;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;">Categories to Block</div>
+            <div class="pb-cats-title" style="font-size:13px;font-weight:800;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;" data-i18n="categoriesToBlock">Categories to Block</div>
             <div class="pb-cats" id="nsched-cats" style="display:flex;flex-direction:column;gap:12px;">
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="distraction" ${!sched.blockCats || sched.blockCats.includes("distraction") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">⚡ Distraction</span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="communication" ${!sched.blockCats || sched.blockCats.includes("communication") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">💬 Communication</span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="uncategorized" ${!sched.blockCats || sched.blockCats.includes("uncategorized") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">❓ Uncategorized</span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="distraction" ${!sched.blockCats || sched.blockCats.includes("distraction") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">⚡ <span data-i18n="catDistraction">Distraction</span></span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="communication" ${!sched.blockCats || sched.blockCats.includes("communication") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">💬 <span data-i18n="catCommunication">Communication</span></span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="uncategorized" ${!sched.blockCats || sched.blockCats.includes("uncategorized") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">❓ <span data-i18n="catUncategorized">Uncategorized</span></span></label>
             </div>
           </div>
           <div class="pb-strict-row" style="padding-top:16px;border-top:1px solid var(--bd)">
             <div>
-              <label for="nsched-notify-time" class="tlbl" style="font-size:14px; display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber); vertical-align:middle; display:inline-block;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span>Pre-Schedule Notification</span></label>
-              <div class="tdesc">Get notified before the session starts.</div>
+              <label for="nsched-notify-time" class="tlbl" style="font-size:14px; display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber); vertical-align:middle; display:inline-block;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span data-i18n="preScheduleNotification">Pre-Schedule Notification</span></label>
+              <div class="tdesc" data-i18n="preScheduleNotificationDesc">Get notified before the session starts.</div>
             </div>
             <select id="nsched-notify-time" class="inp" style="width:140px;padding:6px 12px">
-              <option value="0" ${sched.notifyMinsBefore === 0 ? "selected" : ""}>Disabled</option>
-              <option value="1" ${sched.notifyMinsBefore === 1 ? "selected" : ""}>1 min before</option>
-              <option value="5" ${(sched.notifyMinsBefore === undefined || sched.notifyMinsBefore === 5) ? "selected" : ""}>5 mins before</option>
-              <option value="10" ${sched.notifyMinsBefore === 10 ? "selected" : ""}>10 mins before</option>
-              <option value="15" ${sched.notifyMinsBefore === 15 ? "selected" : ""}>15 mins before</option>
+              <option value="0" ${sched.notifyMinsBefore === 0 ? "selected" : ""} data-i18n="disabled">Disabled</option>
+              <option value="1" ${sched.notifyMinsBefore === 1 ? "selected" : ""} data-i18n="oneMinBefore">1 min before</option>
+              <option value="5" ${(sched.notifyMinsBefore === undefined || sched.notifyMinsBefore === 5) ? "selected" : ""} data-i18n="fiveMinsBefore">5 mins before</option>
+              <option value="10" ${sched.notifyMinsBefore === 10 ? "selected" : ""} data-i18n="tenMinsBefore">10 mins before</option>
+              <option value="15" ${sched.notifyMinsBefore === 15 ? "selected" : ""} data-i18n="fifteenMinsBefore">15 mins before</option>
             </select>
           </div>
         </div>
         <div style="padding:16px 32px 24px;border-top:1px solid var(--bd);display:flex;gap:12px;justify-content:flex-end;flex-shrink:0;">
-          <button class="bs" id="nsched-cancel">Cancel</button>
-          <button class="bp" id="nsched-save">${isEdit ? "Save Changes" : "Add Schedule"}</button>
+          <button class="bs" id="nsched-cancel" data-i18n="cancel">Cancel</button>
+          <button class="bp" id="nsched-save">${isEdit ? t_("saveChanges") : t_("addSchedule")}</button>
         </div>
       </div>
     `);
 document.body.appendChild(overlay);
+        if (typeof translatePage === "function") translatePage();
 
         const catsSec = overlay.querySelector("#nsched-cats-sec");
         const catsInputs = catsSec.querySelectorAll("input");
@@ -4949,7 +4973,7 @@ document.body.appendChild(overlay);
             const startTime = document.getElementById("nsched-start").value;
             const endTime = document.getElementById("nsched-end").value;
             const days = Array.from(overlay.querySelectorAll(".nsched-day:checked")).map(cb => parseInt(cb.value));
-            if (!days.length) { if (typeof toast === "function") toast("Select at least one day", "er"); return; }
+            if (!days.length) { if (typeof toast === "function") toast(t_("selectAtLeastOneDay"), "er"); return; }
             const strict = false;
             const cats = Array.from(overlay.querySelectorAll("#nsched-cats input:checked")).map(cb => cb.value);
             const notify = parseInt(document.getElementById("nsched-notify-time").value) || 0;
@@ -4964,7 +4988,7 @@ document.body.appendChild(overlay);
             await sSync({ settings: { ...sv, focusSchedules: scheds } });
             overlay.remove();
             renderSchedules(scheds);
-            if (typeof toast === "function") toast(isEdit ? "Schedule updated" : "Schedule added", "ok");
+            if (typeof toast === "function") toast(isEdit ? t_("scheduleUpdated") : t_("scheduleAdded"), "ok");
         });
 
     }
@@ -4998,8 +5022,8 @@ document.body.appendChild(overlay);
             if ($("cat-inp")) $("cat-inp").value = qDomain;
             if ($("cat-redir")) $("cat-redir").value = qRedir;
             if ($("mon-inp-domain")) $("mon-inp-domain").value = qDomain;
-            if ($("btn-add-block")) $("btn-add-block").textContent = "Add Block Rule";
-            if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Add Block Rule";
+            if ($("btn-add-block")) $("btn-add-block").textContent = t_("addBlockRule");
+            if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = t_("addBlockRule");
             if (typeof switchRuleModalTab === "function") switchRuleModalTab("block");
             addRuleModal.classList.remove("hide");
 
@@ -5014,7 +5038,7 @@ document.body.appendChild(overlay);
             if ($("cat-inp")) $("cat-inp").value = "";
             if ($("cat-redir")) $("cat-redir").value = "";
             if ($("mon-inp-domain")) $("mon-inp-domain").value = "";
-            if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Track / Label Site";
+            if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = t_("trackLabelSite");
             if (typeof switchRuleModalTab === "function") switchRuleModalTab("monitor");
             addRuleModal.classList.remove("hide");
         });
@@ -5051,8 +5075,8 @@ document.body.appendChild(overlay);
             } else {
                 if ($("m-id")) $("m-id").value = "";
                 if ($("cat-inp")) $("cat-inp").value = domain;
-                if ($("btn-add-block")) $("btn-add-block").textContent = "Add Block Rule";
-                if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = "Add Block Rule";
+                if ($("btn-add-block")) $("btn-add-block").textContent = t_("addBlockRule");
+                if ($("add-rule-modal-title")) $("add-rule-modal-title").textContent = t_("addBlockRule");
                 if (typeof switchRuleModalTab === "function") switchRuleModalTab("block");
                 const modal = $("add-rule-modal");
                 if (modal) modal.classList.remove("hide");
@@ -5155,18 +5179,18 @@ document.body.appendChild(overlay);
         const input = $("allow-domain-input");
         const val = input.value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
         if (!val) {
-            toast("Please enter a domain", "warn");
+            toast(t_("enterDomain"), "warn");
             return;
         }
         if (!val.includes(".") || val.length < 4) {
-            toast("Please enter a valid domain", "warn");
+            toast(t_("enterValidDomain"), "warn");
             return;
         }
         
         let t = await gLocal(["allowList"]);
         let list = t.allowList || [];
         if (list.includes(val)) {
-            toast("Domain already allowed", "warn");
+            toast(t_("domainAlreadyAllowed"), "warn");
             return;
         }
         list.push(val);
@@ -5174,7 +5198,7 @@ document.body.appendChild(overlay);
         await sLocal({ allowList });
         input.value = "";
         renderCombined();
-        toast("Added to Allowlist", "ok");
+        toast(t_("addedToAllowlist"), "ok");
     });
 
     // --- Never Track Quick Add ---
@@ -5182,7 +5206,7 @@ document.body.appendChild(overlay);
         const input = $("never-track-input");
         const val = input.value.trim();
         if (!val) {
-            toast("Please enter a domain", "warn");
+            toast(t_("enterDomain"), "warn");
             return;
         }
         
@@ -5192,7 +5216,7 @@ document.body.appendChild(overlay);
             .filter(d => d && d.includes(".") && d.length > 3);
             
         if (domains.length === 0) {
-            toast("Please enter valid domain(s)", "warn");
+            toast(t_("enterValidDomains"), "warn");
             return;
         }
         
@@ -5211,9 +5235,9 @@ document.body.appendChild(overlay);
             await sLocal({ neverTrackDomains: list });
             input.value = "";
             renderCombined();
-            toast(`Added ${addedCount} domain(s) to Never-Track`, "ok");
+            toast(t_("addedDomainsToNeverTrack", [addedCount]), "ok");
         } else {
-            toast("Domains already in list", "warn");
+            toast(t_("domainsAlreadyInList"), "warn");
         }
     });
 
@@ -5232,11 +5256,11 @@ document.body.appendChild(overlay);
         if (focusActive) {
             btnPrivacy.style.opacity = "0.3";
             btnPrivacy.style.cursor = "not-allowed";
-            btnPrivacy.title = "Privacy Mode (disabled during Focus Mode)";
+            btnPrivacy.title = t_("privacyDisabledDuringFocus");
         } else {
             btnPrivacy.style.opacity = "";
             btnPrivacy.style.cursor = "";
-            btnPrivacy.title = "Privacy Mode / Pause Tracking";
+            btnPrivacy.title = t_("privacyModeTitle");
         }
 
         if (state && state.active) {
@@ -5257,7 +5281,7 @@ document.body.appendChild(overlay);
                         const m = Math.floor(diff / 60000);
                         const s = Math.floor((diff % 60000) / 1000);
                         if (statusPrivacy) {
-                            statusPrivacy.textContent = `Paused: ${m}m ${String(s).padStart(2, '0')}s`;
+                            statusPrivacy.textContent = t_("pausedTime", [`${m}m ${String(s).padStart(2, '0')}s`]);
                         }
                     }
                 };
@@ -5269,7 +5293,7 @@ document.body.appendChild(overlay);
                     _dashboardPrivacyCountdownTick = null;
                 }
                 if (statusPrivacy) {
-                    statusPrivacy.textContent = "Paused (Always)";
+                    statusPrivacy.textContent = t_("pausedAlways");
                 }
             }
         } else {
@@ -5294,7 +5318,7 @@ document.body.appendChild(overlay);
             btnPrivacy.addEventListener("click", async () => {
                 const fs = await msg("FOCUS_GET_STATE");
                 if (fs && fs.focusState && fs.focusState.active) {
-                    toast("Privacy Mode cannot be enabled during Focus Mode", "er");
+                    toast(t_("privacyDisabledDuringFocus"), "er");
                     return;
                 }
 
@@ -5303,7 +5327,7 @@ document.body.appendChild(overlay);
                     if (!await promptPinIfEnabled("lockPrivacy")) return;
                     await msg("STOP_PRIVACY_MODE");
                     window.updateDashboardPrivacyUI();
-                    toast("Tracking resumed", "ok");
+                    toast(t_("trackingResumed"), "ok");
                 } else {
                     if (!await promptPinIfEnabled("lockPrivacy")) return;
                     modal && modal.classList.remove("hide");
@@ -5327,7 +5351,7 @@ document.body.appendChild(overlay);
             await msg("START_PRIVACY_MODE", { duration: mins });
             modal && modal.classList.add("hide");
             window.updateDashboardPrivacyUI();
-            toast("Privacy Mode enabled", "ok");
+            toast(t_("privacyModeEnabled"), "ok");
         };
 
         $("btn-dash-privacy-30") && $("btn-dash-privacy-30").addEventListener("click", () => startPrivacy(30));
@@ -5403,13 +5427,13 @@ listContainer.appendChild(row);
         listContainer.querySelectorAll(".btn-restore-backup").forEach(btn => {
             btn.addEventListener("click", async () => {
                 const id = btn.getAttribute("data-id");
-                if (await showConfirm("Restore Backup", "Restoring will REPLACE all current data. Continue?", { isDestructive: true, confirmText: "Restore" })) {
+                if (await showConfirm(t_("restoreBackup"), t_("restoreBackupConfirm"), { isDestructive: true, confirmText: t_("restoreConfirmBtn") })) {
                     const res = await msg("BACKUP_RESTORE_LOCAL", { id });
                     if (res && res.ok) {
-                        toast("Backup restored — reloading...", "ok");
+                        toast(t_("backupRestoredReloading"), "ok");
                         setTimeout(() => location.reload(), 1000);
                     } else {
-                        toast("Restore failed", "er");
+                        toast(t_("restoreFailed"), "er");
                     }
                 }
             });
@@ -5429,9 +5453,9 @@ listContainer.appendChild(row);
                     a.click();
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
-                    toast("Download started", "ok");
+                    toast(t_("downloadStarted"), "ok");
                 } else {
-                    toast("Failed to download data", "er");
+                    toast(t_("failedDownloadData"), "er");
                 }
             });
         });
@@ -5439,13 +5463,13 @@ listContainer.appendChild(row);
         listContainer.querySelectorAll(".btn-delete-backup").forEach(btn => {
             btn.addEventListener("click", async () => {
                 const id = btn.getAttribute("data-id");
-                if (await showConfirm("Delete Backup", "Permanently delete this backup from history?", { isDestructive: true, confirmText: "Delete" })) {
+                if (await showConfirm(t_("deleteBackup"), t_("deleteBackupConfirm"), { isDestructive: true, confirmText: t_("deleteConfirmBtn") })) {
                     const res = await msg("BACKUP_DELETE_LOCAL", { id });
                     if (res && res.ok) {
-                        toast("Backup deleted", "ok");
+                        toast(t_("backupDeleted"), "ok");
                         renderLocalBackupsList();
                     } else {
-                        toast("Delete failed", "er");
+                        toast(t_("deleteFailed"), "er");
                     }
                 }
             });
@@ -5458,15 +5482,15 @@ listContainer.appendChild(row);
     if (btnCreateLocalBackup) {
         btnCreateLocalBackup.addEventListener("click", async () => {
             btnCreateLocalBackup.disabled = true;
-            btnCreateLocalBackup.textContent = "Creating...";
+            btnCreateLocalBackup.textContent = t_("creating");
             const res = await msg("BACKUP_CREATE_LOCAL", { label: "Manual Backup" });
             btnCreateLocalBackup.disabled = false;
-            btnCreateLocalBackup.textContent = "+ Create Local Backup";
+            btnCreateLocalBackup.textContent = t_("btnCreateLocalBackup");
             if (res && res.ok) {
-                toast("Local backup created", "ok");
+                toast(t_("localBackupCreated"), "ok");
                 renderLocalBackupsList();
             } else {
-                toast("Backup creation failed", "er");
+                toast(t_("backupCreationFailed"), "er");
             }
         });
     }
@@ -5585,7 +5609,7 @@ listContainer.appendChild(row);
                     const domInput = $("quick-domain");
                     const domainVal = domInput ? domInput.value.trim() : "";
                     if (!domainVal) {
-                        toast("Enter a domain name first to block instantly", "er");
+                        toast(t_("enterDomainFirstToBlockInstantly"), "er");
                         return;
                     }
                     
@@ -5629,7 +5653,7 @@ listContainer.appendChild(row);
                         
                         await loadRules();
                         await renderCombined();
-                        toast("Site blocked under " + p.name, "ok");
+                        toast(t_("siteBlockedUnderPreset", [p.name]), "ok");
                     }
                 });
                 
@@ -5643,12 +5667,12 @@ listContainer.appendChild(row);
                 // Wire Delete button
                 slot.querySelector(".delete-preset-slot-btn").addEventListener("click", async (e) => {
                     e.stopPropagation();
-                    if (await showConfirm("Delete Preset", `Are you sure you want to delete preset "${p.name}"?`, { isDestructive: true, confirmText: "Delete" })) {
+                    if (await showConfirm(t_("deletePreset"), t_("deletePresetConfirm", [p.name]), { isDestructive: true, confirmText: t_("deleteConfirmBtn") })) {
                         blockPresetsList[i] = null;
                         blockPresetsList = blockPresetsList.filter(x => x !== null);
                         await sLocal({ blockPresets: blockPresetsList });
                         await loadAndRenderPresets();
-                        toast("Preset deleted", "ok");
+                        toast(t_("presetDeleted"), "ok");
                     }
                 });
             }
@@ -5710,7 +5734,7 @@ listContainer.appendChild(row);
                 updateCheckboxLabelStyle(cb);
             });
 
-            $("add-preset-modal-title").textContent = "Edit Block Preset";
+            $("add-preset-modal-title").textContent = t_("editBlockPreset");
         } else {
             // New preset
             $("p-id").value = "";
@@ -5736,7 +5760,7 @@ listContainer.appendChild(row);
                 updateCheckboxLabelStyle(cb);
             });
 
-            $("add-preset-modal-title").textContent = "Create Block Preset";
+            $("add-preset-modal-title").textContent = t_("createBlockPreset");
         }
 
         // Trigger styles/displays
@@ -5805,7 +5829,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
         const id = $("p-id").value;
         const name = $("p-preset-name").value.trim();
         if (!name) {
-            toast("Preset name is required", "er");
+            toast(t_("presetNameRequired"), "er");
             return;
         }
 
@@ -5814,7 +5838,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
         // Count custom presets (max 3 custom presets allowed)
         const customPresetsCount = blockPresetsList.filter(p => p.id !== id).length;
         if (isNew && customPresetsCount >= 3) {
-            toast("You can add up to 3 custom presets", "er");
+            toast(t_("maxCustomPresetsLimit"), "er");
             return;
         }
 
@@ -5868,7 +5892,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
         await sLocal({ blockPresets: blockPresetsList });
         loadAndRenderPresets();
         $("add-preset-modal").classList.add("hide");
-        toast(isNew ? "Preset created" : "Preset updated", "ok");
+        toast(isNew ? t_("presetCreated") : t_("presetUpdated"), "ok");
     }
 
     // Modal events
@@ -5967,7 +5991,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
                 $("mf-cd").style.display = c.cooldownEnabled ? "block" : "none";
                 $("mf-session").style.display = c.sessionLimitEnabled ? "block" : "none";
 
-                toast("Applied preset: " + p.name, "ok");
+                toast(t_("appliedPreset", [p.name]), "ok");
             });
         }
     }

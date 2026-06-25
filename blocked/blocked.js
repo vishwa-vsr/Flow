@@ -1,35 +1,39 @@
 // Flow v6.5 — Blocked Page
 // New: show rule that fired, "unblock for 5 min" (PIN-gated), last productive site, rotating quotes.
+(async function () {
 
+if (typeof initI18n === "function") {
+  await initI18n();
+}
+if (typeof translatePage === "function") {
+  translatePage();
+}
 
-
-const MSGS = [
-  { e: "🧱", h: "Not today, champ.", s: "Your future self said NO. They were very firm about it." },
-  { e: "🤖", h: "ACCESS DENIED.", s: "The productivity bot has spoken. Resistance is futile." },
-  { e: "🧠", h: "Big Brain Move.", s: "You blocked this. Past-you was smarter than you right now." },
-  { e: "🚪", h: "The door is locked.", s: "You put the lock there. You gave me the key. Not giving it back." },
-  { e: "🏋️", h: "Your discipline called.", s: "It wants you back. It misses you. Go do the thing." },
-  { e: "⛔", h: "NOPE. Absolutely not.", s: "Come back when you earned it. You know what to do." },
-  { e: "🦾", h: "Stay hard.", s: "The work does not do itself. Go back to it." },
-  { e: "🐤", h: "Bock bock bock!", s: "That is the sound of procrastination. Don't be a chicken." },
-];
+const MSGS = [];
+for (var i = 1; i <= 8; i++) {
+  MSGS.push({
+    e: t_("blockedMsg" + i + "Emoji"),
+    h: t_("blockedMsg" + i + "Head"),
+    s: t_("blockedMsg" + i + "Sub")
+  });
+}
 
 const RULE_LABELS = {
-  instant: "Instant Block Active",
-  schedule: "Schedule Block Active",
-  time_limit: "Daily Limit Reached",
-  session_limit: "Session Limit Reached",
-  manual: "Manually Blocked",
-  tweak: "Distracting Section Blocked",
+  instant: t_("ruleInstantBlock"),
+  schedule: t_("ruleScheduleBlock"),
+  time_limit: t_("ruleTimeLimitReached"),
+  session_limit: t_("ruleSessionLimitReached"),
+  manual: t_("ruleManuallyBlocked"),
+  tweak: t_("ruleTweakBlocked"),
 };
 
 const RULE_DETAIL = {
-  instant: "This site is set to always block.",
-  schedule: "This site is blocked during your scheduled block hours.",
-  time_limit: "You have hit your daily time limit for this site.",
-  session_limit: "You have hit your per-session limit for this site. Take a break!",
-  manual: "You added this site to your block list.",
-  tweak: "Access to this specific section is blocked by your Advanced Site Tweaks.",
+  instant: t_("ruleDetailInstant"),
+  schedule: t_("ruleDetailSchedule"),
+  time_limit: t_("ruleDetailTimeLimit"),
+  session_limit: t_("ruleDetailSessionLimit"),
+  manual: t_("ruleDetailManual"),
+  tweak: t_("ruleDetailTweak"),
 };
 
 // ── Parse params ──────────────────────────────────────────────────────────────
@@ -43,9 +47,9 @@ function safeAtob(str) {
 var qs = new URLSearchParams(window.location.search || "");
 var hs = new URLSearchParams((window.location.hash || "").replace(/^#/, ""));
 function P(k1, k2) { return qs.get(k1) || qs.get(k2) || hs.get(k1) || hs.get(k2) || ""; }
-var rawDomain = P("domain", "d") || "this site";
-var blockedDomain = rawDomain;
-if (rawDomain && rawDomain !== "this site") {
+var rawDomain = P("domain", "d") || "";
+var blockedDomain = "";
+if (rawDomain) {
   var decoded = safeAtob(rawDomain);
   if (decoded && decoded.includes(".")) {
     blockedDomain = decoded;
@@ -65,15 +69,18 @@ gSync(["settings"]).then(function (res) {
     document.getElementById("sub").textContent = m.s;
   } else {
     document.getElementById("emoji").textContent = "⛔";
-    setSafeHTML(document.getElementById("headline"), "This site is <em>blocked</em>");
-    document.getElementById("sub").textContent = "Access is restricted by your Flow rules.";
+    setSafeHTML(document.getElementById("headline"), t_("neutralBlockHead"));
+    document.getElementById("sub").textContent = t_("neutralBlockSub");
   }
 });
-document.querySelector(".quote").textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+
+const quoteIndex = Math.floor(Math.random() * 11) + 1;
+const quoteText = t_("quote" + quoteIndex);
+document.querySelector(".quote").textContent = quoteText && quoteText !== ("quote" + quoteIndex) ? quoteText : (QUOTES[quoteIndex - 1] || QUOTES[0]);
 
 // ── Domain pill & bar reason ──────────────────────────────────────────────────
-document.getElementById("domain-pill").textContent = blockedDomain;
-document.getElementById("bar-reason").textContent = RULE_LABELS[reason] || "Block Rule Active";
+document.getElementById("domain-pill").textContent = blockedDomain || t_("thisSite");
+document.getElementById("bar-reason").textContent = RULE_LABELS[reason] || t_("blockRuleActive");
 
 // ── Badge — shows which rule fired + any detail ───────────────────────────────
 function formatTime12(timeStr) {
@@ -90,25 +97,25 @@ var schedEnd = P("sched_end");
 var cooldownEnds = Number(P("cooldown_ends") || 0);
 
 if (reason === "time_limit" && limit > 0) {
-  badge.textContent = "Daily limit · " + Math.round(limit / 60) + " min spent";
+  badge.textContent = t_("dailyLimitBadge", [String(Math.round(limit / 60))]);
 } else if (reason === "schedule" && schedEnd) {
-  badge.textContent = "Blocked until " + formatTime12(schedEnd);
+  badge.textContent = t_("blockedUntil", [formatTime12(schedEnd)]);
 } else if (reason === "session_limit" && cooldownEnds > 0) {
   function tickCooldown() {
     var diff = Math.max(0, Math.round((cooldownEnds - Date.now()) / 1000));
     if (diff <= 0) {
-      badge.textContent = "Cooldown over! Refresh page to visit.";
+      badge.textContent = t_("cooldownOver");
       badge.style.color = "var(--green)";
     } else {
       var m = Math.floor(diff / 60);
       var s = diff % 60;
-      badge.textContent = "Take a break · unblocking in " + m + "m " + String(s).padStart(2, "0") + "s";
+      badge.textContent = t_("takeABreak", [m + "m " + String(s).padStart(2, "0") + "s"]);
       setTimeout(tickCooldown, 1000);
     }
   }
   tickCooldown();
 } else {
-  badge.textContent = RULE_LABELS[reason] || "Blocked by Flow";
+  badge.textContent = RULE_LABELS[reason] || t_("blockedByFlow");
 }
 badge.className = "badge " + (RULE_LABELS[reason] ? reason : "");
 
@@ -116,9 +123,9 @@ badge.className = "badge " + (RULE_LABELS[reason] ? reason : "");
 var ruleDetail = document.getElementById("rule-detail");
 if (ruleDetail) {
   if (reason === "schedule" && schedEnd) {
-    ruleDetail.textContent = "This site is blocked until " + formatTime12(schedEnd) + " by your schedule.";
+    ruleDetail.textContent = t_("blockedUntilSchedule", [formatTime12(schedEnd)]);
   } else {
-    ruleDetail.textContent = RULE_DETAIL[reason] || "This site has been blocked by one of your rules.";
+    ruleDetail.textContent = RULE_DETAIL[reason] || t_("defaultRuleDetail");
   }
 }
 
@@ -129,13 +136,10 @@ try {
     var el = document.getElementById("productive-suggestion");
     if (!el) return;
     var safeDom = escHTML(res.domain);
-    setSafeHTML(el, 'Go do something useful: <a href="https://' + safeDom + '" class="prod-link">' + safeDom + ' →</a>');
+    setSafeHTML(el, t_("goDoSomethingUseful") + ' <a href="https://' + safeDom + '" class="prod-link">' + safeDom + ' →</a>');
     el.style.display = "block";
   });
 } catch (_) { }
-
-
-
 
 // ── Back button ───────────────────────────────────────────────────────────────
 document.getElementById("btn-back").addEventListener("click", function () {
@@ -164,5 +168,7 @@ document.getElementById("btn-set").addEventListener("click", function () {
     chrome.runtime.openOptionsPage();
   }
 });
+
+})();
 
 
