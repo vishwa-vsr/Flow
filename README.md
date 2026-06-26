@@ -4,6 +4,8 @@
 
 *Formerly known as FocusFlow.*
 
+![Flow Banner](flow_preview1.jpg)
+
 <p>
   <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
   <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
@@ -42,7 +44,20 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 ## 📸 Screenshots
 
-![Flow Preview](flow_preview.jpg)
+### 🌊 Product Overview
+![Flow Overview Banner](flow_preview1.jpg)
+
+### ⏱️ Pomodoro Focus Timer & Presets
+![Focus Mode and Schedules](flow_preview4.jpg)
+
+### 📊 Detailed Daily Analytics & Consistency Heatmap
+![Detailed Daily Analytics](flow_preview2.jpg)
+
+### 🚫 Smart Site Blocker (Rules & Redirects)
+![Block and Allow Rules](flow_preview3.jpg)
+
+### ⚙️ Personalization, Themes & Backups
+![Personalize Workspace](flow_preview5.jpg)
 
 ---
 
