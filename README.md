@@ -125,6 +125,22 @@ See [CHANGELOG.md](./CHANGELOG.md) for a full list of changes across all version
 
 ---
 
+## FAQ
+
+#### Does Flow collect my browsing history?
+No. Flow is completely local-first. All your browsing activity, settings, and logs are saved on your computer. None of your data is tracked, saved, or sent to external servers.
+
+#### Why does the extension ask for host permissions (site access)?
+Flow needs site access to track when you are active on websites so it can calculate your study stats and block distracting pages. Since this process runs locally on your computer, the browser needs permission to run the tracking code on your open tabs.
+
+#### How can I install Flow on Google Chrome?
+Our Chrome Web Store review is pending. In the meantime, you can install it manually by downloading the latest `flow-dist-v7.0.0.zip` file from our Releases page and loading it in Developer Mode.
+
+#### How do I backup my settings?
+You can manually download a backup of your data from the "Migration & Imports" tab on the options page. We do not use automatic cloud backups to keep your data private and warning-free.
+
+---
+
 ## 🤝 Contributing
 
 There are several ways to contribute to Flow:
@@ -133,7 +149,7 @@ There are several ways to contribute to Flow:
 Describe your problem or idea in [GitHub Issues](https://github.com/vishwa-vsr/Flow/issues).
 
 #### 2. Help Translate
-Flow supports multi-language translations (starting with English and Spanish!). If you want to help translate Flow into your native language, please join the translation thread in our [GitHub Discussions](https://github.com/vishwa-vsr/Flow/discussions/4)!
+Flow supports multi-language translations (starting with English and Spanish!). If you want to help translate Flow, check out our [Translation Guide](./TRANSLATING.md) or join the translation thread in our [GitHub Discussions](https://github.com/vishwa-vsr/Flow/discussions/4)!
 
 #### 3. Rate 5 Stars ⭐
 Leave a review on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) or [Edge](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic). It's simple and incredibly helpful!
