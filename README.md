@@ -143,16 +143,9 @@ You can manually download a backup of your data from the "Migration & Imports" t
 
 ## 🤝 Contributing
 
-There are several ways to contribute to Flow:
+We welcome contributions of all kinds! Please check out our [Contributing Guide](./CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, suggest features, or help with translations.
 
-#### 1. Report Bugs & Request Features
-Describe your problem or idea in [GitHub Issues](https://github.com/vishwa-vsr/Flow/issues).
-
-#### 2. Help Translate
-Flow supports multi-language translations (starting with English and Spanish!). If you want to help translate Flow, check out our [Translation Guide](./TRANSLATING.md) or join the translation thread in our [GitHub Discussions](https://github.com/vishwa-vsr/Flow/discussions/4)!
-
-#### 3. Rate 5 Stars ⭐
-Leave a review on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) or [Edge](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic). It's simple and incredibly helpful!
+If you like Flow, leaving a 5-star review on the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
 
 ---
 
