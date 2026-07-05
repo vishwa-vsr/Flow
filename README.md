@@ -67,7 +67,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 |---|---|---|---|
 | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=latest)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/rating/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/users/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) |
 | [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=latest&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) |
-| Chrome Web Store | [![](https://img.shields.io/badge/Download_ZIP-7.0.0-blue?logo=googlechrome&logoColor=white)](https://github.com/vishwa-vsr/Flow/releases/latest) | 🔜 Pending Approval | [Download ZIP (Manual)](https://github.com/vishwa-vsr/Flow/releases/latest) |
+| Chrome Web Store | [![](https://img.shields.io/badge/Download_ZIP-7.0.0-blue?logo=googlechrome&logoColor=white)](https://github.com/vishwa-vsr/Flow/releases/latest) | 🔜 coming soon | [Download ZIP (Manual)](https://github.com/vishwa-vsr/Flow/releases/latest) |
 
 ---
 
@@ -134,7 +134,7 @@ No. Flow is completely local-first. All your browsing activity, settings, and lo
 Flow needs site access to track when you are active on websites so it can calculate your study stats and block distracting pages. Since this process runs locally on your computer, the browser needs permission to run the tracking code on your open tabs.
 
 #### How can I install Flow on Google Chrome?
-Our Chrome Web Store review is pending. In the meantime, you can install it manually by downloading the latest `flow-dist-v7.0.0.zip` file from our Releases page and loading it in Developer Mode.
+Our Chrome Web Store release is coming soon, you can install it manually by downloading the latest `flow-dist-v7.0.0.zip` file from our Releases page and loading it in Developer Mode.
 
 #### How do I backup my settings?
 You can manually download a backup of your data from the "Migration & Imports" tab on the options page. We do not use automatic cloud backups to keep your data private and warning-free.
