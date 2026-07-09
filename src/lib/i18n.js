@@ -70,6 +70,7 @@
         var res = await gSync(["settings"]);
         var settings = res && res.settings ? res.settings : {};
         var lang = settings.language || "default";
+        root.currentLanguage = lang;
 
         if (lang !== "default") {
           var url = chrome.runtime.getURL("_locales/" + lang + "/messages.json");

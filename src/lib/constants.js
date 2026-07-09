@@ -134,7 +134,7 @@
 
   root.CSS_MAP = {
     "bw-mode": 'html { filter: grayscale(1) !important; }',
-    "yt-shorts": 'ytd-reel-shelf-renderer, ytd-rich-section-renderer:has(a[href*="/shorts" i]), ytd-rich-item-renderer:has(a[href*="/shorts" i]), ytd-video-renderer:has(a[href*="/shorts" i]), ytd-grid-video-renderer:has(a[href*="/shorts" i]), ytd-reel-item-renderer, ytd-shorts, ytd-reel-video-renderer, yt-tab-shape[tab-title="Shorts" i], yt-tab-group-shape a[href*="/shorts" i], yt-navigation-item-view-model:has(a[href*="/shorts" i]), a[title="Shorts" i], a[title^="Shorts" i] { display: none !important; }',
+    "yt-shorts": 'ytd-reel-shelf-renderer, ytd-rich-section-renderer:has(a[href*="/shorts" i]), ytd-rich-item-renderer:has(a[href*="/shorts" i]), ytd-video-renderer:has(a[href*="/shorts" i]), ytd-grid-video-renderer:has(a[href*="/shorts" i]), ytd-reel-item-renderer, ytd-shorts, ytd-reel-video-renderer, yt-tab-shape[tab-title="Shorts" i], yt-tab-group-shape a[href*="/shorts" i], yt-navigation-item-view-model:has(a[href*="/shorts" i]), a[title="Shorts" i], a[title^="Shorts" i], grid-shelf-view-model, ytd-rich-shelf-renderer[is-shorts], #shorts-container, ytd-shelf-renderer:has(a[href*="/shorts" i]) { display: none !important; }',
     "yt-recom": 'ytd-browse[page-subtype="home"] { display: none !important; }',
     "yt-related": '#secondary, ytd-watch-next-secondary-results-renderer, ytd-compact-video-renderer { display: none !important; }',
     "yt-comments": "#comments { display: none !important; }",

@@ -81,7 +81,7 @@
           s.dayRolloverHour = typeof s.dayRolloverHour === "number" ? s.dayRolloverHour : 0;
           s.dataRetentionDays = typeof s.dataRetentionDays === "number" ? s.dataRetentionDays : 365;
           s.autoBackupEnabled = typeof s.autoBackupEnabled === "boolean" ? s.autoBackupEnabled : false;
-          s.showIdleBadge = typeof s.showIdleBadge === "boolean" ? s.showIdleBadge : true;
+          s.showIdleBadge = typeof s.showIdleBadge === "boolean" ? s.showIdleBadge : false;
           s.lockPrivacy = typeof s.lockPrivacy === "boolean" ? s.lockPrivacy : true;
           s.lockAdjustTime = typeof s.lockAdjustTime === "boolean" ? s.lockAdjustTime : true;
           

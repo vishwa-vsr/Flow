@@ -66,6 +66,29 @@ async function getTodayData() {
     return _todayDataCache;
 }
 
+// Database Bloat Fix: Pre-aggregated all-time totals cached in meta store
+async function getAllTimeTotals() {
+    let totals = await FFDB.getMeta("all_time_totals", null);
+    if (totals === null) {
+        // Calculate by scanning all days (once-off)
+        const all = await FFDB.getAllDays();
+        totals = {};
+        for (const entry of Object.values(all)) {
+            if (!entry || !entry.sites) continue;
+            for (const [domain, secs] of Object.entries(entry.sites)) {
+                totals[domain] = (totals[domain] || 0) + (secs | 0);
+            }
+        }
+        await FFDB.setMeta("all_time_totals", totals);
+    }
+    return totals;
+}
+
+async function saveAllTimeTotals(totals) {
+    await FFDB.setMeta("all_time_totals", totals);
+    _allTimeTotalsCache = { totals, ts: Date.now() };
+}
+
 // gSync / sSync / gLocal / sLocal / todayKey now come from src/lib/storage.js
 
 function domain(t) {
@@ -160,7 +183,6 @@ async function restoreFlushQueue() {
 // for the relevant keys, with a safety TTL of 5s in case a write slips by.
 const _storCache = {
     local: { data: null, ts: 0 },
-    sync: { data: null, ts: 0 },
 };
 const _CACHE_TTL_MS = 3600000; // 1 hour (invalidated instantly on storage change)
 const _LOCAL_CACHE_KEYS = ["blockRules", "allowList", "siteCategories", "granularRules", "hiddenDefaultSites", "neverTrackDomains", "privacyModeActive", "privacyModeUntil", "lastBackupAt"];
@@ -176,21 +198,12 @@ async function getCachedLocal() {
     return data;
 }
 async function getCachedSync() {
-    const now = Date.now();
-    if (_storCache.sync.data && (now - _storCache.sync.ts) < _CACHE_TTL_MS) {
-        return _storCache.sync.data;
-    }
-    const data = await gSync(_SYNC_CACHE_KEYS);
-    _storCache.sync = { data, ts: now };
-    return data;
+    return gSync(_SYNC_CACHE_KEYS);
 }
 try {
     chrome.storage.onChanged.addListener((changes, area) => {
         if (area === "local" && _LOCAL_CACHE_KEYS.some(k => k in changes)) {
             _storCache.local = { data: null, ts: 0 };
-        }
-        if (area === "sync" && _SYNC_CACHE_KEYS.some(k => k in changes)) {
-            _storCache.sync = { data: null, ts: 0 };
         }
     });
 } catch (_) { }
@@ -202,7 +215,6 @@ async function getAllCats() {
 
 async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
     if (e <= 0 || !t) return;
-    const s = e >= 60;
     flushQueue.push({ domainStr: t, elapsedSecs: e, startTimeMs: a });
     persistFlushQueue();
     if (isFlushing) return;
@@ -225,7 +237,18 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
                 if (!entry.sites) entry.sites = {};
                 if (!entry.timeline) entry.timeline = [];
                 entry.sites[domainStr] = (entry.sites[domainStr] || 0) + secs;
-                if (s) entry.timeline.push({ start: sMs, end: eMs, cat });
+                
+                // Merge into the last block if it belongs to the same category and is within 30 seconds of the last block's end.
+                if (entry.timeline.length > 0) {
+                    const last = entry.timeline[entry.timeline.length - 1];
+                    if (last.cat === cat && sMs - last.end <= 30000) {
+                        last.end = Math.max(last.end, eMs);
+                    } else {
+                        entry.timeline.push({ start: sMs, end: eMs, cat });
+                    }
+                } else {
+                    entry.timeline.push({ start: sMs, end: eMs, cat });
+                }
                 dirtyDays.add(key);
             };
             if (start.toDateString() === end.toDateString()) {
@@ -246,8 +269,14 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
                 }
             }
             await FFDB.bulkSetDays(writeMap);
-            // Bug fix #3: invalidate all-time totals cache since we just wrote new data
-            _allTimeTotalsCache = null;
+            // Update all-time totals incrementally
+            try {
+                const totals = await getAllTimeTotals();
+                totals[domainStr] = (totals[domainStr] || 0) + elapsedSecs;
+                await saveAllTimeTotals(totals);
+            } catch (err) {
+                console.warn("[FF] Failed to update all-time totals:", err);
+            }
 
             // Session Limit Check
             try {
@@ -587,8 +616,44 @@ function isTimeWindowActive(startStr, endStr, days, now = new Date()) {
         return daysArr.includes(curDow);
     }
 }
-
-
+async function updateRuleDomainsCache() {
+    try {
+        const _loc = await gLocal(["blockRules", "cooldownConfig", "granularRules"]);
+        const blockRules = _loc.blockRules || [];
+        const cooldownConfig = _loc.cooldownConfig || {};
+        const granularRules = _loc.granularRules || {};
+        
+        const domains = new Set();
+        
+        // 1. Add block rule domains
+        blockRules.forEach(r => {
+            if (r.domain) {
+                domains.add(r.domain.toLowerCase().trim());
+            }
+        });
+        
+        // 2. Add active cooldown domains
+        const cooldowns = cooldownConfig.activeDomains || [];
+        cooldowns.forEach(d => {
+            domains.add(d.toLowerCase().trim());
+        });
+        
+        // 3. Add domains with at least one active advanced tweak
+        Object.entries(granularRules).forEach(([dom, tweaks]) => {
+            if (tweaks && typeof tweaks === "object") {
+                const hasActiveTweak = Object.values(tweaks).some(val => val === true);
+                if (hasActiveTweak) {
+                    domains.add(dom.toLowerCase().trim());
+                }
+            }
+        });
+        
+        // Save the unique sorted domains as an array
+        await sLocal({ ruleDomainsCache: Array.from(domains) });
+    } catch (err) {
+        console.warn("[FF] Error updating ruleDomainsCache:", err);
+    }
+}
 
 async function updateDNRRules() {
     await restoreState();
@@ -926,6 +991,7 @@ let isPrivacyActive = _loc.privacyModeActive === true;
             await sLocal({ cooldownConfig });
         }
     } catch (_) {}
+    await updateRuleDomainsCache();
 }
 async function categorize(t) {
     if (!t) return "uncategorized";
@@ -1183,7 +1249,7 @@ async function updateBadge() {
                     color: "#5C9CFC"
                 });
             } else {
-                if (!1 !== cfg.showIdleBadge) {
+                if (!!cfg.showIdleBadge) {
                     chrome.action.setBadgeText({ text: "idl" });
                     chrome.action.setBadgeBackgroundColor({ color: "#9CA3AF" });
                 } else {
@@ -1470,20 +1536,50 @@ async function handleFocusPhaseEnd() {
 async function computeStreak(dat) {
     const _ss = await getCachedSync();
     const st = _ss.settings || {};
-    const cats = st.goalCats || ["productivity", "learning"], req = 60 * (st.streakMinMinutes || 30), days = Object.keys(dat).sort();
+    const cats = st.goalCats || ["productivity", "learning"];
+    const showWasted = st.showWastedDays !== false;
+    const minActiveSecs = 60 * (st.heatmapMinActive || 10);
+    const ratioThresh = (st.heatmapRatioThresh || 50) / 100;
+    const days = Object.keys(dat).sort();
 
-    const getGoalSecsForDay = async (dKey) => {
+    const checkActiveDay = async (dKey) => {
         const entry = dat[dKey];
-        if (!entry) return 0;
+        if (!entry) return false;
+        
+        let focus = 0;
+        let prod = 0;
+        let learn = 0;
+        let distract = 0;
+        let comm = 0;
+        let unc = 0;
+        
         if (entry.sites) {
-            let sum = 0;
             for (const [dom, s] of Object.entries(entry.sites)) {
                 const cat = await categorize(dom);
-                if (cats.includes(cat)) sum += s;
+                if (cats.includes(cat)) focus += s;
+                if (cat === "productivity") prod += s;
+                else if (cat === "learning") learn += s;
+                else if (cat === "distraction") distract += s;
+                else if (cat === "communication") comm += s;
+                else if (cat === "uncategorized") unc += s;
             }
-            return sum;
+        } else {
+            focus = cats.reduce((sum, c) => sum + (entry[c] || 0), 0);
+            prod = entry.productivity || 0;
+            learn = entry.learning || 0;
+            distract = entry.distraction || 0;
+            comm = entry.communication || 0;
+            unc = entry.uncategorized || 0;
         }
-        return cats.reduce((sum, c) => sum + (entry[c] || 0), 0);
+        
+        const total = prod + learn + distract + comm + unc;
+        if (total < minActiveSecs) return false;
+        
+        const denominator = focus + distract;
+        if (denominator === 0) return false;
+        
+        const ratio = focus / denominator;
+        return ratio >= ratioThresh;
     };
 
     let bs = 0,
@@ -1492,8 +1588,25 @@ async function computeStreak(dat) {
         tmp = 0,
         lst = null;
     for (const d of days) {
-        let secs = await getGoalSecsForDay(d);
-        if (secs > ms && (ms = secs, bd = d), secs >= req) {
+        let focusSecs = 0;
+        const entry = dat[d];
+        if (entry) {
+            if (entry.sites) {
+                for (const [dom, s] of Object.entries(entry.sites)) {
+                    const cat = await categorize(dom);
+                    if (cats.includes(cat)) focusSecs += s;
+                }
+            } else {
+                focusSecs = cats.reduce((sum, c) => sum + (entry[c] || 0), 0);
+            }
+        }
+        if (focusSecs > ms) {
+            ms = focusSecs;
+            bd = d;
+        }
+
+        const isActive = await checkActiveDay(d);
+        if (isActive) {
             if (!lst) tmp = 1;
             else {
                 const pD = d.split("-"), pLst = lst.split("-");
@@ -1510,12 +1623,12 @@ async function computeStreak(dat) {
     yd.setDate(yd.getDate() - 1);
     let tdS = `${td.getFullYear()}-${String(td.getMonth() + 1).padStart(2, "0")}-${String(td.getDate()).padStart(2, "0")}`,
         ydS = `${yd.getFullYear()}-${String(yd.getMonth() + 1).padStart(2, "0")}-${String(yd.getDate()).padStart(2, "0")}`,
-        tdSecs = await getGoalSecsForDay(tdS),
-        ydSecs = await getGoalSecsForDay(ydS),
+        tdActive = await checkActiveDay(tdS),
+        ydActive = await checkActiveDay(ydS),
         chk = new Date;
-    if (tdSecs >= req) chk = td;
+    if (tdActive) chk = td;
     else {
-        if (!(ydSecs >= req)) return {
+        if (!ydActive) return {
             currentStreak: 0,
             bestStreak: bs,
             bestDay: bd
@@ -1524,10 +1637,10 @@ async function computeStreak(dat) {
     }
     for (; ;) {
         let str = `${chk.getFullYear()}-${String(chk.getMonth() + 1).padStart(2, "0")}-${String(chk.getDate()).padStart(2, "0")}`;
-        const secs = await getGoalSecsForDay(str);
-        if (!(secs >= req)) break;
+        const isActive = await checkActiveDay(str);
+        if (!isActive) break;
         cur++, chk.setDate(chk.getDate() - 1);
-        if (cur > 3650) break; // FF v4.2: hard safety bound (10 years) against runaway loop
+        if (cur > 3650) break; // safety bound
     }
     return {
         currentStreak: cur,
@@ -1641,7 +1754,7 @@ async function handle(t, e) {
                     if (t.enabled) {
                         await chrome.scripting.insertCSS({ target: { tabId }, css: CSS_MAP[t.ruleId], origin: "USER" }).catch(() => { });
                     } else {
-                        await chrome.scripting.removeCSS({ target: { tabId }, css: CSS_MAP[t.ruleId] }).catch(() => { });
+                        await chrome.scripting.removeCSS({ target: { tabId }, css: CSS_MAP[t.ruleId], origin: "USER" }).catch(() => { });
                     }
                     return { ok: !0 };
                 }
@@ -1654,7 +1767,7 @@ async function handle(t, e) {
                 const siteRules = rules[host] || {};
 
                 for (const rId of Object.keys(CSS_MAP)) {
-                    await chrome.scripting.removeCSS({ target: { tabId }, css: CSS_MAP[rId] }).catch(() => { });
+                    await chrome.scripting.removeCSS({ target: { tabId }, css: CSS_MAP[rId], origin: "USER" }).catch(() => { });
                 }
                 for (const rId of Object.keys(siteRules)) {
                     if (siteRules[rId] && CSS_MAP[rId]) {
@@ -1687,7 +1800,16 @@ async function handle(t, e) {
                 _todayDataCacheKey = day;
             }
             // FF v6.17: keep allTimeTotals in sync with manual scrubs.
-            _allTimeTotalsCache = null;
+            try {
+                const totals = await getAllTimeTotals();
+                if (totals[dom] !== undefined) {
+                    totals[dom] = Math.max(0, (totals[dom] || 0) - sub);
+                    if (totals[dom] === 0) delete totals[dom];
+                    await saveAllTimeTotals(totals);
+                }
+            } catch (err) {
+                console.warn("[FF] Failed to scrub all-time totals:", err);
+            }
             return { ok: !0 };
         }
         case "STATS_RESET_ALL": {
@@ -1700,6 +1822,9 @@ async function handle(t, e) {
             await FFDB.ensureMigrated();
             await FFDB.clearDays();
             await FFDB.setRollups({});
+            try {
+                await FFDB.deleteMeta("all_time_totals");
+            } catch (_) {}
             // FF v6.17: also clear running totals + allow re-migration after backup restore.
             // Bug#9 fix: remove legacy ghost keys instead of writing empty objects
             await chrome.storage.local.remove(["daily", "monthly_rollups"]);
@@ -1853,7 +1978,10 @@ async function handle(t, e) {
                 (async () => {
                     try {
                         await sLocal({ lastCompressedAt: 0 });
-                        _allTimeTotalsCache = null;
+                        try {
+                            await FFDB.deleteMeta("all_time_totals");
+                        } catch (_) {}
+                        await getAllTimeTotals();
                         await updateDNRRules();
                     } catch (err) {
                         console.error("Post-import migration failed", err);
@@ -1970,7 +2098,10 @@ async function handle(t, e) {
                 (async () => {
                     try {
                         await sLocal({ lastCompressedAt: 0 });
-                        _allTimeTotalsCache = null;
+                        try {
+                            await FFDB.deleteMeta("all_time_totals");
+                        } catch (_) {}
+                        await getAllTimeTotals();
                         await updateDNRRules();
                     } catch (err) {
                         console.error("Post-import migration failed", err);
@@ -2083,21 +2214,8 @@ async function handle(t, e) {
             return { data };
         }
         case "STATS_GET_ALLTIME_TOTALS": {
-            // Bug fix #3: serve from cache when fresh — prevents scanning all IDB days on every popup open
-            const _attNow = Date.now();
-            if (_allTimeTotalsCache && (_attNow - _allTimeTotalsCache.ts) < _ATT_CACHE_TTL_MS) {
-                return { allTimeTotals: _allTimeTotalsCache.totals };
-            }
             await FFDB.ensureMigrated();
-            const all = await FFDB.getAllDays();
-            const totals = {};
-            for (const entry of Object.values(all)) {
-                if (!entry || !entry.sites) continue;
-                for (const [domain, secs] of Object.entries(entry.sites)) {
-                    totals[domain] = (totals[domain] || 0) + (secs | 0);
-                }
-            }
-            _allTimeTotalsCache = { totals, ts: _attNow };
+            const totals = await getAllTimeTotals();
             return { allTimeTotals: totals };
         }
         case "STATS_GET_TOTAL_DAYS": {
@@ -2353,6 +2471,7 @@ async function init() {
     });
     // FF v4.2: migrate chrome.storage.local.daily → IndexedDB on first run, then compact.
     await FFDB.ensureMigrated();
+    try { await getAllTimeTotals(); } catch (err) { console.warn("[FF] Failed to build allTimeTotals in init:", err); }
     
     // FF v6.18: Automatically clean up legacy ghost data from storage to save space.
     try { await chrome.storage.local.remove(["daily", "monthly_rollups"]); } catch (_) {}
@@ -2617,6 +2736,43 @@ chrome.storage.onChanged.addListener((changes, area) => {
         updateDNRRules();
     }
 });
+
+chrome.storage.onChanged.addListener(async (changes, area) => {
+    if (area === "local" && changes.granularRules) {
+        const oldRules = changes.granularRules.oldValue || {};
+        const newRules = changes.granularRules.newValue || {};
+        
+        const allDomains = new Set([...Object.keys(oldRules), ...Object.keys(newRules)]);
+        for (const dom of allDomains) {
+            const oldDomRules = oldRules[dom] || {};
+            const newDomRules = newRules[dom] || {};
+            
+            const allRuleIds = new Set([...Object.keys(oldDomRules), ...Object.keys(newDomRules)]);
+            for (const ruleId of allRuleIds) {
+                if (oldDomRules[ruleId] !== newDomRules[ruleId]) {
+                    const enabled = newDomRules[ruleId] === true;
+                    const tabs = await chrome.tabs.query({}).catch(() => []);
+                    for (const tab of tabs) {
+                        if (tab.id && tab.url) {
+                            const tabDom = domain(tab.url);
+                            if (tabDom === dom || tabDom.endsWith("." + dom)) {
+                                if (CSS_MAP[ruleId]) {
+                                    if (enabled) {
+                                        await chrome.scripting.insertCSS({ target: { tabId: tab.id }, css: CSS_MAP[ruleId], origin: "USER" }).catch(() => { });
+                                    } else {
+                                        await chrome.scripting.removeCSS({ target: { tabId: tab.id }, css: CSS_MAP[ruleId], origin: "USER" }).catch(() => { });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        await updateRuleDomainsCache();
+    }
+});
+
 // FF v6.17: a single onInstalled / onStartup pair. `init()` already calls
 // `ensurePresets()` indirectly via `updateDNRRules → getActivePreset`, so the
 // explicit second call has been removed (was seeding presets twice on first install).

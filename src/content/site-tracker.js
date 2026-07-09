@@ -39,9 +39,8 @@
   }
 
   // Fast check: is this current website actually tracked or governed by any rules?
-  // Bug 6 fix: read only blockRules + cooldownConfig (1 read instead of 3)
   const fastCfg = await new Promise((res) =>
-    chrome.storage.local.get(["cooldownConfig", "blockRules", "granularRules", "neverTrackDomains", "privacyModeActive", "allowList"], (r) => res(r || {}))
+    chrome.storage.local.get(["ruleDomainsCache", "neverTrackDomains", "privacyModeActive", "allowList"], (r) => res(r || {}))
   );
 
   const allowList = fastCfg.allowList || [];
@@ -55,6 +54,24 @@
     return;
   }
 
+  let hasRules = true;
+  if (fastCfg.ruleDomainsCache !== undefined) {
+    const ruleDomains = fastCfg.ruleDomainsCache || [];
+    const hostLower = host.toLowerCase().trim();
+    hasRules = ruleDomains.some((d) => hostLower === d || hostLower.endsWith("." + d));
+  }
+
+  if (!hasRules) {
+    window.__ffCooldownActive = false;
+    return;
+  }
+
+  // Lazy-load detailed rules only for rule-governed domains (or if cache is uninitialized)
+  const ruleDetails = await new Promise((res) =>
+    chrome.storage.local.get(["cooldownConfig", "blockRules", "granularRules"], (r) => res(r || {}))
+  );
+  Object.assign(fastCfg, ruleDetails);
+
   const cdConf1 = fastCfg.cooldownConfig || {};
   const cooldowns = (cdConf1.activeDomains || []).map((d) => String(d).toLowerCase().trim()).filter(Boolean);
   const blockRules = fastCfg.blockRules || [];
@@ -63,11 +80,6 @@
   const isCooldown = cooldowns.some((d) => host === d || host.endsWith("." + d));
   const isBlocked = blockRules.some((r) => r.domain && (host === r.domain.toLowerCase() || host.endsWith("." + r.domain.toLowerCase())));
 
-  // If the user has absolutely no rules for this domain, bail out completely!
-  if (!isCooldown && !isBlocked && (!fastCfg.granularRules || !fastCfg.granularRules[host])) {
-    window.__ffCooldownActive = false;
-    return;
-  }
 
   // ---- Advanced Reddit Shadow DOM Hiding ----
   if (host === "reddit.com") {
