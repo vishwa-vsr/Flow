@@ -114,11 +114,10 @@
         <button class="vtab" data-atab="daily" data-i18n="dailyBreakdown">Daily Breakdown</button>
         <button class="vtab" data-atab="topsites" data-i18n="topSites">Top Sites</button>
         <button class="vtab" data-atab="trend" data-i18n="studyVsDistraction">Study vs Distraction</button>
-        <button class="vtab" data-atab="insights" data-i18n="insights">Insights</button>
       </div>
 
       <div id="atab-overview">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
           <div class="range-selector">
             <button class="vtab act" data-range="7" data-i18n="range7d">7d</button>
             <button class="vtab" data-range="14" data-i18n="range14d">14d</button>
@@ -137,7 +136,7 @@
           <button id="ov-apply" class="vtab act" style="font-weight:800" data-i18n="apply">Apply</button>
         </div>
 
-        <div class="compact-grid">
+        <div class="compact-grid" style="gap: 16px; margin-bottom: 16px;">
           <div class="ac">
             <div class="acv w" id="an-total">0m</div>
             <div class="aclbl" data-i18n="total">Total</div>
@@ -159,47 +158,108 @@
             <div class="aclbl" data-i18n="catCommunication">Communication</div>
           </div>
 
-          <div class="at-card">
-            <div class="at-val" id="an-bs">0d</div>
-            <div class="at-lbl" data-i18n="bestStreak">Best streak</div>
+          <div class="ac">
+            <div class="acv w" id="an-bs">0d</div>
+            <div class="aclbl" data-i18n="bestStreak">Best streak</div>
           </div>
-          <div class="at-card">
-            <div class="at-val" id="an-bd">—</div>
-            <div class="at-lbl" data-i18n="bestDay">Best day</div>
+          <div class="ac">
+            <div class="acv w" id="an-bd">—</div>
+            <div class="aclbl" data-i18n="bestDay">Best day</div>
           </div>
-          <div class="at-card">
-            <div class="at-val" id="at-total">0h</div>
-            <div class="at-lbl" data-i18n="allTimeTotal">All-time total</div>
+          <div class="ac">
+            <div class="acv w" id="at-total">0h</div>
+            <div class="aclbl" data-i18n="allTimeTotal">All-time total</div>
           </div>
-          <div class="at-card">
-            <div class="at-val" id="at-daily-avg">0m</div>
-            <div class="at-lbl" data-i18n="dailyAverage">Daily average</div>
+          <div class="ac">
+            <div class="acv w" id="at-daily-avg">0m</div>
+            <div class="aclbl" data-i18n="dailyAverage">Daily average</div>
           </div>
-          <div class="at-card">
-            <div class="at-val" id="at-days">0</div>
-            <div class="at-lbl" data-i18n="daysTracked">Days tracked</div>
+          <div class="ac">
+            <div class="acv w" id="at-days">0</div>
+            <div class="aclbl" data-i18n="daysTracked">Days tracked</div>
           </div>
         </div>
 
-        <div class="chart-container" style="margin-bottom:40px">
-          <div class="chart-hdr">
-            <div class="chart-toggles" id="ov-toggles">
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-ov-prod" checked><span class="chart-tog-dot"
-                  style="background:var(--green)"></span><span class="chart-tog-text" data-i18n="catProductivity">Productivity</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-ov-lrn" checked><span class="chart-tog-dot"
-                  style="background:var(--purple)"></span><span class="chart-tog-text" data-i18n="catLearning">Learning</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-ov-dist" checked><span class="chart-tog-dot"
-                  style="background:var(--red)"></span><span class="chart-tog-text" data-i18n="catDistraction">Distraction</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-ov-comm" checked><span class="chart-tog-dot"
-                  style="background:var(--blue)"></span><span class="chart-tog-text" data-i18n="catCommunication">Communication</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-ov-unc" checked><span class="chart-tog-dot"
-                  style="background:var(--tx4)"></span><span class="chart-tog-text" data-i18n="catUncategorized">Uncategorized</span></label>
+        <!-- New Symmetrical Overview Layout Grid -->
+        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); margin-bottom: 16px; gap: 16px; align-items: stretch;">
+          <!-- Left Column: Category Donut & Ratio Bar -->
+          <div class="card" style="padding:24px; display:flex; flex-direction:column; gap:20px; min-height:380px; height:100%; box-sizing:border-box;">
+            <div class="ctit" data-i18n="timeDistribution">Time Distribution</div>
+            
+            <!-- Focus vs Distraction Ratio Bar -->
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">
+                <span id="ov-ratio-bar-focus-lbl" style="color:var(--green)">Focus: 0%</span>
+                <span id="ov-ratio-bar-dist-lbl" style="color:var(--red)">Distraction: 0%</span>
+              </div>
+              <div style="width:100%; height:8px; border-radius:99px; background:var(--bg4); overflow:hidden; display:flex;">
+                <div id="ov-ratio-bar-focus" style="height:100%; background:var(--green); width:0%; transition:width 0.3s ease;"></div>
+                <div id="ov-ratio-bar-dist" style="height:100%; background:var(--red); width:0%; transition:width 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Donut Chart Canvas and Legend -->
+            <div style="display:flex; align-items:center; gap:24px; flex:1; flex-wrap:wrap; justify-content:center;">
+              <div style="position:relative; width:200px; height:200px; display:flex; justify-content:center; align-items:center; margin: 0 auto;">
+                <canvas id="ov-donut-chart" style="width:200px; height:200px; z-index:1;"></canvas>
+                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; z-index:0; pointer-events:none;">
+                  <div id="ov-donut-total-lbl" style="font-size:24px; font-weight:800; color:var(--tx)">0h</div>
+                  <div id="ov-donut-sub-lbl" style="font-size:10px; font-weight:700; color:var(--tx3); text-transform:uppercase; letter-spacing:0.5px;" data-i18n="tracked">tracked</div>
+                </div>
+              </div>
+              <div id="ov-donut-legend" style="display:flex; flex-direction:column; gap:8px; justify-content:center; flex:1; min-width:200px;">
+                <!-- Filled dynamically in JS -->
+              </div>
             </div>
           </div>
-          <div class="chart-wrapper">
-            <div id="ov-y-axis" class="y-axis"></div>
-            <div class="chart-scroll" id="ov-scroll"><canvas id="ov-chart" height="450" role="img" aria-label="Overview chart showing tracking time breakdown by category."></canvas></div>
-            <div id="ov-y-axis-right" class="y-axis y-axis-right"></div>
+
+          <!-- Right Column: Top 5 Websites -->
+          <div class="card" style="padding:24px; display:flex; flex-direction:column; gap:16px; min-height:380px; height:100%; box-sizing:border-box;">
+            <div class="ctit" data-i18n="top5Websites">Top 5 Websites</div>
+            <div id="ov-topsites-list" style="display:flex; flex-direction:column; gap:16px; flex:1; justify-content:center;">
+              <!-- Filled dynamically in JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Insights Summary Grid -->
+        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 16px; gap: 16px;">
+          <div class="at-card" style="border-color:var(--green-bd)">
+            <div class="at-val" style="color:var(--green)" id="ins-good-days">0</div>
+            <div class="at-lbl" data-i18n="goodDays365d">Good Days (365d)</div>
+          </div>
+          <div class="at-card" style="border-color:var(--red-bd)">
+            <div class="at-val" style="color:var(--red)" id="ins-wasted-days">0</div>
+            <div class="at-lbl" data-i18n="wastedDays365d">Wasted (365d)</div>
+          </div>
+        </div>
+
+        <!-- 365-Day Consistency Heatmap card (moved here) -->
+        <div class="card" style="padding:24px; margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+            <div>
+              <div class="ctit" style="margin:0" data-i18n="consistency365">365-Day Consistency</div>
+              <div style="font-size:12px;color:var(--tx3);margin-top:4px" data-i18n="heatmapHelp">Each square is one day. Greener = more focus time. Red = wasted day.</div>
+            </div>
+            <div id="heatmap-legend" data-i18n-title="clickToCustomizeThresholds" style="cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;
+                      color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1px;
+                      background:var(--bg3);border:1px solid var(--bd);border-radius:99px;
+                      padding:6px 12px;transition:all .2s ease;white-space:nowrap;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--tx3);"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span data-i18n="less">Less</span>
+              <span style="display:inline-block;width:10px;height:10px;background:var(--bg4);border-radius:3px"></span>
+              <span style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.3);border-radius:3px"></span>
+              <span style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.55);border-radius:3px"></span>
+              <span style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.8);border-radius:3px"></span>
+              <span style="display:inline-block;width:10px;height:10px;background:#05D581;border-radius:3px"></span>
+              <span data-i18n="more">More</span>
+              <span style="margin-left:8px;display:inline-block;width:10px;height:10px;background:#F46B7A;border-radius:3px"></span>
+              <span data-i18n="wasted">Wasted</span>
+            </div>
+          </div>
+          <div id="heatmap-wrap" style="overflow-x:auto; position:relative;">
+            <div id="heatmap-loading" class="ff-loading" style="padding:40px 0;" data-i18n="buildingHeatmap">Building heatmap…</div>
+            <canvas id="heatmap-canvas" style="display:none" role="img" aria-label="365-day consistency heatmap showing your productivity levels for each day of the past year."></canvas>
           </div>
         </div>
       </div>
@@ -261,103 +321,90 @@
           <input type="date" id="trend-to" />
           <button id="trend-apply" class="vtab act" style="font-weight:800" data-i18n="apply">Apply</button>
         </div>
-        <div class="compact-grid" style="grid-template-columns:repeat(3,1fr)">
-          <div class="at-card" style="border-color:var(--green-bd)">
-            <div class="at-val" style="color:var(--green)" id="trend-study-total">0h</div>
-            <div class="at-lbl" data-i18n="totalWorkStudy">Total Work/Study</div>
-          </div>
-          <div class="at-card" style="border-color:var(--red-bd)">
-            <div class="at-val" style="color:var(--red)" id="trend-dist-total">0h</div>
-            <div class="at-lbl" data-i18n="totalDistraction">Total Distraction</div>
-          </div>
-          <div class="at-card">
-            <div class="at-val" id="trend-ratio">—</div>
-            <div class="at-lbl" data-i18n="productivityRatio">Productivity Ratio</div>
-          </div>
-        </div>
 
         <div class="chart-container">
           <div class="chart-hdr">
             <div class="chart-toggles" id="trend-toggles">
               <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-prod" checked><span
                   class="chart-tog-dot" style="background:var(--green)"></span><span
-                  class="chart-tog-text" data-i18n="catProductivity">Productivity</span></label>
+                  class="chart-tog-text" id="tog-trend-prod-lbl" data-i18n="catProductivity">Productivity</span></label>
               <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-lrn" checked><span class="chart-tog-dot"
-                  style="background:var(--purple)"></span><span class="chart-tog-text" data-i18n="catLearning">Learning</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-comm" checked><span
+                  style="background:var(--purple)"></span><span class="chart-tog-text" id="tog-trend-lrn-lbl" data-i18n="catLearning">Learning</span></label>
+              <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-comm"><span
                   class="chart-tog-dot" style="background:var(--blue)"></span><span
-                  class="chart-tog-text" data-i18n="catCommunication">Communication</span></label>
+                  class="chart-tog-text" id="tog-trend-comm-lbl" data-i18n="catCommunication">Communication</span></label>
               <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-dist" checked><span
                   class="chart-tog-dot" style="background:var(--red)"></span><span
-                  class="chart-tog-text" data-i18n="catDistraction">Distraction</span></label>
-              <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-unc" checked><span class="chart-tog-dot"
-                  style="background:var(--tx4)"></span><span class="chart-tog-text" data-i18n="catUncategorized">Uncategorized</span></label>
+                  class="chart-tog-text" id="tog-trend-dist-lbl" data-i18n="catDistraction">Distraction</span></label>
+              <label class="chart-tog-lbl"><input type="checkbox" id="tog-trend-unc"><span class="chart-tog-dot"
+                  style="background:var(--tx4)"></span><span class="chart-tog-text" id="tog-trend-unc-lbl" data-i18n="catUncategorized">Uncategorized</span></label>
+              <label class="chart-tog-lbl" style="border-left: 1px solid var(--bd); padding-left: 12px; margin-left: 4px;">
+                <input type="checkbox" id="tog-trend-avg" checked>
+                <span class="chart-tog-dot" style="background:transparent; border: 1.5px dashed var(--green); border-radius: 0;"></span>
+                <span class="chart-tog-text" id="tog-trend-avg-lbl" data-i18n="averageLine">Average Line</span>
+              </label>
+            </div>
+            
+            <div class="range-selector" id="trend-view-selector" style="margin: 0; display:flex; gap:4px; background:var(--bg3); padding:4px; border-radius:8px; border:1px solid var(--bd);">
+                <button class="vtab" id="btn-trend-view-line" style="padding:6px 12px; font-size:12px; font-weight:700;" data-i18n="lineChart">Line</button>
+                <button class="vtab" id="btn-trend-view-bar" style="padding:6px 12px; font-size:12px; font-weight:700;" data-i18n="barChart">Bar</button>
             </div>
           </div>
-          <div class="chart-wrapper">
+          <div class="chart-wrapper" id="trend-line-wrapper">
             <div id="trend-y-axis" class="y-axis"></div>
             <div class="chart-scroll" id="trend-scroll"><canvas id="trend-chart" height="450" role="img" aria-label="Study vs distraction trend chart showing focus hours compared to distraction hours."></canvas></div>
             <div id="trend-y-axis-right" class="y-axis y-axis-right"></div>
           </div>
+          <div class="chart-wrapper" id="trend-bar-wrapper" style="display:none">
+            <div id="trend-bar-y-axis" class="y-axis"></div>
+            <div class="chart-scroll" id="trend-bar-scroll"><canvas id="trend-bar-chart" height="450" role="img" aria-label="Comparison bar chart."></canvas></div>
+            <div id="trend-bar-y-axis-right" class="y-axis y-axis-right"></div>
+          </div>
+        </div>
+
+        <!-- Comparison Smart Insights Grid -->
+        <div class="compact-grid" id="trend-insights-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 16px; gap: 16px; align-items: stretch;">
+          <!-- Card 1: MoM Comparison -->
+          <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; height: 100%; box-sizing: border-box;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--tx3); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: 8px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span data-i18n="momComparison">Month-over-Month</span>
+            </div>
+            <div id="insight-mom-value" style="font-size: 18px; font-weight: 800; color: var(--tx);">Calculating...</div>
+            <div id="insight-mom-desc" style="font-size: 12px; color: var(--tx); line-height: 1.4;" data-i18n="momComparisonDesc">Comparing this month's active time vs last month.</div>
+          </div>
+          
+          <!-- Card 2: Productivity vs Distraction Split -->
+          <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%; box-sizing: border-box;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--tx3); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: 8px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10H12V2z"></path></svg>
+              <span data-i18n="focusVsDistraction">Focus vs. Distraction</span>
+            </div>
+            
+            <div style="display: flex; gap: 16px; align-items: center; width: 100%;">
+              <!-- Left side: Sparkline (35% width) -->
+              <div id="insight-split-chart-container" style="width: 35%; flex-shrink: 0; height: 65px; position: relative;">
+                <canvas id="insight-split-chart"></canvas>
+              </div>
+              
+              <!-- Bold straight line (vertical divider - taller) -->
+              <div id="insight-split-divider" style="width: 3px; background: var(--tx2); height: 95px; border-radius: 1.5px; flex-shrink: 0; align-self: center;"></div>
+              
+              <!-- Right side: Stats and descriptions (65% width) -->
+              <div style="width: 65%; flex-grow: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding-left: 4px;">
+                <div id="insight-split-value" style="font-size: 15px; font-weight: 800; color: var(--tx); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Calculating...</div>
+                <div style="width: 100%; height: 8px; background: var(--bg4); border-radius: 4px; overflow: hidden; display: flex;">
+                  <div id="split-focus-bar" style="height: 100%; background: var(--green); width: 0%; transition: width 0.3s;"></div>
+                  <div id="split-dist-bar" style="height: 100%; background: var(--red); width: 0%; transition: width 0.3s;"></div>
+                </div>
+                <div id="insight-split-desc" style="font-size: 11px; color: var(--tx); line-height: 1.3;">Ratio of study time to distracted time.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div id="atab-insights" style="display:none">
-        <div class="compact-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:24px">
-          <div class="at-card" style="border-color:var(--green-bd)">
-            <div class="at-val" style="color:var(--green)" id="ins-good-days">0</div>
-            <div class="at-lbl" data-i18n="goodDays365d">Good Days (365d)</div>
-          </div>
-          <div class="at-card" style="border-color:var(--red-bd)">
-            <div class="at-val" style="color:var(--red)" id="ins-wasted-days">0</div>
-            <div class="at-lbl" data-i18n="wastedDays365d">Wasted (365d)</div>
-          </div>
-        </div>
-        <div class="card" style="padding:24px">
-          <div
-            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
-            <div>
-              <div class="ctit" style="margin:0" data-i18n="consistency365">365-Day Consistency</div>
-              <div style="font-size:12px;color:var(--tx3);margin-top:4px" data-i18n="heatmapHelp">Each square is one day. Greener = more focus
-                time. Red = wasted day.</div>
-            </div>
-            <!-- FF v6.18: made legend look like a clickable button (Problem 8) -->
-            <div id="heatmap-legend" data-i18n-title="clickToCustomizeThresholds" style="cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;
-                      color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1px;
-                      background:var(--bg3);border:1px solid var(--bd);border-radius:99px;
-                      padding:6px 12px;transition:all .2s ease;white-space:nowrap;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--tx3);"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-              <span data-i18n="less">Less</span>
-              <span style="display:inline-block;width:10px;height:10px;background:var(--bg4);border-radius:3px"></span>
-              <span
-                style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.3);border-radius:3px"></span>
-              <span
-                style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.55);border-radius:3px"></span>
-              <span
-                style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.8);border-radius:3px"></span>
-              <span style="display:inline-block;width:10px;height:10px;background:#05D581;border-radius:3px"></span>
-              <span data-i18n="more">More</span>
-              <span
-                style="margin-left:8px;display:inline-block;width:10px;height:10px;background:#F46B7A;border-radius:3px"></span>
-              <span data-i18n="wasted">Wasted</span>
-            </div>
-          </div>
-          <div id="heatmap-wrap" style="overflow-x:auto; position:relative;">
-            <div id="heatmap-loading" class="ff-loading" style="padding:40px 0;" data-i18n="buildingHeatmap">Building heatmap…</div>
-            <canvas id="heatmap-canvas" style="display:none" role="img" aria-label="365-day consistency heatmap showing your productivity levels for each day of the past year."></canvas>
-          </div>
-        </div>
-        <div class="compact-grid" style="grid-template-columns:repeat(2,1fr);margin-top:24px">
-          <div class="card" style="padding:20px">
-            <div class="ctit" style="margin-bottom:8px" data-i18n="weekdayVsWeekend">Weekday vs Weekend</div>
-            <div id="ins-wkd-split" style="font-size:14px;color:var(--tx2);font-weight:600;line-height:1.6">—</div>
-          </div>
-          <div class="card" style="padding:20px">
-            <div class="ctit" style="margin-bottom:8px" data-i18n="mostProductiveDay">Most Productive Day</div>
-            <div id="ins-best-dow" style="font-size:14px;color:var(--tx2);font-weight:600;line-height:1.6">—</div>
-          </div>
-        </div>
-      </div>
+
     </section>
 
     <section class="tab" id="tab-focus" role="tabpanel" aria-labelledby="tab-btn-focus">
@@ -447,9 +494,16 @@
             </div>
             <div class="trow" style="padding-bottom:16px">
               <div>
-                <label for="streak-min-input" class="tlbl" style="font-size:14px; cursor:pointer;" data-i18n="dailyStreakMin">Daily Streak Min (m)</label>
+                <label for="streak-min-input" class="tlbl" style="font-size:14px; cursor:pointer;" data-i18n="minActiveTimeShort">Min Active Time (m)</label>
               </div>
-              <input type="number" id="streak-min-input" class="num inp" min="5" max="240" value="30"
+              <input type="number" id="streak-min-input" class="num inp" min="1" max="240" value="10"
+                style="width:80px" />
+            </div>
+            <div class="trow" style="padding-bottom:16px">
+              <div>
+                <label for="ratio-threshold-input" class="tlbl" style="font-size:14px; cursor:pointer;" data-i18n="ratioThresholdShort">Ratio Threshold (%)</label>
+              </div>
+              <input type="number" id="ratio-threshold-input" class="num inp" min="1" max="100" value="50"
                 style="width:80px" />
             </div>
             <div class="trow" style="padding-bottom:16px">
@@ -837,6 +891,9 @@
                   <option value="default" data-i18n="systemDefault">System Default</option>
                   <option value="en" data-i18n="langEnglish">English</option>
                   <option value="es" data-i18n="langSpanish">Español (Informal/Blunt)</option>
+                  <option value="zh_CN" data-i18n="langChineseSimplified">简体中文 (Simplified)</option>
+                  <option value="zh_TW" data-i18n="langChineseTraditional">繁體中文 (Traditional)</option>
+                  <option value="zh_HK" data-i18n="langChineseHongKong">繁體中文 (香港)</option>
                 </select>
               </div>
             </div>
@@ -1357,8 +1414,8 @@
     <!-- ═══════ PRIVACY MODE MODAL ═══════ -->
     <div id="privacy-modal" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
       <div class="card"
-        style="width:100%; max-width:400px; padding:32px; display:flex; flex-direction:column; gap:20px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); background:var(--bg2); border:1px solid var(--bd);">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
+        <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
           <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
             <span style="color:#A855F7; display:inline-flex; align-items:center;">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1366,18 +1423,20 @@
             <span id="privacy-modal-title" data-i18n="privacyMode">Privacy Mode</span>
           </div>
           <button id="privacy-modal-close" aria-label="Close Privacy Modal"
-            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         </div>
-        <div style="font-size:14px; color:var(--tx2); line-height:1.5;" data-i18n="privacyModalDesc">
-          Pause all time-tracking and network-level blocking. Choose how long you want to pause:
+        <div style="padding:24px 32px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; flex:1;">
+          <div style="font-size:14px; color:var(--tx2); line-height:1.5;" data-i18n="privacyModalDesc">
+            Pause all time-tracking and network-level blocking. Choose how long you want to pause:
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <button class="privacy-choice-btn" id="btn-dash-privacy-30" data-i18n="pauseFor30Min">Pause for 30 minutes</button>
+            <button class="privacy-choice-btn" id="btn-dash-privacy-60" data-i18n="pauseFor1Hour">Pause for 1 hour</button>
+            <button class="privacy-choice-btn danger" id="btn-dash-privacy-always" data-i18n="pauseUntilResumed">Pause until resumed</button>
+          </div>
         </div>
-        <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
-          <button class="privacy-choice-btn" id="btn-dash-privacy-30" data-i18n="pauseFor30Min">Pause for 30 minutes</button>
-          <button class="privacy-choice-btn" id="btn-dash-privacy-60" data-i18n="pauseFor1Hour">Pause for 1 hour</button>
-          <button class="privacy-choice-btn danger" id="btn-dash-privacy-always" data-i18n="pauseUntilResumed">Pause until resumed</button>
-        </div>
-        <div style="display:flex; gap:12px; margin-top:8px; border-top:1px solid var(--bd); padding-top:16px;">
-          <button class="bs" id="btn-dash-privacy-cancel" style="width:100%; padding:12px; font-weight:bold; flex:1;" data-i18n="cancel">Cancel</button>
+        <div style="padding:16px 32px 24px; border-top:1px solid var(--bd); display:flex; gap:12px; justify-content:flex-end; flex-shrink:0;">
+          <button class="bs" id="btn-dash-privacy-cancel" style="padding:10px 20px;" data-i18n="cancel">Cancel</button>
         </div>
       </div>
     </div>
@@ -1512,7 +1571,6 @@
     <script src="../src/lib/storage.js"></script>
     <script src="../src/lib/db.js"></script>
     <script src="../utils.js"></script>
-    <script src="../src/lib/chart.min.js"></script>
     <script src="../src/lib/i18n.js"></script>
     <script src="dashboard.js"></script>
 </body>

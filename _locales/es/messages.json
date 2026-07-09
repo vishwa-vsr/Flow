@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Flow - Gestor de Sitios y Rastreador de Hábitos",
+    "message": "Flow - Bloqueador de Sitios y Rastreador de Hábitos",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
@@ -22,6 +22,10 @@
   "cancel": {
     "message": "Cancelar",
     "description": "Label for the cancel button."
+  },
+  "ok": {
+    "message": "Aceptar",
+    "description": "Label for the OK/confirm button."
   },
   "analytics": {
     "message": "Analíticas",
@@ -247,6 +251,10 @@
     "message": "Por defecto (Instantáneo)",
     "description": "Label for the default instant-block mode."
   },
+  "confirmBlockTitle": {
+    "message": "¿Bloquear sitio web?",
+    "description": "Title of the custom confirmation modal when blocking a site."
+  },
   "confirmBlock": {
     "message": "¿Seguro que quieres bloquear $domain$? Se recargará la pestaña y se bloqueará el acceso a este sitio.",
     "description": "Confirmation dialog when blocking a site.",
@@ -256,6 +264,14 @@
         "example": "youtube.com"
       }
     }
+  },
+  "confirmPauseTitle": {
+    "message": "¿Pausar sesión de enfoque?",
+    "description": "Title of the confirmation modal when pausing a session."
+  },
+  "confirmPauseDesc": {
+    "message": "Las sesiones solo se pueden pausar por un máximo de 5 minutos. Después de 5 minutos, la sesión terminará automáticamente.",
+    "description": "Description in confirmation modal when pausing a session."
   },
   "deepWork": {
     "message": "Trabajo profundo.",
@@ -335,7 +351,7 @@
     "placeholders": {
       "time": {
         "content": "$1",
-        "example": "30 minutos"
+        "example": "30 minutes"
       }
     }
   },
@@ -676,6 +692,14 @@
   "analyticsDesc": {
     "message": "Tu panorama de productividad completo.",
     "description": "Analytics section description."
+  },
+  "timeDistribution": {
+    "message": "Distribución del Tiempo",
+    "description": "Time distribution section title."
+  },
+  "top5Websites": {
+    "message": "Top 5 Sitios Web",
+    "description": "Top 5 websites section title."
   },
   "overview": {
     "message": "Resumen",
@@ -1200,6 +1224,162 @@
   "langSpanish": {
     "message": "Español (Informal/Blunt)",
     "description": "Language choice."
+  },
+  "langChineseSimplified": {
+    "message": "Chino (Simplificado) / 简体中文",
+    "description": "Language choice."
+  },
+  "langChineseTraditional": {
+    "message": "Chino (Tradicional) / 繁體中文",
+    "description": "Language choice."
+  },
+  "langChineseHongKong": {
+    "message": "Chino (Hong Kong) / 繁體中文 (香港)",
+    "description": "Language choice."
+  },
+  "averageLine": {
+    "message": "Línea de Promedio",
+    "description": "Chart option."
+  },
+  "lineChart": {
+    "message": "Línea",
+    "description": "Chart type toggle."
+  },
+  "barChart": {
+    "message": "Barra",
+    "description": "Chart type toggle."
+  },
+  "reduceTime": {
+    "message": "Reducir Tiempo",
+    "description": "Daily stats card action."
+  },
+  "howManyMinutesRemove": {
+    "message": "¿Cuántos minutos deseas eliminar para $1?",
+    "description": "Prompt message in the time reduction modal."
+  },
+  "remove": {
+    "message": "Eliminar",
+    "description": "Action button label."
+  },
+  "minutes": {
+    "message": "Minutos",
+    "description": "Input field placeholder."
+  },
+  "momComparison": {
+    "message": "Mes a Mes",
+    "description": "Settings card label."
+  },
+  "momComparisonDesc": {
+    "message": "Comparación del tiempo activo de este mes con el mes pasado.",
+    "description": "Card description."
+  },
+  "focusVsDistraction": {
+    "message": "Enfoque vs. Distracción",
+    "description": "Card label."
+  },
+  "pctFocus": {
+    "message": "$1% Enfoque",
+    "description": "Focus percentage summary."
+  },
+  "pctDistraction": {
+    "message": "$1% Distracción",
+    "description": "Distraction percentage summary."
+  },
+  "focusSplitDesc": {
+    "message": "Estuviste enfocado durante $1 y te distrajiste durante $2.",
+    "description": "Productivity split description sentence."
+  },
+  "noFocusDistTimeRange": {
+    "message": "No hay tiempo de enfoque o distracción registrado en este rango.",
+    "description": "Placeholder text."
+  },
+  "pinSiteToTop": {
+    "message": "Fijar sitio arriba",
+    "description": "Tooltip text."
+  },
+  "unpinSite": {
+    "message": "Desfijar sitio",
+    "description": "Tooltip text."
+  },
+  "visitSite": {
+    "message": "Visitar sitio",
+    "description": "Tooltip text."
+  },
+  "addOrEditRule": {
+    "message": "Añadir o editar regla",
+    "description": "Tooltip text."
+  },
+  "autoCategorized": {
+    "message": "Categorizado automáticamente",
+    "description": "Tooltip text."
+  },
+  "totalTracked": {
+    "message": "Total Registrado",
+    "description": "Daily stat title."
+  },
+  "activeTimeline": {
+    "message": "Cronología de Actividad de 24 Horas",
+    "description": "Section header."
+  },
+  "heatmapThresholds": {
+    "message": "Umbrales del Mapa de Calor",
+    "description": "Modal title."
+  },
+  "minActiveTimeMins": {
+    "message": "Tiempo Activo Mínimo (minutos)",
+    "description": "Config setting label."
+  },
+  "minActiveTimeDesc": {
+    "message": "Tiempo total mínimo registrado para colorear un día.",
+    "description": "Config option helper text."
+  },
+  "ratioThresholdPct": {
+    "message": "Umbral de Proporción (%)",
+    "description": "Config setting label."
+  },
+  "ratioThresholdDesc": {
+    "message": "Si tu proporción de enfoque está por debajo de este %, el día es Perdido (Rojo). De lo contrario, es Activo (Verde).",
+    "description": "Config option helper text."
+  },
+  "showWastedDays": {
+    "message": "Mostrar Días Perdidos (Rojo)",
+    "description": "Config setting label."
+  },
+  "showWastedDaysDesc": {
+    "message": "Destacar los días de alta distracción como bloques rojos.",
+    "description": "Config option helper text."
+  },
+  "focusCategories": {
+    "message": "Categorías de Enfoque",
+    "description": "Config setting label."
+  },
+  "selectFocusCatsDesc": {
+    "message": "Selecciona qué categorías cuentan para tu Tiempo de Enfoque diario.",
+    "description": "Config option helper text."
+  },
+  "activeHrs": {
+    "message": "$1 de actividad",
+    "description": "Label showing tracked active time hours."
+  },
+  "noActiveTimeTracked": {
+    "message": "Aún no hay tiempo activo registrado.",
+    "description": "Placeholder text."
+  },
+  "vsLastMonth": {
+    "message": "vs $1 el mes pasado ($2)",
+    "description": "MoM status comparison description."
+  },
+  "vsLastMonthNoChange": {
+    "message": "vs $1 el mes pasado (sin cambios)",
+    "description": "MoM status comparison description."
+  },
+  "increase": {
+    "message": "aumento",
+    "description": "Label indicating value increase."
+  },
+  "decrease": {
+    "message": "disminución",
+    "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
     "message": "Control de Acceso y Seguridad",
@@ -2264,11 +2444,11 @@
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "Últimos $ días",
+    "message": "Últimos $count$ días",
     "description": "Last X days label",
     "placeholders": {
       "count": {
-        "content": "",
+        "content": "$1",
         "example": "7"
       }
     }
@@ -2399,12 +2579,172 @@
     "placeholders": {
       "day": {
         "content": "$1",
-        "example": "Lunes"
+        "example": "Monday"
       },
       "time": {
         "content": "$2",
         "example": "2h 15m"
       }
     }
+  },
+  "editPreset": {
+    "message": "Editar preajuste",
+    "description": "Modal title."
+  },
+  "presetName": {
+    "message": "Nombre del preajuste",
+    "description": "Label."
+  },
+  "workTimeMin": {
+    "message": "Tiempo de trabajo (min)",
+    "description": "Input field label."
+  },
+  "breakTimeMin": {
+    "message": "Tiempo de descanso (min)",
+    "description": "Input field label."
+  },
+  "longBreakMin": {
+    "message": "Descanso largo (min)",
+    "description": "Input field label."
+  },
+  "cycles": {
+    "message": "Ciclos",
+    "description": "Input field label."
+  },
+  "enableNotifications": {
+    "message": "Activar notificaciones",
+    "description": "Toggle switch label."
+  },
+  "epNotifyDesc": {
+    "message": "Recibe alertas automáticas cuando terminen los períodos de enfoque o descanso.",
+    "description": "Help text."
+  },
+  "autoStartNextCycle": {
+    "message": "Iniciar ciclo siguiente automáticamente",
+    "description": "Toggle switch label."
+  },
+  "epAutoStartDesc": {
+    "message": "Pasa automáticamente al siguiente ciclo de trabajo o descanso.",
+    "description": "Help text."
+  },
+  "categoriesToBlockDuringFocus": {
+    "message": "Categorías a bloquear durante el enfoque",
+    "description": "Checkbox group header."
+  },
+  "scheduledSession": {
+    "message": "Sesión programada",
+    "description": "Focus history item label."
+  },
+  "presetPomodoro": {
+    "message": "Pomodoro",
+    "description": "Built-in preset name."
+  },
+  "presetDeepWork": {
+    "message": "Enfoque profundo",
+    "description": "Built-in preset name."
+  },
+  "presetShortSprint": {
+    "message": "Sesión corta",
+    "description": "Built-in preset name."
+  },
+  "presetFlow": {
+    "message": "Flow",
+    "description": "Built-in preset name."
+  },
+  "noFocusSessionsYet": {
+    "message": "Aún no hay sesiones de enfoque.",
+    "description": "Placeholder text."
+  },
+  "startFirstSession": {
+    "message": "Iniciar primera sesión",
+    "description": "Button label."
+  },
+  "siteList": {
+    "message": "Lista de sitios",
+    "description": "Tab title."
+  },
+  "smartPresetsAndCategories": {
+    "message": "Preajustes inteligentes y categorías",
+    "description": "Tab title."
+  },
+  "advancedTweaks": {
+    "message": "Ajustes avanzados",
+    "description": "Tab title."
+  },
+  "freetimeHours": {
+    "message": "Horas de tiempo libre",
+    "description": "Section header."
+  },
+  "addFreetime": {
+    "message": "Añadir tiempo libre",
+    "description": "Button label."
+  },
+  "editFreetime": {
+    "message": "Editar tiempo libre",
+    "description": "Modal title."
+  },
+  "addBlockRule": {
+    "message": "Añadir regla de bloqueo",
+    "description": "Modal title."
+  },
+  "to": {
+    "message": "a",
+    "description": "Preposition."
+  },
+  "siteCountSingle": {
+    "message": "$count$ sitio",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "siteCountPlural": {
+    "message": "$count$ sitios",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "minActiveTimeShort": {
+    "message": "Tiempo activo mín. (m)",
+    "description": "Short label for sidebar settings."
+  },
+  "ratioThresholdShort": {
+    "message": "Umbral de proporción (%)",
+    "description": "Short label for sidebar settings."
+  },
+  "averageFocus": {
+    "message": "Promedio de enfoque",
+    "description": "Chart line label."
+  },
+  "noRulesYet": {
+    "message": "Aún no hay reglas",
+    "description": "Placeholder header."
+  },
+  "blockSitesToGetStarted": {
+    "message": "Bloquea sitios distractores para comenzar.",
+    "description": "Placeholder description."
+  },
+  "noExceptionsYet": {
+    "message": "Aún no hay excepciones",
+    "description": "Placeholder header."
+  },
+  "allowSitesDesc": {
+    "message": "Permite sitios que omiten todas las reglas de bloqueo.",
+    "description": "Placeholder description."
+  },
+  "noDomainsIgnored": {
+    "message": "No hay dominios ignorados",
+    "description": "Placeholder header."
+  },
+  "neverTrackDesc": {
+    "message": "Los dominios de esta lista nunca se rastrearán para analíticas.",
+    "description": "Placeholder description."
   }
 }

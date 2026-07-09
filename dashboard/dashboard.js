@@ -3,6 +3,9 @@ var $ = function (e) {
 },
     _barChartInstance = null,
     _trendChartInstance = null,
+    _donutChartInstance = null,
+    _trendBarChartInstance = null,
+    activeTrendView = "line",
     _currentFocusState = null,
     _lastFavPct = -1,
     _tabHidden = false,
@@ -39,12 +42,23 @@ var $ = function (e) {
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
 
 function getLocale() {
+    if (typeof currentLanguage !== "undefined" && currentLanguage && currentLanguage !== "default") {
+        return currentLanguage;
+    }
     const sel = document.getElementById("lang-sel")?.value;
     if (sel && sel !== "default") return sel;
     if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
         return chrome.i18n.getUILanguage();
     }
     return navigator.language || "en-US";
+}
+
+function getPresetName(id, name) {
+    if (id === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
+    if (id === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
+    if (id === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
+    if (id === "custom") return t_("presetFlow") || name || "Flow";
+    return name;
 }
 
 async function applyTheme() {
@@ -351,19 +365,19 @@ function injectScrubModal() {
           <div style="padding: 24px 32px 16px; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
             <div style="font-size: 20px; font-weight: 800; color: var(--tx); display: flex; align-items: center; gap: 10px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--purple);"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>Reduce Time</span>
+              <span>${t_("reduceTime") || "Reduce Time"}</span>
             </div>
             <button id="scrub-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
           <div style="padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; flex: 1;">
-            <div style="font-size: 13px; color: var(--tx2); line-height: 1.5;">How many minutes do you want to remove for <span id="scrub-dom" style="color: var(--tx); font-weight: 700;"></span>?</div>
-            <input type="number" id="scrub-mins" class="inp" style="width: 100%; font-size: 24px; text-align: center; font-weight: 800;" placeholder="Minutes">
+            <div id="scrub-prompt" style="font-size: 13px; color: var(--tx2); line-height: 1.5;"></div>
+            <input type="number" id="scrub-mins" class="inp" style="width: 100%; font-size: 24px; text-align: center; font-weight: 800;" placeholder="${t_("minutes") || "Minutes"}">
           </div>
           <div style="padding: 16px 32px 24px; border-top: 1px solid var(--bd); display: flex; gap: 12px; justify-content: flex-end; flex-shrink: 0;">
-            <button class="bs" id="scrub-cancel" style="padding: 10px 20px;">Cancel</button>
-            <button class="bp" id="scrub-save" style="padding: 10px 20px; background: var(--red); color: #fff; border-color: var(--red); font-size: 13px; font-weight: 700;">Remove</button>
+            <button class="bs" id="scrub-cancel" style="padding: 10px 20px;">${t_("cancel") || "Cancel"}</button>
+            <button class="bp" id="scrub-save" style="padding: 10px 20px; background: var(--red); color: #fff; border-color: var(--red); font-size: 13px; font-weight: 700;">${t_("remove") || "Remove"}</button>
           </div>
         </div>
         `);
@@ -385,7 +399,16 @@ function injectScrubModal() {
 }
 
 function openScrubModal(e, t, a) {
-    $("scrubModal") || injectScrubModal(), activeScrubDay = e, activeScrubDom = t, activeScrubSecs = a, $("scrub-dom").textContent = t, $("scrub-mins").value = "", $("scrub-mins").max = Math.ceil(a / 60), $("scrubModal").classList.remove("hide"), setTimeout(() => $("scrub-mins").focus(), 50)
+    $("scrubModal") || injectScrubModal();
+    activeScrubDay = e;
+    activeScrubDom = t;
+    activeScrubSecs = a;
+    const domainSpan = `<span style="color: var(--tx); font-weight: 700;">${t}</span>`;
+    setSafeHTML($("scrub-prompt"), t_("howManyMinutesRemove", [domainSpan]) || `How many minutes do you want to remove for ${domainSpan}?`);
+    $("scrub-mins").value = "";
+    $("scrub-mins").max = Math.ceil(a / 60);
+    $("scrubModal").classList.remove("hide");
+    setTimeout(() => $("scrub-mins").focus(), 50);
 }
 async function renderGranularBlocksUI() {
     let e = document.getElementById("tab-sitemanager");
@@ -523,11 +546,11 @@ async function renderCombined() {
         } else {
             empty.style.display = "flex";
             if (window.activeRuleTab === "block") {
-                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No rules yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Block distracting sites to get started.</p></div>');
+                setSafeHTML(empty, `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">${t_("noRulesYet") || "No rules yet"}</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">${t_("blockSitesToGetStarted") || "Block distracting sites to get started."}</p></div>`);
             } else if (window.activeRuleTab === "allow") {
-                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No exceptions yet</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Allow sites that bypass all blocking rules.</p></div>');
+                setSafeHTML(empty, `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">${t_("noExceptionsYet") || "No exceptions yet"}</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">${t_("allowSitesDesc") || "Allow sites that bypass all blocking rules."}</p></div>`);
             } else {
-                setSafeHTML(empty, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">No domains ignored</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">Domains on this list will never be tracked for analytics.</p></div>');
+                setSafeHTML(empty, `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;width:100%;"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.2;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><p style="font-size:16px;font-weight:800;color:var(--tx2);margin:0;">${t_("noDomainsIgnored") || "No domains ignored"}</p><p style="font-size:13px;color:var(--tx3);margin:0;text-align:center;">${t_("neverTrackDesc") || "Domains on this list will never be tracked for analytics."}</p></div>`);
             }
         }
     }
@@ -809,20 +832,21 @@ function renderCatSquares() {
     ["all"].concat(allCats()).forEach(a => {
         var n = "all" === a,
             i = n ? {
-                label: "All Sites",
+                label: t_("allSites") || "All Sites",
                 emoji: "🌍",
                 color: "var(--tx)"
-            } : CAT_META[a] || {
-                label: a,
-                emoji: "🏷️",
-                color: "#555"
+            } : {
+                label: catLabel(a, !1),
+                emoji: catEmoji(a),
+                color: CAT_COLORS[a] || "#555"
             },
             s = 0;
         n ? s = t.length : t.forEach(e => {
             getEffectiveCat(e).cat === a && s++
         });
         var o = document.createElement("div");
-        o.className = "cat-sq" + (selectedCat === a ? " selected" : ""), o.style.borderColor = selectedCat === a ? i.color : void 0, setSafeHTML(o, `<div class="cat-sq-icon">${i.emoji}</div><div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${s} sites</div>`), o.addEventListener("click", () => {
+        const countStr = s === 1 ? (t_("siteCountSingle", ["1"]) || "1 site") : (t_("siteCountPlural", [String(s)]) || `${s} sites`);
+        o.className = "cat-sq" + (selectedCat === a ? " selected" : ""), o.style.borderColor = selectedCat === a ? i.color : void 0, setSafeHTML(o, `<div class="cat-sq-icon">${i.emoji}</div><div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${countStr}</div>`), o.addEventListener("click", () => {
             selectedCat = a, renderCategories()
         }), e.appendChild(o)
     })
@@ -860,7 +884,8 @@ function renderCategories() {
     }), Object.keys(t).length ? allCats().forEach(a => {
         if (t[a] && t[a].length && ("all" === selectedCat || selectedCat === a)) {
             var n = document.createElement("div");
-            n.className = "card", setSafeHTML(n, `<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--bd2)"><span style="width:12px;height:12px;border-radius:50%;background:${catColor(a)}"></span><span style="font-size:16px;font-weight:800;flex:1;color:var(--tx)">${catEmoji(a)} ${catLabel(a, !1)}</span><span style="font-size:12px;color:var(--tx3);background:var(--bg4);padding:6px 12px;border-radius:999px;font-weight:700">${t[a].length} sites</span></div>`);
+            const totalCountStr = t[a].length === 1 ? (t_("siteCountSingle", ["1"]) || "1 site") : (t_("siteCountPlural", [String(t[a].length)]) || `${t[a].length} sites`);
+            n.className = "card", setSafeHTML(n, `<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--bd2)"><span style="width:12px;height:12px;border-radius:50%;background:${catColor(a)}"></span><span style="font-size:16px;font-weight:800;flex:1;color:var(--tx)">${catEmoji(a)} ${catLabel(a, !1)}</span><span style="font-size:12px;color:var(--tx3);background:var(--bg4);padding:6px 12px;border-radius:999px;font-weight:700">${totalCountStr}</span></div>`);
             var i = document.createElement("div");
             t[a].forEach(e => {
                 var t = document.createElement("div");
@@ -949,8 +974,38 @@ async function loadSettings(preloadedSettings) {
     if ($("idle-timeout-sel")) $("idle-timeout-sel").value = e.idleTimeout || 30;
     if ($("welcome-back-thresh-sel")) $("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10;
 }
+
+let _chartLoadingPromise = null;
+function ensureChartLibrary() {
+    if (window.Chart) {
+        return Promise.resolve();
+    }
+    if (_chartLoadingPromise) {
+        return _chartLoadingPromise;
+    }
+    _chartLoadingPromise = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "../src/lib/chart.min.js";
+        script.onload = () => {
+            _chartLoadingPromise = null;
+            resolve();
+        };
+        script.onerror = (err) => {
+            _chartLoadingPromise = null;
+            reject(err);
+        };
+        document.body.appendChild(script);
+    });
+    return _chartLoadingPromise;
+}
+
 async function loadAnalytics() {
     await loadCategories();
+    try {
+        await ensureChartLibrary();
+    } catch (err) {
+        console.warn("[FF] Failed to load charting library:", err);
+    }
     const tabEl = $("atab-" + currentATab);
     if (tabEl) {
         if (tabEl.style.opacity !== "0") {
@@ -963,7 +1018,6 @@ async function loadAnalytics() {
         else if ("daily" === currentATab) await renderDailyBreakdown();
         else if ("topsites" === currentATab) await renderTopSites();
         else if ("trend" === currentATab) await renderTrend();
-        else if ("insights" === currentATab) await renderInsights();
     } finally {
         if (tabEl) {
             tabEl.style.transition = "opacity 0.25s ease";
@@ -994,8 +1048,9 @@ async function renderInsights() {
     recalculateRangeStats(data);
     const settings = settingsRes?.settings || {};
     const goalCats = settings.goalCats || ["productivity", "learning"];
-    const goalSecs = 60 * (settings.streakMinMinutes || 30);
-    const distractThresh = ((settings.threshDistract || 60) / 100);
+    const showWasted = settings.showWastedDays !== false;
+    const minActiveSecs = 60 * (settings.heatmapMinActive || 10);
+    const ratioThresh = (settings.heatmapRatioThresh || 50) / 100;
 
     // FF v6.18: Start heatmap from first day of data
     let firstDataIdx = keys.findIndex(k => {
@@ -1008,7 +1063,6 @@ async function renderInsights() {
     // Compute per-day status: 'empty' | 'ok' | 'good' | 'great' | 'best' | 'wasted'
     const cellStatus = {}, dailyTotals = {};
     let active = 0, wasted = 0;
-    let maxFocus = 1;
     keys.forEach(k => {
         const d = data[k] || {};
         const focus = goalCats.reduce((s, c) => s + (d[c] || 0), 0);
@@ -1018,24 +1072,36 @@ async function renderInsights() {
         // Fix Issue 7: Calculate total by summing raw categories exactly once to prevent double-counting
         const total = prod + learn + distract + (d.communication || 0) + (d.uncategorized || 0);
         dailyTotals[k] = { focus, prod, learn, distract, total };
-        if (focus > maxFocus) maxFocus = focus;
     });
     keys.forEach(k => {
         const { focus, prod, learn, distract, total } = dailyTotals[k];
-        if (total < 60) { cellStatus[k] = "empty"; return; }
-        // Wasted: high distraction ratio AND below focus goal
-        if (focus < goalSecs && total > 0 && distract / total >= distractThresh) {
+        if (total < minActiveSecs) { cellStatus[k] = "empty"; return; }
+        
+        const denominator = focus + distract;
+        if (denominator === 0) {
+            cellStatus[k] = "empty";
+            return;
+        }
+        
+        const ratio = focus / denominator;
+        if (showWasted && ratio < ratioThresh) {
             cellStatus[k] = "wasted"; wasted++; return;
         }
-        if (focus >= goalSecs) {
-            active++;
-            const r = focus / maxFocus;
-            if (r >= 0.85) cellStatus[k] = "best";
-            else if (r >= 0.6) cellStatus[k] = "great";
-            else if (r >= 0.3) cellStatus[k] = "good";
-            else cellStatus[k] = "ok";
+        
+        active++;
+        if (ratio >= 1.0) {
+            cellStatus[k] = "best";
         } else {
-            cellStatus[k] = "empty";
+            const range = 1.0 - ratioThresh;
+            if (range <= 0) {
+                cellStatus[k] = "best";
+            } else {
+                const normalized = (ratio - ratioThresh) / range;
+                if (normalized >= 0.75) cellStatus[k] = "best";
+                else if (normalized >= 0.5) cellStatus[k] = "great";
+                else if (normalized >= 0.25) cellStatus[k] = "good";
+                else cellStatus[k] = "ok";
+            }
         }
     });
 
@@ -1233,52 +1299,81 @@ async function renderInsights() {
     hoverLayer.addEventListener("mouseleave", hideHeatmapTip);
     const legend = $("heatmap-legend");
     if (legend && !legend.dataset.wired) {
-        legend.dataset.wired = "1";
-        legend.addEventListener("click", () => {
+        legend.addEventListener("click", async () => {
+            const settingsRes = await gSync(["settings"]);
+            const settings = settingsRes?.settings || {};
+            const goalCats = settings.goalCats || ["productivity", "learning"];
             const overlay = document.createElement("div");
             overlay.className = "overlay";
             overlay.style.zIndex = "9999";
             setSafeHTML(overlay, `
-              <div class="card" style="width:100%;max-width:400px;padding:0;display:flex;flex-direction:column;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
-                <div style="padding:24px 32px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
-                  <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:10px;">
+              <div class="card" style="width:100%;max-width:460px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
+                <div style="padding:var(--space-lg) var(--space-lg) var(--space-md);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+                  <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:var(--space-xs);">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;flex-shrink:0;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83 2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    <span>Heatmap Thresholds</span>
+                    <span>${t_("heatmapThresholds") || "Heatmap Thresholds"}</span>
                   </div>
-                  <button id="hm-close" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+                  <button id="hm-close" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:var(--space-xxs);display:inline-flex;align-items:center;justify-content:center;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                   </button>
                 </div>
-                <div style="padding:24px 32px;display:flex;flex-direction:column;gap:20px;overflow-y:auto;flex:1;">
+                <div style="padding:var(--space-lg);display:flex;flex-direction:column;gap:var(--space-lg);overflow-y:auto;flex:1;">
                   <div>
-                    <label class="slbl" style="display:block;margin-bottom:6px;">Minimum Focus Time (minutes)</label>
-                    <input type="number" id="hm-min-focus" class="inp" value="${settings.streakMinMinutes || 30}" style="width:100%"/>
-                    <div style="font-size:12px;color:var(--tx3);margin-top:4px;">Minimum time to count as an active day.</div>
+                    <label class="slbl" style="display:block;margin-bottom:var(--space-xs);">${t_("minActiveTimeMins") || "Minimum Active Time (minutes)"}</label>
+                    <input type="number" id="hm-min-active" class="inp" value="${settings.heatmapMinActive || 10}" style="width:100%"/>
+                    <div style="font-size:12px;color:var(--tx3);margin-top:var(--space-xxs);">${t_("minActiveTimeDesc") || "Minimum total tracked time to color a day."}</div>
                   </div>
                   <div>
-                    <label class="slbl" style="display:block;margin-bottom:6px;">Wasted Day Distraction (%)</label>
-                    <input type="number" id="hm-dist-thresh" class="inp" value="${settings.threshDistract || 60}" style="width:100%"/>
-                    <div style="font-size:12px;color:var(--tx3);margin-top:4px;">If distraction is above this % and focus is low, the day is Wasted.</div>
+                    <label class="slbl" style="display:block;margin-bottom:var(--space-xs);">${t_("ratioThresholdPct") || "Ratio Threshold (%)"}</label>
+                    <input type="number" id="hm-ratio-threshold" class="inp" value="${settings.heatmapRatioThresh || 50}" style="width:100%"/>
+                    <div style="font-size:12px;color:var(--tx3);margin-top:var(--space-xxs);">${t_("ratioThresholdDesc") || "If your focus ratio is below this %, the day is Wasted (Red). Otherwise, it is Active (Green)."}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-sm) 0;border-bottom:1px solid var(--bd);">
+                    <div>
+                      <label class="slbl" style="display:block;">${t_("showWastedDays") || "Show Wasted Days (Red)"}</label>
+                      <div style="font-size:12px;color:var(--tx3);margin-top:var(--space-xxs);">${t_("showWastedDaysDesc") || "Highlight high-distraction days as red blocks."}</div>
+                    </div>
+                    <label class="tog">
+                      <input type="checkbox" id="hm-show-wasted" ${settings.showWastedDays !== false ? 'checked' : ''}/>
+                      <span class="ttrack"></span>
+                    </label>
+                  </div>
+                  <div>
+                    <label class="slbl" style="display:block;margin-bottom:var(--space-xs);">${t_("focusCategories") || "Focus Categories"}</label>
+                    <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
+                      ${["productivity", "learning", "communication", "distraction", "uncategorized"].map(c => `
+                        <label style="display:flex;align-items:center;gap:var(--space-xs);font-size:14px;color:var(--tx);cursor:pointer;">
+                          <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="accent-color:var(--green);width:16px;height:16px;"/>
+                          <span style="text-transform:capitalize;">${t_("cat" + c.charAt(0).toUpperCase() + c.slice(1)) || c}</span>
+                        </label>
+                      `).join('')}
+                    </div>
+                    <div style="font-size:12px;color:var(--tx3);margin-top:var(--space-xs);">${t_("selectFocusCatsDesc") || "Select which categories count towards your daily Focus Time."}</div>
                   </div>
                 </div>
-                <div style="padding:16px 32px 24px;border-top:1px solid var(--bd);display:flex;gap:12px;justify-content:flex-end;flex-shrink:0;">
-                  <button class="bs" id="hm-cancel">Cancel</button>
-                  <button class="bp" id="hm-save" style="font-size:13px;font-weight:700;">Save Settings</button>
+                <div style="padding:var(--space-md) var(--space-lg) var(--space-lg);border-top:1px solid var(--bd);display:flex;gap:var(--space-sm);justify-content:flex-end;flex-shrink:0;">
+                  <button class="bs" id="hm-cancel">${t_("cancel") || "Cancel"}</button>
+                  <button class="bp" id="hm-save" style="font-size:13px;font-weight:700;">${t_("saveSettings") || "Save Settings"}</button>
                 </div>
               </div>
             `);
-document.body.appendChild(overlay);
+            document.body.appendChild(overlay);
             document.getElementById("hm-cancel").onclick = () => overlay.remove();
             document.getElementById("hm-close").onclick = () => overlay.remove();
             document.getElementById("hm-save").onclick = async () => {
                 const sv = (await gSync(["settings"])).settings || {};
-                sv.streakMinMinutes = parseInt(document.getElementById("hm-min-focus").value) || 30;
-                sv.threshDistract = parseInt(document.getElementById("hm-dist-thresh").value) || 60;
-                await sSync({ settings: sv });
+                sv.heatmapMinActive = parseInt(document.getElementById("hm-min-active").value) || 10;
+                sv.heatmapRatioThresh = parseInt(document.getElementById("hm-ratio-threshold").value) || 50;
+                sv.showWastedDays = document.getElementById("hm-show-wasted").checked;
+                
+                const checkedCats = Array.from(overlay.querySelectorAll(".hm-cat-cb:checked")).map(cb => cb.value);
+                sv.goalCats = checkedCats.length > 0 ? checkedCats : ["productivity", "learning"];
 
+                await sSync({ settings: sv });
+ 
                 overlay.remove();
                 renderInsights();
-                if (typeof toast === "function") toast(t_("thresholdsUpdated"), "ok");
+                if (typeof toast === "function") toast(t_("thresholdsUpdated") || "Thresholds updated", "ok");
             };
         });
     }
@@ -1468,7 +1563,21 @@ document.querySelectorAll(".ni").forEach(e => {
     }), $("btn-fp") && $("btn-fp").addEventListener("click", async () => {
         if ($("btn-fp").disabled) return; $("btn-fp").disabled = true;
         try {
-            var e = $("btn-fp").textContent.includes("Resume") || $("btn-fp").textContent.includes("Start");
+            var e = $("btn-fp").textContent.includes(t_("btnResume")) || 
+                    $("btn-fp").textContent.includes(t_("startWork")) || 
+                    $("btn-fp").textContent.includes(t_("startBreak")) ||
+                    $("btn-fp").textContent.includes("Resume") || 
+                    $("btn-fp").textContent.includes("Start") || 
+                    $("btn-fp").textContent.includes("Reanudar") || 
+                    $("btn-fp").textContent.includes("Iniciar");
+            if (!e) {
+                const confirmed = await showConfirm(
+                    t_("confirmPauseTitle") || "Pause focus session?",
+                    t_("confirmPauseDesc") || "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
+                    { confirmText: t_("btnPause") || "Pause", cancelText: t_("cancel") || "Cancel", icon: "⏳" }
+                );
+                if (!confirmed) return;
+            }
             renderFocus((await msg(e ? "FOCUS_RESUME" : "FOCUS_PAUSE"))?.focusState, await getActiveWorkMins())
         } finally { $("btn-fp").disabled = false; }
     }), $("btn-skip") && $("btn-skip").addEventListener("click", async () => {
@@ -1478,15 +1587,16 @@ document.querySelectorAll(".ni").forEach(e => {
     }), $("btn-save-goals") && $("btn-save-goals").addEventListener("click", async () => {
         var e = (await gSync(["settings"])).settings || {};
         e.weeklyGoalHours = parseInt($("weekly-goal-input").value) || 0;
-        e.streakMinMinutes = parseInt($("streak-min-input").value) || 30;
+        e.heatmapMinActive = parseInt($("streak-min-input").value) || 10;
+        e.heatmapRatioThresh = parseInt($("ratio-threshold-input").value) || 50;
         e.weekStartsOn = $("week-start-select").value || "mon";
         let t = [];
         document.querySelectorAll(".goal-cb-cat:checked").forEach(e => t.push(e.value)), e.goalCats = t.length ? t : ["productivity", "learning"], await sSync({
             settings: e
-        }), toast(t_("studyGoalsSaved"), "ok"), loadWeeklyGoalSettings(), loadAnalytics()
+        }), toast(t_("studyGoalsSaved") || "Study goals saved", "ok"), loadWeeklyGoalSettings(), loadAnalytics()
     }), document.querySelectorAll("[data-atab]").forEach(e => {
         e.addEventListener("click", () => {
-            document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend", "insights"].forEach(e => {
+            document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend"].forEach(e => {
                 const tab = $("atab-" + e);
                 if (tab) {
                     if (e === currentATab) {
@@ -1547,6 +1657,32 @@ document.querySelectorAll(".ni").forEach(e => {
             renderTrend();
         })
     });
+
+    const btnTrendLine = document.getElementById("btn-trend-view-line");
+    const btnTrendBar = document.getElementById("btn-trend-view-bar");
+    if (btnTrendLine && btnTrendBar) {
+        if (activeTrendView === "line") {
+            btnTrendLine.classList.add("act");
+            btnTrendBar.classList.remove("act");
+        } else {
+            btnTrendBar.classList.add("act");
+            btnTrendLine.classList.remove("act");
+        }
+        btnTrendLine.addEventListener("click", () => {
+            if (activeTrendView === "line") return;
+            activeTrendView = "line";
+            btnTrendLine.classList.add("act");
+            btnTrendBar.classList.remove("act");
+            renderTrend();
+        });
+        btnTrendBar.addEventListener("click", () => {
+            if (activeTrendView === "bar") return;
+            activeTrendView = "bar";
+            btnTrendBar.classList.add("act");
+            btnTrendLine.classList.remove("act");
+            renderTrend();
+        });
+    }
 // FF v4.2: Daily Breakdown range selector
 document.querySelectorAll("[data-dailyrange]").forEach(e => {
     e.addEventListener("click", () => {
@@ -1694,37 +1830,63 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
         const colors = catGradients[cat] || catGradients.uncategorized;
         
         datasets.push({
-            label: CAT_LABELS[cat] || "Uncategorized",
+            label: t_("cat" + cat.charAt(0).toUpperCase() + cat.slice(1)) || CAT_LABELS[cat],
             data: data,
-            backgroundColor: function(context) {
-                const chart = context.chart;
-                const {ctx, scales} = chart;
-                const index = context.dataIndex;
-                if (index === undefined || !scales.y) return colors.solid;
-                
-                const val = context.dataset.data[index] || 0;
-                const yVal = scales.y.getPixelForValue(val);
-                const yZero = scales.y.getPixelForValue(0);
-                
-                if (!isFinite(yVal) || !isFinite(yZero)) return colors.solid;
-                
-                const gradient = ctx.createLinearGradient(0, yVal, 0, yZero);
-                gradient.addColorStop(0, colors.solid);
-                gradient.addColorStop(1, colors.fade);
-                return gradient;
-            },
-            borderRadius: { topLeft: 6, topRight: 6, bottomLeft: 0, bottomRight: 0 },
-            borderSkipped: 'bottom',
+            backgroundColor: colors.solid,
+            borderRadius: 0,
             barPercentage: 0.8,
             categoryPercentage: 0.8,
-            maxBarThickness: 16
-        });
-
-        data.forEach(val => {
-            if (val > maxVal) maxVal = val;
+            maxBarThickness: 32
         });
     });
+
+    // Calculate the maximum daily total across all categories to scale the stacked bar chart correctly
+    dayKeys.forEach(dayKey => {
+        let dayTotal = 0;
+        activeCats.forEach(cat => {
+            dayTotal += Math.max(0, Math.round((dayStats[dayKey] && dayStats[dayKey][cat] || 0) / 60));
+        });
+        if (dayTotal > maxVal) maxVal = dayTotal;
+    });
     maxVal = Math.max(60, maxVal);
+
+    let totalDailyMins = 0;
+    dayKeys.forEach(dayKey => {
+        activeCats.forEach(cat => {
+            totalDailyMins += Math.max(0, Math.round((dayStats[dayKey] && dayStats[dayKey][cat] || 0) / 60));
+        });
+    });
+    const avgMins = dayKeys.length > 0 ? (totalDailyMins / dayKeys.length) : 0;
+    const avgLabel = avgMins >= 60 ? (avgMins / 60).toFixed(1) + "h" : Math.round(avgMins) + "m";
+
+    const avgLinePlugin = {
+        id: 'avgLine',
+        afterDraw: (chart) => {
+            const { ctx, scales, chartArea } = chart;
+            const showAvg = $("tog-trend-avg") && $("tog-trend-avg").checked;
+            if (!scales.y || avgMins <= 0 || !showAvg) return;
+            
+            const yVal = scales.y.getPixelForValue(avgMins);
+            if (!isFinite(yVal) || yVal < chartArea.top || yVal > chartArea.bottom) return;
+            
+            ctx.save();
+            ctx.beginPath();
+            ctx.strokeStyle = isLight ? 'rgba(15, 23, 42, 0.35)' : 'rgba(255, 255, 255, 0.35)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.moveTo(chartArea.left, yVal);
+            ctx.lineTo(chartArea.right, yVal);
+            ctx.stroke();
+            
+            ctx.fillStyle = isLight ? '#0f172a' : '#ffffff';
+            ctx.font = 'bold 11px "Manrope", sans-serif';
+            ctx.textBaseline = 'bottom';
+            ctx.textAlign = 'right';
+            const labelText = `AVG: ${avgLabel}`;
+            ctx.fillText(labelText, chartArea.right - 8, yVal - 4);
+            ctx.restore();
+        }
+    };
 
     // Dynamic Y-axis alignment plugin (populates both left and right stationary axes)
     const alignYAxisPlugin = {
@@ -1818,7 +1980,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
             labels: labels,
             datasets: datasets
         },
-        plugins: [alignYAxisPlugin],
+        plugins: [alignYAxisPlugin, avgLinePlugin],
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -1880,6 +2042,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
             },
             scales: {
                 x: {
+                    stacked: true,
                     grid: {
                         display: false
                     },
@@ -1893,6 +2056,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
                     }
                 },
                 y: {
+                    stacked: true,
                     position: 'left',
                     min: 0,
                     max: maxVal,
@@ -1907,6 +2071,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
                     }
                 },
                 yRight: {
+                    stacked: true,
                     position: 'right',
                     min: 0,
                     max: maxVal,
@@ -1972,12 +2137,20 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
 
     const datasets = [];
     const categories = [
-        { key: 'productivity', label: 'Productivity', data: prod },
-        { key: 'learning', label: 'Learning', data: learn },
-        { key: 'communication', label: 'Communication', data: comm },
-        { key: 'distraction', label: 'Distraction', data: dist },
-        { key: 'uncategorized', label: 'Uncategorized', data: unc }
+        { key: 'productivity', label: catLabel('productivity', !1), data: prod },
+        { key: 'learning', label: catLabel('learning', !1), data: learn },
+        { key: 'communication', label: catLabel('communication', !1), data: comm },
+        { key: 'distraction', label: catLabel('distraction', !1), data: dist },
+        { key: 'uncategorized', label: catLabel('uncategorized', !1), data: unc }
     ];
+
+    const dashStyles = {
+        productivity: [],
+        learning: [],
+        communication: [2, 2],
+        distraction: [6, 4],
+        uncategorized: [4, 4]
+    };
 
     categories.forEach(cat => {
         if (cat.data && cat.data.length) {
@@ -1986,6 +2159,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
                 label: cat.label,
                 data: cat.data,
                 borderColor: colors.solid,
+                borderDash: dashStyles[cat.key] || [],
                 backgroundColor: function(context) {
                     const chart = context.chart;
                     const {ctx, chartArea} = chart;
@@ -2006,6 +2180,31 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
             });
         }
     });
+
+    const showAvg = $("tog-trend-avg") && $("tog-trend-avg").checked;
+    if (showAvg) {
+        let focusSum = [];
+        for (let idx = 0; idx < labels.length; idx++) {
+            let pVal = prod ? (prod[idx] || 0) : 0;
+            let lVal = learn ? (learn[idx] || 0) : 0;
+            focusSum.push(pVal + lVal);
+        }
+        const avgVal = focusSum.reduce((a, b) => a + b, 0) / Math.max(1, focusSum.length);
+        const avgData = new Array(labels.length).fill(Math.round(avgVal));
+        
+        datasets.push({
+            label: t_("averageFocus") || 'Average Focus',
+            data: avgData,
+            borderColor: 'rgba(5, 213, 129, 0.45)',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            borderDash: [6, 6],
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0
+        });
+    }
 
     let maxVal = 0;
     datasets.forEach(ds => {
@@ -2268,8 +2467,195 @@ async function renderOverview() {
         month: "short",
         day: "numeric"
     }) : "—");
-    let u = [];
-    $("tog-ov-prod")?.checked && u.push("productivity"), $("tog-ov-lrn")?.checked && u.push("learning"), $("tog-ov-dist")?.checked && u.push("distraction"), $("tog-ov-comm")?.checked && u.push("communication"), $("tog-ov-unc")?.checked && u.push("uncategorized"), $("ov-chart") && drawBarChart("ov-chart", "ov-y-axis", "ov-scroll", t, e, n, u, s)
+    // 1. Calculate overall category totals
+    const prodSecs = i.productivity || 0;
+    const learnSecs = i.learning || 0;
+    const commSecs = i.communication || 0;
+    const distractSecs = i.distraction || 0;
+    const uncSecs = i.uncategorized || 0;
+    const totalSecs = prodSecs + learnSecs + commSecs + distractSecs + uncSecs;
+
+    // Update donut center label
+    if ($("ov-donut-total-lbl")) {
+        $("ov-donut-total-lbl").textContent = fmt(totalSecs);
+    }
+
+    // Draw circular Donut Chart
+    const donutCanvas = document.getElementById("ov-donut-chart");
+    if (donutCanvas) {
+        const existing = Chart.getChart(donutCanvas);
+        if (existing) {
+            existing.destroy();
+        }
+        if (_donutChartInstance) {
+            _donutChartInstance.destroy();
+        }
+        
+        const dataVals = [
+            Math.max(0, Math.round(prodSecs / 60)),
+            Math.max(0, Math.round(learnSecs / 60)),
+            Math.max(0, Math.round(commSecs / 60)),
+            Math.max(0, Math.round(distractSecs / 60)),
+            Math.max(0, Math.round(uncSecs / 60))
+        ];
+
+        _donutChartInstance = new Chart(donutCanvas, {
+            type: "doughnut",
+            data: {
+                labels: [
+                    t_("catProductivity") || "Productivity",
+                    t_("catLearning") || "Learning",
+                    t_("catCommunication") || "Communication",
+                    t_("catDistraction") || "Distraction",
+                    t_("catUncategorized") || "Uncategorized"
+                ],
+                datasets: [{
+                    data: dataVals,
+                    backgroundColor: ["#05D581", "#A855F7", "#5C9CFC", "#F46B7A", "#71717A"],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 8
+                },
+                onHover: (event, activeElements) => {
+                    const target = event.chart.canvas;
+                    if (activeElements && activeElements.length > 0) {
+                        target.style.cursor = 'pointer';
+                        const activeEl = activeElements[0];
+                        const index = activeEl.index;
+                        const label = _donutChartInstance.data.labels[index];
+                        const rawSecs = [prodSecs, learnSecs, commSecs, distractSecs, uncSecs][index];
+                        
+                        if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(rawSecs);
+                        if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = label;
+                    } else {
+                        target.style.cursor = 'default';
+                        if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(totalSecs);
+                        if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = t_("tracked") || "tracked";
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                cutout: "75%"
+            }
+        });
+    }
+
+    // Render custom donut legend
+    const legendEl = $("ov-donut-legend");
+    if (legendEl) {
+        legendEl.innerHTML = "";
+        const catsList = [
+            { id: "productivity", color: "#05D581", label: t_("catProductivity") || "Productivity" },
+            { id: "learning", color: "#A855F7", label: t_("catLearning") || "Learning" },
+            { id: "communication", color: "#5C9CFC", label: t_("catCommunication") || "Communication" },
+            { id: "distraction", color: "#F46B7A", label: t_("catDistraction") || "Distraction" },
+            { id: "uncategorized", color: "#71717A", label: t_("catUncategorized") || "Uncategorized" }
+        ];
+        catsList.forEach(c => {
+            let secs = 0;
+            if (c.id === "productivity") secs = prodSecs;
+            else if (c.id === "learning") secs = learnSecs;
+            else if (c.id === "communication") secs = commSecs;
+            else if (c.id === "distraction") secs = distractSecs;
+            else if (c.id === "uncategorized") secs = uncSecs;
+
+            if (secs > 0 || totalSecs === 0) {
+                const pct = totalSecs > 0 ? Math.round((secs / totalSecs) * 100) : 0;
+                const row = document.createElement("div");
+                row.className = "ov-legend-row";
+                setSafeHTML(row, `
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="width:10px; height:10px; border-radius:50%; background:${c.color}; flex-shrink:0;"></span>
+                        <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.label}</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
+                        <span style="color:var(--tx); font-size:12px;">${fmt(secs)}</span>
+                        <span style="color:var(--tx); min-width:32px; text-align:right;">${pct}%</span>
+                    </div>
+                `);
+                row.addEventListener("mouseenter", () => {
+                    const dataIndex = ["productivity", "learning", "communication", "distraction", "uncategorized"].indexOf(c.id);
+                    if (_donutChartInstance && dataIndex !== -1) {
+                        _donutChartInstance.setActiveElements([{ datasetIndex: 0, index: dataIndex }]);
+                        _donutChartInstance.update();
+                    }
+                    if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(secs);
+                    if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = c.label;
+                });
+                row.addEventListener("mouseleave", () => {
+                    if (_donutChartInstance) {
+                        _donutChartInstance.setActiveElements([]);
+                        _donutChartInstance.update();
+                    }
+                    if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(totalSecs);
+                    if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = t_("tracked") || "tracked";
+                });
+                legendEl.appendChild(row);
+            }
+        });
+    }
+
+    // 2. Focus vs Distraction ratio
+    const focusSecs = prodSecs + learnSecs;
+    const ratioSumSecs = focusSecs + distractSecs;
+    let focusPct = 0;
+    let distractPct = 0;
+    if (ratioSumSecs > 0) {
+        focusPct = Math.round((focusSecs / ratioSumSecs) * 100);
+        distractPct = 100 - focusPct;
+    }
+    if ($("ov-ratio-bar-focus-lbl")) $("ov-ratio-bar-focus-lbl").textContent = `Focus: ${focusPct}%`;
+    if ($("ov-ratio-bar-dist-lbl")) $("ov-ratio-bar-dist-lbl").textContent = `Distraction: ${distractPct}%`;
+    if ($("ov-ratio-bar-focus")) $("ov-ratio-bar-focus").style.width = `${focusPct}%`;
+    if ($("ov-ratio-bar-dist")) $("ov-ratio-bar-dist").style.width = `${distractPct}%`;
+
+    // 3. Render Top 5 websites list
+    const sortedSites = Object.entries(i.sites || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+    const listEl = $("ov-topsites-list");
+    if (listEl) {
+        listEl.innerHTML = "";
+        if (sortedSites.length === 0) {
+            listEl.innerHTML = `<div class="empty" style="padding:40px 0;"><p data-i18n="noSitesTracked">No websites tracked for this period.</p></div>`;
+        } else {
+            const maxSiteSecs = sortedSites[0][1] || 1;
+            sortedSites.forEach(([domain, secs]) => {
+                const sitePct = Math.round((secs / maxSiteSecs) * 100);
+                const row = document.createElement("div");
+                row.style.cssText = "display:flex; flex-direction:column; gap:6px; width:100%;";
+                setSafeHTML(row, `
+                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:700;">
+                        <span style="display:flex; align-items:center; gap:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:var(--tx)">
+                            ${getFav(domain)}
+                            <span>${domain}</span>
+                        </span>
+                        <span style="color:var(--tx3); font-size:12px; flex-shrink:0;">${fmt(secs)}</span>
+                    </div>
+                    <div style="width:100%; height:6px; border-radius:99px; background:var(--bg4); overflow:hidden;">
+                        <div style="height:100%; background:var(--purple); width:${sitePct}%; border-radius:99px; transition:width 0.3s ease;"></div>
+                    </div>
+                `);
+                listEl.appendChild(row);
+            });
+        }
+    }
+
+    // 4. Render consistency heatmap at bottom
+    await renderInsights();
 }
 async function renderDailyBreakdown() {
     // FF v4.2: was loading the entire history (STATS_GET_ALL) and slicing 45 days — laggy.
@@ -2343,14 +2729,25 @@ async function renderDailyBreakdown() {
             let hasTimeline = i.timeline && i.timeline.length > 0;
             if (hasTimeline) {
                 f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">`;
-                for (let e = 1; e < 4; e++) f += `<div class="db-timeline-gridline" style="left:${25 * e}%;"></div>`;
-                let e = new Date(n + "T00:00:00").getTime(),
-                    t = e + 864e5;
+                for (let gridIdx = 1; gridIdx < 4; gridIdx++) f += `<div class="db-timeline-gridline" style="left:${25 * gridIdx}%;"></div>`;
+                const dateParts = n.split("-");
+                const yr = parseInt(dateParts[0], 10);
+                const mo = parseInt(dateParts[1], 10) - 1;
+                const dy = parseInt(dateParts[2], 10);
+                const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
+                const midnightEnd = midnightStart + 864e5;
                 i.timeline.forEach(a => {
-                    let n = Math.max(e, a.start),
-                        i = Math.min(t, a.end);
-                    i <= n || (f += `<div class="db-timeline-block" style="left:${(n - e) / 864e5 * 100}%;width:${(i - n) / 864e5 * 100}%;background:${catColor(a.cat)};" title="${new Date(n).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - ${new Date(i).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}"></div>`)
-                }), f += `</div>
+                    let sTime = Math.max(midnightStart, a.start),
+                        eTime = Math.min(midnightEnd, a.end);
+                    if (eTime > sTime) {
+                        const blockLeft = ((sTime - midnightStart) / 864e5) * 100;
+                        const blockWidth = ((eTime - sTime) / 864e5) * 100;
+                        const titleStart = new Date(sTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                        const titleEnd = new Date(eTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                        f += `<div class="db-timeline-block" style="left:${blockLeft}%;width:${blockWidth}%;background:${catColor(a.cat)};" title="${titleStart} - ${titleEnd}"></div>`;
+                    }
+                });
+                f += `</div>
                         <div class="db-timeline-labels">
                            <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
                         </div>`;
@@ -2369,35 +2766,35 @@ async function renderDailyBreakdown() {
                 <!-- Total Tracked -->
                 <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1);">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">Total Tracked</span>
+                    <span class="db-stat-title">${t_("totalTracked") || "Total Tracked"}</span>
                     <span class="db-stat-value num" style="color: var(--tx);">${fmt(d)}</span>
                   </div>
                 </div>
                 <!-- Productivity -->
                 <div class="db-stat-box" style="--glow-color: rgba(5, 213, 129, 0.15); --glow-border: rgba(5, 213, 129, 0.2); --glow-shadow: rgba(5, 213, 129, 0.1); opacity: ${s > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">Productivity</span>
+                    <span class="db-stat-title">${t_("catProductivity") || "Productivity"}</span>
                     <span class="db-stat-value num" style="color: var(--green);">${fmt(s)}</span>
                   </div>
                 </div>
                 <!-- Learning -->
                 <div class="db-stat-box" style="--glow-color: rgba(168, 85, 247, 0.15); --glow-border: rgba(168, 85, 247, 0.2); --glow-shadow: rgba(168, 85, 247, 0.1); opacity: ${o > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">Learning</span>
+                    <span class="db-stat-title">${t_("catLearning") || "Learning"}</span>
                     <span class="db-stat-value num" style="color: var(--purple);">${fmt(o)}</span>
                   </div>
                 </div>
                 <!-- Communication -->
                 <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1); opacity: ${r > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">Communication</span>
+                    <span class="db-stat-title">${t_("catCommunication") || "Communication"}</span>
                     <span class="db-stat-value num" style="color: var(--blue);">${fmt(r)}</span>
                   </div>
                 </div>
                 <!-- Distraction -->
                 <div class="db-stat-box" style="--glow-color: rgba(244, 107, 122, 0.15); --glow-border: rgba(244, 107, 122, 0.2); --glow-shadow: rgba(244, 107, 122, 0.1); opacity: ${l > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">Distraction</span>
+                    <span class="db-stat-title">${t_("catDistraction") || "Distraction"}</span>
                     <span class="db-stat-value num" style="color: var(--red);">${fmt(l)}</span>
                   </div>
                 </div>
@@ -2407,11 +2804,14 @@ async function renderDailyBreakdown() {
               <div class="db-hero" style="margin-bottom: 24px;">
                 <div class="db-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
                   <div class="db-card-header-txt">
-                    ${new Date(n + "T00:00:00").toLocaleDateString(getLocale(), { weekday: "long", month: "long", day: "numeric" })}
+                    ${(() => {
+                        const parts = n.split("-");
+                        return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)).toLocaleDateString(getLocale(), { weekday: "long", month: "long", day: "numeric" });
+                    })()}
                   </div>
                   ${hasTimeline ? `
                     <div class="db-card-header-txt">
-                      24-Hour Active Timeline
+                      ${t_("activeTimeline") || "24-Hour Active Timeline"}
                     </div>
                   ` : ''}
                 </div>
@@ -2425,11 +2825,11 @@ async function renderDailyBreakdown() {
               <div class="db-bar-container">
                 <div class="db-bar-wrap">${h}</div>
                 <div class="db-bar-legend">
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--green)"></span> Productivity</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--purple)"></span> Learning</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--blue)"></span> Communication</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--red)"></span> Distraction</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--tx4)"></span> Uncategorized</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--green)"></span> ${catLabel("productivity", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--purple)"></span> ${catLabel("learning", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--blue)"></span> ${catLabel("communication", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--red)"></span> ${catLabel("distraction", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--tx4)"></span> ${catLabel("uncategorized", !1)}</div>
                 </div>
               </div>
               ${y}
@@ -2502,7 +2902,27 @@ async function renderTopSites() {
                 var n = `<select class="sel" data-domain="${e[0]}" style="padding:4px 8px;font-size:12px;width:100% !important;box-sizing:border-box;">`;
                 allCats().forEach(e => n += `<option value="${e}"${e === t.cat ? " selected" : ""}>${catEmoji(e)} ${catLabel(e, !1)}</option>`), n += "</select>";
 
-                setSafeHTML(a, `\n      <span class="dom" style="display:flex; align-items:center; gap:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">\n        ${getFav(e[0])}\n        <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>\n        ${t.auto ? '<span style="font-size:11px;color:var(--tx3);" title="Auto-categorized">✨</span>' : ""}\n      </span>\n      <div style="display:flex; align-items:center; gap:10px; justify-content:flex-start; margin-left: -12px;">\n        <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? 'Unpin site' : 'Pin site to top'}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">\n          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>\n        </button>\n        <a href="https://${e[0]}" class="top-site-visit-btn" target="_blank" title="Visit site" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:4px; transition: color 0.2s;">\n          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>\n        </a>\n        <button class="top-site-rule-btn" data-domain="${e[0]}" title="Add or Edit Rule" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">\n          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>\n        </button>\n      </div>\n      ${n}\n      <span class="stat-pill">${fmt(e[1])}</span>\n      <span class="stat-pill">~${fmt(Math.round(e[1] / l))}</span>\n    `);
+                setSafeHTML(a, `
+      <span class="dom" style="display:flex; align-items:center; gap:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
+        ${getFav(e[0])}
+        <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>
+        ${t.auto ? `<span style="font-size:11px;color:var(--tx3);" title="${t_('autoCategorized')}">?</span>` : ""}
+      </span>
+      <div style="display:flex; align-items:center; gap:10px; justify-content:flex-start; margin-left: -12px;">
+        <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? t_('unpinSite') : t_('pinSiteToTop')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+        </button>
+        <a href="https://${e[0]}" class="top-site-visit-btn" target="_blank" title="${t_('visitSite')}" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:4px; transition: color 0.2s;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="top-site-rule-btn" data-domain="${e[0]}" title="${t_('addOrEditRule')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </button>
+      </div>
+      ${n}
+      <span class="stat-pill">${fmt(e[1])}</span>
+      <span class="stat-pill">~${fmt(Math.round(e[1] / l))}</span>
+    `);
 a.querySelector(".sel")?.addEventListener("change", async function () {
                     await tagSite(this.getAttribute("data-domain"), this.value), loadAnalytics()
                 });
@@ -2567,6 +2987,199 @@ async function renderTrend() {
         var t = (n[e] || {}).uncategorized || 0;
         return Math.round(t / 60)
     });
+
+    // Recalculate Category Totals and update toggle labels
+    function formatMinsToHours(mins) {
+        if (mins >= 60) {
+            return (mins / 60).toFixed(1) + "h";
+        }
+        return mins + "m";
+    }
+
+    const prodTotal = o.reduce((a, b) => a + b, 0);
+    const lrnTotal = r.reduce((a, b) => a + b, 0);
+    const commTotal = l.reduce((a, b) => a + b, 0);
+    const distTotal = c.reduce((a, b) => a + b, 0);
+    const uncTotal = d.reduce((a, b) => a + b, 0);
+
+    const prodLabel = $("tog-trend-prod-lbl");
+    const lrnLabel = $("tog-trend-lrn-lbl");
+    const commLabel = $("tog-trend-comm-lbl");
+    const distLabel = $("tog-trend-dist-lbl");
+    const uncLabel = $("tog-trend-unc-lbl");
+
+    if (prodLabel) prodLabel.textContent = `${catLabel("productivity", !1)} (${formatMinsToHours(prodTotal)})`;
+    if (lrnLabel) lrnLabel.textContent = `${catLabel("learning", !1)} (${formatMinsToHours(lrnTotal)})`;
+    if (commLabel) commLabel.textContent = `${catLabel("communication", !1)} (${formatMinsToHours(commTotal)})`;
+    if (distLabel) distLabel.textContent = `${catLabel("distraction", !1)} (${formatMinsToHours(distTotal)})`;
+    if (uncLabel) uncLabel.textContent = `${catLabel("uncategorized", !1)} (${formatMinsToHours(uncTotal)})`;
+
+    // Productivity vs Distraction Split Card
+    const focusMins = prodTotal + lrnTotal;
+    const distMins = distTotal;
+    const totalSplitMins = focusMins + distMins;
+    const splitValEl = $("insight-split-value");
+    const splitDescEl = $("insight-split-desc");
+    const focusBar = $("split-focus-bar");
+    const distBar = $("split-dist-bar");
+
+    if (splitValEl && splitDescEl && focusBar && distBar) {
+        const sparkCanvas = $("insight-split-chart");
+        const sparkContainer = $("insight-split-chart-container");
+        const sparkDivider = $("insight-split-divider");
+
+        if (totalSplitMins === 0) {
+            splitValEl.textContent = "—";
+            focusBar.style.width = "0%";
+            distBar.style.width = "0%";
+            splitDescEl.textContent = t_("noFocusDistTimeRange") || "No focus or distraction time tracked in this range.";
+            if (sparkContainer) sparkContainer.style.display = "none";
+            if (sparkDivider) sparkDivider.style.display = "none";
+            if (sparkCanvas) {
+                const existingSpark = Chart.getChart(sparkCanvas);
+                if (existingSpark) existingSpark.destroy();
+            }
+        } else {
+            const focusPct = Math.round((focusMins / totalSplitMins) * 100);
+            const distPct = 100 - focusPct;
+
+            const focusHrs = formatMinsToHours(focusMins);
+            const distHrs = formatMinsToHours(distMins);
+
+            splitValEl.innerHTML = `<span style="color:var(--green);">${t_("pctFocus", [focusPct])}</span> / <span style="color:var(--red);">${t_("pctDistraction", [distPct])}</span>`;
+            focusBar.style.width = `${focusPct}%`;
+            distBar.style.width = `${distPct}%`;
+            splitDescEl.textContent = t_("focusSplitDesc", [focusHrs, distHrs]) || `You focused for ${focusHrs} and were distracted for ${distHrs}.`;
+
+            if (sparkContainer) sparkContainer.style.display = "block";
+            if (sparkDivider) sparkDivider.style.display = "block";
+
+            if (sparkCanvas) {
+                const existingSpark = Chart.getChart(sparkCanvas);
+                if (existingSpark) existingSpark.destroy();
+
+                new Chart(sparkCanvas, {
+                    type: 'line',
+                    data: {
+                        labels: t, // t is the labels array defined at line 2841 (e.g. ['Jun 27', 'Jun 28', ...])
+                        datasets: [
+                            {
+                                label: 'Focus',
+                                data: e.map(dayKey => Math.round(((n[dayKey]?.productivity || 0) + (n[dayKey]?.learning || 0)) / 60)),
+                                borderColor: '#05D581',
+                                borderWidth: 1.5,
+                                fill: false,
+                                pointRadius: 0,
+                                pointHoverRadius: 3,
+                                tension: 0.3
+                            },
+                            {
+                                label: 'Distraction',
+                                data: e.map(dayKey => Math.round((n[dayKey]?.distraction || 0) / 60)),
+                                borderColor: '#F46B7A',
+                                borderWidth: 1.5,
+                                fill: false,
+                                pointRadius: 0,
+                                pointHoverRadius: 3,
+                                tension: 0.3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: true }
+                        },
+                        scales: {
+                            x: { display: false },
+                            y: { display: false }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // Month-over-Month Comparison Card
+    try {
+        const nowObj = new Date();
+        const thisYear = nowObj.getFullYear();
+        const thisMonthVal = nowObj.getMonth();
+        const todayDate = nowObj.getDate();
+
+        const thisMonthDays = [];
+        for (let d = 1; d <= todayDate; d++) {
+            const mStr = String(thisMonthVal + 1).padStart(2, '0');
+            const dStr = String(d).padStart(2, '0');
+            thisMonthDays.push(`${thisYear}-${mStr}-${dStr}`);
+        }
+
+        const lastMonthVal = thisMonthVal === 0 ? 11 : thisMonthVal - 1;
+        const lastMonthYear = thisMonthVal === 0 ? thisYear - 1 : thisYear;
+        
+        const daysInLastMonth = new Date(lastMonthYear, lastMonthVal + 1, 0).getDate();
+
+        const lastMonthDays = [];
+        for (let d = 1; d <= daysInLastMonth; d++) {
+            const mStr = String(lastMonthVal + 1).padStart(2, '0');
+            const dStr = String(d).padStart(2, '0');
+            lastMonthDays.push(`${lastMonthYear}-${mStr}-${dStr}`);
+        }
+
+        const allRangeDays = [...thisMonthDays, ...lastMonthDays];
+        const rangeRes = await msg("STATS_GET_RANGE", { days: allRangeDays });
+        const rangeData = rangeRes?.data || {};
+
+        recalculateRangeStats(rangeData);
+
+        const getActiveSecs = (dayKey) => {
+            const day = rangeData[dayKey] || {};
+            return (day.productivity || 0) + (day.learning || 0) + (day.communication || 0) + (day.distraction || 0) + (day.uncategorized || 0);
+        };
+
+        let thisMonthSecs = 0;
+        thisMonthDays.forEach(day => thisMonthSecs += getActiveSecs(day));
+
+        let lastMonthSecs = 0;
+        lastMonthDays.forEach(day => lastMonthSecs += getActiveSecs(day));
+
+        const momValEl = $("insight-mom-value");
+        const momDescEl = $("insight-mom-desc");
+
+        if (momValEl && momDescEl) {
+            const thisMonthHrs = (thisMonthSecs / 3600).toFixed(1) + "h";
+            const lastMonthHrs = (lastMonthSecs / 3600).toFixed(1) + "h";
+
+            if (thisMonthSecs === 0 && lastMonthSecs === 0) {
+                momValEl.textContent = "—";
+                momDescEl.textContent = t_("noActiveTimeTracked") || "No active time tracked yet.";
+            } else if (lastMonthSecs === 0) {
+                momValEl.textContent = t_("activeHrs", [thisMonthHrs]);
+                const incSpan = `<span style="color:var(--green); font-weight:700;">↗ ${t_("increase") || "increase"}</span>`;
+                momDescEl.innerHTML = t_("vsLastMonth", ["0.0h", incSpan]) || `vs <span style="font-weight:700;">0.0h</span> last month (${incSpan})`;
+            } else {
+                const diffPct = Math.round(((thisMonthSecs - lastMonthSecs) / lastMonthSecs) * 100);
+                if (diffPct > 0) {
+                    momValEl.textContent = t_("activeHrs", [thisMonthHrs]);
+                    const incSpan = `<span style="color:var(--green); font-weight:700;">↗ ${diffPct}% ${t_("increase") || "increase"}</span>`;
+                    momDescEl.innerHTML = t_("vsLastMonth", [lastMonthHrs, incSpan]) || `vs <span style="font-weight:700;">${lastMonthHrs}</span> last month (${incSpan})`;
+                } else if (diffPct < 0) {
+                    momValEl.textContent = t_("activeHrs", [thisMonthHrs]);
+                    const decSpan = `<span style="color:var(--red); font-weight:700;">↘ ${Math.abs(diffPct)}% ${t_("decrease") || "decrease"}</span>`;
+                    momDescEl.innerHTML = t_("vsLastMonth", [lastMonthHrs, decSpan]) || `vs <span style="font-weight:700;">${lastMonthHrs}</span> last month (${decSpan})`;
+                } else {
+                    momValEl.textContent = t_("activeHrs", [thisMonthHrs]);
+                    momDescEl.innerHTML = t_("vsLastMonthNoChange", [lastMonthHrs]) || `vs <span style="font-weight:700;">${lastMonthHrs}</span> last month (no change)`;
+                }
+            }
+        }
+    } catch (err) {
+        console.warn("Failed MoM calculation:", err);
+    }
+
+
     var u = [];
     for (var p = 2 * _windowDays - 1; p >= _windowDays; p--) {
         // Previous-period window of equal length, ending the day before our window starts.
@@ -2592,6 +3205,8 @@ async function renderTrend() {
     var y = h > 0 ? Math.round((i - h) / h * 100) : i > 0 ? 100 : 0,
         b = f > 0 ? Math.round((s - f) / f * 100) : s > 0 ? 100 : 0;
 
+
+
     function buildTrendBadge(percentChange, isProductivity) {
         if (0 === percentChange) {
             return `<span class="stat-trend-badge" style="background:var(--bg4);color:var(--tx3);border:1px solid var(--bd2)">No change</span>`;
@@ -2601,33 +3216,76 @@ async function renderTrend() {
         let arrowSymbol = percentChange > 0 ? "↗" : "↘";
         return `<span class="${badgeClass}">${arrowSymbol} ${Math.abs(percentChange)}%</span> <span class="stat-trend-meta">vs prev ${_windowDays}d</span>`;
     }
-    let x = $("trend-study-total")?.parentElement?.parentElement;
-    x && !x.dataset.modified && (x.dataset.modified = "true", setSafeHTML(x, `
-          <div class="stat-card prod-stat-card">
-              <div class="stat-card-hdr">
-                  <span class="stat-card-title">Productivity Focus</span>
-                  <span class="stat-card-icon prod-icon">
-                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                  </span>
-              </div>
-              <div class="stat-card-body">
-                  <div class="stat-card-val" id="pop-prod-val">—</div>
-                  <div id="pop-prod-trend" class="stat-card-trend">—</div>
-              </div>
-          </div>
-          <div class="stat-card dist-stat-card">
-              <div class="stat-card-hdr">
-                  <span class="stat-card-title">Distraction Tracking</span>
-                  <span class="stat-card-icon dist-icon">
-                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                  </span>
-              </div>
-              <div class="stat-card-body">
-                  <div class="stat-card-val" id="pop-dist-val">—</div>
-                  <div id="pop-dist-trend" class="stat-card-trend">—</div>
-              </div>
-          </div>
-    `));
+    // Calculate Peak Focus Hours
+    let hourSeconds = new Array(24).fill(0);
+    let hasTimelineData = false;
+    Object.values(n).forEach(dayEntry => {
+        if (dayEntry && Array.isArray(dayEntry.timeline)) {
+            dayEntry.timeline.forEach(session => {
+                if (session.cat === "productivity" || session.cat === "learning") {
+                    let start = session.start;
+                    let end = session.end;
+                    if (typeof start === "number" && typeof end === "number" && end > start) {
+                        hasTimelineData = true;
+                        let curr = start;
+                        while (curr < end) {
+                            let currDate = new Date(curr);
+                            let currHour = currDate.getHours();
+                            let nextHourDate = new Date(currDate);
+                            nextHourDate.setHours(currHour + 1, 0, 0, 0);
+                            let nextHourMs = nextHourDate.getTime();
+                            let chunkEnd = Math.min(end, nextHourMs);
+                            let chunkSecs = Math.max(0, (chunkEnd - curr) / 1000);
+                            hourSeconds[currHour] += chunkSecs;
+                            curr = chunkEnd;
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    let peakHour = -1;
+    let maxHourSecs = 0;
+    for (let h = 0; h < 24; h++) {
+        if (hourSeconds[h] > maxHourSecs) {
+            maxHourSecs = hourSeconds[h];
+            peakHour = h;
+        }
+    }
+
+    if (peakHour !== -1 && maxHourSecs > 0) {
+        let startHour = peakHour;
+        let endHour = (peakHour + 2) % 24;
+        function formatHourAMPM(h) {
+            let ampm = h >= 12 ? 'PM' : 'AM';
+            let displayHour = h % 12;
+            displayHour = displayHour ? displayHour : 12;
+            return displayHour + ' ' + ampm;
+        }
+        let timeWindowStr = formatHourAMPM(startHour) + " – " + formatHourAMPM(endHour);
+        let peakMins = Math.round(maxHourSecs / 60);
+        let peakHoursText = peakMins >= 60 ? (peakMins / 60).toFixed(1) + "h" : peakMins + "m";
+        
+        $("pop-peak-val") && setSafeHTML($("pop-peak-val"), timeWindowStr);
+        $("pop-peak-desc") && setSafeHTML($("pop-peak-desc"), "Your most productive time (total " + peakHoursText + " focus)");
+    } else {
+        $("pop-peak-val") && setSafeHTML($("pop-peak-val"), "—");
+        $("pop-peak-desc") && setSafeHTML($("pop-peak-desc"), "Track focus sessions to see peak hours");
+    }
+
+    const btnLine = document.getElementById("btn-trend-view-line");
+    const btnBar = document.getElementById("btn-trend-view-bar");
+    if (btnLine && btnBar) {
+        if (activeTrendView === "line") {
+            btnLine.classList.add("act");
+            btnBar.classList.remove("act");
+        } else {
+            btnBar.classList.add("act");
+            btnLine.classList.remove("act");
+        }
+    }
+
     $("pop-prod-val") && setSafeHTML($("pop-prod-val"), fmt(i));
     $("pop-prod-trend") && setSafeHTML($("pop-prod-trend"), buildTrendBadge(y, true));
     $("pop-dist-val") && setSafeHTML($("pop-dist-val"), fmt(s));
@@ -2637,7 +3295,32 @@ async function renderTrend() {
         S = !$("tog-trend-comm") || $("tog-trend-comm").checked,
         L = !$("tog-trend-dist") || $("tog-trend-dist").checked,
         T = !$("tog-trend-unc") || $("tog-trend-unc").checked;
-    "function" == typeof drawTrendChart && $("trend-chart") && drawTrendChart("trend-chart", "trend-y-axis", "trend-scroll", t, w ? o : null, E ? r : null, S ? l : null, L ? c : null, T ? d : null)
+
+    const lineWrap = $("trend-line-wrapper");
+    const barWrap = $("trend-bar-wrapper");
+
+    if (activeTrendView === "line") {
+        if (lineWrap) lineWrap.style.display = "";
+        if (barWrap) barWrap.style.display = "none";
+        "function" == typeof drawTrendChart && $("trend-chart") && drawTrendChart("trend-chart", "trend-y-axis", "trend-scroll", t, w ? o : null, E ? r : null, S ? l : null, L ? c : null, T ? d : null);
+    } else {
+        if (lineWrap) lineWrap.style.display = "none";
+        if (barWrap) barWrap.style.display = "";
+        
+        let u = [];
+        w && u.push("productivity");
+        E && u.push("learning");
+        L && u.push("distraction");
+        S && u.push("communication");
+        T && u.push("uncategorized");
+        
+        let sLogs = {};
+        e.forEach(dayKey => {
+            sLogs[dayKey] = (n[dayKey] || {}).sites || {};
+        });
+        
+        "function" == typeof drawBarChart && $("trend-bar-chart") && drawBarChart("trend-bar-chart", "trend-bar-y-axis", "trend-bar-scroll", t, e, n, u, sLogs);
+    }
 }
 async function loadDashboardStreak() {
     var t = await msg("STATS_GET_STREAK"),
@@ -2664,7 +3347,8 @@ async function loadDashboardStreak() {
 async function loadWeeklyGoalSettings() {
     var e = (await gSync(["settings"])).settings || {};
     $("weekly-goal-input") && ($("weekly-goal-input").value = e.weeklyGoalHours || 0);
-    $("streak-min-input") && ($("streak-min-input").value = e.streakMinMinutes || 30);
+    $("streak-min-input") && ($("streak-min-input").value = e.heatmapMinActive || 10);
+    $("ratio-threshold-input") && ($("ratio-threshold-input").value = e.heatmapRatioThresh || 50);
     $("week-start-select") && ($("week-start-select").value = e.weekStartsOn || "mon");
     let t = e.goalCats || ["productivity", "learning"];
     document.querySelectorAll(".goal-cb-cat").forEach(e => {
@@ -2755,7 +3439,7 @@ async function loadExtendedSettings(preloadedSettings) {
         $("tog-time-warn") && ($("tog-time-warn").checked = !1 !== e.timeWarningEnabled), 
         $("time-warn-secs") && ($("time-warn-secs").value = e.timeWarningSecs || 60), 
         $("tog-badge") && ($("tog-badge").checked = !1 !== e.showBadge), 
-        $("tog-idle-badge") && ($("tog-idle-badge").checked = !1 !== e.showIdleBadge), 
+        $("tog-idle-badge") && ($("tog-idle-badge").checked = !!e.showIdleBadge), 
         $("idle-timeout-sel") && ($("idle-timeout-sel").value = e.idleTimeout || 30), 
         $("welcome-back-thresh-sel") && ($("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10), 
         $("max-gap-sel") && ($("max-gap-sel").value = e.maxGapSecs !== undefined ? e.maxGapSecs : 300),
@@ -2852,7 +3536,7 @@ async function loadExtendedSettings(preloadedSettings) {
                 a.style.alignItems = "center";
                 setSafeHTML(a, `
                     <div style="font-size:24px; color:var(--tx3); margin-bottom:4px;">+</div>
-                    <div style="font-size:13px; font-weight:800; color:var(--tx3);">Add Free-time</div>
+                    <div style="font-size:13px; font-weight:800; color:var(--tx3);">${t_("addFreetime") || "Add Free-time"}</div>
                 `);
                 a.addEventListener("mouseover", () => {
                     a.style.borderColor = "var(--green)";
@@ -2894,8 +3578,8 @@ async function loadExtendedSettings(preloadedSettings) {
                 setSafeHTML(a, `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div style="display:flex; flex-direction:column; gap:2px;">
-                            <span style="font-size:11px; font-weight:800; color:var(--tx3); text-transform:uppercase; letter-spacing:0.05em;">Free-time Hours</span>
-                            <span style="font-size:14px; font-weight:800; color:var(--tx);">${start12} to ${end12}</span>
+                            <span style="font-size:11px; font-weight:800; color:var(--tx3); text-transform:uppercase; letter-spacing:0.05em;">${t_("freetimeHours") || "Free-time Hours"}</span>
+                            <span style="font-size:14px; font-weight:800; color:var(--tx);">${start12} ${t_("to") || "to"} ${end12}</span>
                         </div>
                         <div class="fh-actions" style="display:flex; gap:6px;">
                             <button class="bic rm-fh-btn" data-idx="${t}" title="Delete" style="background:var(--bg4); border:1px solid var(--bd); border-radius:6px; cursor:pointer; width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; color:var(--red); padding: 0;">✕</button>
@@ -2943,7 +3627,7 @@ async function loadExtendedSettings(preloadedSettings) {
     function showFreeTimeEditModal(slotIdx, fhObj) {
         const modal = $("free-time-modal");
         if (!modal) return;
-        $("ft-modal-title").textContent = fhObj ? "Edit Free-time" : "Add Free-time";
+        $("ft-modal-title").textContent = fhObj ? (t_("editFreetime") || "Edit Free-time") : (t_("addFreetime") || "Add Free-time");
         $("ft-start").value = fhObj ? (fhObj.start || "18:00") : "18:00";
         $("ft-end").value = fhObj ? (fhObj.end || "22:00") : "22:00";
         const daysList = fhObj ? (fhObj.days || [0, 1, 2, 3, 4, 5, 6]) : [0, 1, 2, 3, 4, 5, 6];
@@ -2989,7 +3673,11 @@ async function loadFocusHistory() {
         t = e?.focusHistory || [],
         a = $("history-list");
     if (a) {
-        if (!t.length) return setSafeHTML(a, '<div class="empty" style="padding:40px 10px">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>\n      <p>No focus sessions yet.</p>\n      <button class="bp" id="btn-empty-start-focus" style="margin-top:16px;padding:10px 24px;">🚀 Start First Session</button>\n    </div>'), void ($("btn-empty-start-focus") && $("btn-empty-start-focus").addEventListener("click", () => {
+        if (!t.length) return setSafeHTML(a, `<div class="empty" style="padding:40px 10px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <p>${t_("noFocusSessionsYet") || "No focus sessions yet."}</p>
+      <button class="bp" id="btn-empty-start-focus" style="margin-top:16px;padding:10px 24px;">🚀 ${t_("startFirstSession") || "Start First Session"}</button>
+    </div>`), void ($("btn-empty-start-focus") && $("btn-empty-start-focus").addEventListener("click", () => {
             $("btn-fs").click()
         }));
         a.textContent = "";
@@ -2997,22 +3685,23 @@ async function loadFocusHistory() {
         histWithIdx.sort((a, b) => (b.startedAt || 0) - (a.startedAt || 0)).forEach(e => {
             var t = document.createElement("div");
             const presetMeta = {
-                pomodoro: { emoji: "🍅", name: "Pomodoro" },
-                deep_work: { emoji: "🧠", name: "Deep Work" },
-                sprint: { emoji: "⚡", name: "Short Sprint" },
-                custom: { emoji: "🌊", name: "Flow" }
+                pomodoro: { emoji: "🍅", name: t_("presetPomodoro") || "Pomodoro" },
+                deep_work: { emoji: "🧠", name: t_("presetDeepWork") || "Deep Work" },
+                sprint: { emoji: "⚡", name: t_("presetShortSprint") || "Short Sprint" },
+                custom: { emoji: "🌊", name: t_("presetFlow") || "Flow" }
             };
-            const pObj = presetMeta[e.presetId] || { emoji: "🎯", name: "Focus" };
+            const pObj = presetMeta[e.presetId] || { emoji: "🎯", name: t_("focus") || "Focus" };
+            const pName = getPresetName(e.presetId, pObj.name);
             const dateStr = new Date(e.date + "T00:00:00").toLocaleDateString(getLocale(), { weekday: "short", month: "short", day: "numeric" });
             const timeStr = e.startedAt ? new Date(e.startedAt).toLocaleTimeString(getLocale(), { hour: "2-digit", minute: "2-digit" }) : "—";
             t.style.cssText = "display:flex;align-items:center;padding:14px 16px;background:var(--bg3);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;transition:var(--trans)";
             t.onmouseover = () => t.style.borderColor = "var(--bd2)";
             t.onmouseout = () => t.style.borderColor = "var(--bd)";
             setSafeHTML(t, `
-              <div style="font-size:20px; width:36px;" title="${pObj.name}">${pObj.emoji}</div>
+               <div style="font-size:20px; width:36px;" title="${pObj.name}">${pObj.emoji}</div>
               <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:0; padding-right:8px;">
                 <div style="font-size:13px; font-weight:800; color:var(--tx); line-height:1.2;">${dateStr} <span style="opacity:0.5; font-weight:500; margin-left:2px; white-space:nowrap;">${timeStr}</span></div>
-                <div style="font-size:12px; font-weight:600; color:var(--tx2); line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${e.isSchedule ? "Scheduled Session" : pObj.name}</div>
+                <div style="font-size:12px; font-weight:600; color:var(--tx2); line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${e.isSchedule ? (t_("scheduledSession") || "Scheduled Session") : pName}</div>
               </div>
               <div style="text-align:right; display:flex; flex-direction:column; justify-content:center; padding-left:8px;">
                 <div class="num" style="font-size:14px; font-weight:800; color:var(--tx);">${e.durationMins || 0}<span style="font-size:10px; opacity:0.6; margin-left:2px;">m</span></div>
@@ -3033,7 +3722,7 @@ a.appendChild(t)
     }
 } ["tog-ov-prod", "tog-ov-lrn", "tog-ov-dist", "tog-ov-comm", "tog-ov-unc"].forEach(e => {
     $(e) && $(e).addEventListener("change", renderOverview)
-}), ["tog-trend-prod", "tog-trend-lrn", "tog-trend-comm", "tog-trend-dist", "tog-trend-unc"].forEach(e => {
+}), ["tog-trend-prod", "tog-trend-lrn", "tog-trend-comm", "tog-trend-dist", "tog-trend-unc", "tog-trend-avg"].forEach(e => {
     $(e) && $(e).addEventListener("change", renderTrend)
 }), $("weekly-goal-input") && $("weekly-goal-input").addEventListener("input", () => {
     renderGoalPreview(parseInt($("weekly-goal-input").value) || 0)
@@ -3127,7 +3816,6 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
     if (!(await promptPinIfEnabled("lockDanger"))) return;
     if (!(await showConfirm(t_("resetStats"), t_("resetStatsConfirm"), { isDestructive: true, confirmText: t_("resetConfirmBtn") }))) return;
     await msg("STATS_RESET_ALL");
-    await sLocal({ daily: {} });
     toast(t_("statsReset"), "ok");
     loadAnalytics();
 }), $("btn-clr-rules") && $("btn-clr-rules").addEventListener("click", async () => {
@@ -4061,7 +4749,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
                 setSafeHTML(card, `
           ${emojiOrIcon}
-          <div style="font-size: 13px; font-weight: 800; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">${sanitizeDomain(p.name || '')}</div>
+          <div style="font-size: 13px; font-weight: 800; color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;">${sanitizeDomain(getPresetName(p.id, p.name) || '')}</div>
           <div style="font-size: 11px; font-weight: 700; color: var(--tx2); margin-top: 2px; display: flex; align-items: center; gap: 4px;">${p.work}m · ${p.brk}m · ${p.cycles || 4} <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><path d="M17 1l4 4-4 4"></path><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><path d="M7 23l-4-4 4-4"></path><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></div>
           
           <div class="preset-card-actions" style="display: flex; gap: 8px; margin-top: 10px; width: 100%; justify-content: center;">
@@ -4174,7 +4862,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
           <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
               ${modalHeaderIcon}
-              <span id="ep-title">Edit Preset</span>
+              <span id="ep-title">${t_("editPreset") || "Edit Preset"}</span>
             </div>
             <button id="ep-close" aria-label="Close Edit Preset Modal" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -4183,25 +4871,25 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
           
           <div style="padding:24px 32px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; flex:1;">
             <div class="srow">
-              <label for="ep-name" class="slbl">Preset Name</label>
-              <input type="text" id="ep-name" class="inp" style="width:100%" value="${sanitizeDomain(p.name || '')}"/>
+              <label for="ep-name" class="slbl">${t_("presetName") || "Preset Name"}</label>
+              <input type="text" id="ep-name" class="inp" style="width:100%" value="${sanitizeDomain(getPresetName(p.id, p.name) || '')}"/>
             </div>
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
               <div class="srow">
-                <label for="ep-work" class="slbl">Work Time (min)</label>
+                <label for="ep-work" class="slbl">${t_("workTimeMin") || "Work Time (min)"}</label>
                 <input type="number" id="ep-work" class="num inp" min="1" max="180" style="width:100%" value="${p.work}"/>
               </div>
               <div class="srow">
-                <label for="ep-brk" class="slbl">Break Time (min)</label>
+                <label for="ep-brk" class="slbl">${t_("breakTimeMin") || "Break Time (min)"}</label>
                 <input type="number" id="ep-brk" class="num inp" min="0" max="60" style="width:100%" value="${p.brk}"/>
               </div>
               <div class="srow">
-                <label for="ep-long" class="slbl">Long Break (min)</label>
+                <label for="ep-long" class="slbl">${t_("longBreakMin") || "Long Break (min)"}</label>
                 <input type="number" id="ep-long" class="num inp" min="0" max="120" style="width:100%" value="${p.long}"/>
               </div>
               <div class="srow">
-                <label for="ep-cyc" class="slbl">Cycles</label>
+                <label for="ep-cyc" class="slbl">${t_("cycles") || "Cycles"}</label>
                 <input type="number" id="ep-cyc" class="num inp" min="1" max="12" style="width:100%" value="${p.cycles}"/>
               </div>
             </div>
@@ -4210,9 +4898,9 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
               <div style="flex:1;">
                 <label for="ep-notify" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                  Enable Notifications
+                  ${t_("enableNotifications") || "Enable Notifications"}
                 </label>
-                <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">Receive push alerts when focus periods or breaks end.</div>
+                <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">${t_("epNotifyDesc") || "Receive push alerts when focus periods or breaks end."}</div>
               </div>
               <label class="tog">
                 <input type="checkbox" id="ep-notify" ${p.notify !== false ? 'checked' : ''}/>
@@ -4224,9 +4912,9 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
               <div style="flex:1;">
                 <label for="ep-autostart" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                  Auto-Start Next Cycle
+                  ${t_("autoStartNextCycle") || "Auto-Start Next Cycle"}
                 </label>
-                <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">Automatically transition to the next work cycle or break.</div>
+                <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">${t_("epAutoStartDesc") || "Automatically transition to the next work cycle or break."}</div>
               </div>
               <label class="tog">
                 <input type="checkbox" id="ep-autostart" ${p.autoStart ? 'checked' : ''}/>
@@ -4235,14 +4923,14 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             </div>
 
             <div id="ep-cats-section" style="display: block;">
-              <div class="slbl" style="margin-bottom:10px;">Categories to Block during focus</div>
+              <div class="slbl" style="margin-bottom:10px;">${t_("categoriesToBlockDuringFocus") || "Categories to Block during focus"}</div>
               <div id="ep-cats-grid" class="c-checkbox-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 ${CATS.map(c => {
                   const checked = (p.cats || p.blockCats || []).includes(c.v);
                   return `
                     <label class="c-checkbox-lbl" style="padding:10px; font-size:13px; font-weight:700; margin:0;">
                       <input type="checkbox" value="${c.v}" ${checked ? 'checked' : ''}/>
-                      <span>${c.l}</span>
+                      <span>${catEmoji(c.v)} ${catLabel(c.v)}</span>
                     </label>
                   `;
               }).join("")}
@@ -4251,8 +4939,8 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
           </div>
 
           <div style="padding: 16px 32px 24px; border-top: 1px solid var(--bd); display: flex; gap: 12px; justify-content: flex-end; flex-shrink: 0;">
-            <button class="bs" id="ep-cancel" style="padding: 10px 20px;">Cancel</button>
-            <button class="bp" id="ep-save" style="padding: 10px 20px; font-size: 13px; font-weight: 700;">Save Changes</button>
+            <button class="bs" id="ep-cancel" style="padding: 10px 20px;">${t_("cancel") || "Cancel"}</button>
+            <button class="bp" id="ep-save" style="padding: 10px 20px; font-size: 13px; font-weight: 700;">${t_("saveChanges") || "Save Changes"}</button>
           </div>
         </div>
       `);
@@ -4341,9 +5029,9 @@ document.body.appendChild(overlay);
         const nav = document.createElement("div");
         nav.className = "sm-tabs";
         setSafeHTML(nav, `
-      <button type="button" class="sm-tab is-active" data-pane="sites">Site List</button>
-      <button type="button" class="sm-tab" data-pane="presets">Smart Presets & Categories</button>
-      <button type="button" class="sm-tab" data-pane="tweaks">Advanced Tweaks</button>
+      <button type="button" class="sm-tab is-active" data-pane="sites">${t_("siteList") || "Site List"}</button>
+      <button type="button" class="sm-tab" data-pane="presets">${t_("smartPresetsAndCategories") || "Smart Presets & Categories"}</button>
+      <button type="button" class="sm-tab" data-pane="tweaks">${t_("advancedTweaks") || "Advanced Tweaks"}</button>
     `);
         const ph = sm.querySelector(".ph");
         ph.parentNode.insertBefore(nav, ph.nextSibling);
@@ -5685,7 +6373,7 @@ listContainer.appendChild(row);
         if (!select) return;
         
         const val = select.value;
-        setSafeHTML(select, '<option value="">-- Select a Preset to Apply --</option>');
+        setSafeHTML(select, `<option value="">${t_("selectPresetToApply") || "-- Select a Preset to Apply --"}</option>`);
         blockPresetsList.forEach(p => {
             if (p) {
                 const opt = document.createElement("option");

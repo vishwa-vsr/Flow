@@ -6,15 +6,14 @@
 <link rel="stylesheet" href="../global.css">
 <style>
 body{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative}
-body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.035) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%)}
 .bar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.4rem;border-bottom:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 88%, transparent);backdrop-filter:blur(12px);z-index:10}
 .pulse{width:8px;height:8px;border-radius:50%;background:var(--red);animation:p 1.5s infinite;box-shadow:0 0 12px var(--red)}
 @keyframes p{0%,100%{opacity:1}50%{opacity:.35}}
 .brand{font-size:.62rem;color:var(--tx3);letter-spacing:.22em;font-family:'Manrope',sans-serif;font-weight:700}
 .bar-reason{font-size:.62rem;color:var(--red);letter-spacing:.18em;text-transform:uppercase;font-weight:700}
-.card{position:relative;z-index:1;width:100%;max-width:440px;padding:2.5rem 2.25rem;text-align:center;box-shadow:var(--shadow-lg);background:linear-gradient(180deg, var(--bg2), var(--bg))}
+.card{position:relative;z-index:1;width:100%;max-width:440px;padding:2.5rem 2.25rem;text-align:center;border:1px solid var(--bd2);border-radius:var(--card-radius);box-shadow:none;background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .pill{display:inline-block;font-size:.62rem;letter-spacing:.18em;color:var(--tx3);text-transform:uppercase;background:var(--bg3);border:1px solid var(--bd);border-radius:999px;padding:.3rem 1rem;margin-bottom:1.5rem;font-family:'Manrope',sans-serif;font-weight:700}
-.emoji{font-size:3.25rem;margin-bottom:.6rem;line-height:1;animation:scale-in .5s cubic-bezier(.16,1,.3,1)}
+.emoji-span{display:none}
 h1{font-family:var(--display-font);font-size:2.4rem;font-weight:400;letter-spacing:-.02em;line-height:1.05;margin-bottom:.75rem;color:var(--tx)}
 h1 em{font-style:italic;color:var(--green)}
 .sub{font-size:.92rem;color:var(--tx2);line-height:1.55;margin-bottom:1.5rem;max-width:34ch;margin-left:auto;margin-right:auto}
@@ -25,14 +24,10 @@ h1 em{font-style:italic;color:var(--green)}
 .btn-back{display:block;width:100%;margin-bottom:.5rem}
 .btn-set{display:block;width:100%}
 .quote{margin-top:2rem;z-index:1;position:relative;font-family:var(--display-font);font-style:italic;font-size:.95rem;color:var(--tx4);max-width:340px;line-height:1.55;text-align:center}
-.gl{position:fixed;pointer-events:none;z-index:0}
-.gl1{bottom:-4rem;right:-4rem;width:22rem;height:22rem;background:radial-gradient(circle,rgba(5,213,129,.06),transparent 70%)}
-.gl2{top:-4rem;left:-4rem;width:22rem;height:22rem;background:radial-gradient(circle,rgba(92,156,252,.05),transparent 70%)}
-  .rule-detail{font-size:.8rem;color:var(--tx3);margin-bottom:1rem;padding:.5rem .9rem;background:var(--bg3);border-radius:8px;border:1px solid var(--bd)}
-  .prod-suggestion{font-size:.82rem;color:var(--tx2);margin-bottom:1rem;display:none}
-  .prod-link{color:var(--green);font-weight:700;text-decoration:none}
-  .prod-link:hover{text-decoration:underline}
-
+.rule-detail{font-size:.8rem;color:var(--tx3);margin-bottom:1rem;padding:.5rem .9rem;background:var(--bg3);border-radius:8px;border:1px solid var(--bd)}
+.prod-suggestion{font-size:.82rem;color:var(--tx2);margin-bottom:1rem;display:none}
+.prod-link{color:var(--green);font-weight:700;text-decoration:none}
+.prod-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -42,19 +37,25 @@ h1 em{font-style:italic;color:var(--green)}
 </div>
 <div class="card scale-in">
   <div class="pill" id="domain-pill" data-i18n="thisSite">this site</div>
-  <div class="emoji" id="emoji">⛔</div>
+  
+  <div style="margin-bottom:1.25rem;">
+    <svg viewBox="0 0 24 24" width="60" height="60" stroke="var(--red)" stroke-width="1.75" fill="var(--red-bg)" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto;filter:drop-shadow(0 4px 12px rgba(244,107,122,0.15))">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+  </div>
+  <span id="emoji" class="emoji-span">⛔</span>
+
   <h1 id="headline">Not <em>today.</em></h1>
   <p class="sub" id="sub">You blocked this. Past-you was smarter than you right now.</p>
   <div class="badge" id="badge" data-i18n="blockedByFlow">Blocked by Flow</div>
   <div class="rule-detail" id="rule-detail"></div>
     <div class="prod-suggestion" id="productive-suggestion"></div>
     <button class="bp btn-back" id="btn-back" data-i18n="takeBackBtn">← Take me back</button>
-
   <button class="bs btn-set" id="btn-set" data-i18n="manageBlockRules">Manage block rules →</button>
 </div>
 <p class="quote">"Discipline is choosing between what you want now and what you want most."</p>
-<div class="gl gl1"></div>
-<div class="gl gl2"></div>
 <script src="../src/lib/constants.js"></script>
 <script src="../src/lib/i18n.js"></script>
 <script src="../src/lib/storage.js"></script>

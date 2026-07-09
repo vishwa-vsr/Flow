@@ -8,6 +8,9 @@ if (typeof initI18n === "function") {
 if (typeof translatePage === "function") {
   translatePage();
 }
+if (typeof applyTheme === "function") {
+  applyTheme();
+}
 
 const MSGS = [];
 for (var i = 1; i <= 8; i++) {
