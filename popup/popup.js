@@ -225,10 +225,10 @@ async function checkCurrentTabForGranularRules() {
                 `).join(""));
 
                 dropdownMenu.querySelectorAll(".preset-dropdown-item").forEach(btn => {
-                    btn.addEventListener("mouseenter", () => btn.style.background = "rgba(255,255,255,0.06)");
+                    btn.addEventListener("mouseenter", () => btn.style.background = "var(--bg3)");
                     btn.addEventListener("mouseleave", () => btn.style.background = "none");
                     btn.addEventListener("click", async () => {
-                        const confirmed = confirm(t_('confirmBlock').replace('$domain$', s));
+                        const confirmed = await showCustomConfirm(t_('confirmBlock').replace('$domain$', s));
                         if (!confirmed) return;
 
                         const resAllow = await gLocal(["allowList"]);
@@ -502,7 +502,7 @@ function renderDonut(e, t) {
 function buildCatSelector(e, t, s) {
     var a = `<select class="sel-cat" data-domain="${escHTML(e)}" style="font-size:10px; padding:4px 8px; border-radius:999px; background:${s}22; color:${s}; border:1px solid ${s}55; outline:none; cursor:pointer; font-weight:800; text-transform:uppercase; appearance:none; text-align:center;">`;
     return ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(e => {
-        a += `<option value="${e}" ${e === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${CAT_LABELS[e]}</option>`
+        a += `<option value="${e}" ${e === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${t_("cat" + e.charAt(0).toUpperCase() + e.slice(1)) || CAT_LABELS[e]}</option>`
     }), a += "</select>"
 }
 
@@ -524,9 +524,12 @@ function renderDynamicList(e, t) {
         
         if (a.length > 10 && !n) {
             const isFirefox = navigator.userAgent.includes("Firefox") || chrome.runtime.getURL("").startsWith("moz-extension:");
+            const isEdge = navigator.userAgent.includes("Edg");
             const rateUrl = isFirefox 
                 ? "https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/" 
-                : "https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic";
+                : isEdge
+                    ? "https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"
+                    : "https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp";
             let overlayHtml = `
               <div id="feedback-overlay" style="display:flex; justify-content:center; gap:8px; align-items:center; width:100%; background:var(--bg2); border-radius:12px; padding:4px;">
                 <a href="${rateUrl}" target="_blank" class="bs bs-sm" style="color:var(--amber); border-color:var(--amber-bd); background:var(--amber-bg); text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('rateUs')}</a>
@@ -629,7 +632,17 @@ $("btn-stop") && $("btn-stop").addEventListener("click", async () => {
 });
 $("btn-pause") && $("btn-pause").addEventListener("click", async () => {
     if (_focusBusy) return; _focusBusy = true;
-    try { renderFocus((await msg($("btn-pause").textContent.includes("Resume") ? "FOCUS_RESUME" : "FOCUS_PAUSE"))?.focusState); }
+    try {
+        const isResuming = $("btn-pause").textContent.includes("Resume") || $("btn-pause").textContent.includes("Reanudar");
+        if (!isResuming) {
+            const confirmed = await showCustomConfirm(
+                t_("confirmPauseDesc") || "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
+                t_("confirmPauseTitle") || "Pause focus session?"
+            );
+            if (!confirmed) return;
+        }
+        renderFocus((await msg(isResuming ? "FOCUS_RESUME" : "FOCUS_PAUSE"))?.focusState);
+    }
     finally { _focusBusy = false; }
 });
 $("btn-skip") && $("btn-skip").addEventListener("click", async () => {
@@ -925,6 +938,42 @@ async function renderPresetRail(pres) {
             loadFocus();
             updatePresetNameInSettings();
         });
+    });
+}
+
+function showCustomConfirm(msgText, titleText = null) {
+    return new Promise((resolve) => {
+        const modal = $("block-confirm-modal");
+        const desc = $("block-confirm-desc");
+        const btnOk = $("block-confirm-ok");
+        const btnCancel = $("block-confirm-cancel");
+        if (!modal || !desc || !btnOk || !btnCancel) {
+            resolve(confirm(msgText));
+            return;
+        }
+        const titleEl = modal.querySelector("h3");
+        if (titleEl) {
+            titleEl.textContent = titleText || t_("confirmBlockTitle") || "Block website?";
+        }
+        desc.textContent = msgText;
+        modal.style.display = "flex";
+        
+        const onOk = () => {
+            cleanup();
+            resolve(true);
+        };
+        const onCancel = () => {
+            cleanup();
+            resolve(false);
+        };
+        const cleanup = () => {
+            modal.style.display = "none";
+            btnOk.removeEventListener("click", onOk);
+            btnCancel.removeEventListener("click", onCancel);
+        };
+        
+        btnOk.addEventListener("click", onOk);
+        btnCancel.addEventListener("click", onCancel);
     });
 }
 
