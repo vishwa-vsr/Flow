@@ -9,8 +9,8 @@
 🌐 **[Visit the Product Website](https://vishwa-vsr.github.io/flow-website/)**
 
 [![License](https://img.shields.io/github/license/vishwa-vsr/Flow)](./LICENSE)
-[![Firefox Add-on Version](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=Firefox%20Extension)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
-[![Firefox Add-on Users](https://img.shields.io/amo/users/flow-website-manager?color=orange&label=Firefox%20Users)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
+[![Firefox Add-on Version](https://img.shields.io/amo/v/flow-website-blocker?color=orange&label=Firefox%20Extension)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/)
+[![Firefox Add-on Users](https://img.shields.io/amo/users/flow-website-blocker?color=orange&label=Firefox%20Users)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/)
 [![Edge Add-on Version](https://img.shields.io/badge/dynamic/json?label=Edge%20Extension&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic)
 [![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Extension)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
 [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Users)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
@@ -71,7 +71,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 | Store | Version | Rating | User Count |
 |---|---|---|---|
-| [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=latest)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/rating/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/users/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) |
+| [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) | [![](https://img.shields.io/amo/v/flow-website-blocker?color=orange&label=latest)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) | [![](https://img.shields.io/amo/rating/flow-website-blocker?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) | [![](https://img.shields.io/amo/users/flow-website-blocker?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) |
 | [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=latest&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) |
 | [Chrome Web Store](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/v/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=latest)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/rating/heinimoclnopjnkpicmonhgichbjejcp?color=blue)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/users/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=users)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) |
 
@@ -151,7 +151,7 @@ You can manually download a backup of your data from the "Migration & Imports" t
 
 We welcome contributions of all kinds! Please check out our [Contributing Guide](./CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, suggest features, or help with translations.
 
-If you like Flow, leaving a 5-star review on the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
+If you like Flow, leaving a 5-star review on the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
 
 ---
 
@@ -165,7 +165,7 @@ This project is licensed under the [MIT License](./LICENSE).
 
 * [Product Website](https://vishwa-vsr.github.io/flow-website/)
 * [Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic)
-* [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
+* [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/)
 * [Privacy Policy](./PRIVACY.md)
 
 ---
