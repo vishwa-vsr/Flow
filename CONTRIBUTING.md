@@ -26,18 +26,33 @@ Flow is localized into multiple languages. If you want to help translate the ext
 ### 3. Code Contributions (Pull Requests)
 If you want to modify the code or fix a bug:
 1. Fork this repository and clone it to your computer.
-2. Navigate to the `flow-source` folder and install the build tools:
+2. Navigate to the root folder of the repository and install the developer tools:
    ```bash
    npm install
    ```
 3. Load the extension in your browser in Developer Mode:
-   - For Chromium browsers: Go to `chrome://extensions/` and click "Load unpacked". Select the `flow-source` folder.
-   - For Firefox: Go to `about:debugging#/runtime/this-firefox` and click "Load Temporary Add-on...". Select the `manifest.json` file inside the `flow-source` folder.
+   - For Chromium browsers (Chrome, Edge, Brave): Go to `chrome://extensions/` and click "Load unpacked". Select this repository's folder.
+   - For Firefox: Go to `about:debugging#/runtime/this-firefox` and click "Load Temporary Add-on...". Select the `manifest.json` file inside the repository's folder.
 4. Make your changes and test them thoroughly.
-5. Compile your changes to verify the build script runs successfully:
-   ```bash
-   python build.py --skip-prompt --zip
-   ```
+5. Compile your changes to verify the build script runs successfully.
+
+#### 🛠️ Available Build Commands
+You can run the following commands in your terminal:
+
+| Command | Description |
+|---|---|
+| `npm run build` | Compiles your source files and minifies JavaScript and CSS into target folders (`flow-dist`, `flow-firefox`, `flow-edge`). |
+| `npm run zip` | Compiles and packages target directories into store-ready `.zip` archives. |
+
+*(Note: To run these commands automatically without interactive prompts, pass `-- --skip-prompt` like so: `npm run build -- --skip-prompt`)*
+
+#### 📋 Pull Request Checklist
+Before opening a Pull Request, please check that:
+- [ ] You tested the changes locally in Developer Mode on your browser.
+- [ ] The build script compiles successfully by running `npm run build`.
+- [ ] You did not add any heavy external libraries (we prefer standard web APIs).
+- [ ] Your code is local-first and does not track users or collect data (privacy-first).
+
 6. Commit your changes and submit a Pull Request to our main branch!
 
 ---

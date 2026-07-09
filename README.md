@@ -4,12 +4,18 @@
 
 *Formerly known as FocusFlow.*
 
-![Flow Banner](flow_preview1.jpg)
+*Latest Release: [v10.0.0 (Flow Rebirth)](CHANGELOG.md)*
 
-<p>
-  <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
-</p>
+🌐 **[Visit the Product Website](https://vishwa-vsr.github.io/flow-website/)**
+
+[![License](https://img.shields.io/github/license/vishwa-vsr/Flow)](./LICENSE)
+[![Firefox Add-on Version](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=Firefox%20Extension)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
+[![Firefox Add-on Users](https://img.shields.io/amo/users/flow-website-manager?color=orange&label=Firefox%20Users)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/)
+[![Edge Add-on Version](https://img.shields.io/badge/dynamic/json?label=Edge%20Extension&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic)
+[![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Extension)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Users)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
+
+![Flow Banner](flow_preview1.jpg)
 
 ---
 
@@ -67,7 +73,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 |---|---|---|---|
 | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/v/flow-website-manager?color=orange&label=latest)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/rating/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) | [![](https://img.shields.io/amo/users/flow-website-manager?color=orange)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/) |
 | [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=latest&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=rating&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) | [![](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) |
-| Chrome Web Store | [![](https://img.shields.io/badge/Download_ZIP-7.0.0-blue?logo=googlechrome&logoColor=white)](https://github.com/vishwa-vsr/Flow/releases/latest) | 🔜 coming soon | [Download ZIP (Manual)](https://github.com/vishwa-vsr/Flow/releases/latest) |
+| [Chrome Web Store](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/v/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=latest)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/rating/heinimoclnopjnkpicmonhgichbjejcp?color=blue)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) | [![](https://img.shields.io/chrome-web-store/users/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=users)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp) |
 
 ---
 
@@ -89,23 +95,23 @@ This repository contains the original, un-minified source code for Flow.
 
 To generate the minified code submitted to browser add-on stores:
 
-1. Ensure **Python 3** and **Node.js (npm)** are installed on your system.
+1. Ensure **Node.js (npm)** is installed on your system.
 2. Open a terminal and navigate into the `flow-source` directory.
 3. Install the dependencies (like `esbuild`) by running:
    ```bash
    npm install
    ```
-4. Run the build script:
+4. Run the build script to compile the target folders:
    ```bash
-   python build.py
+   npm run build
    ```
-   *(Note: The script is interactive by default and will ask you if you want to bump the version number and build the Chrome/Firefox folders. You can pass the `-y` or `--skip-prompt` flag to bypass these prompts. You can also pass the `--zip` flag to package the distribution folders into `.zip` archives for store upload.)*
-5. The script will create a `flow-firefox` directory (and a `flow-dist` directory for Chromium) containing the final, minified extension code.
+   *(Note: To build and package the target folders into `.zip` archives for store upload, run `npm run zip` instead. The scripts are interactive by default and will ask you if you want to bump the version number. You can pass the `-y` or `--skip-prompt` flag to bypass these prompts, e.g., `npm run build -- --skip-prompt`.)*
+5. The script will create target directories like `flow-dist` (for Chrome), `flow-edge` (for Edge), and `flow-firefox` (for Firefox) containing the final, minified extension code.
 
 ### Notes on the Build Process
-* The `build.py` script does **not** use complex bundlers like Webpack, Rollup, or Vite.
-* It primarily uses `esbuild` to optimize and minify the JavaScript files.
-* If `esbuild` (or the `node_modules` folder) is not found, the script gracefully falls back to basic Regular Expressions to strip whitespace, newlines, and comments.
+* The `build.js` script does **not** use complex bundlers like Webpack, Rollup, or Vite.
+* It uses `esbuild`'s official JavaScript API to optimize and minify JavaScript and CSS files.
+* If `esbuild` (or the `node_modules` folder) is not found, the script gracefully falls back to basic Regular Expressions to strip comments and clean whitespace.
 * The code is **not** obfuscated.
 
 ---
@@ -134,7 +140,7 @@ No. Flow is completely local-first. All your browsing activity, settings, and lo
 Flow needs site access to track when you are active on websites so it can calculate your study stats and block distracting pages. Since this process runs locally on your computer, the browser needs permission to run the tracking code on your open tabs.
 
 #### How can I install Flow on Google Chrome?
-Our Chrome Web Store release is coming soon, you can install it manually by downloading the latest `flow-dist-v7.0.0.zip` file from our Releases page and loading it in Developer Mode.
+You can install Flow directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp). Alternatively, if you want to install it manually, you can download the latest `flow-dist-v10.0.0.zip` file from our Releases page and load it in Developer Mode.
 
 #### How do I backup my settings?
 You can manually download a backup of your data from the "Migration & Imports" tab on the options page. We do not use automatic cloud backups to keep your data private and warning-free.

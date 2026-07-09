@@ -1,74 +1,32 @@
 # Changelog
 
-All notable updates and improvements to **Flow** are documented below.
+All notable changes to this project will be documented in this file.
 
-## [7.0.0] - 2026-06-25
-- **Removed "Downloads" Permission**: Completely removed the weekly auto-backup feature and its associated `"downloads"` browser permission to protect user privacy and avoid scary browser warnings. Manual backups can still be downloaded instantly without any permissions.
-- **Internationalization (i18n) Support**: Added a robust translation framework for localizing the main popup, options dashboard, blocked pages, and extension metadata.
-- **Spanish Language Translation**: Added direct, informal, and blunt Spanish translations for all options dashboard screens, status panels, configuration sliders, daily limit badges, and rotating motivational quotes.
-- **Fixed CPU Usage Spike**: Optimized the Reddit layout-hiding code to stop scanning every single element on the webpage. This fixes browser freezing on infinite-scroll pages and drastically reduces CPU usage.
-- **Fixed Brave Redirection Bug**: Resolved an issue where Brave browser hung indefinitely on blocked websites by using declarativeNetRequest block actions combined with a tab-level redirect fallback.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.9.9] - 2026-06-18
-- **New Dashboard Design**: Redesigned analytics cards with a premium look, bold typography, and interactive animations.
-- **Trend Indicators**: Added color-coded badges that show if your productivity is improving or if distractions are increasing.
-- **Access Control Unified**: Merged passcode locks and safety checklists into a single "Access Control & Safety" card.
-- **Simplified Settings**: Cleaned up the settings page by removing clutter and focusing on clean cards.
+## [10.0.0] - 2026-07-09 ("Flow Rebirth")
 
-## [6.9.8] - 2026-06-14
-- **Fixed Redirect Bugs**: Resolved an infinite loading loop that occurred when visiting blocked sites.
-- **Smart Idle Detection**: Improved tracking so it won't mark you as idle if you are actively clicking or typing.
+This is a major milestone release marking the transition from "Website Manager" to "Website Blocker", and celebrating the official submission to the Chrome Web Store!
 
-## [6.9.7] - 2026-06-13
-- **SVG Icon Upgrades**: Replaced generic emojis with custom icons in schedules and popups.
+*Note: The version has been bumped directly from 7.0.8 to 10.0.0 to celebrate this launch, establish unified version numbering across Chrome, Firefox, and Edge stores, and ensure that all existing users receive the update automatically.*
 
-## [6.9.6] - 2026-06-10
-- **SVG Icon Redesign**: Swapped emojis with crisp vector icons across all lists, settings, and status indicators.
-- **Ethereal Shadow Theme**: Added a new background option for dark mode.
-- **Dashed Empty States**: Redesigned empty lists to look cleaner with descriptive hints.
+### Added
+- **Official Chrome Web Store support:** Initial release package for Google Chrome.
+- **Multi-language support:** Fully localized user interface in English, Spanish, Simplified Chinese, and Traditional Chinese (HK/TW).
+- **Standardized build tools:** Replaced the old Python compiler script (`build.py`) with a modern JavaScript build script (`build.js`) running on the official Node.js `esbuild` API.
+- **NPM terminal shortcuts:** Added `npm run build` and `npm run zip` commands inside `package.json` to simplify compiling.
+- **Portable developer tools:** Moved translation helper tools inside the main directory and changed hardcoded folders to relative paths so they work on any computer.
+- **Expanded core features:**
+  - **Premium Pomodoro Timer:** Fully customizable focus blocks, short breaks, and long breaks with an animated glowing ring that fills up as you work.
+  - **Visual Site Analytics:** Interactive circular donut chart displaying your top-visited websites and showing exactly where your minutes went.
+  - **Advanced Website Blocker:** Granular, network-level blocking rules supporting focus schedules, daily time limits, per-session cooldowns, and custom redirect pages.
+  - **Secure 6-Digit Passcode:** PIN lock protection for editing rules, stopping timers, changing presets, or unlocking options to prevent self-cheating.
+  - **365-Day Consistency Heatmap:** GitHub-style calendar heatmap tracking focus days (green) vs. wasted days (red) based on customizable ratios.
+  - **Study vs. Distraction Trends:** Color-coded graphs showing comparisons between productive time, learning, communication, and distractions over 7-day or 30-day ranges.
+  - **Customizable Themes:** Three clean, premium look options: Light theme, Dark theme, and a glassmorphic Cinematic theme with animated background blurs.
+  - **Privacy-First Backups:** Export settings and history to a JSON file or import logs from other popular tracking tools without any online data tracking.
 
-## [6.9.5] - 2026-06-06
-- **Legend Hover Stats**: Hovering over categories in the popup chart now highlights their specific duration.
-- **Refined Timer Panel**: Grouped timer inputs side-by-side (Work/Break times) and added a direct link to advanced settings.
-- **Mobile Friendly**: Improved the dashboard grid layout for smaller laptop and mobile screens.
-
-## [6.9.2] - 2026-06-02
-- **Firefox Custom Tab Fix**: Fixed a bug where Firefox custom tab features conflicted with normal browsing.
-
-## [6.9.1] - 2026-06-02
-- **Import History**: Added uploader support to import data from other popular trackers (Webtime Tracker, Time Tracker, etc.).
-- **Passcode Upgrades**: Replaced emoji locks with high-res SVG padlock icons.
-
-## [6.8.6] - 2026-05-29
-- **Link Fixes**: Updated the Firefox store link and GitHub repository URL on the dashboard.
-
-## [6.8.5] - 2026-05-29
-- **Midnight Schedules**: Added support for block schedules and free-time windows that wrap around midnight.
-- **Flexible Weeks**: Added a setting to start your calendar week on Sunday or Monday.
-- **Smarter Categorization**: Decoupled site blocking from category tagging to prevent overlapping rules.
-
-## [6.8.4] - 2026-05-28
-- **Rebranding**: Officially renamed the extension to **Flow**!
-- **Cleaner Styling**: Refined input boxes, select dropdowns, and checkboxes.
-
-## [6.8.3] - 2026-05-26
-- **Cinematic Mode**: Added an animated gradient background option.
-- **Unified Design**: Standardized colors, borders, and shadows using a global design system.
-
-## [6.8.2] - 2026-05-24
-- **365-Day Heatmap**: Added a visual habit calendar to track your focus history over the year.
-- **Behavior Analytics**: Added insights showing your weekday vs. weekend productivity.
-
-## [6.8.1] - 2026-05-22
-- **Comparison Tab**: Added a trend chart showing study times vs. distraction times side-by-side.
-- **Date Range Picker**: Added custom date filters for charts and analytics.
-
-## [6.8.0] - 2026-05-20
-- **New Dashboard Tabs**: Organized the workspace into 4 tabs: Analytics, Focus Mode, Site Manager, and Settings.
-- **Focus Schedules**: Set recurring blocks of time that start automatically.
-- **Granular Passcodes**: Lock specific areas (Timer stop, Rules, Settings, etc.) instead of locking the whole app.
-- **Head-up Warnings**: Receive alerts a few seconds before a site gets blocked.
-
-## [6.7.0] - 2026-05-10
-- **Initial Release**: First public release on Firefox and Edge.
-- **Core Features**: Pomodoro timer, visual donut chart, domain blocker, weekly goals, and light/dark mode options.
+### Changed
+- **Renamed extension:** Renamed the extension from **Flow - Website Manager & Habit Tracker** to **Flow - Website Blocker & Habit Tracker** across all localized languages.
+- **Developer documentation:** Rewrote `README.md`, `CONTRIBUTING.md`, and `TRANSLATING.md` to guide contributors on using the new Node.js workflow and translator rules.

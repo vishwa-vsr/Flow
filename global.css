@@ -61,7 +61,7 @@ html.light{
   --shadow-lg:0 20px 48px rgba(0,0,0,.10);
   /* glass / surface — light mode overrides */
   --glass-bg:rgba(255,255,255,0.75);
-  --glass-bd:rgba(0,0,0,0.05);
+  --glass-bd:rgba(0,0,0,0.12);
   --surface-subtle:rgba(0,0,0,0.015);
   --surface-elevated:rgba(0,0,0,0.03);
   --bd-subtle:rgba(0,0,0,0.04);
@@ -81,6 +81,16 @@ html.light{
   --purple:#7e22ce;
   --purple-bg:rgba(126,34,206,0.08);
   --purple-bd:rgba(126,34,206,0.2);
+}
+
+html.light .bp {
+  color: #ffffff !important;
+}
+html.light .pb-badge-active {
+  color: #ffffff !important;
+}
+html.light .pb-badge-strict {
+  color: #ffffff !important;
 }
 
 html.cinematic body{background:#070310}
@@ -111,12 +121,12 @@ body{
   background:var(--bg2);
   border:1px solid var(--bd);
   border-radius:var(--card-radius);
-  box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
   position:relative;overflow:hidden;margin-bottom:16px;
   transition:var(--trans);
 }
 .card:hover{border-color:var(--bd2)}
-html.light .card{box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.6)}
+html.light .card{box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
 
 /* buttons */
 .bp{
@@ -127,8 +137,8 @@ html.light .card{box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.6)
   border:1px solid rgba(255,255,255,.08);
   box-shadow:var(--shadow-xs);
 }
-.bp:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm);filter:brightness(1.06)}
-.bp:active{transform:translateY(0);filter:brightness(.98)}
+.bp:hover{filter:brightness(1.06)}
+.bp:active{filter:brightness(.95)}
 /* FF v6.18: small pill variant for compact contexts (popup block button etc.) */
 .bp-sm{padding:5px 14px;font-size:11px;border-radius:99px;letter-spacing:.02em}
 
@@ -138,8 +148,8 @@ html.light .card{box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.6)
   cursor:pointer;transition:var(--trans);white-space:nowrap;
   background:var(--bg3);color:var(--tx);border:1px solid var(--bd2);
 }
-.bs:hover{background:var(--bg4);border-color:var(--bd3);transform:translateY(-1px)}
-.bs:active{transform:translateY(0)}
+.bs:hover{background:var(--bg4);border-color:var(--bd3)}
+.bs:active{filter:brightness(.95)}
 .bs-sm{padding:5px 14px;font-size:11px;border-radius:99px;letter-spacing:.02em}
 .bs-danger{
   border-radius:var(--btn-radius);padding:11px 22px;
@@ -147,8 +157,8 @@ html.light .card{box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.6)
   cursor:pointer;transition:var(--trans);white-space:nowrap;
   background:rgba(244,107,122,.15);color:var(--red);border:1px solid rgba(244,107,122,.3);
 }
-.bs-danger:hover{background:rgba(244,107,122,.25);border-color:rgba(244,107,122,.5);transform:translateY(-1px)}
-.bs-danger:active{transform:translateY(0)}
+.bs-danger:hover{background:rgba(244,107,122,.25);border-color:rgba(244,107,122,.5)}
+.bs-danger:active{filter:brightness(.95)}
 .bs-danger-sm{padding:5px 14px;font-size:11px;border-radius:99px;letter-spacing:.02em}
 
 /* toggle */
