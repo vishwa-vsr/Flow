@@ -4,16 +4,17 @@
 
 *Formerly known as FocusFlow.*
 
-*Latest Release: [v10.0.0 (Flow Rebirth)](CHANGELOG.md)*
+*Latest Release: [v10.0.1](CHANGELOG.md)*
 
 🌐 **[Visit the Product Website](https://vishwa-vsr.github.io/flow-website/)**
 
 [![License](https://img.shields.io/github/license/vishwa-vsr/Flow)](./LICENSE)
-[![Firefox Add-on Version](https://img.shields.io/amo/v/flow-website-blocker?color=orange&label=Firefox%20Extension)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/)
-[![Firefox Add-on Users](https://img.shields.io/amo/users/flow-website-blocker?color=orange&label=Firefox%20Users)](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/)
-[![Edge Add-on Version](https://img.shields.io/badge/dynamic/json?label=Edge%20Extension&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjlcdkibfogehgkbhkkkglifbanenkmic)](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic)
-[![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Extension)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/heinimoclnopjnkpicmonhgichbjejcp?color=blue&label=Chrome%20Users)](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp)
+
+<p>
+  <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png" alt="Available in the Chrome Web Store" height="48"></a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
+</p>
 
 ![Flow Banner](flow_preview1.jpg)
 
