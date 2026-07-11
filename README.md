@@ -1,4 +1,10 @@
-# 🌊 Flow
+# <img src="icons/icon128.png" width="32" height="32" valign="middle"> Flow
+
+<p>
+  <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png" alt="Available in the Chrome Web Store" height="48"></a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
+</p>
 
 **A premium, zero-distraction productivity companion that helps you reclaim your time, build deep focus habits, and block digital noise.**
 
@@ -9,12 +15,6 @@
 🌐 **[Visit the Product Website](https://vishwa-vsr.github.io/flow-website/)**
 
 [![License](https://img.shields.io/github/license/vishwa-vsr/Flow)](./LICENSE)
-
-<p>
-  <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png" alt="Available in the Chrome Web Store" height="48"></a>
-  <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"><img src="https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png" alt="Get it from Microsoft" height="48"></a>
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/"><img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" alt="Get the add-on" height="48"></a>
-</p>
 
 ![Flow Banner](flow_preview1.jpg)
 
