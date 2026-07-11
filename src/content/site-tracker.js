@@ -33,10 +33,8 @@
   document.addEventListener("visibilitychange", () => {
     _sendVisibility(document.visibilityState);
   });
-  // Also fire immediately in case the script loaded into a hidden tab.
-  if (document.visibilityState !== "visible") {
-    _sendVisibility("hidden");
-  }
+  // Fire immediately to establish the correct visibility state on load.
+  _sendVisibility(document.visibilityState);
 
   // Fast check: is this current website actually tracked or governed by any rules?
   const fastCfg = await new Promise((res) =>

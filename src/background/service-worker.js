@@ -13,6 +13,13 @@ if (typeof importScripts !== "undefined") {
     }
 }
 const BLOCKED_PAGE = "/blocked/index.html";
+const SSO_EXCLUSIONS = [
+    "accounts.google.com",
+    "accounts.youtube.com",
+    "login.live.com",
+    "login.microsoftonline.com",
+    "appleid.apple.com"
+];
 
 function safeBtoa(str) {
     try {
@@ -848,6 +855,7 @@ let isPrivacyActive = _loc.privacyModeActive === true;
     _activeRedirects = { ...i };
     const n = Object.entries(i).map(([t, e], a) => {
         const isLocal = e.startsWith(BLOCKED_PAGE);
+        const exclusions = SSO_EXCLUSIONS.filter(ex => ex === t.toLowerCase().trim() || ex.endsWith("." + t.toLowerCase().trim()));
         if (isLocal) {
             return {
                 id: a + 1,
@@ -857,7 +865,8 @@ let isPrivacyActive = _loc.privacyModeActive === true;
                 },
                 condition: {
                     urlFilter: `||${t}`,
-                    resourceTypes: ["main_frame"]
+                    resourceTypes: ["main_frame"],
+                    ...(exclusions.length > 0 ? { excludedRequestDomains: exclusions } : {})
                 }
             }
         } else {
@@ -876,7 +885,8 @@ let isPrivacyActive = _loc.privacyModeActive === true;
                 },
                 condition: {
                     urlFilter: `||${t}`,
-                    resourceTypes: ["main_frame"]
+                    resourceTypes: ["main_frame"],
+                    ...(exclusions.length > 0 ? { excludedRequestDomains: exclusions } : {})
                 }
             }
         }
@@ -910,7 +920,10 @@ let isPrivacyActive = _loc.privacyModeActive === true;
             if (!t.url) continue;
             const e = domain(t.url);
             if (e) {
-                let a = Object.keys(i).find(t => e === t || e.endsWith("." + t));
+                let a = Object.keys(i).find(t => {
+                    if (SSO_EXCLUSIONS.includes(e)) return false;
+                    return e === t || e.endsWith("." + t);
+                });
                 if (a && !t.url.includes(chrome.runtime.id)) {
                     let redirectUrl = i[a];
                     if (redirectUrl.startsWith(BLOCKED_PAGE)) {
@@ -1034,7 +1047,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     // 0.5. Intercept blocked pages and redirect using chrome.tabs.update (avoids Brave's network redirect hang bug)
     if (changeInfo.status === "loading" || changeInfo.url) {
         if (typeof _activeRedirects !== "undefined" && _activeRedirects) {
-            const matchedDom = Object.keys(_activeRedirects).find(d => dom === d || dom.endsWith("." + d));
+            const matchedDom = Object.keys(_activeRedirects).find(d => {
+                if (SSO_EXCLUSIONS.includes(dom)) return false;
+                return dom === d || dom.endsWith("." + d);
+            });
             if (matchedDom && !url.includes(chrome.runtime.id)) {
                 let redirectUrl = _activeRedirects[matchedDom];
                 if (redirectUrl.startsWith(BLOCKED_PAGE)) {
@@ -2576,6 +2592,23 @@ async function init() {
         });
         await sLocal({ siteCategories: scMap, presetsPreApplied: true });
     }
+    try {
+        const _alRes = await gLocal(["allowList", "ssoPreApplied"]);
+        if (!_alRes.ssoPreApplied) {
+            const al = _alRes.allowList || [];
+            const defaults = [
+                "accounts.google.com",
+                "accounts.youtube.com",
+                "login.live.com",
+                "login.microsoftonline.com",
+                "appleid.apple.com"
+            ];
+            defaults.forEach(dom => {
+                if (!al.includes(dom)) al.push(dom);
+            });
+            await sLocal({ allowList: al, ssoPreApplied: true });
+        }
+    } catch (_) {}
     await updateDNRRules();
     const e = await getCachedSync();
     chrome.idle.setDetectionInterval(e.settings?.idleTimeout || 30), await chrome.alarms.create("tracker_heartbeat", {

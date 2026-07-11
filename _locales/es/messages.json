@@ -123,7 +123,7 @@
   },
   "cycles": {
     "message": "Ciclos",
-    "description": "Label for the number of Pomodoro cycles input."
+    "description": "Input field label."
   },
   "saveSettings": {
     "message": "Guardar Ajustes",
@@ -154,15 +154,15 @@
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ Detener",
+    "message": "Detener",
     "description": "Label for the stop button."
   },
   "btnSkip": {
-    "message": "⏭ Saltar",
+    "message": "Saltar",
     "description": "Label for the skip button."
   },
   "btnPause": {
-    "message": "⏸ Pausar",
+    "message": "Pausar",
     "description": "Label for the pause button."
   },
   "btnResume": {
@@ -286,8 +286,8 @@
     "description": "Status text during a Pomodoro long break phase."
   },
   "scheduledSession": {
-    "message": "Sesión Programada",
-    "description": "Label for a focus session that was triggered by a schedule."
+    "message": "Sesión programada",
+    "description": "Focus history item label."
   },
   "schedule": {
     "message": "Horario",
@@ -746,8 +746,8 @@
     "description": "Start date label."
   },
   "to": {
-    "message": "Hasta",
-    "description": "End date label."
+    "message": "a",
+    "description": "Preposition."
   },
   "apply": {
     "message": "Aplicar",
@@ -1278,16 +1278,38 @@
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$1% Enfoque",
-    "description": "Focus percentage summary."
+    "message": "$focusPct$% Enfoque",
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
   },
   "pctDistraction": {
-    "message": "$1% Distracción",
-    "description": "Distraction percentage summary."
+    "message": "$distPct$% Distración",
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
   },
   "focusSplitDesc": {
-    "message": "Estuviste enfocado durante $1 y te distrajiste durante $2.",
-    "description": "Productivity split description sentence."
+    "message": "Estuviste enfocado durante $focusedTime$ y te distrajiste durante $distractedTime$.",
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
   },
   "noFocusDistTimeRange": {
     "message": "No hay tiempo de enfoque o distracción registrado en este rango.",
@@ -1778,8 +1800,8 @@
     "description": "Modal title."
   },
   "presetName": {
-    "message": "Nombre del Ajuste",
-    "description": "Input field label."
+    "message": "Nombre del preajuste",
+    "description": "Label."
   },
   "egPresetName": {
     "message": "ej. Modo Estricto",
@@ -2591,10 +2613,6 @@
     "message": "Editar preajuste",
     "description": "Modal title."
   },
-  "presetName": {
-    "message": "Nombre del preajuste",
-    "description": "Label."
-  },
   "workTimeMin": {
     "message": "Tiempo de trabajo (min)",
     "description": "Input field label."
@@ -2605,10 +2623,6 @@
   },
   "longBreakMin": {
     "message": "Descanso largo (min)",
-    "description": "Input field label."
-  },
-  "cycles": {
-    "message": "Ciclos",
     "description": "Input field label."
   },
   "enableNotifications": {
@@ -2630,10 +2644,6 @@
   "categoriesToBlockDuringFocus": {
     "message": "Categorías a bloquear durante el enfoque",
     "description": "Checkbox group header."
-  },
-  "scheduledSession": {
-    "message": "Sesión programada",
-    "description": "Focus history item label."
   },
   "presetPomodoro": {
     "message": "Pomodoro",
@@ -2671,25 +2681,13 @@
     "message": "Ajustes avanzados",
     "description": "Tab title."
   },
-  "freetimeHours": {
-    "message": "Horas de tiempo libre",
-    "description": "Section header."
-  },
   "addFreetime": {
     "message": "Añadir tiempo libre",
     "description": "Button label."
   },
-  "editFreetime": {
-    "message": "Editar tiempo libre",
-    "description": "Modal title."
-  },
   "addBlockRule": {
     "message": "Añadir regla de bloqueo",
     "description": "Modal title."
-  },
-  "to": {
-    "message": "a",
-    "description": "Preposition."
   },
   "siteCountSingle": {
     "message": "$count$ sitio",
@@ -2746,5 +2744,9 @@
   "neverTrackDesc": {
     "message": "Los dominios de esta lista nunca se rastrearán para analíticas.",
     "description": "Placeholder description."
+  },
+  "freetimeHoursTitle": {
+    "message": "Horas de tiempo libre",
+    "description": "Section header."
   }
 }

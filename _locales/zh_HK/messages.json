@@ -154,15 +154,15 @@
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ 停止",
+    "message": "停止",
     "description": "Label for the stop button."
   },
   "btnSkip": {
-    "message": "⏭ 跳過",
+    "message": "跳過",
     "description": "Label for the skip button."
   },
   "btnPause": {
-    "message": "⏸ 暫停",
+    "message": "暫停",
     "description": "Label for the pause button."
   },
   "btnResume": {
@@ -1278,16 +1278,38 @@
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$1% 焦點",
-    "description": "Focus percentage summary."
+    "message": "$focusPct$% 焦點",
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
   },
   "pctDistraction": {
-    "message": "$1% 分心",
-    "description": "Distraction percentage summary."
+    "message": "$distPct$% 分心",
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
   },
   "focusSplitDesc": {
-    "message": "您專注於 $1，卻因 $2 而分心。",
-    "description": "Productivity split description sentence."
+    "message": "您專注於 $focusedTime$，卻因 $distractedTime$ 而分心。",
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
   },
   "noFocusDistTimeRange": {
     "message": "在此範圍內沒有追蹤到注意力集中或分心的時間。",
@@ -2659,17 +2681,9 @@
     "message": "進階調整",
     "description": "Tab title."
   },
-  "freetimeHours": {
-    "message": "空閒時間",
-    "description": "Section header."
-  },
   "addFreetime": {
     "message": "新增空閒時間",
     "description": "Button label."
-  },
-  "editFreetime": {
-    "message": "編輯空閒時間",
-    "description": "Modal title."
   },
   "addBlockRule": {
     "message": "新增阻止規則",
@@ -2730,5 +2744,9 @@
   "neverTrackDesc": {
     "message": "此列表中的網域永遠不會被追蹤以進行分析。",
     "description": "Placeholder description."
+  },
+  "freetimeHoursTitle": {
+    "message": "空閒時間",
+    "description": "Section header."
   }
 }

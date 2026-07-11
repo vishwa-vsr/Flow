@@ -123,7 +123,7 @@
   },
   "cycles": {
     "message": "Cycles",
-    "description": "Label for the number of Pomodoro cycles input."
+    "description": "Input field label."
   },
   "saveSettings": {
     "message": "Save Settings",
@@ -154,15 +154,15 @@
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ Stop",
+    "message": "Stop",
     "description": "Label for the stop button."
   },
   "btnSkip": {
-    "message": "⏭ Skip",
+    "message": "Skip",
     "description": "Label for the skip button."
   },
   "btnPause": {
-    "message": "⏸ Pause",
+    "message": "Pause",
     "description": "Label for the pause button."
   },
   "btnResume": {
@@ -287,7 +287,7 @@
   },
   "scheduledSession": {
     "message": "Scheduled Session",
-    "description": "Label for a focus session that was triggered by a schedule."
+    "description": "Focus history item label."
   },
   "schedule": {
     "message": "Schedule",
@@ -746,8 +746,8 @@
     "description": "Start date label."
   },
   "to": {
-    "message": "To",
-    "description": "End date label."
+    "message": "to",
+    "description": "Preposition."
   },
   "apply": {
     "message": "Apply",
@@ -1278,16 +1278,38 @@
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$1% Focus",
-    "description": "Focus percentage summary."
+    "message": "$focusPct$% Focus",
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
   },
   "pctDistraction": {
-    "message": "$1% Distraction",
-    "description": "Distraction percentage summary."
+    "message": "$distPct$% Distraction",
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
   },
   "focusSplitDesc": {
-    "message": "You focused for $1 and were distracted for $2.",
-    "description": "Productivity split description sentence."
+    "message": "You focused for $focusedTime$ and were distracted for $distractedTime$.",
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
   },
   "noFocusDistTimeRange": {
     "message": "No focus or distraction time tracked in this range.",
@@ -1779,7 +1801,7 @@
   },
   "presetName": {
     "message": "Preset Name",
-    "description": "Input field label."
+    "description": "Label."
   },
   "egPresetName": {
     "message": "e.g. Strict Mode",
@@ -2591,10 +2613,6 @@
     "message": "Edit Preset",
     "description": "Modal title."
   },
-  "presetName": {
-    "message": "Preset Name",
-    "description": "Label."
-  },
   "workTimeMin": {
     "message": "Work Time (min)",
     "description": "Input field label."
@@ -2605,10 +2623,6 @@
   },
   "longBreakMin": {
     "message": "Long Break (min)",
-    "description": "Input field label."
-  },
-  "cycles": {
-    "message": "Cycles",
     "description": "Input field label."
   },
   "enableNotifications": {
@@ -2630,10 +2644,6 @@
   "categoriesToBlockDuringFocus": {
     "message": "Categories to Block during focus",
     "description": "Checkbox group header."
-  },
-  "scheduledSession": {
-    "message": "Scheduled Session",
-    "description": "Focus history item label."
   },
   "presetPomodoro": {
     "message": "Pomodoro",
@@ -2671,25 +2681,13 @@
     "message": "Advanced Tweaks",
     "description": "Tab title."
   },
-  "freetimeHours": {
-    "message": "Free-time Hours",
-    "description": "Section header."
-  },
   "addFreetime": {
     "message": "Add Free-time",
     "description": "Button label."
   },
-  "editFreetime": {
-    "message": "Edit Free-time",
-    "description": "Modal title."
-  },
   "addBlockRule": {
     "message": "Add Block Rule",
     "description": "Modal title."
-  },
-  "to": {
-    "message": "to",
-    "description": "Preposition."
   },
   "siteCountSingle": {
     "message": "$count$ site",
@@ -2746,5 +2744,9 @@
   "neverTrackDesc": {
     "message": "Domains on this list will never be tracked for analytics.",
     "description": "Placeholder description."
+  },
+  "freetimeHoursTitle": {
+    "message": "Free-time Hours",
+    "description": "Section header."
   }
 }

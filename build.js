@@ -480,10 +480,18 @@ async function main() {
       // Zip the source files
       const sourceZipPath = path.join(PARENT_DIR, `flow-source-v${version}.zip`);
       await zipDirectory(SRC_DIR, sourceZipPath, (item, stat, zipPath) => {
-        // Skip unnecessary system/dev folders in source package
-        if (SKIP.has(item) || item === 'backup' || item === '.agents' || item === '.github') return true;
+        // Skip unnecessary system/dev folders in source package, but keep build.js and package.json for reviewers
+        const skipSet = new Set(SKIP);
+        skipSet.delete('build.js');
+        skipSet.delete('package.json');
+        
+        if (skipSet.has(item) || item === 'backup' || item === '.agents' || item === '.github') return true;
         if (item.startsWith('flow_preview') && item.endsWith('.jpg')) return true;
         if (item === 'package-lock.json' || item === 'project_rules.md' || item === 'design.md') return true;
+        
+        // Remove markdown files and LICENSE as requested by the user
+        if (item.endsWith('.md') || item === 'LICENSE') return true;
+        
         return false;
       });
 

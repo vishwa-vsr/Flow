@@ -42,15 +42,20 @@ var $ = function (e) {
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
 
 function getLocale() {
+    let loc = "en-US";
     if (typeof currentLanguage !== "undefined" && currentLanguage && currentLanguage !== "default") {
-        return currentLanguage;
+        loc = currentLanguage;
+    } else {
+        const sel = document.getElementById("lang-sel")?.value;
+        if (sel && sel !== "default") {
+            loc = sel;
+        } else if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
+            loc = chrome.i18n.getUILanguage();
+        } else {
+            loc = navigator.language || "en-US";
+        }
     }
-    const sel = document.getElementById("lang-sel")?.value;
-    if (sel && sel !== "default") return sel;
-    if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
-        return chrome.i18n.getUILanguage();
-    }
-    return navigator.language || "en-US";
+    return loc.replace(/_/g, "-").replace(/\s+/g, "-");
 }
 
 function getPresetName(id, name) {
@@ -975,28 +980,8 @@ async function loadSettings(preloadedSettings) {
     if ($("welcome-back-thresh-sel")) $("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10;
 }
 
-let _chartLoadingPromise = null;
 function ensureChartLibrary() {
-    if (window.Chart) {
-        return Promise.resolve();
-    }
-    if (_chartLoadingPromise) {
-        return _chartLoadingPromise;
-    }
-    _chartLoadingPromise = new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = "../src/lib/chart.min.js";
-        script.onload = () => {
-            _chartLoadingPromise = null;
-            resolve();
-        };
-        script.onerror = (err) => {
-            _chartLoadingPromise = null;
-            reject(err);
-        };
-        document.body.appendChild(script);
-    });
-    return _chartLoadingPromise;
+    return Promise.resolve();
 }
 
 async function loadAnalytics() {
@@ -3578,7 +3563,7 @@ async function loadExtendedSettings(preloadedSettings) {
                 setSafeHTML(a, `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div style="display:flex; flex-direction:column; gap:2px;">
-                            <span style="font-size:11px; font-weight:800; color:var(--tx3); text-transform:uppercase; letter-spacing:0.05em;">${t_("freetimeHours") || "Free-time Hours"}</span>
+                            <span style="font-size:11px; font-weight:800; color:var(--tx3); text-transform:uppercase; letter-spacing:0.05em;">${t_("freetimeHoursTitle") || "Free-time Hours"}</span>
                             <span style="font-size:14px; font-weight:800; color:var(--tx);">${start12} ${t_("to") || "to"} ${end12}</span>
                         </div>
                         <div class="fh-actions" style="display:flex; gap:6px;">
@@ -3627,7 +3612,7 @@ async function loadExtendedSettings(preloadedSettings) {
     function showFreeTimeEditModal(slotIdx, fhObj) {
         const modal = $("free-time-modal");
         if (!modal) return;
-        $("ft-modal-title").textContent = fhObj ? (t_("editFreetime") || "Edit Free-time") : (t_("addFreetime") || "Add Free-time");
+        $("ft-modal-title").textContent = fhObj ? (t_("editFreeTime") || "Edit Free-time") : (t_("addFreetime") || "Add Free-time");
         $("ft-start").value = fhObj ? (fhObj.start || "18:00") : "18:00";
         $("ft-end").value = fhObj ? (fhObj.end || "22:00") : "22:00";
         const daysList = fhObj ? (fhObj.days || [0, 1, 2, 3, 4, 5, 6]) : [0, 1, 2, 3, 4, 5, 6];

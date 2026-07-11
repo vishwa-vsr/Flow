@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.1] - 2026-07-10
+
+### Fixed
+- **SSO login exclusions:** Exempted essential Single Sign-On (SSO) subdomains (`accounts.google.com`, `accounts.youtube.com`, `login.live.com`, `login.microsoftonline.com`, and `appleid.apple.com`) from being blocked, and automatically seeded them into the user's visible Allowlist in the dashboard settings on startup.
+- **YouTube player height fix:** Fixed a bug where hiding related videos cut off the bottom of the video player by targeting the recommendations container `ytd-watch-next-secondary-results-renderer`, keeping the player at its correct size in both default and theater modes.
+- **Focus vs. Distraction placeholders fix:** Fixed a bug in all 5 locale files where `$1` and `$2` placeholders in the "Focus vs. Distraction" chart breakdown were displayed literally instead of being replaced by actual numbers, by correctly defining `"placeholders"` metadata blocks.
+- **Tracking state on refresh:** Fixed a bug where refreshing any website would put the tracking status to "idle" until a window focus or tab change occurred.
+- **Double icons on dashboard buttons:** Removed redundant Unicode prefix symbols from localized translation messages for the Stop, Pause, and Skip buttons to prevent double icons next to inline SVGs.
+- **Feedback button aesthetics:** Removed drop shadows and hover glows from the GitHub, Submit Feedback, and Help Translate buttons in the settings page to make them look flat and clean.
+
+### Removed
+- **Month-over-Month comparison card:** Removed the redundant card from the analytics comparison tab.
+
 ## [10.0.0] - 2026-07-09 ("Flow Rebirth")
 
 This is a major milestone release marking the transition from "Website Manager" to "Website Blocker", and celebrating the official submission to the Chrome Web Store!

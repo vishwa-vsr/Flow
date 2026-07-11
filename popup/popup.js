@@ -526,7 +526,7 @@ function renderDynamicList(e, t) {
             const isFirefox = navigator.userAgent.includes("Firefox") || chrome.runtime.getURL("").startsWith("moz-extension:");
             const isEdge = navigator.userAgent.includes("Edg");
             const rateUrl = isFirefox 
-                ? "https://addons.mozilla.org/en-US/firefox/addon/flow-website-manager/" 
+                ? "https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/" 
                 : isEdge
                     ? "https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"
                     : "https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp";
