@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title data-i18n="extName">Flow Dashboard</title>
 
-  <link rel="icon" id="dynamic-favicon" href="../icons/icon128.png">
+  <link rel="icon" id="dynamic-favicon" href="../assets/icons/icon128.png">
 
-  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="../styles/global.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 
@@ -19,7 +19,7 @@
     <div class="nav-container">
       <div style="display:flex; align-items:center; gap:16px;">
         <a href="https://vishwa-vsr.github.io/flow-website/" target="_blank" class="brand" style="text-decoration:none;">
-          <img id="logo-img" src="../icons/icon128.png" alt="Logo" style="width:28px;height:28px;border-radius:6px; transition:var(--trans);">
+          <img id="logo-img" src="../assets/icons/icon128.png" alt="Logo" style="width:28px;height:28px;border-radius:6px; transition:var(--trans);">
           <span class="bname" style="margin-left:4px;">Flow</span>
         </a>
         <button id="btn-dashboard-privacy" class="privacy-btn" data-i18n-title="privacyModeTitle" aria-label="Privacy Mode / Pause Tracking">
@@ -364,15 +364,6 @@
 
         <!-- Comparison Smart Insights Grid -->
         <div class="compact-grid" id="trend-insights-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 16px; gap: 16px; align-items: stretch;">
-          <!-- Card 1: MoM Comparison -->
-          <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; height: 100%; box-sizing: border-box;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--tx3); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: 8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              <span data-i18n="momComparison">Month-over-Month</span>
-            </div>
-            <div id="insight-mom-value" style="font-size: 18px; font-weight: 800; color: var(--tx);">Calculating...</div>
-            <div id="insight-mom-desc" style="font-size: 12px; color: var(--tx); line-height: 1.4;" data-i18n="momComparisonDesc">Comparing this month's active time vs last month.</div>
-          </div>
           
           <!-- Card 2: Productivity vs Distraction Split -->
           <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%; box-sizing: border-box;">
@@ -1032,18 +1023,18 @@
                 <div style="display:flex; gap:12px; align-items:center;">
                   <a href="https://github.com/vishwa-vsr/Flow"
                     target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.2s ease, box-shadow 0.2s ease;">
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     <span>GitHub</span>
                   </a>
                   <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog"
                     target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--blue) !important; color:#ffffff !important; box-shadow:0 4px 12px rgba(29,78,216,0.15); transition:transform 0.2s ease, box-shadow 0.2s ease;">
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--blue) !important; color:#ffffff !important; transition:transform 0.2s ease;">
                     <span data-i18n="submitFeedbackBtn">💡 Submit Feedback</span>
                   </a>
                   <a href="https://github.com/vishwa-vsr/Flow/discussions/4"
                     target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.2s ease, box-shadow 0.2s ease;">
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
                     <span data-i18n="helpTranslateBtn">🌐 Help Translate</span>
                   </a>
                 </div>
@@ -1567,12 +1558,12 @@
     <div id="toast" class="toast hide" role="status" aria-live="polite"></div>
     <div id="heatmap-tooltip"></div>
 
-    <script src="../src/lib/constants.js"></script>
-    <script src="../src/lib/storage.js"></script>
-    <script src="../src/lib/db.js"></script>
+    <script src="../lib/constants.js"></script>
+    <script src="../lib/storage.js"></script>
+    <script src="../lib/db.js"></script>
     <script src="../utils.js"></script>
-    <script src="../src/lib/i18n.js"></script>
-    <script src="../src/lib/chart.min.js"></script>
+    <script src="../lib/i18n.js"></script>
+    <script src="../lib/chart.min.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>

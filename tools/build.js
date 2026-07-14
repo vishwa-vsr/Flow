@@ -14,8 +14,8 @@ const path = require('path');
 const readline = require('readline');
 const { execSync } = require('child_process');
 
-const SRC_DIR = __dirname;
-const PARENT_DIR = path.dirname(SRC_DIR);
+const SRC_DIR = path.join(__dirname, '..', 'src');
+const PARENT_DIR = path.join(__dirname, '..', '..');
 
 // Files and folders to skip copying
 const SKIP = new Set([
@@ -225,9 +225,9 @@ function buildTarget(targetName, isFirefox = false) {
 
           if (manifest.background && manifest.background.service_worker) {
             manifest.background.scripts = [
-              'src/lib/constants.js',
-              'src/lib/storage.js',
-              'src/lib/db.js',
+              'lib/constants.js',
+              'lib/storage.js',
+              'lib/db.js',
               manifest.background.service_worker
             ];
             delete manifest.background.service_worker;

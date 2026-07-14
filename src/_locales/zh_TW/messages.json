@@ -1,91 +1,91 @@
 {
   "extName": {
-    "message": "Flow - Bloqueador de Sitios y Rastreador de Hábitos",
+    "message": "Flow - 網站攔截器和習慣追蹤器",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Rastreador de productividad avanzado y bloqueador de distracciones a nivel de red.",
+    "message": "先進的生產力追蹤器和網路層級幹擾攔截器。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
-    "message": "Verificación",
+    "message": "確認",
     "description": "Title for the PIN verification dialog."
   },
   "enterPin": {
-    "message": "Ingresa tu PIN de 6 dígitos para continuar",
+    "message": "輸入您的 6 位 PIN 碼以繼續",
     "description": "Instruction shown in the PIN verification dialog."
   },
   "incorrectPin": {
-    "message": "PIN incorrecto",
+    "message": "PIN 碼不正確",
     "description": "Error message when the user enters a wrong PIN."
   },
   "cancel": {
-    "message": "Cancelar",
+    "message": "取消",
     "description": "Label for the cancel button."
   },
   "ok": {
-    "message": "Aceptar",
+    "message": "好的",
     "description": "Label for the OK/confirm button."
   },
   "analytics": {
-    "message": "Analíticas",
+    "message": "分析",
     "description": "Label for the analytics section or button."
   },
   "toggleTheme": {
-    "message": "Cambiar tema",
+    "message": "切換主題",
     "description": "Tooltip for the theme toggle button."
   },
   "privacyMode": {
-    "message": "Modo Privado / Pausar Rastreo",
+    "message": "隱私模式/暫停跟踪",
     "description": "Label for the privacy mode toggle that pauses tracking."
   },
   "settings": {
-    "message": "Ajustes",
+    "message": "設定",
     "description": "Label for the settings button or section."
   },
   "pauseTrackingBlocking": {
-    "message": "Pausar Rastreo y Bloqueo",
+    "message": "暫停追蹤和阻止",
     "description": "Title for the pause tracking and blocking panel."
   },
   "pauseFor30Min": {
-    "message": "Pausar por 30 minutos",
+    "message": "暫停30分鐘",
     "description": "Option to pause tracking for 30 minutes."
   },
   "pauseFor1Hour": {
-    "message": "Pausar por 1 hora",
+    "message": "暫停1小時",
     "description": "Option to pause tracking for 1 hour."
   },
   "pauseUntilResumed": {
-    "message": "Pausar hasta reanudar",
+    "message": "暫停直至恢復",
     "description": "Option to pause tracking indefinitely until manually resumed."
   },
   "privacyModeActive": {
-    "message": "Modo Privado Activo",
+    "message": "隱私模式已激活",
     "description": "Status indicator when privacy mode is currently on."
   },
   "trackingBlockingPaused": {
-    "message": "Rastreo y bloqueo en pausa",
+    "message": "追蹤和阻止已暫停",
     "description": "Status message when tracking and blocking are paused."
   },
   "resume": {
-    "message": "Reanudar",
+    "message": "恢復",
     "description": "Label for the resume button to restart tracking."
   },
   "tabToday": {
-    "message": "Hoy",
+    "message": "今天",
     "description": "Tab label for today's data view."
   },
   "tabAllTime": {
-    "message": "Total",
+    "message": "所有時間",
     "description": "Tab label for all-time data view."
   },
   "weeklyGoal": {
-    "message": "Meta Semanal",
+    "message": "每週目標",
     "description": "Label for the weekly productivity goal section."
   },
   "goalDone": {
-    "message": "$h$h $m$m hechos",
-    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m hechos.",
+    "message": "$h$小時$m$分鐘完成",
+    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
     "placeholders": {
       "h": {
         "content": "$1",
@@ -98,131 +98,131 @@
     }
   },
   "setGoalInSettings": {
-    "message": "Configura tu meta en Ajustes",
+    "message": "在「設定」中設定目標",
     "description": "Prompt shown when the user has not configured a weekly goal."
   },
   "goalHit": {
-    "message": "¡Meta cumplida! ✓",
+    "message": "進球了！ ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {
-    "message": "Ajustes del Temporizador",
+    "message": "定時器設定",
     "description": "Title for the Pomodoro timer settings panel."
   },
   "workMin": {
-    "message": "Trabajo (min)",
+    "message": "工作（分鐘）",
     "description": "Label for the work duration input in minutes."
   },
   "shortBreak": {
-    "message": "Descanso Corto",
+    "message": "短暫休息",
     "description": "Label for the short break duration input."
   },
   "longBreak": {
-    "message": "Descanso Largo",
+    "message": "長假",
     "description": "Label for the long break duration input."
   },
   "cycles": {
-    "message": "Ciclos",
-    "description": "Input field label."
+    "message": "週期",
+    "description": "Label for the number of Pomodoro cycles input."
   },
   "saveSettings": {
-    "message": "Guardar Ajustes",
+    "message": "儲存設定",
     "description": "Label for the save settings button."
   },
   "advancedSettings": {
-    "message": "Ajustes Avanzados",
+    "message": "進階設定",
     "description": "Label for the advanced settings link or button."
   },
   "focusMode": {
-    "message": "Modo Enfoque",
+    "message": "對焦模式",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
-    "message": "Pomodoro",
+    "message": "番茄鐘",
     "description": "Label for the Pomodoro timer section."
   },
   "readyToFocus": {
-    "message": "¿Listo para concentrarte?",
+    "message": "準備好集中註意力了嗎？",
     "description": "Prompt shown before a focus session begins."
   },
   "autoStopsIn": {
-    "message": "⏱ Se detiene en",
+    "message": "⏱ 自動停止",
     "description": "Label indicating when focus mode will automatically stop."
   },
   "btnStart": {
-    "message": "▶ Iniciar",
+    "message": "▶ 開始",
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ Detener",
+    "message": "停止",
     "description": "Label for the stop button."
   },
   "btnSkip": {
-    "message": "⏭ Saltar",
+    "message": "跳過",
     "description": "Label for the skip button."
   },
   "btnPause": {
-    "message": "⏸ Pausar",
+    "message": "暫停",
     "description": "Label for the pause button."
   },
   "btnResume": {
-    "message": "▶ Reanudar",
+    "message": "▶ 履歷",
     "description": "Label for the resume button."
   },
   "loading": {
-    "message": "Cargando...",
+    "message": "載入中...",
     "description": "Generic loading indicator text."
   },
   "loadingData": {
-    "message": "Cargando datos...",
+    "message": "正在載入資料...",
     "description": "Loading indicator when fetching analytics data."
   },
   "noDataYet": {
-    "message": "Sin datos todavía.",
+    "message": "還沒有數據。",
     "description": "Placeholder shown when there is no tracking data to display."
   },
   "sublblToday": {
-    "message": "hoy",
+    "message": "今天",
     "description": "Lowercase sub-label for the today tab."
   },
   "sublblAllTime": {
-    "message": "total",
+    "message": "所有時間",
     "description": "Lowercase sub-label for the all-time tab."
   },
   "catProductivity": {
-    "message": "Productividad",
+    "message": "生產力",
     "description": "Display name for the Productivity category."
   },
   "catLearning": {
-    "message": "Aprendizaje",
+    "message": "學習",
     "description": "Display name for the Learning category."
   },
   "catCommunication": {
-    "message": "Comunicación",
+    "message": "溝通",
     "description": "Display name for the Communication category."
   },
   "catDistraction": {
-    "message": "Distracción",
+    "message": "分散注意力",
     "description": "Display name for the Distraction category."
   },
   "catUncategorized": {
-    "message": "Sin categoría",
+    "message": "未分類",
     "description": "Display name for the Uncategorized category."
   },
   "allSitesToday": {
-    "message": "Todos los Sitios Hoy",
+    "message": "今日所有網站",
     "description": "Heading for the list of all sites visited today."
   },
   "allTimeSiteUsage": {
-    "message": "Uso Total de Sitios",
+    "message": "所有時間的網站使用情況",
     "description": "Heading for the list of all-time site usage."
   },
   "clickTagToEdit": {
-    "message": "(Haz clic en la etiqueta para editar)",
+    "message": "（點擊標籤即可編輯）",
     "description": "Hint text telling the user they can click a category tag to change it."
   },
   "showAllSites": {
-    "message": "Mostrar los $count$ sitios",
+    "message": "顯示所有 $count$ 站點",
     "description": "Button to expand and show all sites in the list.",
     "placeholders": {
       "count": {
@@ -232,31 +232,31 @@
     }
   },
   "rateUs": {
-    "message": "⭐ Califícanos",
+    "message": "⭐ 評價我們",
     "description": "Link to rate the extension on the Chrome Web Store."
   },
   "feedback": {
-    "message": "💬 Opiniones",
+    "message": "💬 回饋",
     "description": "Link to send feedback about the extension."
   },
   "unblock": {
-    "message": "Desbloquear",
+    "message": "解鎖",
     "description": "Button to unblock a currently blocked site."
   },
   "blockSite": {
-    "message": "Bloquear Sitio",
+    "message": "區塊站點",
     "description": "Button to block the current site."
   },
   "defaultInstant": {
-    "message": "Por defecto (Instantáneo)",
+    "message": "預設（即時）",
     "description": "Label for the default instant-block mode."
   },
   "confirmBlockTitle": {
-    "message": "¿Bloquear sitio web?",
+    "message": "屏蔽網站？",
     "description": "Title of the custom confirmation modal when blocking a site."
   },
   "confirmBlock": {
-    "message": "¿Seguro que quieres bloquear $domain$? Se recargará la pestaña y se bloqueará el acceso a este sitio.",
+    "message": "您確定要封鎖 $domain$ 嗎？這將重新載入選項卡並阻止對此網站的存取。",
     "description": "Confirmation dialog when blocking a site.",
     "placeholders": {
       "domain": {
@@ -266,40 +266,40 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "¿Pausar sesión de enfoque?",
+    "message": "暫停焦點會話？",
     "description": "Title of the confirmation modal when pausing a session."
   },
   "confirmPauseDesc": {
-    "message": "Las sesiones solo se pueden pausar por un máximo de 5 minutos. Después de 5 minutos, la sesión terminará automáticamente.",
+    "message": "會話最多只能暫停 5 分鐘。 5 分鐘後，您的會話將自動結束。",
     "description": "Description in confirmation modal when pausing a session."
   },
   "deepWork": {
-    "message": "Trabajo profundo.",
+    "message": "深度工作。",
     "description": "Status text during a Pomodoro work phase."
   },
   "shortBreakPhase": {
-    "message": "Descanso corto.",
+    "message": "短暫的休息。",
     "description": "Status text during a Pomodoro short break phase."
   },
   "longBreakPhase": {
-    "message": "¡Descanso largo!",
+    "message": "長假！",
     "description": "Status text during a Pomodoro long break phase."
   },
   "scheduledSession": {
-    "message": "Sesión programada",
-    "description": "Focus history item label."
+    "message": "預定會議",
+    "description": "Label for a focus session that was triggered by a schedule."
   },
   "schedule": {
-    "message": "Horario",
+    "message": "行程",
     "description": "Label for the schedule section or button."
   },
   "work": {
-    "message": "Trabajo",
+    "message": "工作",
     "description": "Label for the work phase in the Pomodoro timer."
   },
   "cyclesDone": {
-    "message": "$count$ hechos",
-    "description": "Shows number of Pomodoro cycles completed. Example: 3 hechos.",
+    "message": "$count$ 完成",
+    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -308,7 +308,7 @@
     }
   },
   "cyclesCompleted": {
-    "message": "$count$ ciclo completado",
+    "message": "$count$ 週期已完成",
     "description": "Singular: one Pomodoro cycle completed.",
     "placeholders": {
       "count": {
@@ -318,7 +318,7 @@
     }
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ ciclos completados",
+    "message": "$count$ 週期已完成",
     "description": "Plural: multiple Pomodoro cycles completed.",
     "placeholders": {
       "count": {
@@ -328,11 +328,11 @@
     }
   },
   "active": {
-    "message": "Activo",
+    "message": "積極的",
     "description": "Status label indicating something is currently active."
   },
   "minWorkBreak": {
-    "message": "$work$ min trabajo · $break$ min descanso",
+    "message": "$work$ 最短工作時間 · $break$ 最短休息時間",
     "description": "Shows the current work and break durations.",
     "placeholders": {
       "work": {
@@ -346,7 +346,7 @@
     }
   },
   "trackingPausedFor": {
-    "message": "Rastreo y bloqueo en pausa por $time$",
+    "message": "追蹤和阻止已暫停 $time$",
     "description": "Status message showing how long tracking is paused.",
     "placeholders": {
       "time": {
@@ -356,16 +356,16 @@
     }
   },
   "trackingPausedIndefinitely": {
-    "message": "Rastreo y bloqueo en pausa indefinidamente",
+    "message": "追蹤和阻止無限期暫停",
     "description": "Status message when tracking is paused with no time limit."
   },
   "privacyDisabledDuringFocus": {
-    "message": "Modo Privado (desactivado durante Modo Enfoque)",
+    "message": "隱私模式（在焦點模式下停用）",
     "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
   },
   "hDone": {
-    "message": "$h$h $m$m hechos",
-    "description": "Hours and minutes completed. Example: 1h 45m hechos.",
+    "message": "$h$小時$m$分鐘完成",
+    "description": "Hours and minutes completed. Example: 1h 45m done.",
     "placeholders": {
       "h": {
         "content": "$1",
@@ -378,8 +378,8 @@
     }
   },
   "hLeft": {
-    "message": "$h$h $m$m restantes",
-    "description": "Hours and minutes remaining. Example: 0h 15m restantes.",
+    "message": "還剩 $h$ 小時 $m$ 米",
+    "description": "Hours and minutes remaining. Example: 0h 15m left.",
     "placeholders": {
       "h": {
         "content": "$1",
@@ -392,7 +392,7 @@
     }
   },
   "blockedPageTitle": {
-    "message": "Bloqueado — Flow",
+    "message": "阻塞 — 流量",
     "description": "Page title for the blocked site page."
   },
   "blockedMsg1Emoji": {
@@ -400,11 +400,11 @@
     "description": "Emoji for blocked message variant 1."
   },
   "blockedMsg1Head": {
-    "message": "Hoy no, campeón.",
+    "message": "不是今天，冠軍。",
     "description": "Heading for blocked message variant 1."
   },
   "blockedMsg1Sub": {
-    "message": "Tu yo del futuro dijo que NO. Y fue muy claro al respecto.",
+    "message": "未來的你說「不」。他們對此非常堅定。",
     "description": "Subtext for blocked message variant 1."
   },
   "blockedMsg2Emoji": {
@@ -412,11 +412,11 @@
     "description": "Emoji for blocked message variant 2."
   },
   "blockedMsg2Head": {
-    "message": "ACCESO DENEGADO.",
+    "message": "拒絕訪問。",
     "description": "Heading for blocked message variant 2."
   },
   "blockedMsg2Sub": {
-    "message": "El bot de productividad ha hablado. Resistirse es inútil.",
+    "message": "生產力機器人已經說話了。抵抗是徒勞的。",
     "description": "Subtext for blocked message variant 2."
   },
   "blockedMsg3Emoji": {
@@ -424,11 +424,11 @@
     "description": "Emoji for blocked message variant 3."
   },
   "blockedMsg3Head": {
-    "message": "Jugada maestra.",
+    "message": "大腦動。",
     "description": "Heading for blocked message variant 3."
   },
   "blockedMsg3Sub": {
-    "message": "Tú bloqueaste esto. El tú del pasado era más listo que el de ahora.",
+    "message": "你阻止了這個。過去的你比現在的你聰明。",
     "description": "Subtext for blocked message variant 3."
   },
   "blockedMsg4Emoji": {
@@ -436,11 +436,11 @@
     "description": "Emoji for blocked message variant 4."
   },
   "blockedMsg4Head": {
-    "message": "La puerta está cerrada.",
+    "message": "門是鎖著的。",
     "description": "Heading for blocked message variant 4."
   },
   "blockedMsg4Sub": {
-    "message": "Tú pusiste el candado. Tú me diste la llave. No te la voy a devolver.",
+    "message": "你把鎖放在那裡。你給了我鑰匙。不還給它。",
     "description": "Subtext for blocked message variant 4."
   },
   "blockedMsg5Emoji": {
@@ -448,11 +448,11 @@
     "description": "Emoji for blocked message variant 5."
   },
   "blockedMsg5Head": {
-    "message": "Tu disciplina llamó.",
+    "message": "你的紀律召喚了。",
     "description": "Heading for blocked message variant 5."
   },
   "blockedMsg5Sub": {
-    "message": "Te extraña. Quiere que vuelvas. Ve a hacer lo que debes.",
+    "message": "它想要你回來。它想念你。去做事吧。",
     "description": "Subtext for blocked message variant 5."
   },
   "blockedMsg6Emoji": {
@@ -460,11 +460,11 @@
     "description": "Emoji for blocked message variant 6."
   },
   "blockedMsg6Head": {
-    "message": "NEL. Ni de broma.",
+    "message": "沒有。絕對不是。",
     "description": "Heading for blocked message variant 6."
   },
   "blockedMsg6Sub": {
-    "message": "Vuelve cuando te lo hayas ganado. Sabes lo que tienes que hacer.",
+    "message": "等你賺到了就回來吧。你知道該怎麼做。",
     "description": "Subtext for blocked message variant 6."
   },
   "blockedMsg7Emoji": {
@@ -472,11 +472,11 @@
     "description": "Emoji for blocked message variant 7."
   },
   "blockedMsg7Head": {
-    "message": "Sin excusas.",
+    "message": "保持努力。",
     "description": "Heading for blocked message variant 7."
   },
   "blockedMsg7Sub": {
-    "message": "El trabajo no se hace solo. Vuelve a lo tuyo.",
+    "message": "這項工作不會自行完成。回到它。",
     "description": "Subtext for blocked message variant 7."
   },
   "blockedMsg8Emoji": {
@@ -484,79 +484,79 @@
     "description": "Emoji for blocked message variant 8."
   },
   "blockedMsg8Head": {
-    "message": "¡Clo clo clo!",
+    "message": "博克博克博克！",
     "description": "Heading for blocked message variant 8."
   },
   "blockedMsg8Sub": {
-    "message": "Ese es el sonido de la procrastinación. No seas gallina.",
+    "message": "那是拖延的聲音。別當一隻雞。",
     "description": "Subtext for blocked message variant 8."
   },
   "neutralBlockHead": {
-    "message": "Este sitio está bloqueado",
+    "message": "該網站已被封鎖",
     "description": "Neutral heading when a site is blocked without a fun message."
   },
   "neutralBlockSub": {
-    "message": "El acceso está restringido por tus reglas de Flow.",
+    "message": "存取受到您的 Flow 規則的限制。",
     "description": "Neutral subtext for blocked site."
   },
   "ruleInstantBlock": {
-    "message": "Bloqueo Instantáneo Activo",
+    "message": "即時封鎖激活",
     "description": "Badge text for an instant block rule."
   },
   "ruleScheduleBlock": {
-    "message": "Bloqueo por Horario Activo",
+    "message": "計劃塊活動",
     "description": "Badge text for a schedule-based block rule."
   },
   "ruleTimeLimitReached": {
-    "message": "Límite Diario Alcanzado",
+    "message": "已達每日限額",
     "description": "Badge text when the daily time limit is reached."
   },
   "ruleSessionLimitReached": {
-    "message": "Límite de Sesión Alcanzado",
+    "message": "已達到會話限制",
     "description": "Badge text when the per-session time limit is reached."
   },
   "ruleManuallyBlocked": {
-    "message": "Bloqueado Manualmente",
+    "message": "手動阻止",
     "description": "Badge text when a site was manually blocked by the user."
   },
   "ruleTweakBlocked": {
-    "message": "Sección Distractora Bloqueada",
+    "message": "分散注意力的部分已被阻止",
     "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
   },
   "ruleDetailInstant": {
-    "message": "Este sitio está configurado para bloquearse siempre.",
+    "message": "該網站被設定為始終阻止。",
     "description": "Detail text explaining an instant block rule."
   },
   "ruleDetailSchedule": {
-    "message": "Este sitio está bloqueado durante tus horas de bloqueo programadas.",
+    "message": "網站在您預定的封鎖時間內被封鎖。",
     "description": "Detail text explaining a schedule block rule."
   },
   "ruleDetailTimeLimit": {
-    "message": "Llegaste al límite de tiempo diario para este sitio.",
+    "message": "您已達到每日造訪此網站的時間限制。",
     "description": "Detail text explaining the daily time limit was reached."
   },
   "ruleDetailSessionLimit": {
-    "message": "Llegaste al límite por sesión para este sitio. ¡Tómate un descanso!",
+    "message": "您已達到此網站的每次會話限制。休息一下吧！",
     "description": "Detail text explaining the session limit was reached."
   },
   "ruleDetailManual": {
-    "message": "Tú añadiste este sitio a tu lista de bloqueo.",
+    "message": "您已將此網站新增至您的封鎖清單。",
     "description": "Detail text explaining the site was manually blocked."
   },
   "ruleDetailTweak": {
-    "message": "El acceso a esta sección está bloqueado por tus Ajustes Avanzados de Sitio.",
+    "message": "您的進階網站調整阻止了對此特定部分的存取。",
     "description": "Detail text explaining a site tweak block."
   },
   "blockRuleActive": {
-    "message": "Regla de Bloqueo Activa",
+    "message": "阻止規則處於活動狀態",
     "description": "Generic badge for any active block rule."
   },
   "blockedByFlow": {
-    "message": "Bloqueado por Flow",
+    "message": "被流量阻塞",
     "description": "Generic blocked indicator."
   },
   "dailyLimitBadge": {
-    "message": "Límite diario · $mins$ min usados",
+    "message": "每日限額·花費$mins$分鐘",
     "description": "Badge showing daily limit and time spent.",
     "placeholders": {
       "mins": {
@@ -566,7 +566,7 @@
     }
   },
   "blockedUntil": {
-    "message": "Bloqueado hasta las $time$",
+    "message": "被阻止直到 $time$",
     "description": "Shows when the block will be lifted.",
     "placeholders": {
       "time": {
@@ -576,11 +576,11 @@
     }
   },
   "cooldownOver": {
-    "message": "¡Se acabó la espera! Recarga la página para entrar.",
+    "message": "冷卻結束！刷新頁面即可存取。",
     "description": "Message shown when the cooldown timer has expired."
   },
   "takeABreak": {
-    "message": "Tómate un descanso · se desbloquea en $time$",
+    "message": "休息一下·在$time$解鎖",
     "description": "Cooldown message showing time until unblock.",
     "placeholders": {
       "time": {
@@ -590,7 +590,7 @@
     }
   },
   "blockedUntilSchedule": {
-    "message": "Este sitio está bloqueado hasta las $time$ por tu horario.",
+    "message": "根據您的日程安排，網站將被阻止直到 $time$。",
     "description": "Tells user when the schedule block lifts.",
     "placeholders": {
       "time": {
@@ -600,75 +600,75 @@
     }
   },
   "defaultRuleDetail": {
-    "message": "Este sitio fue bloqueado por una de tus reglas.",
+    "message": "該網站已被您的一項規則封鎖。",
     "description": "Fallback detail text for an unknown block rule."
   },
   "goDoSomethingUseful": {
-    "message": "Ve a hacer algo útil:",
+    "message": "去做一些有用的事：",
     "description": "Heading above helpful link suggestions on the blocked page."
   },
   "takeBackBtn": {
-    "message": "← Llévame de vuelta",
+    "message": "← 帶我回去",
     "description": "Button to navigate back to the previous page."
   },
   "manageBlockRules": {
-    "message": "Administrar reglas de bloqueo →",
+    "message": "管理阻止規則 →",
     "description": "Link to the dashboard to manage block rules."
   },
   "thisSite": {
-    "message": "este sitio",
+    "message": "這個網站",
     "description": "Generic label referring to the current site."
   },
   "quote1": {
-    "message": "\"Tu futuro yo te está vigilando. Haz que se sienta orgulloso.\"",
+    "message": "“未來你正在看著。讓他們感到驕傲。”",
     "description": "Motivational quote 1."
   },
   "quote2": {
-    "message": "\"Disciplina es elegir entre lo que quieres ahora y lo que más deseas.\"",
+    "message": "“紀律就是在你現在想要的和你最想要的之間做出選擇。”",
     "description": "Motivational quote 2."
   },
   "quote3": {
-    "message": "\"El trabajo profundo aplasta al estar ocupado haciendo nada.\"",
+    "message": "“深度工作勝過忙碌工作。”",
     "description": "Motivational quote 3."
   },
   "quote4": {
-    "message": "\"Pequeños pasos todos los días construyen grandes resultados.\"",
+    "message": "“每天的小步驟會帶來大的成果。”",
     "description": "Motivational quote 4."
   },
   "quote5": {
-    "message": "\"No necesitas más tiempo. Lo que necesitas es concentrarte de verdad.\"",
+    "message": "“你不需要更多的時間。你需要更多的專注。”",
     "description": "Motivational quote 5."
   },
   "quote6": {
-    "message": "\"Lo que haces hoy importa mucho más de lo que crees.\"",
+    "message": "“你今天所做的事情比你想像的更重要。”",
     "description": "Motivational quote 6."
   },
   "quote7": {
-    "message": "\"El obstáculo es el camino.\"",
+    "message": "“障礙就是道路。”",
     "description": "Motivational quote 7."
   },
   "quote8": {
-    "message": "\"Sufre el dolor de la disciplina o sufre el dolor del arrepentimiento.\"",
+    "message": "「要么承受紀律的痛苦，要么承受後悔的痛苦。”",
     "description": "Motivational quote 8."
   },
   "quote9": {
-    "message": "\"Tu enfoque determina tu realidad.\"",
+    "message": "“你的注意力決定了你的現實。”",
     "description": "Motivational quote 9."
   },
   "quote10": {
-    "message": "\"Sé tan jodidamente bueno que no puedan ignorarte.\"",
+    "message": "“表現得足夠好，他們不會忽視你。”",
     "description": "Motivational quote 10."
   },
   "quote11": {
-    "message": "\"Disciplina es igual a libertad.\"",
+    "message": "“紀律等於自由。”",
     "description": "Motivational quote 11."
   },
   "privacyModeTitle": {
-    "message": "Modo Privado / Pausar Rastreo",
+    "message": "隱私模式/暫停跟踪",
     "description": "Tooltip for privacy mode toggle."
   },
   "pausedTime": {
-    "message": "Pausado: $time$",
+    "message": "暫停：$time$",
     "description": "Paused timer display.",
     "placeholders": {
       "time": {
@@ -678,983 +678,1005 @@
     }
   },
   "siteManager": {
-    "message": "Gestor de Sitios",
+    "message": "現場經理",
     "description": "Label for the site manager button or section."
   },
   "settingsLocked": {
-    "message": "Ajustes Bloqueados",
+    "message": "設定已鎖定",
     "description": "Title when settings are passcode locked."
   },
   "incorrectPinTryAgain": {
-    "message": "PIN incorrecto. Ni de broma entras así. Inténtalo otra vez.",
+    "message": "PIN 碼不正確 — 請重試",
     "description": "PIN mismatch warning."
   },
   "analyticsDesc": {
-    "message": "Tu panorama de productividad completo.",
+    "message": "您完整的生產力圖景。",
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "Distribución del Tiempo",
+    "message": "時間分佈",
     "description": "Time distribution section title."
   },
   "top5Websites": {
-    "message": "Top 5 Sitios Web",
+    "message": "前 5 名網站",
     "description": "Top 5 websites section title."
   },
   "overview": {
-    "message": "Resumen",
+    "message": "概述",
     "description": "Overview tab title."
   },
   "dailyBreakdown": {
-    "message": "Desglose Diario",
+    "message": "每日細目",
     "description": "Daily breakdown tab title."
   },
   "topSites": {
-    "message": "Sitios Top",
+    "message": "熱門網站",
     "description": "Top sites tab title."
   },
   "studyVsDistraction": {
-    "message": "Estudio vs Distracción",
+    "message": "學習與分心",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "Comparación",
+    "message": "比較",
     "description": "Alternative title for trend tab."
   },
   "insights": {
-    "message": "Análisis",
+    "message": "見解",
     "description": "Insights tab title."
   },
   "7days": {
-    "message": "7 días",
+    "message": "7天",
     "description": "Range selection button label."
   },
   "30days": {
-    "message": "30 días",
+    "message": "30天",
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "Rango Personalizado",
+    "message": "定制範圍",
     "description": "Custom date range selection."
   },
   "last7Days": {
-    "message": "Últimos 7 días",
+    "message": "過去 7 天",
     "description": "Default range display label."
   },
   "from": {
-    "message": "Desde",
+    "message": "從",
     "description": "Start date label."
   },
   "to": {
-    "message": "a",
-    "description": "Preposition."
+    "message": "到",
+    "description": "End date label."
   },
   "apply": {
-    "message": "Aplicar",
+    "message": "申請",
     "description": "Submit date range selection."
   },
   "total": {
-    "message": "Total",
+    "message": "全部的",
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "Mejor racha",
+    "message": "最佳連勝紀錄",
     "description": "Best consecutive focus days."
   },
   "bestDay": {
-    "message": "Mejor día",
+    "message": "最好的一天",
     "description": "Single day with highest focus time."
   },
   "allTimeTotal": {
-    "message": "Total acumulado",
+    "message": "歷史總計",
     "description": "Total tracked focus time since install."
   },
   "dailyAverage": {
-    "message": "Promedio diario",
+    "message": "日平均",
     "description": "Mean focus time per day."
   },
   "daysTracked": {
-    "message": "Días rastreados",
+    "message": "追蹤天數",
     "description": "Total number of tracked days."
   },
   "searchSites": {
-    "message": "Buscar sitios…",
+    "message": "搜尋網站...",
     "description": "Filter placeholder."
   },
   "domain": {
-    "message": "Dominio",
+    "message": "領域",
     "description": "Site manager table header."
   },
   "actions": {
-    "message": "Acciones",
+    "message": "行動",
     "description": "Site manager table header."
   },
   "category": {
-    "message": "Categoría",
+    "message": "類別",
     "description": "Site manager table header."
   },
   "avgDay": {
-    "message": "Promedio/Día",
+    "message": "平均/天",
     "description": "Average usage per day table header."
   },
   "loadingSites": {
-    "message": "Cargando sitios…",
+    "message": "正在加載網站...",
     "description": "Loader text."
   },
   "totalWorkStudy": {
-    "message": "Total Trabajo/Estudio",
+    "message": "總工作/學習",
     "description": "Focus category sum label."
   },
   "totalDistraction": {
-    "message": "Total Distracción",
+    "message": "完全分心",
     "description": "Distraction category sum label."
   },
   "productivityRatio": {
-    "message": "Ratio de Productividad",
+    "message": "生產力比",
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "Días Buenos (365d)",
+    "message": "好日子 (365d)",
     "description": "Number of high productivity days."
   },
   "wastedDays365d": {
-    "message": "Desperdiciados (365d)",
+    "message": "浪費（365天）",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "Consistencia de 365 Días",
+    "message": "365 天一致性",
     "description": "Yearly consistency calendar label."
   },
   "heatmapHelp": {
-    "message": "Cada cuadro es un día. Más verde = más tiempo de enfoque. Rojo = día desperdiciado.",
+    "message": "每個方格就是一天。更環保=更多的專注時間。紅色=浪費了一天。",
     "description": "Description of yearly heatmap."
   },
   "clickToCustomizeThresholds": {
-    "message": "Haz clic para personalizar límites",
+    "message": "按一下可自訂閾值",
     "description": "Legend customization tooltip."
   },
   "less": {
-    "message": "Menos",
+    "message": "較少的",
     "description": "Heatmap legend lower label."
   },
   "more": {
-    "message": "Más",
+    "message": "更多的",
     "description": "Heatmap legend higher label."
   },
   "wasted": {
-    "message": "Desperdiciado",
+    "message": "浪費了",
     "description": "Heatmap legend wasted day label."
   },
   "buildingHeatmap": {
-    "message": "Creando mapa de calor…",
+    "message": "建構熱圖...",
     "description": "Heatmap builder indicator."
   },
   "weekdayVsWeekend": {
-    "message": "Día de semana vs Fin de semana",
+    "message": "平日與週末",
     "description": "Split comparison chart label."
   },
   "mostProductiveDay": {
-    "message": "Día Más Productivo",
+    "message": "最有成效的一天",
     "description": "Day of week with highest productivity."
   },
   "focusDesc": {
-    "message": "Concéntrate, sigue tus metas y construye tu racha.",
+    "message": "鎖定目標、追蹤目標並建立連續記錄。",
     "description": "Focus section subtitle."
   },
   "zeroCycles": {
-    "message": "0 ciclos",
+    "message": "0 週期",
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "Iniciar Enfoque",
+    "message": "開始對焦",
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "Ajustes Rápidos",
+    "message": "快速預設",
     "description": "Group title."
   },
   "focusSchedules": {
-    "message": "Horarios de Enfoque",
+    "message": "重點日程",
     "description": "Group title."
   },
   "goalsStreak": {
-    "message": "Metas y Racha",
+    "message": "進球數和連勝數",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "Meta Semanal (hrs)",
+    "message": "每週目標（小時）",
     "description": "Config label."
   },
   "dailyStreakMin": {
-    "message": "Mínimo Racha Diaria (m)",
+    "message": "每日最少連續步行距離（公尺）",
     "description": "Config label."
   },
   "startWeekOn": {
-    "message": "Iniciar Semana En",
+    "message": "開始一周",
     "description": "Config label."
   },
   "monday": {
-    "message": "Lunes",
+    "message": "週一",
     "description": "Weekday name."
   },
   "sunday": {
-    "message": "Domingo",
+    "message": "星期日",
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "Contar Para Metas",
+    "message": "計算目標",
     "description": "Checkbox group label."
   },
   "saveGoals": {
-    "message": "Guardar Metas",
+    "message": "保存目標",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "Progreso Semanal",
+    "message": "週進度",
     "description": "Stats display."
   },
   "zeroGoalDone": {
-    "message": "0h 0m hechos",
+    "message": "0 小時 0 分鐘完成",
     "description": "No progress yet."
   },
   "noGoal": {
-    "message": "Sin meta",
+    "message": "沒有目標",
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "Historial",
+    "message": "歷史",
     "description": "Focus history table title."
   },
   "clearHistory": {
-    "message": "Borrar Historial",
+    "message": "清除歷史記錄",
     "description": "Delete history tooltip."
   },
   "noFocusSessions": {
-    "message": "Sin sesiones de enfoque aún.",
+    "message": "還沒有焦點會議。",
     "description": "Empty state label."
   },
   "siteManagerDesc": {
-    "message": "Etiqueta sitios para analíticas, o bloquéalos por completo.",
+    "message": "標記網站以進行分析，或完全阻止它們。",
     "description": "Site manager subtitle."
   },
   "ruleManager": {
-    "message": "Gestor de Reglas",
+    "message": "規則管理器",
     "description": "Block page inner card title."
   },
   "blockList": {
-    "message": "Lista de Bloqueo",
+    "message": "阻止列表",
     "description": "Config category."
   },
   "allowlist": {
-    "message": "Lista de Permitidos",
+    "message": "允許名單",
     "description": "Config category."
   },
   "neverTrack": {
-    "message": "No Rastrear",
+    "message": "永不追蹤",
     "description": "Config category."
   },
   "searchRules": {
-    "message": "Buscar reglas…",
+    "message": "搜尋規則...",
     "description": "Rules filter placeholder."
   },
   "domainName": {
-    "message": "Nombre de Dominio",
+    "message": "網域",
     "description": "Input field label."
   },
   "egDomain": {
-    "message": "ej. reddit.com",
+    "message": "例如reddit.com",
     "description": "Placeholder."
   },
   "redirectToOptional": {
-    "message": "Redirigir A (Opcional)",
+    "message": "重新導向至（可選）",
     "description": "Input field label."
   },
   "egRedirect": {
-    "message": "ej. pw.live",
+    "message": "例如密碼直播",
     "description": "Placeholder."
   },
   "addNewRule": {
-    "message": "+ Nueva Regla",
+    "message": "+ 新增規則",
     "description": "Action button."
   },
   "bulkEdit": {
-    "message": "Edición Masiva",
+    "message": "批次編輯",
     "description": "Action button."
   },
   "egAllowDomain": {
-    "message": "ej. gmail.com",
+    "message": "例如gmail.com",
     "description": "Placeholder."
   },
   "addToAllowlist": {
-    "message": "+ Permitir Sitio",
+    "message": "+ 加入白名單",
     "description": "Action button."
   },
   "domainNamePlural": {
-    "message": "Nombre(s) de Dominio",
+    "message": "網域",
     "description": "Input field label."
   },
   "egNeverTrackDomain": {
-    "message": "ej. banco.com, privado.com",
+    "message": "例如銀行.com、私人.com",
     "description": "Placeholder."
   },
   "addToNeverTrack": {
-    "message": "+ No Rastrear Sitio",
+    "message": "+ 新增至永不追蹤",
     "description": "Action button."
   },
   "tipClick": {
-    "message": "Tip: Haz clic en ",
+    "message": "提示：點選",
     "description": "Helpful hint start."
   },
   "tipRuleDetails": {
-    "message": " en cualquier regla para poner límites de tiempo, horarios o un temporizador de espera.",
+    "message": "在任何規則上設定時間限制、時間表或冷卻計時器。",
     "description": "Helpful hint body."
   },
   "deleteSelected": {
-    "message": "Eliminar Seleccionados",
+    "message": "刪除所選內容",
     "description": "Bulk action button."
   },
   "type": {
-    "message": "Tipo",
+    "message": "類型",
     "description": "Table column header."
   },
   "mode": {
-    "message": "Modo",
+    "message": "模式",
     "description": "Table column header."
   },
   "dailyLimit": {
-    "message": "Límite Diario",
+    "message": "每日限額",
     "description": "Table column header."
   },
   "noBlockingRules": {
-    "message": "Sin reglas de bloqueo aún.",
+    "message": "還沒有阻止規則。",
     "description": "Empty state label."
   },
   "freeTimeHours": {
-    "message": "Horas libres (sin bloqueo)",
+    "message": "空閒時間（無阻塞）",
     "description": "Card sub-title."
   },
   "filterByCategory": {
-    "message": "🔍 Filtrar por Categoría",
+    "message": "🔍 依類別過濾",
     "description": "Card title."
   },
   "searchSitesInCategories": {
-    "message": "Buscar sitios en categorías…",
+    "message": "按類別搜尋網站...",
     "description": "Placeholder."
   },
   "trackLabelSite": {
-    "message": "+ Rastrear / Etiquetar Sitio",
+    "message": "+ 追蹤/標籤站點",
     "description": "Action button."
   },
   "settingsDesc": {
-    "message": "Personaliza tu experiencia Flow.",
+    "message": "客製化您的 Flow 體驗。",
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "Guardar Todos los Ajustes",
+    "message": "儲存所有設定",
     "description": "Action button."
   },
   "securitySystem": {
-    "message": "Seguridad y Sistema",
+    "message": "安全與系統",
     "description": "Settings sub-tab label."
   },
   "trackingBlocking": {
-    "message": "Rastreo y Bloqueo",
+    "message": "追蹤和阻止",
     "description": "Settings sub-tab label."
   },
   "trackingEngine": {
-    "message": "Motor de Rastreo",
+    "message": "追蹤引擎",
     "description": "Settings card label."
   },
   "idleTimeout": {
-    "message": "Tiempo de Inactividad",
+    "message": "空閒超時",
     "description": "Settings config option."
   },
   "idleTimeoutDesc": {
-    "message": "Deja de rastrear si no mueves el ratón.",
+    "message": "如果停止移動滑鼠，則停止追蹤時間。",
     "description": "Settings config option description."
   },
   "after30Sec": {
-    "message": "Tras 30 segundos",
+    "message": "30秒後",
     "description": "Dropdown choice."
   },
   "after1Min": {
-    "message": "Tras 1 minuto",
+    "message": "1分鐘後",
     "description": "Dropdown choice."
   },
   "after2Min": {
-    "message": "Tras 2 minutos",
+    "message": "2分鐘後",
     "description": "Dropdown choice."
   },
   "after5Min": {
-    "message": "Tras 5 minutos",
+    "message": "5分鐘後",
     "description": "Dropdown choice."
   },
   "computerSleepGap": {
-    "message": "Límite de Suspensión del Equipo",
+    "message": "電腦睡眠間隙",
     "description": "Settings config option."
   },
   "computerSleepGapDesc": {
-    "message": "Límite para calcular el tiempo si suspendes la computadora.",
+    "message": "如果您讓電腦進入睡眠狀態，則限制活動時間計算。",
     "description": "Settings config option description."
   },
   "1minute": {
-    "message": "1 minuto",
+    "message": "1分鐘",
     "description": "Dropdown choice."
   },
   "5minutes": {
-    "message": "5 minutos",
+    "message": "5分鐘",
     "description": "Dropdown choice."
   },
   "10minutes": {
-    "message": "10 minutos",
+    "message": "10分鐘",
     "description": "Dropdown choice."
   },
   "15minutes": {
-    "message": "15 minutos",
+    "message": "15分鐘",
     "description": "Dropdown choice."
   },
   "mediaPlaybackTracking": {
-    "message": "Rastreo de Reproducción de Multimedia",
+    "message": "媒體播放追蹤",
     "description": "Settings config option."
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "Sigue rastreando si se reproduce audio o video (aunque estés inactivo).",
+    "message": "如果音訊或視訊正在播放（即使在空閒時），請繼續追蹤時間。",
     "description": "Settings config option description."
   },
   "ignoreQuickVisits": {
-    "message": "Ignorar Visitas Rápidas",
+    "message": "忽略快速訪問",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "Ignora visitas más cortas que esto para limpiar tus datos.",
+    "message": "忽略短於此持續時間的存取以保持資料乾淨。",
     "description": "Settings config option description."
   },
   "offTrackEverything": {
-    "message": "Apagado (rastrear todo)",
+    "message": "關閉（跟踪所有內容）",
     "description": "Dropdown choice."
   },
   "3seconds": {
-    "message": "3 segundos",
+    "message": "3秒",
     "description": "Dropdown choice."
   },
   "5seconds": {
-    "message": "5 segundos",
+    "message": "5秒",
     "description": "Dropdown choice."
   },
   "10seconds": {
-    "message": "10 segundos",
+    "message": "10秒",
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "Retención del Historial de Datos",
+    "message": "資料歷史保留",
     "description": "Settings config option."
   },
   "dataHistoryRetentionDesc": {
-    "message": "Borra historial de rastreo más antiguo que esto para ahorrar espacio.",
+    "message": "自動刪除早於該持續時間的詳細追蹤日誌以節省空間。",
     "description": "Settings config option description."
   },
   "after30Days": {
-    "message": "Tras 30 días",
+    "message": "30天后",
     "description": "Dropdown choice."
   },
   "after90Days": {
-    "message": "Tras 90 días",
+    "message": "90天后",
     "description": "Dropdown choice."
   },
   "after180Days": {
-    "message": "Tras 180 días",
+    "message": "180天后",
     "description": "Dropdown choice."
   },
   "after1Year": {
-    "message": "Tras 1 año",
+    "message": "1年後",
     "description": "Dropdown choice."
   },
   "after2Years": {
-    "message": "Tras 2 años",
+    "message": "2年後",
     "description": "Dropdown choice."
   },
   "after3Years": {
-    "message": "Tras 3 años",
+    "message": "3年後",
     "description": "Dropdown choice."
   },
   "foreverKeepAll": {
-    "message": "Para siempre (guardar todo)",
+    "message": "永遠（保留全部）",
     "description": "Dropdown choice."
   },
   "weeklyAutoBackup": {
-    "message": "Copia de Seguridad Semanal Automática",
+    "message": "每周自動備份",
     "description": "Settings config option."
   },
   "weeklyAutoBackupDesc": {
-    "message": "Exporta y descarga tus estadísticas y reglas automáticamente una vez por semana.",
+    "message": "每周自動匯出和下載一次以追蹤統計資料和規則。",
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "Apariencia",
+    "message": "外貌",
     "description": "Settings card label."
   },
   "themeDark": {
-    "message": "Oscuro",
+    "message": "黑暗的",
     "description": "Dropdown choice."
   },
   "themeLight": {
-    "message": "Claro",
+    "message": "光",
     "description": "Dropdown choice."
   },
   "themeCinematic": {
-    "message": "Cinemático",
+    "message": "電影般的",
     "description": "Dropdown choice."
   },
   "languageOverride": {
-    "message": "Language / Idioma",
+    "message": "語言/慣用語",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
-    "message": "Fuerza el idioma de la extensión en lugar del predeterminado del navegador.",
+    "message": "覆寫擴充功能的預設瀏覽器語言。",
     "description": "Settings config option description."
   },
   "systemDefault": {
-    "message": "Predeterminado del Sistema",
+    "message": "系統預設值",
     "description": "Dropdown choice."
   },
   "langEnglish": {
-    "message": "English",
+    "message": "英語",
     "description": "Language choice."
   },
   "langSpanish": {
-    "message": "Español (Informal/Blunt)",
+    "message": "西班牙語（非正式/直率）",
     "description": "Language choice."
   },
   "langChineseSimplified": {
-    "message": "Chino (Simplificado) / 简体中文",
+    "message": "中文（簡體） / 簡體中文",
     "description": "Language choice."
   },
   "langChineseTraditional": {
-    "message": "Chino (Tradicional) / 繁體中文",
+    "message": "中文（繁體） / 繁體中文",
     "description": "Language choice."
   },
   "langChineseHongKong": {
-    "message": "Chino (Hong Kong) / 繁體中文 (香港)",
+    "message": "中文（香港） / 繁體中文（香港）",
     "description": "Language choice."
   },
   "averageLine": {
-    "message": "Línea de Promedio",
+    "message": "平均線",
     "description": "Chart option."
   },
   "lineChart": {
-    "message": "Línea",
+    "message": "線",
     "description": "Chart type toggle."
   },
   "barChart": {
-    "message": "Barra",
+    "message": "酒吧",
     "description": "Chart type toggle."
   },
   "reduceTime": {
-    "message": "Reducir Tiempo",
+    "message": "減少時間",
     "description": "Daily stats card action."
   },
   "howManyMinutesRemove": {
-    "message": "¿Cuántos minutos deseas eliminar para $1?",
+    "message": "您想要刪除 $1 多少分鐘？",
     "description": "Prompt message in the time reduction modal."
   },
   "remove": {
-    "message": "Eliminar",
+    "message": "消除",
     "description": "Action button label."
   },
   "minutes": {
-    "message": "Minutos",
+    "message": "分分鐘",
     "description": "Input field placeholder."
   },
   "momComparison": {
-    "message": "Mes a Mes",
+    "message": "季比",
     "description": "Settings card label."
   },
   "momComparisonDesc": {
-    "message": "Comparación del tiempo activo de este mes con el mes pasado.",
+    "message": "比較本月與上個月的活躍時間。",
     "description": "Card description."
   },
   "focusVsDistraction": {
-    "message": "Enfoque vs. Distracción",
+    "message": "專注與分心",
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$1% Enfoque",
-    "description": "Focus percentage summary."
+    "message": "$focusPct$% 焦點",
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
   },
   "pctDistraction": {
-    "message": "$1% Distracción",
-    "description": "Distraction percentage summary."
+    "message": "$distPct$% 分心",
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
   },
   "focusSplitDesc": {
-    "message": "Estuviste enfocado durante $1 y te distrajiste durante $2.",
-    "description": "Productivity split description sentence."
+    "message": "您專注於 $focusedTime$，卻因 $distractedTime$ 而分心。",
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
   },
   "noFocusDistTimeRange": {
-    "message": "No hay tiempo de enfoque o distracción registrado en este rango.",
+    "message": "在此範圍內沒有追蹤到注意力集中或分心的時間。",
     "description": "Placeholder text."
   },
   "pinSiteToTop": {
-    "message": "Fijar sitio arriba",
+    "message": "將網站固定在頂部",
     "description": "Tooltip text."
   },
   "unpinSite": {
-    "message": "Desfijar sitio",
+    "message": "取消固定網站",
     "description": "Tooltip text."
   },
   "visitSite": {
-    "message": "Visitar sitio",
+    "message": "造訪網站",
     "description": "Tooltip text."
   },
   "addOrEditRule": {
-    "message": "Añadir o editar regla",
+    "message": "新增或編輯規則",
     "description": "Tooltip text."
   },
   "autoCategorized": {
-    "message": "Categorizado automáticamente",
+    "message": "自動分類",
     "description": "Tooltip text."
   },
   "totalTracked": {
-    "message": "Total Registrado",
+    "message": "總跟蹤數",
     "description": "Daily stat title."
   },
   "activeTimeline": {
-    "message": "Cronología de Actividad de 24 Horas",
+    "message": "24 小時活躍時間線",
     "description": "Section header."
   },
   "heatmapThresholds": {
-    "message": "Umbrales del Mapa de Calor",
+    "message": "熱圖閾值",
     "description": "Modal title."
   },
   "minActiveTimeMins": {
-    "message": "Tiempo Activo Mínimo (minutos)",
+    "message": "最短活躍時間（分鐘）",
     "description": "Config setting label."
   },
   "minActiveTimeDesc": {
-    "message": "Tiempo total mínimo registrado para colorear un día.",
+    "message": "一天著色的最短總追蹤時間。",
     "description": "Config option helper text."
   },
   "ratioThresholdPct": {
-    "message": "Umbral de Proporción (%)",
+    "message": "比率閾值 (%)",
     "description": "Config setting label."
   },
   "ratioThresholdDesc": {
-    "message": "Si tu proporción de enfoque está por debajo de este %, el día es Perdido (Rojo). De lo contrario, es Activo (Verde).",
+    "message": "如果您的聚焦比率低於此百分比，則這一天就浪費了（紅色）。否則，它處於活動狀態（綠色）。",
     "description": "Config option helper text."
   },
   "showWastedDays": {
-    "message": "Mostrar Días Perdidos (Rojo)",
+    "message": "顯示浪費的日子（紅色）",
     "description": "Config setting label."
   },
   "showWastedDaysDesc": {
-    "message": "Destacar los días de alta distracción como bloques rojos.",
+    "message": "將高度分散注意力的日子突出顯示為紅色區塊。",
     "description": "Config option helper text."
   },
   "focusCategories": {
-    "message": "Categorías de Enfoque",
+    "message": "焦點類別",
     "description": "Config setting label."
   },
   "selectFocusCatsDesc": {
-    "message": "Selecciona qué categorías cuentan para tu Tiempo de Enfoque diario.",
+    "message": "選擇哪些類別計入您的每日專注時間。",
     "description": "Config option helper text."
   },
   "activeHrs": {
-    "message": "$1 de actividad",
+    "message": "$1 活躍",
     "description": "Label showing tracked active time hours."
   },
   "noActiveTimeTracked": {
-    "message": "Aún no hay tiempo activo registrado.",
+    "message": "尚未追蹤活躍時間。",
     "description": "Placeholder text."
   },
   "vsLastMonth": {
-    "message": "vs $1 el mes pasado ($2)",
+    "message": "與上個月的 $1 相比 ($2)",
     "description": "MoM status comparison description."
   },
   "vsLastMonthNoChange": {
-    "message": "vs $1 el mes pasado (sin cambios)",
+    "message": "與上個月 $1 相比（無變化）",
     "description": "MoM status comparison description."
   },
   "increase": {
-    "message": "aumento",
+    "message": "增加",
     "description": "Label indicating value increase."
   },
   "decrease": {
-    "message": "disminución",
+    "message": "減少",
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "Control de Acceso y Seguridad",
+    "message": "存取控制與安全",
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "Estado de Protección PIN:",
+    "message": "PIN 碼保護狀態：",
     "description": "Settings config option."
   },
   "notSet": {
-    "message": "No Configurado",
+    "message": "未設定",
     "description": "PIN status."
   },
   "set6DigitPin": {
-    "message": "Configurar PIN de 6 dígitos",
+    "message": "設定 6 位元 PIN 碼",
     "description": "Input placeholder."
   },
   "confirm6DigitPin": {
-    "message": "Confirmar PIN de 6 dígitos",
+    "message": "確認 6 位數 PIN 碼",
     "description": "Input placeholder."
   },
   "savePin": {
-    "message": "Guardar PIN",
+    "message": "儲存密碼",
     "description": "Action button."
   },
   "changePin": {
-    "message": "Cambiar PIN",
+    "message": "更改密碼",
     "description": "Action button."
   },
   "removePin": {
-    "message": "Quitar PIN",
+    "message": "刪除 PIN 碼",
     "description": "Action button."
   },
   "setPinToEnableLocks": {
-    "message": "Configura un PIN para activar estos bloqueos",
+    "message": "設定 PIN 碼以啟用這些鎖",
     "description": "Helper block message."
   },
   "whatToLock": {
-    "message": "Qué Bloquear",
+    "message": "鎖定什麼",
     "description": "Settings block header."
   },
   "lockTimerStop": {
-    "message": "Bloquear Botón Detener Temporizador",
+    "message": "鎖定定時器停止按鈕",
     "description": "Settings config option."
   },
   "lockTimerStopDesc": {
-    "message": "Pide PIN para detener o pausar una sesión de enfoque activa.",
+    "message": "需要 PIN 碼才能停止或暫停活動的焦點會話。",
     "description": "Settings config option description."
   },
   "lockEditingRules": {
-    "message": "Bloquear Edición/Eliminación de Reglas",
+    "message": "鎖定編輯/刪除規則",
     "description": "Settings config option."
   },
   "lockEditingRulesDesc": {
-    "message": "Pide PIN para modificar, borrar o vaciar reglas y listas de bloqueo.",
+    "message": "需要 PIN 碼才能修改、刪除或清除網站封鎖清單和規則。",
     "description": "Settings config option description."
   },
   "lockFreeTime": {
-    "message": "Bloquear Horas Libres",
+    "message": "鎖定空閒時間",
     "description": "Settings config option."
   },
   "lockFreeTimeDesc": {
-    "message": "Pide PIN para cambiar tus horarios libres.",
+    "message": "需要 PIN 碼才能新增、編輯或刪除預定的空閒時間。",
     "description": "Settings config option description."
   },
   "lockFocusPresets": {
-    "message": "Bloquear Edición de Ajustes de Enfoque",
+    "message": "鎖定編輯焦點預設",
     "description": "Settings config option."
   },
   "lockFocusPresetsDesc": {
-    "message": "Pide PIN para editar o borrar ajustes de enfoque personalizados.",
+    "message": "需要 PIN 碼才能修改或刪除自訂焦點預設。",
     "description": "Settings config option description."
   },
   "lockFocusSchedules": {
-    "message": "Bloquear Edición de Horarios de Enfoque",
+    "message": "鎖定編輯/刪除焦點計劃",
     "description": "Settings config option."
   },
   "lockFocusSchedulesDesc": {
-    "message": "Pide PIN para cambiar o borrar horarios de enfoque.",
+    "message": "需要 PIN 碼才能變更或刪除焦點計畫配置。",
     "description": "Settings config option description."
   },
   "lockAdvancedTweaks": {
-    "message": "Bloquear Modificaciones de Sitio Avanzadas",
+    "message": "鎖定進階網站調整",
     "description": "Settings config option."
   },
   "lockAdvancedTweaksDesc": {
-    "message": "Pide PIN para acceder a estilos personalizados o modificaciones avanzadas.",
+    "message": "需要 PIN 才能存取自訂樣式、腳本注入或進階調整。",
     "description": "Settings config option description."
   },
   "lockPrivacyMode": {
-    "message": "Bloquear Modo Privado (Pausar Rastreo)",
+    "message": "鎖定隱私模式（暫停追蹤）",
     "description": "Settings config option."
   },
   "lockPrivacyModeDesc": {
-    "message": "Pide PIN para pausar el rastreo o activar modo privado.",
+    "message": "需要 PIN 碼才能暫停追蹤或啟用隱私模式。",
     "description": "Settings config option description."
   },
   "lockAdjustTime": {
-    "message": "Bloquear Ajuste de Tiempo (Desglose Diario)",
+    "message": "鎖定調整時間（每日細分）",
     "description": "Settings config option."
   },
   "lockAdjustTimeDesc": {
-    "message": "Pide PIN para cambiar a mano el tiempo rastreado en desglose diario.",
+    "message": "需要 PIN 碼才能手動調整或清除每日細分中的追蹤時間。",
     "description": "Settings config option description."
   },
   "lockDangerZone": {
-    "message": "Bloquear Zona de Peligro (Borrar Datos)",
+    "message": "鎖定危險區域（清除資料）",
     "description": "Settings config option."
   },
   "lockDangerZoneDesc": {
-    "message": "Pide PIN para reiniciar estadísticas, reglas o categorías.",
+    "message": "需要 PIN 碼才能重設統計資料、規則或自訂類別。",
     "description": "Settings config option description."
   },
   "dangerZone": {
-    "message": "Zona de Peligro",
+    "message": "危險區",
     "description": "Settings card label."
   },
   "resetAllStats": {
-    "message": "Reiniciar todas las estadísticas",
+    "message": "重置所有統計數據",
     "description": "Settings config option."
   },
   "resetAllStatsDesc": {
-    "message": "Borra todo tu historial de rastreo y analíticas. No se puede deshacer.",
+    "message": "擦除所有記錄的網站追蹤歷史記錄和分析。此操作無法撤銷。",
     "description": "Settings config option description."
   },
   "btnResetStats": {
-    "message": "Borrar Estadísticas",
+    "message": "重置統計數據",
     "description": "Action button."
   },
   "clearAllRules": {
-    "message": "Borrar todas las reglas de bloqueo/permiso",
+    "message": "清除所有阻止和允許規則",
     "description": "Settings config option."
   },
   "clearAllRulesDesc": {
-    "message": "Elimina listas de bloqueo, horarios, límites y permitidos.",
+    "message": "刪除所有自訂網站封鎖清單、計劃、限制和允許清單。",
     "description": "Settings config option description."
   },
   "btnClearRules": {
-    "message": "Borrar Reglas",
+    "message": "明確的規則",
     "description": "Action button."
   },
   "clearAllCategories": {
-    "message": "Borrar categorías manuales",
+    "message": "清除所有手冊類別",
     "description": "Settings config option."
   },
   "clearAllCategoriesDesc": {
-    "message": "Restaura las categorías de sitios a las predeterminadas.",
+    "message": "將所有自訂網站類別標籤重設為預設值。",
     "description": "Settings config option description."
   },
   "btnClearCategories": {
-    "message": "Borrar Categorías",
+    "message": "清除類別",
     "description": "Action button."
   },
   "supportFeedbackHeader": {
-    "message": "Soporte y Opiniones",
+    "message": "支持與回饋",
     "description": "Settings card label."
   },
   "submitFeedbackHeader": {
-    "message": "Enviar Sugerencias y Reportes de Errores",
+    "message": "提交功能請求和錯誤報告",
     "description": "Settings config option."
   },
   "submitFeedbackDesc": {
-    "message": "¡Ayúdanos a mejorar Flow! Comparte tus ideas o reporta fallos.",
+    "message": "幫助我們改善 Flow！分享您的想法、建議或報告任何錯誤。",
     "description": "Settings config option description."
   },
   "submitFeedbackBtn": {
-    "message": "💡 Enviar Opiniones",
+    "message": "💡 提交回饋",
     "description": "Action button."
   },
   "helpTranslateBtn": {
-    "message": "🌐 Ayuda a Traducir",
+    "message": "🌐 幫忙翻譯",
     "description": "Action button."
   },
   "backupRestoreHeader": {
-    "message": "Copia de Seguridad y Restauración",
+    "message": "備份與復原",
     "description": "Settings card label."
   },
   "exportDataJson": {
-    "message": "Exportar todos los datos a JSON",
+    "message": "將所有資料匯出為 JSON",
     "description": "Settings config option."
   },
   "exportDataJsonDesc": {
-    "message": "Estadísticas, reglas, categorías y ajustes.",
+    "message": "統計資料、規則、類別、設定。",
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "Descargar JSON",
+    "message": "下載 JSON",
     "description": "Action button."
   },
   "restoreFromJson": {
-    "message": "Restaurar desde JSON",
+    "message": "從 JSON 恢復",
     "description": "Settings config option."
   },
   "restoreFromJsonDesc": {
-    "message": "Reemplaza TODOS los datos actuales. Confirma antes de restaurar.",
+    "message": "替換所有當前資料。恢復前確認。",
     "description": "Settings config option description."
   },
   "chooseFile": {
-    "message": "Elegir Archivo…",
+    "message": "選擇檔案...",
     "description": "Input file label."
   },
   "localStorageUsage": {
-    "message": "Uso de Almacenamiento Local",
+    "message": "本地儲存使用情況",
     "description": "Settings config option."
   },
   "localStorageUsageDesc": {
-    "message": "Espacio usado por ajustes, historial y reglas (de 10MB máximo).",
+    "message": "設定、歷史記錄和規則使用的空間（超出 10MB 限制）。",
     "description": "Settings config option description."
   },
   "migrationImportsHeader": {
-    "message": "Migración e Importaciones",
+    "message": "移民和進口",
     "description": "Settings card label."
   },
   "importFromWatt": {
-    "message": "Importar desde Web Activity Time Tracker",
+    "message": "從網路活動時間追蹤器導入",
     "description": "Settings config option."
   },
   "importFromWattDesc": {
-    "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
+    "message": "上傳匯出的 CSV 檔案以合併您過去的追蹤歷史記錄。",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "Importar desde Time Tracker - Web Habit Builder",
+    "message": "從時間追蹤器導入 - 網路習慣產生器",
     "description": "Settings config option."
   },
   "importFromTtDesc": {
-    "message": "Sube el archivo JSON exportado para unir tu historial de rastreo.",
+    "message": "上傳匯出的 JSON 檔案以合併您過去的追蹤歷史記錄。",
     "description": "Settings config option description."
   },
   "importFromWt": {
-    "message": "Importar desde Webtime Tracker",
+    "message": "從網路時間追蹤器導入",
     "description": "Settings config option."
   },
   "importFromWtDesc": {
-    "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
+    "message": "上傳匯出的 CSV 檔案以合併您過去的追蹤歷史記錄。",
     "description": "Settings config option description."
   },
   "backupHistory": {
-    "message": "Historial de Respaldos",
+    "message": "備份歷史記錄",
     "description": "Settings block title."
   },
   "btnCreateLocalBackup": {
-    "message": "+ Crear Respaldo Local",
+    "message": "+ 建立本機備份",
     "description": "Action button."
   },
   "editFreeTime": {
-    "message": "Editar Horas Libres",
+    "message": "編輯空閒時間",
     "description": "Modal title."
   },
   "fromTime": {
-    "message": "Hora de Inicio",
+    "message": "從時間",
     "description": "Input field label."
   },
   "toTime": {
-    "message": "Hora de Fin",
+    "message": "到時間",
     "description": "Input field label."
   },
   "activeDays": {
-    "message": "Días Activos",
+    "message": "活躍天數",
     "description": "Input field label."
   },
   "saveChanges": {
-    "message": "Guardar Cambios",
+    "message": "儲存變更",
     "description": "Action button."
   },
   "tagMonitor": {
-    "message": "Etiquetar / Monitorear",
+    "message": "標籤/監控",
     "description": "Tab segment title."
   },
   "quickApplyPreset": {
-    "message": "Aplicar Ajuste Rápido",
+    "message": "快速應用預設",
     "description": "Select label."
   },
   "selectPresetToApply": {
-    "message": "-- Selecciona un ajuste para aplicar --",
+    "message": "-- 選擇要套用的預設 --",
     "description": "Option label."
   },
   "egDomainNoPrefix": {
@@ -1662,175 +1684,175 @@
     "description": "Placeholder."
   },
   "activeRulesSelectMultiple": {
-    "message": "Reglas Activas (Selecciona varias)",
+    "message": "活動規則（選擇多個）",
     "description": "Sub-header label."
   },
   "dailyTimeLimit": {
-    "message": "Límite de tiempo diario",
+    "message": "每日時間限制",
     "description": "Rule mode option."
   },
   "dailyLimitMinutes": {
-    "message": "Límite diario (minutos) (0 = siempre bloqueado)",
+    "message": "每日限制（分鐘）（0 = 始終被阻止）",
     "description": "Input field label."
   },
   "perSessionLimit": {
-    "message": "Límite por Sesión",
+    "message": "每次會話限制",
     "description": "Rule mode option."
   },
   "sessionSettings": {
-    "message": "Ajustes de Sesión",
+    "message": "會話設定",
     "description": "Input block title."
   },
   "timeLimitMinutes": {
-    "message": "Límite de Tiempo (minutos)",
+    "message": "時間限制（分鐘）",
     "description": "Input field label."
   },
   "breakCooldownMinutes": {
-    "message": "Descanso / Espera (minutos)",
+    "message": "休息/冷卻（分鐘）",
     "description": "Input field label."
   },
   "scheduleBased": {
-    "message": "Por horario",
+    "message": "基於時間表",
     "description": "Rule mode option."
   },
   "timeWindows": {
-    "message": "Ventanas de tiempo",
+    "message": "時間視窗",
     "description": "Input field label."
   },
   "addWindow": {
-    "message": "+ Añadir ventana",
+    "message": "+ 新增視窗",
     "description": "Action button."
   },
   "cooldownSite": {
-    "message": "Sitio de espera",
+    "message": "降溫場地",
     "description": "Rule mode option."
   },
   "cooldownSettings": {
-    "message": "Ajustes de Espera",
+    "message": "冷卻設定",
     "description": "Input block title."
   },
   "waitTimeSec": {
-    "message": "Espera (seg)",
+    "message": "等待時間（秒）",
     "description": "Input field label."
   },
   "frequency": {
-    "message": "Frecuencia",
+    "message": "頻率",
     "description": "Input field label."
   },
   "everyVisit": {
-    "message": "Cada visita",
+    "message": "每次訪問",
     "description": "Option choice."
   },
   "oncePerDay": {
-    "message": "Una vez al día",
+    "message": "每天一次",
     "description": "Option choice."
   },
   "every10min": {
-    "message": "Cada 10 min",
+    "message": "每10分鐘一班",
     "description": "Option choice."
   },
   "optDistraction": {
-    "message": "⚡ Distracción",
+    "message": "⚡ 分散注意力",
     "description": "Category choice."
   },
   "optProductivity": {
-    "message": "💻 Productividad",
+    "message": "💻 生產力",
     "description": "Category choice."
   },
   "optLearning": {
-    "message": "📚 Aprendizaje",
+    "message": "📚學習",
     "description": "Category choice."
   },
   "optCommunication": {
-    "message": "💬 Comunicación",
+    "message": "💬 通訊",
     "description": "Category choice."
   },
   "optUncategorized": {
-    "message": "❓ Sin categoría",
+    "message": "❓ 未分類",
     "description": "Category choice."
   },
   "assignCategoryDesc": {
-    "message": "Esto asigna una categoría para estadísticas sin bloquear el sitio.",
+    "message": "這會在不阻止網站的情況下指派統計類別。",
     "description": "Explanation text."
   },
   "saveTag": {
-    "message": "Guardar Etiqueta",
+    "message": "儲存標籤",
     "description": "Action button."
   },
   "areYouSure": {
-    "message": "¿Seguro?",
+    "message": "你確定嗎？",
     "description": "Modal title."
   },
   "cannotBeUndone": {
-    "message": "Esta acción no se puede deshacer.",
+    "message": "此操作無法撤銷。",
     "description": "Modal sub-text warning."
   },
   "confirm": {
-    "message": "Confirmar",
+    "message": "確認",
     "description": "Action button."
   },
   "privacyModalDesc": {
-    "message": "Pausa el rastreo y el bloqueo. Elige cuánto tiempo pausar:",
+    "message": "暫停所有時間追蹤和網路層級阻止。選擇您要暫停的時間：",
     "description": "Modal sub-text warning."
   },
   "createBlockPreset": {
-    "message": "Crear Ajuste de Bloqueo",
+    "message": "建立區塊預設",
     "description": "Modal title."
   },
   "presetName": {
-    "message": "Nombre del preajuste",
-    "description": "Label."
+    "message": "預設名稱",
+    "description": "Input field label."
   },
   "egPresetName": {
-    "message": "ej. Modo Estricto",
+    "message": "例如嚴格模式",
     "description": "Placeholder."
   },
   "rulesConfiguration": {
-    "message": "Configuración de Reglas",
+    "message": "規則配置",
     "description": "Sub-header label."
   },
   "savePreset": {
-    "message": "Guardar Ajuste",
+    "message": "儲存預設",
     "description": "Action button."
   },
   "timeAdjusted": {
-    "message": "Tiempo ajustado",
+    "message": "時間調整",
     "description": "Toast notice."
   },
   "adjustFailed": {
-    "message": "Fallo al ajustar",
+    "message": "調整失敗",
     "description": "Toast notice."
   },
   "undoNeverTrackRestored": {
-    "message": "Deshacer: 'No Rastrear' restaurado",
+    "message": "撤銷：永不恢復軌道",
     "description": "Toast notice."
   },
   "undoRuleRestored": {
-    "message": "Deshacer: regla restaurada",
+    "message": "撤銷：恢復規則",
     "description": "Toast notice."
   },
   "undoAllowRuleRestored": {
-    "message": "Deshacer: regla de permitidos restaurada",
+    "message": "撤銷：恢復允許規則",
     "description": "Toast notice."
   },
   "removed": {
-    "message": "Eliminado",
+    "message": "已刪除",
     "description": "Toast notice."
   },
   "thresholdsUpdated": {
-    "message": "Límites actualizados",
+    "message": "閾值已更新",
     "description": "Toast notice."
   },
   "noItemsSelected": {
-    "message": "No seleccionaste nada, genio.",
+    "message": "沒有選擇任何項目",
     "description": "Toast notice."
   },
   "deleteRules": {
-    "message": "Borrar Reglas",
+    "message": "刪除規則",
     "description": "Confirm title."
   },
   "deleteRulesConfirm": {
-    "message": "¿Borrar $count$ reglas?",
+    "message": "刪除 $count$ 規則？",
     "description": "Confirm body.",
     "placeholders": {
       "count": {
@@ -1840,15 +1862,15 @@
     }
   },
   "itemsDeleted": {
-    "message": "Elementos eliminados",
+    "message": "已刪除的項目",
     "description": "Toast notice."
   },
   "enterDomain": {
-    "message": "Escribe un dominio real, no inventes.",
+    "message": "輸入網域名稱",
     "description": "Toast notice."
   },
   "taggedSuccessfully": {
-    "message": "$domain$ etiquetado con éxito",
+    "message": "$domain$ 標記成功",
     "description": "Toast notice.",
     "placeholders": {
       "domain": {
@@ -1858,47 +1880,47 @@
     }
   },
   "studyGoalsSaved": {
-    "message": "Metas de estudio guardadas",
+    "message": "已儲存學習目標",
     "description": "Toast notice."
   },
   "pickBothDates": {
-    "message": "Elige ambas fechas",
+    "message": "選擇兩個日期",
     "description": "Toast notice."
   },
   "endDateBeforeStart": {
-    "message": "A ver, la fecha de fin no puede ser antes de la de inicio. Piensa un poco.",
+    "message": "結束日期早於開始日期",
     "description": "Toast notice."
   },
   "removedException": {
-    "message": "Excepción eliminada",
+    "message": "刪除了異常",
     "description": "Toast notice."
   },
   "selectAtLeastOneDay": {
-    "message": "Elige al menos un día, no seas flojo.",
+    "message": "至少選擇一天",
     "description": "Toast notice."
   },
   "freeTimeSaved": {
-    "message": "¡Horario libre guardado con éxito!",
+    "message": "空閒時段已成功保存！",
     "description": "Toast notice."
   },
   "sessionDeleted": {
-    "message": "Sesión eliminada",
+    "message": "會話已刪除",
     "description": "Toast notice."
   },
   "alreadyAdded": {
-    "message": "Eso ya está en la lista. No dupliques cosas.",
+    "message": "已新增",
     "description": "Toast notice."
   },
   "exceptionAdded": {
-    "message": "Excepción añadida",
+    "message": "增加了例外",
     "description": "Toast notice."
   },
   "settingsSaved": {
-    "message": "Ajustes guardados",
+    "message": "設定已儲存",
     "description": "Toast notice."
   },
   "errorSavingSettings": {
-    "message": "Valió gorro al guardar los ajustes: $error$",
+    "message": "儲存設定時發生錯誤：$error$",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
@@ -1908,95 +1930,95 @@
     }
   },
   "pinSavedActive": {
-    "message": "PIN guardado. No te lo vayas a olvidar.",
+    "message": "PIN 碼已儲存並處於活動狀態",
     "description": "Toast notice."
   },
   "pinRemoved": {
-    "message": "PIN eliminado",
+    "message": "PIN 碼已刪除",
     "description": "Toast notice."
   },
   "resetStatsConfirm": {
-    "message": "¿Borrar TODO? ¿En serio? Luego no llores, que no se puede recuperar.",
+    "message": "刪除所有統計資料？此操作無法撤銷。",
     "description": "Confirm body."
   },
   "resetConfirmBtn": {
-    "message": "Borrar",
+    "message": "重置",
     "description": "Confirm action."
   },
   "clearRules": {
-    "message": "Borrar Reglas",
+    "message": "明確的規則",
     "description": "Confirm title."
   },
   "clearRulesConfirm": {
-    "message": "¿Seguro que quieres quitar todas las reglas de bloqueo? No te rindas tan fácil.",
+    "message": "刪除所有阻止/允許規則？",
     "description": "Confirm body."
   },
   "clearConfirmBtn": {
-    "message": "Borrar",
+    "message": "清除",
     "description": "Confirm action."
   },
   "rulesCleared": {
-    "message": "Reglas borradas",
+    "message": "規則已清除",
     "description": "Toast notice."
   },
   "clearCategories": {
-    "message": "Borrar Categorías",
+    "message": "清除類別",
     "description": "Confirm title."
   },
   "clearCategoriesConfirm": {
-    "message": "¿Eliminar todas las categorías personalizadas?",
+    "message": "刪除所有自訂類別？",
     "description": "Confirm body."
   },
   "categoriesCleared": {
-    "message": "Categorías borradas",
+    "message": "類別已清除",
     "description": "Toast notice."
   },
   "clearHistoryConfirm": {
-    "message": "¿Borrar historial? ¿Quieres borrar tus pecados?",
+    "message": "清除歷史記錄？",
     "description": "Confirm body."
   },
   "cleared": {
-    "message": "Borrado",
+    "message": "已清除",
     "description": "Toast notice."
   },
   "exportFailed": {
-    "message": "Error al exportar",
+    "message": "匯出失敗",
     "description": "Toast notice."
   },
   "backupDownloaded": {
-    "message": "Copia de seguridad descargada",
+    "message": "備份已下載",
     "description": "Toast notice."
   },
   "restoreBackup": {
-    "message": "Restaurar Copia de Seguridad",
+    "message": "恢復備份",
     "description": "Confirm title."
   },
   "restoreBackupConfirm": {
-    "message": "La restauración REEMPLAZARÁ todos los datos actuales. ¿Continuar?",
+    "message": "恢復將替換所有當前資料。繼續？",
     "description": "Confirm body."
   },
   "restoreConfirmBtn": {
-    "message": "Restaurar",
+    "message": "恢復",
     "description": "Confirm action."
   },
   "restoredReloading": {
-    "message": "Restaurado — recargando…",
+    "message": "已恢復 - 正在重新載入...",
     "description": "Toast notice."
   },
   "invalidJsonFile": {
-    "message": "Ese archivo JSON no sirve. Sube algo real.",
+    "message": "JSON 檔案無效",
     "description": "Toast notice."
   },
   "importLogsWattConfirm": {
-    "message": "Esto unirá los registros de Web Activity Time Tracker con el historial de Flow.\n\nAtención: Si importas la misma hoja de cálculo dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "message": "這會將 Web Activity Time Tracker 日誌合併到 Flow 的歷史記錄中。\n\n警告：如果您匯入同一電子表格兩次，則會將追蹤時間新增兩次。按一下“確定”繼續。",
     "description": "Confirm body."
   },
   "importConfirmBtn": {
-    "message": "Importar",
+    "message": "進口",
     "description": "Confirm action."
   },
   "successfullyImportedDays": {
-    "message": "¡Se importaron con éxito $count$ días! Recargando...",
+    "message": "已成功導入 $count$ 天！正在重新加載...",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -2006,7 +2028,7 @@
     }
   },
   "importFailedErr": {
-    "message": "Fallo al importar: $error$",
+    "message": "導入失敗：$error$",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
@@ -2016,19 +2038,19 @@
     }
   },
   "invalidFile": {
-    "message": "Archivo no válido",
+    "message": "文件無效",
     "description": "Default error."
   },
   "importLogsTtConfirm": {
-    "message": "Esto unirá los registros JSON de Time Tracker con el historial de Flow.\n\nAtención: Si importas el mismo archivo JSON dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "message": "這會將 Time Tracker JSON 日誌合併到 Flow 的歷史記錄中。\n\n警告：如果兩次匯入同一個 JSON 文件，則會將追蹤時間添加兩次。按一下“確定”繼續。",
     "description": "Confirm body."
   },
   "importLogsWtConfirm": {
-    "message": "Esto unirá los registros CSV de Webtime Tracker con el historial de Flow.\n\nAtención: Si importas el mismo archivo CSV dos veces, se duplicará el tiempo rastreado. Haz clic en Aceptar para proceder.",
+    "message": "這會將 Webtime Tracker CSV 日誌合併到 Flow 的歷史記錄中。\n\n警告：如果您兩次匯入同一個 CSV 文件，則會將追蹤時間新增兩次。按一下“確定”繼續。",
     "description": "Confirm body."
   },
   "activatedPreset": {
-    "message": "Ajuste activado: $name$",
+    "message": "啟動的預設：$name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2038,39 +2060,39 @@
     }
   },
   "presetSavedSuccessfully": {
-    "message": "¡Ajuste guardado con éxito!",
+    "message": "預設保存成功！",
     "description": "Toast notice."
   },
   "scheduleDeleted": {
-    "message": "Horario eliminado",
+    "message": "時間表已刪除",
     "description": "Toast notice."
   },
   "scheduleUpdated": {
-    "message": "Horario actualizado",
+    "message": "時間表已更新",
     "description": "Toast notice."
   },
   "scheduleAdded": {
-    "message": "Horario añadido",
+    "message": "新增了時間表",
     "description": "Toast notice."
   },
   "enterValidDomain": {
-    "message": "Ingresa un dominio que sirva, por favor.",
+    "message": "請輸入有效域名",
     "description": "Toast notice."
   },
   "domainAlreadyAllowed": {
-    "message": "Ese ya estaba en la lista de permitidos. No insistas.",
+    "message": "域名已被允許",
     "description": "Toast notice."
   },
   "addedToAllowlist": {
-    "message": "Sitio libre. Ojalá no sea para procrastinar.",
+    "message": "已加入白名單",
     "description": "Toast notice."
   },
   "enterValidDomains": {
-    "message": "Por favor ingresa dominio(s) válido(s)",
+    "message": "請輸入有效域名",
     "description": "Toast notice."
   },
   "addedDomainsToNeverTrack": {
-    "message": "Se añadieron $count$ dominio(s) a 'No Rastrear'",
+    "message": "將 $count$ 網域新增至 Never-Track",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -2080,59 +2102,59 @@
     }
   },
   "domainsAlreadyInList": {
-    "message": "Los dominios ya están en la lista",
+    "message": "網域已在清單中",
     "description": "Toast notice."
   },
   "trackingResumed": {
-    "message": "Rastreo reanudado",
+    "message": "追蹤已恢復",
     "description": "Toast notice."
   },
   "privacyModeEnabled": {
-    "message": "Modo Privado activado",
+    "message": "隱私模式已啟用",
     "description": "Toast notice."
   },
   "backupRestoredReloading": {
-    "message": "Copia de seguridad restaurada — recargando...",
+    "message": "備份已還原 — 正在重新載入...",
     "description": "Toast notice."
   },
   "downloadStarted": {
-    "message": "Descarga iniciada",
+    "message": "下載開始",
     "description": "Toast notice."
   },
   "failedDownloadData": {
-    "message": "Fallo al descargar datos",
+    "message": "下載資料失敗",
     "description": "Toast notice."
   },
   "deleteBackupConfirm": {
-    "message": "¿Borrar de forma permanente este respaldo del historial?",
+    "message": "從歷史記錄中永久刪除此備份？",
     "description": "Confirm body."
   },
   "deleteConfirmBtn": {
-    "message": "Borrar",
+    "message": "刪除",
     "description": "Confirm action."
   },
   "backupDeleted": {
-    "message": "Respaldo eliminado",
+    "message": "備份已刪除",
     "description": "Toast notice."
   },
   "deleteFailed": {
-    "message": "Fallo al borrar",
+    "message": "刪除失敗",
     "description": "Toast notice."
   },
   "localBackupCreated": {
-    "message": "Respaldo local creado",
+    "message": "已建立本地備份",
     "description": "Toast notice."
   },
   "backupCreationFailed": {
-    "message": "Fallo al crear respaldo",
+    "message": "備份建立失敗",
     "description": "Toast notice."
   },
   "enterDomainFirstToBlockInstantly": {
-    "message": "Escribe un dominio primero si quieres bloquearlo al instante.",
+    "message": "先輸入網域名稱即可立即封鎖",
     "description": "Toast notice."
   },
   "siteBlockedUnderPreset": {
-    "message": "Sitio bloqueado bajo el ajuste $name$",
+    "message": "網站被 $name$ 屏蔽",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2142,7 +2164,7 @@
     }
   },
   "deletePresetConfirm": {
-    "message": "¿De verdad quieres borrar el ajuste \"$name$\"?",
+    "message": "您確定要刪除預設“$name$”嗎？",
     "description": "Confirm body.",
     "placeholders": {
       "name": {
@@ -2152,27 +2174,27 @@
     }
   },
   "presetDeleted": {
-    "message": "Ajuste eliminado",
+    "message": "預設已刪除",
     "description": "Toast notice."
   },
   "presetNameRequired": {
-    "message": "Ponle un nombre al ajuste, no lo dejes en blanco.",
+    "message": "需要預設名稱",
     "description": "Toast notice."
   },
   "maxCustomPresetsLimit": {
-    "message": "Ya tienes 3 ajustes personalizados. Deja de inventar tanto.",
+    "message": "您最多可以新增 3 個自訂預設",
     "description": "Toast notice."
   },
   "presetCreated": {
-    "message": "Ajuste creado",
+    "message": "預設已建立",
     "description": "Toast notice."
   },
   "presetUpdated": {
-    "message": "Ajuste modificado",
+    "message": "預設已更新",
     "description": "Toast notice."
   },
   "appliedPreset": {
-    "message": "Ajuste aplicado: $name$",
+    "message": "應用的預設：$name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2182,11 +2204,11 @@
     }
   },
   "undo10s": {
-    "message": "Deshacer (10s)",
+    "message": "撤銷（10 秒）",
     "description": "Undo text label."
   },
   "undoXs": {
-    "message": "Deshacer ($secs$s)",
+    "message": "撤銷（$secs$秒）",
     "description": "Undo countdown.",
     "placeholders": {
       "secs": {
@@ -2196,39 +2218,39 @@
     }
   },
   "editBlockRule": {
-    "message": "Editar Regla de Bloqueo",
+    "message": "編輯阻止規則",
     "description": "Modal title."
   },
   "startWork": {
-    "message": "▶ Iniciar Trabajo",
+    "message": "▶ 開始工作",
     "description": "Action button."
   },
   "startBreak": {
-    "message": "▶ Iniciar Descanso",
+    "message": "▶ 開始休息",
     "description": "Action button."
   },
   "scheduledFocus": {
-    "message": "Enfoque Programado",
+    "message": "預定焦點",
     "description": "Focus mode timer subtext."
   },
   "pinLengthError": {
-    "message": "El PIN debe tener exactamente 6 dígitos.",
+    "message": "PIN 碼必須剛好是 6 位數字",
     "description": "PIN configuration error."
   },
   "pinsDoNotMatch": {
-    "message": "Los PINs no coinciden.",
+    "message": "PIN 碼不匹配",
     "description": "PIN configuration error."
   },
   "readingFile": {
-    "message": "Leyendo archivo...",
+    "message": "正在讀取檔案...",
     "description": "Migration progress status."
   },
   "parsingCsvData": {
-    "message": "Analizando datos CSV...",
+    "message": "正在解析 CSV 資料...",
     "description": "Migration progress status."
   },
   "mergingDaysOfHistory": {
-    "message": "Uniendo $count$ días de historial...",
+    "message": "合併 $count$ 天的歷史...",
     "description": "Migration progress status.",
     "placeholders": {
       "count": {
@@ -2238,11 +2260,11 @@
     }
   },
   "finalizingAndReloading": {
-    "message": "Finalizando y recargando...",
+    "message": "完成並重新加載...",
     "description": "Migration progress status."
   },
   "importingDataDayOf": {
-    "message": "Importando datos: Día $current$ de $total$...",
+    "message": "導入資料：第 $current$ 天 $total$...",
     "description": "Migration progress status.",
     "placeholders": {
       "current": {
@@ -2256,79 +2278,79 @@
     }
   },
   "creatingPreImportBackup": {
-    "message": "Creando respaldo antes de importar...",
+    "message": "建立導入前備份...",
     "description": "Migration progress status."
   },
   "parsingJsonData": {
-    "message": "Analizando datos JSON...",
+    "message": "正在解析 JSON 資料...",
     "description": "Migration progress status."
   },
   "creating": {
-    "message": "Creando...",
+    "message": "創造...",
     "description": "Button progress indicator."
   },
   "editBlockPreset": {
-    "message": "Editar Ajuste de Bloqueo",
+    "message": "編輯區塊預設",
     "description": "Modal title."
   },
   "pausedAlways": {
-    "message": "Pausado (Siempre)",
+    "message": "暫停（始終）",
     "description": "Indefinite pause status."
   },
   "delete": {
-    "message": "Eliminar",
+    "message": "刪除",
     "description": "Generic tooltip or button."
   },
   "edit": {
-    "message": "Editar",
+    "message": "編輯",
     "description": "Generic tooltip or button."
   },
   "restoreThisBackup": {
-    "message": "Restaurar este respaldo",
+    "message": "恢復此備份",
     "description": "Tooltip."
   },
   "downloadJsonFile": {
-    "message": "Descargar archivo JSON",
+    "message": "下載 JSON 文件",
     "description": "Tooltip."
   },
   "deleteThisBackup": {
-    "message": "Eliminar este respaldo",
+    "message": "刪除此備份",
     "description": "Tooltip."
   },
   "egMorningFocus": {
-    "message": "ej. Enfoque Matutino",
+    "message": "例如晨間焦點",
     "description": "Schedule input placeholder."
   },
   "quickStart": {
-    "message": "Inicio Rápido",
+    "message": "快速入門",
     "description": "Button tooltip."
   },
   "editSettings": {
-    "message": "Editar Ajustes",
+    "message": "編輯設定",
     "description": "Button tooltip."
   },
   "daySundayLetter": {
-    "message": "D",
+    "message": "S",
     "description": "Sunday letter."
   },
   "dayMondayLetter": {
-    "message": "L",
+    "message": "中號",
     "description": "Monday letter."
   },
   "dayTuesdayLetter": {
-    "message": "M",
+    "message": "時間",
     "description": "Tuesday letter."
   },
   "dayWednesdayLetter": {
-    "message": "M",
+    "message": "瓦",
     "description": "Wednesday letter."
   },
   "dayThursdayLetter": {
-    "message": "J",
+    "message": "時間",
     "description": "Thursday letter."
   },
   "dayFridayLetter": {
-    "message": "V",
+    "message": "F",
     "description": "Friday letter."
   },
   "daySaturdayLetter": {
@@ -2336,115 +2358,115 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7d",
+    "message": "7天",
     "description": "7 days range label shortcut"
   },
   "range14d": {
-    "message": "14d",
+    "message": "14天",
     "description": "14 days range label shortcut"
   },
   "range30d": {
-    "message": "30d",
+    "message": "30天",
     "description": "30 days range label shortcut"
   },
   "range45d": {
-    "message": "45d",
+    "message": "45天",
     "description": "45 days range label shortcut"
   },
   "trackLocalFiles": {
-    "message": "Rastrear Archivos Locales",
+    "message": "追蹤本地文件",
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "Rastrea los PDF o archivos locales que abres. No te escondas.",
+    "message": "追蹤在瀏覽器中開啟的本機 HTML 或 PDF 檔案。",
     "description": "Track local files option description"
   },
   "blockingBehavior": {
-    "message": "Comportamiento de Bloqueo",
+    "message": "阻止行為",
     "description": "Blocking behavior card header"
   },
   "showFunnyBlockedPage": {
-    "message": "Mostrar página de bloqueo con frases chidas",
+    "message": "顯示有​​趣的被封鎖頁面",
     "description": "Show funny blocked page option"
   },
   "timeLimitWarning": {
-    "message": "Aviso antes de que te bloquee",
+    "message": "封鎖前的時間限制警告",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "Te avisa estos segundos antes de que te bloquee la página. Prepárate.",
+    "message": "在網站被封鎖之前的幾秒鐘內顯示警告。",
     "description": "Warning duration description"
   },
   "sec": {
-    "message": "seg",
+    "message": "秒",
     "description": "seconds abbreviation"
   },
   "tabLimiter": {
-    "message": "Límite de pestañas por dominio",
+    "message": "每個域的製表符限制器",
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "Pon 0 para desactivar. Si puedes controlarte.",
+    "message": "設定 0 禁用。",
     "description": "Tab limiter description"
   },
   "tabsMax": {
-    "message": "pestañas máx",
+    "message": "最大標籤數",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "Excepciones de Rastreo",
+    "message": "追蹤異常狀況",
     "description": "Tracking exceptions card header"
   },
   "alwaysTrackEvenIdle": {
-    "message": "Rastrear siempre (incluso inactivo)",
+    "message": "始終跟踪（即使閒置時）",
     "description": "Always track option"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "Sitios que seguirán contando tiempo aunque te vayas a hacer un café.",
+    "message": "即使您離開也始終追蹤時間的網站（例如 pw.live）",
     "description": "Always track description"
   },
   "btnAddException": {
-    "message": "+ Añadir Excepción",
+    "message": "+ 新增例外",
     "description": "Add exception button"
   },
   "badgeDisplay": {
-    "message": "Contador del Icono",
+    "message": "徽章展示",
     "description": "Badge display card header"
   },
   "showTimeSpentBadge": {
-    "message": "Mostrar tiempo en el icono",
+    "message": "顯示在擴充徽章上花費的時間",
     "description": "Show time spent option"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "Muestra los minutos que llevas perdiendo en el sitio actual.",
+    "message": "顯示在目前網站上花費的分鐘數。",
     "description": "Show time spent description"
   },
   "showIdlWhenIdle": {
-    "message": "Mostrar \"idl\" al estar inactivo",
+    "message": "空閒/不追蹤時顯示“idl”",
     "description": "Show idle status option"
   },
   "showIdlWhenIdleDesc": {
-    "message": "Muestra \"idl\" en el icono para que sepas que no está contando nada.",
+    "message": "當時間追蹤暫停或不活動時，在擴充徽章上顯示「idl」。",
     "description": "Show idle status description"
   },
   "dataRollover": {
-    "message": "Datos e Inicio del Día",
+    "message": "數據和滾動",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "Reinicio del Día para Búhos",
+    "message": "夜貓子日翻轉",
     "description": "Night owl rollover option"
   },
   "nightOwlRolloverDesc": {
-    "message": "Define a qué hora empieza tu nuevo día de rastreo. Útil si eres de los que no duermen.",
+    "message": "定義新的追蹤日的開始時間。如果你工作到很晚很有用。",
     "description": "Night owl description"
   },
   "midnight": {
-    "message": "Medianoche (12:00 AM)",
+    "message": "午夜（12:00 AM）",
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "Últimos $count$ días",
+    "message": "過去 $count$ 天",
     "description": "Last X days label",
     "placeholders": {
       "count": {
@@ -2454,127 +2476,127 @@
     }
   },
   "tuesday": {
-    "message": "Martes",
+    "message": "週二",
     "description": "Weekday name."
   },
   "wednesday": {
-    "message": "Miércoles",
+    "message": "週三",
     "description": "Weekday name."
   },
   "thursday": {
-    "message": "Jueves",
+    "message": "週四",
     "description": "Weekday name."
   },
   "friday": {
-    "message": "Viernes",
+    "message": "星期五",
     "description": "Weekday name."
   },
   "saturday": {
-    "message": "Sábado",
+    "message": "週六",
     "description": "Weekday name."
   },
   "sun": {
-    "message": "Dom",
+    "message": "太陽",
     "description": "Abbreviated weekday name."
   },
   "mon": {
-    "message": "Lun",
+    "message": "週一",
     "description": "Abbreviated weekday name."
   },
   "tue": {
-    "message": "Mar",
+    "message": "星期二",
     "description": "Abbreviated weekday name."
   },
   "wed": {
-    "message": "Mié",
+    "message": "週三",
     "description": "Abbreviated weekday name."
   },
   "thu": {
-    "message": "Jue",
+    "message": "星期四",
     "description": "Abbreviated weekday name."
   },
   "fri": {
-    "message": "Vie",
+    "message": "週五",
     "description": "Abbreviated weekday name."
   },
   "sat": {
-    "message": "Sáb",
+    "message": "星期六",
     "description": "Abbreviated weekday name."
   },
   "everyday": {
-    "message": "Todos los días",
+    "message": "每天",
     "description": "Schedule frequency label."
   },
   "weekdays": {
-    "message": "Días laborables",
+    "message": "平日",
     "description": "Schedule frequency label."
   },
   "focusSession": {
-    "message": "Sesión de enfoque",
+    "message": "焦點會議",
     "description": "Default focus session name."
   },
   "addSchedule": {
-    "message": "Añadir horario",
+    "message": "新增時間表",
     "description": "Add schedule button."
   },
   "notEnoughDataYet": {
-    "message": "Aún no hay suficientes datos",
+    "message": "還沒有足夠的數據",
     "description": "Empty state analytics label."
   },
   "label": {
-    "message": "Etiqueta",
+    "message": "標籤",
     "description": "Text input label."
   },
   "start": {
-    "message": "Inicio",
+    "message": "開始",
     "description": "Time input label."
   },
   "end": {
-    "message": "Fin",
+    "message": "結尾",
     "description": "Time input label."
   },
   "categoriesToBlock": {
-    "message": "Categorías a bloquear",
+    "message": "要阻止的類別",
     "description": "Categories select section header."
   },
   "preScheduleNotification": {
-    "message": "Notificación previa",
+    "message": "預定通知",
     "description": "Option label."
   },
   "preScheduleNotificationDesc": {
-    "message": "Recibe un aviso antes de que empiece la sesión.",
+    "message": "在會議開始前收到通知。",
     "description": "Option sublabel."
   },
   "disabled": {
-    "message": "Desactivado",
+    "message": "殘障人士",
     "description": "Option setting selection."
   },
   "oneMinBefore": {
-    "message": "1 min antes",
+    "message": "1 分鐘前",
     "description": "Option setting selection."
   },
   "fiveMinsBefore": {
-    "message": "5 min antes",
+    "message": "5分鐘前",
     "description": "Option setting selection."
   },
   "tenMinsBefore": {
-    "message": "10 min antes",
+    "message": "10分鐘前",
     "description": "Option setting selection."
   },
   "fifteenMinsBefore": {
-    "message": "15 min antes",
+    "message": "15分鐘前",
     "description": "Option setting selection."
   },
   "editFocusSchedule": {
-    "message": "Editar horario de enfoque",
+    "message": "編輯焦點時間表",
     "description": "Dialog title."
   },
   "addFocusSchedule": {
-    "message": "Añadir horario de enfoque",
+    "message": "新增焦點時間表",
     "description": "Dialog title."
   },
   "bestDowStat": {
-    "message": "$day$ — prom. $time$ de enfoque",
+    "message": "$day$ — 焦點的平均值 $time$",
     "description": "Best day of week performance metric.",
     "placeholders": {
       "day": {
@@ -2588,87 +2610,87 @@
     }
   },
   "editPreset": {
-    "message": "Editar preajuste",
+    "message": "編輯預設",
     "description": "Modal title."
   },
   "workTimeMin": {
-    "message": "Tiempo de trabajo (min)",
+    "message": "工作時間（分鐘）",
     "description": "Input field label."
   },
   "breakTimeMin": {
-    "message": "Tiempo de descanso (min)",
+    "message": "休息時間（分鐘）",
     "description": "Input field label."
   },
   "longBreakMin": {
-    "message": "Descanso largo (min)",
+    "message": "長休息（分鐘）",
     "description": "Input field label."
   },
   "enableNotifications": {
-    "message": "Activar notificaciones",
+    "message": "啟用通知",
     "description": "Toggle switch label."
   },
   "epNotifyDesc": {
-    "message": "Recibe alertas automáticas cuando terminen los períodos de enfoque o descanso.",
+    "message": "當專注時段或休息結束時接收推播警報。",
     "description": "Help text."
   },
   "autoStartNextCycle": {
-    "message": "Iniciar ciclo siguiente automáticamente",
+    "message": "自動啟動下一個週期",
     "description": "Toggle switch label."
   },
   "epAutoStartDesc": {
-    "message": "Pasa automáticamente al siguiente ciclo de trabajo o descanso.",
+    "message": "自動過渡到下一個工作週期或休息。",
     "description": "Help text."
   },
   "categoriesToBlockDuringFocus": {
-    "message": "Categorías a bloquear durante el enfoque",
+    "message": "焦點期間要阻止的類別",
     "description": "Checkbox group header."
   },
   "presetPomodoro": {
-    "message": "Pomodoro",
+    "message": "番茄鐘",
     "description": "Built-in preset name."
   },
   "presetDeepWork": {
-    "message": "Enfoque profundo",
+    "message": "深度工作",
     "description": "Built-in preset name."
   },
   "presetShortSprint": {
-    "message": "Sesión corta",
+    "message": "短距離衝刺",
     "description": "Built-in preset name."
   },
   "presetFlow": {
-    "message": "Flow",
+    "message": "流動",
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "Aún no hay sesiones de enfoque.",
+    "message": "還沒有焦點會議。",
     "description": "Placeholder text."
   },
   "startFirstSession": {
-    "message": "Iniciar primera sesión",
+    "message": "開始第一個會話",
     "description": "Button label."
   },
   "siteList": {
-    "message": "Lista de sitios",
+    "message": "站點列表",
     "description": "Tab title."
   },
   "smartPresetsAndCategories": {
-    "message": "Preajustes inteligentes y categorías",
+    "message": "智慧預設和類別",
     "description": "Tab title."
   },
   "advancedTweaks": {
-    "message": "Ajustes avanzados",
+    "message": "進階調整",
     "description": "Tab title."
   },
   "addFreetime": {
-    "message": "Añadir tiempo libre",
+    "message": "新增空閒時間",
     "description": "Button label."
   },
   "addBlockRule": {
-    "message": "Añadir regla de bloqueo",
+    "message": "新增阻止規則",
     "description": "Modal title."
   },
   "siteCountSingle": {
-    "message": "$count$ sitio",
+    "message": "$count$ 站點",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2678,7 +2700,7 @@
     }
   },
   "siteCountPlural": {
-    "message": "$count$ sitios",
+    "message": "$count$ 站點",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2688,43 +2710,43 @@
     }
   },
   "minActiveTimeShort": {
-    "message": "Tiempo activo mín. (m)",
+    "message": "最短活動時間（公尺）",
     "description": "Short label for sidebar settings."
   },
   "ratioThresholdShort": {
-    "message": "Umbral de proporción (%)",
+    "message": "比率閾值 (%)",
     "description": "Short label for sidebar settings."
   },
   "averageFocus": {
-    "message": "Promedio de enfoque",
+    "message": "平均焦點",
     "description": "Chart line label."
   },
   "noRulesYet": {
-    "message": "Aún no hay reglas",
+    "message": "還沒有規則",
     "description": "Placeholder header."
   },
   "blockSitesToGetStarted": {
-    "message": "Bloquea sitios distractores para comenzar.",
+    "message": "阻止分散注意力的網站即可開始。",
     "description": "Placeholder description."
   },
   "noExceptionsYet": {
-    "message": "Aún no hay excepciones",
+    "message": "還沒有例外",
     "description": "Placeholder header."
   },
   "allowSitesDesc": {
-    "message": "Permite sitios que omiten todas las reglas de bloqueo.",
+    "message": "允許繞過所有阻止規則的網站。",
     "description": "Placeholder description."
   },
   "noDomainsIgnored": {
-    "message": "No hay dominios ignorados",
+    "message": "沒有忽略任何域",
     "description": "Placeholder header."
   },
   "neverTrackDesc": {
-    "message": "Los dominios de esta lista nunca se rastrearán para analíticas.",
+    "message": "此列表中的網域永遠不會被追蹤以進行分析。",
     "description": "Placeholder description."
   },
   "freetimeHoursTitle": {
-    "message": "Horas de tiempo libre",
+    "message": "空閒時間",
     "description": "Section header."
   }
 }

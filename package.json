@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "node build.js",
-    "zip": "node build.js --zip"
+    "build": "node tools/build.js",
+    "zip": "node tools/build.js --zip"
   },
   "dependencies": {
     "esbuild": "^0.28.1",
