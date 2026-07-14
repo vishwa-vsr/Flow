@@ -104,6 +104,43 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 ---
 
+## 📂 Repository File Structure
+
+To help contributors understand where files are located, here is the organized layout of the repository:
+
+```text
+flow-source/
+  ├── src/                         <-- ALL extension code goes here!
+  │    ├── manifest.json           <-- Extension configurations
+  │    ├── _locales/               <-- Localized translation files
+  │    ├── assets/                 <-- Media assets (fonts, icons)
+  │    │    ├── fonts/
+  │    │    └── icons/
+  │    ├── styles/
+  │    │    └── global.css         <-- Core shared design CSS tokens
+  │    ├── background/             <-- Service workers (tab tracking, blocking)
+  │    ├── content/                <-- Content script tracking site focus
+  │    ├── lib/                    <-- Helper scripts (constants, db, storage)
+  │    ├── blocked/                <-- Refined blocked page layout
+  │    ├── dashboard/              <-- Premium visual statistics screen
+  │    ├── popup/                  <-- Main dropdown focus timer card
+  │    └── utils.js                <-- DOM/UI interface helper functions
+  ├── tools/
+  │    ├── build.js                <-- Standard optimized minifier builder
+  │    ├── languages_analysis.html <-- Translation stats checking interface
+  │    ├── languages_analysis.py   <-- Translation statistics checking tool
+  │    └── translate_locales.py    <-- Machine translator utility helper
+  ├── media/                       <-- Marketing posters and preview banners
+  │    ├── flow_preview1.jpg
+  │    └── ...
+  ├── .gitignore                 
+  ├── package.json               
+  ├── README.md                  
+  └── CONTRIBUTING.md            
+```
+
+---
+
 ## 💻 Source Code & Build Instructions
 
 This repository contains the original, un-minified source code for Flow.
@@ -120,9 +157,15 @@ To generate the minified production packages submitted to browser extension stor
    ```
 4. Run the build script:
    ```bash
-   npm run build
-   ```
-   *(Note: To package the target folders into `.zip` archives for store uploads, run `npm run zip` instead. Bypassing prompts can be done via the `--yes` flag, e.g., `npm run build -- --yes`. On Windows, if PowerShell blocks running the npm command due to script policies, run the build script directly with node: `node tools/build.js --yes`, or bypass execution policies with `powershell -ExecutionPolicy Bypass -Command "npm run build"`.)*
+    npm run build
+    ```
+
+> [!TIP]
+> To package the target folders into `.zip` archives for store uploads, run `npm run zip` instead. Bypassing prompts can be done via the `--yes` flag: `npm run build -- --yes`.
+
+> [!WARNING]
+> **Windows Users**: If PowerShell blocks running the npm command due to script policies, run the build script directly with Node: `node tools/build.js --yes`, or bypass execution policies with `powershell -ExecutionPolicy Bypass -Command "npm run build"`.
+
 5. The build script outputs optimized builds into `flow-dist/` (for Chrome), `flow-edge/` (for Edge), and `flow-firefox/` (for Firefox).
 
 ### Notes on the Build Process
