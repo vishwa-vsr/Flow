@@ -2659,17 +2659,9 @@
     "message": "高级调整",
     "description": "Tab title."
   },
-  "freetimeHours": {
-    "message": "空闲时间",
-    "description": "Section header."
-  },
   "addFreetime": {
     "message": "添加空闲时间",
     "description": "Button label."
-  },
-  "editFreetime": {
-    "message": "编辑空闲时间",
-    "description": "Modal title."
   },
   "addBlockRule": {
     "message": "添加阻止规则",
@@ -2730,5 +2722,9 @@
   "neverTrackDesc": {
     "message": "此列表中的域永远不会被跟踪以进行分析。",
     "description": "Placeholder description."
+  },
+  "freetimeHoursTitle": {
+    "message": "空闲时间",
+    "description": "Section header."
   }
 }
