@@ -42,15 +42,20 @@ var $ = function (e) {
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
 
 function getLocale() {
+    let loc = "en-US";
     if (typeof currentLanguage !== "undefined" && currentLanguage && currentLanguage !== "default") {
-        return currentLanguage;
+        loc = currentLanguage;
+    } else {
+        const sel = document.getElementById("lang-sel")?.value;
+        if (sel && sel !== "default") {
+            loc = sel;
+        } else if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
+            loc = chrome.i18n.getUILanguage();
+        } else {
+            loc = navigator.language || "en-US";
+        }
     }
-    const sel = document.getElementById("lang-sel")?.value;
-    if (sel && sel !== "default") return sel;
-    if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
-        return chrome.i18n.getUILanguage();
-    }
-    return navigator.language || "en-US";
+    return loc.replace(/_/g, "-").replace(/\s+/g, "-");
 }
 
 function getPresetName(id, name) {
