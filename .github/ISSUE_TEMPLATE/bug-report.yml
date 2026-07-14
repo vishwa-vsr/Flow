@@ -1,0 +1,49 @@
+name: 🐛 Bug Report
+description: Report a bug to help us improve Flow
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below.
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Which browser are you using?
+      options:
+        - Microsoft Edge
+        - Firefox
+        - Google Chrome (Beta/Manual)
+        - Brave
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Flow Extension Version
+      description: You can find this in the extension popup or browser settings page.
+      placeholder: e.g., 6.8.6
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Android
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What is happening, and what did you expect to happen instead?
+      placeholder: Steps to reproduce, details of the bug, etc.
+    validations:
+      required: true

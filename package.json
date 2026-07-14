@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "node build.js",
+    "zip": "node build.js --zip"
+  },
+  "dependencies": {
+    "esbuild": "^0.28.1",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "archiver": "^8.0.0"
+  }
+}

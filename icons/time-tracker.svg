@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Deep blue background circle -->
+  <circle cx="64" cy="64" r="56" fill="#3f51b5" />
+  <!-- Shadow under top cap -->
+  <rect x="38" y="34" width="52" height="6" fill="#1a237e" opacity="0.4" rx="2" />
+  <!-- Shadow above bottom cap -->
+  <rect x="38" y="88" width="52" height="6" fill="#1a237e" opacity="0.4" rx="2" />
+  <!-- Glass bulb body with a very soft light grey outline -->
+  <path d="M 44 34 C 34 46, 56 58, 56 64 C 56 70, 34 82, 44 94 L 84 94 C 94 82, 72 70, 72 64 C 72 58, 94 46, 84 34 Z" fill="#ffffff" stroke="#d5d5d5" stroke-width="1" />
+  <!-- Top sand in upper bulb -->
+  <path d="M 46 38 C 38 46, 58 58, 64 64 C 70 58, 90 46, 82 38 Z" fill="#4e5d6c" />
+  <!-- Bottom sand pile in lower bulb -->
+  <path d="M 45 92 L 83 92 L 64 74 Z" fill="#4e5d6c" />
+  <!-- Sand stream running down -->
+  <line x1="64" y1="62" x2="64" y2="76" stroke="#4e5d6c" stroke-width="3" stroke-linecap="round" />
+  <!-- Top wood cap -->
+  <rect x="34" y="26" width="60" height="8" rx="4" fill="#f7cb83" />
+  <!-- Bottom wood cap -->
+  <rect x="34" y="94" width="60" height="8" rx="4" fill="#f7cb83" />
+</svg>

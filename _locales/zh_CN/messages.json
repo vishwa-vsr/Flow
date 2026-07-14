@@ -1,0 +1,2734 @@
+{
+  "extName": {
+    "message": "Flow - 网站拦截器和习惯追踪器",
+    "description": "Extension name shown in the Chrome Web Store and browser toolbar."
+  },
+  "extDescription": {
+    "message": "先进的生产力跟踪器和网络级干扰拦截器。",
+    "description": "Extension description shown in the Chrome Web Store listing."
+  },
+  "verification": {
+    "message": "确认",
+    "description": "Title for the PIN verification dialog."
+  },
+  "enterPin": {
+    "message": "输入您的 6 位 PIN 码以继续",
+    "description": "Instruction shown in the PIN verification dialog."
+  },
+  "incorrectPin": {
+    "message": "PIN 码不正确",
+    "description": "Error message when the user enters a wrong PIN."
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "Label for the cancel button."
+  },
+  "ok": {
+    "message": "好的",
+    "description": "Label for the OK/confirm button."
+  },
+  "analytics": {
+    "message": "分析",
+    "description": "Label for the analytics section or button."
+  },
+  "toggleTheme": {
+    "message": "切换主题",
+    "description": "Tooltip for the theme toggle button."
+  },
+  "privacyMode": {
+    "message": "隐私模式/暂停跟踪",
+    "description": "Label for the privacy mode toggle that pauses tracking."
+  },
+  "settings": {
+    "message": "设置",
+    "description": "Label for the settings button or section."
+  },
+  "pauseTrackingBlocking": {
+    "message": "暂停跟踪和阻止",
+    "description": "Title for the pause tracking and blocking panel."
+  },
+  "pauseFor30Min": {
+    "message": "暂停30分钟",
+    "description": "Option to pause tracking for 30 minutes."
+  },
+  "pauseFor1Hour": {
+    "message": "暂停1小时",
+    "description": "Option to pause tracking for 1 hour."
+  },
+  "pauseUntilResumed": {
+    "message": "暂停直至恢复",
+    "description": "Option to pause tracking indefinitely until manually resumed."
+  },
+  "privacyModeActive": {
+    "message": "隐私模式激活",
+    "description": "Status indicator when privacy mode is currently on."
+  },
+  "trackingBlockingPaused": {
+    "message": "跟踪和阻止已暂停",
+    "description": "Status message when tracking and blocking are paused."
+  },
+  "resume": {
+    "message": "恢复",
+    "description": "Label for the resume button to restart tracking."
+  },
+  "tabToday": {
+    "message": "今天",
+    "description": "Tab label for today's data view."
+  },
+  "tabAllTime": {
+    "message": "所有时间",
+    "description": "Tab label for all-time data view."
+  },
+  "weeklyGoal": {
+    "message": "每周目标",
+    "description": "Label for the weekly productivity goal section."
+  },
+  "goalDone": {
+    "message": "$h$小时$m$分钟完成",
+    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "2"
+      },
+      "m": {
+        "content": "$2",
+        "example": "30"
+      }
+    }
+  },
+  "setGoalInSettings": {
+    "message": "在“设置”中设定目标",
+    "description": "Prompt shown when the user has not configured a weekly goal."
+  },
+  "goalHit": {
+    "message": "进球了！ ✓",
+    "description": "Message shown when the weekly goal has been reached."
+  },
+  "timerSettings": {
+    "message": "定时器设置",
+    "description": "Title for the Pomodoro timer settings panel."
+  },
+  "workMin": {
+    "message": "工作（分钟）",
+    "description": "Label for the work duration input in minutes."
+  },
+  "shortBreak": {
+    "message": "短暂休息",
+    "description": "Label for the short break duration input."
+  },
+  "longBreak": {
+    "message": "长假",
+    "description": "Label for the long break duration input."
+  },
+  "cycles": {
+    "message": "周期",
+    "description": "Label for the number of Pomodoro cycles input."
+  },
+  "saveSettings": {
+    "message": "保存设置",
+    "description": "Label for the save settings button."
+  },
+  "advancedSettings": {
+    "message": "高级设置",
+    "description": "Label for the advanced settings link or button."
+  },
+  "focusMode": {
+    "message": "对焦模式",
+    "description": "Label for the focus mode toggle or section."
+  },
+  "pomodoro": {
+    "message": "番茄钟",
+    "description": "Label for the Pomodoro timer section."
+  },
+  "readyToFocus": {
+    "message": "准备好集中注意力了吗？",
+    "description": "Prompt shown before a focus session begins."
+  },
+  "autoStopsIn": {
+    "message": "⏱ 自动停止",
+    "description": "Label indicating when focus mode will automatically stop."
+  },
+  "btnStart": {
+    "message": "▶ 开始",
+    "description": "Label for the start button."
+  },
+  "btnStop": {
+    "message": "■ 停止",
+    "description": "Label for the stop button."
+  },
+  "btnSkip": {
+    "message": "⏭ 跳过",
+    "description": "Label for the skip button."
+  },
+  "btnPause": {
+    "message": "⏸ 暂停",
+    "description": "Label for the pause button."
+  },
+  "btnResume": {
+    "message": "▶ 简历",
+    "description": "Label for the resume button."
+  },
+  "loading": {
+    "message": "加载中...",
+    "description": "Generic loading indicator text."
+  },
+  "loadingData": {
+    "message": "正在加载数据...",
+    "description": "Loading indicator when fetching analytics data."
+  },
+  "noDataYet": {
+    "message": "还没有数据。",
+    "description": "Placeholder shown when there is no tracking data to display."
+  },
+  "sublblToday": {
+    "message": "今天",
+    "description": "Lowercase sub-label for the today tab."
+  },
+  "sublblAllTime": {
+    "message": "所有时间",
+    "description": "Lowercase sub-label for the all-time tab."
+  },
+  "catProductivity": {
+    "message": "生产率",
+    "description": "Display name for the Productivity category."
+  },
+  "catLearning": {
+    "message": "学习",
+    "description": "Display name for the Learning category."
+  },
+  "catCommunication": {
+    "message": "沟通",
+    "description": "Display name for the Communication category."
+  },
+  "catDistraction": {
+    "message": "分散注意力",
+    "description": "Display name for the Distraction category."
+  },
+  "catUncategorized": {
+    "message": "未分类",
+    "description": "Display name for the Uncategorized category."
+  },
+  "allSitesToday": {
+    "message": "今日所有网站",
+    "description": "Heading for the list of all sites visited today."
+  },
+  "allTimeSiteUsage": {
+    "message": "所有时间的网站使用情况",
+    "description": "Heading for the list of all-time site usage."
+  },
+  "clickTagToEdit": {
+    "message": "（点击标签即可编辑）",
+    "description": "Hint text telling the user they can click a category tag to change it."
+  },
+  "showAllSites": {
+    "message": "显示所有 $count$ 站点",
+    "description": "Button to expand and show all sites in the list.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
+  },
+  "rateUs": {
+    "message": "⭐ 评价我们",
+    "description": "Link to rate the extension on the Chrome Web Store."
+  },
+  "feedback": {
+    "message": "💬 反馈",
+    "description": "Link to send feedback about the extension."
+  },
+  "unblock": {
+    "message": "解锁",
+    "description": "Button to unblock a currently blocked site."
+  },
+  "blockSite": {
+    "message": "块站点",
+    "description": "Button to block the current site."
+  },
+  "defaultInstant": {
+    "message": "默认（即时）",
+    "description": "Label for the default instant-block mode."
+  },
+  "confirmBlockTitle": {
+    "message": "屏蔽网站？",
+    "description": "Title of the custom confirmation modal when blocking a site."
+  },
+  "confirmBlock": {
+    "message": "您确定要阻止 $domain$ 吗？这将重新加载选项卡并阻止对此站点的访问。",
+    "description": "Confirmation dialog when blocking a site.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "youtube.com"
+      }
+    }
+  },
+  "confirmPauseTitle": {
+    "message": "暂停焦点会话？",
+    "description": "Title of the confirmation modal when pausing a session."
+  },
+  "confirmPauseDesc": {
+    "message": "会话最多只能暂停 5 分钟。 5 分钟后，您的会话将自动结束。",
+    "description": "Description in confirmation modal when pausing a session."
+  },
+  "deepWork": {
+    "message": "深度工作。",
+    "description": "Status text during a Pomodoro work phase."
+  },
+  "shortBreakPhase": {
+    "message": "短暂的休息。",
+    "description": "Status text during a Pomodoro short break phase."
+  },
+  "longBreakPhase": {
+    "message": "长假！",
+    "description": "Status text during a Pomodoro long break phase."
+  },
+  "scheduledSession": {
+    "message": "预定会议",
+    "description": "Label for a focus session that was triggered by a schedule."
+  },
+  "schedule": {
+    "message": "日程",
+    "description": "Label for the schedule section or button."
+  },
+  "work": {
+    "message": "工作",
+    "description": "Label for the work phase in the Pomodoro timer."
+  },
+  "cyclesDone": {
+    "message": "$count$ 完成",
+    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "cyclesCompleted": {
+    "message": "$count$ 周期已完成",
+    "description": "Singular: one Pomodoro cycle completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "cyclesCompletedPlural": {
+    "message": "$count$ 周期已完成",
+    "description": "Plural: multiple Pomodoro cycles completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
+  },
+  "active": {
+    "message": "积极的",
+    "description": "Status label indicating something is currently active."
+  },
+  "minWorkBreak": {
+    "message": "$work$ 最短工作时间 · $break$ 最短休息时间",
+    "description": "Shows the current work and break durations.",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "trackingPausedFor": {
+    "message": "跟踪和阻止已暂停 $time$",
+    "description": "Status message showing how long tracking is paused.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "30 minutes"
+      }
+    }
+  },
+  "trackingPausedIndefinitely": {
+    "message": "跟踪和阻止无限期暂停",
+    "description": "Status message when tracking is paused with no time limit."
+  },
+  "privacyDisabledDuringFocus": {
+    "message": "隐私模式（在焦点模式下禁用）",
+    "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
+  },
+  "hDone": {
+    "message": "$h$小时$m$分钟完成",
+    "description": "Hours and minutes completed. Example: 1h 45m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "1"
+      },
+      "m": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "hLeft": {
+    "message": "还剩 $h$ 小时 $m$ 米",
+    "description": "Hours and minutes remaining. Example: 0h 15m left.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "0"
+      },
+      "m": {
+        "content": "$2",
+        "example": "15"
+      }
+    }
+  },
+  "blockedPageTitle": {
+    "message": "阻塞 — 流量",
+    "description": "Page title for the blocked site page."
+  },
+  "blockedMsg1Emoji": {
+    "message": "🧱",
+    "description": "Emoji for blocked message variant 1."
+  },
+  "blockedMsg1Head": {
+    "message": "不是今天，冠军。",
+    "description": "Heading for blocked message variant 1."
+  },
+  "blockedMsg1Sub": {
+    "message": "未来的你说“不”。他们对此非常坚定。",
+    "description": "Subtext for blocked message variant 1."
+  },
+  "blockedMsg2Emoji": {
+    "message": "🤖",
+    "description": "Emoji for blocked message variant 2."
+  },
+  "blockedMsg2Head": {
+    "message": "拒绝访问。",
+    "description": "Heading for blocked message variant 2."
+  },
+  "blockedMsg2Sub": {
+    "message": "生产力机器人已经说话了。抵抗是徒劳的。",
+    "description": "Subtext for blocked message variant 2."
+  },
+  "blockedMsg3Emoji": {
+    "message": "🧠",
+    "description": "Emoji for blocked message variant 3."
+  },
+  "blockedMsg3Head": {
+    "message": "大脑动。",
+    "description": "Heading for blocked message variant 3."
+  },
+  "blockedMsg3Sub": {
+    "message": "你阻止了这个。过去的你比现在的你聪明。",
+    "description": "Subtext for blocked message variant 3."
+  },
+  "blockedMsg4Emoji": {
+    "message": "🚪",
+    "description": "Emoji for blocked message variant 4."
+  },
+  "blockedMsg4Head": {
+    "message": "门是锁着的。",
+    "description": "Heading for blocked message variant 4."
+  },
+  "blockedMsg4Sub": {
+    "message": "你把锁放在那里。你给了我钥匙。不还给它。",
+    "description": "Subtext for blocked message variant 4."
+  },
+  "blockedMsg5Emoji": {
+    "message": "🏋️",
+    "description": "Emoji for blocked message variant 5."
+  },
+  "blockedMsg5Head": {
+    "message": "你的纪律召唤了。",
+    "description": "Heading for blocked message variant 5."
+  },
+  "blockedMsg5Sub": {
+    "message": "它想要你回来。它想念你。去做事吧。",
+    "description": "Subtext for blocked message variant 5."
+  },
+  "blockedMsg6Emoji": {
+    "message": "⛔",
+    "description": "Emoji for blocked message variant 6."
+  },
+  "blockedMsg6Head": {
+    "message": "没有。绝对不是。",
+    "description": "Heading for blocked message variant 6."
+  },
+  "blockedMsg6Sub": {
+    "message": "等你赚到了就回来吧。你知道该怎么做。",
+    "description": "Subtext for blocked message variant 6."
+  },
+  "blockedMsg7Emoji": {
+    "message": "🦾",
+    "description": "Emoji for blocked message variant 7."
+  },
+  "blockedMsg7Head": {
+    "message": "保持努力。",
+    "description": "Heading for blocked message variant 7."
+  },
+  "blockedMsg7Sub": {
+    "message": "这项工作不会自行完成。回到它。",
+    "description": "Subtext for blocked message variant 7."
+  },
+  "blockedMsg8Emoji": {
+    "message": "🐤",
+    "description": "Emoji for blocked message variant 8."
+  },
+  "blockedMsg8Head": {
+    "message": "博克博克博克！",
+    "description": "Heading for blocked message variant 8."
+  },
+  "blockedMsg8Sub": {
+    "message": "那是拖延的声音。别当一只鸡。",
+    "description": "Subtext for blocked message variant 8."
+  },
+  "neutralBlockHead": {
+    "message": "该网站已被屏蔽",
+    "description": "Neutral heading when a site is blocked without a fun message."
+  },
+  "neutralBlockSub": {
+    "message": "访问受到您的 Flow 规则的限制。",
+    "description": "Neutral subtext for blocked site."
+  },
+  "ruleInstantBlock": {
+    "message": "即时封锁激活",
+    "description": "Badge text for an instant block rule."
+  },
+  "ruleScheduleBlock": {
+    "message": "计划块活动",
+    "description": "Badge text for a schedule-based block rule."
+  },
+  "ruleTimeLimitReached": {
+    "message": "已达到每日限额",
+    "description": "Badge text when the daily time limit is reached."
+  },
+  "ruleSessionLimitReached": {
+    "message": "已达到会话限制",
+    "description": "Badge text when the per-session time limit is reached."
+  },
+  "ruleManuallyBlocked": {
+    "message": "手动阻止",
+    "description": "Badge text when a site was manually blocked by the user."
+  },
+  "ruleTweakBlocked": {
+    "message": "分散注意力的部分已被阻止",
+    "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
+  },
+  "ruleDetailInstant": {
+    "message": "该网站被设置为始终阻止。",
+    "description": "Detail text explaining an instant block rule."
+  },
+  "ruleDetailSchedule": {
+    "message": "该网站在您预定的封锁时间内被封锁。",
+    "description": "Detail text explaining a schedule block rule."
+  },
+  "ruleDetailTimeLimit": {
+    "message": "您已达到每日访问此网站的时间限制。",
+    "description": "Detail text explaining the daily time limit was reached."
+  },
+  "ruleDetailSessionLimit": {
+    "message": "您已达到此网站的每次会话限制。休息一下吧！",
+    "description": "Detail text explaining the session limit was reached."
+  },
+  "ruleDetailManual": {
+    "message": "您已将此网站添加到您的阻止列表中。",
+    "description": "Detail text explaining the site was manually blocked."
+  },
+  "ruleDetailTweak": {
+    "message": "您的高级站点调整阻止了对此特定部分的访问。",
+    "description": "Detail text explaining a site tweak block."
+  },
+  "blockRuleActive": {
+    "message": "阻止规则处于活动状态",
+    "description": "Generic badge for any active block rule."
+  },
+  "blockedByFlow": {
+    "message": "被流量阻塞",
+    "description": "Generic blocked indicator."
+  },
+  "dailyLimitBadge": {
+    "message": "每日限额·花费$mins$分钟",
+    "description": "Badge showing daily limit and time spent.",
+    "placeholders": {
+      "mins": {
+        "content": "$1",
+        "example": "45"
+      }
+    }
+  },
+  "blockedUntil": {
+    "message": "被阻止直到 $time$",
+    "description": "Shows when the block will be lifted.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "cooldownOver": {
+    "message": "冷却结束！刷新页面即可访问。",
+    "description": "Message shown when the cooldown timer has expired."
+  },
+  "takeABreak": {
+    "message": "休息一下·在$time$解锁",
+    "description": "Cooldown message showing time until unblock.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2:30"
+      }
+    }
+  },
+  "blockedUntilSchedule": {
+    "message": "根据您的日程安排，该网站将被阻止直到 $time$。",
+    "description": "Tells user when the schedule block lifts.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "defaultRuleDetail": {
+    "message": "该网站已被您的一项规则屏蔽。",
+    "description": "Fallback detail text for an unknown block rule."
+  },
+  "goDoSomethingUseful": {
+    "message": "去做一些有用的事情：",
+    "description": "Heading above helpful link suggestions on the blocked page."
+  },
+  "takeBackBtn": {
+    "message": "← 带我回去",
+    "description": "Button to navigate back to the previous page."
+  },
+  "manageBlockRules": {
+    "message": "管理阻止规则 →",
+    "description": "Link to the dashboard to manage block rules."
+  },
+  "thisSite": {
+    "message": "这个网站",
+    "description": "Generic label referring to the current site."
+  },
+  "quote1": {
+    "message": "“未来你正在注视着。让他们感到骄傲。”",
+    "description": "Motivational quote 1."
+  },
+  "quote2": {
+    "message": "“纪律就是在你现在想要的和你最想要的之间做出选择。”",
+    "description": "Motivational quote 2."
+  },
+  "quote3": {
+    "message": "“深度工作胜过忙碌工作。”",
+    "description": "Motivational quote 3."
+  },
+  "quote4": {
+    "message": "“每天的小步骤会带来大的成果。”",
+    "description": "Motivational quote 4."
+  },
+  "quote5": {
+    "message": "“你不需要更多的时间。你需要更多的专注。”",
+    "description": "Motivational quote 5."
+  },
+  "quote6": {
+    "message": "“你今天所做的事情比你想象的更重要。”",
+    "description": "Motivational quote 6."
+  },
+  "quote7": {
+    "message": "“障碍就是道路。”",
+    "description": "Motivational quote 7."
+  },
+  "quote8": {
+    "message": "“要么承受纪律的痛苦，要么承受后悔的痛苦。”",
+    "description": "Motivational quote 8."
+  },
+  "quote9": {
+    "message": "“你的注意力决定了你的现实。”",
+    "description": "Motivational quote 9."
+  },
+  "quote10": {
+    "message": "“表现得足够好，他们不会忽视你。”",
+    "description": "Motivational quote 10."
+  },
+  "quote11": {
+    "message": "“纪律等于自由。”",
+    "description": "Motivational quote 11."
+  },
+  "privacyModeTitle": {
+    "message": "隐私模式/暂停跟踪",
+    "description": "Tooltip for privacy mode toggle."
+  },
+  "pausedTime": {
+    "message": "暂停：$time$",
+    "description": "Paused timer display.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "29:30"
+      }
+    }
+  },
+  "siteManager": {
+    "message": "现场经理",
+    "description": "Label for the site manager button or section."
+  },
+  "settingsLocked": {
+    "message": "设置已锁定",
+    "description": "Title when settings are passcode locked."
+  },
+  "incorrectPinTryAgain": {
+    "message": "PIN 码不正确 — 请重试",
+    "description": "PIN mismatch warning."
+  },
+  "analyticsDesc": {
+    "message": "您完整的生产力图景。",
+    "description": "Analytics section description."
+  },
+  "timeDistribution": {
+    "message": "时间分布",
+    "description": "Time distribution section title."
+  },
+  "top5Websites": {
+    "message": "前 5 名网站",
+    "description": "Top 5 websites section title."
+  },
+  "overview": {
+    "message": "概述",
+    "description": "Overview tab title."
+  },
+  "dailyBreakdown": {
+    "message": "每日细目",
+    "description": "Daily breakdown tab title."
+  },
+  "topSites": {
+    "message": "热门网站",
+    "description": "Top sites tab title."
+  },
+  "studyVsDistraction": {
+    "message": "学习与分心",
+    "description": "Study vs Distraction tab title."
+  },
+  "comparison": {
+    "message": "比较",
+    "description": "Alternative title for trend tab."
+  },
+  "insights": {
+    "message": "见解",
+    "description": "Insights tab title."
+  },
+  "7days": {
+    "message": "7天",
+    "description": "Range selection button label."
+  },
+  "30days": {
+    "message": "30天",
+    "description": "Range selection button label."
+  },
+  "customRange": {
+    "message": "定制范围",
+    "description": "Custom date range selection."
+  },
+  "last7Days": {
+    "message": "过去 7 天",
+    "description": "Default range display label."
+  },
+  "from": {
+    "message": "从",
+    "description": "Start date label."
+  },
+  "to": {
+    "message": "到",
+    "description": "End date label."
+  },
+  "apply": {
+    "message": "申请",
+    "description": "Submit date range selection."
+  },
+  "total": {
+    "message": "全部的",
+    "description": "Sum of tracked minutes."
+  },
+  "bestStreak": {
+    "message": "最佳连胜纪录",
+    "description": "Best consecutive focus days."
+  },
+  "bestDay": {
+    "message": "最好的一天",
+    "description": "Single day with highest focus time."
+  },
+  "allTimeTotal": {
+    "message": "历史总计",
+    "description": "Total tracked focus time since install."
+  },
+  "dailyAverage": {
+    "message": "日平均",
+    "description": "Mean focus time per day."
+  },
+  "daysTracked": {
+    "message": "追踪天数",
+    "description": "Total number of tracked days."
+  },
+  "searchSites": {
+    "message": "搜索网站...",
+    "description": "Filter placeholder."
+  },
+  "domain": {
+    "message": "领域",
+    "description": "Site manager table header."
+  },
+  "actions": {
+    "message": "行动",
+    "description": "Site manager table header."
+  },
+  "category": {
+    "message": "类别",
+    "description": "Site manager table header."
+  },
+  "avgDay": {
+    "message": "平均/天",
+    "description": "Average usage per day table header."
+  },
+  "loadingSites": {
+    "message": "正在加载站点...",
+    "description": "Loader text."
+  },
+  "totalWorkStudy": {
+    "message": "总工作/学习",
+    "description": "Focus category sum label."
+  },
+  "totalDistraction": {
+    "message": "完全分心",
+    "description": "Distraction category sum label."
+  },
+  "productivityRatio": {
+    "message": "生产率比",
+    "description": "Comparison ratio label."
+  },
+  "goodDays365d": {
+    "message": "好日子 (365d)",
+    "description": "Number of high productivity days."
+  },
+  "wastedDays365d": {
+    "message": "浪费（365天）",
+    "description": "Number of low productivity days."
+  },
+  "consistency365": {
+    "message": "365 天一致性",
+    "description": "Yearly consistency calendar label."
+  },
+  "heatmapHelp": {
+    "message": "每个方格就是一天。更环保=更多的专注时间。红色=浪费了一天。",
+    "description": "Description of yearly heatmap."
+  },
+  "clickToCustomizeThresholds": {
+    "message": "单击可自定义阈值",
+    "description": "Legend customization tooltip."
+  },
+  "less": {
+    "message": "较少的",
+    "description": "Heatmap legend lower label."
+  },
+  "more": {
+    "message": "更多的",
+    "description": "Heatmap legend higher label."
+  },
+  "wasted": {
+    "message": "浪费了",
+    "description": "Heatmap legend wasted day label."
+  },
+  "buildingHeatmap": {
+    "message": "构建热图...",
+    "description": "Heatmap builder indicator."
+  },
+  "weekdayVsWeekend": {
+    "message": "工作日与周末",
+    "description": "Split comparison chart label."
+  },
+  "mostProductiveDay": {
+    "message": "最有成效的一天",
+    "description": "Day of week with highest productivity."
+  },
+  "focusDesc": {
+    "message": "锁定目标、跟踪目标并建立连续记录。",
+    "description": "Focus section subtitle."
+  },
+  "zeroCycles": {
+    "message": "0 周期",
+    "description": "Zero completed cycles."
+  },
+  "startFocus": {
+    "message": "开始聚焦",
+    "description": "Action button label."
+  },
+  "quickPresets": {
+    "message": "快速预设",
+    "description": "Group title."
+  },
+  "focusSchedules": {
+    "message": "重点日程",
+    "description": "Group title."
+  },
+  "goalsStreak": {
+    "message": "进球数和连胜数",
+    "description": "Group title."
+  },
+  "weeklyGoalHrs": {
+    "message": "每周目标（小时）",
+    "description": "Config label."
+  },
+  "dailyStreakMin": {
+    "message": "每日最少连续行走距离（米）",
+    "description": "Config label."
+  },
+  "startWeekOn": {
+    "message": "开始一周",
+    "description": "Config label."
+  },
+  "monday": {
+    "message": "周一",
+    "description": "Weekday name."
+  },
+  "sunday": {
+    "message": "星期日",
+    "description": "Weekday name."
+  },
+  "countTowardsGoals": {
+    "message": "计算目标",
+    "description": "Checkbox group label."
+  },
+  "saveGoals": {
+    "message": "保存目标",
+    "description": "Action button label."
+  },
+  "weekProgress": {
+    "message": "周进度",
+    "description": "Stats display."
+  },
+  "zeroGoalDone": {
+    "message": "0 小时 0 分钟完成",
+    "description": "No progress yet."
+  },
+  "noGoal": {
+    "message": "没有目标",
+    "description": "Missing goal config text."
+  },
+  "history": {
+    "message": "历史",
+    "description": "Focus history table title."
+  },
+  "clearHistory": {
+    "message": "清除历史记录",
+    "description": "Delete history tooltip."
+  },
+  "noFocusSessions": {
+    "message": "还没有焦点会议。",
+    "description": "Empty state label."
+  },
+  "siteManagerDesc": {
+    "message": "标记网站以进行分析，或完全阻止它们。",
+    "description": "Site manager subtitle."
+  },
+  "ruleManager": {
+    "message": "规则管理器",
+    "description": "Block page inner card title."
+  },
+  "blockList": {
+    "message": "阻止列表",
+    "description": "Config category."
+  },
+  "allowlist": {
+    "message": "允许名单",
+    "description": "Config category."
+  },
+  "neverTrack": {
+    "message": "永不追踪",
+    "description": "Config category."
+  },
+  "searchRules": {
+    "message": "搜索规则...",
+    "description": "Rules filter placeholder."
+  },
+  "domainName": {
+    "message": "域名",
+    "description": "Input field label."
+  },
+  "egDomain": {
+    "message": "例如reddit.com",
+    "description": "Placeholder."
+  },
+  "redirectToOptional": {
+    "message": "重定向至（可选）",
+    "description": "Input field label."
+  },
+  "egRedirect": {
+    "message": "例如密码直播",
+    "description": "Placeholder."
+  },
+  "addNewRule": {
+    "message": "+ 添加新规则",
+    "description": "Action button."
+  },
+  "bulkEdit": {
+    "message": "批量编辑",
+    "description": "Action button."
+  },
+  "egAllowDomain": {
+    "message": "例如gmail.com",
+    "description": "Placeholder."
+  },
+  "addToAllowlist": {
+    "message": "+ 添加到白名单",
+    "description": "Action button."
+  },
+  "domainNamePlural": {
+    "message": "域名",
+    "description": "Input field label."
+  },
+  "egNeverTrackDomain": {
+    "message": "例如银行.com、私人.com",
+    "description": "Placeholder."
+  },
+  "addToNeverTrack": {
+    "message": "+ 添加至永不追踪",
+    "description": "Action button."
+  },
+  "tipClick": {
+    "message": "提示：点击",
+    "description": "Helpful hint start."
+  },
+  "tipRuleDetails": {
+    "message": "在任何规则上设置时间限制、时间表或冷却计时器。",
+    "description": "Helpful hint body."
+  },
+  "deleteSelected": {
+    "message": "删除所选内容",
+    "description": "Bulk action button."
+  },
+  "type": {
+    "message": "类型",
+    "description": "Table column header."
+  },
+  "mode": {
+    "message": "模式",
+    "description": "Table column header."
+  },
+  "dailyLimit": {
+    "message": "每日限额",
+    "description": "Table column header."
+  },
+  "noBlockingRules": {
+    "message": "还没有阻止规则。",
+    "description": "Empty state label."
+  },
+  "freeTimeHours": {
+    "message": "空闲时间（无阻塞）",
+    "description": "Card sub-title."
+  },
+  "filterByCategory": {
+    "message": "🔍 按类别过滤",
+    "description": "Card title."
+  },
+  "searchSitesInCategories": {
+    "message": "按类别搜索网站...",
+    "description": "Placeholder."
+  },
+  "trackLabelSite": {
+    "message": "+ 跟踪/标签站点",
+    "description": "Action button."
+  },
+  "settingsDesc": {
+    "message": "定制您的 Flow 体验。",
+    "description": "Settings section subtitle."
+  },
+  "saveAllSettings": {
+    "message": "保存所有设置",
+    "description": "Action button."
+  },
+  "securitySystem": {
+    "message": "安全与系统",
+    "description": "Settings sub-tab label."
+  },
+  "trackingBlocking": {
+    "message": "跟踪和阻止",
+    "description": "Settings sub-tab label."
+  },
+  "trackingEngine": {
+    "message": "追踪引擎",
+    "description": "Settings card label."
+  },
+  "idleTimeout": {
+    "message": "空闲超时",
+    "description": "Settings config option."
+  },
+  "idleTimeoutDesc": {
+    "message": "如果停止移动鼠标，则停止跟踪时间。",
+    "description": "Settings config option description."
+  },
+  "after30Sec": {
+    "message": "30秒后",
+    "description": "Dropdown choice."
+  },
+  "after1Min": {
+    "message": "1分钟后",
+    "description": "Dropdown choice."
+  },
+  "after2Min": {
+    "message": "2分钟后",
+    "description": "Dropdown choice."
+  },
+  "after5Min": {
+    "message": "5分钟后",
+    "description": "Dropdown choice."
+  },
+  "computerSleepGap": {
+    "message": "电脑睡眠间隙",
+    "description": "Settings config option."
+  },
+  "computerSleepGapDesc": {
+    "message": "如果您让计算机进入睡眠状态，则限制活动时间计算。",
+    "description": "Settings config option description."
+  },
+  "1minute": {
+    "message": "1分钟",
+    "description": "Dropdown choice."
+  },
+  "5minutes": {
+    "message": "5分钟",
+    "description": "Dropdown choice."
+  },
+  "10minutes": {
+    "message": "10分钟",
+    "description": "Dropdown choice."
+  },
+  "15minutes": {
+    "message": "15分钟",
+    "description": "Dropdown choice."
+  },
+  "mediaPlaybackTracking": {
+    "message": "媒体播放跟踪",
+    "description": "Settings config option."
+  },
+  "mediaPlaybackTrackingDesc": {
+    "message": "如果音频或视频正在播放（即使在空闲时），请继续跟踪时间。",
+    "description": "Settings config option description."
+  },
+  "ignoreQuickVisits": {
+    "message": "忽略快速访问",
+    "description": "Settings config option."
+  },
+  "ignoreQuickVisitsDesc": {
+    "message": "忽略短于此持续时间的访问以保持数据干净。",
+    "description": "Settings config option description."
+  },
+  "offTrackEverything": {
+    "message": "关闭（跟踪所有内容）",
+    "description": "Dropdown choice."
+  },
+  "3seconds": {
+    "message": "3秒",
+    "description": "Dropdown choice."
+  },
+  "5seconds": {
+    "message": "5秒",
+    "description": "Dropdown choice."
+  },
+  "10seconds": {
+    "message": "10秒",
+    "description": "Dropdown choice."
+  },
+  "dataHistoryRetention": {
+    "message": "数据历史保留",
+    "description": "Settings config option."
+  },
+  "dataHistoryRetentionDesc": {
+    "message": "自动删除早于该持续时间的详细跟踪日志以节省空间。",
+    "description": "Settings config option description."
+  },
+  "after30Days": {
+    "message": "30天后",
+    "description": "Dropdown choice."
+  },
+  "after90Days": {
+    "message": "90天后",
+    "description": "Dropdown choice."
+  },
+  "after180Days": {
+    "message": "180天后",
+    "description": "Dropdown choice."
+  },
+  "after1Year": {
+    "message": "1年后",
+    "description": "Dropdown choice."
+  },
+  "after2Years": {
+    "message": "2年后",
+    "description": "Dropdown choice."
+  },
+  "after3Years": {
+    "message": "3年后",
+    "description": "Dropdown choice."
+  },
+  "foreverKeepAll": {
+    "message": "永远（保留全部）",
+    "description": "Dropdown choice."
+  },
+  "weeklyAutoBackup": {
+    "message": "每周自动备份",
+    "description": "Settings config option."
+  },
+  "weeklyAutoBackupDesc": {
+    "message": "每周自动导出和下载一次跟踪统计数据和规则。",
+    "description": "Settings config option description."
+  },
+  "appearance": {
+    "message": "外貌",
+    "description": "Settings card label."
+  },
+  "themeDark": {
+    "message": "黑暗的",
+    "description": "Dropdown choice."
+  },
+  "themeLight": {
+    "message": "光",
+    "description": "Dropdown choice."
+  },
+  "themeCinematic": {
+    "message": "电影般的",
+    "description": "Dropdown choice."
+  },
+  "languageOverride": {
+    "message": "语言/习语",
+    "description": "Settings config option."
+  },
+  "languageOverrideDesc": {
+    "message": "覆盖扩展程序的默认浏览器语言。",
+    "description": "Settings config option description."
+  },
+  "systemDefault": {
+    "message": "系统默认值",
+    "description": "Dropdown choice."
+  },
+  "langEnglish": {
+    "message": "英语",
+    "description": "Language choice."
+  },
+  "langSpanish": {
+    "message": "西班牙语（非正式/直率）",
+    "description": "Language choice."
+  },
+  "langChineseSimplified": {
+    "message": "中文（简体） / 简体中文",
+    "description": "Language choice."
+  },
+  "langChineseTraditional": {
+    "message": "中文（繁体） / 繁体中文",
+    "description": "Language choice."
+  },
+  "langChineseHongKong": {
+    "message": "中文（香港） / 繁体中文（香港）",
+    "description": "Language choice."
+  },
+  "averageLine": {
+    "message": "平均线",
+    "description": "Chart option."
+  },
+  "lineChart": {
+    "message": "线",
+    "description": "Chart type toggle."
+  },
+  "barChart": {
+    "message": "酒吧",
+    "description": "Chart type toggle."
+  },
+  "reduceTime": {
+    "message": "减少时间",
+    "description": "Daily stats card action."
+  },
+  "howManyMinutesRemove": {
+    "message": "您想要删除 $1 多少分钟？",
+    "description": "Prompt message in the time reduction modal."
+  },
+  "remove": {
+    "message": "消除",
+    "description": "Action button label."
+  },
+  "minutes": {
+    "message": "分钟",
+    "description": "Input field placeholder."
+  },
+  "momComparison": {
+    "message": "环比",
+    "description": "Settings card label."
+  },
+  "momComparisonDesc": {
+    "message": "比较本月与上个月的活跃时间。",
+    "description": "Card description."
+  },
+  "focusVsDistraction": {
+    "message": "专注与分心",
+    "description": "Card label."
+  },
+  "pctFocus": {
+    "message": "$1% 焦点",
+    "description": "Focus percentage summary."
+  },
+  "pctDistraction": {
+    "message": "$1% 分心",
+    "description": "Distraction percentage summary."
+  },
+  "focusSplitDesc": {
+    "message": "您专注于 $1，却因 $2 而分心。",
+    "description": "Productivity split description sentence."
+  },
+  "noFocusDistTimeRange": {
+    "message": "在此范围内没有追踪到注意力集中或分心的时间。",
+    "description": "Placeholder text."
+  },
+  "pinSiteToTop": {
+    "message": "将网站固定到顶部",
+    "description": "Tooltip text."
+  },
+  "unpinSite": {
+    "message": "取消固定网站",
+    "description": "Tooltip text."
+  },
+  "visitSite": {
+    "message": "访问网站",
+    "description": "Tooltip text."
+  },
+  "addOrEditRule": {
+    "message": "添加或编辑规则",
+    "description": "Tooltip text."
+  },
+  "autoCategorized": {
+    "message": "自动分类",
+    "description": "Tooltip text."
+  },
+  "totalTracked": {
+    "message": "总跟踪数",
+    "description": "Daily stat title."
+  },
+  "activeTimeline": {
+    "message": "24 小时活跃时间线",
+    "description": "Section header."
+  },
+  "heatmapThresholds": {
+    "message": "热图阈值",
+    "description": "Modal title."
+  },
+  "minActiveTimeMins": {
+    "message": "最短活跃时间（分钟）",
+    "description": "Config setting label."
+  },
+  "minActiveTimeDesc": {
+    "message": "一天着色的最短总跟踪时间。",
+    "description": "Config option helper text."
+  },
+  "ratioThresholdPct": {
+    "message": "比率阈值 (%)",
+    "description": "Config setting label."
+  },
+  "ratioThresholdDesc": {
+    "message": "如果您的聚焦比率低于此百分比，则这一天就被浪费了（红色）。否则，它处于活动状态（绿色）。",
+    "description": "Config option helper text."
+  },
+  "showWastedDays": {
+    "message": "显示浪费的日子（红色）",
+    "description": "Config setting label."
+  },
+  "showWastedDaysDesc": {
+    "message": "将高度分散注意力的日子突出显示为红色块。",
+    "description": "Config option helper text."
+  },
+  "focusCategories": {
+    "message": "焦点类别",
+    "description": "Config setting label."
+  },
+  "selectFocusCatsDesc": {
+    "message": "选择哪些类别计入您的每日专注时间。",
+    "description": "Config option helper text."
+  },
+  "activeHrs": {
+    "message": "$1 活跃",
+    "description": "Label showing tracked active time hours."
+  },
+  "noActiveTimeTracked": {
+    "message": "尚未追踪活跃时间。",
+    "description": "Placeholder text."
+  },
+  "vsLastMonth": {
+    "message": "与上个月的 $1 相比 ($2)",
+    "description": "MoM status comparison description."
+  },
+  "vsLastMonthNoChange": {
+    "message": "与上个月 $1 相比（无变化）",
+    "description": "MoM status comparison description."
+  },
+  "increase": {
+    "message": "增加",
+    "description": "Label indicating value increase."
+  },
+  "decrease": {
+    "message": "减少",
+    "description": "Label indicating value decrease."
+  },
+  "accessControlSafety": {
+    "message": "访问控制与安全",
+    "description": "Settings card label."
+  },
+  "pinProtectionStatus": {
+    "message": "PIN 码保护状态：",
+    "description": "Settings config option."
+  },
+  "notSet": {
+    "message": "未设置",
+    "description": "PIN status."
+  },
+  "set6DigitPin": {
+    "message": "设置 6 位 PIN 码",
+    "description": "Input placeholder."
+  },
+  "confirm6DigitPin": {
+    "message": "确认 6 位 PIN 码",
+    "description": "Input placeholder."
+  },
+  "savePin": {
+    "message": "保存密码",
+    "description": "Action button."
+  },
+  "changePin": {
+    "message": "更改密码",
+    "description": "Action button."
+  },
+  "removePin": {
+    "message": "删除 PIN 码",
+    "description": "Action button."
+  },
+  "setPinToEnableLocks": {
+    "message": "设置 PIN 码以启用这些锁",
+    "description": "Helper block message."
+  },
+  "whatToLock": {
+    "message": "锁定什么",
+    "description": "Settings block header."
+  },
+  "lockTimerStop": {
+    "message": "锁定定时器停止按钮",
+    "description": "Settings config option."
+  },
+  "lockTimerStopDesc": {
+    "message": "需要 PIN 码才能停止或暂停活动的焦点会话。",
+    "description": "Settings config option description."
+  },
+  "lockEditingRules": {
+    "message": "锁定编辑/删除规则",
+    "description": "Settings config option."
+  },
+  "lockEditingRulesDesc": {
+    "message": "需要 PIN 码才能修改、删除或清除网站阻止列表和规则。",
+    "description": "Settings config option description."
+  },
+  "lockFreeTime": {
+    "message": "锁定空闲时间",
+    "description": "Settings config option."
+  },
+  "lockFreeTimeDesc": {
+    "message": "需要 PIN 码才能添加、编辑或删除预定的空闲时间。",
+    "description": "Settings config option description."
+  },
+  "lockFocusPresets": {
+    "message": "锁定编辑焦点预设",
+    "description": "Settings config option."
+  },
+  "lockFocusPresetsDesc": {
+    "message": "需要 PIN 码才能修改或删除自定义焦点预设。",
+    "description": "Settings config option description."
+  },
+  "lockFocusSchedules": {
+    "message": "锁定编辑/删除焦点计划",
+    "description": "Settings config option."
+  },
+  "lockFocusSchedulesDesc": {
+    "message": "需要 PIN 码才能更改或删除焦点计划配置。",
+    "description": "Settings config option description."
+  },
+  "lockAdvancedTweaks": {
+    "message": "锁定高级站点调整",
+    "description": "Settings config option."
+  },
+  "lockAdvancedTweaksDesc": {
+    "message": "需要 PIN 才能访问自定义样式、脚本注入或高级调整。",
+    "description": "Settings config option description."
+  },
+  "lockPrivacyMode": {
+    "message": "锁定隐私模式（暂停跟踪）",
+    "description": "Settings config option."
+  },
+  "lockPrivacyModeDesc": {
+    "message": "需要 PIN 码才能暂停跟踪或启用隐私模式。",
+    "description": "Settings config option description."
+  },
+  "lockAdjustTime": {
+    "message": "锁定调整时间（每日细分）",
+    "description": "Settings config option."
+  },
+  "lockAdjustTimeDesc": {
+    "message": "需要 PIN 码才能手动调整或清除每日细分中的跟踪时间。",
+    "description": "Settings config option description."
+  },
+  "lockDangerZone": {
+    "message": "锁定危险区域（清除数据）",
+    "description": "Settings config option."
+  },
+  "lockDangerZoneDesc": {
+    "message": "需要 PIN 码才能重置统计信息、规则或自定义类别。",
+    "description": "Settings config option description."
+  },
+  "dangerZone": {
+    "message": "危险区",
+    "description": "Settings card label."
+  },
+  "resetAllStats": {
+    "message": "重置所有统计数据",
+    "description": "Settings config option."
+  },
+  "resetAllStatsDesc": {
+    "message": "擦除所有记录的网站跟踪历史记录和分析。此操作无法撤消。",
+    "description": "Settings config option description."
+  },
+  "btnResetStats": {
+    "message": "重置统计数据",
+    "description": "Action button."
+  },
+  "clearAllRules": {
+    "message": "清除所有阻止和允许规则",
+    "description": "Settings config option."
+  },
+  "clearAllRulesDesc": {
+    "message": "删除所有自定义网站阻止列表、计划、限制和允许列表。",
+    "description": "Settings config option description."
+  },
+  "btnClearRules": {
+    "message": "明确的规则",
+    "description": "Action button."
+  },
+  "clearAllCategories": {
+    "message": "清除所有手册类别",
+    "description": "Settings config option."
+  },
+  "clearAllCategoriesDesc": {
+    "message": "将所有自定义网站类别标签重置回默认值。",
+    "description": "Settings config option description."
+  },
+  "btnClearCategories": {
+    "message": "清除类别",
+    "description": "Action button."
+  },
+  "supportFeedbackHeader": {
+    "message": "支持与反馈",
+    "description": "Settings card label."
+  },
+  "submitFeedbackHeader": {
+    "message": "提交功能请求和错误报告",
+    "description": "Settings config option."
+  },
+  "submitFeedbackDesc": {
+    "message": "帮助我们改善 Flow！分享您的想法、建议或报告任何错误。",
+    "description": "Settings config option description."
+  },
+  "submitFeedbackBtn": {
+    "message": "💡 提交反馈",
+    "description": "Action button."
+  },
+  "helpTranslateBtn": {
+    "message": "🌐 帮助翻译",
+    "description": "Action button."
+  },
+  "backupRestoreHeader": {
+    "message": "备份与恢复",
+    "description": "Settings card label."
+  },
+  "exportDataJson": {
+    "message": "将所有数据导出为 JSON",
+    "description": "Settings config option."
+  },
+  "exportDataJsonDesc": {
+    "message": "统计数据、规则、类别、设置。",
+    "description": "Settings config option description."
+  },
+  "downloadJson": {
+    "message": "下载 JSON",
+    "description": "Action button."
+  },
+  "restoreFromJson": {
+    "message": "从 JSON 恢复",
+    "description": "Settings config option."
+  },
+  "restoreFromJsonDesc": {
+    "message": "替换所有当前数据。恢复前确认。",
+    "description": "Settings config option description."
+  },
+  "chooseFile": {
+    "message": "选择文件...",
+    "description": "Input file label."
+  },
+  "localStorageUsage": {
+    "message": "本地存储使用情况",
+    "description": "Settings config option."
+  },
+  "localStorageUsageDesc": {
+    "message": "设置、历史记录和规则使用的空间（超出 10MB 限制）。",
+    "description": "Settings config option description."
+  },
+  "migrationImportsHeader": {
+    "message": "移民和进口",
+    "description": "Settings card label."
+  },
+  "importFromWatt": {
+    "message": "从网络活动时间跟踪器导入",
+    "description": "Settings config option."
+  },
+  "importFromWattDesc": {
+    "message": "上传导出的 CSV 文件以合并您过去的跟踪历史记录。",
+    "description": "Settings config option description."
+  },
+  "importFromTt": {
+    "message": "从时间跟踪器导入 - 网络习惯生成器",
+    "description": "Settings config option."
+  },
+  "importFromTtDesc": {
+    "message": "上传导出的 JSON 文件以合并您过去的跟踪历史记录。",
+    "description": "Settings config option description."
+  },
+  "importFromWt": {
+    "message": "从网络时间跟踪器导入",
+    "description": "Settings config option."
+  },
+  "importFromWtDesc": {
+    "message": "上传导出的 CSV 文件以合并您过去的跟踪历史记录。",
+    "description": "Settings config option description."
+  },
+  "backupHistory": {
+    "message": "备份历史记录",
+    "description": "Settings block title."
+  },
+  "btnCreateLocalBackup": {
+    "message": "+ 创建本地备份",
+    "description": "Action button."
+  },
+  "editFreeTime": {
+    "message": "编辑空闲时间",
+    "description": "Modal title."
+  },
+  "fromTime": {
+    "message": "从时间",
+    "description": "Input field label."
+  },
+  "toTime": {
+    "message": "到时间",
+    "description": "Input field label."
+  },
+  "activeDays": {
+    "message": "活跃天数",
+    "description": "Input field label."
+  },
+  "saveChanges": {
+    "message": "保存更改",
+    "description": "Action button."
+  },
+  "tagMonitor": {
+    "message": "标签/监控",
+    "description": "Tab segment title."
+  },
+  "quickApplyPreset": {
+    "message": "快速应用预设",
+    "description": "Select label."
+  },
+  "selectPresetToApply": {
+    "message": "-- 选择要应用的预设 --",
+    "description": "Option label."
+  },
+  "egDomainNoPrefix": {
+    "message": "reddit.com",
+    "description": "Placeholder."
+  },
+  "activeRulesSelectMultiple": {
+    "message": "活动规则（选择多个）",
+    "description": "Sub-header label."
+  },
+  "dailyTimeLimit": {
+    "message": "每日时间限制",
+    "description": "Rule mode option."
+  },
+  "dailyLimitMinutes": {
+    "message": "每日限制（分钟）（0 = 始终被阻止）",
+    "description": "Input field label."
+  },
+  "perSessionLimit": {
+    "message": "每次会话限制",
+    "description": "Rule mode option."
+  },
+  "sessionSettings": {
+    "message": "会话设置",
+    "description": "Input block title."
+  },
+  "timeLimitMinutes": {
+    "message": "时间限制（分钟）",
+    "description": "Input field label."
+  },
+  "breakCooldownMinutes": {
+    "message": "休息/冷却（分钟）",
+    "description": "Input field label."
+  },
+  "scheduleBased": {
+    "message": "基于时间表",
+    "description": "Rule mode option."
+  },
+  "timeWindows": {
+    "message": "时间窗口",
+    "description": "Input field label."
+  },
+  "addWindow": {
+    "message": "+ 添加窗口",
+    "description": "Action button."
+  },
+  "cooldownSite": {
+    "message": "降温场地",
+    "description": "Rule mode option."
+  },
+  "cooldownSettings": {
+    "message": "冷却设置",
+    "description": "Input block title."
+  },
+  "waitTimeSec": {
+    "message": "等待时间（秒）",
+    "description": "Input field label."
+  },
+  "frequency": {
+    "message": "频率",
+    "description": "Input field label."
+  },
+  "everyVisit": {
+    "message": "每次访问",
+    "description": "Option choice."
+  },
+  "oncePerDay": {
+    "message": "每天一次",
+    "description": "Option choice."
+  },
+  "every10min": {
+    "message": "每10分钟一班",
+    "description": "Option choice."
+  },
+  "optDistraction": {
+    "message": "⚡ 分散注意力",
+    "description": "Category choice."
+  },
+  "optProductivity": {
+    "message": "💻 生产力",
+    "description": "Category choice."
+  },
+  "optLearning": {
+    "message": "📚学习",
+    "description": "Category choice."
+  },
+  "optCommunication": {
+    "message": "💬 通讯",
+    "description": "Category choice."
+  },
+  "optUncategorized": {
+    "message": "❓ 未分类",
+    "description": "Category choice."
+  },
+  "assignCategoryDesc": {
+    "message": "这会在不阻止站点的情况下分配统计类别。",
+    "description": "Explanation text."
+  },
+  "saveTag": {
+    "message": "保存标签",
+    "description": "Action button."
+  },
+  "areYouSure": {
+    "message": "你确定吗？",
+    "description": "Modal title."
+  },
+  "cannotBeUndone": {
+    "message": "此操作无法撤消。",
+    "description": "Modal sub-text warning."
+  },
+  "confirm": {
+    "message": "确认",
+    "description": "Action button."
+  },
+  "privacyModalDesc": {
+    "message": "暂停所有时间跟踪和网络级阻止。选择您要暂停的时间：",
+    "description": "Modal sub-text warning."
+  },
+  "createBlockPreset": {
+    "message": "创建块预设",
+    "description": "Modal title."
+  },
+  "presetName": {
+    "message": "预设名称",
+    "description": "Input field label."
+  },
+  "egPresetName": {
+    "message": "例如严格模式",
+    "description": "Placeholder."
+  },
+  "rulesConfiguration": {
+    "message": "规则配置",
+    "description": "Sub-header label."
+  },
+  "savePreset": {
+    "message": "保存预设",
+    "description": "Action button."
+  },
+  "timeAdjusted": {
+    "message": "时间调整",
+    "description": "Toast notice."
+  },
+  "adjustFailed": {
+    "message": "调整失败",
+    "description": "Toast notice."
+  },
+  "undoNeverTrackRestored": {
+    "message": "撤消：永不恢复轨道",
+    "description": "Toast notice."
+  },
+  "undoRuleRestored": {
+    "message": "撤消：恢复规则",
+    "description": "Toast notice."
+  },
+  "undoAllowRuleRestored": {
+    "message": "撤消：恢复允许规则",
+    "description": "Toast notice."
+  },
+  "removed": {
+    "message": "已删除",
+    "description": "Toast notice."
+  },
+  "thresholdsUpdated": {
+    "message": "阈值已更新",
+    "description": "Toast notice."
+  },
+  "noItemsSelected": {
+    "message": "没有选择任何项目",
+    "description": "Toast notice."
+  },
+  "deleteRules": {
+    "message": "删除规则",
+    "description": "Confirm title."
+  },
+  "deleteRulesConfirm": {
+    "message": "删除 $count$ 规则？",
+    "description": "Confirm body.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "itemsDeleted": {
+    "message": "已删除的项目",
+    "description": "Toast notice."
+  },
+  "enterDomain": {
+    "message": "输入域名",
+    "description": "Toast notice."
+  },
+  "taggedSuccessfully": {
+    "message": "$domain$ 标记成功",
+    "description": "Toast notice.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "reddit.com"
+      }
+    }
+  },
+  "studyGoalsSaved": {
+    "message": "已保存学习目标",
+    "description": "Toast notice."
+  },
+  "pickBothDates": {
+    "message": "选择两个日期",
+    "description": "Toast notice."
+  },
+  "endDateBeforeStart": {
+    "message": "结束日期早于开始日期",
+    "description": "Toast notice."
+  },
+  "removedException": {
+    "message": "删除了异常",
+    "description": "Toast notice."
+  },
+  "selectAtLeastOneDay": {
+    "message": "至少选择一天",
+    "description": "Toast notice."
+  },
+  "freeTimeSaved": {
+    "message": "空闲时间段已成功保存！",
+    "description": "Toast notice."
+  },
+  "sessionDeleted": {
+    "message": "会话已删除",
+    "description": "Toast notice."
+  },
+  "alreadyAdded": {
+    "message": "已添加",
+    "description": "Toast notice."
+  },
+  "exceptionAdded": {
+    "message": "添加了例外",
+    "description": "Toast notice."
+  },
+  "settingsSaved": {
+    "message": "设置已保存",
+    "description": "Toast notice."
+  },
+  "errorSavingSettings": {
+    "message": "保存设置时出错：$error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Unknown error"
+      }
+    }
+  },
+  "pinSavedActive": {
+    "message": "PIN 码已保存并处于活动状态",
+    "description": "Toast notice."
+  },
+  "pinRemoved": {
+    "message": "PIN 码已删除",
+    "description": "Toast notice."
+  },
+  "resetStatsConfirm": {
+    "message": "删除所有统计数据？此操作无法撤消。",
+    "description": "Confirm body."
+  },
+  "resetConfirmBtn": {
+    "message": "重置",
+    "description": "Confirm action."
+  },
+  "clearRules": {
+    "message": "明确的规则",
+    "description": "Confirm title."
+  },
+  "clearRulesConfirm": {
+    "message": "删除所有阻止/允许规则？",
+    "description": "Confirm body."
+  },
+  "clearConfirmBtn": {
+    "message": "清除",
+    "description": "Confirm action."
+  },
+  "rulesCleared": {
+    "message": "规则已清除",
+    "description": "Toast notice."
+  },
+  "clearCategories": {
+    "message": "清除类别",
+    "description": "Confirm title."
+  },
+  "clearCategoriesConfirm": {
+    "message": "删除所有自定义类别？",
+    "description": "Confirm body."
+  },
+  "categoriesCleared": {
+    "message": "类别已清除",
+    "description": "Toast notice."
+  },
+  "clearHistoryConfirm": {
+    "message": "清除历史记录？",
+    "description": "Confirm body."
+  },
+  "cleared": {
+    "message": "已清除",
+    "description": "Toast notice."
+  },
+  "exportFailed": {
+    "message": "导出失败",
+    "description": "Toast notice."
+  },
+  "backupDownloaded": {
+    "message": "备份已下载",
+    "description": "Toast notice."
+  },
+  "restoreBackup": {
+    "message": "恢复备份",
+    "description": "Confirm title."
+  },
+  "restoreBackupConfirm": {
+    "message": "恢复将替换所有当前数据。继续？",
+    "description": "Confirm body."
+  },
+  "restoreConfirmBtn": {
+    "message": "恢复",
+    "description": "Confirm action."
+  },
+  "restoredReloading": {
+    "message": "已恢复 - 正在重新加载...",
+    "description": "Toast notice."
+  },
+  "invalidJsonFile": {
+    "message": "JSON 文件无效",
+    "description": "Toast notice."
+  },
+  "importLogsWattConfirm": {
+    "message": "这会将 Web Activity Time Tracker 日志合并到 Flow 的历史记录中。\n\n警告：如果您导入同一电子表格两次，则会将跟踪时间添加两次。单击“确定”继续。",
+    "description": "Confirm body."
+  },
+  "importConfirmBtn": {
+    "message": "进口",
+    "description": "Confirm action."
+  },
+  "successfullyImportedDays": {
+    "message": "已成功导入 $count$ 天！正在重新加载...",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "importFailedErr": {
+    "message": "导入失败：$error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "File missing"
+      }
+    }
+  },
+  "invalidFile": {
+    "message": "文件无效",
+    "description": "Default error."
+  },
+  "importLogsTtConfirm": {
+    "message": "这会将 Time Tracker JSON 日志合并到 Flow 的历史记录中。\n\n警告：如果两次导入同一个 JSON 文件，则会将跟踪时间添加两次。单击“确定”继续。",
+    "description": "Confirm body."
+  },
+  "importLogsWtConfirm": {
+    "message": "这会将 Webtime Tracker CSV 日志合并到 Flow 的历史记录中。\n\n警告：如果您两次导入同一个 CSV 文件，则会将跟踪时间添加两次。单击“确定”继续。",
+    "description": "Confirm body."
+  },
+  "activatedPreset": {
+    "message": "激活的预设：$name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetSavedSuccessfully": {
+    "message": "预设保存成功！",
+    "description": "Toast notice."
+  },
+  "scheduleDeleted": {
+    "message": "时间表已删除",
+    "description": "Toast notice."
+  },
+  "scheduleUpdated": {
+    "message": "时间表已更新",
+    "description": "Toast notice."
+  },
+  "scheduleAdded": {
+    "message": "添加了时间表",
+    "description": "Toast notice."
+  },
+  "enterValidDomain": {
+    "message": "请输入有效域名",
+    "description": "Toast notice."
+  },
+  "domainAlreadyAllowed": {
+    "message": "域名已被允许",
+    "description": "Toast notice."
+  },
+  "addedToAllowlist": {
+    "message": "已添加到白名单",
+    "description": "Toast notice."
+  },
+  "enterValidDomains": {
+    "message": "请输入有效域名",
+    "description": "Toast notice."
+  },
+  "addedDomainsToNeverTrack": {
+    "message": "将 $count$ 域添加到 Never-Track",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "domainsAlreadyInList": {
+    "message": "域已在列表中",
+    "description": "Toast notice."
+  },
+  "trackingResumed": {
+    "message": "追踪已恢复",
+    "description": "Toast notice."
+  },
+  "privacyModeEnabled": {
+    "message": "隐私模式已启用",
+    "description": "Toast notice."
+  },
+  "backupRestoredReloading": {
+    "message": "备份已恢复 — 正在重新加载...",
+    "description": "Toast notice."
+  },
+  "downloadStarted": {
+    "message": "下载开始",
+    "description": "Toast notice."
+  },
+  "failedDownloadData": {
+    "message": "下载数据失败",
+    "description": "Toast notice."
+  },
+  "deleteBackupConfirm": {
+    "message": "从历史记录中永久删除此备份？",
+    "description": "Confirm body."
+  },
+  "deleteConfirmBtn": {
+    "message": "删除",
+    "description": "Confirm action."
+  },
+  "backupDeleted": {
+    "message": "备份已删除",
+    "description": "Toast notice."
+  },
+  "deleteFailed": {
+    "message": "删除失败",
+    "description": "Toast notice."
+  },
+  "localBackupCreated": {
+    "message": "已创建本地备份",
+    "description": "Toast notice."
+  },
+  "backupCreationFailed": {
+    "message": "备份创建失败",
+    "description": "Toast notice."
+  },
+  "enterDomainFirstToBlockInstantly": {
+    "message": "先输入域名即可立即屏蔽",
+    "description": "Toast notice."
+  },
+  "siteBlockedUnderPreset": {
+    "message": "网站被 $name$ 屏蔽",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "deletePresetConfirm": {
+    "message": "您确定要删除预设“$name$”吗？",
+    "description": "Confirm body.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetDeleted": {
+    "message": "预设已删除",
+    "description": "Toast notice."
+  },
+  "presetNameRequired": {
+    "message": "需要预设名称",
+    "description": "Toast notice."
+  },
+  "maxCustomPresetsLimit": {
+    "message": "您最多可以添加 3 个自定义预设",
+    "description": "Toast notice."
+  },
+  "presetCreated": {
+    "message": "预设已创建",
+    "description": "Toast notice."
+  },
+  "presetUpdated": {
+    "message": "预设已更新",
+    "description": "Toast notice."
+  },
+  "appliedPreset": {
+    "message": "应用的预设：$name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "undo10s": {
+    "message": "撤消（10 秒）",
+    "description": "Undo text label."
+  },
+  "undoXs": {
+    "message": "撤消（$secs$秒）",
+    "description": "Undo countdown.",
+    "placeholders": {
+      "secs": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "editBlockRule": {
+    "message": "编辑阻止规则",
+    "description": "Modal title."
+  },
+  "startWork": {
+    "message": "▶ 开始工作",
+    "description": "Action button."
+  },
+  "startBreak": {
+    "message": "▶ 开始休息",
+    "description": "Action button."
+  },
+  "scheduledFocus": {
+    "message": "预定焦点",
+    "description": "Focus mode timer subtext."
+  },
+  "pinLengthError": {
+    "message": "PIN 码必须正好是 6 位数字",
+    "description": "PIN configuration error."
+  },
+  "pinsDoNotMatch": {
+    "message": "PIN 码不匹配",
+    "description": "PIN configuration error."
+  },
+  "readingFile": {
+    "message": "正在读取文件...",
+    "description": "Migration progress status."
+  },
+  "parsingCsvData": {
+    "message": "正在解析 CSV 数据...",
+    "description": "Migration progress status."
+  },
+  "mergingDaysOfHistory": {
+    "message": "合并 $count$ 天的历史...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "finalizingAndReloading": {
+    "message": "完成并重新加载...",
+    "description": "Migration progress status."
+  },
+  "importingDataDayOf": {
+    "message": "导入数据：第 $current$ 天 $total$...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "10"
+      },
+      "total": {
+        "content": "$2",
+        "example": "100"
+      }
+    }
+  },
+  "creatingPreImportBackup": {
+    "message": "创建导入前备份...",
+    "description": "Migration progress status."
+  },
+  "parsingJsonData": {
+    "message": "正在解析 JSON 数据...",
+    "description": "Migration progress status."
+  },
+  "creating": {
+    "message": "创造...",
+    "description": "Button progress indicator."
+  },
+  "editBlockPreset": {
+    "message": "编辑块预设",
+    "description": "Modal title."
+  },
+  "pausedAlways": {
+    "message": "暂停（始终）",
+    "description": "Indefinite pause status."
+  },
+  "delete": {
+    "message": "删除",
+    "description": "Generic tooltip or button."
+  },
+  "edit": {
+    "message": "编辑",
+    "description": "Generic tooltip or button."
+  },
+  "restoreThisBackup": {
+    "message": "恢复此备份",
+    "description": "Tooltip."
+  },
+  "downloadJsonFile": {
+    "message": "下载 JSON 文件",
+    "description": "Tooltip."
+  },
+  "deleteThisBackup": {
+    "message": "删除此备份",
+    "description": "Tooltip."
+  },
+  "egMorningFocus": {
+    "message": "例如晨间焦点",
+    "description": "Schedule input placeholder."
+  },
+  "quickStart": {
+    "message": "快速入门",
+    "description": "Button tooltip."
+  },
+  "editSettings": {
+    "message": "编辑设置",
+    "description": "Button tooltip."
+  },
+  "daySundayLetter": {
+    "message": "S",
+    "description": "Sunday letter."
+  },
+  "dayMondayLetter": {
+    "message": "中号",
+    "description": "Monday letter."
+  },
+  "dayTuesdayLetter": {
+    "message": "时间",
+    "description": "Tuesday letter."
+  },
+  "dayWednesdayLetter": {
+    "message": "瓦",
+    "description": "Wednesday letter."
+  },
+  "dayThursdayLetter": {
+    "message": "时间",
+    "description": "Thursday letter."
+  },
+  "dayFridayLetter": {
+    "message": "F",
+    "description": "Friday letter."
+  },
+  "daySaturdayLetter": {
+    "message": "S",
+    "description": "Saturday letter."
+  },
+  "range7d": {
+    "message": "7天",
+    "description": "7 days range label shortcut"
+  },
+  "range14d": {
+    "message": "14天",
+    "description": "14 days range label shortcut"
+  },
+  "range30d": {
+    "message": "30天",
+    "description": "30 days range label shortcut"
+  },
+  "range45d": {
+    "message": "45天",
+    "description": "45 days range label shortcut"
+  },
+  "trackLocalFiles": {
+    "message": "跟踪本地文件",
+    "description": "Track local files option"
+  },
+  "trackLocalFilesDesc": {
+    "message": "跟踪在浏览器中打开的本地 HTML 或 PDF 文件。",
+    "description": "Track local files option description"
+  },
+  "blockingBehavior": {
+    "message": "阻止行为",
+    "description": "Blocking behavior card header"
+  },
+  "showFunnyBlockedPage": {
+    "message": "显示有趣的被阻止页面",
+    "description": "Show funny blocked page option"
+  },
+  "timeLimitWarning": {
+    "message": "封锁前的时间限制警告",
+    "description": "Warning duration option"
+  },
+  "timeLimitWarningDesc": {
+    "message": "在网站被阻止之前的几秒内显示警告。",
+    "description": "Warning duration description"
+  },
+  "sec": {
+    "message": "秒",
+    "description": "seconds abbreviation"
+  },
+  "tabLimiter": {
+    "message": "每个域的制表符限制器",
+    "description": "Tab limiter option"
+  },
+  "tabLimiterDesc": {
+    "message": "设置 0 禁用。",
+    "description": "Tab limiter description"
+  },
+  "tabsMax": {
+    "message": "最大标签数",
+    "description": "tabs limit label"
+  },
+  "trackingExceptions": {
+    "message": "跟踪异常情况",
+    "description": "Tracking exceptions card header"
+  },
+  "alwaysTrackEvenIdle": {
+    "message": "始终跟踪（即使闲置时）",
+    "description": "Always track option"
+  },
+  "alwaysTrackEvenIdleDesc": {
+    "message": "即使您离开也始终跟踪时间的网站（例如 pw.live）",
+    "description": "Always track description"
+  },
+  "btnAddException": {
+    "message": "+ 添加例外",
+    "description": "Add exception button"
+  },
+  "badgeDisplay": {
+    "message": "徽章展示",
+    "description": "Badge display card header"
+  },
+  "showTimeSpentBadge": {
+    "message": "显示在扩展徽章上花费的时间",
+    "description": "Show time spent option"
+  },
+  "showTimeSpentBadgeDesc": {
+    "message": "显示在当前站点上花费的分钟数。",
+    "description": "Show time spent description"
+  },
+  "showIdlWhenIdle": {
+    "message": "空闲/不跟踪时显示“idl”",
+    "description": "Show idle status option"
+  },
+  "showIdlWhenIdleDesc": {
+    "message": "当时间跟踪暂停或不活动时，在扩展徽章上显示“idl”。",
+    "description": "Show idle status description"
+  },
+  "dataRollover": {
+    "message": "数据和滚动",
+    "description": "Data and rollover card header"
+  },
+  "nightOwlRollover": {
+    "message": "夜猫子日翻转",
+    "description": "Night owl rollover option"
+  },
+  "nightOwlRolloverDesc": {
+    "message": "定义新的跟踪日的开始时间。如果你工作到很晚很有用。",
+    "description": "Night owl description"
+  },
+  "midnight": {
+    "message": "午夜（12:00 AM）",
+    "description": "Midnight option"
+  },
+  "lastXDays": {
+    "message": "过去 $count$ 天",
+    "description": "Last X days label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "tuesday": {
+    "message": "周二",
+    "description": "Weekday name."
+  },
+  "wednesday": {
+    "message": "周三",
+    "description": "Weekday name."
+  },
+  "thursday": {
+    "message": "周四",
+    "description": "Weekday name."
+  },
+  "friday": {
+    "message": "星期五",
+    "description": "Weekday name."
+  },
+  "saturday": {
+    "message": "周六",
+    "description": "Weekday name."
+  },
+  "sun": {
+    "message": "太阳",
+    "description": "Abbreviated weekday name."
+  },
+  "mon": {
+    "message": "周一",
+    "description": "Abbreviated weekday name."
+  },
+  "tue": {
+    "message": "星期二",
+    "description": "Abbreviated weekday name."
+  },
+  "wed": {
+    "message": "周三",
+    "description": "Abbreviated weekday name."
+  },
+  "thu": {
+    "message": "星期四",
+    "description": "Abbreviated weekday name."
+  },
+  "fri": {
+    "message": "周五",
+    "description": "Abbreviated weekday name."
+  },
+  "sat": {
+    "message": "星期六",
+    "description": "Abbreviated weekday name."
+  },
+  "everyday": {
+    "message": "每天",
+    "description": "Schedule frequency label."
+  },
+  "weekdays": {
+    "message": "平日",
+    "description": "Schedule frequency label."
+  },
+  "focusSession": {
+    "message": "焦点会议",
+    "description": "Default focus session name."
+  },
+  "addSchedule": {
+    "message": "添加时间表",
+    "description": "Add schedule button."
+  },
+  "notEnoughDataYet": {
+    "message": "还没有足够的数据",
+    "description": "Empty state analytics label."
+  },
+  "label": {
+    "message": "标签",
+    "description": "Text input label."
+  },
+  "start": {
+    "message": "开始",
+    "description": "Time input label."
+  },
+  "end": {
+    "message": "结尾",
+    "description": "Time input label."
+  },
+  "categoriesToBlock": {
+    "message": "要阻止的类别",
+    "description": "Categories select section header."
+  },
+  "preScheduleNotification": {
+    "message": "预定通知",
+    "description": "Option label."
+  },
+  "preScheduleNotificationDesc": {
+    "message": "在会议开始前收到通知。",
+    "description": "Option sublabel."
+  },
+  "disabled": {
+    "message": "残疾人",
+    "description": "Option setting selection."
+  },
+  "oneMinBefore": {
+    "message": "1 分钟前",
+    "description": "Option setting selection."
+  },
+  "fiveMinsBefore": {
+    "message": "5分钟前",
+    "description": "Option setting selection."
+  },
+  "tenMinsBefore": {
+    "message": "10分钟前",
+    "description": "Option setting selection."
+  },
+  "fifteenMinsBefore": {
+    "message": "15分钟前",
+    "description": "Option setting selection."
+  },
+  "editFocusSchedule": {
+    "message": "编辑焦点时间表",
+    "description": "Dialog title."
+  },
+  "addFocusSchedule": {
+    "message": "添加焦点时间表",
+    "description": "Dialog title."
+  },
+  "bestDowStat": {
+    "message": "$day$ — 焦点的平均值 $time$",
+    "description": "Best day of week performance metric.",
+    "placeholders": {
+      "day": {
+        "content": "$1",
+        "example": "Monday"
+      },
+      "time": {
+        "content": "$2",
+        "example": "2h 15m"
+      }
+    }
+  },
+  "editPreset": {
+    "message": "编辑预设",
+    "description": "Modal title."
+  },
+  "workTimeMin": {
+    "message": "工作时间（分钟）",
+    "description": "Input field label."
+  },
+  "breakTimeMin": {
+    "message": "休息时间（分钟）",
+    "description": "Input field label."
+  },
+  "longBreakMin": {
+    "message": "长休息（分钟）",
+    "description": "Input field label."
+  },
+  "enableNotifications": {
+    "message": "启用通知",
+    "description": "Toggle switch label."
+  },
+  "epNotifyDesc": {
+    "message": "当专注时段或休息结束时接收推送警报。",
+    "description": "Help text."
+  },
+  "autoStartNextCycle": {
+    "message": "自动启动下一个周期",
+    "description": "Toggle switch label."
+  },
+  "epAutoStartDesc": {
+    "message": "自动过渡到下一个工作周期或休息。",
+    "description": "Help text."
+  },
+  "categoriesToBlockDuringFocus": {
+    "message": "焦点期间要阻止的类别",
+    "description": "Checkbox group header."
+  },
+  "presetPomodoro": {
+    "message": "番茄钟",
+    "description": "Built-in preset name."
+  },
+  "presetDeepWork": {
+    "message": "深度工作",
+    "description": "Built-in preset name."
+  },
+  "presetShortSprint": {
+    "message": "短距离冲刺",
+    "description": "Built-in preset name."
+  },
+  "presetFlow": {
+    "message": "流动",
+    "description": "Built-in preset name."
+  },
+  "noFocusSessionsYet": {
+    "message": "还没有焦点会议。",
+    "description": "Placeholder text."
+  },
+  "startFirstSession": {
+    "message": "开始第一个会话",
+    "description": "Button label."
+  },
+  "siteList": {
+    "message": "站点列表",
+    "description": "Tab title."
+  },
+  "smartPresetsAndCategories": {
+    "message": "智能预设和类别",
+    "description": "Tab title."
+  },
+  "advancedTweaks": {
+    "message": "高级调整",
+    "description": "Tab title."
+  },
+  "freetimeHours": {
+    "message": "空闲时间",
+    "description": "Section header."
+  },
+  "addFreetime": {
+    "message": "添加空闲时间",
+    "description": "Button label."
+  },
+  "editFreetime": {
+    "message": "编辑空闲时间",
+    "description": "Modal title."
+  },
+  "addBlockRule": {
+    "message": "添加阻止规则",
+    "description": "Modal title."
+  },
+  "siteCountSingle": {
+    "message": "$count$ 站点",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "siteCountPlural": {
+    "message": "$count$ 站点",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "minActiveTimeShort": {
+    "message": "最短活动时间（米）",
+    "description": "Short label for sidebar settings."
+  },
+  "ratioThresholdShort": {
+    "message": "比率阈值 (%)",
+    "description": "Short label for sidebar settings."
+  },
+  "averageFocus": {
+    "message": "平均焦点",
+    "description": "Chart line label."
+  },
+  "noRulesYet": {
+    "message": "还没有规则",
+    "description": "Placeholder header."
+  },
+  "blockSitesToGetStarted": {
+    "message": "阻止分散注意力的网站即可开始。",
+    "description": "Placeholder description."
+  },
+  "noExceptionsYet": {
+    "message": "还没有例外",
+    "description": "Placeholder header."
+  },
+  "allowSitesDesc": {
+    "message": "允许绕过所有阻止规则的网站。",
+    "description": "Placeholder description."
+  },
+  "noDomainsIgnored": {
+    "message": "没有忽略任何域",
+    "description": "Placeholder header."
+  },
+  "neverTrackDesc": {
+    "message": "此列表中的域永远不会被跟踪以进行分析。",
+    "description": "Placeholder description."
+  }
+}

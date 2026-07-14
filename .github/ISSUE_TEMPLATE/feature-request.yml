@@ -1,0 +1,25 @@
+name: 💡 Feature Request
+description: Propose a new idea or improvement for Flow
+title: "[Feature Request]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make Flow better? Share it here!
+  - type: textarea
+    id: pitch
+    attributes:
+      label: What is your idea?
+      description: Describe the feature you want to see.
+      placeholder: I want to be able to...
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do we need this?
+      description: Explain how this feature helps you or other users stay focused.
+      placeholder: This would help because...
+    validations:
+      required: true
