@@ -488,6 +488,10 @@ async function main() {
         if (skipSet.has(item) || item === 'backup' || item === '.agents' || item === '.github') return true;
         if (item.startsWith('flow_preview') && item.endsWith('.jpg')) return true;
         if (item === 'package-lock.json' || item === 'project_rules.md' || item === 'design.md') return true;
+        
+        // Remove markdown files and LICENSE as requested by the user
+        if (item.endsWith('.md') || item === 'LICENSE') return true;
+        
         return false;
       });
 
