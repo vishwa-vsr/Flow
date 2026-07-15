@@ -19,7 +19,7 @@
 
   <br>
   
-  <img src="media/flow_preview1.jpg" width="100%" alt="Flow Overview Banner" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  <img src="media/flow_preview6.jpg" width="100%" alt="Flow Overview Banner" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
 </div>
 
 ---
@@ -131,7 +131,7 @@ flow-source/
   │    ├── languages_analysis.py   <-- Translation statistics checking tool
   │    └── translate_locales.py    <-- Machine translator utility helper
   ├── media/                       <-- Marketing posters and preview banners
-  │    ├── flow_preview1.jpg
+  │    ├── flow_preview6.jpg
   │    └── ...
   ├── .gitignore                 
   ├── package.json               
