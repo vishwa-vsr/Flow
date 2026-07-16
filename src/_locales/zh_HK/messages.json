@@ -1575,6 +1575,14 @@
     "message": "🌐 幫忙翻譯",
     "description": "Action button."
   },
+  "rateUsBtn": {
+    "message": "⭐ 評分 5 星",
+    "description": "Action button."
+  },
+  "changelogBtn": {
+    "message": "📋 更新日誌",
+    "description": "Action button."
+  },
   "backupRestoreHeader": {
     "message": "備份與復原",
     "description": "Settings card label."

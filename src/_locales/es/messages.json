@@ -1575,6 +1575,14 @@
     "message": "🌐 Ayuda a Traducir",
     "description": "Action button."
   },
+  "rateUsBtn": {
+    "message": "⭐ Califícanos",
+    "description": "Action button."
+  },
+  "changelogBtn": {
+    "message": "📋 Historial de cambios",
+    "description": "Action button."
+  },
   "backupRestoreHeader": {
     "message": "Copia de Seguridad y Restauración",
     "description": "Settings card label."
