@@ -215,7 +215,7 @@ To generate the minified production packages submitted to browser extension stor
 
 We welcome contributions of all kinds! Please check out our [Contributing Guide](./CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, suggest features, or help with translations.
 
-If you like Flow, leaving a 5-star review on the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/) or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
+If you like Flow, leaving a 5-star review on the [Chrome Web Store](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp), [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/), or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
 
 ---
 
@@ -236,7 +236,7 @@ This project is licensed under the [MIT License](./LICENSE).
 ---
 
 <div align="center">
-  <p><b>🔗 Quick Links:</b> <a href="https://vishwa-vsr.github.io/flow-website/">Product Website</a> • <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic">Edge Add-on</a> • <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/">Firefox Add-on</a> • <a href="./PRIVACY.md">Privacy Policy</a></p>
+  <p><b>🔗 Quick Links:</b> <a href="https://vishwa-vsr.github.io/flow-website/">Product Website</a> • <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp">Chrome Web Store</a> • <a href="https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic">Edge Add-on</a> • <a href="https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/">Firefox Add-on</a> • <a href="./PRIVACY.md">Privacy Policy</a></p>
 
   <hr style="width: 50%;">
 
