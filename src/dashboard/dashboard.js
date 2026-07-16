@@ -3475,6 +3475,8 @@ async function loadExtendedSettings(preloadedSettings) {
             t.style.display = "flex";
             t.style.justifyContent = "space-between";
             t.style.alignItems = "center";
+            t.style.flexWrap = "wrap";
+            t.style.gap = "12px";
             a = document.getElementById("pin-actions-div");
             if (a) {
                 a.style.display = "flex";
