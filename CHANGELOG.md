@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Migration logos:** Fixed broken logo images in the Migration & Imports card of the settings dashboard by updating their path to load from the correct `assets/icons` folder.
 - **Storage usage indicator:** Updated the Local Storage Usage visual indicator on the settings page to calculate the combined size of the IndexedDB history database and the basic local settings storage, making it fully accurate, and updated descriptions across all languages.
 - **Desktop alerts:** Fixed the extension crashing/throwing "Unable to download all specified images" errors during desktop alert creation by updating the notification logo source path to load from the correct `assets/icons` folder.
+- **Favicon Disappearance:** Fixed the fallback icon path references in the dashboard's dynamic favicon code, resolving the tab logo disappearing when switching browser tabs.
 
 ## [10.0.1] - 2026-07-10
 
