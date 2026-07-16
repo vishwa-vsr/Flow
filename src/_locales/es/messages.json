@@ -1568,23 +1568,23 @@
     "description": "Settings config option description."
   },
   "submitFeedbackBtn": {
-    "message": "💡 Enviar Opiniones",
+    "message": "Enviar Opiniones",
     "description": "Action button."
   },
   "helpTranslateBtn": {
-    "message": "🌐 Ayuda a Traducir",
+    "message": "Ayuda a Traducir",
     "description": "Action button."
   },
   "websiteBtn": {
-    "message": "✨ Sitio Web",
+    "message": "Sitio Web",
     "description": "Action button."
   },
   "rateUsBtn": {
-    "message": "⭐ Califícanos",
+    "message": "Califícanos",
     "description": "Action button."
   },
   "changelogBtn": {
-    "message": "📋 Historial de cambios",
+    "message": "Historial de cambios",
     "description": "Action button."
   },
   "backupRestoreHeader": {

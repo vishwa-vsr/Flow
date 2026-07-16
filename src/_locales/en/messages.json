@@ -1568,23 +1568,23 @@
     "description": "Settings config option description."
   },
   "submitFeedbackBtn": {
-    "message": "💡 Submit Feedback",
+    "message": "Submit Feedback",
     "description": "Action button."
   },
   "helpTranslateBtn": {
-    "message": "🌐 Help Translate",
+    "message": "Help Translate",
     "description": "Action button."
   },
   "websiteBtn": {
-    "message": "✨ Website",
+    "message": "Website",
     "description": "Action button."
   },
   "rateUsBtn": {
-    "message": "⭐ Rate 5 Stars",
+    "message": "Rate 5 Stars",
     "description": "Action button."
   },
   "changelogBtn": {
-    "message": "📋 Changelog",
+    "message": "Changelog",
     "description": "Action button."
   },
   "backupRestoreHeader": {

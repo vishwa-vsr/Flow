@@ -1568,23 +1568,23 @@
     "description": "Settings config option description."
   },
   "submitFeedbackBtn": {
-    "message": "💡 提交回饋",
+    "message": "提交回饋",
     "description": "Action button."
   },
   "helpTranslateBtn": {
-    "message": "🌐 幫忙翻譯",
+    "message": "幫忙翻譯",
     "description": "Action button."
   },
   "websiteBtn": {
-    "message": "✨ 官方網站",
+    "message": "官方網站",
     "description": "Action button."
   },
   "rateUsBtn": {
-    "message": "⭐ 評分 5 星",
+    "message": "評分 5 星",
     "description": "Action button."
   },
   "changelogBtn": {
-    "message": "📋 更新日誌",
+    "message": "更新日誌",
     "description": "Action button."
   },
   "backupRestoreHeader": {
