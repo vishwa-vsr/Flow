@@ -219,6 +219,16 @@ If you like Flow, leaving a 5-star review on the [Firefox Add-ons Store](https:/
 
 ---
 
+## 💖 Credits & Third-Party Resources
+
+Flow is made possible thanks to these amazing open-source libraries, typefaces, and assets:
+
+* **[Chart.js](https://www.chartjs.org/)** — Used under the [MIT License](https://github.com/chartjs/Chart.js/blob/master/LICENSE.md) to render the premium analytics charts.
+* **[Manrope Font](https://github.com/sharanda/manrope)** — Mikhail Sharanda's modern geometric sans-serif typeface, used under the [SIL Open Font License 1.1](./src/assets/fonts/LICENSE.txt).
+* **Migration Brand Assets** — Logos for *Web Activity Time Tracker*, *Time Tracker*, and *Webtime Tracker* are used strictly for nominative identification of import options. All trademarks and brand names are properties of their respective owners.
+
+---
+
 ## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE).
