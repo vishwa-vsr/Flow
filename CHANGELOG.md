@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Folder Restructuring:** Cleaned up the repository layout by putting all extension source files (including popup, dashboard, blocked, assets, global.css, and utils.js) inside a unified `src/` folder.
 - **Build Tool Location:** Moved `build.js` inside the `tools/` folder.
 - **Documentation:** Updated the README.md and CONTRIBUTING.md to reflect the new directory structure, and added instructions on how to bypass PowerShell script execution policy issues on Windows.
+- **Chart.js Compression:** Created a custom version of Chart.js to remove unused charts (like Radar and Scatter charts), shrinking the file size by 18 KB (a 9% reduction) to make the extension lighter, and added a simple command (`npm run bundle-chart`) to rebuild it easily.
+- **Top Websites List:** Increased the Top 5 Websites list to Top 6 Websites in the analytics dashboard overview to utilize empty space and balance the layout.
+- **Database Footprint Optimization:** Optimized how website visits are recorded in the database by replacing 13-digit millisecond timestamps with seconds-since-midnight and session duration formats, saving 20% to 30% of database space and making charts load faster, with an automatic background migration script for existing data.
+
+### Fixed
+- **Migration logos:** Fixed broken logo images in the Migration & Imports card of the settings dashboard by updating their path to load from the correct `assets/icons` folder.
+- **Storage usage indicator:** Updated the Local Storage Usage visual indicator on the settings page to calculate the combined size of the IndexedDB history database and the basic local settings storage, making it fully accurate, and updated descriptions across all languages.
+- **Desktop alerts:** Fixed the extension crashing/throwing "Unable to download all specified images" errors during desktop alert creation by updating the notification logo source path to load from the correct `assets/icons` folder.
 
 ## [10.0.1] - 2026-07-10
 

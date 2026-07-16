@@ -215,7 +215,7 @@
 
           <!-- Right Column: Top 5 Websites -->
           <div class="card" style="padding:24px; display:flex; flex-direction:column; gap:16px; min-height:380px; height:100%; box-sizing:border-box;">
-            <div class="ctit" data-i18n="top5Websites">Top 5 Websites</div>
+            <div class="ctit" data-i18n="top6Websites">Top 6 Websites</div>
             <div id="ov-topsites-list" style="display:flex; flex-direction:column; gap:16px; flex:1; justify-content:center;">
               <!-- Filled dynamically in JS -->
             </div>
@@ -1057,17 +1057,12 @@
                 </div><label class="bp" style="cursor:pointer"><input type="file" id="file-import"
                     accept="application/json,.json" style="display:none" /><span data-i18n="chooseFile">Choose File…</span></label>
               </div>
-              <div class="trow" style="border-bottom:none;padding-bottom:0;flex-direction:column;align-items:stretch;gap:12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <div>
-                    <div class="tlbl" data-i18n="localStorageUsage">Local Storage Usage</div>
-                    <div class="tdesc" data-i18n="localStorageUsageDesc">Space used by settings, history, and rules (out of 10MB limit).</div>
-                  </div>
-                  <div id="storage-usage-text" style="font-size:13px; font-weight:700; color:var(--tx2); font-family:monospace;">0.00 KB / 10 MB (0.00%)</div>
+              <div class="trow" style="border-bottom:none;padding-bottom:0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+                <div>
+                  <div class="tlbl" data-i18n="localStorageUsage">Local Storage Usage</div>
+                  <div class="tdesc" data-i18n="localStorageUsageDesc">Space used by settings, rules, and history database.</div>
                 </div>
-                <div style="height:8px; background:var(--bg4); border-radius:99px; overflow:hidden; width:100%;">
-                  <div id="storage-usage-fill" style="height:100%; border-radius:99px; background:var(--green); width:0%; transition:width 0.5s ease;"></div>
-                </div>
+                <div id="storage-usage-text" style="font-size:13px; font-weight:700; color:var(--tx2); font-family:monospace; flex-shrink:0;">0.00 KB</div>
               </div>
             </div>
 
@@ -1076,7 +1071,7 @@
               <div class="ctit" style="color:var(--green)" data-i18n="migrationImportsHeader">Migration &amp; Imports</div>
               <div class="trow" style="border-top:none;padding-top:0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
                 <div style="display:flex;align-items:center;gap:16px;">
-                  <img class="mig-icon" src="../icons/web-activity.svg" width="36" height="36" style="flex-shrink:0;" alt="Web Activity Time Tracker logo" />
+                  <img class="mig-icon" src="../assets/icons/web-activity.svg" width="36" height="36" style="flex-shrink:0;" alt="Web Activity Time Tracker logo" />
                   <div>
                     <div class="tlbl" data-i18n="importFromWatt">Import from Web Activity Time Tracker</div>
                     <div class="tdesc" data-i18n="importFromWtDesc">Upload your exported CSV file to merge your past tracking history.</div>
@@ -1090,7 +1085,7 @@
 
               <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
                 <div style="display:flex;align-items:center;gap:16px;">
-                  <img class="mig-icon" src="../icons/time-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Time Tracker - Web Habit Builder logo" />
+                  <img class="mig-icon" src="../assets/icons/time-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Time Tracker - Web Habit Builder logo" />
                   <div>
                     <div class="tlbl" data-i18n="importFromTt">Import from Time Tracker - Web Habit Builder</div>
                     <div class="tdesc" data-i18n="importFromTtDesc">Upload your exported JSON file to merge your past tracking history.</div>
@@ -1104,7 +1099,7 @@
 
               <div class="trow" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
                 <div style="display:flex;align-items:center;gap:16px;">
-                  <img class="mig-icon" src="../icons/webtime-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Webtime Tracker logo" />
+                  <img class="mig-icon" src="../assets/icons/webtime-tracker.svg" width="36" height="36" style="flex-shrink:0;" alt="Webtime Tracker logo" />
                   <div>
                     <div class="tlbl" data-i18n="importFromWt">Import from Webtime Tracker</div>
                     <div class="tdesc" data-i18n="importFromWtDesc">Upload your exported CSV file to merge your past tracking history.</div>

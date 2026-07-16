@@ -1,13 +1,15 @@
 {
   "scripts": {
     "build": "node tools/build.js",
-    "zip": "node tools/build.js --zip"
+    "zip": "node tools/build.js --zip",
+    "bundle-chart": "esbuild tools/bundle-chart.js --bundle --minify --outfile=src/lib/chart.min.js --target=chrome90"
   },
   "dependencies": {
     "esbuild": "^0.28.1",
     "ws": "^8.21.0"
   },
   "devDependencies": {
-    "archiver": "^8.0.0"
+    "archiver": "^8.0.0",
+    "chart.js": "^4.5.1"
   }
 }

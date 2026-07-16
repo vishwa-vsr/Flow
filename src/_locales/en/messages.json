@@ -697,9 +697,9 @@
     "message": "Time Distribution",
     "description": "Time distribution section title."
   },
-  "top5Websites": {
-    "message": "Top 5 Websites",
-    "description": "Top 5 websites section title."
+  "top6Websites": {
+    "message": "Top 6 Websites",
+    "description": "Top 6 websites section title."
   },
   "overview": {
     "message": "Overview",
@@ -1604,11 +1604,11 @@
     "description": "Input file label."
   },
   "localStorageUsage": {
-    "message": "Local Storage Usage",
+    "message": "Extension Storage Usage",
     "description": "Settings config option."
   },
   "localStorageUsageDesc": {
-    "message": "Space used by settings, history, and rules (out of 10MB limit).",
+    "message": "Space used by settings, rules, and history database.",
     "description": "Settings config option description."
   },
   "migrationImportsHeader": {

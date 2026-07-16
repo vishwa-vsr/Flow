@@ -697,9 +697,9 @@
     "message": "Distribución del Tiempo",
     "description": "Time distribution section title."
   },
-  "top5Websites": {
-    "message": "Top 5 Sitios Web",
-    "description": "Top 5 websites section title."
+  "top6Websites": {
+    "message": "Top 6 Sitios Web",
+    "description": "Top 6 websites section title."
   },
   "overview": {
     "message": "Resumen",
@@ -1604,11 +1604,11 @@
     "description": "Input file label."
   },
   "localStorageUsage": {
-    "message": "Uso de Almacenamiento Local",
+    "message": "Uso de Almacenamiento de la Extensión",
     "description": "Settings config option."
   },
   "localStorageUsageDesc": {
-    "message": "Espacio usado por ajustes, historial y reglas (de 10MB máximo).",
+    "message": "Espacio usado por los ajustes, reglas y base de datos de historial.",
     "description": "Settings config option description."
   },
   "migrationImportsHeader": {

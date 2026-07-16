@@ -245,16 +245,33 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
                 if (!entry.timeline) entry.timeline = [];
                 entry.sites[domainStr] = (entry.sites[domainStr] || 0) + secs;
                 
+                const [y, m, d] = key.split("-").map(Number);
+                const midnightMs = new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+                
+                const startSecs = Math.round((sMs - midnightMs) / 1000);
+                const durSecs = Math.round((eMs - sMs) / 1000);
+                
                 // Merge into the last block if it belongs to the same category and is within 30 seconds of the last block's end.
                 if (entry.timeline.length > 0) {
                     const last = entry.timeline[entry.timeline.length - 1];
-                    if (last.cat === cat && sMs - last.end <= 30000) {
-                        last.end = Math.max(last.end, eMs);
+                    const lastStartMs = typeof last.start === "number" && last.start < 86400 ? (midnightMs + last.start * 1000) : last.start;
+                    const lastEndMs = typeof last.end === "number" ? last.end : (typeof last.dur === "number" ? (lastStartMs + last.dur * 1000) : lastStartMs);
+                    
+                    if (last.cat === cat && sMs - lastEndMs <= 30000) {
+                        const mergedEndMs = Math.max(lastEndMs, eMs);
+                        const newDur = Math.round((mergedEndMs - lastStartMs) / 1000);
+                        if (typeof last.dur === "number" || typeof last.start === "number") {
+                            last.start = Math.round((lastStartMs - midnightMs) / 1000);
+                            last.dur = newDur;
+                            delete last.end;
+                        } else {
+                            last.end = mergedEndMs;
+                        }
                     } else {
-                        entry.timeline.push({ start: sMs, end: eMs, cat });
+                        entry.timeline.push({ start: startSecs, dur: durSecs, cat });
                     }
                 } else {
-                    entry.timeline.push({ start: sMs, end: eMs, cat });
+                    entry.timeline.push({ start: startSecs, dur: durSecs, cat });
                 }
                 dirtyDays.add(key);
             };
@@ -1446,7 +1463,7 @@ async function handleFocusPhaseEnd() {
         try { await chrome.storage.local.set({ userStoppedFocus: true, userStoppedAt: Date.now() }); } catch (_) { }
         try {
             if (!ap || ap.notify !== false) {
-                let t = chrome.runtime.getURL("icons/icon128.png");
+                let t = chrome.runtime.getURL("assets/icons/icon128.png");
                 chrome.notifications.create("focus_done_" + Date.now(), {
                     type: "basic",
                     iconUrl: t,
@@ -1475,7 +1492,7 @@ async function handleFocusPhaseEnd() {
                 focusState.remaining = s;
                 try {
                     if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("icons/icon128.png");
+                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
                         chrome.notifications.create("focus_break_start_" + Date.now(), {
                             type: "basic",
                             iconUrl: t,
@@ -1494,7 +1511,7 @@ async function handleFocusPhaseEnd() {
                 focusState.remaining = a;
                 try {
                     if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("icons/icon128.png");
+                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
                         chrome.notifications.create("focus_break_start_" + Date.now(), {
                             type: "basic",
                             iconUrl: t,
@@ -1520,7 +1537,7 @@ async function handleFocusPhaseEnd() {
             focusState.startedAt = Date.now();
             try {
                 if (!ap || ap.notify !== false) {
-                    let t = chrome.runtime.getURL("icons/icon128.png");
+                    let t = chrome.runtime.getURL("assets/icons/icon128.png");
                     chrome.notifications.create("focus_work_" + Date.now(), {
                         type: "basic",
                         iconUrl: t,
@@ -1956,7 +1973,10 @@ async function handle(t, e) {
 
                 // Wipe and import days first (if writing fails, local storage won't be cleared)
                 await FFDB.clearDays();
-                if (isPlainObj(p.daily)) await FFDB.bulkSetDays(p.daily);
+                if (isPlainObj(p.daily)) {
+                    await FFDB.bulkSetDays(p.daily);
+                    await FFDB.optimizeTimelines();
+                }
                 if (isPlainObj(p.rollups)) await FFDB.setRollups(p.rollups);
 
 
@@ -2685,7 +2705,7 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
                                         await chrome.storage.local.set({ [_notifyKey]: true });
                                         chrome.notifications.create("ff-sched-notify-" + Date.now(), {
                                             type: "basic",
-                                            iconUrl: chrome.runtime.getURL("icons/icon128.png"),
+                                            iconUrl: chrome.runtime.getURL("assets/icons/icon128.png"),
                                             title: "Flow - Session Starting Soon",
                                             message: '"' + (_sc.label || "Focus") + '" starts in ' + _diff + ' minute' + (_diff !== 1 ? 's' : '') + '.'
                                         });
@@ -2724,7 +2744,7 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
                                 try {
                                     chrome.notifications.create("ff-sched-" + Date.now(), {
                                         type: "basic",
-                                        iconUrl: chrome.runtime.getURL("icons/icon128.png"),
+                                        iconUrl: chrome.runtime.getURL("assets/icons/icon128.png"),
                                         title: "Flow - Scheduled Session",
                                         message: "Auto-starting \"" + (_sc.label || "Focus") + "\" session."
                                     });

@@ -697,9 +697,9 @@
     "message": "時間分佈",
     "description": "Time distribution section title."
   },
-  "top5Websites": {
-    "message": "前 5 名網站",
-    "description": "Top 5 websites section title."
+  "top6Websites": {
+    "message": "前 6 名網站",
+    "description": "Top 6 websites section title."
   },
   "overview": {
     "message": "概述",
@@ -1604,11 +1604,11 @@
     "description": "Input file label."
   },
   "localStorageUsage": {
-    "message": "本地儲存使用情況",
+    "message": "擴充功能儲存空間使用情況",
     "description": "Settings config option."
   },
   "localStorageUsageDesc": {
-    "message": "設定、歷史記錄和規則使用的空間（超出 10MB 限制）。",
+    "message": "設定、規則和歷史資料庫所佔用的空間。",
     "description": "Settings config option description."
   },
   "migrationImportsHeader": {

@@ -2606,10 +2606,10 @@ async function renderOverview() {
     if ($("ov-ratio-bar-focus")) $("ov-ratio-bar-focus").style.width = `${focusPct}%`;
     if ($("ov-ratio-bar-dist")) $("ov-ratio-bar-dist").style.width = `${distractPct}%`;
 
-    // 3. Render Top 5 websites list
+    // 3. Render Top 6 websites list
     const sortedSites = Object.entries(i.sites || {})
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
+        .slice(0, 6);
 
     const listEl = $("ov-topsites-list");
     if (listEl) {
@@ -2722,8 +2722,16 @@ async function renderDailyBreakdown() {
                 const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
                 const midnightEnd = midnightStart + 864e5;
                 i.timeline.forEach(a => {
-                    let sTime = Math.max(midnightStart, a.start),
-                        eTime = Math.min(midnightEnd, a.end);
+                    let sTime, eTime;
+                    if (typeof a.start === "number" && a.start < 86400) {
+                        sTime = midnightStart + a.start * 1000;
+                        eTime = sTime + (a.dur || 0) * 1000;
+                    } else {
+                        sTime = a.start;
+                        eTime = a.end || a.start;
+                    }
+                    sTime = Math.max(midnightStart, sTime);
+                    eTime = Math.min(midnightEnd, eTime);
                     if (eTime > sTime) {
                         const blockLeft = ((sTime - midnightStart) / 864e5) * 100;
                         const blockWidth = ((eTime - sTime) / 864e5) * 100;
@@ -3210,17 +3218,30 @@ async function renderTrend() {
                 if (session.cat === "productivity" || session.cat === "learning") {
                     let start = session.start;
                     let end = session.end;
-                    if (typeof start === "number" && typeof end === "number" && end > start) {
+                    let dur = session.dur;
+                    let startSecs, endSecs;
+                    
+                    if (typeof start === "number") {
+                        if (start < 86400) {
+                            startSecs = start;
+                            endSecs = start + (dur || 0);
+                        } else if (typeof end === "number") {
+                            const date = new Date(start);
+                            const midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+                            startSecs = Math.max(0, Math.round((start - midnight) / 1000));
+                            endSecs = Math.max(0, Math.round((end - midnight) / 1000));
+                        }
+                    }
+                    
+                    if (typeof startSecs === "number" && typeof endSecs === "number" && endSecs > startSecs) {
                         hasTimelineData = true;
-                        let curr = start;
-                        while (curr < end) {
-                            let currDate = new Date(curr);
-                            let currHour = currDate.getHours();
-                            let nextHourDate = new Date(currDate);
-                            nextHourDate.setHours(currHour + 1, 0, 0, 0);
-                            let nextHourMs = nextHourDate.getTime();
-                            let chunkEnd = Math.min(end, nextHourMs);
-                            let chunkSecs = Math.max(0, (chunkEnd - curr) / 1000);
+                        let curr = startSecs;
+                        while (curr < endSecs) {
+                            let currHour = Math.floor(curr / 3600);
+                            if (currHour >= 24) currHour = 23;
+                            let nextHourSecs = (currHour + 1) * 3600;
+                            let chunkEnd = Math.min(endSecs, nextHourSecs);
+                            let chunkSecs = Math.max(0, chunkEnd - curr);
                             hourSeconds[currHour] += chunkSecs;
                             curr = chunkEnd;
                         }
@@ -3362,12 +3383,14 @@ function renderWhitelist(e) {
 }
 // Storage Usage Indicator Helper
 async function updateStorageUsageIndicator() {
-    const fillEl = $("storage-usage-fill");
     const textEl = $("storage-usage-text");
-    if (!fillEl && !textEl) return;
+    if (!textEl) return;
 
     try {
-        const bytes = await new Promise((resolve) => {
+        let bytes = 0;
+        
+        // 1. Get chrome.storage.local usage (settings)
+        const localBytes = await new Promise((resolve) => {
             if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local && typeof chrome.storage.local.getBytesInUse === "function") {
                 chrome.storage.local.getBytesInUse(null, (b) => {
                     resolve(b || 0);
@@ -3386,9 +3409,17 @@ async function updateStorageUsageIndicator() {
                 resolve(0);
             }
         });
+        bytes += localBytes;
 
-        const limit = 10485760;
-        const pct = Math.min(100, Math.max(0, (bytes / limit) * 100));
+        // 2. Get IndexedDB usage (history database)
+        if (navigator.storage && typeof navigator.storage.estimate === "function") {
+            try {
+                const estimate = await navigator.storage.estimate();
+                if (estimate.usage && estimate.usage > 0) {
+                    bytes += estimate.usage;
+                }
+            } catch (_) {}
+        }
         
         let formatted = "0.00 KB";
         if (bytes >= 1048576) {
@@ -3398,17 +3429,7 @@ async function updateStorageUsageIndicator() {
         }
 
         if (textEl) {
-            textEl.textContent = `${formatted} / 10 MB (${pct.toFixed(2)}%)`;
-        }
-        if (fillEl) {
-            fillEl.style.width = pct.toFixed(2) + "%";
-            if (pct >= 90) {
-                fillEl.style.background = "var(--red)";
-            } else if (pct >= 75) {
-                fillEl.style.background = "var(--amber)";
-            } else {
-                fillEl.style.background = "var(--green)";
-            }
+            textEl.textContent = `${formatted} (Unlimited)`;
         }
     } catch (err) {
         console.warn("[FF storage] failed to query storage usage:", err);

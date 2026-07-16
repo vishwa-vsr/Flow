@@ -279,12 +279,50 @@
       return await FFDB.getMeta("backup_data_" + id, null);
     },
 
+    async optimizeTimelines() {
+      try {
+        const allDays = await FFDB.getAllDays();
+        const updatedDays = {};
+        let migratedCount = 0;
+        for (const [dayKey, entry] of Object.entries(allDays)) {
+          if (entry && Array.isArray(entry.timeline) && entry.timeline.length > 0) {
+            const [y, m, d] = dayKey.split("-").map(Number);
+            const midnightMs = new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+            let isDirty = false;
+            const newTimeline = entry.timeline.map(session => {
+              if (typeof session.start === "number" && session.start >= 86400) {
+                // Old format millisecond timestamp
+                isDirty = true;
+                const sSecs = Math.max(0, Math.round((session.start - midnightMs) / 1000));
+                const eTime = session.end || session.start;
+                const dSecs = Math.max(0, Math.round((eTime - session.start) / 1000));
+                return { start: sSecs, dur: dSecs, cat: session.cat };
+              }
+              return session;
+            });
+            if (isDirty) {
+              entry.timeline = newTimeline;
+              updatedDays[dayKey] = entry;
+              migratedCount++;
+            }
+          }
+        }
+        if (migratedCount > 0) {
+          await FFDB.bulkSetDays(updatedDays);
+          console.log(`[FFDB] optimized ${migratedCount} daily timelines.`);
+        }
+      } catch (err) {
+        console.warn("[FFDB] failed timeline optimization:", err);
+      }
+    },
+
     async ensureMigrated() {
       if (_isMigratedInMemory) return;
       if (FFDB._migrating) return FFDB._migrating;
       FFDB._migrating = (async () => {
         const done = await FFDB.getMeta("migrated_v1", false);
         if (done) {
+          await FFDB.optimizeTimelines();
           _isMigratedInMemory = true;
           return;
         }
@@ -304,6 +342,7 @@
             chrome.storage.local.remove(["daily", "monthly_rollups"], resolve);
           });
         } catch (_) {}
+        await FFDB.optimizeTimelines();
         _isMigratedInMemory = true;
       })();
       try {
