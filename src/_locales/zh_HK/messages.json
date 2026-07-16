@@ -1575,6 +1575,10 @@
     "message": "🌐 幫忙翻譯",
     "description": "Action button."
   },
+  "websiteBtn": {
+    "message": "✨ 官方網站",
+    "description": "Action button."
+  },
   "rateUsBtn": {
     "message": "⭐ 評分 5 星",
     "description": "Action button."

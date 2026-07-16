@@ -1575,6 +1575,10 @@
     "message": "🌐 Help Translate",
     "description": "Action button."
   },
+  "websiteBtn": {
+    "message": "✨ Website",
+    "description": "Action button."
+  },
   "rateUsBtn": {
     "message": "⭐ Rate 5 Stars",
     "description": "Action button."
