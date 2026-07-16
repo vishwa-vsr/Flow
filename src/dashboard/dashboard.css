@@ -991,7 +991,7 @@
 
     .db-timeline-container {
       position: relative;
-      height: 12px;
+      height: 18px;
       background: var(--bg3);
       border-radius: 99px;
       overflow: hidden;
