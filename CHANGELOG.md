@@ -17,10 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Support links:** Added direct links to the product website, the Chrome Web Store rating page, the online changelog, and updated the translation guide link inside the Support & Feedback settings panel, replacing all raw emojis with clean, inline SVG icons.
 
 ### Fixed
-- **Migration logos:** Fixed broken logo images in the Migration & Imports card of the settings dashboard by updating their path to load from the correct `assets/icons` folder.
 - **Storage usage indicator:** Updated the Local Storage Usage visual indicator on the settings page to calculate the combined size of the IndexedDB history database and the basic local settings storage, making it fully accurate, and updated descriptions across all languages.
-- **Desktop alerts:** Fixed the extension crashing/throwing "Unable to download all specified images" errors during desktop alert creation by updating the notification logo source path to load from the correct `assets/icons` folder.
-- **Favicon Disappearance:** Fixed the fallback icon path references in the dashboard's dynamic favicon code, resolving the tab logo disappearing when switching browser tabs.
 - **Access Control UI:** Fixed the PIN Active badge overlapping/colliding with settings buttons by enabling flex wrapping and spacing on its container.
 
 ## [10.0.1] - 2026-07-10
