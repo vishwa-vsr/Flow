@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Top Websites List:** Increased the Top 5 Websites list to Top 6 Websites in the analytics dashboard overview to utilize empty space and balance the layout.
 - **Database Footprint Optimization:** Optimized how website visits are recorded in the database by replacing 13-digit millisecond timestamps with seconds-since-midnight and session duration formats, saving 20% to 30% of database space and making charts load faster, with an automatic background migration script for existing data.
 - **Support links:** Added direct links to the product website, the Chrome Web Store rating page, the online changelog, and updated the translation guide link inside the Support & Feedback settings panel, replacing all raw emojis with clean, inline SVG icons.
+- **Active Timeline Redesign:** Increased the 24-hour active timeline visual height from 12px to 18px to match the thickness, rounded corners, and premium styling of the productivity category cylinder.
 
 ### Fixed
 - **Storage usage indicator:** Updated the Local Storage Usage visual indicator on the settings page to calculate the combined size of the IndexedDB history database and the basic local settings storage, making it fully accurate, and updated descriptions across all languages.
