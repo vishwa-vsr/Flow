@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Chart.js Compression:** Created a custom version of Chart.js to remove unused charts (like Radar and Scatter charts), shrinking the file size by 18 KB (a 9% reduction) to make the extension lighter, and added a simple command (`npm run bundle-chart`) to rebuild it easily.
 - **Top Websites List:** Increased the Top 5 Websites list to Top 6 Websites in the analytics dashboard overview to utilize empty space and balance the layout.
 - **Database Footprint Optimization:** Optimized how website visits are recorded in the database by replacing 13-digit millisecond timestamps with seconds-since-midnight and session duration formats, saving 20% to 30% of database space and making charts load faster, with an automatic background migration script for existing data.
-- **Support links:** Added direct links to the product website, the Chrome Web Store rating page, the online changelog, and updated the translation guide link inside the Support & Feedback settings panel.
+- **Support links:** Added direct links to the product website, the Chrome Web Store rating page, the online changelog, and updated the translation guide link inside the Support & Feedback settings panel, replacing all raw emojis with clean, inline SVG icons.
 
 ### Fixed
 - **Migration logos:** Fixed broken logo images in the Migration & Imports card of the settings dashboard by updating their path to load from the correct `assets/icons` folder.
