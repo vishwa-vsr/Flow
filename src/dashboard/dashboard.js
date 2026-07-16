@@ -934,7 +934,7 @@ function renderFocus(e, t = 25) {
     if (!e || !e.active) {
         $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = t_("zeroCycles")), $("fpb") && ($("fpb").textContent = t_("work"), $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
         let e = document.getElementById("dynamic-favicon");
-        return void (e && (e.href = "../icons/icon128.png"))
+        return void (e && (e.href = "../assets/icons/icon128.png"))
     }
     $("logo-img") && ($("logo-img").className = "on");
     var a = "work" === e.phase,
@@ -3887,7 +3887,7 @@ renderFocus = function (e, t) {
     } else {
         _focusTick && (clearInterval(_focusTick), _focusTick = null);
         let e = document.getElementById("dynamic-favicon");
-        e && (e.href = "../icons/icon128.png")
+        e && (e.href = "../assets/icons/icon128.png")
     }
 }, document.addEventListener("visibilitychange", async () => {
     if (document.hidden) {
