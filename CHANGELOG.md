@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [10.0.2] - 2026-07-12
 
+### Added
+- **Uninstall Feedback Form:** Added a redirect to a Google Form questionnaire that opens automatically when the user uninstalls the extension, helping us gather insights to improve the app.
+
 ### Changed
 - **Folder Restructuring:** Cleaned up the repository layout by putting all extension source files (including popup, dashboard, blocked, assets, global.css, and utils.js) inside a unified `src/` folder.
 - **Build Tool Location:** Moved `build.js` inside the `tools/` folder.
