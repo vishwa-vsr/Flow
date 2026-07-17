@@ -2831,6 +2831,11 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
 // explicit second call has been removed (was seeding presets twice on first install).
 chrome.runtime.onInstalled.addListener(async (details) => {
     try { await init(); } catch (e) { console.warn("[FF] onInstalled init failed", e); }
+    try {
+        chrome.runtime.setUninstallURL("https://docs.google.com/forms/d/e/1FAIpQLSelORGL9j0n_nudcnCKRpjQ1OctoPmTWSgZwYa6mPkGLwWm-Q/viewform?usp=publish-editor");
+    } catch (e) {
+        console.warn("[FF] Failed to set uninstall URL", e);
+    }
 });
 chrome.runtime.onStartup.addListener(async () => {
     try {
