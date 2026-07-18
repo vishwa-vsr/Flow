@@ -1,7 +1,9 @@
 <div align="center">
   <img src="src/assets/icons/icon128.png" width="96" height="96" alt="Flow Logo">
   <h1>Flow</h1>
-  <p><b>A premium, zero-distraction productivity companion that helps you reclaim your time, build deep focus habits, and block digital noise.</b></p>
+  <p><b>Flow is a privacy-first web extension that monitors your browsing, blocks distractions, and helps you build deep study habits — all running completely locally.
+
+</b></p>
 
   <p>
     <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"><img src="https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png" alt="Available in the Chrome Web Store" height="40"></a>
