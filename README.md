@@ -50,7 +50,6 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 | 🏷️ **Site Categorization** | Tag every website as Productivity, Learning, Communication, Distraction, or Uncategorized. |
 | ⏰ **Focus Schedules** | Set recurring daily or weekly focus sessions that automatically govern your browser. |
 | 🌗 **Dark, Light & Cinematic Themes** | Premium styling options including a glassmorphic cinematic mode with animated gradient blurs. |
-| 🆕 **Custom New Tab Page** | Replace your browser's blank new tab page with a clean clock, daily widgets, and quick-access stats. |
 | 💾 **Data Backup & Import** | Export your logs as JSON, or import past data from Webtime Tracker, Time Tracker, and Web Activity Tracker. |
 
 ---
