@@ -5,7 +5,7 @@
 (function (root) {
   root.FF_CONSTANTS_VERSION = "6.4";
 
-  root.CAT_COLORS = {
+  root.DEFAULT_CAT_COLORS = {
     productivity: "#05D581",
     learning: "#A855F7",
     distraction: "#F46B7A",
@@ -13,7 +13,7 @@
     uncategorized: "#555555",
   };
 
-  root.CAT_LABELS = {
+  root.DEFAULT_CAT_LABELS = {
     productivity: "Productivity",
     learning: "Learning",
     distraction: "Distraction",
@@ -21,7 +21,7 @@
     uncategorized: "Uncategorized",
   };
 
-  root.CAT_EMOJI = {
+  root.DEFAULT_CAT_EMOJI = {
     productivity: "💻",
     learning: "📚",
     distraction: "⚡",
@@ -29,19 +29,41 @@
     uncategorized: "❓",
   };
 
-  // Convenience: combined { label, color, emoji } per category — replaces the
-  // per-file CAT_META copy that used to live in dashboard.js.
-  root.CAT_META = (function () {
-    const out = {};
+  root.CAT_COLORS = { ...root.DEFAULT_CAT_COLORS };
+  root.CAT_LABELS = { ...root.DEFAULT_CAT_LABELS };
+  root.CAT_EMOJI = { ...root.DEFAULT_CAT_EMOJI };
+
+  root.rebuildCatMeta = function () {
+    root.CAT_META = {};
     for (const k of Object.keys(root.CAT_LABELS)) {
-      out[k] = {
+      root.CAT_META[k] = {
         label: root.CAT_LABELS[k],
         color: root.CAT_COLORS[k],
         emoji: root.CAT_EMOJI[k],
       };
     }
-    return out;
-  })();
+  };
+
+  root.applyCustomCategories = function (customMap) {
+    // Reset to defaults first
+    root.CAT_COLORS = { ...root.DEFAULT_CAT_COLORS };
+    root.CAT_LABELS = { ...root.DEFAULT_CAT_LABELS };
+    root.CAT_EMOJI = { ...root.DEFAULT_CAT_EMOJI };
+
+    if (customMap && typeof customMap === "object") {
+      for (const [key, meta] of Object.entries(customMap)) {
+        if (key === "uncategorized" || key === "all") continue;
+        if (meta && typeof meta === "object") {
+          if (meta.label && typeof meta.label === "string") root.CAT_LABELS[key] = meta.label.trim();
+          if (meta.emoji && typeof meta.emoji === "string") root.CAT_EMOJI[key] = meta.emoji.trim();
+          if (meta.color && typeof meta.color === "string") root.CAT_COLORS[key] = meta.color.trim();
+        }
+      }
+    }
+    root.rebuildCatMeta();
+  };
+
+  root.rebuildCatMeta();
 
   root.DEFAULT_CATS = ["productivity", "learning", "distraction", "communication", "uncategorized"];
 

@@ -103,24 +103,24 @@ function hideAnalyticsHeader() {
 }
 
 function catColor(e) {
-    return (CAT_META[e] || {
-        color: "#555555"
-    }).color
+    if (CAT_COLORS && CAT_COLORS[e]) return CAT_COLORS[e];
+    return (CAT_META[e] || { color: "#555555" }).color || "#555555";
 }
 
 function catEmoji(e) {
-    return (CAT_META[e] || {
-        emoji: "🏷️"
-    }).emoji
+    if (CAT_EMOJI && CAT_EMOJI[e]) return CAT_EMOJI[e];
+    return (CAT_META[e] || { emoji: "🏷️" }).emoji || "🏷️";
 }
 
 function catLabel(e, t) {
-    var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
-    var a = t_(key);
-    if (a === key) {
-        a = (CAT_META[e] || { label: e }).label;
+    var label = CAT_LABELS ? CAT_LABELS[e] : null;
+    if (!label || (typeof DEFAULT_CAT_LABELS !== "undefined" && label === DEFAULT_CAT_LABELS[e])) {
+        var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
+        var trans = t_(key);
+        if (trans && trans !== key) label = trans;
     }
-    return t ? a + " ✨" : a
+    if (!label) label = (CAT_META[e] || { label: e }).label;
+    return t ? label + " ✨" : label;
 }
 
 function allCats() {
@@ -793,6 +793,10 @@ async function loadCategories() {
     var e = await gLocal(["siteCategories", "hiddenDefaultSites"]);
     siteCategories = e.siteCategories || {};
     hiddenDefaultSites = e.hiddenDefaultSites || [];
+    var syncRes = await gSync(["customCategories"]);
+    if (syncRes && syncRes.customCategories && typeof applyCustomCategories === "function") {
+        applyCustomCategories(syncRes.customCategories);
+    }
 }
 
 function isDefaultSiteHidden(d) {
@@ -851,10 +855,171 @@ function renderCatSquares() {
         });
         var o = document.createElement("div");
         const countStr = s === 1 ? (t_("siteCountSingle", ["1"]) || "1 site") : (t_("siteCountPlural", [String(s)]) || `${s} sites`);
-        o.className = "cat-sq" + (selectedCat === a ? " selected" : ""), o.style.borderColor = selectedCat === a ? i.color : void 0, setSafeHTML(o, `<div class="cat-sq-icon">${i.emoji}</div><div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${countStr}</div>`), o.addEventListener("click", () => {
-            selectedCat = a, renderCategories()
-        }), e.appendChild(o)
-    })
+        o.className = "cat-sq" + (selectedCat === a ? " selected" : "");
+        o.style.borderColor = selectedCat === a ? i.color : void 0;
+
+        const isEditable = !n && a !== "uncategorized";
+        const editBtnHtml = isEditable ? `
+            <button type="button" class="cat-sq-edit-btn" title="Edit Category" aria-label="Edit Category">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+            </button>
+        ` : "";
+
+        setSafeHTML(o, `${editBtnHtml}<div class="cat-sq-icon">${i.emoji}</div><div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${countStr}</div>`);
+
+        if (isEditable) {
+            const editBtn = o.querySelector(".cat-sq-edit-btn");
+            if (editBtn) {
+                editBtn.addEventListener("click", (ev) => {
+                    ev.stopPropagation();
+                    openEditCategoryModal(a);
+                });
+            }
+        }
+
+        o.addEventListener("click", () => {
+            selectedCat = a;
+            renderCategories();
+        });
+        e.appendChild(o);
+    });
+}
+
+function openEditCategoryModal(catKey) {
+    const existing = document.getElementById("edit-cat-modal-overlay");
+    if (existing) existing.remove();
+
+    const currentLabel = CAT_LABELS[catKey] || catKey;
+    const currentEmoji = CAT_EMOJI[catKey] || "🏷️";
+    const currentColor = CAT_COLORS[catKey] || "#05D581";
+
+    const overlay = document.createElement("div");
+    overlay.id = "edit-cat-modal-overlay";
+    overlay.className = "overlay";
+    overlay.style.zIndex = "10000";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+
+    const colorSwatches = [
+        "#05D581", "#A855F7", "#F46B7A", "#5C9CFC",
+        "#F59E0B", "#EC4899", "#14B8A6", "#3B82F6",
+        "#8B5CF6", "#64748B"
+    ];
+
+    setSafeHTML(overlay, `
+      <div class="overlay-card cat-edit-modal-card" style="max-width: 420px; padding: 24px; border-radius: var(--radius-lg, 16px); background: var(--bg2); border: 1px solid var(--bd); box-shadow: 0 16px 40px rgba(0,0,0,0.3);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+          <h3 style="margin:0; font-size: 18px; font-weight: 800; display:flex; align-items:center; gap: 8px; color:var(--tx);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            Edit Category
+          </h3>
+          <button id="cat-edit-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding: 4px; display:inline-flex; align-items:center; justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap: 16px;">
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Category Name</label>
+            <input type="text" id="cat-edit-label" value="${sanitizeDomain(currentLabel)}" maxlength="20" placeholder="e.g. Work" style="width:100%; padding: 10px 14px; border-radius: 10px; border:1px solid var(--bd); background:var(--bg3); color:var(--tx); font-size:14px; font-weight:600;" />
+          </div>
+
+          <div style="display:flex; gap: 16px;">
+            <div style="flex:1;">
+              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Emoji Icon</label>
+              <input type="text" id="cat-edit-emoji" value="${sanitizeDomain(currentEmoji)}" maxlength="4" style="width:100%; padding: 10px 14px; border-radius: 10px; border:1px solid var(--bd); background:var(--bg3); color:var(--tx); font-size:16px; text-align:center;" />
+            </div>
+            <div style="flex:1;">
+              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Accent Color</label>
+              <div style="display:flex; align-items:center; gap: 8px;">
+                <input type="color" id="cat-edit-color" value="${currentColor}" style="width:42px; height:42px; padding:2px; border-radius:10px; border:1px solid var(--bd); background:var(--bg3); cursor:pointer;" />
+                <span id="cat-edit-color-val" style="font-size:12px; font-weight:700; color:var(--tx2); text-transform:uppercase;">${currentColor}</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Preset Swatches</label>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              ${colorSwatches.map(hex => `
+                <button type="button" class="cat-swatch-btn" data-color="${hex}" style="width:26px; height:26px; border-radius:50%; border: 2px solid ${hex === currentColor ? 'var(--tx)' : 'transparent'}; background:${hex}; cursor:pointer; transition:transform 0.15s ease;"></button>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 24px; padding-top: 16px; border-top:1px solid var(--bd);">
+          <button id="cat-edit-reset" type="button" style="background:none; border:1px solid var(--bd); color:var(--tx2); padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor:pointer; display:inline-flex; align-items:center; gap: 6px; transition:var(--trans);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            Reset to Default
+          </button>
+
+          <div style="display:flex; gap: 8px;">
+            <button id="cat-edit-cancel" type="button" style="background:var(--bg3); border:1px solid var(--bd); color:var(--tx); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor:pointer;">Cancel</button>
+            <button id="cat-edit-save" type="button" style="background:var(--green); border:none; color:#000; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor:pointer; display:inline-flex; align-items:center; gap: 6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    `);
+
+    document.body.appendChild(overlay);
+
+    const colorPicker = overlay.querySelector("#cat-edit-color");
+    const colorValSpan = overlay.querySelector("#cat-edit-color-val");
+    if (colorPicker && colorValSpan) {
+        colorPicker.addEventListener("input", (e) => {
+            colorValSpan.textContent = e.target.value.toUpperCase();
+        });
+    }
+
+    overlay.querySelectorAll(".cat-swatch-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const hex = btn.getAttribute("data-color");
+            if (colorPicker) colorPicker.value = hex;
+            if (colorValSpan) colorValSpan.textContent = hex.toUpperCase();
+            overlay.querySelectorAll(".cat-swatch-btn").forEach(b => b.style.borderColor = "transparent");
+            btn.style.borderColor = "var(--tx)";
+        });
+    });
+
+    overlay.querySelector("#cat-edit-close")?.addEventListener("click", () => overlay.remove());
+    overlay.querySelector("#cat-edit-cancel")?.addEventListener("click", () => overlay.remove());
+
+    overlay.querySelector("#cat-edit-reset")?.addEventListener("click", async () => {
+        const syncRes = (await gSync(["customCategories"])).customCategories || {};
+        delete syncRes[catKey];
+        await sSync({ customCategories: syncRes });
+        if (typeof applyCustomCategories === "function") applyCustomCategories(syncRes);
+        overlay.remove();
+        renderCategories();
+        if (typeof buildPresetBuilder === "function") buildPresetBuilder();
+    });
+
+    overlay.querySelector("#cat-edit-save")?.addEventListener("click", async () => {
+        const newLabel = (overlay.querySelector("#cat-edit-label").value || "").trim();
+        const newEmoji = (overlay.querySelector("#cat-edit-emoji").value || "").trim() || "🏷️";
+        const newColor = overlay.querySelector("#cat-edit-color").value || currentColor;
+
+        if (!newLabel) return;
+
+        const syncRes = (await gSync(["customCategories"])).customCategories || {};
+        syncRes[catKey] = { label: newLabel, emoji: newEmoji, color: newColor };
+
+        await sSync({ customCategories: syncRes });
+        if (typeof applyCustomCategories === "function") applyCustomCategories(syncRes);
+        overlay.remove();
+        renderCategories();
+        if (typeof buildPresetBuilder === "function") buildPresetBuilder();
+    });
 }
 async function tagSite(e, t) {
     siteCategories[e] = t;

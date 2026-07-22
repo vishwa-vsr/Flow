@@ -2520,6 +2520,12 @@ async function ensureHeartbeatAlarm() {
 }
 
 async function init() {
+    try {
+        const { customCategories } = await gSync(["customCategories"]);
+        if (customCategories && typeof applyCustomCategories === "function") {
+            applyCustomCategories(customCategories);
+        }
+    } catch (_) {}
     await restoreFlushQueue().catch(() => { }); // Bug#3 fix: restore queued flushes from session storage
     const t = await gLocal(["focusSession"]);
     t.focusSession && (focusState = {
@@ -2803,9 +2809,12 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
     }
 });
 chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "sync" && changes.customCategories && typeof applyCustomCategories === "function") {
+        applyCustomCategories(changes.customCategories.newValue);
+    }
     if (
         (area === "local" && (changes.allowList || changes.blockRules || changes.siteCategories)) ||
-        (area === "sync" && (changes.focusPresets || changes.settings))
+        (area === "sync" && (changes.focusPresets || changes.settings || changes.customCategories))
     ) {
         updateDNRRules();
     }

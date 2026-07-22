@@ -709,6 +709,13 @@ renderFocus = function (e) {
 };
 
 async function initPopup() {
+    try {
+        var syncCustom = await gSync(["customCategories"]);
+        if (syncCustom && syncCustom.customCategories && typeof applyCustomCategories === "function") {
+            applyCustomCategories(syncCustom.customCategories);
+        }
+    } catch (_) {}
+
     if (typeof initI18n === "function") {
         await initI18n();
     }
