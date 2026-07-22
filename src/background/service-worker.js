@@ -679,7 +679,28 @@ async function updateRuleDomainsCache() {
     }
 }
 
+let updateDNRQueue = Promise.resolve();
+
 async function updateDNRRules() {
+    let resolvePromise;
+    const promise = new Promise((resolve) => {
+        resolvePromise = resolve;
+    });
+
+    updateDNRQueue = updateDNRQueue.then(async () => {
+        try {
+            await updateDNRRulesInternal();
+        } catch (err) {
+            console.error("[FF] Error in updateDNRRules:", err);
+        } finally {
+            resolvePromise();
+        }
+    });
+
+    return promise;
+}
+
+async function updateDNRRulesInternal() {
     await restoreState();
     await ensureHeartbeatAlarm();
     // FF v6.16 perf: cached reads (was 2 storage round-trips per call).

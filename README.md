@@ -17,7 +17,7 @@
     <a href="./LICENSE"><img src="https://img.shields.io/github/license/vishwa-vsr/Flow" alt="License" valign="middle"></a>
   </p>
   
-  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.2</b></i></p>
+  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.3</b></i></p>
 
   <br>
   
