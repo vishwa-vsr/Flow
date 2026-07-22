@@ -1309,24 +1309,24 @@
       width: 24px;
       height: 24px;
       border-radius: 6px;
-      border: 1px solid transparent;
-      background: rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--bd2);
+      background: var(--bg2);
       color: var(--tx2);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      opacity: 0.6;
+      opacity: 0.85;
       transition: all 0.2s ease;
       z-index: 2;
     }
 
     .cat-sq-edit-btn:hover {
       opacity: 1;
-      background: var(--bg1);
-      color: var(--tx);
-      border-color: var(--bd);
-      transform: scale(1.05);
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+      transform: scale(1.1);
     }
 
     .cat-sq:hover {

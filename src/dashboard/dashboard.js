@@ -1055,7 +1055,23 @@ function renderCategories() {
         if (t[a] && t[a].length && ("all" === selectedCat || selectedCat === a)) {
             var n = document.createElement("div");
             const totalCountStr = t[a].length === 1 ? (t_("siteCountSingle", ["1"]) || "1 site") : (t_("siteCountPlural", [String(t[a].length)]) || `${t[a].length} sites`);
-            n.className = "card", setSafeHTML(n, `<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--bd2)"><span style="width:12px;height:12px;border-radius:50%;background:${catColor(a)}"></span><span style="font-size:16px;font-weight:800;flex:1;color:var(--tx)">${catEmoji(a)} ${catLabel(a, !1)}</span><span style="font-size:12px;color:var(--tx3);background:var(--bg4);padding:6px 12px;border-radius:999px;font-weight:700">${totalCountStr}</span></div>`);
+            n.className = "card";
+            const hdrEditBtnHtml = (a !== "uncategorized" && a !== "all") ? `
+                <button type="button" class="hdr-cat-edit-btn" data-cat="${a}" title="Edit Category" style="background:var(--bg4); border:1px solid var(--bd); color:var(--tx2); padding:5px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition:var(--trans);">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Edit
+                </button>
+            ` : "";
+
+            setSafeHTML(n, `<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--bd2)"><span style="width:12px;height:12px;border-radius:50%;background:${catColor(a)}"></span><span style="font-size:16px;font-weight:800;flex:1;color:var(--tx)">${catEmoji(a)} ${catLabel(a, !1)}</span>${hdrEditBtnHtml}<span style="font-size:12px;color:var(--tx3);background:var(--bg4);padding:6px 12px;border-radius:999px;font-weight:700">${totalCountStr}</span></div>`);
+            
+            const btn = n.querySelector(".hdr-cat-edit-btn");
+            if (btn) {
+                btn.addEventListener("click", () => openEditCategoryModal(a));
+            }
             var i = document.createElement("div");
             t[a].forEach(e => {
                 var t = document.createElement("div");
