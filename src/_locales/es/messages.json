@@ -694,32 +694,26 @@
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "Distribución del Tiempo",
-    "description": "Time distribution section title."
+    "message": "DISTRIBUCIÓN DEL TIEMPO"
   },
   "top6Websites": {
-    "message": "Top 6 Sitios Web",
-    "description": "Top 6 websites section title."
+    "message": "TOP 6 SITIOS WEBS"
   },
   "overview": {
-    "message": "Resumen",
-    "description": "Overview tab title."
+    "message": "Resumen"
   },
   "dailyBreakdown": {
-    "message": "Desglose Diario",
-    "description": "Daily breakdown tab title."
+    "message": "Desglose Diario"
   },
   "topSites": {
-    "message": "Sitios Top",
-    "description": "Top sites tab title."
+    "message": "Sitios Principales"
   },
   "studyVsDistraction": {
     "message": "Estudio vs Distracción",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "Comparación",
-    "description": "Alternative title for trend tab."
+    "message": "Comparación"
   },
   "insights": {
     "message": "Análisis",
@@ -734,8 +728,7 @@
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "Rango Personalizado",
-    "description": "Custom date range selection."
+    "message": "Rango Personalizado"
   },
   "last7Days": {
     "message": "Últimos 7 días",
@@ -758,24 +751,19 @@
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "Mejor racha",
-    "description": "Best consecutive focus days."
+    "message": "MEJOR RACHA"
   },
   "bestDay": {
-    "message": "Mejor día",
-    "description": "Single day with highest focus time."
+    "message": "MEJOR DÍA"
   },
   "allTimeTotal": {
-    "message": "Total acumulado",
-    "description": "Total tracked focus time since install."
+    "message": "TOTAL HISTÓRICO"
   },
   "dailyAverage": {
-    "message": "Promedio diario",
-    "description": "Mean focus time per day."
+    "message": "PROMEDIO DIARIO"
   },
   "daysTracked": {
-    "message": "Días rastreados",
-    "description": "Total number of tracked days."
+    "message": "DÍAS REGISTRADOS"
   },
   "searchSites": {
     "message": "Buscar sitios…",
@@ -814,16 +802,14 @@
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "Días Buenos (365d)",
-    "description": "Number of high productivity days."
+    "message": "DÍAS BUENOS (365D)"
   },
   "wastedDays365d": {
     "message": "Desperdiciados (365d)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "Consistencia de 365 Días",
-    "description": "Yearly consistency calendar label."
+    "message": "CONSISTENCIA DE 365 DÍAS"
   },
   "heatmapHelp": {
     "message": "Cada cuadro es un día. Más verde = más tiempo de enfoque. Rojo = día desperdiciado.",
@@ -870,20 +856,17 @@
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "Ajustes Rápidos",
-    "description": "Group title."
+    "message": "PREAJUSTES RÁPIDOS"
   },
   "focusSchedules": {
-    "message": "Horarios de Enfoque",
-    "description": "Group title."
+    "message": "HORARIOS DE ENFOQUE"
   },
   "goalsStreak": {
     "message": "Metas y Racha",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "Meta Semanal (hrs)",
-    "description": "Config label."
+    "message": "Objetivo semanal (hrs)"
   },
   "dailyStreakMin": {
     "message": "Mínimo Racha Diaria (m)",
@@ -902,16 +885,14 @@
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "Contar Para Metas",
-    "description": "Checkbox group label."
+    "message": "CUENTAN PARA LOS OBJETIVOS"
   },
   "saveGoals": {
     "message": "Guardar Metas",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "Progreso Semanal",
-    "description": "Stats display."
+    "message": "Progreso Semanal"
   },
   "zeroGoalDone": {
     "message": "0h 0m hechos",
@@ -922,8 +903,7 @@
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "Historial",
-    "description": "Focus history table title."
+    "message": "HISTORIAL"
   },
   "clearHistory": {
     "message": "Borrar Historial",
@@ -1050,8 +1030,7 @@
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "Guardar Todos los Ajustes",
-    "description": "Action button."
+    "message": "Guardar todos los ajustes"
   },
   "securitySystem": {
     "message": "Seguridad y Sistema",
@@ -1190,8 +1169,7 @@
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "Apariencia",
-    "description": "Settings card label."
+    "message": "APARIENCIA"
   },
   "themeDark": {
     "message": "Oscuro",
@@ -1420,8 +1398,7 @@
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "Estado de Protección PIN:",
-    "description": "Settings config option."
+    "message": "Estado de protección por PIN:"
   },
   "notSet": {
     "message": "No Configurado",
@@ -1440,12 +1417,10 @@
     "description": "Action button."
   },
   "changePin": {
-    "message": "Cambiar PIN",
-    "description": "Action button."
+    "message": "Cambiar PIN"
   },
   "removePin": {
-    "message": "Quitar PIN",
-    "description": "Action button."
+    "message": "Eliminar PIN"
   },
   "setPinToEnableLocks": {
     "message": "Configura un PIN para activar estos bloqueos",
@@ -1612,8 +1587,7 @@
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "Descargar JSON",
-    "description": "Action button."
+    "message": "Descargar JSON"
   },
   "restoreFromJson": {
     "message": "Restaurar desde JSON",
@@ -2382,20 +2356,16 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7d",
-    "description": "7 days range label shortcut"
+    "message": "7d"
   },
   "range14d": {
-    "message": "14d",
-    "description": "14 days range label shortcut"
+    "message": "14d"
   },
   "range30d": {
-    "message": "30d",
-    "description": "30 days range label shortcut"
+    "message": "30d"
   },
   "range45d": {
-    "message": "45d",
-    "description": "45 days range label shortcut"
+    "message": "45d"
   },
   "trackLocalFiles": {
     "message": "Rastrear Archivos Locales",
@@ -2491,7 +2461,6 @@
   },
   "lastXDays": {
     "message": "Últimos $count$ días",
-    "description": "Last X days label",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -2845,27 +2814,207 @@
     "message": "Oculta elementos de interfaz distractores en sitios compatibles (YouTube Shorts, feed de Reddit, cronología de X, etc.).",
     "description": "Subtitle for Advanced Site Tweaks panel."
   },
-  "tweak_yt_shorts": { "message": "Ocultar Shorts", "description": "Tweak option label." },
-  "tweak_yt_recom": { "message": "Ocultar feed de inicio", "description": "Tweak option label." },
-  "tweak_yt_related": { "message": "Ocultar videos relacionados", "description": "Tweak option label." },
-  "tweak_yt_comments": { "message": "Ocultar comentarios", "description": "Tweak option label." },
-  "tweak_rd_feed": { "message": "Ocultar feed principal", "description": "Tweak option label." },
-  "tweak_rd_comments": { "message": "Ocultar comentarios", "description": "Tweak option label." },
-  "tweak_rd_popular": { "message": "Ocultar Popular, Noticias y Explorar", "description": "Tweak option label." },
-  "tweak_rd_recent_communities": { "message": "Ocultar Recientes y Comunidades", "description": "Tweak option label." },
-  "tweak_ig_reels": { "message": "Ocultar enlace de Reels", "description": "Tweak option label." },
-  "tweak_ig_home": { "message": "Ocultar feed de inicio", "description": "Tweak option label." },
-  "tweak_ig_explore": { "message": "Ocultar enlace de Explorar", "description": "Tweak option label." },
-  "tweak_ig_suggested": { "message": "Ocultar sugerencias para ti", "description": "Tweak option label." },
-  "tweak_x_timeline": { "message": "Ocultar cronología Para ti / Siguiendo", "description": "Tweak option label." },
-  "tweak_tw_trends": { "message": "Ocultar tendencias", "description": "Tweak option label." },
-  "tweak_x_whotofollow": { "message": "Ocultar a quién seguir", "description": "Tweak option label." },
-  "tweak_x_promoted": { "message": "Ocultar publicaciones promocionadas", "description": "Tweak option label." },
-  "tweak_li_feed": { "message": "Ocultar feed principal", "description": "Tweak option label." },
-  "tweak_li_news": { "message": "Ocultar noticias de LinkedIn", "description": "Tweak option label." },
-  "tweak_li_promoted": { "message": "Ocultar publicaciones promocionadas", "description": "Tweak option label." },
-  "tweak_nf_autoplay": { "message": "Desactivar vistas previas automáticas", "description": "Tweak option label." },
-  "tweak_nf_recom": { "message": "Ocultar recomendaciones", "description": "Tweak option label." },
-  "tweak_nf_billboard": { "message": "Ocultar cartelera destacada", "description": "Tweak option label." },
-  "tweak_bw_mode": { "message": "Modo Blanco y Negro", "description": "Tweak option label." }
+  "tweak_yt_shorts": {
+    "message": "Ocultar Shorts",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_recom": {
+    "message": "Ocultar feed de inicio",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_related": {
+    "message": "Ocultar videos relacionados",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_comments": {
+    "message": "Ocultar comentarios",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_feed": {
+    "message": "Ocultar feed principal",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_comments": {
+    "message": "Ocultar comentarios",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_popular": {
+    "message": "Ocultar Popular, Noticias y Explorar",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_recent_communities": {
+    "message": "Ocultar Recientes y Comunidades",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_reels": {
+    "message": "Ocultar enlace de Reels",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_home": {
+    "message": "Ocultar feed de inicio",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_explore": {
+    "message": "Ocultar enlace de Explorar",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_suggested": {
+    "message": "Ocultar sugerencias para ti",
+    "description": "Tweak option label."
+  },
+  "tweak_x_timeline": {
+    "message": "Ocultar cronología Para ti / Siguiendo",
+    "description": "Tweak option label."
+  },
+  "tweak_tw_trends": {
+    "message": "Ocultar tendencias",
+    "description": "Tweak option label."
+  },
+  "tweak_x_whotofollow": {
+    "message": "Ocultar a quién seguir",
+    "description": "Tweak option label."
+  },
+  "tweak_x_promoted": {
+    "message": "Ocultar publicaciones promocionadas",
+    "description": "Tweak option label."
+  },
+  "tweak_li_feed": {
+    "message": "Ocultar feed principal",
+    "description": "Tweak option label."
+  },
+  "tweak_li_news": {
+    "message": "Ocultar noticias de LinkedIn",
+    "description": "Tweak option label."
+  },
+  "tweak_li_promoted": {
+    "message": "Ocultar publicaciones promocionadas",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_autoplay": {
+    "message": "Desactivar vistas previas automáticas",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_recom": {
+    "message": "Ocultar recomendaciones",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_billboard": {
+    "message": "Ocultar cartelera destacada",
+    "description": "Tweak option label."
+  },
+  "tweak_bw_mode": {
+    "message": "Modo Blanco y Negro",
+    "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "TOTAL"
+  },
+  "statProductivity": {
+    "message": "PRODUCTIVIDAD"
+  },
+  "statLearning": {
+    "message": "APRENDIZAJE"
+  },
+  "statDistraction": {
+    "message": "DISTRACCIÓN"
+  },
+  "statCommunication": {
+    "message": "COMUNICACIÓN"
+  },
+  "consistencyDesc": {
+    "message": "Cada cuadrado es un día. Más verde = más tiempo de enfoque. Rojo = día desperdiciado."
+  },
+  "legendLess": {
+    "message": "MENOS"
+  },
+  "legendMore": {
+    "message": "MÁS"
+  },
+  "legendWasted": {
+    "message": "DESPERDICIADO"
+  },
+  "wasted365d": {
+    "message": "DESPERDICIADOS (365D)"
+  },
+  "focusSubtitle": {
+    "message": "Concéntrate, sigue tus objetivos y construye tu racha."
+  },
+  "goalsAndStreak": {
+    "message": "OBJETIVOS Y RACHA"
+  },
+  "minActiveTimeM": {
+    "message": "Tiempo activo mín. (m)"
+  },
+  "ratioThreshold": {
+    "message": "Umbral de proporción (%)"
+  },
+  "darkTheme": {
+    "message": "Oscuro"
+  },
+  "lightTheme": {
+    "message": "Claro"
+  },
+  "cinematicTheme": {
+    "message": "Cinematográfico"
+  },
+  "supportAndFeedback": {
+    "message": "SOPORTE Y COMENTARIOS"
+  },
+  "submitRequestsDesc": {
+    "message": "¡Ayúdanos a mejorar Flow! Comparte tus ideas, sugerencias o reporta fallos."
+  },
+  "submitFeedback": {
+    "message": "Enviar comentarios"
+  },
+  "helpTranslate": {
+    "message": "Ayudar a traducir"
+  },
+  "rate5Stars": {
+    "message": "Calificar 5 estrellas"
+  },
+  "changelog": {
+    "message": "Registro de cambios"
+  },
+  "accessControlAndSafety": {
+    "message": "CONTROL DE ACCESO Y SEGURIDAD"
+  },
+  "pinActive": {
+    "message": "PIN activo"
+  },
+  "backupAndRestore": {
+    "message": "COPIA DE SEGURIDAD Y RESTAURACIÓN"
+  },
+  "exportJsonDesc": {
+    "message": "Exportar todos los datos como JSON"
+  },
+  "restoreJsonDesc": {
+    "message": "Restaurar desde JSON"
+  },
+  "productivity": {
+    "message": "生産性"
+  },
+  "learning": {
+    "message": "学習"
+  },
+  "distraction": {
+    "message": "誘惑"
+  },
+  "communication": {
+    "message": "コミュニケーション"
+  },
+  "uncategorized": {
+    "message": "未分類"
+  },
+  "pause": {
+    "message": "一時停止"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "settingsTitle": {
+    "message": "設定"
+  }
 }

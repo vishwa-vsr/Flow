@@ -694,32 +694,26 @@
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "Time Distribution",
-    "description": "Time distribution section title."
+    "message": "Distribuição de tempo"
   },
   "top6Websites": {
-    "message": "Top 6 Websites",
-    "description": "Top 6 websites section title."
+    "message": "Principais 6 websites"
   },
   "overview": {
-    "message": "Overview",
-    "description": "Overview tab title."
+    "message": "Visão Geral"
   },
   "dailyBreakdown": {
-    "message": "Daily Breakdown",
-    "description": "Daily breakdown tab title."
+    "message": "Detalhamento Diário"
   },
   "topSites": {
-    "message": "Top Sites",
-    "description": "Top sites tab title."
+    "message": "Principais Sites"
   },
   "studyVsDistraction": {
-    "message": "Study vs Distraction",
+    "message": "Estudo vs. Distração",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "Comparison",
-    "description": "Alternative title for trend tab."
+    "message": "Comparação"
   },
   "insights": {
     "message": "Insights",
@@ -734,23 +728,22 @@
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "Custom Range",
-    "description": "Custom date range selection."
+    "message": "Intervalo personalizado"
   },
   "last7Days": {
-    "message": "Last 7 days",
+    "message": "Últimos 7 dias",
     "description": "Default range display label."
   },
   "from": {
-    "message": "From",
+    "message": "De",
     "description": "Start date label."
   },
   "to": {
-    "message": "to",
+    "message": "Até",
     "description": "Preposition."
   },
   "apply": {
-    "message": "Apply",
+    "message": "Aplicar",
     "description": "Submit date range selection."
   },
   "total": {
@@ -758,24 +751,19 @@
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "Best streak",
-    "description": "Best consecutive focus days."
+    "message": "Melhor sequência"
   },
   "bestDay": {
-    "message": "Best day",
-    "description": "Single day with highest focus time."
+    "message": "Melhor dia"
   },
   "allTimeTotal": {
-    "message": "All-time total",
-    "description": "Total tracked focus time since install."
+    "message": "Total histórico"
   },
   "dailyAverage": {
-    "message": "Daily average",
-    "description": "Mean focus time per day."
+    "message": "Média diária"
   },
   "daysTracked": {
-    "message": "Days tracked",
-    "description": "Total number of tracked days."
+    "message": "Dias registrados"
   },
   "searchSites": {
     "message": "Search sites…",
@@ -814,16 +802,14 @@
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "Good Days (365d)",
-    "description": "Number of high productivity days."
+    "message": "Dias bons (365D)"
   },
   "wastedDays365d": {
     "message": "Wasted (365d)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "365-Day Consistency",
-    "description": "Yearly consistency calendar label."
+    "message": "Consistência de 365 dias"
   },
   "heatmapHelp": {
     "message": "Each square is one day. Greener = more focus time. Red = wasted day.",
@@ -866,31 +852,28 @@
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "Start Focus",
+    "message": "Iniciar foco",
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "Quick Presets",
-    "description": "Group title."
+    "message": "Predefinições rápidas"
   },
   "focusSchedules": {
-    "message": "Focus Schedules",
-    "description": "Group title."
+    "message": "Horários de foco"
   },
   "goalsStreak": {
     "message": "Goals & Streak",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "Weekly Goal (hrs)",
-    "description": "Config label."
+    "message": "Meta semanal (hrs)"
   },
   "dailyStreakMin": {
     "message": "Daily Streak Min (m)",
     "description": "Config label."
   },
   "startWeekOn": {
-    "message": "Start Week On",
+    "message": "Iniciar semana na",
     "description": "Config label."
   },
   "monday": {
@@ -902,28 +885,25 @@
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "Count Towards Goals",
-    "description": "Checkbox group label."
+    "message": "Contar para as metas"
   },
   "saveGoals": {
     "message": "Save Goals",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "Week Progress",
-    "description": "Stats display."
+    "message": "Progresso semanal"
   },
   "zeroGoalDone": {
     "message": "0h 0m done",
     "description": "No progress yet."
   },
   "noGoal": {
-    "message": "No goal",
+    "message": "Sem meta",
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "History",
-    "description": "Focus history table title."
+    "message": "Histórico"
   },
   "clearHistory": {
     "message": "Clear History",
@@ -1046,12 +1026,11 @@
     "description": "Action button."
   },
   "settingsDesc": {
-    "message": "Customize your Flow experience.",
+    "message": "Personalize sua experiência no Flow.",
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "Save All Settings",
-    "description": "Action button."
+    "message": "Salvar Todas as Configurações"
   },
   "securitySystem": {
     "message": "Security & System",
@@ -1190,8 +1169,7 @@
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "Appearance",
-    "description": "Settings card label."
+    "message": "Aparência"
   },
   "themeDark": {
     "message": "Dark",
@@ -1206,11 +1184,11 @@
     "description": "Dropdown choice."
   },
   "languageOverride": {
-    "message": "Language / Idioma",
+    "message": "Idioma / Language",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
-    "message": "Override the default browser language for the extension.",
+    "message": "Substituir o idioma padrão do navegador para a extensão.",
     "description": "Settings config option description."
   },
   "systemDefault": {
@@ -1420,8 +1398,7 @@
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "PIN Protection Status:",
-    "description": "Settings config option."
+    "message": "Status de Proteção por PIN:"
   },
   "notSet": {
     "message": "Not Set",
@@ -1440,12 +1417,10 @@
     "description": "Action button."
   },
   "changePin": {
-    "message": "Change PIN",
-    "description": "Action button."
+    "message": "Alterar PIN"
   },
   "removePin": {
-    "message": "Remove PIN",
-    "description": "Action button."
+    "message": "Remover PIN"
   },
   "setPinToEnableLocks": {
     "message": "Set a PIN to enable these locks",
@@ -1612,8 +1587,7 @@
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "Download JSON",
-    "description": "Action button."
+    "message": "Baixar JSON"
   },
   "restoreFromJson": {
     "message": "Restore from JSON",
@@ -1812,7 +1786,7 @@
     "description": "Modal sub-text warning."
   },
   "confirm": {
-    "message": "Confirm",
+    "message": "Confirmar",
     "description": "Action button."
   },
   "privacyModalDesc": {
@@ -2382,20 +2356,16 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7d",
-    "description": "7 days range label shortcut"
+    "message": "7d"
   },
   "range14d": {
-    "message": "14d",
-    "description": "14 days range label shortcut"
+    "message": "14d"
   },
   "range30d": {
-    "message": "30d",
-    "description": "30 days range label shortcut"
+    "message": "30d"
   },
   "range45d": {
-    "message": "45d",
-    "description": "45 days range label shortcut"
+    "message": "45d"
   },
   "trackLocalFiles": {
     "message": "Track Local Files",
@@ -2490,8 +2460,7 @@
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "Last $count$ days",
-    "description": "Last X days label",
+    "message": "Últimos $count$ dias",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -2686,7 +2655,7 @@
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "No focus sessions yet.",
+    "message": "Nenhuma sessão de foco ainda.",
     "description": "Placeholder text."
   },
   "startFirstSession": {
@@ -2936,5 +2905,116 @@
   "tweak_bw_mode": {
     "message": "Modo Preto e Branco",
     "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "TOTAL"
+  },
+  "statProductivity": {
+    "message": "PRODUTIVIDADE"
+  },
+  "statLearning": {
+    "message": "APRENDIZADO"
+  },
+  "statDistraction": {
+    "message": "DISTRAÇÃO"
+  },
+  "statCommunication": {
+    "message": "COMUNICAÇÃO"
+  },
+  "consistencyDesc": {
+    "message": "Cada quadrado representa um dia. Mais verde = mais tempo de foco. Vermelho = dia desperdiçado."
+  },
+  "legendLess": {
+    "message": "MENOS"
+  },
+  "legendMore": {
+    "message": "MAIS"
+  },
+  "legendWasted": {
+    "message": "DESPERDIÇADO"
+  },
+  "wasted365d": {
+    "message": "Desperdiçados (365D)"
+  },
+  "focusSubtitle": {
+    "message": "Mantenha o foco, acompanhe metas e construa sua sequência."
+  },
+  "goalsAndStreak": {
+    "message": "Metas e sequência"
+  },
+  "minActiveTimeM": {
+    "message": "Tempo ativo mín. (m)"
+  },
+  "ratioThreshold": {
+    "message": "Limiar de proporção (%)"
+  },
+  "darkTheme": {
+    "message": "Escuro"
+  },
+  "lightTheme": {
+    "message": "Claro"
+  },
+  "cinematicTheme": {
+    "message": "Cinematográfico"
+  },
+  "supportAndFeedback": {
+    "message": "Suporte e Feedback"
+  },
+  "submitRequestsDesc": {
+    "message": "Ajude-nos a melhorar o Flow! Compartilhe suas ideias, sugestões ou informe problemas."
+  },
+  "submitFeedback": {
+    "message": "Enviar Feedback"
+  },
+  "helpTranslate": {
+    "message": "Ajude a Traduzir"
+  },
+  "rate5Stars": {
+    "message": "Avaliar 5 Estrelas"
+  },
+  "changelog": {
+    "message": "Registro de Alterações"
+  },
+  "accessControlAndSafety": {
+    "message": "Controle de Acesso e Segurança"
+  },
+  "pinActive": {
+    "message": "PIN Ativo"
+  },
+  "backupAndRestore": {
+    "message": "Backup e Restauração"
+  },
+  "exportJsonDesc": {
+    "message": "Exportar todos os dados como JSON"
+  },
+  "restoreJsonDesc": {
+    "message": "Restaurar do JSON"
+  },
+  "productivity": {
+    "message": "Produtividade"
+  },
+  "learning": {
+    "message": "Aprendizado"
+  },
+  "distraction": {
+    "message": "Distração"
+  },
+  "communication": {
+    "message": "Comunicação"
+  },
+  "uncategorized": {
+    "message": "Sem categoria"
+  },
+  "pause": {
+    "message": "Pausar"
+  },
+  "stop": {
+    "message": "Parar"
+  },
+  "skip": {
+    "message": "Pular"
+  },
+  "settingsTitle": {
+    "message": "Configurações"
   }
 }

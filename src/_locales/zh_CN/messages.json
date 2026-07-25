@@ -694,32 +694,26 @@
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "时间分布",
-    "description": "Time distribution section title."
+    "message": "时间分配"
   },
   "top6Websites": {
-    "message": "前 6 名网站",
-    "description": "Top 6 websites section title."
+    "message": "热门网站 TOP 6"
   },
   "overview": {
-    "message": "概述",
-    "description": "Overview tab title."
+    "message": "概览"
   },
   "dailyBreakdown": {
-    "message": "每日细目",
-    "description": "Daily breakdown tab title."
+    "message": "每日明细"
   },
   "topSites": {
-    "message": "热门网站",
-    "description": "Top sites tab title."
+    "message": "热门网站"
   },
   "studyVsDistraction": {
     "message": "学习与分心",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "比较",
-    "description": "Alternative title for trend tab."
+    "message": "对比"
   },
   "insights": {
     "message": "见解",
@@ -734,8 +728,7 @@
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "定制范围",
-    "description": "Custom date range selection."
+    "message": "自定义范围"
   },
   "last7Days": {
     "message": "过去 7 天",
@@ -758,24 +751,19 @@
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "最佳连胜纪录",
-    "description": "Best consecutive focus days."
+    "message": "最佳连续"
   },
   "bestDay": {
-    "message": "最好的一天",
-    "description": "Single day with highest focus time."
+    "message": "最佳单日"
   },
   "allTimeTotal": {
-    "message": "历史总计",
-    "description": "Total tracked focus time since install."
+    "message": "历史总计"
   },
   "dailyAverage": {
-    "message": "日平均",
-    "description": "Mean focus time per day."
+    "message": "每日平均"
   },
   "daysTracked": {
-    "message": "追踪天数",
-    "description": "Total number of tracked days."
+    "message": "记录天数"
   },
   "searchSites": {
     "message": "搜索网站...",
@@ -814,16 +802,14 @@
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "好日子 (365d)",
-    "description": "Number of high productivity days."
+    "message": "良好天数 (365天)"
   },
   "wastedDays365d": {
     "message": "浪费（365天）",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "365 天一致性",
-    "description": "Yearly consistency calendar label."
+    "message": "365天持续度"
   },
   "heatmapHelp": {
     "message": "每个方格就是一天。更环保=更多的专注时间。红色=浪费了一天。",
@@ -870,20 +856,17 @@
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "快速预设",
-    "description": "Group title."
+    "message": "快速预设"
   },
   "focusSchedules": {
-    "message": "重点日程",
-    "description": "Group title."
+    "message": "计划排期"
   },
   "goalsStreak": {
     "message": "进球数和连胜数",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "每周目标（小时）",
-    "description": "Config label."
+    "message": "每周目标 (小时)"
   },
   "dailyStreakMin": {
     "message": "每日最少连续行走距离（米）",
@@ -902,16 +885,14 @@
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "计算目标",
-    "description": "Checkbox group label."
+    "message": "计入目标"
   },
   "saveGoals": {
     "message": "保存目标",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "周进度",
-    "description": "Stats display."
+    "message": "本周进度"
   },
   "zeroGoalDone": {
     "message": "0 小时 0 分钟完成",
@@ -922,8 +903,7 @@
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "历史",
-    "description": "Focus history table title."
+    "message": "历史记录"
   },
   "clearHistory": {
     "message": "清除历史记录",
@@ -1050,8 +1030,7 @@
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "保存所有设置",
-    "description": "Action button."
+    "message": "保存所有设置"
   },
   "securitySystem": {
     "message": "安全与系统",
@@ -1190,8 +1169,7 @@
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "外貌",
-    "description": "Settings card label."
+    "message": "外观"
   },
   "themeDark": {
     "message": "黑暗的",
@@ -1420,8 +1398,7 @@
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "PIN 码保护状态：",
-    "description": "Settings config option."
+    "message": "PIN 保护状态："
   },
   "notSet": {
     "message": "未设置",
@@ -1440,12 +1417,10 @@
     "description": "Action button."
   },
   "changePin": {
-    "message": "更改密码",
-    "description": "Action button."
+    "message": "更改 PIN"
   },
   "removePin": {
-    "message": "删除 PIN 码",
-    "description": "Action button."
+    "message": "移除 PIN"
   },
   "setPinToEnableLocks": {
     "message": "设置 PIN 码以启用这些锁",
@@ -1612,8 +1587,7 @@
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "下载 JSON",
-    "description": "Action button."
+    "message": "下载 JSON"
   },
   "restoreFromJson": {
     "message": "从 JSON 恢复",
@@ -2382,20 +2356,16 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7天",
-    "description": "7 days range label shortcut"
+    "message": "7天"
   },
   "range14d": {
-    "message": "14天",
-    "description": "14 days range label shortcut"
+    "message": "14天"
   },
   "range30d": {
-    "message": "30天",
-    "description": "30 days range label shortcut"
+    "message": "30天"
   },
   "range45d": {
-    "message": "45天",
-    "description": "45 days range label shortcut"
+    "message": "45天"
   },
   "trackLocalFiles": {
     "message": "跟踪本地文件",
@@ -2490,8 +2460,7 @@
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "过去 $count$ 天",
-    "description": "Last X days label",
+    "message": "最近 $count$ 天",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -2845,27 +2814,207 @@
     "message": "在支持的网站上隐藏令人分心的界面元素（YouTube Shorts、Reddit 动态、X 时间线等）。",
     "description": "Subtitle for Advanced Site Tweaks panel."
   },
-  "tweak_yt_shorts": { "message": "隐藏 Shorts", "description": "Tweak option label." },
-  "tweak_yt_recom": { "message": "隐藏首页动态", "description": "Tweak option label." },
-  "tweak_yt_related": { "message": "隐藏相关视频", "description": "Tweak option label." },
-  "tweak_yt_comments": { "message": "隐藏评论", "description": "Tweak option label." },
-  "tweak_rd_feed": { "message": "隐藏主页动态", "description": "Tweak option label." },
-  "tweak_rd_comments": { "message": "隐藏评论", "description": "Tweak option label." },
-  "tweak_rd_popular": { "message": "隐藏热门、新闻与探索", "description": "Tweak option label." },
-  "tweak_rd_recent_communities": { "message": "隐藏最近与社区", "description": "Tweak option label." },
-  "tweak_ig_reels": { "message": "隐藏 Reels 链接", "description": "Tweak option label." },
-  "tweak_ig_home": { "message": "隐藏首页动态", "description": "Tweak option label." },
-  "tweak_ig_explore": { "message": "隐藏探索链接", "description": "Tweak option label." },
-  "tweak_ig_suggested": { "message": "隐藏为你推荐", "description": "Tweak option label." },
-  "tweak_x_timeline": { "message": "隐藏推荐 / 关注时间线", "description": "Tweak option label." },
-  "tweak_tw_trends": { "message": "隐藏趋势", "description": "Tweak option label." },
-  "tweak_x_whotofollow": { "message": "隐藏推荐关注", "description": "Tweak option label." },
-  "tweak_x_promoted": { "message": "隐藏推广帖子", "description": "Tweak option label." },
-  "tweak_li_feed": { "message": "隐藏主页动态", "description": "Tweak option label." },
-  "tweak_li_news": { "message": "隐藏 LinkedIn 新闻", "description": "Tweak option label." },
-  "tweak_li_promoted": { "message": "隐藏推广帖子", "description": "Tweak option label." },
-  "tweak_nf_autoplay": { "message": "禁用自动播放预览", "description": "Tweak option label." },
-  "tweak_nf_recom": { "message": "隐藏推荐", "description": "Tweak option label." },
-  "tweak_nf_billboard": { "message": "隐藏特色海报", "description": "Tweak option label." },
-  "tweak_bw_mode": { "message": "黑白模式", "description": "Tweak option label." }
+  "tweak_yt_shorts": {
+    "message": "隐藏 Shorts",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_recom": {
+    "message": "隐藏首页动态",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_related": {
+    "message": "隐藏相关视频",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_comments": {
+    "message": "隐藏评论",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_feed": {
+    "message": "隐藏主页动态",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_comments": {
+    "message": "隐藏评论",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_popular": {
+    "message": "隐藏热门、新闻与探索",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_recent_communities": {
+    "message": "隐藏最近与社区",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_reels": {
+    "message": "隐藏 Reels 链接",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_home": {
+    "message": "隐藏首页动态",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_explore": {
+    "message": "隐藏探索链接",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_suggested": {
+    "message": "隐藏为你推荐",
+    "description": "Tweak option label."
+  },
+  "tweak_x_timeline": {
+    "message": "隐藏推荐 / 关注时间线",
+    "description": "Tweak option label."
+  },
+  "tweak_tw_trends": {
+    "message": "隐藏趋势",
+    "description": "Tweak option label."
+  },
+  "tweak_x_whotofollow": {
+    "message": "隐藏推荐关注",
+    "description": "Tweak option label."
+  },
+  "tweak_x_promoted": {
+    "message": "隐藏推广帖子",
+    "description": "Tweak option label."
+  },
+  "tweak_li_feed": {
+    "message": "隐藏主页动态",
+    "description": "Tweak option label."
+  },
+  "tweak_li_news": {
+    "message": "隐藏 LinkedIn 新闻",
+    "description": "Tweak option label."
+  },
+  "tweak_li_promoted": {
+    "message": "隐藏推广帖子",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_autoplay": {
+    "message": "禁用自动播放预览",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_recom": {
+    "message": "隐藏推荐",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_billboard": {
+    "message": "隐藏特色海报",
+    "description": "Tweak option label."
+  },
+  "tweak_bw_mode": {
+    "message": "黑白模式",
+    "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "总计"
+  },
+  "statProductivity": {
+    "message": "生产力"
+  },
+  "statLearning": {
+    "message": "学习"
+  },
+  "statDistraction": {
+    "message": "分心"
+  },
+  "statCommunication": {
+    "message": "沟通"
+  },
+  "consistencyDesc": {
+    "message": "每个方块代表一天。绿色越深 = 专注时间越多。红色 = 浪费的一天。"
+  },
+  "legendLess": {
+    "message": "少"
+  },
+  "legendMore": {
+    "message": "多"
+  },
+  "legendWasted": {
+    "message": "浪费"
+  },
+  "wasted365d": {
+    "message": "浪费天数 (365天)"
+  },
+  "focusSubtitle": {
+    "message": "保持专注，跟踪目标，建立连胜记录。"
+  },
+  "goalsAndStreak": {
+    "message": "目标与连胜"
+  },
+  "minActiveTimeM": {
+    "message": "最短活动时间 (分钟)"
+  },
+  "ratioThreshold": {
+    "message": "比例阈值 (%)"
+  },
+  "darkTheme": {
+    "message": "深色"
+  },
+  "lightTheme": {
+    "message": "浅色"
+  },
+  "cinematicTheme": {
+    "message": "影院"
+  },
+  "supportAndFeedback": {
+    "message": "支持与反馈"
+  },
+  "submitRequestsDesc": {
+    "message": "帮助我们改进 Flow！分享您的想法、建议或报告任何缺陷。"
+  },
+  "submitFeedback": {
+    "message": "提交反馈"
+  },
+  "helpTranslate": {
+    "message": "帮助翻译"
+  },
+  "rate5Stars": {
+    "message": "评价 5 星"
+  },
+  "changelog": {
+    "message": "更新日志"
+  },
+  "accessControlAndSafety": {
+    "message": "访问控制与安全"
+  },
+  "pinActive": {
+    "message": "PIN 已激活"
+  },
+  "backupAndRestore": {
+    "message": "备份与恢复"
+  },
+  "exportJsonDesc": {
+    "message": "将所有数据导出为 JSON"
+  },
+  "restoreJsonDesc": {
+    "message": "从 JSON 恢复"
+  },
+  "productivity": {
+    "message": "生産性"
+  },
+  "learning": {
+    "message": "学習"
+  },
+  "distraction": {
+    "message": "誘惑"
+  },
+  "communication": {
+    "message": "コミュニケーション"
+  },
+  "uncategorized": {
+    "message": "未分類"
+  },
+  "pause": {
+    "message": "一時停止"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "settingsTitle": {
+    "message": "設定"
+  }
 }

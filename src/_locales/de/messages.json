@@ -694,32 +694,26 @@
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "Time Distribution",
-    "description": "Time distribution section title."
+    "message": "Zeitverteilung"
   },
   "top6Websites": {
-    "message": "Top 6 Websites",
-    "description": "Top 6 websites section title."
+    "message": "Top 6 Websites"
   },
   "overview": {
-    "message": "Overview",
-    "description": "Overview tab title."
+    "message": "Übersicht"
   },
   "dailyBreakdown": {
-    "message": "Daily Breakdown",
-    "description": "Daily breakdown tab title."
+    "message": "Tägliche Aufschlüsselung"
   },
   "topSites": {
-    "message": "Top Sites",
-    "description": "Top sites tab title."
+    "message": "Top-Websites"
   },
   "studyVsDistraction": {
-    "message": "Study vs Distraction",
+    "message": "Lernen vs. Ablenkung",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "Comparison",
-    "description": "Alternative title for trend tab."
+    "message": "Vergleich"
   },
   "insights": {
     "message": "Insights",
@@ -734,48 +728,42 @@
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "Custom Range",
-    "description": "Custom date range selection."
+    "message": "Benutzerdefinierter Bereich"
   },
   "last7Days": {
-    "message": "Last 7 days",
+    "message": "Letzte 7 Tage",
     "description": "Default range display label."
   },
   "from": {
-    "message": "From",
+    "message": "Von",
     "description": "Start date label."
   },
   "to": {
-    "message": "to",
+    "message": "Bis",
     "description": "Preposition."
   },
   "apply": {
-    "message": "Apply",
+    "message": "Anwenden",
     "description": "Submit date range selection."
   },
   "total": {
-    "message": "Total",
+    "message": "Gesamt",
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "Best streak",
-    "description": "Best consecutive focus days."
+    "message": "Beste Serie"
   },
   "bestDay": {
-    "message": "Best day",
-    "description": "Single day with highest focus time."
+    "message": "Bester Tag"
   },
   "allTimeTotal": {
-    "message": "All-time total",
-    "description": "Total tracked focus time since install."
+    "message": "Gesamtzeit historisch"
   },
   "dailyAverage": {
-    "message": "Daily average",
-    "description": "Mean focus time per day."
+    "message": "Täglicher Durchschnitt"
   },
   "daysTracked": {
-    "message": "Days tracked",
-    "description": "Total number of tracked days."
+    "message": "Erfasste Tage"
   },
   "searchSites": {
     "message": "Search sites…",
@@ -814,16 +802,14 @@
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "Good Days (365d)",
-    "description": "Number of high productivity days."
+    "message": "Gute Tage (365T)"
   },
   "wastedDays365d": {
     "message": "Wasted (365d)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "365-Day Consistency",
-    "description": "Yearly consistency calendar label."
+    "message": "365-Tage-Konsistenz"
   },
   "heatmapHelp": {
     "message": "Each square is one day. Greener = more focus time. Red = wasted day.",
@@ -866,31 +852,28 @@
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "Start Focus",
+    "message": "Fokus starten",
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "Quick Presets",
-    "description": "Group title."
+    "message": "Schnellvorlagen"
   },
   "focusSchedules": {
-    "message": "Focus Schedules",
-    "description": "Group title."
+    "message": "Fokus-Zeitpläne"
   },
   "goalsStreak": {
     "message": "Goals & Streak",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "Weekly Goal (hrs)",
-    "description": "Config label."
+    "message": "Wöchentliches Ziel (Std.)"
   },
   "dailyStreakMin": {
     "message": "Daily Streak Min (m)",
     "description": "Config label."
   },
   "startWeekOn": {
-    "message": "Start Week On",
+    "message": "Woche beginnen am",
     "description": "Config label."
   },
   "monday": {
@@ -902,28 +885,25 @@
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "Count Towards Goals",
-    "description": "Checkbox group label."
+    "message": "Zu Zielen zählen"
   },
   "saveGoals": {
     "message": "Save Goals",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "Week Progress",
-    "description": "Stats display."
+    "message": "Wochenfortschritt"
   },
   "zeroGoalDone": {
     "message": "0h 0m done",
     "description": "No progress yet."
   },
   "noGoal": {
-    "message": "No goal",
+    "message": "Kein Ziel",
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "History",
-    "description": "Focus history table title."
+    "message": "Verlauf"
   },
   "clearHistory": {
     "message": "Clear History",
@@ -1046,12 +1026,11 @@
     "description": "Action button."
   },
   "settingsDesc": {
-    "message": "Customize your Flow experience.",
+    "message": "Passe dein Flow-Erlebnis an.",
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "Save All Settings",
-    "description": "Action button."
+    "message": "Alle Einstellungen speichern"
   },
   "securitySystem": {
     "message": "Security & System",
@@ -1190,8 +1169,7 @@
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "Appearance",
-    "description": "Settings card label."
+    "message": "Erscheinungsbild"
   },
   "themeDark": {
     "message": "Dark",
@@ -1206,11 +1184,11 @@
     "description": "Dropdown choice."
   },
   "languageOverride": {
-    "message": "Language / Idioma",
+    "message": "Sprache / Idioma",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
-    "message": "Override the default browser language for the extension.",
+    "message": "Überschreibe die Standardsprache des Browsers für die Erweiterung.",
     "description": "Settings config option description."
   },
   "systemDefault": {
@@ -1420,8 +1398,7 @@
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "PIN Protection Status:",
-    "description": "Settings config option."
+    "message": "PIN-Schutzstatus:"
   },
   "notSet": {
     "message": "Not Set",
@@ -1440,12 +1417,10 @@
     "description": "Action button."
   },
   "changePin": {
-    "message": "Change PIN",
-    "description": "Action button."
+    "message": "PIN ändern"
   },
   "removePin": {
-    "message": "Remove PIN",
-    "description": "Action button."
+    "message": "PIN entfernen"
   },
   "setPinToEnableLocks": {
     "message": "Set a PIN to enable these locks",
@@ -1612,8 +1587,7 @@
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "Download JSON",
-    "description": "Action button."
+    "message": "JSON herunterladen"
   },
   "restoreFromJson": {
     "message": "Restore from JSON",
@@ -1812,7 +1786,7 @@
     "description": "Modal sub-text warning."
   },
   "confirm": {
-    "message": "Confirm",
+    "message": "Bestätigen",
     "description": "Action button."
   },
   "privacyModalDesc": {
@@ -2382,20 +2356,16 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7d",
-    "description": "7 days range label shortcut"
+    "message": "7 Tage"
   },
   "range14d": {
-    "message": "14d",
-    "description": "14 days range label shortcut"
+    "message": "14 Tage"
   },
   "range30d": {
-    "message": "30d",
-    "description": "30 days range label shortcut"
+    "message": "30 Tage"
   },
   "range45d": {
-    "message": "45d",
-    "description": "45 days range label shortcut"
+    "message": "45 Tage"
   },
   "trackLocalFiles": {
     "message": "Track Local Files",
@@ -2490,8 +2460,7 @@
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "Last $count$ days",
-    "description": "Last X days label",
+    "message": "Letzte $count$ Tage",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -2686,7 +2655,7 @@
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "No focus sessions yet.",
+    "message": "Noch keine Fokus-Sitzungen vorhanden.",
     "description": "Placeholder text."
   },
   "startFirstSession": {
@@ -2936,5 +2905,116 @@
   "tweak_bw_mode": {
     "message": "Schwarz-Weiß-Modus",
     "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "GESAMT"
+  },
+  "statProductivity": {
+    "message": "PRODUKTIVITÄT"
+  },
+  "statLearning": {
+    "message": "LERNEN"
+  },
+  "statDistraction": {
+    "message": "ABLENKUNG"
+  },
+  "statCommunication": {
+    "message": "KOMMUNIKATION"
+  },
+  "consistencyDesc": {
+    "message": "Jedes Quadrat ist ein Tag. Grüner = mehr Fokuszeit. Rot = verschwendeter Tag."
+  },
+  "legendLess": {
+    "message": "WENIGER"
+  },
+  "legendMore": {
+    "message": "MEHR"
+  },
+  "legendWasted": {
+    "message": "VERSCHWENDET"
+  },
+  "wasted365d": {
+    "message": "Verschwendet (365T)"
+  },
+  "focusSubtitle": {
+    "message": "Bleib fokussiert, verfolge Ziele und baue deine Serie aus."
+  },
+  "goalsAndStreak": {
+    "message": "Ziele & Serie"
+  },
+  "minActiveTimeM": {
+    "message": "Mindestaktive Zeit (Min.)"
+  },
+  "ratioThreshold": {
+    "message": "Schwellenwert (%)"
+  },
+  "darkTheme": {
+    "message": "Dunkel"
+  },
+  "lightTheme": {
+    "message": "Hell"
+  },
+  "cinematicTheme": {
+    "message": "Kinematografisch"
+  },
+  "supportAndFeedback": {
+    "message": "Support & Feedback"
+  },
+  "submitRequestsDesc": {
+    "message": "Hilf uns Flow zu verbessern! Teile deine Ideen, Vorschläge oder melde Fehler."
+  },
+  "submitFeedback": {
+    "message": "Feedback senden"
+  },
+  "helpTranslate": {
+    "message": "Beim Übersetzen helfen"
+  },
+  "rate5Stars": {
+    "message": "5 Sterne bewerten"
+  },
+  "changelog": {
+    "message": "Änderungsprotokoll"
+  },
+  "accessControlAndSafety": {
+    "message": "Zugriffskontrolle & Sicherheit"
+  },
+  "pinActive": {
+    "message": "PIN aktiv"
+  },
+  "backupAndRestore": {
+    "message": "Sicherung & Wiederherstellung"
+  },
+  "exportJsonDesc": {
+    "message": "Alle Daten als JSON exportieren"
+  },
+  "restoreJsonDesc": {
+    "message": "Aus JSON wiederherstellen"
+  },
+  "productivity": {
+    "message": "Produktivität"
+  },
+  "learning": {
+    "message": "Lernen"
+  },
+  "distraction": {
+    "message": "Ablenkung"
+  },
+  "communication": {
+    "message": "Kommunikation"
+  },
+  "uncategorized": {
+    "message": "Unkategorisiert"
+  },
+  "pause": {
+    "message": "Pause"
+  },
+  "stop": {
+    "message": "Stopp"
+  },
+  "skip": {
+    "message": "Überspringen"
+  },
+  "settingsTitle": {
+    "message": "Einstellungen"
   }
 }

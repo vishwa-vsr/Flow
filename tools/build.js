@@ -429,7 +429,33 @@ async function main() {
     }
   }
 
+function verifyLocaleParity() {
+  const localesDir = path.join(SRC_DIR, '_locales');
+  if (!fs.existsSync(localesDir)) return;
+  const enPath = path.join(localesDir, 'en', 'messages.json');
+  if (!fs.existsSync(enPath)) return;
+  const enKeys = Object.keys(JSON.parse(fs.readFileSync(enPath, 'utf8')));
+  const dirs = fs.readdirSync(localesDir).filter(d => fs.statSync(path.join(localesDir, d)).isDirectory());
+  
+  let hasMissing = false;
+  dirs.forEach(loc => {
+    const locFile = path.join(localesDir, loc, 'messages.json');
+    if (fs.existsSync(locFile)) {
+      const locKeys = Object.keys(JSON.parse(fs.readFileSync(locFile, 'utf8')));
+      const missing = enKeys.filter(k => !locKeys.includes(k));
+      if (missing.length > 0) {
+        console.warn(`\x1b[33m[I18N LINTER WARNING] Locale '${loc}' is missing ${missing.length} keys from 'en'!\x1b[0m`);
+        hasMissing = true;
+      }
+    }
+  });
+  if (!hasMissing) {
+    console.log(`\x1b[32m[I18N LINTER PASS] All ${dirs.length} locale folders verified with 100% key parity (${enKeys.length} keys).\x1b[0m\n`);
+  }
+}
+
   if (shouldBuild) {
+    verifyLocaleParity();
     buildTarget('flow-dist', false);
     buildTarget('flow-edge', false);
     buildTarget('flow-firefox', true);

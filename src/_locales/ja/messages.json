@@ -694,32 +694,26 @@
     "description": "Analytics section description."
   },
   "timeDistribution": {
-    "message": "Time Distribution",
-    "description": "Time distribution section title."
+    "message": "時間配分"
   },
   "top6Websites": {
-    "message": "Top 6 Websites",
-    "description": "Top 6 websites section title."
+    "message": "トップ6ウェブサイト"
   },
   "overview": {
-    "message": "Overview",
-    "description": "Overview tab title."
+    "message": "概要"
   },
   "dailyBreakdown": {
-    "message": "Daily Breakdown",
-    "description": "Daily breakdown tab title."
+    "message": "日別内訳"
   },
   "topSites": {
-    "message": "Top Sites",
-    "description": "Top sites tab title."
+    "message": "トップサイト"
   },
   "studyVsDistraction": {
-    "message": "Study vs Distraction",
+    "message": "学習 vs 誘惑",
     "description": "Study vs Distraction tab title."
   },
   "comparison": {
-    "message": "Comparison",
-    "description": "Alternative title for trend tab."
+    "message": "比較"
   },
   "insights": {
     "message": "Insights",
@@ -734,48 +728,42 @@
     "description": "Range selection button label."
   },
   "customRange": {
-    "message": "Custom Range",
-    "description": "Custom date range selection."
+    "message": "カスタム期間"
   },
   "last7Days": {
-    "message": "Last 7 days",
+    "message": "過去7日間",
     "description": "Default range display label."
   },
   "from": {
-    "message": "From",
+    "message": "開始日",
     "description": "Start date label."
   },
   "to": {
-    "message": "to",
+    "message": "終了日",
     "description": "Preposition."
   },
   "apply": {
-    "message": "Apply",
+    "message": "適用",
     "description": "Submit date range selection."
   },
   "total": {
-    "message": "Total",
+    "message": "合計",
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "Best streak",
-    "description": "Best consecutive focus days."
+    "message": "最高連続記録"
   },
   "bestDay": {
-    "message": "Best day",
-    "description": "Single day with highest focus time."
+    "message": "最高記録日"
   },
   "allTimeTotal": {
-    "message": "All-time total",
-    "description": "Total tracked focus time since install."
+    "message": "累計合計"
   },
   "dailyAverage": {
-    "message": "Daily average",
-    "description": "Mean focus time per day."
+    "message": "1日平均"
   },
   "daysTracked": {
-    "message": "Days tracked",
-    "description": "Total number of tracked days."
+    "message": "記録日数"
   },
   "searchSites": {
     "message": "Search sites…",
@@ -814,16 +802,14 @@
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
-    "message": "Good Days (365d)",
-    "description": "Number of high productivity days."
+    "message": "良い日 (365日)"
   },
   "wastedDays365d": {
     "message": "Wasted (365d)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
-    "message": "365-Day Consistency",
-    "description": "Yearly consistency calendar label."
+    "message": "365日の一貫性"
   },
   "heatmapHelp": {
     "message": "Each square is one day. Greener = more focus time. Red = wasted day.",
@@ -866,31 +852,28 @@
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "Start Focus",
+    "message": "集中を開始",
     "description": "Action button label."
   },
   "quickPresets": {
-    "message": "Quick Presets",
-    "description": "Group title."
+    "message": "クイックプリセット"
   },
   "focusSchedules": {
-    "message": "Focus Schedules",
-    "description": "Group title."
+    "message": "集中スケジュール"
   },
   "goalsStreak": {
     "message": "Goals & Streak",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
-    "message": "Weekly Goal (hrs)",
-    "description": "Config label."
+    "message": "週間目標 (時間)"
   },
   "dailyStreakMin": {
     "message": "Daily Streak Min (m)",
     "description": "Config label."
   },
   "startWeekOn": {
-    "message": "Start Week On",
+    "message": "週の開始日",
     "description": "Config label."
   },
   "monday": {
@@ -902,28 +885,25 @@
     "description": "Weekday name."
   },
   "countTowardsGoals": {
-    "message": "Count Towards Goals",
-    "description": "Checkbox group label."
+    "message": "目標にカウント"
   },
   "saveGoals": {
     "message": "Save Goals",
     "description": "Action button label."
   },
   "weekProgress": {
-    "message": "Week Progress",
-    "description": "Stats display."
+    "message": "今週の進捗"
   },
   "zeroGoalDone": {
     "message": "0h 0m done",
     "description": "No progress yet."
   },
   "noGoal": {
-    "message": "No goal",
+    "message": "目標なし",
     "description": "Missing goal config text."
   },
   "history": {
-    "message": "History",
-    "description": "Focus history table title."
+    "message": "履歴"
   },
   "clearHistory": {
     "message": "Clear History",
@@ -1046,12 +1026,11 @@
     "description": "Action button."
   },
   "settingsDesc": {
-    "message": "Customize your Flow experience.",
+    "message": "Flowの体験をカスタマイズします。",
     "description": "Settings section subtitle."
   },
   "saveAllSettings": {
-    "message": "Save All Settings",
-    "description": "Action button."
+    "message": "全設定を保存"
   },
   "securitySystem": {
     "message": "Security & System",
@@ -1190,8 +1169,7 @@
     "description": "Settings config option description."
   },
   "appearance": {
-    "message": "Appearance",
-    "description": "Settings card label."
+    "message": "外観"
   },
   "themeDark": {
     "message": "Dark",
@@ -1206,11 +1184,11 @@
     "description": "Dropdown choice."
   },
   "languageOverride": {
-    "message": "Language / Idioma",
+    "message": "言語 / Idioma",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
-    "message": "Override the default browser language for the extension.",
+    "message": "拡張機能の言語を手動で上書きします。",
     "description": "Settings config option description."
   },
   "systemDefault": {
@@ -1420,8 +1398,7 @@
     "description": "Settings card label."
   },
   "pinProtectionStatus": {
-    "message": "PIN Protection Status:",
-    "description": "Settings config option."
+    "message": "PIN保護ステータス:"
   },
   "notSet": {
     "message": "Not Set",
@@ -1440,12 +1417,10 @@
     "description": "Action button."
   },
   "changePin": {
-    "message": "Change PIN",
-    "description": "Action button."
+    "message": "PIN変更"
   },
   "removePin": {
-    "message": "Remove PIN",
-    "description": "Action button."
+    "message": "PIN削除"
   },
   "setPinToEnableLocks": {
     "message": "Set a PIN to enable these locks",
@@ -1612,8 +1587,7 @@
     "description": "Settings config option description."
   },
   "downloadJson": {
-    "message": "Download JSON",
-    "description": "Action button."
+    "message": "JSONをダウンロード"
   },
   "restoreFromJson": {
     "message": "Restore from JSON",
@@ -1812,7 +1786,7 @@
     "description": "Modal sub-text warning."
   },
   "confirm": {
-    "message": "Confirm",
+    "message": "確認",
     "description": "Action button."
   },
   "privacyModalDesc": {
@@ -2382,20 +2356,16 @@
     "description": "Saturday letter."
   },
   "range7d": {
-    "message": "7d",
-    "description": "7 days range label shortcut"
+    "message": "7日間"
   },
   "range14d": {
-    "message": "14d",
-    "description": "14 days range label shortcut"
+    "message": "14日間"
   },
   "range30d": {
-    "message": "30d",
-    "description": "30 days range label shortcut"
+    "message": "30日間"
   },
   "range45d": {
-    "message": "45d",
-    "description": "45 days range label shortcut"
+    "message": "45日間"
   },
   "trackLocalFiles": {
     "message": "Track Local Files",
@@ -2490,8 +2460,7 @@
     "description": "Midnight option"
   },
   "lastXDays": {
-    "message": "Last $count$ days",
-    "description": "Last X days label",
+    "message": "過去 $count$ 日間",
     "placeholders": {
       "count": {
         "content": "$1",
@@ -2686,7 +2655,7 @@
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "No focus sessions yet.",
+    "message": "フォーカスセッションの履歴はまだありません。",
     "description": "Placeholder text."
   },
   "startFirstSession": {
@@ -2936,5 +2905,116 @@
   "tweak_bw_mode": {
     "message": "白黒モード",
     "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "合計"
+  },
+  "statProductivity": {
+    "message": "生産性"
+  },
+  "statLearning": {
+    "message": "学習"
+  },
+  "statDistraction": {
+    "message": "誘惑"
+  },
+  "statCommunication": {
+    "message": "コミュニケーション"
+  },
+  "consistencyDesc": {
+    "message": "各マスは1日を表します。緑が濃い＝集中時間が多い。赤＝無駄にした日。"
+  },
+  "legendLess": {
+    "message": "少ない"
+  },
+  "legendMore": {
+    "message": "多い"
+  },
+  "legendWasted": {
+    "message": "無駄"
+  },
+  "wasted365d": {
+    "message": "無駄な日 (365日)"
+  },
+  "focusSubtitle": {
+    "message": "集中力を高め、目標を追跡し、連続記録を構築します。"
+  },
+  "goalsAndStreak": {
+    "message": "目標と連続記録"
+  },
+  "minActiveTimeM": {
+    "message": "最短アクティブ時間 (分)"
+  },
+  "ratioThreshold": {
+    "message": "比率閾値 (%)"
+  },
+  "darkTheme": {
+    "message": "ダーク"
+  },
+  "lightTheme": {
+    "message": "ライト"
+  },
+  "cinematicTheme": {
+    "message": "シネマティック"
+  },
+  "supportAndFeedback": {
+    "message": "サポートとフィードバック"
+  },
+  "submitRequestsDesc": {
+    "message": "Flowの改善にご協力ください！アイデアや提案の共有、バグ報告をお願いします。"
+  },
+  "submitFeedback": {
+    "message": "フィードバックを送信"
+  },
+  "helpTranslate": {
+    "message": "翻訳に協力"
+  },
+  "rate5Stars": {
+    "message": "5つ星評価"
+  },
+  "changelog": {
+    "message": "変更履歴"
+  },
+  "accessControlAndSafety": {
+    "message": "アクセス制御とセキュリティ"
+  },
+  "pinActive": {
+    "message": "PIN有効"
+  },
+  "backupAndRestore": {
+    "message": "バックアップと復元"
+  },
+  "exportJsonDesc": {
+    "message": "全データをJSON形式でエクスポート"
+  },
+  "restoreJsonDesc": {
+    "message": "JSONから復元"
+  },
+  "productivity": {
+    "message": "生産性"
+  },
+  "learning": {
+    "message": "学習"
+  },
+  "distraction": {
+    "message": "誘惑"
+  },
+  "communication": {
+    "message": "コミュニケーション"
+  },
+  "uncategorized": {
+    "message": "未分類"
+  },
+  "pause": {
+    "message": "一時停止"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "settingsTitle": {
+    "message": "設定"
   }
 }
