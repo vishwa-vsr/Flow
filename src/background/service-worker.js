@@ -353,10 +353,6 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
     }
 }
 
-// FF v6.18: removed dead scanPageForKeywords() — it referenced document/location
-// which don't exist in a service worker. Was never called after Bug#10 cleanup.
-
-
 function isNeverTrack(domainStr, neverTrackDomains) {
     if (!domainStr || !neverTrackDomains || !neverTrackDomains.length) return false;
     const lowerDom = domainStr.toLowerCase();

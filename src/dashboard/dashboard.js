@@ -4195,8 +4195,6 @@ function switchRuleModalTab(type) {
         if ($("btn-add-tag-inline")) $("btn-add-tag-inline").style.display = "block";
     }
 }
-// Legacy cooldown helpers removed in favor of integrated checkboxes
-
 if ($("btn-export")) $("btn-export").addEventListener("click", async () => {
     const r = await msg("BACKUP_EXPORT");
     if (!r || !r.ok) return toast(t_("exportFailed"), "err");
