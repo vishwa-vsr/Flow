@@ -461,6 +461,15 @@ function verifyLocaleParity() {
     // to load the extension: "Variable $xxx$ used but not defined."
     Object.entries(locData).forEach(([key, val]) => {
       const msg = val.message || '';
+      if (val.placeholders) {
+        Object.entries(val.placeholders).forEach(([pName, pVal]) => {
+          if (!pVal || !pVal.content || pVal.content.trim() === '') {
+            console.error(`\x1b[31m[I18N ERROR] ${loc}/${key}: Placeholder "${pName}" has empty "content" field!\x1b[0m`);
+            hasPlaceholderErrors = true;
+          }
+        });
+      }
+
       const varMatches = msg.match(/\$([a-zA-Z_][a-zA-Z0-9_]*)\$/g);
       if (!varMatches) return;
 
@@ -474,15 +483,6 @@ function verifyLocaleParity() {
         console.error(`\x1b[31m[I18N ERROR] ${loc}/${key}: Uses $${missingVars.join('$, $')}$ but no "placeholders" defined!\x1b[0m`);
         console.error(`  Message: "${msg}"`);
         hasPlaceholderErrors = true;
-      }
-
-      if (val.placeholders) {
-        Object.entries(val.placeholders).forEach(([pName, pVal]) => {
-          if (!pVal || !pVal.content || pVal.content.trim() === '') {
-            console.error(`\x1b[31m[I18N ERROR] ${loc}/${key}: Placeholder "${pName}" has empty "content" field!\x1b[0m`);
-            hasPlaceholderErrors = true;
-          }
-        });
       }
     });
 

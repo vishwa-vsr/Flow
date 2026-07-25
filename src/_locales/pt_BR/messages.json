@@ -2525,21 +2525,21 @@
     "description": "Modal title."
   },
   "siteCountSingle": {
-    "message": "$ site",
+    "message": "$count$ site",
     "description": "Plural count.",
     "placeholders": {
       "count": {
-        "content": "",
+        "content": "$1",
         "example": "1"
       }
     }
   },
   "siteCountPlural": {
-    "message": "$ sites",
+    "message": "$count$ sites",
     "description": "Plural count.",
     "placeholders": {
       "count": {
-        "content": "",
+        "content": "$1",
         "example": "5"
       }
     }
