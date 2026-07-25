@@ -1075,7 +1075,7 @@
     }
 
     .db-site-dom {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       font-size: 14px;
       font-weight: 700;
       color: var(--tx);
@@ -1186,7 +1186,7 @@
     }
 
     .dom {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       font-size: 14px;
       font-weight: 700;
       color: var(--tx);
