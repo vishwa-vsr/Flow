@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Flat Modern UI (Green Glow Removal):** Removed green `box-shadow` glows from active Quick Preset cards, Count Towards Goals checkboxes, play button hovers, logo animations, day dots, and popup category selection pills for a clean, modern aesthetic.
 - **Dynamic Category Rendering:** Updated Analytics Overview cards, Donut Chart & Legend, Heatmap Settings modal, Daily Breakdown tab, Count Towards Goals checkboxes, and Popup dropdowns to render custom category names, emojis, and accent colors dynamically.
 - **Theme Cycling Optimization:** Streamlined popup theme switching to transition directly from `cinematic` to `dark` theme, skipping deprecated custom theme states.
+- **Site Name Typography (Manrope Font):** Updated site domain names across Top Sites, Daily Breakdown, and Site Manager lists to use the embedded `Manrope` font (`manrope.woff2`) for clean typography consistency.
 
 ### Fixed
 - **Rule Unique ID Queue:** Implemented task queuing for `declarativeNetRequest` dynamic rule updates to serialize background rule modifications and eliminate duplicate rule ID errors.
