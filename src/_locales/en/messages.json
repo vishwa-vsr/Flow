@@ -1237,6 +1237,18 @@
     "message": "Chinese (Hong Kong) / 繁體中文 (香港)",
     "description": "Language choice."
   },
+  "langJapanese": {
+    "message": "Japanese / 日本語",
+    "description": "Language choice."
+  },
+  "langGerman": {
+    "message": "German / Deutsch",
+    "description": "Language choice."
+  },
+  "langPortugueseBrazil": {
+    "message": "Portuguese (Brazil) / Português (Brasil)",
+    "description": "Language choice."
+  },
   "averageLine": {
     "message": "Average Line",
     "description": "Chart option."

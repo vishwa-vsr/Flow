@@ -1234,7 +1234,19 @@
     "description": "Language choice."
   },
   "langChineseHongKong": {
-    "message": "中文（香港） / 繁体中文（香港）",
+    "message": "中文 (香港) / 繁體中文 (香港)",
+    "description": "Language choice."
+  },
+  "langJapanese": {
+    "message": "日语 / 日本語",
+    "description": "Language choice."
+  },
+  "langGerman": {
+    "message": "德语 / Deutsch",
+    "description": "Language choice."
+  },
+  "langPortugueseBrazil": {
+    "message": "葡萄牙语 (巴西) / Português (Brasil)",
     "description": "Language choice."
   },
   "averageLine": {
