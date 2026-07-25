@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Custom Editable Categories:** Added full customization for Category Name, Emoji, and Accent Color across core categories (Productivity, Learning, Distraction, Communication) in Smart Presets & Categories tab, featuring an instant "Reset to Default" option.
 - **Cross-Context Category Sync:** Added real-time category storage sync so custom category names, emojis, and accent colors propagate automatically across the Extension Popup, Background Service Worker, and Dashboard.
-- **Expanded Global Translations (Japanese, German, Brazilian Portuguese):** Added 3 new native languages (`ja`, `de`, `pt_BR`) with 100% key parity across all 675 translation keys, expanding settings language dropdown options.
+- **Expanded Global Translations (Japanese, German, Brazilian Portuguese):** Added 3 new native languages (`ja`, `de`, `pt_BR`) with 100% key parity across all 777 translation keys, expanding settings language dropdown options.
+- **Complete Popup Localization:** Translated all popup interface elements (Today/All Time tabs, Focus Timer labels, Start/Stop/Pause/Skip buttons, Weekly Goal, Site Tweaks, Privacy Mode, Block/Unblock buttons, Category labels) across all 8 supported languages.
+- **Full Extension-Wide Translation Coverage:** Translated all remaining 777 keys across all 8 locales including blocked page messages, analytics descriptions, site manager labels, focus presets, rule confirmations, backup/import toasts, day names, and schedule notifications.
 
 ### Changed
 - **Flat Modern UI (Green Glow Removal):** Removed green `box-shadow` glows from active Quick Preset cards, Count Towards Goals checkboxes, play button hovers, logo animations, day dots, and popup category selection pills for a clean, modern aesthetic.
@@ -29,6 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **PIN Security Modal Localization:** Added full multi-language translations across all 8 supported locales for the PIN Security verification popup header and instruction text.
 - **Site Manager Sub-Tabs & Form Localization:** Added full multi-language translations across all 8 supported locales for Site Manager sub-tabs (Site List, Smart Presets & Categories, Advanced Tweaks), rule search placeholders, and the "+ Preset" form button.
 - **Advanced Site Tweaks Localization:** Added full multi-language translations across all 8 supported locales for the Advanced Site Tweaks panel header, subtitle description, and all 23 individual site tweak option labels (YouTube, Reddit, Instagram, X/Twitter, LinkedIn, Netflix, and B&W Mode).
+- **Popup `[object Promise]` Bug:** Fixed a critical bug where YouTube/site tweak toggle labels displayed `[object Promise]` instead of translated text because `msg()` (async background message sender) was incorrectly used instead of `t_()` (synchronous translation helper).
+- **Hardcoded Pause/Resume Detection:** Fixed a language-breaking bug where the focus timer's Pause/Resume button relied on checking for English text "Resume" or Spanish "Reanudar" in the button label, which failed for all other languages. Now uses a language-independent `data-state` attribute.
+- **Hardcoded "Work" Phase Label:** Fixed the focus phase label rendering a raw English string `"Work"` instead of using the `t_("work")` translation function.
+- **Chrome Placeholder Crash Prevention:** Fixed `"Variable $count$ used but not defined"` errors that prevented the extension from loading by adding required `"placeholders"` blocks to all keys using `$variable$` syntax across all 8 locales.
+- **Build Linter Upgrade:** Upgraded the i18n build linter from a simple key-parity check to a comprehensive 3-check validation system: (1) key parity across locales, (2) Chrome placeholder validation that fails the build if `$var$` is used without a matching `"placeholders"` block, (3) English fallback detection that warns when non-English locales still have untranslated keys.
 
 ## [10.0.2] - 2026-07-12
 

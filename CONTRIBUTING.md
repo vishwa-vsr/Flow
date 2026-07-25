@@ -51,7 +51,7 @@ You can run the following commands in your terminal:
 #### 📋 Pull Request Checklist
 Before opening a Pull Request, please check that:
 - [ ] You tested the changes locally in Developer Mode on your browser.
-- [ ] The build script compiles successfully by running `npm run build`.
+- [ ] The build script compiles successfully by running `npm run build` (passing all 3 i18n linter checks).
 - [ ] You did not add any heavy external libraries (we prefer standard web APIs).
 - [ ] Your code is local-first and does not track users or collect data (privacy-first).
 
