@@ -1466,12 +1466,16 @@ async function renderInsights() {
     hoverLayer.addEventListener("mouseleave", hideHeatmapTip);
     const legend = $("heatmap-legend");
     if (legend && !legend.dataset.wired) {
+        legend.dataset.wired = "true";
         legend.addEventListener("click", async () => {
+            const existing = document.querySelector(".hm-modal-overlay");
+            if (existing) existing.remove();
+
             const settingsRes = await gSync(["settings"]);
             const settings = settingsRes?.settings || {};
             const goalCats = settings.goalCats || ["productivity", "learning"];
             const overlay = document.createElement("div");
-            overlay.className = "overlay";
+            overlay.className = "overlay hm-modal-overlay";
             overlay.style.zIndex = "9999";
             setSafeHTML(overlay, `
               <div class="card" style="width:100%;max-width:460px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
@@ -1525,23 +1529,32 @@ async function renderInsights() {
               </div>
             `);
             document.body.appendChild(overlay);
-            document.getElementById("hm-cancel").onclick = () => overlay.remove();
-            document.getElementById("hm-close").onclick = () => overlay.remove();
-            document.getElementById("hm-save").onclick = async () => {
-                const sv = (await gSync(["settings"])).settings || {};
-                sv.heatmapMinActive = parseInt(document.getElementById("hm-min-active").value) || 10;
-                sv.heatmapRatioThresh = parseInt(document.getElementById("hm-ratio-threshold").value) || 50;
-                sv.showWastedDays = document.getElementById("hm-show-wasted").checked;
-                
-                const checkedCats = Array.from(overlay.querySelectorAll(".hm-cat-cb:checked")).map(cb => cb.value);
-                sv.goalCats = checkedCats.length > 0 ? checkedCats : ["productivity", "learning"];
 
-                await sSync({ settings: sv });
- 
-                overlay.remove();
-                renderInsights();
-                if (typeof toast === "function") toast(t_("thresholdsUpdated") || "Thresholds updated", "ok");
-            };
+            const cancelBtn = overlay.querySelector("#hm-cancel");
+            const closeBtn = overlay.querySelector("#hm-close");
+            const saveBtn = overlay.querySelector("#hm-save");
+
+            if (cancelBtn) cancelBtn.onclick = () => overlay.remove();
+            if (closeBtn) closeBtn.onclick = () => overlay.remove();
+            overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+            if (saveBtn) {
+                saveBtn.onclick = async () => {
+                    const sv = (await gSync(["settings"])).settings || {};
+                    sv.heatmapMinActive = parseInt(overlay.querySelector("#hm-min-active").value) || 10;
+                    sv.heatmapRatioThresh = parseInt(overlay.querySelector("#hm-ratio-threshold").value) || 50;
+                    sv.showWastedDays = overlay.querySelector("#hm-show-wasted").checked;
+                    
+                    const checkedCats = Array.from(overlay.querySelectorAll(".hm-cat-cb:checked")).map(cb => cb.value);
+                    sv.goalCats = checkedCats.length > 0 ? checkedCats : ["productivity", "learning"];
+
+                    await sSync({ settings: sv });
+     
+                    overlay.remove();
+                    renderInsights();
+                    if (typeof toast === "function") toast(t_("thresholdsUpdated") || "Thresholds updated", "ok");
+                };
+            }
         });
     }
 }
