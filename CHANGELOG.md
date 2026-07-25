@@ -5,10 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [10.0.3] - 2026-07-21
+## [10.0.3] - 2026-07-25
+
+### Added
+- **Custom Editable Categories:** Added full customization for Category Name, Emoji, and Accent Color across core categories (Productivity, Learning, Distraction, Communication) in Smart Presets & Categories tab, featuring an instant "Reset to Default" option.
+- **Cross-Context Category Sync:** Added real-time category storage sync so custom category names, emojis, and accent colors propagate automatically across the Extension Popup, Background Service Worker, and Dashboard.
+
+### Changed
+- **Flat Modern UI (Green Glow Removal):** Removed green `box-shadow` glows from active Quick Preset cards, Count Towards Goals checkboxes, play button hovers, logo animations, day dots, and popup category selection pills for a clean, modern aesthetic.
+- **Dynamic Category Rendering:** Updated Analytics Overview cards, Donut Chart & Legend, Heatmap Settings modal, Daily Breakdown tab, Count Towards Goals checkboxes, and Popup dropdowns to render custom category names, emojis, and accent colors dynamically.
 
 ### Fixed
-- **Rule Unique ID Crash:** Implemented task queuing for site block updates so they run sequentially, eliminating the browser console crashes related to non-unique rule IDs.
+- **Rule Unique ID Queue:** Implemented task queuing for `declarativeNetRequest` dynamic rule updates to serialize background rule modifications and eliminate duplicate rule ID errors.
+- **Heatmap Thresholds Modal Stacking:** Fixed duplicate event listener registration and overlay stacking when switching tabs, ensuring the Cancel button, Cross (✕) button, and backdrop click close the modal immediately.
 
 ## [10.0.2] - 2026-07-12
 
