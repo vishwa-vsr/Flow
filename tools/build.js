@@ -434,23 +434,88 @@ function verifyLocaleParity() {
   if (!fs.existsSync(localesDir)) return;
   const enPath = path.join(localesDir, 'en', 'messages.json');
   if (!fs.existsSync(enPath)) return;
-  const enKeys = Object.keys(JSON.parse(fs.readFileSync(enPath, 'utf8')));
+  const enData = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+  const enKeys = Object.keys(enData);
   const dirs = fs.readdirSync(localesDir).filter(d => fs.statSync(path.join(localesDir, d)).isDirectory());
   
   let hasMissing = false;
+  let hasPlaceholderErrors = false;
+  let untranslatedWarnings = [];
+
   dirs.forEach(loc => {
     const locFile = path.join(localesDir, loc, 'messages.json');
-    if (fs.existsSync(locFile)) {
-      const locKeys = Object.keys(JSON.parse(fs.readFileSync(locFile, 'utf8')));
-      const missing = enKeys.filter(k => !locKeys.includes(k));
-      if (missing.length > 0) {
-        console.warn(`\x1b[33m[I18N LINTER WARNING] Locale '${loc}' is missing ${missing.length} keys from 'en'!\x1b[0m`);
-        hasMissing = true;
+    if (!fs.existsSync(locFile)) return;
+    const locData = JSON.parse(fs.readFileSync(locFile, 'utf8'));
+    const locKeys = Object.keys(locData);
+
+    // CHECK 1: Key parity — every English key must exist in this locale
+    const missing = enKeys.filter(k => !locKeys.includes(k));
+    if (missing.length > 0) {
+      console.warn(`\x1b[33m[I18N LINTER WARNING] Locale '${loc}' is missing ${missing.length} keys from 'en'!\x1b[0m`);
+      missing.forEach(k => console.warn(`  > ${k}`));
+      hasMissing = true;
+    }
+
+    // CHECK 2: Placeholder validation — Chrome REQUIRES a "placeholders" block
+    // for every $variable$ used in a message string. Without it, Chrome refuses
+    // to load the extension: "Variable $xxx$ used but not defined."
+    Object.entries(locData).forEach(([key, val]) => {
+      const msg = val.message || '';
+      const varMatches = msg.match(/\$([a-zA-Z_][a-zA-Z0-9_]*)\$/g);
+      if (!varMatches) return;
+
+      const usedVars = [...new Set(varMatches.map(v => v.replace(/\$/g, '').toLowerCase()))];
+      const definedVars = val.placeholders
+        ? Object.keys(val.placeholders).map(k => k.toLowerCase())
+        : [];
+
+      const missingVars = usedVars.filter(v => !definedVars.includes(v));
+      if (missingVars.length > 0) {
+        console.error(`\x1b[31m[I18N ERROR] ${loc}/${key}: Uses $${missingVars.join('$, $')}$ but no "placeholders" defined!\x1b[0m`);
+        console.error(`  Message: "${msg}"`);
+        hasPlaceholderErrors = true;
+      }
+    });
+
+    // CHECK 3: English fallback detection (skip 'en' itself)
+    // Warns when a non-English locale still has English text for a key.
+    if (loc !== 'en') {
+      let untranslated = 0;
+      Object.entries(locData).forEach(([key, val]) => {
+        const enMsg = enData[key] && enData[key].message;
+        // Only flag strings longer than 3 chars (skip "OK", "PIN", "JSON", etc.)
+        if (enMsg && val.message === enMsg && enMsg.length > 3) {
+          untranslated++;
+        }
+      });
+      if (untranslated > 0) {
+        untranslatedWarnings.push({ loc, count: untranslated });
       }
     }
   });
-  if (!hasMissing) {
-    console.log(`\x1b[32m[I18N LINTER PASS] All ${dirs.length} locale folders verified with 100% key parity (${enKeys.length} keys).\x1b[0m\n`);
+
+  // Report results
+  if (hasPlaceholderErrors) {
+    console.error(`\n\x1b[31m[I18N FAIL] Placeholder errors found! Chrome will refuse to load this extension.\x1b[0m`);
+    console.error(`Fix: Add "placeholders" to each affected key in messages.json.`);
+    console.error(`Example: "placeholders": { "count": { "content": "$1", "example": "5" } }\n`);
+    process.exit(1);
+  }
+
+  if (untranslatedWarnings.length > 0) {
+    console.warn(`\x1b[33m[I18N WARNING] Some locales have keys still showing English text:\x1b[0m`);
+    untranslatedWarnings.forEach(w => {
+      console.warn(`  ${w.loc}: ${w.count} keys still identical to English`);
+    });
+    console.warn('');
+  }
+
+  if (!hasMissing && !hasPlaceholderErrors) {
+    const passMsg = [`[I18N PASS] All ${dirs.length} locales verified — ${enKeys.length} keys, 0 missing, 0 placeholder errors.`];
+    if (untranslatedWarnings.length === 0) {
+      passMsg.push(`[I18N PASS] All non-English locales have native translations.`);
+    }
+    console.log(`\x1b[32m${passMsg.join('\n')}\x1b[0m\n`);
   }
 }
 
