@@ -230,6 +230,12 @@ textarea:focus {
   background-color: var(--bg4) !important;
 }
 
+.sel-cat:focus,
+.sel-cat:hover {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 /* selection */
 ::selection{background:var(--green);color:#0a0a0a}
 

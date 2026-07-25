@@ -797,6 +797,7 @@ async function loadCategories() {
     if (syncRes && syncRes.customCategories && typeof applyCustomCategories === "function") {
         applyCustomCategories(syncRes.customCategories);
     }
+    loadWeeklyGoalSettings();
 }
 
 function isDefaultSiteHidden(d) {
@@ -3544,8 +3545,18 @@ async function loadWeeklyGoalSettings() {
     $("ratio-threshold-input") && ($("ratio-threshold-input").value = e.heatmapRatioThresh || 50);
     $("week-start-select") && ($("week-start-select").value = e.weekStartsOn || "mon");
     let t = e.goalCats || ["productivity", "learning"];
-    document.querySelectorAll(".goal-cb-cat").forEach(e => {
-        e.checked = t.includes(e.value)
+    document.querySelectorAll(".goal-cb-cat").forEach(cb => {
+        cb.checked = t.includes(cb.value);
+        const lbl = cb.closest(".goal-cb-lbl");
+        if (lbl) {
+            const catKey = cb.value;
+            const emoji = catEmoji(catKey);
+            const label = catLabel(catKey, false);
+            lbl.innerHTML = "";
+            lbl.appendChild(cb);
+            const txtNode = document.createTextNode(` ${emoji} ${label}`);
+            lbl.appendChild(txtNode);
+        }
     }), await renderGoalPreview(e.weeklyGoalHours || 0);
     await loadDashboardStreak();
 }

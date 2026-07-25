@@ -446,7 +446,7 @@ function renderDonut(e, t) {
                     var dot = document.createElement("div");
                     dot.className = "leg-dot";
                     dot.style.background = e.color;
-                    dot.style.boxShadow = "0 0 6px " + e.color;
+                    dot.style.boxShadow = "none";
                     
                     var info = document.createElement("div");
                     info.className = "leg-info";
@@ -500,11 +500,10 @@ function renderDonut(e, t) {
 }
 
 function buildCatSelector(e, t, s) {
-    var a = `<select class="sel-cat" data-domain="${escHTML(e)}" style="font-size:10px; padding:4px 8px; border-radius:999px; background:${s}22; color:${s}; border:1px solid ${s}55; outline:none; cursor:pointer; font-weight:800; text-transform:uppercase; appearance:none; text-align:center;">`;
+    var a = `<select class="sel-cat" data-domain="${escHTML(e)}" style="font-size:10px; padding:4px 8px; border-radius:999px; background:${s}22; color:${s}; border:1px solid ${s}55; outline:none; cursor:pointer; font-weight:800; text-transform:uppercase; appearance:none; text-align:center; box-shadow:none !important;">`;
     return ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(catKey => {
         const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (CAT_LABELS?.[catKey] || catKey));
-        const emoji = (typeof getCatEmoji === "function" ? getCatEmoji(catKey) : (CAT_EMOJI?.[catKey] || ""));
-        a += `<option value="${catKey}" ${catKey === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${emoji} ${lbl}</option>`
+        a += `<option value="${catKey}" ${catKey === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${lbl}</option>`
     }), a += "</select>"
 }
 
