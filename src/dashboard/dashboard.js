@@ -1002,6 +1002,8 @@ function openEditCategoryModal(catKey) {
         if (typeof applyCustomCategories === "function") applyCustomCategories(syncRes);
         overlay.remove();
         renderCategories();
+        loadWeeklyGoalSettings();
+        loadAnalytics();
         if (typeof buildPresetBuilder === "function") buildPresetBuilder();
     });
 
@@ -1019,6 +1021,8 @@ function openEditCategoryModal(catKey) {
         if (typeof applyCustomCategories === "function") applyCustomCategories(syncRes);
         overlay.remove();
         renderCategories();
+        loadWeeklyGoalSettings();
+        loadAnalytics();
         if (typeof buildPresetBuilder === "function") buildPresetBuilder();
     });
 }

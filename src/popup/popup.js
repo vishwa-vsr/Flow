@@ -68,7 +68,6 @@ $("btn-theme") && $("btn-theme").addEventListener("click", async function () {
     let t = "dark";
     if (e.theme === "dark") t = "light";
     else if (e.theme === "light") t = "cinematic";
-    else if (e.theme === "cinematic") t = "custom";
     else t = "dark";
     await sLocal({
         theme: t
