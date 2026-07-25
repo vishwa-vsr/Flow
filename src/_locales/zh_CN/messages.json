@@ -2760,5 +2760,33 @@
   "freetimeHoursTitle": {
     "message": "空闲时间",
     "description": "Section header."
+  },
+  "editCategory": {
+    "message": "编辑分类",
+    "description": "Title for custom category edit modal."
+  },
+  "categoryName": {
+    "message": "分类名称",
+    "description": "Label for category name input field."
+  },
+  "emojiIcon": {
+    "message": "表情符号图标",
+    "description": "Label for category emoji input field."
+  },
+  "accentColor": {
+    "message": "强调颜色",
+    "description": "Label for category accent color picker."
+  },
+  "presetSwatches": {
+    "message": "预设色板",
+    "description": "Label for color preset swatches."
+  },
+  "resetToDefault": {
+    "message": "恢复默认设置",
+    "description": "Button text to reset category to default settings."
+  },
+  "save": {
+    "message": "保存",
+    "description": "Generic Save button label."
   }
 }

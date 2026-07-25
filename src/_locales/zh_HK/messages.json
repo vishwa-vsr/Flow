@@ -2760,5 +2760,33 @@
   "freetimeHoursTitle": {
     "message": "空閒時間",
     "description": "Section header."
+  },
+  "editCategory": {
+    "message": "編輯分類",
+    "description": "Title for custom category edit modal."
+  },
+  "categoryName": {
+    "message": "分類名稱",
+    "description": "Label for category name input field."
+  },
+  "emojiIcon": {
+    "message": "表情符號圖示",
+    "description": "Label for category emoji input field."
+  },
+  "accentColor": {
+    "message": "強調顏色",
+    "description": "Label for category accent color picker."
+  },
+  "presetSwatches": {
+    "message": "預設色板",
+    "description": "Label for color preset swatches."
+  },
+  "resetToDefault": {
+    "message": "恢復預設值",
+    "description": "Button text to reset category to default settings."
+  },
+  "save": {
+    "message": "儲存",
+    "description": "Generic Save button label."
   }
 }

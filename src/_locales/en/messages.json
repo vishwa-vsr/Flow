@@ -2760,5 +2760,33 @@
   "freetimeHoursTitle": {
     "message": "Free-time Hours",
     "description": "Section header."
+  },
+  "editCategory": {
+    "message": "Edit Category",
+    "description": "Title for custom category edit modal."
+  },
+  "categoryName": {
+    "message": "Category Name",
+    "description": "Label for category name input field."
+  },
+  "emojiIcon": {
+    "message": "Emoji Icon",
+    "description": "Label for category emoji input field."
+  },
+  "accentColor": {
+    "message": "Accent Color",
+    "description": "Label for category accent color picker."
+  },
+  "presetSwatches": {
+    "message": "Preset Swatches",
+    "description": "Label for color preset swatches."
+  },
+  "resetToDefault": {
+    "message": "Reset to Default",
+    "description": "Button text to reset category to default settings."
+  },
+  "save": {
+    "message": "Save",
+    "description": "Generic Save button label."
   }
 }

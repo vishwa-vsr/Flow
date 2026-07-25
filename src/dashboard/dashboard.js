@@ -920,7 +920,7 @@ function openEditCategoryModal(catKey) {
               <path d="M12 20h9"></path>
               <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
             </svg>
-            Edit Category
+            ${t_("editCategory") || "Edit Category"}
           </h3>
           <button id="cat-edit-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding: 4px; display:inline-flex; align-items:center; justify-content:center;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -929,17 +929,17 @@ function openEditCategoryModal(catKey) {
 
         <div style="display:flex; flex-direction:column; gap: 16px;">
           <div>
-            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Category Name</label>
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("categoryName") || "Category Name"}</label>
             <input type="text" id="cat-edit-label" value="${sanitizeDomain(currentLabel)}" maxlength="20" placeholder="e.g. Work" style="width:100%; padding: 10px 14px; border-radius: 10px; border:1px solid var(--bd); background:var(--bg3); color:var(--tx); font-size:14px; font-weight:600;" />
           </div>
 
           <div style="display:flex; gap: 16px;">
             <div style="flex:1;">
-              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Emoji Icon</label>
+              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("emojiIcon") || "Emoji Icon"}</label>
               <input type="text" id="cat-edit-emoji" value="${sanitizeDomain(currentEmoji)}" maxlength="4" style="width:100%; padding: 10px 14px; border-radius: 10px; border:1px solid var(--bd); background:var(--bg3); color:var(--tx); font-size:16px; text-align:center;" />
             </div>
             <div style="flex:1;">
-              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Accent Color</label>
+              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("accentColor") || "Accent Color"}</label>
               <div style="display:flex; align-items:center; gap: 8px;">
                 <input type="color" id="cat-edit-color" value="${currentColor}" style="width:42px; height:42px; padding:2px; border-radius:10px; border:1px solid var(--bd); background:var(--bg3); cursor:pointer;" />
                 <span id="cat-edit-color-val" style="font-size:12px; font-weight:700; color:var(--tx2); text-transform:uppercase;">${currentColor}</span>
@@ -948,7 +948,7 @@ function openEditCategoryModal(catKey) {
           </div>
 
           <div>
-            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">Preset Swatches</label>
+            <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("presetSwatches") || "Preset Swatches"}</label>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               ${colorSwatches.map(hex => `
                 <button type="button" class="cat-swatch-btn" data-color="${hex}" style="width:26px; height:26px; border-radius:50%; border: 2px solid ${hex === currentColor ? 'var(--tx)' : 'transparent'}; background:${hex}; cursor:pointer; transition:transform 0.15s ease;"></button>
@@ -960,14 +960,14 @@ function openEditCategoryModal(catKey) {
         <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 24px; padding-top: 16px; border-top:1px solid var(--bd);">
           <button id="cat-edit-reset" type="button" style="background:none; border:1px solid var(--bd); color:var(--tx2); padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor:pointer; display:inline-flex; align-items:center; gap: 6px; transition:var(--trans);">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-            Reset to Default
+            ${t_("resetToDefault") || "Reset to Default"}
           </button>
 
           <div style="display:flex; gap: 8px;">
-            <button id="cat-edit-cancel" type="button" style="background:var(--bg3); border:1px solid var(--bd); color:var(--tx); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor:pointer;">Cancel</button>
+            <button id="cat-edit-cancel" type="button" style="background:var(--bg3); border:1px solid var(--bd); color:var(--tx); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor:pointer;">${t_("cancel") || "Cancel"}</button>
             <button id="cat-edit-save" type="button" style="background:var(--green); border:none; color:#000; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor:pointer; display:inline-flex; align-items:center; gap: 6px;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Save
+              ${t_("save") || "Save"}
             </button>
           </div>
         </div>
