@@ -25,10 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Heatmap Thresholds Modal Stacking:** Fixed duplicate event listener registration and overlay stacking when switching tabs, ensuring the Cancel button, Cross (✕) button, and backdrop click close the modal immediately.
 - **Instant Category Edit Re-rendering:** Fixed delayed UI updates when saving or resetting category edits, triggering immediate live re-renders across Focus Mode and Analytics tabs.
 - **Analytics Header Localization Fix:** Fixed a bug in `hideAnalyticsHeader()` where the top title header was hardcoded to match English `"Analytics"`, causing localized headers like `"Analíticas"` in Spanish to remain visible.
-- **Edit Category Modal Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for the Edit Category modal (title, input labels, color swatch headers, and reset/cancel/save buttons).
-- **PIN Security Modal Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for the PIN Security verification popup header and instruction text.
-- **Site Manager Sub-Tabs & Form Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for Site Manager sub-tabs (Site List, Smart Presets & Categories, Advanced Tweaks), rule search placeholders, and the "+ Preset" form button.
-- **Advanced Site Tweaks Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for the Advanced Site Tweaks panel header, subtitle description, and all 23 individual site tweak option labels (YouTube, Reddit, Instagram, X/Twitter, LinkedIn, Netflix, and B&W Mode).
+- **Edit Category Modal Localization:** Added full multi-language translations across all 8 supported locales (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`, `ja`, `de`, `pt_BR`) for the Edit Category modal (title, input labels, color swatch headers, and reset/cancel/save buttons).
+- **PIN Security Modal Localization:** Added full multi-language translations across all 8 supported locales for the PIN Security verification popup header and instruction text.
+- **Site Manager Sub-Tabs & Form Localization:** Added full multi-language translations across all 8 supported locales for Site Manager sub-tabs (Site List, Smart Presets & Categories, Advanced Tweaks), rule search placeholders, and the "+ Preset" form button.
+- **Advanced Site Tweaks Localization:** Added full multi-language translations across all 8 supported locales for the Advanced Site Tweaks panel header, subtitle description, and all 23 individual site tweak option labels (YouTube, Reddit, Instagram, X/Twitter, LinkedIn, Netflix, and B&W Mode).
 
 ## [10.0.2] - 2026-07-12
 
