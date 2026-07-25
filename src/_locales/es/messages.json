@@ -1033,84 +1033,65 @@
     "message": "Guardar todos los ajustes"
   },
   "securitySystem": {
-    "message": "Seguridad y Sistema",
-    "description": "Settings sub-tab label."
+    "message": "Seguridad y Sistema"
   },
   "trackingBlocking": {
-    "message": "Rastreo y Bloqueo",
-    "description": "Settings sub-tab label."
+    "message": "Seguimiento y Bloqueo"
   },
   "trackingEngine": {
-    "message": "Motor de Rastreo",
-    "description": "Settings card label."
+    "message": "MOTOR DE SEGUIMIENTO"
   },
   "idleTimeout": {
-    "message": "Tiempo de Inactividad",
-    "description": "Settings config option."
+    "message": "Tiempo de espera de inactividad"
   },
   "idleTimeoutDesc": {
-    "message": "Deja de rastrear si no mueves el ratón.",
-    "description": "Settings config option description."
+    "message": "Detener el seguimiento del tiempo si deja de mover el ratón."
   },
   "after30Sec": {
-    "message": "Tras 30 segundos",
-    "description": "Dropdown choice."
+    "message": "Después de 30 segundos"
   },
   "after1Min": {
-    "message": "Tras 1 minuto",
-    "description": "Dropdown choice."
+    "message": "Después de 1 minuto"
   },
   "after2Min": {
-    "message": "Tras 2 minutos",
-    "description": "Dropdown choice."
+    "message": "Después de 2 minutos"
   },
   "after5Min": {
-    "message": "Tras 5 minutos",
-    "description": "Dropdown choice."
+    "message": "Después de 5 minutos"
   },
   "computerSleepGap": {
-    "message": "Límite de Suspensión del Equipo",
-    "description": "Settings config option."
+    "message": "Intervalo de suspensión del equipo"
   },
   "computerSleepGapDesc": {
-    "message": "Límite para calcular el tiempo si suspendes la computadora.",
-    "description": "Settings config option description."
+    "message": "Limitar el cálculo del tiempo activo si pone el equipo en suspensión."
   },
   "1minute": {
-    "message": "1 minuto",
-    "description": "Dropdown choice."
+    "message": "1 minuto"
   },
   "5minutes": {
-    "message": "5 minutos",
-    "description": "Dropdown choice."
+    "message": "5 minutos"
   },
   "10minutes": {
-    "message": "10 minutos",
-    "description": "Dropdown choice."
+    "message": "10 minutos"
   },
   "15minutes": {
-    "message": "15 minutos",
-    "description": "Dropdown choice."
+    "message": "15 minutos"
   },
   "mediaPlaybackTracking": {
-    "message": "Rastreo de Reproducción de Multimedia",
-    "description": "Settings config option."
+    "message": "Seguimiento de reproducción de medios"
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "Sigue rastreando si se reproduce audio o video (aunque estés inactivo).",
-    "description": "Settings config option description."
+    "message": "Continuar registrando el tiempo si se reproduce audio o vídeo (incluso estando inactivo)."
   },
   "ignoreQuickVisits": {
     "message": "Ignorar Visitas Rápidas",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "Ignora visitas más cortas que esto para limpiar tus datos.",
-    "description": "Settings config option description."
+    "message": "Ignorar visitas más cortas que esta duración para mantener los datos limpios."
   },
   "offTrackEverything": {
-    "message": "Apagado (rastrear todo)",
-    "description": "Dropdown choice."
+    "message": "Desactivado (registrar todo)"
   },
   "3seconds": {
     "message": "3 segundos",
@@ -1125,36 +1106,28 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "Retención del Historial de Datos",
-    "description": "Settings config option."
+    "message": "Retención del historial de datos"
   },
   "dataHistoryRetentionDesc": {
-    "message": "Borra historial de rastreo más antiguo que esto para ahorrar espacio.",
-    "description": "Settings config option description."
+    "message": "Eliminar automáticamente los registros detallados más antiguos que esta duración para ahorrar espacio."
   },
   "after30Days": {
-    "message": "Tras 30 días",
-    "description": "Dropdown choice."
+    "message": "Después de 30 días"
   },
   "after90Days": {
-    "message": "Tras 90 días",
-    "description": "Dropdown choice."
+    "message": "Después de 90 días"
   },
   "after180Days": {
-    "message": "Tras 180 días",
-    "description": "Dropdown choice."
+    "message": "Después de 180 días"
   },
   "after1Year": {
-    "message": "Tras 1 año",
-    "description": "Dropdown choice."
+    "message": "Después de 1 año"
   },
   "after2Years": {
-    "message": "Tras 2 años",
-    "description": "Dropdown choice."
+    "message": "Después de 2 años"
   },
   "after3Years": {
-    "message": "Tras 3 años",
-    "description": "Dropdown choice."
+    "message": "Después de 3 años"
   },
   "foreverKeepAll": {
     "message": "Para siempre (guardar todo)",
@@ -1172,16 +1145,13 @@
     "message": "APARIENCIA"
   },
   "themeDark": {
-    "message": "Oscuro",
-    "description": "Dropdown choice."
+    "message": "Oscuro"
   },
   "themeLight": {
-    "message": "Claro",
-    "description": "Dropdown choice."
+    "message": "Claro"
   },
   "themeCinematic": {
-    "message": "Cinemático",
-    "description": "Dropdown choice."
+    "message": "Cinematográfico"
   },
   "languageOverride": {
     "message": "Language / Idioma",
@@ -1394,8 +1364,7 @@
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "Control de Acceso y Seguridad",
-    "description": "Settings card label."
+    "message": "Control de Acceso y Seguridad"
   },
   "pinProtectionStatus": {
     "message": "Estado de protección por PIN:"
@@ -1423,227 +1392,173 @@
     "message": "Eliminar PIN"
   },
   "setPinToEnableLocks": {
-    "message": "Configura un PIN para activar estos bloqueos",
-    "description": "Helper block message."
+    "message": "Establezca un PIN para activar estos bloqueos"
   },
   "whatToLock": {
-    "message": "Qué Bloquear",
-    "description": "Settings block header."
+    "message": "Qué bloquear"
   },
   "lockTimerStop": {
-    "message": "Bloquear Botón Detener Temporizador",
-    "description": "Settings config option."
+    "message": "Bloquear botón de detener temporizador"
   },
   "lockTimerStopDesc": {
-    "message": "Pide PIN para detener o pausar una sesión de enfoque activa.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para detener o pausar una sesión de enfoque activa."
   },
   "lockEditingRules": {
-    "message": "Bloquear Edición/Eliminación de Reglas",
-    "description": "Settings config option."
+    "message": "Bloquear edición/eliminación de reglas"
   },
   "lockEditingRulesDesc": {
-    "message": "Pide PIN para modificar, borrar o vaciar reglas y listas de bloqueo.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para modificar, eliminar o borrar listas y reglas de bloqueo de sitios web."
   },
   "lockFreeTime": {
-    "message": "Bloquear Horas Libres",
-    "description": "Settings config option."
+    "message": "Bloquear horas de tiempo libre"
   },
   "lockFreeTimeDesc": {
-    "message": "Pide PIN para cambiar tus horarios libres.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para añadir, editar o eliminar franjas de tiempo libre programadas."
   },
   "lockFocusPresets": {
-    "message": "Bloquear Edición de Ajustes de Enfoque",
-    "description": "Settings config option."
+    "message": "Bloquear edición de preajustes de enfoque"
   },
   "lockFocusPresetsDesc": {
-    "message": "Pide PIN para editar o borrar ajustes de enfoque personalizados.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para modificar o eliminar preajustes de enfoque personalizados."
   },
   "lockFocusSchedules": {
-    "message": "Bloquear Edición de Horarios de Enfoque",
-    "description": "Settings config option."
+    "message": "Bloquear edición/eliminación de horarios de enfoque"
   },
   "lockFocusSchedulesDesc": {
-    "message": "Pide PIN para cambiar o borrar horarios de enfoque.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para cambiar o eliminar configuraciones de horarios de enfoque."
   },
   "lockAdvancedTweaks": {
-    "message": "Bloquear Modificaciones de Sitio Avanzadas",
-    "description": "Settings config option."
+    "message": "Bloquear ajustes avanzados de sitios"
   },
   "lockAdvancedTweaksDesc": {
-    "message": "Pide PIN para acceder a estilos personalizados o modificaciones avanzadas.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para acceder a estilos personalizados, inyecciones de script o ajustes avanzados."
   },
   "lockPrivacyMode": {
-    "message": "Bloquear Modo Privado (Pausar Rastreo)",
-    "description": "Settings config option."
+    "message": "Bloquear Modo de Privacidad (Pausar seguimiento)"
   },
   "lockPrivacyModeDesc": {
-    "message": "Pide PIN para pausar el rastreo o activar modo privado.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para pausar el seguimiento o activar el modo de privacidad."
   },
   "lockAdjustTime": {
-    "message": "Bloquear Ajuste de Tiempo (Desglose Diario)",
-    "description": "Settings config option."
+    "message": "Bloquear ajuste de tiempo (Desglose diario)"
   },
   "lockAdjustTimeDesc": {
-    "message": "Pide PIN para cambiar a mano el tiempo rastreado en desglose diario.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para ajustar manualmente el tiempo registrado en el desglose diario."
   },
   "lockDangerZone": {
-    "message": "Bloquear Zona de Peligro (Borrar Datos)",
-    "description": "Settings config option."
+    "message": "Bloquear Zona Peligrosa (Borrar datos)"
   },
   "lockDangerZoneDesc": {
-    "message": "Pide PIN para reiniciar estadísticas, reglas o categorías.",
-    "description": "Settings config option description."
+    "message": "Requerir PIN para restablecer estadísticas, reglas o categorías personalizadas."
   },
   "dangerZone": {
-    "message": "Zona de Peligro",
-    "description": "Settings card label."
+    "message": "Zona Peligrosa"
   },
   "resetAllStats": {
-    "message": "Reiniciar todas las estadísticas",
-    "description": "Settings config option."
+    "message": "Restablecer todas las estadísticas"
   },
   "resetAllStatsDesc": {
-    "message": "Borra todo tu historial de rastreo y analíticas. No se puede deshacer.",
-    "description": "Settings config option description."
+    "message": "Borrar todo el historial de seguimiento y analíticas registradas. Esto no se puede deshacer."
   },
   "btnResetStats": {
-    "message": "Borrar Estadísticas",
-    "description": "Action button."
+    "message": "Restablecer estadísticas"
   },
   "clearAllRules": {
-    "message": "Borrar todas las reglas de bloqueo/permiso",
-    "description": "Settings config option."
+    "message": "Borrar todas las reglas de bloqueo y permisión"
   },
   "clearAllRulesDesc": {
-    "message": "Elimina listas de bloqueo, horarios, límites y permitidos.",
-    "description": "Settings config option description."
+    "message": "Eliminar todas las listas de bloqueo de sitios web, horarios, límites y listas de permisión personalizadas."
   },
   "btnClearRules": {
-    "message": "Borrar Reglas",
-    "description": "Action button."
+    "message": "Borrar reglas"
   },
   "clearAllCategories": {
-    "message": "Borrar categorías manuales",
-    "description": "Settings config option."
+    "message": "Borrar todas las categorías manuales"
   },
   "clearAllCategoriesDesc": {
-    "message": "Restaura las categorías de sitios a las predeterminadas.",
-    "description": "Settings config option description."
+    "message": "Restablecer todas las etiquetas de categorías de sitios web personalizadas a los valores predeterminados."
   },
   "btnClearCategories": {
-    "message": "Borrar Categorías",
-    "description": "Action button."
+    "message": "Borrar categorías"
   },
   "supportFeedbackHeader": {
-    "message": "Soporte y Opiniones",
-    "description": "Settings card label."
+    "message": "Soporte y Comentarios"
   },
   "submitFeedbackHeader": {
-    "message": "Enviar Sugerencias y Reportes de Errores",
-    "description": "Settings config option."
+    "message": "Enviar solicitudes de funciones e informes de errores"
   },
   "submitFeedbackDesc": {
-    "message": "¡Ayúdanos a mejorar Flow! Comparte tus ideas o reporta fallos.",
-    "description": "Settings config option description."
+    "message": "¡Ayúdanos a mejorar Flow! Comparte tus ideas, sugerencias o reporta fallos."
   },
   "submitFeedbackBtn": {
-    "message": "Enviar Opiniones",
-    "description": "Action button."
+    "message": "Enviar comentarios"
   },
   "helpTranslateBtn": {
-    "message": "Ayuda a Traducir",
-    "description": "Action button."
+    "message": "Ayudar a traducir"
   },
   "websiteBtn": {
-    "message": "Sitio Web",
-    "description": "Action button."
+    "message": "Sitio web"
   },
   "rateUsBtn": {
-    "message": "Califícanos",
-    "description": "Action button."
+    "message": "Calificar 5 estrellas"
   },
   "changelogBtn": {
-    "message": "Historial de cambios",
-    "description": "Action button."
+    "message": "Registro de cambios"
   },
   "backupRestoreHeader": {
-    "message": "Copia de Seguridad y Restauración",
-    "description": "Settings card label."
+    "message": "Copia de seguridad y Restauración"
   },
   "exportDataJson": {
-    "message": "Exportar todos los datos a JSON",
-    "description": "Settings config option."
+    "message": "Exportar todos los datos como JSON"
   },
   "exportDataJsonDesc": {
-    "message": "Estadísticas, reglas, categorías y ajustes.",
-    "description": "Settings config option description."
+    "message": "Estadísticas, reglas, categorías, ajustes."
   },
   "downloadJson": {
     "message": "Descargar JSON"
   },
   "restoreFromJson": {
-    "message": "Restaurar desde JSON",
-    "description": "Settings config option."
+    "message": "Restaurar desde JSON"
   },
   "restoreFromJsonDesc": {
-    "message": "Reemplaza TODOS los datos actuales. Confirma antes de restaurar.",
-    "description": "Settings config option description."
+    "message": "Reemplaza TODOS los datos actuales. Confirme antes de restaurar."
   },
   "chooseFile": {
-    "message": "Elegir Archivo…",
-    "description": "Input file label."
+    "message": "Elegir archivo…"
   },
   "localStorageUsage": {
-    "message": "Uso de Almacenamiento de la Extensión",
-    "description": "Settings config option."
+    "message": "Uso de almacenamiento local"
   },
   "localStorageUsageDesc": {
-    "message": "Espacio usado por los ajustes, reglas y base de datos de historial.",
-    "description": "Settings config option description."
+    "message": "Espacio utilizado por la base de datos de ajustes, reglas e historial."
   },
   "migrationImportsHeader": {
-    "message": "Migración e Importaciones",
-    "description": "Settings card label."
+    "message": "Migración e Importaciones"
   },
   "importFromWatt": {
-    "message": "Importar desde Web Activity Time Tracker",
-    "description": "Settings config option."
+    "message": "Importar desde Web Activity Time Tracker"
   },
   "importFromWattDesc": {
     "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "Importar desde Time Tracker - Web Habit Builder",
-    "description": "Settings config option."
+    "message": "Importar desde Time Tracker - Web Habit Builder"
   },
   "importFromTtDesc": {
-    "message": "Sube el archivo JSON exportado para unir tu historial de rastreo.",
-    "description": "Settings config option description."
+    "message": "Suba su archivo JSON exportado para combinar su historial de seguimiento anterior."
   },
   "importFromWt": {
-    "message": "Importar desde Webtime Tracker",
-    "description": "Settings config option."
+    "message": "Importar desde Webtime Tracker"
   },
   "importFromWtDesc": {
-    "message": "Sube el archivo CSV exportado para unir tu historial de rastreo.",
-    "description": "Settings config option description."
+    "message": "Suba su archivo CSV exportado para combinar su historial de seguimiento anterior."
   },
   "backupHistory": {
-    "message": "Historial de Respaldos",
-    "description": "Settings block title."
+    "message": "Historial de Copias de Seguridad"
   },
   "btnCreateLocalBackup": {
-    "message": "+ Crear Respaldo Local",
-    "description": "Action button."
+    "message": "+ Crear copia de seguridad local"
   },
   "editFreeTime": {
     "message": "Editar Horas Libres",
@@ -2372,24 +2287,20 @@
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "Rastrea los PDF o archivos locales que abres. No te escondas.",
-    "description": "Track local files option description"
+    "message": "Registrar archivos HTML o PDF locales abiertos en su navegador."
   },
   "blockingBehavior": {
-    "message": "Comportamiento de Bloqueo",
-    "description": "Blocking behavior card header"
+    "message": "COMPORTAMIENTO DE BLOQUEO"
   },
   "showFunnyBlockedPage": {
-    "message": "Mostrar página de bloqueo con frases chidas",
-    "description": "Show funny blocked page option"
+    "message": "Mostrar página de bloqueo divertida"
   },
   "timeLimitWarning": {
     "message": "Aviso antes de que te bloquee",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "Te avisa estos segundos antes de que te bloquee la página. Prepárate.",
-    "description": "Warning duration description"
+    "message": "Mostrar una advertencia esta cantidad de segundos antes de bloquear un sitio."
   },
   "sec": {
     "message": "seg",
@@ -2400,64 +2311,51 @@
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "Pon 0 para desactivar. Si puedes controlarte.",
-    "description": "Tab limiter description"
+    "message": "Establezca 0 para desactivar."
   },
   "tabsMax": {
     "message": "pestañas máx",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "Excepciones de Rastreo",
-    "description": "Tracking exceptions card header"
+    "message": "EXCEPCIONES DE SEGUIMIENTO"
   },
   "alwaysTrackEvenIdle": {
-    "message": "Rastrear siempre (incluso inactivo)",
-    "description": "Always track option"
+    "message": "Registrar siempre (incluso inactivo)"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "Sitios que seguirán contando tiempo aunque te vayas a hacer un café.",
-    "description": "Always track description"
+    "message": "Sitios que siempre registran tiempo incluso si se aleja (ej. pw.live)"
   },
   "btnAddException": {
-    "message": "+ Añadir Excepción",
-    "description": "Add exception button"
+    "message": "+ Añadir excepción"
   },
   "badgeDisplay": {
-    "message": "Contador del Icono",
-    "description": "Badge display card header"
+    "message": "MOSTRAR EN LA INSIGNIA"
   },
   "showTimeSpentBadge": {
-    "message": "Mostrar tiempo en el icono",
-    "description": "Show time spent option"
+    "message": "Mostrar tiempo transcurrido en la insignia de la extensión"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "Muestra los minutos que llevas perdiendo en el sitio actual.",
-    "description": "Show time spent description"
+    "message": "Muestra los minutos transcurridos en el sitio actual."
   },
   "showIdlWhenIdle": {
-    "message": "Mostrar \"idl\" al estar inactivo",
-    "description": "Show idle status option"
+    "message": "Mostrar \"idl\" al estar inactivo / sin seguimiento"
   },
   "showIdlWhenIdleDesc": {
-    "message": "Muestra \"idl\" en el icono para que sepas que no está contando nada.",
-    "description": "Show idle status description"
+    "message": "Muestra \"idl\" en la insignia cuando el seguimiento está pausado o inactivo."
   },
   "dataRollover": {
     "message": "Datos e Inicio del Día",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "Reinicio del Día para Búhos",
-    "description": "Night owl rollover option"
+    "message": "Reinicio diario nocturno"
   },
   "nightOwlRolloverDesc": {
-    "message": "Define a qué hora empieza tu nuevo día de rastreo. Útil si eres de los que no duermen.",
-    "description": "Night owl description"
+    "message": "Defina cuándo comienza su nuevo día de seguimiento. Útil si trabaja hasta tarde."
   },
   "midnight": {
-    "message": "Medianoche (12:00 AM)",
-    "description": "Midnight option"
+    "message": "Medianoche (12:00 AM)"
   },
   "lastXDays": {
     "message": "Últimos $count$ días",
@@ -3016,5 +2914,197 @@
   },
   "settingsTitle": {
     "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "Seguridad y Sistema"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "Seguimiento y Bloqueo"
+  },
+  "lockStopTitle": {
+    "message": "Bloquear botón de detener temporizador"
+  },
+  "lockStopDesc": {
+    "message": "Requerir PIN para detener o pausar una sesión de enfoque activa."
+  },
+  "lockRulesTitle": {
+    "message": "Bloquear edición/eliminación de reglas"
+  },
+  "lockRulesDesc": {
+    "message": "Requerir PIN para modificar, eliminar o borrar listas y reglas de bloqueo de sitios web."
+  },
+  "lockFreetimeTitle": {
+    "message": "Bloquear horas de tiempo libre"
+  },
+  "lockFreetimeDesc": {
+    "message": "Requerir PIN para añadir, editar o eliminar franjas de tiempo libre programadas."
+  },
+  "lockFocusPresetsTitle": {
+    "message": "Bloquear edición de preajustes de enfoque"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "Bloquear edición/eliminación de horarios de enfoque"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "Requerir PIN para cambiar o eliminar configuraciones de horarios de enfoque."
+  },
+  "lockTweaksTitle": {
+    "message": "Bloquear ajustes avanzados de sitios"
+  },
+  "lockTweaksDesc": {
+    "message": "Requerir PIN para acceder a estilos personalizados, inyecciones de script o ajustes avanzados."
+  },
+  "lockPrivacyTitle": {
+    "message": "Bloquear Modo de Privacidad (Pausar seguimiento)"
+  },
+  "lockPrivacyDesc": {
+    "message": "Requerir PIN para pausar el seguimiento o activar el modo de privacidad."
+  },
+  "lockAdjustTimeTitle": {
+    "message": "Bloquear ajuste de tiempo (Desglose diario)"
+  },
+  "lockDangerTitle": {
+    "message": "Bloquear Zona Peligrosa (Borrar datos)"
+  },
+  "lockDangerDesc": {
+    "message": "Requerir PIN para restablecer estadísticas, reglas o categorías personalizadas."
+  },
+  "extStorageUsage": {
+    "message": "USO DE ALMACENAMIENTO DE LA EXTENSIÓN"
+  },
+  "extStorageDesc": {
+    "message": "Espacio utilizado por la base de datos de ajustes, reglas e historial."
+  },
+  "migrationAndImports": {
+    "message": "MIGRACIÓN E IMPORTACIONES"
+  },
+  "importWebActivityTitle": {
+    "message": "Importar desde Web Activity Time Tracker"
+  },
+  "importWebActivityDesc": {
+    "message": "Suba su archivo CSV exportado para combinar su historial de seguimiento anterior."
+  },
+  "importHabitBuilderTitle": {
+    "message": "Importar desde Time Tracker - Web Habit Builder"
+  },
+  "importHabitBuilderDesc": {
+    "message": "Suba su archivo JSON exportado para combinar su historial de seguimiento anterior."
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "Importar desde Webtime Tracker"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "Suba su archivo CSV exportado para combinar su historial de seguimiento anterior."
+  },
+  "createLocalBackupBtn": {
+    "message": "+ Crear copia de seguridad local"
+  },
+  "resetStatsTitle": {
+    "message": "Restablecer todas las estadísticas"
+  },
+  "resetStatsDesc": {
+    "message": "Borrar todo el historial de seguimiento y analíticas registradas. Esto no se puede deshacer."
+  },
+  "resetStatsBtn": {
+    "message": "Restablecer estadísticas"
+  },
+  "clearRulesTitle": {
+    "message": "Borrar todas las reglas de bloqueo y permisión"
+  },
+  "clearRulesDesc": {
+    "message": "Eliminar todas las listas de bloqueo de sitios web, horarios, límites y listas de permisión personalizadas."
+  },
+  "clearRulesBtn": {
+    "message": "Borrar reglas"
+  },
+  "clearCategoriesTitle": {
+    "message": "Borrar todas las categorías manuales"
+  },
+  "clearCategoriesDesc": {
+    "message": "Restablecer todas las etiquetas de categorías de sitios web personalizadas a los valores predeterminados."
+  },
+  "clearCategoriesBtn": {
+    "message": "Borrar categorías"
+  },
+  "idleTimeoutTitle": {
+    "message": "Tiempo de espera de inactividad"
+  },
+  "after30Secs": {
+    "message": "Después de 30 segundos"
+  },
+  "after2Mins": {
+    "message": "Después de 2 minutos"
+  },
+  "after5Mins": {
+    "message": "Después de 5 minutos"
+  },
+  "sleepGapTitle": {
+    "message": "Intervalo de suspensión del equipo"
+  },
+  "sleepGapDesc": {
+    "message": "Limitar el cálculo del tiempo activo si pone el equipo en suspensión."
+  },
+  "never": {
+    "message": "Nunca"
+  },
+  "mediaTrackingTitle": {
+    "message": "Seguimiento de reproducción de medios"
+  },
+  "mediaTrackingDesc": {
+    "message": "Continuar registrando el tiempo si se reproduce audio o vídeo (incluso estando inactivo)."
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "Ignorar visitas rápidas"
+  },
+  "trackLocalFilesTitle": {
+    "message": "Registrar archivos locales"
+  },
+  "alwaysTrackTitle": {
+    "message": "Registrar siempre (incluso inactivo)"
+  },
+  "alwaysTrackDesc": {
+    "message": "Sitios que siempre registran tiempo incluso si se aleja (ej. pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ Añadir excepción"
+  },
+  "noExceptionsAdded": {
+    "message": "No se han añadido excepciones."
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "Mostrar tiempo transcurrido en la insignia de la extensión"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "Muestra los minutos transcurridos en el sitio actual."
+  },
+  "showIdlTitle": {
+    "message": "Mostrar \"idl\" al estar inactivo / sin seguimiento"
+  },
+  "showIdlDesc": {
+    "message": "Muestra \"idl\" en la insignia cuando el seguimiento está pausado o inactivo."
+  },
+  "timeLimitWarningTitle": {
+    "message": "Advertencia de límite de tiempo antes del bloqueo"
+  },
+  "tabLimiterTitle": {
+    "message": "Limitador de pestañas por dominio"
+  },
+  "dataAndRollover": {
+    "message": "DATOS Y REINICIO DIARIO"
+  },
+  "nightOwlTitle": {
+    "message": "Reinicio diario nocturno"
+  },
+  "nightOwlDesc": {
+    "message": "Defina cuándo comienza su nuevo día de seguimiento. Útil si trabaja hasta tarde."
+  },
+  "midnight12am": {
+    "message": "Medianoche (12:00 AM)"
+  },
+  "dataRetentionTitle": {
+    "message": "Retención del historial de datos"
+  },
+  "dataRetentionDesc": {
+    "message": "Eliminar automáticamente los registros detallados más antiguos que esta duración para ahorrar espacio."
   }
 }

@@ -1033,84 +1033,65 @@
     "message": "全設定を保存"
   },
   "securitySystem": {
-    "message": "Security & System",
-    "description": "Settings sub-tab label."
+    "message": "セキュリティとシステム"
   },
   "trackingBlocking": {
-    "message": "Tracking & Blocking",
-    "description": "Settings sub-tab label."
+    "message": "トラッキングとブロック"
   },
   "trackingEngine": {
-    "message": "Tracking Engine",
-    "description": "Settings card label."
+    "message": "トラッキングエンジン"
   },
   "idleTimeout": {
-    "message": "Idle Timeout",
-    "description": "Settings config option."
+    "message": "アイドルタイムアウト"
   },
   "idleTimeoutDesc": {
-    "message": "Stop tracking time if you stop moving your mouse.",
-    "description": "Settings config option description."
+    "message": "マウスの移動を停止した場合に時間の追跡を停止します。"
   },
   "after30Sec": {
-    "message": "After 30 seconds",
-    "description": "Dropdown choice."
+    "message": "30秒後"
   },
   "after1Min": {
-    "message": "After 1 minute",
-    "description": "Dropdown choice."
+    "message": "1分後"
   },
   "after2Min": {
-    "message": "After 2 minutes",
-    "description": "Dropdown choice."
+    "message": "2分後"
   },
   "after5Min": {
-    "message": "After 5 minutes",
-    "description": "Dropdown choice."
+    "message": "5分後"
   },
   "computerSleepGap": {
-    "message": "Computer Sleep Gap",
-    "description": "Settings config option."
+    "message": "コンピュータのスリープ間隔"
   },
   "computerSleepGapDesc": {
-    "message": "Capping active time calculation if you put the computer to sleep.",
-    "description": "Settings config option description."
+    "message": "コンピュータをスリープ状態にした場合にアクティブ時間の計算を上限設定します。"
   },
   "1minute": {
-    "message": "1 minute",
-    "description": "Dropdown choice."
+    "message": "1分"
   },
   "5minutes": {
-    "message": "5 minutes",
-    "description": "Dropdown choice."
+    "message": "5分"
   },
   "10minutes": {
-    "message": "10 minutes",
-    "description": "Dropdown choice."
+    "message": "10分"
   },
   "15minutes": {
-    "message": "15 minutes",
-    "description": "Dropdown choice."
+    "message": "15分"
   },
   "mediaPlaybackTracking": {
-    "message": "Media Playback Tracking",
-    "description": "Settings config option."
+    "message": "メディア再生トラッキング"
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "Keep tracking time if audio or video is playing (even when idle).",
-    "description": "Settings config option description."
+    "message": "音声や動画が再生中の場合は（アイドル時でも）追跡を継続します。"
   },
   "ignoreQuickVisits": {
     "message": "Ignore Quick Visits",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "Ignore visits shorter than this duration to keep data clean.",
-    "description": "Settings config option description."
+    "message": "データをクリーンに保つため、この期間より短い訪問を無視します。"
   },
   "offTrackEverything": {
-    "message": "Off (track everything)",
-    "description": "Dropdown choice."
+    "message": "オフ (すべて追跡)"
   },
   "3seconds": {
     "message": "3 seconds",
@@ -1125,36 +1106,28 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "Data History Retention",
-    "description": "Settings config option."
+    "message": "データ履歴の保持期間"
   },
   "dataHistoryRetentionDesc": {
-    "message": "Automatically delete detailed tracking logs older than this duration to save space.",
-    "description": "Settings config option description."
+    "message": "容量を節約するため、この期間より古い詳細な追跡ログを自動削除します。"
   },
   "after30Days": {
-    "message": "After 30 days",
-    "description": "Dropdown choice."
+    "message": "30日後"
   },
   "after90Days": {
-    "message": "After 90 days",
-    "description": "Dropdown choice."
+    "message": "90日後"
   },
   "after180Days": {
-    "message": "After 180 days",
-    "description": "Dropdown choice."
+    "message": "180日後"
   },
   "after1Year": {
-    "message": "After 1 year",
-    "description": "Dropdown choice."
+    "message": "1年後"
   },
   "after2Years": {
-    "message": "After 2 years",
-    "description": "Dropdown choice."
+    "message": "2年後"
   },
   "after3Years": {
-    "message": "After 3 years",
-    "description": "Dropdown choice."
+    "message": "3年後"
   },
   "foreverKeepAll": {
     "message": "Forever (keep all)",
@@ -1172,16 +1145,13 @@
     "message": "外観"
   },
   "themeDark": {
-    "message": "Dark",
-    "description": "Dropdown choice."
+    "message": "ダーク"
   },
   "themeLight": {
-    "message": "Light",
-    "description": "Dropdown choice."
+    "message": "ライト"
   },
   "themeCinematic": {
-    "message": "Cinematic",
-    "description": "Dropdown choice."
+    "message": "シネマティック"
   },
   "languageOverride": {
     "message": "言語 / Idioma",
@@ -1394,8 +1364,7 @@
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "Access Control & Safety",
-    "description": "Settings card label."
+    "message": "アクセス制御とセキュリティ"
   },
   "pinProtectionStatus": {
     "message": "PIN保護ステータス:"
@@ -1423,227 +1392,173 @@
     "message": "PIN削除"
   },
   "setPinToEnableLocks": {
-    "message": "Set a PIN to enable these locks",
-    "description": "Helper block message."
+    "message": "これらのロックを有効にするにはPINを設定してください"
   },
   "whatToLock": {
-    "message": "What to Lock",
-    "description": "Settings block header."
+    "message": "ロック対象"
   },
   "lockTimerStop": {
-    "message": "Lock Timer Stop Button",
-    "description": "Settings config option."
+    "message": "タイマー停止ボタンをロック"
   },
   "lockTimerStopDesc": {
-    "message": "Require PIN to stop or pause an active focus session.",
-    "description": "Settings config option description."
+    "message": "アクティブな集中セッションの停止または一時停止にPINを要求します。"
   },
   "lockEditingRules": {
-    "message": "Lock Editing/Deleting Rules",
-    "description": "Settings config option."
+    "message": "ルールの編集・削除をロック"
   },
   "lockEditingRulesDesc": {
-    "message": "Require PIN to modify, delete, or clear website blocking lists and rules.",
-    "description": "Settings config option description."
+    "message": "ウェブサイトのブロックリストやルールの変更・削除・消去にPINを要求します。"
   },
   "lockFreeTime": {
-    "message": "Lock Free-time Hours",
-    "description": "Settings config option."
+    "message": "自由時間のロック"
   },
   "lockFreeTimeDesc": {
-    "message": "Require PIN to add, edit, or remove scheduled free-time slots.",
-    "description": "Settings config option description."
+    "message": "スケジュールされた自由時間枠の追加・編集・削除にPINを要求します。"
   },
   "lockFocusPresets": {
-    "message": "Lock Editing Focus Presets",
-    "description": "Settings config option."
+    "message": "集中プリセットの編集をロック"
   },
   "lockFocusPresetsDesc": {
-    "message": "Require PIN to modify or delete customized focus presets.",
-    "description": "Settings config option description."
+    "message": "カスタマイズされた集中プリセットの変更・削除にPINを要求します。"
   },
   "lockFocusSchedules": {
-    "message": "Lock Editing/Deleting Focus Schedules",
-    "description": "Settings config option."
+    "message": "集中スケジュールの編集・削除をロック"
   },
   "lockFocusSchedulesDesc": {
-    "message": "Require PIN to change or remove focus schedule configurations.",
-    "description": "Settings config option description."
+    "message": "集中スケジュール設定の変更・削除にPINを要求します。"
   },
   "lockAdvancedTweaks": {
-    "message": "Lock Advanced Site Tweaks",
-    "description": "Settings config option."
+    "message": "高度なサイト調整をロック"
   },
   "lockAdvancedTweaksDesc": {
-    "message": "Require PIN to access custom styles, script injections, or advanced tweaks.",
-    "description": "Settings config option description."
+    "message": "カスタムスタイルや高度な調整へのアクセスにPINを要求します。"
   },
   "lockPrivacyMode": {
-    "message": "Lock Privacy Mode (Pause Tracking)",
-    "description": "Settings config option."
+    "message": "プライバシーモードをロック (追跡停止)"
   },
   "lockPrivacyModeDesc": {
-    "message": "Require PIN to pause tracking or enable privacy mode.",
-    "description": "Settings config option description."
+    "message": "追跡の一時停止やプライバシーモードの有効化にPINを要求します。"
   },
   "lockAdjustTime": {
-    "message": "Lock Adjust Time (Daily Breakdown)",
-    "description": "Settings config option."
+    "message": "時間調整をロック (日別内訳)"
   },
   "lockAdjustTimeDesc": {
-    "message": "Require PIN to manually adjust or scrub tracked time in daily breakdown.",
-    "description": "Settings config option description."
+    "message": "日別内訳での記録時間の手動調整・編集にPINを要求します。"
   },
   "lockDangerZone": {
-    "message": "Lock Danger Zone (Clear Data)",
-    "description": "Settings config option."
+    "message": "危険ゾーンをロック (データ消去)"
   },
   "lockDangerZoneDesc": {
-    "message": "Require PIN to reset statistics, rules, or custom categories.",
-    "description": "Settings config option description."
+    "message": "統計情報・ルール・カスタムカテゴリのリセットにPINを要求します。"
   },
   "dangerZone": {
-    "message": "Danger Zone",
-    "description": "Settings card label."
+    "message": "危険ゾーン"
   },
   "resetAllStats": {
-    "message": "Reset all statistics",
-    "description": "Settings config option."
+    "message": "全統計情報をリセット"
   },
   "resetAllStatsDesc": {
-    "message": "Wipe all recorded website tracking history and analytics. This cannot be undone.",
-    "description": "Settings config option description."
+    "message": "記録された全ウェブサイト追跡履歴と分析データを消去します。この操作は元に戻せません。"
   },
   "btnResetStats": {
-    "message": "Reset Stats",
-    "description": "Action button."
+    "message": "統計をリセット"
   },
   "clearAllRules": {
-    "message": "Clear all block & allow rules",
-    "description": "Settings config option."
+    "message": "全ブロック・許可ルールを消去"
   },
   "clearAllRulesDesc": {
-    "message": "Remove all custom website blocking lists, schedules, limits, and allowlists.",
-    "description": "Settings config option description."
+    "message": "全カスタムブロックリスト、スケジュール、制限、許可リストを削除します。"
   },
   "btnClearRules": {
-    "message": "Clear Rules",
-    "description": "Action button."
+    "message": "ルールを消去"
   },
   "clearAllCategories": {
-    "message": "Clear all manual categories",
-    "description": "Settings config option."
+    "message": "全手動カテゴリを消去"
   },
   "clearAllCategoriesDesc": {
-    "message": "Reset all custom website category tags back to default.",
-    "description": "Settings config option description."
+    "message": "全カスタムウェブサイトカテゴリタグをデフォルトに戻します。"
   },
   "btnClearCategories": {
-    "message": "Clear Categories",
-    "description": "Action button."
+    "message": "カテゴリを消去"
   },
   "supportFeedbackHeader": {
-    "message": "Support & Feedback",
-    "description": "Settings card label."
+    "message": "サポートとフィードバック"
   },
   "submitFeedbackHeader": {
-    "message": "Submit Feature Requests & Bug Reports",
-    "description": "Settings config option."
+    "message": "機能リクエストとバグ報告の送信"
   },
   "submitFeedbackDesc": {
-    "message": "Help us improve Flow! Share your ideas, suggestions, or report any bugs.",
-    "description": "Settings config option description."
+    "message": "Flowの改善にご協力ください！アイデアや提案の共有、バグ報告をお願いします。"
   },
   "submitFeedbackBtn": {
-    "message": "Submit Feedback",
-    "description": "Action button."
+    "message": "フィードバックを送信"
   },
   "helpTranslateBtn": {
-    "message": "Help Translate",
-    "description": "Action button."
+    "message": "翻訳に協力"
   },
   "websiteBtn": {
-    "message": "Website",
-    "description": "Action button."
+    "message": "ウェブサイト"
   },
   "rateUsBtn": {
-    "message": "Rate 5 Stars",
-    "description": "Action button."
+    "message": "5つ星評価"
   },
   "changelogBtn": {
-    "message": "Changelog",
-    "description": "Action button."
+    "message": "変更履歴"
   },
   "backupRestoreHeader": {
-    "message": "Backup & Restore",
-    "description": "Settings card label."
+    "message": "バックアップと復元"
   },
   "exportDataJson": {
-    "message": "Export all data as JSON",
-    "description": "Settings config option."
+    "message": "全データをJSON形式でエクスポート"
   },
   "exportDataJsonDesc": {
-    "message": "Stats, rules, categories, settings.",
-    "description": "Settings config option description."
+    "message": "統計情報、ルール、カテゴリ、設定。"
   },
   "downloadJson": {
     "message": "JSONをダウンロード"
   },
   "restoreFromJson": {
-    "message": "Restore from JSON",
-    "description": "Settings config option."
+    "message": "JSONから復元"
   },
   "restoreFromJsonDesc": {
-    "message": "Replaces ALL current data. Confirm before restoring.",
-    "description": "Settings config option description."
+    "message": "現在の全データを置き換えます。復元前に確認してください。"
   },
   "chooseFile": {
-    "message": "Choose File…",
-    "description": "Input file label."
+    "message": "ファイルを選択…"
   },
   "localStorageUsage": {
-    "message": "Extension Storage Usage",
-    "description": "Settings config option."
+    "message": "ローカルストレージ使用量"
   },
   "localStorageUsageDesc": {
-    "message": "Space used by settings, rules, and history database.",
-    "description": "Settings config option description."
+    "message": "設定、ルール、履歴データベースが使用している容量。"
   },
   "migrationImportsHeader": {
-    "message": "Migration & Imports",
-    "description": "Settings card label."
+    "message": "移行とインポート"
   },
   "importFromWatt": {
-    "message": "Import from Web Activity Time Tracker",
-    "description": "Settings config option."
+    "message": "Web Activity Time Trackerからインポート"
   },
   "importFromWattDesc": {
     "message": "Upload your exported CSV file to merge your past tracking history.",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "Import from Time Tracker - Web Habit Builder",
-    "description": "Settings config option."
+    "message": "Time Tracker - Web Habit Builderからインポート"
   },
   "importFromTtDesc": {
-    "message": "Upload your exported JSON file to merge your past tracking history.",
-    "description": "Settings config option description."
+    "message": "エクスポートしたJSONファイルをアップロードして過去の履歴を統合します。"
   },
   "importFromWt": {
-    "message": "Import from Webtime Tracker",
-    "description": "Settings config option."
+    "message": "Webtime Trackerからインポート"
   },
   "importFromWtDesc": {
-    "message": "Upload your exported CSV file to merge your past tracking history.",
-    "description": "Settings config option description."
+    "message": "エクスポートしたCSVファイルをアップロードして過去の履歴を統合します。"
   },
   "backupHistory": {
-    "message": "Backup History",
-    "description": "Settings block title."
+    "message": "バックアップ履歴"
   },
   "btnCreateLocalBackup": {
-    "message": "+ Create Local Backup",
-    "description": "Action button."
+    "message": "+ ローカルバックアップを作成"
   },
   "editFreeTime": {
     "message": "Edit Free-time",
@@ -2372,24 +2287,20 @@
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "Track local HTML or PDF files opened in your browser.",
-    "description": "Track local files option description"
+    "message": "ブラウザで開いたローカルのHTMLまたはPDFファイルを追跡します。"
   },
   "blockingBehavior": {
-    "message": "Blocking Behavior",
-    "description": "Blocking behavior card header"
+    "message": "ブロック動作"
   },
   "showFunnyBlockedPage": {
-    "message": "Show funny blocked page",
-    "description": "Show funny blocked page option"
+    "message": "面白いブロックページを表示"
   },
   "timeLimitWarning": {
     "message": "Time limit warning before block",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "Show a warning this many seconds before a site is blocked.",
-    "description": "Warning duration description"
+    "message": "サイトがブロックされる指定秒数前に警告を表示します。"
   },
   "sec": {
     "message": "sec",
@@ -2400,64 +2311,51 @@
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "Set 0 to disable.",
-    "description": "Tab limiter description"
+    "message": "0に設定すると無効になります。"
   },
   "tabsMax": {
     "message": "tabs max",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "Tracking Exceptions",
-    "description": "Tracking exceptions card header"
+    "message": "トラッキングの例外"
   },
   "alwaysTrackEvenIdle": {
-    "message": "Always track (even when idle)",
-    "description": "Always track option"
+    "message": "常に追跡 (アイドル時も含む)"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "Sites that always track time even when you walk away (e.g., pw.live)",
-    "description": "Always track description"
+    "message": "席を外しても常に時間を追跡するサイト (例: pw.live)"
   },
   "btnAddException": {
-    "message": "+ Add Exception",
-    "description": "Add exception button"
+    "message": "+ 例外を追加"
   },
   "badgeDisplay": {
-    "message": "Badge Display",
-    "description": "Badge display card header"
+    "message": "バッジ表示"
   },
   "showTimeSpentBadge": {
-    "message": "Show time spent on extension badge",
-    "description": "Show time spent option"
+    "message": "拡張機能バッジに経過時間を表示"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "Displays minutes spent on the current site.",
-    "description": "Show time spent description"
+    "message": "現在のサイトで費やした時間を分単位で表示します。"
   },
   "showIdlWhenIdle": {
-    "message": "Show \"idl\" when idle / not tracking",
-    "description": "Show idle status option"
+    "message": "アイドル/非追跡時に「idl」を表示"
   },
   "showIdlWhenIdleDesc": {
-    "message": "Displays \"idl\" on the extension badge when time tracking is paused or inactive.",
-    "description": "Show idle status description"
+    "message": "時間追跡が停止中または非アクティブな場合にバッジに「idl」と表示します。"
   },
   "dataRollover": {
     "message": "Data & Rollover",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "Night Owl Day Rollover",
-    "description": "Night owl rollover option"
+    "message": "ナイトフクロウの日更新時間"
   },
   "nightOwlRolloverDesc": {
-    "message": "Define when your new tracking day starts. Useful if you work late.",
-    "description": "Night owl description"
+    "message": "新しい追跡日の開始時間を設定します。夜遅くまで仕事をする場合に便利です。"
   },
   "midnight": {
-    "message": "Midnight (12:00 AM)",
-    "description": "Midnight option"
+    "message": "深夜 (00:00)"
   },
   "lastXDays": {
     "message": "過去 $count$ 日間",
@@ -3016,5 +2914,197 @@
   },
   "settingsTitle": {
     "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "セキュリティとシステム"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "トラッキングとブロック"
+  },
+  "lockStopTitle": {
+    "message": "タイマー停止ボタンをロック"
+  },
+  "lockStopDesc": {
+    "message": "アクティブな集中セッションの停止または一時停止にPINを要求します。"
+  },
+  "lockRulesTitle": {
+    "message": "ルールの編集・削除をロック"
+  },
+  "lockRulesDesc": {
+    "message": "ウェブサイトのブロックリストやルールの変更・削除・消去にPINを要求します。"
+  },
+  "lockFreetimeTitle": {
+    "message": "自由時間のロック"
+  },
+  "lockFreetimeDesc": {
+    "message": "スケジュールされた自由時間枠の追加・編集・削除にPINを要求します。"
+  },
+  "lockFocusPresetsTitle": {
+    "message": "集中プリセットの編集をロック"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "集中スケジュールの編集・削除をロック"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "集中スケジュール設定の変更・削除にPINを要求します。"
+  },
+  "lockTweaksTitle": {
+    "message": "高度なサイト調整をロック"
+  },
+  "lockTweaksDesc": {
+    "message": "カスタムスタイルや高度な調整へのアクセスにPINを要求します。"
+  },
+  "lockPrivacyTitle": {
+    "message": "プライバシーモードをロック (追跡停止)"
+  },
+  "lockPrivacyDesc": {
+    "message": "追跡の一時停止やプライバシーモードの有効化にPINを要求します。"
+  },
+  "lockAdjustTimeTitle": {
+    "message": "時間調整をロック (日別内訳)"
+  },
+  "lockDangerTitle": {
+    "message": "危険ゾーンをロック (データ消去)"
+  },
+  "lockDangerDesc": {
+    "message": "統計情報・ルール・カスタムカテゴリのリセットにPINを要求します。"
+  },
+  "extStorageUsage": {
+    "message": "拡張機能のストレージ使用量"
+  },
+  "extStorageDesc": {
+    "message": "設定、ルール、履歴データベースが使用している容量。"
+  },
+  "migrationAndImports": {
+    "message": "移行とインポート"
+  },
+  "importWebActivityTitle": {
+    "message": "Web Activity Time Trackerからインポート"
+  },
+  "importWebActivityDesc": {
+    "message": "エクスポートしたCSVファイルをアップロードして過去の履歴を統合します。"
+  },
+  "importHabitBuilderTitle": {
+    "message": "Time Tracker - Web Habit Builderからインポート"
+  },
+  "importHabitBuilderDesc": {
+    "message": "エクスポートしたJSONファイルをアップロードして過去の履歴を統合します。"
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "Webtime Trackerからインポート"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "エクスポートしたCSVファイルをアップロードして過去の履歴を統合します。"
+  },
+  "createLocalBackupBtn": {
+    "message": "+ ローカルバックアップを作成"
+  },
+  "resetStatsTitle": {
+    "message": "全統計情報をリセット"
+  },
+  "resetStatsDesc": {
+    "message": "記録された全ウェブサイト追跡履歴と分析データを消去します。この操作は元に戻せません。"
+  },
+  "resetStatsBtn": {
+    "message": "統計をリセット"
+  },
+  "clearRulesTitle": {
+    "message": "全ブロック・許可ルールを消去"
+  },
+  "clearRulesDesc": {
+    "message": "全カスタムブロックリスト、スケジュール、制限、許可リストを削除します。"
+  },
+  "clearRulesBtn": {
+    "message": "ルールを消去"
+  },
+  "clearCategoriesTitle": {
+    "message": "全手動カテゴリを消去"
+  },
+  "clearCategoriesDesc": {
+    "message": "全カスタムウェブサイトカテゴリタグをデフォルトに戻します。"
+  },
+  "clearCategoriesBtn": {
+    "message": "カテゴリを消去"
+  },
+  "idleTimeoutTitle": {
+    "message": "アイドルタイムアウト"
+  },
+  "after30Secs": {
+    "message": "30秒後"
+  },
+  "after2Mins": {
+    "message": "2分後"
+  },
+  "after5Mins": {
+    "message": "5分後"
+  },
+  "sleepGapTitle": {
+    "message": "コンピュータのスリープ間隔"
+  },
+  "sleepGapDesc": {
+    "message": "コンピュータをスリープ状態にした場合にアクティブ時間の計算を上限設定します。"
+  },
+  "never": {
+    "message": "なし"
+  },
+  "mediaTrackingTitle": {
+    "message": "メディア再生トラッキング"
+  },
+  "mediaTrackingDesc": {
+    "message": "音声や動画が再生中の場合は（アイドル時でも）追跡を継続します。"
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "短い訪問を無視"
+  },
+  "trackLocalFilesTitle": {
+    "message": "ローカルファイルを追跡"
+  },
+  "alwaysTrackTitle": {
+    "message": "常に追跡 (アイドル時も含む)"
+  },
+  "alwaysTrackDesc": {
+    "message": "席を外しても常に時間を追跡するサイト (例: pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ 例外を追加"
+  },
+  "noExceptionsAdded": {
+    "message": "例外は追加されていません。"
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "拡張機能バッジに経過時間を表示"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "現在のサイトで費やした時間を分単位で表示します。"
+  },
+  "showIdlTitle": {
+    "message": "アイドル/非追跡時に「idl」を表示"
+  },
+  "showIdlDesc": {
+    "message": "時間追跡が停止中または非アクティブな場合にバッジに「idl」と表示します。"
+  },
+  "timeLimitWarningTitle": {
+    "message": "ブロック前の時間制限警告"
+  },
+  "tabLimiterTitle": {
+    "message": "ドメインごとのタブ数制限"
+  },
+  "dataAndRollover": {
+    "message": "データと日更新"
+  },
+  "nightOwlTitle": {
+    "message": "ナイトフクロウの日更新時間"
+  },
+  "nightOwlDesc": {
+    "message": "新しい追跡日の開始時間を設定します。夜遅くまで仕事をする場合に便利です。"
+  },
+  "midnight12am": {
+    "message": "深夜 (00:00)"
+  },
+  "dataRetentionTitle": {
+    "message": "データ履歴の保持期間"
+  },
+  "dataRetentionDesc": {
+    "message": "容量を節約するため、この期間より古い詳細な追跡ログを自動削除します。"
   }
 }

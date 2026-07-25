@@ -1033,84 +1033,65 @@
     "message": "Save All Settings"
   },
   "securitySystem": {
-    "message": "Security & System",
-    "description": "Settings sub-tab label."
+    "message": "Security & System"
   },
   "trackingBlocking": {
-    "message": "Tracking & Blocking",
-    "description": "Settings sub-tab label."
+    "message": "Tracking & Blocking"
   },
   "trackingEngine": {
-    "message": "Tracking Engine",
-    "description": "Settings card label."
+    "message": "TRACKING ENGINE"
   },
   "idleTimeout": {
-    "message": "Idle Timeout",
-    "description": "Settings config option."
+    "message": "Idle Timeout"
   },
   "idleTimeoutDesc": {
-    "message": "Stop tracking time if you stop moving your mouse.",
-    "description": "Settings config option description."
+    "message": "Stop tracking time if you stop moving your mouse."
   },
   "after30Sec": {
-    "message": "After 30 seconds",
-    "description": "Dropdown choice."
+    "message": "After 30 seconds"
   },
   "after1Min": {
-    "message": "After 1 minute",
-    "description": "Dropdown choice."
+    "message": "After 1 minute"
   },
   "after2Min": {
-    "message": "After 2 minutes",
-    "description": "Dropdown choice."
+    "message": "After 2 minutes"
   },
   "after5Min": {
-    "message": "After 5 minutes",
-    "description": "Dropdown choice."
+    "message": "After 5 minutes"
   },
   "computerSleepGap": {
-    "message": "Computer Sleep Gap",
-    "description": "Settings config option."
+    "message": "Computer Sleep Gap"
   },
   "computerSleepGapDesc": {
-    "message": "Capping active time calculation if you put the computer to sleep.",
-    "description": "Settings config option description."
+    "message": "Capping active time calculation if you put the computer to sleep."
   },
   "1minute": {
-    "message": "1 minute",
-    "description": "Dropdown choice."
+    "message": "1 minute"
   },
   "5minutes": {
-    "message": "5 minutes",
-    "description": "Dropdown choice."
+    "message": "5 minutes"
   },
   "10minutes": {
-    "message": "10 minutes",
-    "description": "Dropdown choice."
+    "message": "10 minutes"
   },
   "15minutes": {
-    "message": "15 minutes",
-    "description": "Dropdown choice."
+    "message": "15 minutes"
   },
   "mediaPlaybackTracking": {
-    "message": "Media Playback Tracking",
-    "description": "Settings config option."
+    "message": "Media Playback Tracking"
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "Keep tracking time if audio or video is playing (even when idle).",
-    "description": "Settings config option description."
+    "message": "Keep tracking time if audio or video is playing (even when idle)."
   },
   "ignoreQuickVisits": {
     "message": "Ignore Quick Visits",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "Ignore visits shorter than this duration to keep data clean.",
-    "description": "Settings config option description."
+    "message": "Ignore visits shorter than this duration to keep data clean."
   },
   "offTrackEverything": {
-    "message": "Off (track everything)",
-    "description": "Dropdown choice."
+    "message": "Off (track everything)"
   },
   "3seconds": {
     "message": "3 seconds",
@@ -1125,36 +1106,28 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "Data History Retention",
-    "description": "Settings config option."
+    "message": "Data History Retention"
   },
   "dataHistoryRetentionDesc": {
-    "message": "Automatically delete detailed tracking logs older than this duration to save space.",
-    "description": "Settings config option description."
+    "message": "Automatically delete detailed tracking logs older than this duration to save space."
   },
   "after30Days": {
-    "message": "After 30 days",
-    "description": "Dropdown choice."
+    "message": "After 30 days"
   },
   "after90Days": {
-    "message": "After 90 days",
-    "description": "Dropdown choice."
+    "message": "After 90 days"
   },
   "after180Days": {
-    "message": "After 180 days",
-    "description": "Dropdown choice."
+    "message": "After 180 days"
   },
   "after1Year": {
-    "message": "After 1 year",
-    "description": "Dropdown choice."
+    "message": "After 1 year"
   },
   "after2Years": {
-    "message": "After 2 years",
-    "description": "Dropdown choice."
+    "message": "After 2 years"
   },
   "after3Years": {
-    "message": "After 3 years",
-    "description": "Dropdown choice."
+    "message": "After 3 years"
   },
   "foreverKeepAll": {
     "message": "Forever (keep all)",
@@ -1172,16 +1145,13 @@
     "message": "APPEARANCE"
   },
   "themeDark": {
-    "message": "Dark",
-    "description": "Dropdown choice."
+    "message": "Dark"
   },
   "themeLight": {
-    "message": "Light",
-    "description": "Dropdown choice."
+    "message": "Light"
   },
   "themeCinematic": {
-    "message": "Cinematic",
-    "description": "Dropdown choice."
+    "message": "Cinematic"
   },
   "languageOverride": {
     "message": "Language / Idioma",
@@ -1394,8 +1364,7 @@
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "Access Control & Safety",
-    "description": "Settings card label."
+    "message": "Access Control & Safety"
   },
   "pinProtectionStatus": {
     "message": "PIN Protection Status:"
@@ -1423,227 +1392,173 @@
     "message": "Remove PIN"
   },
   "setPinToEnableLocks": {
-    "message": "Set a PIN to enable these locks",
-    "description": "Helper block message."
+    "message": "Set a PIN to enable these locks"
   },
   "whatToLock": {
-    "message": "What to Lock",
-    "description": "Settings block header."
+    "message": "What to Lock"
   },
   "lockTimerStop": {
-    "message": "Lock Timer Stop Button",
-    "description": "Settings config option."
+    "message": "Lock Timer Stop Button"
   },
   "lockTimerStopDesc": {
-    "message": "Require PIN to stop or pause an active focus session.",
-    "description": "Settings config option description."
+    "message": "Require PIN to stop or pause an active focus session."
   },
   "lockEditingRules": {
-    "message": "Lock Editing/Deleting Rules",
-    "description": "Settings config option."
+    "message": "Lock Editing/Deleting Rules"
   },
   "lockEditingRulesDesc": {
-    "message": "Require PIN to modify, delete, or clear website blocking lists and rules.",
-    "description": "Settings config option description."
+    "message": "Require PIN to modify, delete, or clear website blocking lists and rules."
   },
   "lockFreeTime": {
-    "message": "Lock Free-time Hours",
-    "description": "Settings config option."
+    "message": "Lock Free-time Hours"
   },
   "lockFreeTimeDesc": {
-    "message": "Require PIN to add, edit, or remove scheduled free-time slots.",
-    "description": "Settings config option description."
+    "message": "Require PIN to add, edit, or remove scheduled free-time slots."
   },
   "lockFocusPresets": {
-    "message": "Lock Editing Focus Presets",
-    "description": "Settings config option."
+    "message": "Lock Editing Focus Presets"
   },
   "lockFocusPresetsDesc": {
-    "message": "Require PIN to modify or delete customized focus presets.",
-    "description": "Settings config option description."
+    "message": "Require PIN to modify or delete customized focus presets."
   },
   "lockFocusSchedules": {
-    "message": "Lock Editing/Deleting Focus Schedules",
-    "description": "Settings config option."
+    "message": "Lock Editing/Deleting Focus Schedules"
   },
   "lockFocusSchedulesDesc": {
-    "message": "Require PIN to change or remove focus schedule configurations.",
-    "description": "Settings config option description."
+    "message": "Require PIN to change or remove focus schedule configurations."
   },
   "lockAdvancedTweaks": {
-    "message": "Lock Advanced Site Tweaks",
-    "description": "Settings config option."
+    "message": "Lock Advanced Site Tweaks"
   },
   "lockAdvancedTweaksDesc": {
-    "message": "Require PIN to access custom styles, script injections, or advanced tweaks.",
-    "description": "Settings config option description."
+    "message": "Require PIN to access custom styles, script injections, or advanced tweaks."
   },
   "lockPrivacyMode": {
-    "message": "Lock Privacy Mode (Pause Tracking)",
-    "description": "Settings config option."
+    "message": "Lock Privacy Mode (Pause Tracking)"
   },
   "lockPrivacyModeDesc": {
-    "message": "Require PIN to pause tracking or enable privacy mode.",
-    "description": "Settings config option description."
+    "message": "Require PIN to pause tracking or enable privacy mode."
   },
   "lockAdjustTime": {
-    "message": "Lock Adjust Time (Daily Breakdown)",
-    "description": "Settings config option."
+    "message": "Lock Adjust Time (Daily Breakdown)"
   },
   "lockAdjustTimeDesc": {
-    "message": "Require PIN to manually adjust or scrub tracked time in daily breakdown.",
-    "description": "Settings config option description."
+    "message": "Require PIN to manually adjust or scrub tracked time in daily breakdown."
   },
   "lockDangerZone": {
-    "message": "Lock Danger Zone (Clear Data)",
-    "description": "Settings config option."
+    "message": "Lock Danger Zone (Clear Data)"
   },
   "lockDangerZoneDesc": {
-    "message": "Require PIN to reset statistics, rules, or custom categories.",
-    "description": "Settings config option description."
+    "message": "Require PIN to reset statistics, rules, or custom categories."
   },
   "dangerZone": {
-    "message": "Danger Zone",
-    "description": "Settings card label."
+    "message": "Danger Zone"
   },
   "resetAllStats": {
-    "message": "Reset all statistics",
-    "description": "Settings config option."
+    "message": "Reset all statistics"
   },
   "resetAllStatsDesc": {
-    "message": "Wipe all recorded website tracking history and analytics. This cannot be undone.",
-    "description": "Settings config option description."
+    "message": "Wipe all recorded website tracking history and analytics. This cannot be undone."
   },
   "btnResetStats": {
-    "message": "Reset Stats",
-    "description": "Action button."
+    "message": "Reset Stats"
   },
   "clearAllRules": {
-    "message": "Clear all block & allow rules",
-    "description": "Settings config option."
+    "message": "Clear all block & allow rules"
   },
   "clearAllRulesDesc": {
-    "message": "Remove all custom website blocking lists, schedules, limits, and allowlists.",
-    "description": "Settings config option description."
+    "message": "Remove all custom website blocking lists, schedules, limits, and allowlists."
   },
   "btnClearRules": {
-    "message": "Clear Rules",
-    "description": "Action button."
+    "message": "Clear Rules"
   },
   "clearAllCategories": {
-    "message": "Clear all manual categories",
-    "description": "Settings config option."
+    "message": "Clear all manual categories"
   },
   "clearAllCategoriesDesc": {
-    "message": "Reset all custom website category tags back to default.",
-    "description": "Settings config option description."
+    "message": "Reset all custom website category tags back to default."
   },
   "btnClearCategories": {
-    "message": "Clear Categories",
-    "description": "Action button."
+    "message": "Clear Categories"
   },
   "supportFeedbackHeader": {
-    "message": "Support & Feedback",
-    "description": "Settings card label."
+    "message": "Support & Feedback"
   },
   "submitFeedbackHeader": {
-    "message": "Submit Feature Requests & Bug Reports",
-    "description": "Settings config option."
+    "message": "Submit Feature Requests & Bug Reports"
   },
   "submitFeedbackDesc": {
-    "message": "Help us improve Flow! Share your ideas, suggestions, or report any bugs.",
-    "description": "Settings config option description."
+    "message": "Help us improve Flow! Share your ideas, suggestions, or report any bugs."
   },
   "submitFeedbackBtn": {
-    "message": "Submit Feedback",
-    "description": "Action button."
+    "message": "Submit Feedback"
   },
   "helpTranslateBtn": {
-    "message": "Help Translate",
-    "description": "Action button."
+    "message": "Help Translate"
   },
   "websiteBtn": {
-    "message": "Website",
-    "description": "Action button."
+    "message": "Website"
   },
   "rateUsBtn": {
-    "message": "Rate 5 Stars",
-    "description": "Action button."
+    "message": "Rate 5 Stars"
   },
   "changelogBtn": {
-    "message": "Changelog",
-    "description": "Action button."
+    "message": "Changelog"
   },
   "backupRestoreHeader": {
-    "message": "Backup & Restore",
-    "description": "Settings card label."
+    "message": "Backup & Restore"
   },
   "exportDataJson": {
-    "message": "Export all data as JSON",
-    "description": "Settings config option."
+    "message": "Export all data as JSON"
   },
   "exportDataJsonDesc": {
-    "message": "Stats, rules, categories, settings.",
-    "description": "Settings config option description."
+    "message": "Stats, rules, categories, settings."
   },
   "downloadJson": {
     "message": "Download JSON"
   },
   "restoreFromJson": {
-    "message": "Restore from JSON",
-    "description": "Settings config option."
+    "message": "Restore from JSON"
   },
   "restoreFromJsonDesc": {
-    "message": "Replaces ALL current data. Confirm before restoring.",
-    "description": "Settings config option description."
+    "message": "Replaces ALL current data. Confirm before restoring."
   },
   "chooseFile": {
-    "message": "Choose File…",
-    "description": "Input file label."
+    "message": "Choose File…"
   },
   "localStorageUsage": {
-    "message": "Extension Storage Usage",
-    "description": "Settings config option."
+    "message": "Local Storage Usage"
   },
   "localStorageUsageDesc": {
-    "message": "Space used by settings, rules, and history database.",
-    "description": "Settings config option description."
+    "message": "Space used by settings, rules, and history database."
   },
   "migrationImportsHeader": {
-    "message": "Migration & Imports",
-    "description": "Settings card label."
+    "message": "Migration & Imports"
   },
   "importFromWatt": {
-    "message": "Import from Web Activity Time Tracker",
-    "description": "Settings config option."
+    "message": "Import from Web Activity Time Tracker"
   },
   "importFromWattDesc": {
     "message": "Upload your exported CSV file to merge your past tracking history.",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "Import from Time Tracker - Web Habit Builder",
-    "description": "Settings config option."
+    "message": "Import from Time Tracker - Web Habit Builder"
   },
   "importFromTtDesc": {
-    "message": "Upload your exported JSON file to merge your past tracking history.",
-    "description": "Settings config option description."
+    "message": "Upload your exported JSON file to merge your past tracking history."
   },
   "importFromWt": {
-    "message": "Import from Webtime Tracker",
-    "description": "Settings config option."
+    "message": "Import from Webtime Tracker"
   },
   "importFromWtDesc": {
-    "message": "Upload your exported CSV file to merge your past tracking history.",
-    "description": "Settings config option description."
+    "message": "Upload your exported CSV file to merge your past tracking history."
   },
   "backupHistory": {
-    "message": "Backup History",
-    "description": "Settings block title."
+    "message": "Backup History"
   },
   "btnCreateLocalBackup": {
-    "message": "+ Create Local Backup",
-    "description": "Action button."
+    "message": "+ Create Local Backup"
   },
   "editFreeTime": {
     "message": "Edit Free-time",
@@ -2372,24 +2287,20 @@
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "Track local HTML or PDF files opened in your browser.",
-    "description": "Track local files option description"
+    "message": "Track local HTML or PDF files opened in your browser."
   },
   "blockingBehavior": {
-    "message": "Blocking Behavior",
-    "description": "Blocking behavior card header"
+    "message": "BLOCKING BEHAVIOR"
   },
   "showFunnyBlockedPage": {
-    "message": "Show funny blocked page",
-    "description": "Show funny blocked page option"
+    "message": "Show funny blocked page"
   },
   "timeLimitWarning": {
     "message": "Time limit warning before block",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "Show a warning this many seconds before a site is blocked.",
-    "description": "Warning duration description"
+    "message": "Show a warning this many seconds before a site is blocked."
   },
   "sec": {
     "message": "sec",
@@ -2400,64 +2311,51 @@
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "Set 0 to disable.",
-    "description": "Tab limiter description"
+    "message": "Set 0 to disable."
   },
   "tabsMax": {
     "message": "tabs max",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "Tracking Exceptions",
-    "description": "Tracking exceptions card header"
+    "message": "TRACKING EXCEPTIONS"
   },
   "alwaysTrackEvenIdle": {
-    "message": "Always track (even when idle)",
-    "description": "Always track option"
+    "message": "Always track (even when idle)"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "Sites that always track time even when you walk away (e.g., pw.live)",
-    "description": "Always track description"
+    "message": "Sites that always track time even when you walk away (e.g., pw.live)"
   },
   "btnAddException": {
-    "message": "+ Add Exception",
-    "description": "Add exception button"
+    "message": "+ Add Exception"
   },
   "badgeDisplay": {
-    "message": "Badge Display",
-    "description": "Badge display card header"
+    "message": "BADGE DISPLAY"
   },
   "showTimeSpentBadge": {
-    "message": "Show time spent on extension badge",
-    "description": "Show time spent option"
+    "message": "Show time spent on extension badge"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "Displays minutes spent on the current site.",
-    "description": "Show time spent description"
+    "message": "Displays minutes spent on the current site."
   },
   "showIdlWhenIdle": {
-    "message": "Show \"idl\" when idle / not tracking",
-    "description": "Show idle status option"
+    "message": "Show \"idl\" when idle / not tracking"
   },
   "showIdlWhenIdleDesc": {
-    "message": "Displays \"idl\" on the extension badge when time tracking is paused or inactive.",
-    "description": "Show idle status description"
+    "message": "Displays \"idl\" on the extension badge when time tracking is paused or inactive."
   },
   "dataRollover": {
     "message": "Data & Rollover",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "Night Owl Day Rollover",
-    "description": "Night owl rollover option"
+    "message": "Night Owl Day Rollover"
   },
   "nightOwlRolloverDesc": {
-    "message": "Define when your new tracking day starts. Useful if you work late.",
-    "description": "Night owl description"
+    "message": "Define when your new tracking day starts. Useful if you work late."
   },
   "midnight": {
-    "message": "Midnight (12:00 AM)",
-    "description": "Midnight option"
+    "message": "Midnight (12:00 AM)"
   },
   "lastXDays": {
     "message": "Last $count$ days",
@@ -3016,5 +2914,197 @@
   },
   "settingsTitle": {
     "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "Security & System"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "Tracking & Blocking"
+  },
+  "lockStopTitle": {
+    "message": "Lock Timer Stop Button"
+  },
+  "lockStopDesc": {
+    "message": "Require PIN to stop or pause an active focus session."
+  },
+  "lockRulesTitle": {
+    "message": "Lock Editing/Deleting Rules"
+  },
+  "lockRulesDesc": {
+    "message": "Require PIN to modify, delete, or clear website blocking lists and rules."
+  },
+  "lockFreetimeTitle": {
+    "message": "Lock Free-time Hours"
+  },
+  "lockFreetimeDesc": {
+    "message": "Require PIN to add, edit, or remove scheduled free-time slots."
+  },
+  "lockFocusPresetsTitle": {
+    "message": "Lock Editing Focus Presets"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "Lock Editing/Deleting Focus Schedules"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "Require PIN to change or remove focus schedule configurations."
+  },
+  "lockTweaksTitle": {
+    "message": "Lock Advanced Site Tweaks"
+  },
+  "lockTweaksDesc": {
+    "message": "Require PIN to access custom styles, script injections, or advanced tweaks."
+  },
+  "lockPrivacyTitle": {
+    "message": "Lock Privacy Mode (Pause Tracking)"
+  },
+  "lockPrivacyDesc": {
+    "message": "Require PIN to pause tracking or enable privacy mode."
+  },
+  "lockAdjustTimeTitle": {
+    "message": "Lock Adjust Time (Daily Breakdown)"
+  },
+  "lockDangerTitle": {
+    "message": "Lock Danger Zone (Clear Data)"
+  },
+  "lockDangerDesc": {
+    "message": "Require PIN to reset statistics, rules, or custom categories."
+  },
+  "extStorageUsage": {
+    "message": "EXTENSION STORAGE USAGE"
+  },
+  "extStorageDesc": {
+    "message": "Space used by settings, rules, and history database."
+  },
+  "migrationAndImports": {
+    "message": "MIGRATION & IMPORTS"
+  },
+  "importWebActivityTitle": {
+    "message": "Import from Web Activity Time Tracker"
+  },
+  "importWebActivityDesc": {
+    "message": "Upload your exported CSV file to merge your past tracking history."
+  },
+  "importHabitBuilderTitle": {
+    "message": "Import from Time Tracker - Web Habit Builder"
+  },
+  "importHabitBuilderDesc": {
+    "message": "Upload your exported JSON file to merge your past tracking history."
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "Import from Webtime Tracker"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "Upload your exported CSV file to merge your past tracking history."
+  },
+  "createLocalBackupBtn": {
+    "message": "+ Create Local Backup"
+  },
+  "resetStatsTitle": {
+    "message": "Reset all statistics"
+  },
+  "resetStatsDesc": {
+    "message": "Wipe all recorded website tracking history and analytics. This cannot be undone."
+  },
+  "resetStatsBtn": {
+    "message": "Reset Stats"
+  },
+  "clearRulesTitle": {
+    "message": "Clear all block & allow rules"
+  },
+  "clearRulesDesc": {
+    "message": "Remove all custom website blocking lists, schedules, limits, and allowlists."
+  },
+  "clearRulesBtn": {
+    "message": "Clear Rules"
+  },
+  "clearCategoriesTitle": {
+    "message": "Clear all manual categories"
+  },
+  "clearCategoriesDesc": {
+    "message": "Reset all custom website category tags back to default."
+  },
+  "clearCategoriesBtn": {
+    "message": "Clear Categories"
+  },
+  "idleTimeoutTitle": {
+    "message": "Idle Timeout"
+  },
+  "after30Secs": {
+    "message": "After 30 seconds"
+  },
+  "after2Mins": {
+    "message": "After 2 minutes"
+  },
+  "after5Mins": {
+    "message": "After 5 minutes"
+  },
+  "sleepGapTitle": {
+    "message": "Computer Sleep Gap"
+  },
+  "sleepGapDesc": {
+    "message": "Capping active time calculation if you put the computer to sleep."
+  },
+  "never": {
+    "message": "Never"
+  },
+  "mediaTrackingTitle": {
+    "message": "Media Playback Tracking"
+  },
+  "mediaTrackingDesc": {
+    "message": "Keep tracking time if audio or video is playing (even when idle)."
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "Ignore Quick Visits"
+  },
+  "trackLocalFilesTitle": {
+    "message": "Track Local Files"
+  },
+  "alwaysTrackTitle": {
+    "message": "Always track (even when idle)"
+  },
+  "alwaysTrackDesc": {
+    "message": "Sites that always track time even when you walk away (e.g., pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ Add Exception"
+  },
+  "noExceptionsAdded": {
+    "message": "No exceptions added."
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "Show time spent on extension badge"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "Displays minutes spent on the current site."
+  },
+  "showIdlTitle": {
+    "message": "Show \"idl\" when idle / not tracking"
+  },
+  "showIdlDesc": {
+    "message": "Displays \"idl\" on the extension badge when time tracking is paused or inactive."
+  },
+  "timeLimitWarningTitle": {
+    "message": "Time limit warning before block"
+  },
+  "tabLimiterTitle": {
+    "message": "Tab limiter per domain"
+  },
+  "dataAndRollover": {
+    "message": "DATA & ROLLOVER"
+  },
+  "nightOwlTitle": {
+    "message": "Night Owl Day Rollover"
+  },
+  "nightOwlDesc": {
+    "message": "Define when your new tracking day starts. Useful if you work late."
+  },
+  "midnight12am": {
+    "message": "Midnight (12:00 AM)"
+  },
+  "dataRetentionTitle": {
+    "message": "Data History Retention"
+  },
+  "dataRetentionDesc": {
+    "message": "Automatically delete detailed tracking logs older than this duration to save space."
   }
 }

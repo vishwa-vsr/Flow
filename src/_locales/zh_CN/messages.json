@@ -1033,84 +1033,65 @@
     "message": "保存所有设置"
   },
   "securitySystem": {
-    "message": "安全与系统",
-    "description": "Settings sub-tab label."
+    "message": "安全与系统"
   },
   "trackingBlocking": {
-    "message": "跟踪和阻止",
-    "description": "Settings sub-tab label."
+    "message": "跟踪与拦截"
   },
   "trackingEngine": {
-    "message": "追踪引擎",
-    "description": "Settings card label."
+    "message": "跟踪引擎"
   },
   "idleTimeout": {
-    "message": "空闲超时",
-    "description": "Settings config option."
+    "message": "空闲超时"
   },
   "idleTimeoutDesc": {
-    "message": "如果停止移动鼠标，则停止跟踪时间。",
-    "description": "Settings config option description."
+    "message": "如果您停止移动鼠标，则停止跟踪时间。"
   },
   "after30Sec": {
-    "message": "30秒后",
-    "description": "Dropdown choice."
+    "message": "30 秒后"
   },
   "after1Min": {
-    "message": "1分钟后",
-    "description": "Dropdown choice."
+    "message": "1 分钟后"
   },
   "after2Min": {
-    "message": "2分钟后",
-    "description": "Dropdown choice."
+    "message": "2 分钟后"
   },
   "after5Min": {
-    "message": "5分钟后",
-    "description": "Dropdown choice."
+    "message": "5 分钟后"
   },
   "computerSleepGap": {
-    "message": "电脑睡眠间隙",
-    "description": "Settings config option."
+    "message": "电脑休眠间隔"
   },
   "computerSleepGapDesc": {
-    "message": "如果您让计算机进入睡眠状态，则限制活动时间计算。",
-    "description": "Settings config option description."
+    "message": "如果让电脑休眠，则限制活动时间计算。"
   },
   "1minute": {
-    "message": "1分钟",
-    "description": "Dropdown choice."
+    "message": "1 分钟"
   },
   "5minutes": {
-    "message": "5分钟",
-    "description": "Dropdown choice."
+    "message": "5 分钟"
   },
   "10minutes": {
-    "message": "10分钟",
-    "description": "Dropdown choice."
+    "message": "10 分钟"
   },
   "15minutes": {
-    "message": "15分钟",
-    "description": "Dropdown choice."
+    "message": "15 分钟"
   },
   "mediaPlaybackTracking": {
-    "message": "媒体播放跟踪",
-    "description": "Settings config option."
+    "message": "媒体播放跟踪"
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "如果音频或视频正在播放（即使在空闲时），请继续跟踪时间。",
-    "description": "Settings config option description."
+    "message": "如果正在播放音频或视频（即使空闲），则继续跟踪时间。"
   },
   "ignoreQuickVisits": {
     "message": "忽略快速访问",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "忽略短于此持续时间的访问以保持数据干净。",
-    "description": "Settings config option description."
+    "message": "忽略短于此持续时间的访问，以保持数据干净。"
   },
   "offTrackEverything": {
-    "message": "关闭（跟踪所有内容）",
-    "description": "Dropdown choice."
+    "message": "关闭 (跟踪所有)"
   },
   "3seconds": {
     "message": "3秒",
@@ -1125,36 +1106,28 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "数据历史保留",
-    "description": "Settings config option."
+    "message": "数据历史保留"
   },
   "dataHistoryRetentionDesc": {
-    "message": "自动删除早于该持续时间的详细跟踪日志以节省空间。",
-    "description": "Settings config option description."
+    "message": "自动删除长于此持续时间的详细跟踪日志以节省空间。"
   },
   "after30Days": {
-    "message": "30天后",
-    "description": "Dropdown choice."
+    "message": "30 天后"
   },
   "after90Days": {
-    "message": "90天后",
-    "description": "Dropdown choice."
+    "message": "90 天后"
   },
   "after180Days": {
-    "message": "180天后",
-    "description": "Dropdown choice."
+    "message": "180 天后"
   },
   "after1Year": {
-    "message": "1年后",
-    "description": "Dropdown choice."
+    "message": "1 年后"
   },
   "after2Years": {
-    "message": "2年后",
-    "description": "Dropdown choice."
+    "message": "2 年后"
   },
   "after3Years": {
-    "message": "3年后",
-    "description": "Dropdown choice."
+    "message": "3 年后"
   },
   "foreverKeepAll": {
     "message": "永远（保留全部）",
@@ -1172,16 +1145,13 @@
     "message": "外观"
   },
   "themeDark": {
-    "message": "黑暗的",
-    "description": "Dropdown choice."
+    "message": "深色"
   },
   "themeLight": {
-    "message": "光",
-    "description": "Dropdown choice."
+    "message": "浅色"
   },
   "themeCinematic": {
-    "message": "电影般的",
-    "description": "Dropdown choice."
+    "message": "影院"
   },
   "languageOverride": {
     "message": "语言/习语",
@@ -1394,8 +1364,7 @@
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "访问控制与安全",
-    "description": "Settings card label."
+    "message": "访问控制与安全"
   },
   "pinProtectionStatus": {
     "message": "PIN 保护状态："
@@ -1423,227 +1392,173 @@
     "message": "移除 PIN"
   },
   "setPinToEnableLocks": {
-    "message": "设置 PIN 码以启用这些锁",
-    "description": "Helper block message."
+    "message": "设置 PIN 以启用这些锁定"
   },
   "whatToLock": {
-    "message": "锁定什么",
-    "description": "Settings block header."
+    "message": "锁定内容"
   },
   "lockTimerStop": {
-    "message": "锁定定时器停止按钮",
-    "description": "Settings config option."
+    "message": "锁定定时器停止按钮"
   },
   "lockTimerStopDesc": {
-    "message": "需要 PIN 码才能停止或暂停活动的焦点会话。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能停止或暂停活动的专注会话。"
   },
   "lockEditingRules": {
-    "message": "锁定编辑/删除规则",
-    "description": "Settings config option."
+    "message": "锁定编辑/删除规则"
   },
   "lockEditingRulesDesc": {
-    "message": "需要 PIN 码才能修改、删除或清除网站阻止列表和规则。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能修改、删除或清除网站拦截列表和规则。"
   },
   "lockFreeTime": {
-    "message": "锁定空闲时间",
-    "description": "Settings config option."
+    "message": "锁定空闲时间段"
   },
   "lockFreeTimeDesc": {
-    "message": "需要 PIN 码才能添加、编辑或删除预定的空闲时间。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能添加、编辑或删除计划的空闲时间段。"
   },
   "lockFocusPresets": {
-    "message": "锁定编辑焦点预设",
-    "description": "Settings config option."
+    "message": "锁定编辑专注预设"
   },
   "lockFocusPresetsDesc": {
-    "message": "需要 PIN 码才能修改或删除自定义焦点预设。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能修改或删除自定义的专注预设。"
   },
   "lockFocusSchedules": {
-    "message": "锁定编辑/删除焦点计划",
-    "description": "Settings config option."
+    "message": "锁定编辑/删除专注计划"
   },
   "lockFocusSchedulesDesc": {
-    "message": "需要 PIN 码才能更改或删除焦点计划配置。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能更改或删除专注计划配置。"
   },
   "lockAdvancedTweaks": {
-    "message": "锁定高级站点调整",
-    "description": "Settings config option."
+    "message": "锁定高级网站微调"
   },
   "lockAdvancedTweaksDesc": {
-    "message": "需要 PIN 才能访问自定义样式、脚本注入或高级调整。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能访问自定义样式、脚本注入或高级微调。"
   },
   "lockPrivacyMode": {
-    "message": "锁定隐私模式（暂停跟踪）",
-    "description": "Settings config option."
+    "message": "锁定隐私模式 (暂停跟踪)"
   },
   "lockPrivacyModeDesc": {
-    "message": "需要 PIN 码才能暂停跟踪或启用隐私模式。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能暂停跟踪或启用隐私模式。"
   },
   "lockAdjustTime": {
-    "message": "锁定调整时间（每日细分）",
-    "description": "Settings config option."
+    "message": "锁定时间调整 (每日明细)"
   },
   "lockAdjustTimeDesc": {
-    "message": "需要 PIN 码才能手动调整或清除每日细分中的跟踪时间。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能在每日明细中手动调整或清理记录的时间。"
   },
   "lockDangerZone": {
-    "message": "锁定危险区域（清除数据）",
-    "description": "Settings config option."
+    "message": "锁定危险区域 (清除数据)"
   },
   "lockDangerZoneDesc": {
-    "message": "需要 PIN 码才能重置统计信息、规则或自定义类别。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能重置统计数据、规则或自定义分类。"
   },
   "dangerZone": {
-    "message": "危险区",
-    "description": "Settings card label."
+    "message": "危险区域"
   },
   "resetAllStats": {
-    "message": "重置所有统计数据",
-    "description": "Settings config option."
+    "message": "重置所有统计数据"
   },
   "resetAllStatsDesc": {
-    "message": "擦除所有记录的网站跟踪历史记录和分析。此操作无法撤消。",
-    "description": "Settings config option description."
+    "message": "清除所有记录的网站跟踪历史和分析数据。此操作无法撤销。"
   },
   "btnResetStats": {
-    "message": "重置统计数据",
-    "description": "Action button."
+    "message": "重置统计"
   },
   "clearAllRules": {
-    "message": "清除所有阻止和允许规则",
-    "description": "Settings config option."
+    "message": "清除所有拦截与允许规则"
   },
   "clearAllRulesDesc": {
-    "message": "删除所有自定义网站阻止列表、计划、限制和允许列表。",
-    "description": "Settings config option description."
+    "message": "移除所有自定义网站拦截列表、计划排期、限制和允许列表。"
   },
   "btnClearRules": {
-    "message": "明确的规则",
-    "description": "Action button."
+    "message": "清除规则"
   },
   "clearAllCategories": {
-    "message": "清除所有手册类别",
-    "description": "Settings config option."
+    "message": "清除所有手动分类"
   },
   "clearAllCategoriesDesc": {
-    "message": "将所有自定义网站类别标签重置回默认值。",
-    "description": "Settings config option description."
+    "message": "将所有自定义网站分类标签重置为默认值。"
   },
   "btnClearCategories": {
-    "message": "清除类别",
-    "description": "Action button."
+    "message": "清除分类"
   },
   "supportFeedbackHeader": {
-    "message": "支持与反馈",
-    "description": "Settings card label."
+    "message": "支持与反馈"
   },
   "submitFeedbackHeader": {
-    "message": "提交功能请求和错误报告",
-    "description": "Settings config option."
+    "message": "提交功能需求与缺陷报告"
   },
   "submitFeedbackDesc": {
-    "message": "帮助我们改善 Flow！分享您的想法、建议或报告任何错误。",
-    "description": "Settings config option description."
+    "message": "帮助我们改进 Flow！分享您的想法、建议或报告任何缺陷。"
   },
   "submitFeedbackBtn": {
-    "message": "提交反馈",
-    "description": "Action button."
+    "message": "提交反馈"
   },
   "helpTranslateBtn": {
-    "message": "帮助翻译",
-    "description": "Action button."
+    "message": "帮助翻译"
   },
   "websiteBtn": {
-    "message": "官方网站",
-    "description": "Action button."
+    "message": "网站"
   },
   "rateUsBtn": {
-    "message": "评分 5 星",
-    "description": "Action button."
+    "message": "评价 5 星"
   },
   "changelogBtn": {
-    "message": "更新日志",
-    "description": "Action button."
+    "message": "更新日志"
   },
   "backupRestoreHeader": {
-    "message": "备份与恢复",
-    "description": "Settings card label."
+    "message": "备份与恢复"
   },
   "exportDataJson": {
-    "message": "将所有数据导出为 JSON",
-    "description": "Settings config option."
+    "message": "将所有数据导出为 JSON"
   },
   "exportDataJsonDesc": {
-    "message": "统计数据、规则、类别、设置。",
-    "description": "Settings config option description."
+    "message": "统计、规则、分类、设置。"
   },
   "downloadJson": {
     "message": "下载 JSON"
   },
   "restoreFromJson": {
-    "message": "从 JSON 恢复",
-    "description": "Settings config option."
+    "message": "从 JSON 恢复"
   },
   "restoreFromJsonDesc": {
-    "message": "替换所有当前数据。恢复前确认。",
-    "description": "Settings config option description."
+    "message": "将替换所有当前数据。恢复前请确认。"
   },
   "chooseFile": {
-    "message": "选择文件...",
-    "description": "Input file label."
+    "message": "选择文件…"
   },
   "localStorageUsage": {
-    "message": "扩展存储使用情况",
-    "description": "Settings config option."
+    "message": "本地存储使用量"
   },
   "localStorageUsageDesc": {
-    "message": "设置、规则和历史数据库所占用的空间。",
-    "description": "Settings config option description."
+    "message": "设置、规则和历史数据库占用的空间。"
   },
   "migrationImportsHeader": {
-    "message": "移民和进口",
-    "description": "Settings card label."
+    "message": "迁移与导入"
   },
   "importFromWatt": {
-    "message": "从网络活动时间跟踪器导入",
-    "description": "Settings config option."
+    "message": "从 Web Activity Time Tracker 导入"
   },
   "importFromWattDesc": {
     "message": "上传导出的 CSV 文件以合并您过去的跟踪历史记录。",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "从时间跟踪器导入 - 网络习惯生成器",
-    "description": "Settings config option."
+    "message": "从 Time Tracker - Web Habit Builder 导入"
   },
   "importFromTtDesc": {
-    "message": "上传导出的 JSON 文件以合并您过去的跟踪历史记录。",
-    "description": "Settings config option description."
+    "message": "上传您导出的 JSON 文件以合并您过去的跟踪历史。"
   },
   "importFromWt": {
-    "message": "从网络时间跟踪器导入",
-    "description": "Settings config option."
+    "message": "从 Webtime Tracker 导入"
   },
   "importFromWtDesc": {
-    "message": "上传导出的 CSV 文件以合并您过去的跟踪历史记录。",
-    "description": "Settings config option description."
+    "message": "上传您导出的 CSV 文件以合并您过去的跟踪历史。"
   },
   "backupHistory": {
-    "message": "备份历史记录",
-    "description": "Settings block title."
+    "message": "备份历史"
   },
   "btnCreateLocalBackup": {
-    "message": "+ 创建本地备份",
-    "description": "Action button."
+    "message": "+ 创建本地备份"
   },
   "editFreeTime": {
     "message": "编辑空闲时间",
@@ -2372,24 +2287,20 @@
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "跟踪在浏览器中打开的本地 HTML 或 PDF 文件。",
-    "description": "Track local files option description"
+    "message": "跟踪在浏览器中打开的本地 HTML 或 PDF 文件。"
   },
   "blockingBehavior": {
-    "message": "阻止行为",
-    "description": "Blocking behavior card header"
+    "message": "拦截行为"
   },
   "showFunnyBlockedPage": {
-    "message": "显示有趣的被阻止页面",
-    "description": "Show funny blocked page option"
+    "message": "显示有趣的拦截页面"
   },
   "timeLimitWarning": {
     "message": "封锁前的时间限制警告",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "在网站被阻止之前的几秒内显示警告。",
-    "description": "Warning duration description"
+    "message": "在网站被拦截前指定秒数显示警告。"
   },
   "sec": {
     "message": "秒",
@@ -2400,64 +2311,51 @@
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "设置 0 禁用。",
-    "description": "Tab limiter description"
+    "message": "设置为 0 以禁用。"
   },
   "tabsMax": {
     "message": "最大标签数",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "跟踪异常情况",
-    "description": "Tracking exceptions card header"
+    "message": "跟踪例外"
   },
   "alwaysTrackEvenIdle": {
-    "message": "始终跟踪（即使闲置时）",
-    "description": "Always track option"
+    "message": "始终跟踪 (即使空闲)"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "即使您离开也始终跟踪时间的网站（例如 pw.live）",
-    "description": "Always track description"
+    "message": "即使离开也始终跟踪时间的网站 (例如 pw.live)"
   },
   "btnAddException": {
-    "message": "+ 添加例外",
-    "description": "Add exception button"
+    "message": "+ 添加例外"
   },
   "badgeDisplay": {
-    "message": "徽章展示",
-    "description": "Badge display card header"
+    "message": "徽章显示"
   },
   "showTimeSpentBadge": {
-    "message": "显示在扩展徽章上花费的时间",
-    "description": "Show time spent option"
+    "message": "在扩展徽章上显示已用时间"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "显示在当前站点上花费的分钟数。",
-    "description": "Show time spent description"
+    "message": "显示在当前网站上花费的分钟数。"
   },
   "showIdlWhenIdle": {
-    "message": "空闲/不跟踪时显示“idl”",
-    "description": "Show idle status option"
+    "message": "空闲/未跟踪时显示 \"idl\""
   },
   "showIdlWhenIdleDesc": {
-    "message": "当时间跟踪暂停或不活动时，在扩展徽章上显示“idl”。",
-    "description": "Show idle status description"
+    "message": "当时间跟踪暂停或未激活时在徽章上显示 \"idl\"。"
   },
   "dataRollover": {
     "message": "数据和滚动",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "夜猫子日翻转",
-    "description": "Night owl rollover option"
+    "message": "夜猫子重置时间"
   },
   "nightOwlRolloverDesc": {
-    "message": "定义新的跟踪日的开始时间。如果你工作到很晚很有用。",
-    "description": "Night owl description"
+    "message": "定义新跟踪天的开始时间。对于深夜工作很有用。"
   },
   "midnight": {
-    "message": "午夜（12:00 AM）",
-    "description": "Midnight option"
+    "message": "午夜 (12:00 AM)"
   },
   "lastXDays": {
     "message": "最近 $count$ 天",
@@ -3016,5 +2914,197 @@
   },
   "settingsTitle": {
     "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "安全与系统"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "跟踪与拦截"
+  },
+  "lockStopTitle": {
+    "message": "锁定定时器停止按钮"
+  },
+  "lockStopDesc": {
+    "message": "需要 PIN 才能停止或暂停活动的专注会话。"
+  },
+  "lockRulesTitle": {
+    "message": "锁定编辑/删除规则"
+  },
+  "lockRulesDesc": {
+    "message": "需要 PIN 才能修改、删除或清除网站拦截列表和规则。"
+  },
+  "lockFreetimeTitle": {
+    "message": "锁定空闲时间段"
+  },
+  "lockFreetimeDesc": {
+    "message": "需要 PIN 才能添加、编辑或删除计划的空闲时间段。"
+  },
+  "lockFocusPresetsTitle": {
+    "message": "锁定编辑专注预设"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "锁定编辑/删除专注计划"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "需要 PIN 才能更改或删除专注计划配置。"
+  },
+  "lockTweaksTitle": {
+    "message": "锁定高级网站微调"
+  },
+  "lockTweaksDesc": {
+    "message": "需要 PIN 才能访问自定义样式、脚本注入或高级微调。"
+  },
+  "lockPrivacyTitle": {
+    "message": "锁定隐私模式 (暂停跟踪)"
+  },
+  "lockPrivacyDesc": {
+    "message": "需要 PIN 才能暂停跟踪或启用隐私模式。"
+  },
+  "lockAdjustTimeTitle": {
+    "message": "锁定时间调整 (每日明细)"
+  },
+  "lockDangerTitle": {
+    "message": "锁定危险区域 (清除数据)"
+  },
+  "lockDangerDesc": {
+    "message": "需要 PIN 才能重置统计数据、规则或自定义分类。"
+  },
+  "extStorageUsage": {
+    "message": "扩展存储使用量"
+  },
+  "extStorageDesc": {
+    "message": "设置、规则和历史数据库占用的空间。"
+  },
+  "migrationAndImports": {
+    "message": "迁移与导入"
+  },
+  "importWebActivityTitle": {
+    "message": "从 Web Activity Time Tracker 导入"
+  },
+  "importWebActivityDesc": {
+    "message": "上传您导出的 CSV 文件以合并您过去的跟踪历史。"
+  },
+  "importHabitBuilderTitle": {
+    "message": "从 Time Tracker - Web Habit Builder 导入"
+  },
+  "importHabitBuilderDesc": {
+    "message": "上传您导出的 JSON 文件以合并您过去的跟踪历史。"
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "从 Webtime Tracker 导入"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "上传您导出的 CSV 文件以合并您过去的跟踪历史。"
+  },
+  "createLocalBackupBtn": {
+    "message": "+ 创建本地备份"
+  },
+  "resetStatsTitle": {
+    "message": "重置所有统计数据"
+  },
+  "resetStatsDesc": {
+    "message": "清除所有记录的网站跟踪历史和分析数据。此操作无法撤销。"
+  },
+  "resetStatsBtn": {
+    "message": "重置统计"
+  },
+  "clearRulesTitle": {
+    "message": "清除所有拦截与允许规则"
+  },
+  "clearRulesDesc": {
+    "message": "移除所有自定义网站拦截列表、计划排期、限制和允许列表。"
+  },
+  "clearRulesBtn": {
+    "message": "清除规则"
+  },
+  "clearCategoriesTitle": {
+    "message": "清除所有手动分类"
+  },
+  "clearCategoriesDesc": {
+    "message": "将所有自定义网站分类标签重置为默认值。"
+  },
+  "clearCategoriesBtn": {
+    "message": "清除分类"
+  },
+  "idleTimeoutTitle": {
+    "message": "空闲超时"
+  },
+  "after30Secs": {
+    "message": "30 秒后"
+  },
+  "after2Mins": {
+    "message": "2 分钟后"
+  },
+  "after5Mins": {
+    "message": "5 分钟后"
+  },
+  "sleepGapTitle": {
+    "message": "电脑休眠间隔"
+  },
+  "sleepGapDesc": {
+    "message": "如果让电脑休眠，则限制活动时间计算。"
+  },
+  "never": {
+    "message": "从不"
+  },
+  "mediaTrackingTitle": {
+    "message": "媒体播放跟踪"
+  },
+  "mediaTrackingDesc": {
+    "message": "如果正在播放音频或视频（即使空闲），则继续跟踪时间。"
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "忽略快速访问"
+  },
+  "trackLocalFilesTitle": {
+    "message": "跟踪本地文件"
+  },
+  "alwaysTrackTitle": {
+    "message": "始终跟踪 (即使空闲)"
+  },
+  "alwaysTrackDesc": {
+    "message": "即使离开也始终跟踪时间的网站 (例如 pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ 添加例外"
+  },
+  "noExceptionsAdded": {
+    "message": "未添加例外。"
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "在扩展徽章上显示已用时间"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "显示在当前网站上花费的分钟数。"
+  },
+  "showIdlTitle": {
+    "message": "空闲/未跟踪时显示 \"idl\""
+  },
+  "showIdlDesc": {
+    "message": "当时间跟踪暂停或未激活时在徽章上显示 \"idl\"。"
+  },
+  "timeLimitWarningTitle": {
+    "message": "拦截前的时间限制警告"
+  },
+  "tabLimiterTitle": {
+    "message": "每个域名的标签页限制"
+  },
+  "dataAndRollover": {
+    "message": "数据与重置"
+  },
+  "nightOwlTitle": {
+    "message": "夜猫子重置时间"
+  },
+  "nightOwlDesc": {
+    "message": "定义新跟踪天的开始时间。对于深夜工作很有用。"
+  },
+  "midnight12am": {
+    "message": "午夜 (12:00 AM)"
+  },
+  "dataRetentionTitle": {
+    "message": "数据历史保留"
+  },
+  "dataRetentionDesc": {
+    "message": "自动删除长于此持续时间的详细跟踪日志以节省空间。"
   }
 }

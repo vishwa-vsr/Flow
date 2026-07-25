@@ -1033,84 +1033,65 @@
     "message": "儲存所有設定"
   },
   "securitySystem": {
-    "message": "安全與系統",
-    "description": "Settings sub-tab label."
+    "message": "安全與系統"
   },
   "trackingBlocking": {
-    "message": "追蹤和阻止",
-    "description": "Settings sub-tab label."
+    "message": "追蹤與攔截"
   },
   "trackingEngine": {
-    "message": "追蹤引擎",
-    "description": "Settings card label."
+    "message": "追蹤引擎"
   },
   "idleTimeout": {
-    "message": "空閒超時",
-    "description": "Settings config option."
+    "message": "空閒超時"
   },
   "idleTimeoutDesc": {
-    "message": "如果停止移動滑鼠，則停止追蹤時間。",
-    "description": "Settings config option description."
+    "message": "如果您停止移動滑鼠，則停止追蹤時間。"
   },
   "after30Sec": {
-    "message": "30秒後",
-    "description": "Dropdown choice."
+    "message": "30 秒後"
   },
   "after1Min": {
-    "message": "1分鐘後",
-    "description": "Dropdown choice."
+    "message": "1 分鐘後"
   },
   "after2Min": {
-    "message": "2分鐘後",
-    "description": "Dropdown choice."
+    "message": "2 分鐘後"
   },
   "after5Min": {
-    "message": "5分鐘後",
-    "description": "Dropdown choice."
+    "message": "5 分鐘後"
   },
   "computerSleepGap": {
-    "message": "電腦睡眠間隙",
-    "description": "Settings config option."
+    "message": "電腦休眠間隔"
   },
   "computerSleepGapDesc": {
-    "message": "如果您讓電腦進入睡眠狀態，則限制活動時間計算。",
-    "description": "Settings config option description."
+    "message": "如果讓電腦休眠，則限制活動時間計算。"
   },
   "1minute": {
-    "message": "1分鐘",
-    "description": "Dropdown choice."
+    "message": "1 分鐘"
   },
   "5minutes": {
-    "message": "5分鐘",
-    "description": "Dropdown choice."
+    "message": "5 分鐘"
   },
   "10minutes": {
-    "message": "10分鐘",
-    "description": "Dropdown choice."
+    "message": "10 分鐘"
   },
   "15minutes": {
-    "message": "15分鐘",
-    "description": "Dropdown choice."
+    "message": "15 分鐘"
   },
   "mediaPlaybackTracking": {
-    "message": "媒體播放追蹤",
-    "description": "Settings config option."
+    "message": "媒體播放追蹤"
   },
   "mediaPlaybackTrackingDesc": {
-    "message": "如果音訊或視訊正在播放（即使在空閒時），請繼續追蹤時間。",
-    "description": "Settings config option description."
+    "message": "如果正在播放音訊或視訊（即使空閒），則繼續追蹤時間。"
   },
   "ignoreQuickVisits": {
     "message": "忽略快速訪問",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
-    "message": "忽略短於此持續時間的存取以保持資料乾淨。",
-    "description": "Settings config option description."
+    "message": "忽略短於此持續時間的訪問，以保持資料乾淨。"
   },
   "offTrackEverything": {
-    "message": "關閉（跟踪所有內容）",
-    "description": "Dropdown choice."
+    "message": "關閉 (追蹤所有)"
   },
   "3seconds": {
     "message": "3秒",
@@ -1125,36 +1106,28 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "資料歷史保留",
-    "description": "Settings config option."
+    "message": "資料歷史保留"
   },
   "dataHistoryRetentionDesc": {
-    "message": "自動刪除早於該持續時間的詳細追蹤日誌以節省空間。",
-    "description": "Settings config option description."
+    "message": "自動刪除長於此持續時間的詳細追蹤日誌以節省空間。"
   },
   "after30Days": {
-    "message": "30天后",
-    "description": "Dropdown choice."
+    "message": "30 天後"
   },
   "after90Days": {
-    "message": "90天后",
-    "description": "Dropdown choice."
+    "message": "90 天後"
   },
   "after180Days": {
-    "message": "180天后",
-    "description": "Dropdown choice."
+    "message": "180 天後"
   },
   "after1Year": {
-    "message": "1年後",
-    "description": "Dropdown choice."
+    "message": "1 年後"
   },
   "after2Years": {
-    "message": "2年後",
-    "description": "Dropdown choice."
+    "message": "2 年後"
   },
   "after3Years": {
-    "message": "3年後",
-    "description": "Dropdown choice."
+    "message": "3 年後"
   },
   "foreverKeepAll": {
     "message": "永遠（保留全部）",
@@ -1172,16 +1145,13 @@
     "message": "外觀"
   },
   "themeDark": {
-    "message": "黑暗的",
-    "description": "Dropdown choice."
+    "message": "深色"
   },
   "themeLight": {
-    "message": "光",
-    "description": "Dropdown choice."
+    "message": "淺色"
   },
   "themeCinematic": {
-    "message": "電影般的",
-    "description": "Dropdown choice."
+    "message": "影院"
   },
   "languageOverride": {
     "message": "語言/慣用語",
@@ -1394,8 +1364,7 @@
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
-    "message": "存取控制與安全",
-    "description": "Settings card label."
+    "message": "存取控制與安全"
   },
   "pinProtectionStatus": {
     "message": "PIN 保護狀態："
@@ -1423,227 +1392,173 @@
     "message": "移除 PIN"
   },
   "setPinToEnableLocks": {
-    "message": "設定 PIN 碼以啟用這些鎖",
-    "description": "Helper block message."
+    "message": "設定 PIN 以啟用這些鎖定"
   },
   "whatToLock": {
-    "message": "鎖定什麼",
-    "description": "Settings block header."
+    "message": "鎖定內容"
   },
   "lockTimerStop": {
-    "message": "鎖定定時器停止按鈕",
-    "description": "Settings config option."
+    "message": "鎖定定時器停止按鈕"
   },
   "lockTimerStopDesc": {
-    "message": "需要 PIN 碼才能停止或暫停活動的焦點會話。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能停止或暫停活動的專注會話。"
   },
   "lockEditingRules": {
-    "message": "鎖定編輯/刪除規則",
-    "description": "Settings config option."
+    "message": "鎖定編輯/刪除規則"
   },
   "lockEditingRulesDesc": {
-    "message": "需要 PIN 碼才能修改、刪除或清除網站封鎖清單和規則。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能修改、刪除或清除網站攔截列表和規則。"
   },
   "lockFreeTime": {
-    "message": "鎖定空閒時間",
-    "description": "Settings config option."
+    "message": "鎖定空閒時間段"
   },
   "lockFreeTimeDesc": {
-    "message": "需要 PIN 碼才能新增、編輯或刪除預定的空閒時間。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能新增、編輯或刪除計劃的空閒時間段。"
   },
   "lockFocusPresets": {
-    "message": "鎖定編輯焦點預設",
-    "description": "Settings config option."
+    "message": "鎖定編輯專注預設"
   },
   "lockFocusPresetsDesc": {
-    "message": "需要 PIN 碼才能修改或刪除自訂焦點預設。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能修改或刪除自訂的專注預設。"
   },
   "lockFocusSchedules": {
-    "message": "鎖定編輯/刪除焦點計劃",
-    "description": "Settings config option."
+    "message": "鎖定編輯/刪除專注計劃"
   },
   "lockFocusSchedulesDesc": {
-    "message": "需要 PIN 碼才能變更或刪除焦點計畫配置。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能變更或刪除專注計劃配置。"
   },
   "lockAdvancedTweaks": {
-    "message": "鎖定進階網站調整",
-    "description": "Settings config option."
+    "message": "鎖定高級網站微調"
   },
   "lockAdvancedTweaksDesc": {
-    "message": "需要 PIN 才能存取自訂樣式、腳本注入或進階調整。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能存取自訂樣式、腳本注入或高級微調。"
   },
   "lockPrivacyMode": {
-    "message": "鎖定隱私模式（暫停追蹤）",
-    "description": "Settings config option."
+    "message": "鎖定隱私模式 (暫停追蹤)"
   },
   "lockPrivacyModeDesc": {
-    "message": "需要 PIN 碼才能暫停追蹤或啟用隱私模式。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能暫停追蹤或啟用隱私模式。"
   },
   "lockAdjustTime": {
-    "message": "鎖定調整時間（每日細分）",
-    "description": "Settings config option."
+    "message": "鎖定時間調整 (每日明細)"
   },
   "lockAdjustTimeDesc": {
-    "message": "需要 PIN 碼才能手動調整或清除每日細分中的追蹤時間。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能在每日明細中手動調整或清理記錄的時間。"
   },
   "lockDangerZone": {
-    "message": "鎖定危險區域（清除資料）",
-    "description": "Settings config option."
+    "message": "鎖定危險區域 (清除資料)"
   },
   "lockDangerZoneDesc": {
-    "message": "需要 PIN 碼才能重設統計資料、規則或自訂類別。",
-    "description": "Settings config option description."
+    "message": "需要 PIN 才能重置統計資料、規則或自訂分類。"
   },
   "dangerZone": {
-    "message": "危險區",
-    "description": "Settings card label."
+    "message": "危險區域"
   },
   "resetAllStats": {
-    "message": "重置所有統計數據",
-    "description": "Settings config option."
+    "message": "重置所有統計資料"
   },
   "resetAllStatsDesc": {
-    "message": "擦除所有記錄的網站追蹤歷史記錄和分析。此操作無法撤銷。",
-    "description": "Settings config option description."
+    "message": "清除所有記錄的網站追蹤歷史和分析資料。此操作無法撤銷。"
   },
   "btnResetStats": {
-    "message": "重置統計數據",
-    "description": "Action button."
+    "message": "重置統計"
   },
   "clearAllRules": {
-    "message": "清除所有阻止和允許規則",
-    "description": "Settings config option."
+    "message": "清除所有攔截與允許規則"
   },
   "clearAllRulesDesc": {
-    "message": "刪除所有自訂網站封鎖清單、計劃、限制和允許清單。",
-    "description": "Settings config option description."
+    "message": "移除所有自訂網站攔截列表、計劃排期、限制和允許列表。"
   },
   "btnClearRules": {
-    "message": "明確的規則",
-    "description": "Action button."
+    "message": "清除規則"
   },
   "clearAllCategories": {
-    "message": "清除所有手冊類別",
-    "description": "Settings config option."
+    "message": "清除所有手動分類"
   },
   "clearAllCategoriesDesc": {
-    "message": "將所有自訂網站類別標籤重設為預設值。",
-    "description": "Settings config option description."
+    "message": "將所有自訂網站分類標籤重置為預設值。"
   },
   "btnClearCategories": {
-    "message": "清除類別",
-    "description": "Action button."
+    "message": "清除分類"
   },
   "supportFeedbackHeader": {
-    "message": "支持與回饋",
-    "description": "Settings card label."
+    "message": "支持與反饋"
   },
   "submitFeedbackHeader": {
-    "message": "提交功能請求和錯誤報告",
-    "description": "Settings config option."
+    "message": "提交功能需求與缺陷報告"
   },
   "submitFeedbackDesc": {
-    "message": "幫助我們改善 Flow！分享您的想法、建議或報告任何錯誤。",
-    "description": "Settings config option description."
+    "message": "幫助我們改進 Flow！分享您的想法、建議或報告任何缺陷。"
   },
   "submitFeedbackBtn": {
-    "message": "提交回饋",
-    "description": "Action button."
+    "message": "提交反饋"
   },
   "helpTranslateBtn": {
-    "message": "幫忙翻譯",
-    "description": "Action button."
+    "message": "幫助翻譯"
   },
   "websiteBtn": {
-    "message": "官方網站",
-    "description": "Action button."
+    "message": "網站"
   },
   "rateUsBtn": {
-    "message": "評分 5 星",
-    "description": "Action button."
+    "message": "評價 5 星"
   },
   "changelogBtn": {
-    "message": "更新日誌",
-    "description": "Action button."
+    "message": "更新日誌"
   },
   "backupRestoreHeader": {
-    "message": "備份與復原",
-    "description": "Settings card label."
+    "message": "備份與恢復"
   },
   "exportDataJson": {
-    "message": "將所有資料匯出為 JSON",
-    "description": "Settings config option."
+    "message": "將所有資料導出為 JSON"
   },
   "exportDataJsonDesc": {
-    "message": "統計資料、規則、類別、設定。",
-    "description": "Settings config option description."
+    "message": "統計、規則、分類、設定。"
   },
   "downloadJson": {
     "message": "下載 JSON"
   },
   "restoreFromJson": {
-    "message": "從 JSON 恢復",
-    "description": "Settings config option."
+    "message": "從 JSON 恢復"
   },
   "restoreFromJsonDesc": {
-    "message": "替換所有當前資料。恢復前確認。",
-    "description": "Settings config option description."
+    "message": "將替換所有當前資料。恢復前請確認。"
   },
   "chooseFile": {
-    "message": "選擇檔案...",
-    "description": "Input file label."
+    "message": "選擇檔案…"
   },
   "localStorageUsage": {
-    "message": "擴充功能儲存空間使用情況",
-    "description": "Settings config option."
+    "message": "本地儲存空間使用量"
   },
   "localStorageUsageDesc": {
-    "message": "設定、規則和歷史資料庫所佔用的空間。",
-    "description": "Settings config option description."
+    "message": "設定、規則和歷史資料庫佔用的空間。"
   },
   "migrationImportsHeader": {
-    "message": "移民和進口",
-    "description": "Settings card label."
+    "message": "遷移與匯入"
   },
   "importFromWatt": {
-    "message": "從網路活動時間追蹤器導入",
-    "description": "Settings config option."
+    "message": "從 Web Activity Time Tracker 匯入"
   },
   "importFromWattDesc": {
     "message": "上傳匯出的 CSV 檔案以合併您過去的追蹤歷史記錄。",
     "description": "Settings config option description."
   },
   "importFromTt": {
-    "message": "從時間追蹤器導入 - 網路習慣產生器",
-    "description": "Settings config option."
+    "message": "從 Time Tracker - Web Habit Builder 匯入"
   },
   "importFromTtDesc": {
-    "message": "上傳匯出的 JSON 檔案以合併您過去的追蹤歷史記錄。",
-    "description": "Settings config option description."
+    "message": "上傳您導出的 JSON 檔案以合併您過去的追蹤歷史。"
   },
   "importFromWt": {
-    "message": "從網路時間追蹤器導入",
-    "description": "Settings config option."
+    "message": "從 Webtime Tracker 匯入"
   },
   "importFromWtDesc": {
-    "message": "上傳匯出的 CSV 檔案以合併您過去的追蹤歷史記錄。",
-    "description": "Settings config option description."
+    "message": "上傳您導出的 CSV 檔案以合併您過去的追蹤歷史。"
   },
   "backupHistory": {
-    "message": "備份歷史記錄",
-    "description": "Settings block title."
+    "message": "備份歷史"
   },
   "btnCreateLocalBackup": {
-    "message": "+ 建立本機備份",
-    "description": "Action button."
+    "message": "+ 創建本地備份"
   },
   "editFreeTime": {
     "message": "編輯空閒時間",
@@ -2372,24 +2287,20 @@
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
-    "message": "追蹤在瀏覽器中開啟的本機 HTML 或 PDF 檔案。",
-    "description": "Track local files option description"
+    "message": "追蹤在瀏覽器中打開的本地 HTML 或 PDF 檔案。"
   },
   "blockingBehavior": {
-    "message": "阻止行為",
-    "description": "Blocking behavior card header"
+    "message": "攔截行為"
   },
   "showFunnyBlockedPage": {
-    "message": "顯示有​​趣的被封鎖頁面",
-    "description": "Show funny blocked page option"
+    "message": "顯示有趣的攔截頁面"
   },
   "timeLimitWarning": {
     "message": "封鎖前的時間限制警告",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
-    "message": "在網站被封鎖之前的幾秒鐘內顯示警告。",
-    "description": "Warning duration description"
+    "message": "在網站被攔截前指定秒數顯示警告。"
   },
   "sec": {
     "message": "秒",
@@ -2400,64 +2311,51 @@
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
-    "message": "設定 0 禁用。",
-    "description": "Tab limiter description"
+    "message": "設定為 0 以停用。"
   },
   "tabsMax": {
     "message": "最大標籤數",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
-    "message": "追蹤異常狀況",
-    "description": "Tracking exceptions card header"
+    "message": "追蹤例外"
   },
   "alwaysTrackEvenIdle": {
-    "message": "始終跟踪（即使閒置時）",
-    "description": "Always track option"
+    "message": "始終追蹤 (即使空閒)"
   },
   "alwaysTrackEvenIdleDesc": {
-    "message": "即使您離開也始終追蹤時間的網站（例如 pw.live）",
-    "description": "Always track description"
+    "message": "即使離開也始終追蹤時間的網站 (例如 pw.live)"
   },
   "btnAddException": {
-    "message": "+ 新增例外",
-    "description": "Add exception button"
+    "message": "+ 新增例外"
   },
   "badgeDisplay": {
-    "message": "徽章展示",
-    "description": "Badge display card header"
+    "message": "徽章顯示"
   },
   "showTimeSpentBadge": {
-    "message": "顯示在擴充徽章上花費的時間",
-    "description": "Show time spent option"
+    "message": "在擴充功能徽章上顯示已用時間"
   },
   "showTimeSpentBadgeDesc": {
-    "message": "顯示在目前網站上花費的分鐘數。",
-    "description": "Show time spent description"
+    "message": "顯示在當前網站上花費的分鐘數。"
   },
   "showIdlWhenIdle": {
-    "message": "空閒/不追蹤時顯示“idl”",
-    "description": "Show idle status option"
+    "message": "空閒/未追蹤時顯示 \"idl\""
   },
   "showIdlWhenIdleDesc": {
-    "message": "當時間追蹤暫停或不活動時，在擴充徽章上顯示「idl」。",
-    "description": "Show idle status description"
+    "message": "當時間追蹤暫停或未啟用時在徽章上顯示 \"idl\"。"
   },
   "dataRollover": {
     "message": "數據和滾動",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "夜貓子日翻轉",
-    "description": "Night owl rollover option"
+    "message": "夜貓子重置時間"
   },
   "nightOwlRolloverDesc": {
-    "message": "定義新的追蹤日的開始時間。如果你工作到很晚很有用。",
-    "description": "Night owl description"
+    "message": "定義新追蹤天的開始時間。對於深夜工作很有用。"
   },
   "midnight": {
-    "message": "午夜（12:00 AM）",
-    "description": "Midnight option"
+    "message": "午夜 (12:00 AM)"
   },
   "lastXDays": {
     "message": "最近 $count$ 天",
@@ -3016,5 +2914,197 @@
   },
   "settingsTitle": {
     "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "安全與系統"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "追蹤與攔截"
+  },
+  "lockStopTitle": {
+    "message": "鎖定定時器停止按鈕"
+  },
+  "lockStopDesc": {
+    "message": "需要 PIN 才能停止或暫停活動的專注會話。"
+  },
+  "lockRulesTitle": {
+    "message": "鎖定編輯/刪除規則"
+  },
+  "lockRulesDesc": {
+    "message": "需要 PIN 才能修改、刪除或清除網站攔截列表和規則。"
+  },
+  "lockFreetimeTitle": {
+    "message": "鎖定空閒時間段"
+  },
+  "lockFreetimeDesc": {
+    "message": "需要 PIN 才能新增、編輯或刪除計劃的空閒時間段。"
+  },
+  "lockFocusPresetsTitle": {
+    "message": "鎖定編輯專注預設"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "鎖定編輯/刪除專注計劃"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "需要 PIN 才能變更或刪除專注計劃配置。"
+  },
+  "lockTweaksTitle": {
+    "message": "鎖定高級網站微調"
+  },
+  "lockTweaksDesc": {
+    "message": "需要 PIN 才能存取自訂樣式、腳本注入或高級微調。"
+  },
+  "lockPrivacyTitle": {
+    "message": "鎖定隱私模式 (暫停追蹤)"
+  },
+  "lockPrivacyDesc": {
+    "message": "需要 PIN 才能暫停追蹤或啟用隱私模式。"
+  },
+  "lockAdjustTimeTitle": {
+    "message": "鎖定時間調整 (每日明細)"
+  },
+  "lockDangerTitle": {
+    "message": "鎖定危險區域 (清除資料)"
+  },
+  "lockDangerDesc": {
+    "message": "需要 PIN 才能重置統計資料、規則或自訂分類。"
+  },
+  "extStorageUsage": {
+    "message": "擴充功能儲存空間使用量"
+  },
+  "extStorageDesc": {
+    "message": "設定、規則和歷史資料庫佔用的空間。"
+  },
+  "migrationAndImports": {
+    "message": "遷移與匯入"
+  },
+  "importWebActivityTitle": {
+    "message": "從 Web Activity Time Tracker 匯入"
+  },
+  "importWebActivityDesc": {
+    "message": "上傳您導出的 CSV 檔案以合併您過去的追蹤歷史。"
+  },
+  "importHabitBuilderTitle": {
+    "message": "從 Time Tracker - Web Habit Builder 匯入"
+  },
+  "importHabitBuilderDesc": {
+    "message": "上傳您導出的 JSON 檔案以合併您過去的追蹤歷史。"
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "從 Webtime Tracker 匯入"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "上傳您導出的 CSV 檔案以合併您過去的追蹤歷史。"
+  },
+  "createLocalBackupBtn": {
+    "message": "+ 創建本地備份"
+  },
+  "resetStatsTitle": {
+    "message": "重置所有統計資料"
+  },
+  "resetStatsDesc": {
+    "message": "清除所有記錄的網站追蹤歷史和分析資料。此操作無法撤銷。"
+  },
+  "resetStatsBtn": {
+    "message": "重置統計"
+  },
+  "clearRulesTitle": {
+    "message": "清除所有攔截與允許規則"
+  },
+  "clearRulesDesc": {
+    "message": "移除所有自訂網站攔截列表、計劃排期、限制和允許列表。"
+  },
+  "clearRulesBtn": {
+    "message": "清除規則"
+  },
+  "clearCategoriesTitle": {
+    "message": "清除所有手動分類"
+  },
+  "clearCategoriesDesc": {
+    "message": "將所有自訂網站分類標籤重置為預設值。"
+  },
+  "clearCategoriesBtn": {
+    "message": "清除分類"
+  },
+  "idleTimeoutTitle": {
+    "message": "空閒超時"
+  },
+  "after30Secs": {
+    "message": "30 秒後"
+  },
+  "after2Mins": {
+    "message": "2 分鐘後"
+  },
+  "after5Mins": {
+    "message": "5 分鐘後"
+  },
+  "sleepGapTitle": {
+    "message": "電腦休眠間隔"
+  },
+  "sleepGapDesc": {
+    "message": "如果讓電腦休眠，則限制活動時間計算。"
+  },
+  "never": {
+    "message": "從不"
+  },
+  "mediaTrackingTitle": {
+    "message": "媒體播放追蹤"
+  },
+  "mediaTrackingDesc": {
+    "message": "如果正在播放音訊或視訊（即使空閒），則繼續追蹤時間。"
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "忽略快速訪問"
+  },
+  "trackLocalFilesTitle": {
+    "message": "追蹤本地檔案"
+  },
+  "alwaysTrackTitle": {
+    "message": "始終追蹤 (即使空閒)"
+  },
+  "alwaysTrackDesc": {
+    "message": "即使離開也始終追蹤時間的網站 (例如 pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ 新增例外"
+  },
+  "noExceptionsAdded": {
+    "message": "未新增例外。"
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "在擴充功能徽章上顯示已用時間"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "顯示在當前網站上花費的分鐘數。"
+  },
+  "showIdlTitle": {
+    "message": "空閒/未追蹤時顯示 \"idl\""
+  },
+  "showIdlDesc": {
+    "message": "當時間追蹤暫停或未啟用時在徽章上顯示 \"idl\"。"
+  },
+  "timeLimitWarningTitle": {
+    "message": "攔截前的時間限制警告"
+  },
+  "tabLimiterTitle": {
+    "message": "每個域名的分頁限制"
+  },
+  "dataAndRollover": {
+    "message": "資料與重置"
+  },
+  "nightOwlTitle": {
+    "message": "夜貓子重置時間"
+  },
+  "nightOwlDesc": {
+    "message": "定義新追蹤天的開始時間。對於深夜工作很有用。"
+  },
+  "midnight12am": {
+    "message": "午夜 (12:00 AM)"
+  },
+  "dataRetentionTitle": {
+    "message": "資料歷史保留"
+  },
+  "dataRetentionDesc": {
+    "message": "自動刪除長於此持續時間的詳細追蹤日誌以節省空間。"
   }
 }
