@@ -475,6 +475,15 @@ function verifyLocaleParity() {
         console.error(`  Message: "${msg}"`);
         hasPlaceholderErrors = true;
       }
+
+      if (val.placeholders) {
+        Object.entries(val.placeholders).forEach(([pName, pVal]) => {
+          if (!pVal || !pVal.content || pVal.content.trim() === '') {
+            console.error(`\x1b[31m[I18N ERROR] ${loc}/${key}: Placeholder "${pName}" has empty "content" field!\x1b[0m`);
+            hasPlaceholderErrors = true;
+          }
+        });
+      }
     });
 
     // CHECK 3: English fallback detection (skip 'en' itself)
