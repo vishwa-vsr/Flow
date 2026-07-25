@@ -85,7 +85,17 @@
   },
   "goalDone": {
     "message": "$h$h $m$m done",
-    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done."
+    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "2"
+      },
+      "m": {
+        "content": "$2",
+        "example": "30"
+      }
+    }
   },
   "setGoalInSettings": {
     "message": "Set goal in Settings",
@@ -213,7 +223,13 @@
   },
   "showAllSites": {
     "message": "Show all $count$ sites",
-    "description": "Button to expand and show all sites in the list."
+    "description": "Button to expand and show all sites in the list.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
   },
   "rateUs": {
     "message": "⭐ Rate Us",
@@ -241,7 +257,13 @@
   },
   "confirmBlock": {
     "message": "Are you sure you want to block $domain$? This will reload the tab and block access to this site.",
-    "description": "Confirmation dialog when blocking a site."
+    "description": "Confirmation dialog when blocking a site.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "youtube.com"
+      }
+    }
   },
   "confirmPauseTitle": {
     "message": "Pause focus session?",
@@ -277,15 +299,33 @@
   },
   "cyclesDone": {
     "message": "$count$ done",
-    "description": "Shows number of Pomodoro cycles completed. Example: 3 done."
+    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "cyclesCompleted": {
     "message": "$count$ cycle completed",
-    "description": "Singular: one Pomodoro cycle completed."
+    "description": "Singular: one Pomodoro cycle completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   },
   "cyclesCompletedPlural": {
     "message": "$count$ cycles completed",
-    "description": "Plural: multiple Pomodoro cycles completed."
+    "description": "Plural: multiple Pomodoro cycles completed.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
+      }
+    }
   },
   "active": {
     "message": "Active",
@@ -293,11 +333,27 @@
   },
   "minWorkBreak": {
     "message": "$work$ min work · $break$ min break",
-    "description": "Shows the current work and break durations."
+    "description": "Shows the current work and break durations.",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
   },
   "trackingPausedFor": {
     "message": "Tracking & blocking paused for $time$",
-    "description": "Status message showing how long tracking is paused."
+    "description": "Status message showing how long tracking is paused.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "30 minutes"
+      }
+    }
   },
   "trackingPausedIndefinitely": {
     "message": "Tracking & blocking paused indefinitely",
@@ -309,11 +365,31 @@
   },
   "hDone": {
     "message": "$h$h $m$m done",
-    "description": "Hours and minutes completed. Example: 1h 45m done."
+    "description": "Hours and minutes completed. Example: 1h 45m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "1"
+      },
+      "m": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
   },
   "hLeft": {
     "message": "$h$h $m$m left",
-    "description": "Hours and minutes remaining. Example: 0h 15m left."
+    "description": "Hours and minutes remaining. Example: 0h 15m left.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "0"
+      },
+      "m": {
+        "content": "$2",
+        "example": "15"
+      }
+    }
   },
   "blockedPageTitle": {
     "message": "Blocked — Flow",
@@ -481,11 +557,23 @@
   },
   "dailyLimitBadge": {
     "message": "Daily limit · $mins$ min spent",
-    "description": "Badge showing daily limit and time spent."
+    "description": "Badge showing daily limit and time spent.",
+    "placeholders": {
+      "mins": {
+        "content": "$1",
+        "example": "45"
+      }
+    }
   },
   "blockedUntil": {
     "message": "Blocked until $time$",
-    "description": "Shows when the block will be lifted."
+    "description": "Shows when the block will be lifted.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5:00 PM"
+      }
+    }
   },
   "cooldownOver": {
     "message": "Cooldown over! Refresh page to visit.",
@@ -493,11 +581,23 @@
   },
   "takeABreak": {
     "message": "Take a break · unblocking in $time$",
-    "description": "Cooldown message showing time until unblock."
+    "description": "Cooldown message showing time until unblock.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2:30"
+      }
+    }
   },
   "blockedUntilSchedule": {
     "message": "This site is blocked until $time$ by your schedule.",
-    "description": "Tells user when the schedule block lifts."
+    "description": "Tells user when the schedule block lifts.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
   },
   "defaultRuleDetail": {
     "message": "This site has been blocked by one of your rules.",
@@ -569,7 +669,13 @@
   },
   "pausedTime": {
     "message": "Paused: $time$",
-    "description": "Paused timer display."
+    "description": "Paused timer display.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "29:30"
+      }
+    }
   },
   "siteManager": {
     "message": "Website-Manager",
@@ -1185,15 +1291,37 @@
   },
   "pctFocus": {
     "message": "$focusPct$% Focus",
-    "description": "Focus percentage summary."
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
   },
   "pctDistraction": {
     "message": "$distPct$% Distraction",
-    "description": "Distraction percentage summary."
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
   },
   "focusSplitDesc": {
     "message": "You focused for $focusedTime$ and were distracted for $distractedTime$.",
-    "description": "Productivity split description sentence."
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
   },
   "noFocusDistTimeRange": {
     "message": "No focus or distraction time tracked in this range.",
@@ -1749,7 +1877,13 @@
   },
   "deleteRulesConfirm": {
     "message": "Delete $count$ rules?",
-    "description": "Confirm body."
+    "description": "Confirm body.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
   },
   "itemsDeleted": {
     "message": "Items deleted",
@@ -1761,7 +1895,13 @@
   },
   "taggedSuccessfully": {
     "message": "$domain$ tagged successfully",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "reddit.com"
+      }
+    }
   },
   "studyGoalsSaved": {
     "message": "Study goals saved",
@@ -1805,7 +1945,13 @@
   },
   "errorSavingSettings": {
     "message": "Error saving settings: $error$",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Unknown error"
+      }
+    }
   },
   "pinSavedActive": {
     "message": "PIN saved & active",
@@ -1897,11 +2043,23 @@
   },
   "successfullyImportedDays": {
     "message": "Successfully imported $count$ days! Reloading...",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
   },
   "importFailedErr": {
     "message": "Import failed: $error$",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "File missing"
+      }
+    }
   },
   "invalidFile": {
     "message": "Invalid file",
@@ -1917,7 +2075,13 @@
   },
   "activatedPreset": {
     "message": "Activated preset: $name$",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
   },
   "presetSavedSuccessfully": {
     "message": "Preset saved successfully!",
@@ -1953,7 +2117,13 @@
   },
   "addedDomainsToNeverTrack": {
     "message": "Added $count$ domain(s) to Never-Track",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "domainsAlreadyInList": {
     "message": "Domains already in list",
@@ -2009,11 +2179,23 @@
   },
   "siteBlockedUnderPreset": {
     "message": "Site blocked under $name$",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
   },
   "deletePresetConfirm": {
     "message": "Are you sure you want to delete preset \"$name$\"?",
-    "description": "Confirm body."
+    "description": "Confirm body.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
   },
   "presetDeleted": {
     "message": "Preset deleted",
@@ -2037,7 +2219,13 @@
   },
   "appliedPreset": {
     "message": "Applied preset: $name$",
-    "description": "Toast notice."
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
   },
   "undo10s": {
     "message": "Undo (10s)",
@@ -2045,7 +2233,13 @@
   },
   "undoXs": {
     "message": "Undo ($secs$s)",
-    "description": "Undo countdown."
+    "description": "Undo countdown.",
+    "placeholders": {
+      "secs": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
   },
   "editBlockRule": {
     "message": "Edit Block Rule",
@@ -2081,7 +2275,13 @@
   },
   "mergingDaysOfHistory": {
     "message": "Merging $count$ days of history...",
-    "description": "Migration progress status."
+    "description": "Migration progress status.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
   },
   "finalizingAndReloading": {
     "message": "Finalizing and reloading...",
@@ -2089,7 +2289,17 @@
   },
   "importingDataDayOf": {
     "message": "Importing data: Day $current$ of $total$...",
-    "description": "Migration progress status."
+    "description": "Migration progress status.",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "10"
+      },
+      "total": {
+        "content": "$2",
+        "example": "100"
+      }
+    }
   },
   "creatingPreImportBackup": {
     "message": "Creating pre-import backup...",
@@ -2281,7 +2491,13 @@
   },
   "lastXDays": {
     "message": "Last $count$ days",
-    "description": "Last X days label"
+    "description": "Last X days label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
   },
   "tuesday": {
     "message": "Tuesday",
@@ -2405,7 +2621,17 @@
   },
   "bestDowStat": {
     "message": "$day$ — avg $time$ of focus",
-    "description": "Best day of week performance metric."
+    "description": "Best day of week performance metric.",
+    "placeholders": {
+      "day": {
+        "content": "$1",
+        "example": "Monday"
+      },
+      "time": {
+        "content": "$2",
+        "example": "2h 15m"
+      }
+    }
   },
   "editPreset": {
     "message": "Edit Preset",
@@ -2489,11 +2715,23 @@
   },
   "siteCountSingle": {
     "message": "$count$ site",
-    "description": "Plural count."
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   },
   "siteCountPlural": {
     "message": "$count$ sites",
-    "description": "Plural count."
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
   },
   "minActiveTimeShort": {
     "message": "Min Active Time (m)",
