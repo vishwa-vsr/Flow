@@ -191,7 +191,7 @@
 
     #logo-img.on {
       animation: pulse 2s infinite;
-      box-shadow: 0 0 12px var(--green)
+      box-shadow: none;
     }
 
     @keyframes pulse {
@@ -1398,7 +1398,7 @@
       height: 6px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 8px var(--green)
+      box-shadow: none;
     }
 
     .focus-layout {
@@ -1612,7 +1612,7 @@
       background: var(--green-bg) !important;
       border-color: var(--green) !important;
       color: var(--green) !important;
-      box-shadow: 0 0 12px rgba(2, 133, 78, 0.15);
+      box-shadow: none;
     }
 
     .goal-cb-lbl input {
@@ -1657,11 +1657,11 @@
     .preset-card.is-active {
       background: var(--green-bg) !important;
       border-color: var(--green) !important;
-      box-shadow: 0 0 16px rgba(5, 213, 129, 0.2) !important;
+      box-shadow: none !important;
     }
 
     .preset-card.is-active:hover {
-      box-shadow: 0 0 20px rgba(5, 213, 129, 0.3) !important;
+      box-shadow: none !important;
     }
 
     /* Quick Play & Options Hover Show-up */
@@ -1681,7 +1681,7 @@
       transform: scale(1.15) !important;
       background: var(--green) !important;
       color: #000 !important;
-      box-shadow: 0 0 10px rgba(5, 213, 129, 0.4);
+      box-shadow: none;
     }
     html.light .preset-play-btn:hover {
       color: #ffffff !important;
@@ -1719,22 +1719,22 @@
 
     @keyframes preset-edit-glow {
       0% {
-        box-shadow: 0 0 0 0 rgba(5, 213, 129, 0.7);
+        box-shadow: none;
       }
       70% {
-        box-shadow: 0 0 0 10px rgba(5, 213, 129, 0);
+        box-shadow: none;
       }
       100% {
-        box-shadow: 0 0 0 0 rgba(5, 213, 129, 0);
+        box-shadow: none;
       }
     }
 
     .glowing-edit-btn {
-      animation: preset-edit-glow 1.5s infinite !important;
       transform: scale(1.1) !important;
       background: var(--green-bg) !important;
       border-color: var(--green) !important;
       color: var(--green) !important;
+      box-shadow: none !important;
     }
 
     /* Reusable utility classes (extracted from inline styles) */

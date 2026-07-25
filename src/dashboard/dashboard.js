@@ -5391,7 +5391,7 @@ document.body.appendChild(overlay);
     .pb-card.is-active {
       border-color: var(--green) !important;
       background: var(--green-bg) !important;
-      box-shadow: 0 0 0 1px var(--green-bd), 0 4px 12px rgba(5,213,129,.05) !important;
+      box-shadow: none !important;
     }
     .pb-card.is-editing {
       box-shadow: 0 0 0 2px var(--blue) !important;
@@ -5534,12 +5534,12 @@ document.body.appendChild(overlay);
       border-radius: 14px !important;
       padding: 14px 20px !important;
       font-size: 14px !important;
-      box-shadow: 0 4px 12px rgba(5,213,129,0.15) !important;
+      box-shadow: none !important;
       transition: var(--trans) !important;
     }
     .pb-actions .bp:hover {
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 16px rgba(5,213,129,0.25) !important;
+      box-shadow: none !important;
     }
     .pb-actions .bs {
       background: var(--bg3) !important;
