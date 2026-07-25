@@ -59,22 +59,22 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 <div align="center">
   <h3>⏱️ Pomodoro Focus Timer & Presets</h3>
-  <img src="media/flow_preview4.jpg" width="90%" alt="Focus Mode and Schedules" style="border-radius: 8px;">
+  <img src="media/flow_preview4.png" width="90%" alt="Focus Mode and Schedules" style="border-radius: 8px;">
 
   <br><br>
 
   <h3>📊 Detailed Daily Analytics & Consistency Heatmap</h3>
-  <img src="media/flow_preview2.jpg" width="90%" alt="Detailed Daily Analytics" style="border-radius: 8px;">
+  <img src="media/flow_preview2.png" width="90%" alt="Detailed Daily Analytics" style="border-radius: 8px;">
 
   <br><br>
 
   <h3>🚫 Smart Site Blocker (Rules & Redirects)</h3>
-  <img src="media/flow_preview3.jpg" width="90%" alt="Block and Allow Rules" style="border-radius: 8px;">
+  <img src="media/flow_preview3.png" width="90%" alt="Block and Allow Rules" style="border-radius: 8px;">
 
   <br><br>
 
-  <h3>⚙️ Personalization, Themes & Backups</h3>
-  <img src="media/flow_preview5.jpg" width="90%" alt="Personalize Workspace" style="border-radius: 8px;">
+  <h3>⚙️ Personalize Workspace</h3>
+  <img src="media/flow_preview5.png" width="90%" alt="Personalize Workspace" style="border-radius: 8px;">
 </div>
 
 ---
