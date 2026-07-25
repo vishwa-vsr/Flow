@@ -320,7 +320,7 @@
     "placeholders": {
       "count": {
         "content": "$1",
-        "example": "4"
+        "example": "3"
       }
     }
   },
@@ -348,7 +348,7 @@
     "placeholders": {
       "time": {
         "content": "$1",
-        "example": "30 minutes"
+        "example": "5m 30s"
       }
     }
   },

@@ -177,7 +177,13 @@
     "message": "(Click Tag to Edit)"
   },
   "showAllSites": {
-    "message": "Show all $count$ sites"
+    "message": "Show all $count$ sites",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
   },
   "rateUs": {
     "message": "⭐ Rate Us"
@@ -233,22 +239,56 @@
     "message": "Work"
   },
   "cyclesDone": {
-    "message": "$count$ done"
+    "message": "$count$ done",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "cyclesCompleted": {
-    "message": "$count$ cycle completed"
+    "message": "$count$ cycle completed",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ cycles completed"
+    "message": "$count$ cycles completed",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "active": {
     "message": "Active"
   },
   "minWorkBreak": {
-    "message": "$work$ min work · $break$ min break"
+    "message": "$work$ min work · $break$ min break",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
   },
   "trackingPausedFor": {
-    "message": "Tracking paused for $time$"
+    "message": "Tracking paused for $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5m 30s"
+      }
+    }
   },
   "trackingPausedIndefinitely": {
     "message": "Tracking paused indefinitely"

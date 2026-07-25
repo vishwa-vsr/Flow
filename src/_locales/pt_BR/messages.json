@@ -183,7 +183,13 @@
     "message": "(Clique na Tag para Editar)"
   },
   "showAllSites": {
-    "message": "Mostrar todos os $count$ sites"
+    "message": "Mostrar todos os $count$ sites",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
   },
   "rateUs": {
     "message": "⭐ Avaliar"
@@ -244,19 +250,47 @@
     "message": "Trabalho"
   },
   "cyclesDone": {
-    "message": "$count$ concluídos"
+    "message": "$count$ concluídos",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "cyclesCompleted": {
-    "message": "$count$ ciclo concluído"
+    "message": "$count$ ciclo concluído",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ ciclos concluídos"
+    "message": "$count$ ciclos concluídos",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
   },
   "active": {
     "message": "Ativo"
   },
   "minWorkBreak": {
-    "message": "$work$ min trabalho · $break$ min pausa"
+    "message": "$work$ min trabalho · $break$ min pausa",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
   },
   "trackingPausedFor": {
     "message": "Tracking & blocking paused for $time$",
@@ -264,7 +298,7 @@
     "placeholders": {
       "time": {
         "content": "$1",
-        "example": "30 minutes"
+        "example": "5m 30s"
       }
     }
   },
