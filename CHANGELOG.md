@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Rule Unique ID Queue:** Implemented task queuing for `declarativeNetRequest` dynamic rule updates to serialize background rule modifications and eliminate duplicate rule ID errors.
 - **Heatmap Thresholds Modal Stacking:** Fixed duplicate event listener registration and overlay stacking when switching tabs, ensuring the Cancel button, Cross (✕) button, and backdrop click close the modal immediately.
 - **Instant Category Edit Re-rendering:** Fixed delayed UI updates when saving or resetting category edits, triggering immediate live re-renders across Focus Mode and Analytics tabs.
+- **Analytics Header Localization Fix:** Fixed a bug in `hideAnalyticsHeader()` where the top title header was hardcoded to match English `"Analytics"`, causing localized headers like `"Analíticas"` in Spanish to remain visible.
 
 ## [10.0.2] - 2026-07-12
 
