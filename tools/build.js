@@ -439,6 +439,7 @@ function verifyLocaleParity() {
   const dirs = fs.readdirSync(localesDir).filter(d => fs.statSync(path.join(localesDir, d)).isDirectory());
   
   let hasMissing = false;
+  let hasDuplicateErrors = false;
   let hasPlaceholderErrors = false;
   let untranslatedWarnings = [];
 
@@ -455,6 +456,18 @@ function verifyLocaleParity() {
       missing.forEach(k => console.warn(`  > ${k}`));
       hasMissing = true;
     }
+
+    // CHECK 1B: Case-insensitive duplicate key check (Firefox AMO validator requirement)
+    const seenKeys = new Map();
+    locKeys.forEach(k => {
+      const lower = k.toLowerCase();
+      if (seenKeys.has(lower)) {
+        console.error(`\x1b[31m[I18N ERROR] Locale '${loc}' has case-insensitive duplicate key: '${k}' collides with '${seenKeys.get(lower)}'!\x1b[0m`);
+        hasDuplicateErrors = true;
+      } else {
+        seenKeys.set(lower, k);
+      }
+    });
 
     // CHECK 2: Placeholder validation — Chrome REQUIRES a "placeholders" block
     // for every $variable$ used in a message string. Without it, Chrome refuses
@@ -504,10 +517,9 @@ function verifyLocaleParity() {
   });
 
   // Report results
-  if (hasPlaceholderErrors) {
-    console.error(`\n\x1b[31m[I18N FAIL] Placeholder errors found! Chrome will refuse to load this extension.\x1b[0m`);
-    console.error(`Fix: Add "placeholders" to each affected key in messages.json.`);
-    console.error(`Example: "placeholders": { "count": { "content": "$1", "example": "5" } }\n`);
+  if (hasDuplicateErrors || hasPlaceholderErrors) {
+    if (hasDuplicateErrors) console.error(`\n\x1b[31m[I18N FAIL] Case-insensitive duplicate keys found! Firefox AMO will refuse this add-on.\x1b[0m`);
+    if (hasPlaceholderErrors) console.error(`\n\x1b[31m[I18N FAIL] Placeholder errors found! Chrome will refuse to load this extension.\x1b[0m`);
     process.exit(1);
   }
 

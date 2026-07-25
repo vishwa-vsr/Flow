@@ -2882,9 +2882,6 @@
   "lockFreetimeTitle": {
     "message": "Freizeitstunden sperren"
   },
-  "lockFreetimeDesc": {
-    "message": "PIN erforderlich, um geplante Freizeitfenster hinzuzufügen, zu bearbeiten oder zu entfernen."
-  },
   "lockFocusPresetsTitle": {
     "message": "Bearbeiten von Fokusvorlagen sperren"
   },

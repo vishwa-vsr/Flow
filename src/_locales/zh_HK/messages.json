@@ -2933,9 +2933,6 @@
   "lockFreetimeTitle": {
     "message": "鎖定空閒時間段"
   },
-  "lockFreetimeDesc": {
-    "message": "需要 PIN 才能新增、編輯或刪除計劃的空閒時間段。"
-  },
   "lockFocusPresetsTitle": {
     "message": "鎖定編輯專注預設"
   },

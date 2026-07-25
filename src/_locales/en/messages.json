@@ -2857,9 +2857,6 @@
   "lockFreetimeTitle": {
     "message": "Lock Free-time Hours"
   },
-  "lockFreetimeDesc": {
-    "message": "Require PIN to add, edit, or remove scheduled free-time slots."
-  },
   "lockFocusPresetsTitle": {
     "message": "Lock Editing Focus Presets"
   },

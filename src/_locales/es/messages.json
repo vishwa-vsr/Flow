@@ -2932,9 +2932,6 @@
   "lockFreetimeTitle": {
     "message": "Bloquear horas de tiempo libre"
   },
-  "lockFreetimeDesc": {
-    "message": "Requerir PIN para añadir, editar o eliminar franjas de tiempo libre programadas."
-  },
   "lockFocusPresetsTitle": {
     "message": "Bloquear edición de preajustes de enfoque"
   },

@@ -2906,9 +2906,6 @@
   "lockFreetimeTitle": {
     "message": "自由時間のロック"
   },
-  "lockFreetimeDesc": {
-    "message": "スケジュールされた自由時間枠の追加・編集・削除にPINを要求します。"
-  },
   "lockFocusPresetsTitle": {
     "message": "集中プリセットの編集をロック"
   },
