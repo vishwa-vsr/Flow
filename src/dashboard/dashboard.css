@@ -417,8 +417,9 @@
 
     .inp:focus,
     .sel:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px var(--green-bg);
+      border-color: var(--bd3);
+      box-shadow: none !important;
+      outline: none !important;
       background: var(--bg4)
     }
 
