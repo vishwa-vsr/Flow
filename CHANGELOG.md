@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Analytics Header Localization Fix:** Fixed a bug in `hideAnalyticsHeader()` where the top title header was hardcoded to match English `"Analytics"`, causing localized headers like `"Analíticas"` in Spanish to remain visible.
 - **Edit Category Modal Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for the Edit Category modal (title, input labels, color swatch headers, and reset/cancel/save buttons).
 - **PIN Security Modal Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for the PIN Security verification popup header and instruction text.
+- **Site Manager Sub-Tabs & Form Localization:** Added full multi-language translations (`en`, `es`, `zh_CN`, `zh_HK`, `zh_TW`) for Site Manager sub-tabs (Site List, Smart Presets & Categories, Advanced Tweaks), rule search placeholders, and the "+ Preset" form button.
 
 ## [10.0.2] - 2026-07-12
 
