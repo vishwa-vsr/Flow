@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Custom Editable Categories:** Added full customization for Category Name, Emoji, and Accent Color across core categories (Productivity, Learning, Distraction, Communication) in Smart Presets & Categories tab, featuring an instant "Reset to Default" option.
 - **Cross-Context Category Sync:** Added real-time category storage sync so custom category names, emojis, and accent colors propagate automatically across the Extension Popup, Background Service Worker, and Dashboard.
+- **Expanded Global Translations (Japanese, German, Brazilian Portuguese):** Added 3 new native languages (`ja`, `de`, `pt_BR`) with 100% key parity across all 675 translation keys, expanding settings language dropdown options.
 
 ### Changed
 - **Flat Modern UI (Green Glow Removal):** Removed green `box-shadow` glows from active Quick Preset cards, Count Towards Goals checkboxes, play button hovers, logo animations, day dots, and popup category selection pills for a clean, modern aesthetic.
