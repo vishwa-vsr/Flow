@@ -2824,5 +2824,36 @@
   "searchIgnoredSites": {
     "message": "搜索忽略的网站...",
     "description": "Placeholder for ignored sites search bar."
-  }
+  },
+  "advancedSiteTweaksTitle": {
+    "message": "高级网站微调",
+    "description": "Title for Advanced Site Tweaks panel."
+  },
+  "advancedSiteTweaksDesc": {
+    "message": "在支持的网站上隐藏令人分心的界面元素（YouTube Shorts、Reddit 动态、X 时间线等）。",
+    "description": "Subtitle for Advanced Site Tweaks panel."
+  },
+  "tweak_yt_shorts": { "message": "隐藏 Shorts", "description": "Tweak option label." },
+  "tweak_yt_recom": { "message": "隐藏首页动态", "description": "Tweak option label." },
+  "tweak_yt_related": { "message": "隐藏相关视频", "description": "Tweak option label." },
+  "tweak_yt_comments": { "message": "隐藏评论", "description": "Tweak option label." },
+  "tweak_rd_feed": { "message": "隐藏主页动态", "description": "Tweak option label." },
+  "tweak_rd_comments": { "message": "隐藏评论", "description": "Tweak option label." },
+  "tweak_rd_popular": { "message": "隐藏热门、新闻与探索", "description": "Tweak option label." },
+  "tweak_rd_recent_communities": { "message": "隐藏最近与社区", "description": "Tweak option label." },
+  "tweak_ig_reels": { "message": "隐藏 Reels 链接", "description": "Tweak option label." },
+  "tweak_ig_home": { "message": "隐藏首页动态", "description": "Tweak option label." },
+  "tweak_ig_explore": { "message": "隐藏探索链接", "description": "Tweak option label." },
+  "tweak_ig_suggested": { "message": "隐藏为你推荐", "description": "Tweak option label." },
+  "tweak_x_timeline": { "message": "隐藏推荐 / 关注时间线", "description": "Tweak option label." },
+  "tweak_tw_trends": { "message": "隐藏趋势", "description": "Tweak option label." },
+  "tweak_x_whotofollow": { "message": "隐藏推荐关注", "description": "Tweak option label." },
+  "tweak_x_promoted": { "message": "隐藏推广帖子", "description": "Tweak option label." },
+  "tweak_li_feed": { "message": "隐藏主页动态", "description": "Tweak option label." },
+  "tweak_li_news": { "message": "隐藏 LinkedIn 新闻", "description": "Tweak option label." },
+  "tweak_li_promoted": { "message": "隐藏推广帖子", "description": "Tweak option label." },
+  "tweak_nf_autoplay": { "message": "禁用自动播放预览", "description": "Tweak option label." },
+  "tweak_nf_recom": { "message": "隐藏推荐", "description": "Tweak option label." },
+  "tweak_nf_billboard": { "message": "隐藏特色海报", "description": "Tweak option label." },
+  "tweak_bw_mode": { "message": "黑白模式", "description": "Tweak option label." }
 }

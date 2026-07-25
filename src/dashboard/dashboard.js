@@ -435,7 +435,8 @@ async function renderGranularBlocksUI() {
             s = '<div style="padding:16px; display:flex; flex-direction:column; gap:12px;">';
         GRANULAR_SITES_DASHBOARD[e].forEach(t => {
             var a = n[e] && n[e][t.id] ? "checked" : "";
-            s += `\n              <div style="display:flex; justify-content:space-between; align-items:center;">\n                 <span style="font-size:13px; font-weight:600; color:var(--tx2)">${t.label}</span>\n                 <label class="tog"><input type="checkbox" class="g-db-cb" data-d="${e}" data-r="${t.id}" ${a}><span class="ttrack"></span></label>\n              </div>`
+            const tweakLabel = t_(`tweak_${t.id.replace(/-/g, '_')}`) || t.label;
+            s += `\n              <div style="display:flex; justify-content:space-between; align-items:center;">\n                 <span style="font-size:13px; font-weight:600; color:var(--tx2)">${tweakLabel}</span>\n                 <label class="tog"><input type="checkbox" class="g-db-cb" data-d="${e}" data-r="${t.id}" ${a}><span class="ttrack"></span></label>\n              </div>`
         }), s += "</div>", setSafeHTML(t, i + s), a.appendChild(t)
     }), document.querySelectorAll(".g-db-cb").forEach(e => {
         e.addEventListener("change", async e => {
@@ -5275,8 +5276,8 @@ document.body.appendChild(overlay);
         // renderGranularBlocksUI() targets #tab-sitemanager — give it a hook).
         setSafeHTML(paneT, `
       <div class="card">
-        <div class="ctit" style="display:flex;align-items:center;gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;flex-shrink:0;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Advanced Site Tweaks</div>
-        <p style="font-size:13px;color:var(--tx2);margin:-12px 0 16px">Hide distracting UI elements on supported sites (YouTube Shorts, Reddit feed, X timeline, etc.).</p>
+        <div class="ctit" style="display:flex;align-items:center;gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;flex-shrink:0;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span data-i18n="advancedSiteTweaksTitle">${t_("advancedSiteTweaksTitle") || "Advanced Site Tweaks"}</span></div>
+        <p style="font-size:13px;color:var(--tx2);margin:-12px 0 16px" data-i18n="advancedSiteTweaksDesc">${t_("advancedSiteTweaksDesc") || "Hide distracting UI elements on supported sites (YouTube Shorts, Reddit feed, X timeline, etc.)."}</p>
         <div id="ff-granular-host"></div>
       </div>
     `);

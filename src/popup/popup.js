@@ -149,9 +149,10 @@ async function checkCurrentTabForGranularRules() {
             let t = ((await gLocal(["granularRules"])).granularRules || {})[a] || {};
             GRANULAR_SITES[a].forEach(e => {
                 let n = !0 === t[e.id] ? "checked" : "";
+                let tweakLbl = (typeof msg === 'function' ? msg(`tweak_${e.id.replace(/-/g, '_')}`) : '') || e.label;
                 sHTML += `
             <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 0;">
-              <span style="font-size:13px;font-weight:600;color:var(--tx2);flex:1;">${escHTML(e.label)}</span>
+              <span style="font-size:13px;font-weight:600;color:var(--tx2);flex:1;">${escHTML(tweakLbl)}</span>
               <label class="tog"><input type="checkbox" class="g-cb" data-d="${escHTML(a)}" data-r="${escHTML(e.id)}" ${n}><span class="ttrack"></span></label>
             </div>
           `;

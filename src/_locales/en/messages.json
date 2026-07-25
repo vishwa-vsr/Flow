@@ -2824,5 +2824,36 @@
   "searchIgnoredSites": {
     "message": "Search ignored sites...",
     "description": "Placeholder for ignored sites search bar."
-  }
+  },
+  "advancedSiteTweaksTitle": {
+    "message": "Advanced Site Tweaks",
+    "description": "Title for Advanced Site Tweaks panel."
+  },
+  "advancedSiteTweaksDesc": {
+    "message": "Hide distracting UI elements on supported sites (YouTube Shorts, Reddit feed, X timeline, etc.).",
+    "description": "Subtitle for Advanced Site Tweaks panel."
+  },
+  "tweak_yt_shorts": { "message": "Hide Shorts", "description": "Tweak option label." },
+  "tweak_yt_recom": { "message": "Hide Home Page Feed", "description": "Tweak option label." },
+  "tweak_yt_related": { "message": "Hide Related Videos", "description": "Tweak option label." },
+  "tweak_yt_comments": { "message": "Hide Comments", "description": "Tweak option label." },
+  "tweak_rd_feed": { "message": "Hide Home Feed", "description": "Tweak option label." },
+  "tweak_rd_comments": { "message": "Hide Comments", "description": "Tweak option label." },
+  "tweak_rd_popular": { "message": "Hide Popular, News, Explore", "description": "Tweak option label." },
+  "tweak_rd_recent_communities": { "message": "Hide Recent and Communities", "description": "Tweak option label." },
+  "tweak_ig_reels": { "message": "Hide Reels link", "description": "Tweak option label." },
+  "tweak_ig_home": { "message": "Hide Home Feed", "description": "Tweak option label." },
+  "tweak_ig_explore": { "message": "Hide Explore link", "description": "Tweak option label." },
+  "tweak_ig_suggested": { "message": "Hide Suggested for You", "description": "Tweak option label." },
+  "tweak_x_timeline": { "message": "Hide For You / Following Timeline", "description": "Tweak option label." },
+  "tweak_tw_trends": { "message": "Hide Trending", "description": "Tweak option label." },
+  "tweak_x_whotofollow": { "message": "Hide Who to Follow", "description": "Tweak option label." },
+  "tweak_x_promoted": { "message": "Hide Promoted Posts", "description": "Tweak option label." },
+  "tweak_li_feed": { "message": "Hide Home Feed", "description": "Tweak option label." },
+  "tweak_li_news": { "message": "Hide LinkedIn News", "description": "Tweak option label." },
+  "tweak_li_promoted": { "message": "Hide Promoted Posts", "description": "Tweak option label." },
+  "tweak_nf_autoplay": { "message": "Disable Autoplay Previews", "description": "Tweak option label." },
+  "tweak_nf_recom": { "message": "Hide Recommendations", "description": "Tweak option label." },
+  "tweak_nf_billboard": { "message": "Hide Featured Billboard", "description": "Tweak option label." },
+  "tweak_bw_mode": { "message": "Black & White Mode", "description": "Tweak option label." }
 }
