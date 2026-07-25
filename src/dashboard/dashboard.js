@@ -95,8 +95,10 @@ function hideAnalyticsHeader() {
         const _parent = _desc.parentElement;
         if (_parent) {
             Array.from(_parent.children).forEach(e => {
-                if ("Analytics" === e.textContent.trim()) e.style.display = "none";
+                if (e !== _desc) e.style.display = "none";
             });
+            const ph = _parent.closest(".ph");
+            if (ph) ph.style.display = "none";
         }
     }
     document.querySelectorAll('[data-atab="trend"]').forEach(e => e.textContent = t_("comparison"));
