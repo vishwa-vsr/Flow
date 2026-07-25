@@ -2788,5 +2788,25 @@
   "save": {
     "message": "Save",
     "description": "Generic Save button label."
+  },
+  "verificationRequired": {
+    "message": "Verification Required",
+    "description": "Title for PIN verification modal."
+  },
+  "enterPinToPerformAction": {
+    "message": "Enter your PIN to perform this action.",
+    "description": "Subtitle instruction when PIN verification is required."
+  },
+  "enterPinToAccessSettings": {
+    "message": "Enter your 6-digit PIN to access settings.",
+    "description": "Subtitle instruction when accessing locked settings."
+  },
+  "enterPinToRemoveIt": {
+    "message": "Enter current PIN to remove it.",
+    "description": "Subtitle instruction when removing PIN."
+  },
+  "enterPinToChangeIt": {
+    "message": "Enter current PIN to change it.",
+    "description": "Subtitle instruction when changing PIN."
   }
 }

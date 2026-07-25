@@ -2788,5 +2788,25 @@
   "save": {
     "message": "儲存",
     "description": "Generic Save button label."
+  },
+  "verificationRequired": {
+    "message": "需要身分驗證",
+    "description": "Title for PIN verification modal."
+  },
+  "enterPinToPerformAction": {
+    "message": "請輸入您的 PIN 碼以執行此操作。",
+    "description": "Subtitle instruction when PIN verification is required."
+  },
+  "enterPinToAccessSettings": {
+    "message": "請輸入您的 6 位數 PIN 碼以存取設定。",
+    "description": "Subtitle instruction when accessing locked settings."
+  },
+  "enterPinToRemoveIt": {
+    "message": "請輸入目前 PIN 碼以將其移除。",
+    "description": "Subtitle instruction when removing PIN."
+  },
+  "enterPinToChangeIt": {
+    "message": "請輸入目前 PIN 碼以將其變更。",
+    "description": "Subtitle instruction when changing PIN."
   }
 }

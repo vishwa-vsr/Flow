@@ -199,9 +199,11 @@ function toast(e, t) {
 var pcRes = null,
     pcBuf = "";
 
-function showPass(e = !1, t = "Settings Locked", a = "Enter your 6-digit PIN to continue") {
+function showPass(e = !1, t, a) {
+    const titleText = t || t_("settingsLocked") || "Settings Locked";
+    const descText = a || t_("enterPin") || "Enter your 6-digit PIN to continue";
     return new Promise(n => {
-        pcRes = n, pcBuf = "", updDots(), $("pc-title") && ($("pc-title").textContent = t), $("pc-desc") && ($("pc-desc").textContent = a), $("pcerr").classList.add("hide"), e ? $("pccancel").classList.remove("hide") : $("pccancel").classList.add("hide"), $("pcOverlay").classList.remove("hide")
+        pcRes = n, pcBuf = "", updDots(), $("pc-title") && ($("pc-title").textContent = titleText), $("pc-desc") && ($("pc-desc").textContent = descText), $("pcerr").classList.add("hide"), e ? $("pccancel").classList.remove("hide") : $("pccancel").classList.add("hide"), $("pcOverlay").classList.remove("hide")
     })
 }
 
@@ -212,12 +214,12 @@ async function checkGate() {
     var e = (await gSync(["settings"])).settings || {};
     if (!e.passcodeHash || !1 === e.lockSettings) return !0;
     for (;;) {
-        if (await showPass(!1, "Settings Locked", "Enter your 6-digit PIN to access settings.")) return !0;
+        if (await showPass(!1, t_("settingsLocked") || "Settings Locked", t_("enterPinToAccessSettings") || "Enter your 6-digit PIN to access settings.")) return !0;
     }
 }
 async function promptPinIfEnabled(e) {
     var t = (await gSync(["settings"])).settings || {};
-    return !t.passcodeHash || !1 === t[e] || await showPass(!0, "Verification Required", "Enter your PIN to perform this action.")
+    return !t.passcodeHash || !1 === t[e] || await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToPerformAction") || "Enter your PIN to perform this action.")
 }
 document.addEventListener("keydown", e => {
     const t = $("pcOverlay");
@@ -4024,14 +4026,14 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
         settings: n
     }), $("pin1").value = "", $("pin2").value = "", a.textContent = "", toast(t_("pinSavedActive"), "ok"), loadExtendedSettings()
 }), $("btn-remove-pin") && $("btn-remove-pin").addEventListener("click", async () => {
-    if (await showPass(!0, "Verification Required", "Enter current PIN to remove it.")) {
+    if (await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToRemoveIt") || "Enter current PIN to remove it.")) {
         var e = (await gSync(["settings"])).settings || {};
         e.passcodeHash = null, e.passcodeEnabled = !1, await sSync({
             settings: e
         }), toast(t_("pinRemoved"), "ok"), loadExtendedSettings()
     }
 }), $("btn-change-pin") && $("btn-change-pin").addEventListener("click", async () => {
-    if (await showPass(!0, "Verification Required", "Enter current PIN to change it.")) {
+    if (await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToChangeIt") || "Enter current PIN to change it.")) {
         $("pin-manage-box").style.display = "none";
         $("pin-setup-box").style.display = "flex";
         const actionDiv = document.getElementById("pin-actions-div");
