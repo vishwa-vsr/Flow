@@ -1131,7 +1131,7 @@ function renderFocus(e, t = 25) {
     var a = "work" === e.phase,
         n = e.fullDuration || (a ? 1500 : "long_break" === e.phase ? 900 : 300),
         i = Math.max(0, 1 - Math.min(1, (e.remaining || 0) / n));
-    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? t_("work") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase")), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0)), $("fcyc") && ($("fcyc").textContent = e.isSchedule ? t_("scheduledFocus") : (e.cyclesCompleted === 1 ? t_("cyclesCompleted", [e.cyclesCompleted]) : t_("cyclesCompletedPlural", [e.cyclesCompleted]))), $("btn-fs") && ($("btn-fs").style.display = "none"), $("btn-fst") && ($("btn-fst").style.display = ""), $("btn-fp") && ($("btn-fp").style.display = "", e.paused ? (e.remaining === n ? $("btn-fp").textContent = "work" === e.phase ? t_("startWork") : t_("startBreak") : $("btn-fp").textContent = t_("btnResume"), $("frf") && ($("frf").style.opacity = "0.5")) : ($("btn-fp").textContent = t_("btnPause"), $("frf") && ($("frf").style.opacity = "1"))), $("btn-skip") && ($("btn-skip").style.display = a ? "none" : "");
+    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? t_("work") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase")), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0)), $("fcyc") && ($("fcyc").textContent = e.isSchedule ? t_("scheduledFocus") : (e.cyclesCompleted === 1 ? t_("cyclesCompleted", [e.cyclesCompleted]) : t_("cyclesCompletedPlural", [e.cyclesCompleted]))), $("btn-fs") && ($("btn-fs").style.display = "none"), $("btn-fst") && ($("btn-fst").style.display = ""), $("btn-fp") && ($("btn-fp").style.display = "", $("btn-fp").dataset.state = e.paused ? "paused" : "running", e.paused ? (e.remaining === n ? $("btn-fp").textContent = "work" === e.phase ? t_("startWork") : t_("startBreak") : $("btn-fp").textContent = t_("btnResume"), $("frf") && ($("frf").style.opacity = "0.5")) : ($("btn-fp").textContent = t_("btnPause"), $("frf") && ($("frf").style.opacity = "1"))), $("btn-skip") && ($("btn-skip").style.display = a ? "none" : "");
     // Bug #5 fix: reuse the single off-screen canvas instead of allocating each tick
     const s = _favCanvas;
     s.width = 32; s.height = 32; // resetting width clears the canvas
@@ -1752,13 +1752,7 @@ document.querySelectorAll(".ni").forEach(e => {
     }), $("btn-fp") && $("btn-fp").addEventListener("click", async () => {
         if ($("btn-fp").disabled) return; $("btn-fp").disabled = true;
         try {
-            var e = $("btn-fp").textContent.includes(t_("btnResume")) || 
-                    $("btn-fp").textContent.includes(t_("startWork")) || 
-                    $("btn-fp").textContent.includes(t_("startBreak")) ||
-                    $("btn-fp").textContent.includes("Resume") || 
-                    $("btn-fp").textContent.includes("Start") || 
-                    $("btn-fp").textContent.includes("Reanudar") || 
-                    $("btn-fp").textContent.includes("Iniciar");
+            var e = $("btn-fp").dataset.state === "paused";
             if (!e) {
                 const confirmed = await showConfirm(
                     t_("confirmPauseTitle") || "Pause focus session?",
