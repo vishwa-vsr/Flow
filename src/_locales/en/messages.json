@@ -8,24 +8,19 @@
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
-    "message": "Verification",
-    "description": "Title for the PIN verification dialog."
+    "message": "Verification"
   },
   "enterPin": {
-    "message": "Enter your 6-digit PIN to continue",
-    "description": "Instruction shown in the PIN verification dialog."
+    "message": "Enter your 6-digit PIN to continue"
   },
   "incorrectPin": {
-    "message": "Incorrect PIN",
-    "description": "Error message when the user enters a wrong PIN."
+    "message": "Incorrect PIN"
   },
   "cancel": {
-    "message": "Cancel",
-    "description": "Label for the cancel button."
+    "message": "Cancel"
   },
   "ok": {
-    "message": "OK",
-    "description": "Label for the OK/confirm button."
+    "message": "OK"
   },
   "analytics": {
     "message": "Analytics",
@@ -44,44 +39,34 @@
     "description": "Label for the settings button or section."
   },
   "pauseTrackingBlocking": {
-    "message": "Pause Tracking & Blocking",
-    "description": "Title for the pause tracking and blocking panel."
+    "message": "Pause Tracking & Blocking"
   },
   "pauseFor30Min": {
-    "message": "Pause for 30 minutes",
-    "description": "Option to pause tracking for 30 minutes."
+    "message": "Pause for 30 minutes"
   },
   "pauseFor1Hour": {
-    "message": "Pause for 1 hour",
-    "description": "Option to pause tracking for 1 hour."
+    "message": "Pause for 1 hour"
   },
   "pauseUntilResumed": {
-    "message": "Pause until resumed",
-    "description": "Option to pause tracking indefinitely until manually resumed."
+    "message": "Pause until resumed"
   },
   "privacyModeActive": {
-    "message": "Privacy Mode Active",
-    "description": "Status indicator when privacy mode is currently on."
+    "message": "Privacy Mode Active"
   },
   "trackingBlockingPaused": {
-    "message": "Tracking & blocking paused",
-    "description": "Status message when tracking and blocking are paused."
+    "message": "Tracking & blocking paused"
   },
   "resume": {
-    "message": "Resume",
-    "description": "Label for the resume button to restart tracking."
+    "message": "Resume"
   },
   "tabToday": {
-    "message": "Today",
-    "description": "Tab label for today's data view."
+    "message": "Today"
   },
   "tabAllTime": {
-    "message": "All Time",
-    "description": "Tab label for all-time data view."
+    "message": "All Time"
   },
   "weeklyGoal": {
-    "message": "Weekly Goal",
-    "description": "Label for the weekly productivity goal section."
+    "message": "Weekly Goal"
   },
   "goalDone": {
     "message": "$h$h $m$m done",
@@ -98,162 +83,120 @@
     }
   },
   "setGoalInSettings": {
-    "message": "Set goal in Settings",
-    "description": "Prompt shown when the user has not configured a weekly goal."
+    "message": "Set goal in Settings"
   },
   "goalHit": {
-    "message": "Goal hit! ✓",
-    "description": "Message shown when the weekly goal has been reached."
+    "message": "🏆 Goal reached!"
   },
   "timerSettings": {
-    "message": "Timer Settings",
-    "description": "Title for the Pomodoro timer settings panel."
+    "message": "Timer Settings"
   },
   "workMin": {
-    "message": "Work (min)",
-    "description": "Label for the work duration input in minutes."
+    "message": "Work (min)"
   },
   "shortBreak": {
-    "message": "Short Break",
-    "description": "Label for the short break duration input."
+    "message": "Short Break"
   },
   "longBreak": {
-    "message": "Long Break",
-    "description": "Label for the long break duration input."
+    "message": "Long Break"
   },
   "cycles": {
-    "message": "Cycles",
-    "description": "Input field label."
+    "message": "Cycles"
   },
   "saveSettings": {
-    "message": "Save Settings",
-    "description": "Label for the save settings button."
+    "message": "Save Settings"
   },
   "advancedSettings": {
-    "message": "Advanced Settings",
-    "description": "Label for the advanced settings link or button."
+    "message": "Advanced Settings"
   },
   "focusMode": {
     "message": "Focus Mode",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
-    "message": "Pomodoro",
-    "description": "Label for the Pomodoro timer section."
+    "message": "Pomodoro"
   },
   "readyToFocus": {
-    "message": "Ready to focus?",
-    "description": "Prompt shown before a focus session begins."
+    "message": "Ready to focus?"
   },
   "autoStopsIn": {
-    "message": "⏱ Auto-stops in",
-    "description": "Label indicating when focus mode will automatically stop."
+    "message": "⏱ Auto-stops in"
   },
   "btnStart": {
-    "message": "▶ Start",
-    "description": "Label for the start button."
+    "message": "▶ Start"
   },
   "btnStop": {
-    "message": "Stop",
-    "description": "Label for the stop button."
+    "message": "■ Stop"
   },
   "btnSkip": {
-    "message": "Skip",
-    "description": "Label for the skip button."
+    "message": "⏭ Skip"
   },
   "btnPause": {
-    "message": "Pause",
-    "description": "Label for the pause button."
+    "message": "⏸ Pause"
   },
   "btnResume": {
-    "message": "▶ Resume",
-    "description": "Label for the resume button."
+    "message": "▶ Resume"
   },
   "loading": {
-    "message": "Loading...",
-    "description": "Generic loading indicator text."
+    "message": "Loading..."
   },
   "loadingData": {
-    "message": "Loading data...",
-    "description": "Loading indicator when fetching analytics data."
+    "message": "Loading data..."
   },
   "noDataYet": {
-    "message": "No data yet.",
-    "description": "Placeholder shown when there is no tracking data to display."
+    "message": "No data yet"
   },
   "sublblToday": {
-    "message": "today",
-    "description": "Lowercase sub-label for the today tab."
+    "message": "today"
   },
   "sublblAllTime": {
-    "message": "all time",
-    "description": "Lowercase sub-label for the all-time tab."
+    "message": "all time"
   },
   "catProductivity": {
-    "message": "Productivity",
-    "description": "Display name for the Productivity category."
+    "message": "Productivity"
   },
   "catLearning": {
-    "message": "Learning",
-    "description": "Display name for the Learning category."
+    "message": "Learning"
   },
   "catCommunication": {
-    "message": "Communication",
-    "description": "Display name for the Communication category."
+    "message": "Communication"
   },
   "catDistraction": {
-    "message": "Distraction",
-    "description": "Display name for the Distraction category."
+    "message": "Distraction"
   },
   "catUncategorized": {
-    "message": "Uncategorized",
-    "description": "Display name for the Uncategorized category."
+    "message": "Uncategorized"
   },
   "allSitesToday": {
-    "message": "All Sites Today",
-    "description": "Heading for the list of all sites visited today."
+    "message": "All Sites Today"
   },
   "allTimeSiteUsage": {
-    "message": "All Time Site Usage",
-    "description": "Heading for the list of all-time site usage."
+    "message": "All Time Site Usage"
   },
   "clickTagToEdit": {
-    "message": "(Click Tag to Edit)",
-    "description": "Hint text telling the user they can click a category tag to change it."
+    "message": "(Click Tag to Edit)"
   },
   "showAllSites": {
-    "message": "Show all $count$ sites",
-    "description": "Button to expand and show all sites in the list.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "42"
-      }
-    }
+    "message": "Show all $count$ sites"
   },
   "rateUs": {
-    "message": "⭐ Rate Us",
-    "description": "Link to rate the extension on the Chrome Web Store."
+    "message": "⭐ Rate Us"
   },
   "feedback": {
-    "message": "💬 Feedback",
-    "description": "Link to send feedback about the extension."
+    "message": "💬 Feedback"
   },
   "unblock": {
-    "message": "Unblock",
-    "description": "Button to unblock a currently blocked site."
+    "message": "Unblock"
   },
   "blockSite": {
-    "message": "Block Site",
-    "description": "Button to block the current site."
+    "message": "Block Site"
   },
   "defaultInstant": {
     "message": "Default (Instant)",
     "description": "Label for the default instant-block mode."
   },
   "confirmBlockTitle": {
-    "message": "Block website?",
-    "description": "Title of the custom confirmation modal when blocking a site."
+    "message": "Block Website?"
   },
   "confirmBlock": {
     "message": "Are you sure you want to block $domain$? This will reload the tab and block access to this site.",
@@ -266,102 +209,52 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "Pause focus session?",
-    "description": "Title of the confirmation modal when pausing a session."
+    "message": "Pause focus session?"
   },
   "confirmPauseDesc": {
-    "message": "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
-    "description": "Description in confirmation modal when pausing a session."
+    "message": "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end."
   },
   "deepWork": {
-    "message": "Deep work.",
-    "description": "Status text during a Pomodoro work phase."
+    "message": "Deep Work"
   },
   "shortBreakPhase": {
-    "message": "Short break.",
-    "description": "Status text during a Pomodoro short break phase."
+    "message": "Short Break!"
   },
   "longBreakPhase": {
-    "message": "Long break!",
-    "description": "Status text during a Pomodoro long break phase."
+    "message": "Long Break!"
   },
   "scheduledSession": {
-    "message": "Scheduled Session",
-    "description": "Focus history item label."
+    "message": "Scheduled session"
   },
   "schedule": {
-    "message": "Schedule",
-    "description": "Label for the schedule section or button."
+    "message": "Schedule"
   },
   "work": {
-    "message": "Work",
-    "description": "Label for the work phase in the Pomodoro timer."
+    "message": "Work"
   },
   "cyclesDone": {
-    "message": "$count$ done",
-    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
+    "message": "$count$ done"
   },
   "cyclesCompleted": {
-    "message": "$count$ cycle completed",
-    "description": "Singular: one Pomodoro cycle completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "1"
-      }
-    }
+    "message": "$count$ cycle completed"
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ cycles completed",
-    "description": "Plural: multiple Pomodoro cycles completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "4"
-      }
-    }
+    "message": "$count$ cycles completed"
   },
   "active": {
-    "message": "Active",
-    "description": "Status label indicating something is currently active."
+    "message": "Active"
   },
   "minWorkBreak": {
-    "message": "$work$ min work · $break$ min break",
-    "description": "Shows the current work and break durations.",
-    "placeholders": {
-      "work": {
-        "content": "$1",
-        "example": "25"
-      },
-      "break": {
-        "content": "$2",
-        "example": "5"
-      }
-    }
+    "message": "$work$ min work · $break$ min break"
   },
   "trackingPausedFor": {
-    "message": "Tracking & blocking paused for $time$",
-    "description": "Status message showing how long tracking is paused.",
-    "placeholders": {
-      "time": {
-        "content": "$1",
-        "example": "30 minutes"
-      }
-    }
+    "message": "Tracking paused for $time$"
   },
   "trackingPausedIndefinitely": {
-    "message": "Tracking & blocking paused indefinitely",
-    "description": "Status message when tracking is paused with no time limit."
+    "message": "Tracking paused indefinitely"
   },
   "privacyDisabledDuringFocus": {
-    "message": "Privacy Mode (disabled during Focus Mode)",
-    "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
+    "message": "Privacy mode disabled during focus session"
   },
   "hDone": {
     "message": "$h$h $m$m done",
@@ -378,18 +271,7 @@
     }
   },
   "hLeft": {
-    "message": "$h$h $m$m left",
-    "description": "Hours and minutes remaining. Example: 0h 15m left.",
-    "placeholders": {
-      "h": {
-        "content": "$1",
-        "example": "0"
-      },
-      "m": {
-        "content": "$2",
-        "example": "15"
-      }
-    }
+    "message": "left"
   },
   "blockedPageTitle": {
     "message": "Blocked — Flow",
@@ -2303,8 +2185,7 @@
     "message": "Show a warning this many seconds before a site is blocked."
   },
   "sec": {
-    "message": "sec",
-    "description": "seconds abbreviation"
+    "message": "sec"
   },
   "tabLimiter": {
     "message": "Tab limiter per domain",
@@ -3106,5 +2987,8 @@
   },
   "dataRetentionDesc": {
     "message": "Automatically delete detailed tracking logs older than this duration to save space."
+  },
+  "tracked": {
+    "message": "Tracked"
   }
 }

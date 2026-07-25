@@ -24,8 +24,7 @@
     "description": "Label for the cancel button."
   },
   "ok": {
-    "message": "OK",
-    "description": "Label for the OK/confirm button."
+    "message": "OK"
   },
   "analytics": {
     "message": "Analysen",
@@ -44,44 +43,34 @@
     "description": "Label for the settings button or section."
   },
   "pauseTrackingBlocking": {
-    "message": "Pause Tracking & Blocking",
-    "description": "Title for the pause tracking and blocking panel."
+    "message": "Tracking & Blockierung pausieren"
   },
   "pauseFor30Min": {
-    "message": "Pause for 30 minutes",
-    "description": "Option to pause tracking for 30 minutes."
+    "message": "30 Minuten pausieren"
   },
   "pauseFor1Hour": {
-    "message": "Pause for 1 hour",
-    "description": "Option to pause tracking for 1 hour."
+    "message": "1 Stunde pausieren"
   },
   "pauseUntilResumed": {
-    "message": "Pause until resumed",
-    "description": "Option to pause tracking indefinitely until manually resumed."
+    "message": "Pausieren bis zur Wiederaufnahme"
   },
   "privacyModeActive": {
-    "message": "Privacy Mode Active",
-    "description": "Status indicator when privacy mode is currently on."
+    "message": "Datenschutzmodus aktiv"
   },
   "trackingBlockingPaused": {
-    "message": "Tracking & blocking paused",
-    "description": "Status message when tracking and blocking are paused."
+    "message": "Tracking & Blockierung pausiert"
   },
   "resume": {
-    "message": "Resume",
-    "description": "Label for the resume button to restart tracking."
+    "message": "Fortsetzen"
   },
   "tabToday": {
-    "message": "Today",
-    "description": "Tab label for today's data view."
+    "message": "Heute"
   },
   "tabAllTime": {
-    "message": "All Time",
-    "description": "Tab label for all-time data view."
+    "message": "Gesamt"
   },
   "weeklyGoal": {
-    "message": "Weekly Goal",
-    "description": "Label for the weekly productivity goal section."
+    "message": "Wochenziel"
   },
   "goalDone": {
     "message": "$h$h $m$m done",
@@ -98,154 +87,115 @@
     }
   },
   "setGoalInSettings": {
-    "message": "Set goal in Settings",
-    "description": "Prompt shown when the user has not configured a weekly goal."
+    "message": "Ziel in Einstellungen festlegen"
   },
   "goalHit": {
     "message": "Goal hit! ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {
-    "message": "Timer Settings",
-    "description": "Title for the Pomodoro timer settings panel."
+    "message": "Timer-Einstellungen"
   },
   "workMin": {
-    "message": "Work (min)",
-    "description": "Label for the work duration input in minutes."
+    "message": "Arbeit (min)"
   },
   "shortBreak": {
-    "message": "Short Break",
-    "description": "Label for the short break duration input."
+    "message": "Kurze Pause"
   },
   "longBreak": {
-    "message": "Long Break",
-    "description": "Label for the long break duration input."
+    "message": "Lange Pause"
   },
   "cycles": {
-    "message": "Cycles",
-    "description": "Input field label."
+    "message": "Zyklen"
   },
   "saveSettings": {
-    "message": "Save Settings",
-    "description": "Label for the save settings button."
+    "message": "Einstellungen speichern"
   },
   "advancedSettings": {
-    "message": "Advanced Settings",
-    "description": "Label for the advanced settings link or button."
+    "message": "Erweiterte Einstellungen"
   },
   "focusMode": {
     "message": "Fokusmodus",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
-    "message": "Pomodoro",
-    "description": "Label for the Pomodoro timer section."
+    "message": "Pomodoro"
   },
   "readyToFocus": {
-    "message": "Ready to focus?",
-    "description": "Prompt shown before a focus session begins."
+    "message": "Bereit zum Fokussieren?"
   },
   "autoStopsIn": {
-    "message": "⏱ Auto-stops in",
-    "description": "Label indicating when focus mode will automatically stop."
+    "message": "⏱ Automatischer Stopp in"
   },
   "btnStart": {
-    "message": "▶ Start",
-    "description": "Label for the start button."
+    "message": "▶ Start"
   },
   "btnStop": {
-    "message": "Stop",
-    "description": "Label for the stop button."
+    "message": "■ Stopp"
   },
   "btnSkip": {
-    "message": "Skip",
-    "description": "Label for the skip button."
+    "message": "⏭ Überspringen"
   },
   "btnPause": {
-    "message": "Pause",
-    "description": "Label for the pause button."
+    "message": "⏸ Pause"
   },
   "btnResume": {
-    "message": "▶ Resume",
-    "description": "Label for the resume button."
+    "message": "▶ Fortsetzen"
   },
   "loading": {
-    "message": "Loading...",
-    "description": "Generic loading indicator text."
+    "message": "Wird geladen..."
   },
   "loadingData": {
-    "message": "Loading data...",
-    "description": "Loading indicator when fetching analytics data."
+    "message": "Daten werden geladen..."
   },
   "noDataYet": {
     "message": "No data yet.",
     "description": "Placeholder shown when there is no tracking data to display."
   },
   "sublblToday": {
-    "message": "today",
-    "description": "Lowercase sub-label for the today tab."
+    "message": "heute"
   },
   "sublblAllTime": {
-    "message": "all time",
-    "description": "Lowercase sub-label for the all-time tab."
+    "message": "gesamt"
   },
   "catProductivity": {
-    "message": "Productivity",
-    "description": "Display name for the Productivity category."
+    "message": "Produktivität"
   },
   "catLearning": {
-    "message": "Learning",
-    "description": "Display name for the Learning category."
+    "message": "Lernen"
   },
   "catCommunication": {
-    "message": "Communication",
-    "description": "Display name for the Communication category."
+    "message": "Kommunikation"
   },
   "catDistraction": {
-    "message": "Distraction",
-    "description": "Display name for the Distraction category."
+    "message": "Ablenkung"
   },
   "catUncategorized": {
-    "message": "Uncategorized",
-    "description": "Display name for the Uncategorized category."
+    "message": "Unkategorisiert"
   },
   "allSitesToday": {
-    "message": "All Sites Today",
-    "description": "Heading for the list of all sites visited today."
+    "message": "Alle Websites heute"
   },
   "allTimeSiteUsage": {
-    "message": "All Time Site Usage",
-    "description": "Heading for the list of all-time site usage."
+    "message": "Gesamte Website-Nutzung"
   },
   "clickTagToEdit": {
-    "message": "(Click Tag to Edit)",
-    "description": "Hint text telling the user they can click a category tag to change it."
+    "message": "(Klicke auf Tag zum Bearbeiten)"
   },
   "showAllSites": {
-    "message": "Show all $count$ sites",
-    "description": "Button to expand and show all sites in the list.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "42"
-      }
-    }
+    "message": "Alle $count$ Websites anzeigen"
   },
   "rateUs": {
-    "message": "⭐ Rate Us",
-    "description": "Link to rate the extension on the Chrome Web Store."
+    "message": "⭐ Bewerten"
   },
   "feedback": {
-    "message": "💬 Feedback",
-    "description": "Link to send feedback about the extension."
+    "message": "💬 Feedback"
   },
   "unblock": {
-    "message": "Unblock",
-    "description": "Button to unblock a currently blocked site."
+    "message": "Entsperren"
   },
   "blockSite": {
-    "message": "Block Site",
-    "description": "Button to block the current site."
+    "message": "Website blockieren"
   },
   "defaultInstant": {
     "message": "Default (Instant)",
@@ -266,12 +216,10 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "Pause focus session?",
-    "description": "Title of the confirmation modal when pausing a session."
+    "message": "Fokus-Sitzung pausieren?"
   },
   "confirmPauseDesc": {
-    "message": "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
-    "description": "Description in confirmation modal when pausing a session."
+    "message": "Sitzungen können nur bis zu 5 Minuten pausiert werden. Nach 5 Minuten wird deine Sitzung automatisch beendet."
   },
   "deepWork": {
     "message": "Deep work.",
@@ -290,60 +238,25 @@
     "description": "Focus history item label."
   },
   "schedule": {
-    "message": "Schedule",
-    "description": "Label for the schedule section or button."
+    "message": "Zeitplan"
   },
   "work": {
-    "message": "Work",
-    "description": "Label for the work phase in the Pomodoro timer."
+    "message": "Arbeit"
   },
   "cyclesDone": {
-    "message": "$count$ done",
-    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
+    "message": "$count$ erledigt"
   },
   "cyclesCompleted": {
-    "message": "$count$ cycle completed",
-    "description": "Singular: one Pomodoro cycle completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "1"
-      }
-    }
+    "message": "$count$ Zyklus abgeschlossen"
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ cycles completed",
-    "description": "Plural: multiple Pomodoro cycles completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "4"
-      }
-    }
+    "message": "$count$ Zyklen abgeschlossen"
   },
   "active": {
-    "message": "Active",
-    "description": "Status label indicating something is currently active."
+    "message": "Aktiv"
   },
   "minWorkBreak": {
-    "message": "$work$ min work · $break$ min break",
-    "description": "Shows the current work and break durations.",
-    "placeholders": {
-      "work": {
-        "content": "$1",
-        "example": "25"
-      },
-      "break": {
-        "content": "$2",
-        "example": "5"
-      }
-    }
+    "message": "$work$ min Arbeit · $break$ min Pause"
   },
   "trackingPausedFor": {
     "message": "Tracking & blocking paused for $time$",
@@ -2303,8 +2216,7 @@
     "message": "Zeige eine Warnung so viele Sekunden vor der Blockierung an."
   },
   "sec": {
-    "message": "sec",
-    "description": "seconds abbreviation"
+    "message": "Sek"
   },
   "tabLimiter": {
     "message": "Tab limiter per domain",
@@ -3106,5 +3018,8 @@
   },
   "dataRetentionDesc": {
     "message": "Erfasste Protokolle älter als diese Dauer automatisch löschen, um Speicher zu sparen."
+  },
+  "tracked": {
+    "message": "Erfasst"
   }
 }

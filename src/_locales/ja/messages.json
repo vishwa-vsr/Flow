@@ -24,8 +24,7 @@
     "description": "Label for the cancel button."
   },
   "ok": {
-    "message": "OK",
-    "description": "Label for the OK/confirm button."
+    "message": "OK"
   },
   "analytics": {
     "message": "分析",
@@ -44,44 +43,34 @@
     "description": "Label for the settings button or section."
   },
   "pauseTrackingBlocking": {
-    "message": "Pause Tracking & Blocking",
-    "description": "Title for the pause tracking and blocking panel."
+    "message": "追跡とブロックを一時停止"
   },
   "pauseFor30Min": {
-    "message": "Pause for 30 minutes",
-    "description": "Option to pause tracking for 30 minutes."
+    "message": "30分間一時停止"
   },
   "pauseFor1Hour": {
-    "message": "Pause for 1 hour",
-    "description": "Option to pause tracking for 1 hour."
+    "message": "1時間一時停止"
   },
   "pauseUntilResumed": {
-    "message": "Pause until resumed",
-    "description": "Option to pause tracking indefinitely until manually resumed."
+    "message": "再開するまで一時停止"
   },
   "privacyModeActive": {
-    "message": "Privacy Mode Active",
-    "description": "Status indicator when privacy mode is currently on."
+    "message": "プライバシーモード有効"
   },
   "trackingBlockingPaused": {
-    "message": "Tracking & blocking paused",
-    "description": "Status message when tracking and blocking are paused."
+    "message": "追跡とブロックが一時停止中"
   },
   "resume": {
-    "message": "Resume",
-    "description": "Label for the resume button to restart tracking."
+    "message": "再開"
   },
   "tabToday": {
-    "message": "Today",
-    "description": "Tab label for today's data view."
+    "message": "今日"
   },
   "tabAllTime": {
-    "message": "All Time",
-    "description": "Tab label for all-time data view."
+    "message": "全期間"
   },
   "weeklyGoal": {
-    "message": "Weekly Goal",
-    "description": "Label for the weekly productivity goal section."
+    "message": "週間目標"
   },
   "goalDone": {
     "message": "$h$h $m$m done",
@@ -98,154 +87,115 @@
     }
   },
   "setGoalInSettings": {
-    "message": "Set goal in Settings",
-    "description": "Prompt shown when the user has not configured a weekly goal."
+    "message": "設定で目標を設定"
   },
   "goalHit": {
     "message": "Goal hit! ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {
-    "message": "Timer Settings",
-    "description": "Title for the Pomodoro timer settings panel."
+    "message": "タイマー設定"
   },
   "workMin": {
-    "message": "Work (min)",
-    "description": "Label for the work duration input in minutes."
+    "message": "作業 (分)"
   },
   "shortBreak": {
-    "message": "Short Break",
-    "description": "Label for the short break duration input."
+    "message": "短い休憩"
   },
   "longBreak": {
-    "message": "Long Break",
-    "description": "Label for the long break duration input."
+    "message": "長い休憩"
   },
   "cycles": {
-    "message": "Cycles",
-    "description": "Input field label."
+    "message": "サイクル数"
   },
   "saveSettings": {
-    "message": "Save Settings",
-    "description": "Label for the save settings button."
+    "message": "設定を保存"
   },
   "advancedSettings": {
-    "message": "Advanced Settings",
-    "description": "Label for the advanced settings link or button."
+    "message": "詳細設定"
   },
   "focusMode": {
     "message": "集中モード",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
-    "message": "Pomodoro",
-    "description": "Label for the Pomodoro timer section."
+    "message": "ポモドーロ"
   },
   "readyToFocus": {
-    "message": "Ready to focus?",
-    "description": "Prompt shown before a focus session begins."
+    "message": "集中する準備はできましたか？"
   },
   "autoStopsIn": {
-    "message": "⏱ Auto-stops in",
-    "description": "Label indicating when focus mode will automatically stop."
+    "message": "⏱ 自動停止まで"
   },
   "btnStart": {
-    "message": "▶ Start",
-    "description": "Label for the start button."
+    "message": "▶ スタート"
   },
   "btnStop": {
-    "message": "Stop",
-    "description": "Label for the stop button."
+    "message": "■ ストップ"
   },
   "btnSkip": {
-    "message": "Skip",
-    "description": "Label for the skip button."
+    "message": "⏭ スキップ"
   },
   "btnPause": {
-    "message": "Pause",
-    "description": "Label for the pause button."
+    "message": "⏸ 一時停止"
   },
   "btnResume": {
-    "message": "▶ Resume",
-    "description": "Label for the resume button."
+    "message": "▶ 再開"
   },
   "loading": {
-    "message": "Loading...",
-    "description": "Generic loading indicator text."
+    "message": "読み込み中..."
   },
   "loadingData": {
-    "message": "Loading data...",
-    "description": "Loading indicator when fetching analytics data."
+    "message": "データを読み込み中..."
   },
   "noDataYet": {
     "message": "No data yet.",
     "description": "Placeholder shown when there is no tracking data to display."
   },
   "sublblToday": {
-    "message": "today",
-    "description": "Lowercase sub-label for the today tab."
+    "message": "今日"
   },
   "sublblAllTime": {
-    "message": "all time",
-    "description": "Lowercase sub-label for the all-time tab."
+    "message": "全期間"
   },
   "catProductivity": {
-    "message": "Productivity",
-    "description": "Display name for the Productivity category."
+    "message": "生産性"
   },
   "catLearning": {
-    "message": "Learning",
-    "description": "Display name for the Learning category."
+    "message": "学習"
   },
   "catCommunication": {
-    "message": "Communication",
-    "description": "Display name for the Communication category."
+    "message": "通信"
   },
   "catDistraction": {
-    "message": "Distraction",
-    "description": "Display name for the Distraction category."
+    "message": "気晴らし"
   },
   "catUncategorized": {
-    "message": "Uncategorized",
-    "description": "Display name for the Uncategorized category."
+    "message": "未分類"
   },
   "allSitesToday": {
-    "message": "All Sites Today",
-    "description": "Heading for the list of all sites visited today."
+    "message": "今日の全サイト"
   },
   "allTimeSiteUsage": {
-    "message": "All Time Site Usage",
-    "description": "Heading for the list of all-time site usage."
+    "message": "全期間のサイト利用"
   },
   "clickTagToEdit": {
-    "message": "(Click Tag to Edit)",
-    "description": "Hint text telling the user they can click a category tag to change it."
+    "message": "(タグをクリックで編集)"
   },
   "showAllSites": {
-    "message": "Show all $count$ sites",
-    "description": "Button to expand and show all sites in the list.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "42"
-      }
-    }
+    "message": "全 $count$ サイトを表示"
   },
   "rateUs": {
-    "message": "⭐ Rate Us",
-    "description": "Link to rate the extension on the Chrome Web Store."
+    "message": "⭐ 評価する"
   },
   "feedback": {
-    "message": "💬 Feedback",
-    "description": "Link to send feedback about the extension."
+    "message": "💬 フィードバック"
   },
   "unblock": {
-    "message": "Unblock",
-    "description": "Button to unblock a currently blocked site."
+    "message": "ブロック解除"
   },
   "blockSite": {
-    "message": "Block Site",
-    "description": "Button to block the current site."
+    "message": "サイトをブロック"
   },
   "defaultInstant": {
     "message": "Default (Instant)",
@@ -266,12 +216,10 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "Pause focus session?",
-    "description": "Title of the confirmation modal when pausing a session."
+    "message": "集中セッションを一時停止しますか？"
   },
   "confirmPauseDesc": {
-    "message": "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
-    "description": "Description in confirmation modal when pausing a session."
+    "message": "セッションの一時停止は最大5分間です。5分経過すると、セッションは自動的に終了します。"
   },
   "deepWork": {
     "message": "Deep work.",
@@ -290,60 +238,25 @@
     "description": "Focus history item label."
   },
   "schedule": {
-    "message": "Schedule",
-    "description": "Label for the schedule section or button."
+    "message": "スケジュール"
   },
   "work": {
-    "message": "Work",
-    "description": "Label for the work phase in the Pomodoro timer."
+    "message": "作業"
   },
   "cyclesDone": {
-    "message": "$count$ done",
-    "description": "Shows number of Pomodoro cycles completed. Example: 3 done.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
+    "message": "$count$ 完了"
   },
   "cyclesCompleted": {
-    "message": "$count$ cycle completed",
-    "description": "Singular: one Pomodoro cycle completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "1"
-      }
-    }
+    "message": "$count$ サイクル完了"
   },
   "cyclesCompletedPlural": {
-    "message": "$count$ cycles completed",
-    "description": "Plural: multiple Pomodoro cycles completed.",
-    "placeholders": {
-      "count": {
-        "content": "$1",
-        "example": "4"
-      }
-    }
+    "message": "$count$ サイクル完了"
   },
   "active": {
-    "message": "Active",
-    "description": "Status label indicating something is currently active."
+    "message": "アクティブ"
   },
   "minWorkBreak": {
-    "message": "$work$ min work · $break$ min break",
-    "description": "Shows the current work and break durations.",
-    "placeholders": {
-      "work": {
-        "content": "$1",
-        "example": "25"
-      },
-      "break": {
-        "content": "$2",
-        "example": "5"
-      }
-    }
+    "message": "$work$ 分作業 · $break$ 分休憩"
   },
   "trackingPausedFor": {
     "message": "Tracking & blocking paused for $time$",
@@ -2303,8 +2216,7 @@
     "message": "サイトがブロックされる指定秒数前に警告を表示します。"
   },
   "sec": {
-    "message": "sec",
-    "description": "seconds abbreviation"
+    "message": "秒"
   },
   "tabLimiter": {
     "message": "Tab limiter per domain",
@@ -3106,5 +3018,8 @@
   },
   "dataRetentionDesc": {
     "message": "容量を節約するため、この期間より古い詳細な追跡ログを自動削除します。"
+  },
+  "tracked": {
+    "message": "追跡済み"
   }
 }

@@ -138,8 +138,7 @@
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
-    "message": "Pomodoro",
-    "description": "Label for the Pomodoro timer section."
+    "message": "Pomodoro"
   },
   "readyToFocus": {
     "message": "¿Listo para concentrarte?",
@@ -154,16 +153,13 @@
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "Detener",
-    "description": "Label for the stop button."
+    "message": "■ Detener"
   },
   "btnSkip": {
-    "message": "Saltar",
-    "description": "Label for the skip button."
+    "message": "⏭ Saltar"
   },
   "btnPause": {
-    "message": "Pausar",
-    "description": "Label for the pause button."
+    "message": "⏸ Pausar"
   },
   "btnResume": {
     "message": "▶ Reanudar",
@@ -3106,5 +3102,8 @@
   },
   "dataRetentionDesc": {
     "message": "Eliminar automáticamente los registros detallados más antiguos que esta duración para ahorrar espacio."
+  },
+  "tracked": {
+    "message": "Registrado"
   }
 }

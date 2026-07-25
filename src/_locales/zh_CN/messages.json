@@ -154,16 +154,13 @@
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "停止",
-    "description": "Label for the stop button."
+    "message": "■ 停止"
   },
   "btnSkip": {
-    "message": "跳过",
-    "description": "Label for the skip button."
+    "message": "⏭ 跳过"
   },
   "btnPause": {
-    "message": "暂停",
-    "description": "Label for the pause button."
+    "message": "⏸ 暂停"
   },
   "btnResume": {
     "message": "▶ 简历",
@@ -3106,5 +3103,8 @@
   },
   "dataRetentionDesc": {
     "message": "自动删除长于此持续时间的详细跟踪日志以节省空间。"
+  },
+  "tracked": {
+    "message": "已追踪"
   }
 }

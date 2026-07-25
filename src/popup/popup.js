@@ -149,7 +149,8 @@ async function checkCurrentTabForGranularRules() {
             let t = ((await gLocal(["granularRules"])).granularRules || {})[a] || {};
             GRANULAR_SITES[a].forEach(e => {
                 let n = !0 === t[e.id] ? "checked" : "";
-                let tweakLbl = (typeof msg === 'function' ? msg(`tweak_${e.id.replace(/-/g, '_')}`) : '') || e.label;
+                let tweakLbl = t_(`tweak_${e.id.replace(/-/g, '_')}`);
+                if (tweakLbl === `tweak_${e.id.replace(/-/g, '_')}`) tweakLbl = e.label;
                 sHTML += `
             <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 0;">
               <span style="font-size:13px;font-weight:600;color:var(--tx2);flex:1;">${escHTML(tweakLbl)}</span>
@@ -598,7 +599,7 @@ function renderFocus(e) {
         s = $("focus-card");
     s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
     var a = t ? 60 * window._focusWorkMins : "long_break" === e.phase ? 60 * window._focusLongBreakMins : 60 * window._focusBreakMins;
-    $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0)), $("fr-cycles") && ($("fr-cycles").textContent = e.isSchedule ? t_("active") : t_("cyclesDone").replace("$count$", (e.cyclesCompleted || 0))), $("focus-phase") && ($("focus-phase").textContent = e.isSchedule ? t_("schedule") : (t ? "Work" : "long_break" === e.phase ? t_("longBreak") : t_("shortBreak")), $("focus-phase").className = "focus-phase " + (e.isSchedule ? "work" : (t ? "work" : "brk"))), $("focus-title") && ($("focus-title").textContent = e.isSchedule ? t_("deepWork") : (t ? t_("deepWork") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase"))), $("focus-sub") && ($("focus-sub").textContent = e.isSchedule ? t_("scheduledSession") : ((e.cyclesCompleted || 0) === 1 ? t_("cyclesCompleted").replace("$count$", 1) : t_("cyclesCompletedPlural").replace("$count$", (e.cyclesCompleted || 0)))), $("btn-start") && ($("btn-start").style.display = "none"), $("btn-stop") && ($("btn-stop").style.display = ""), $("btn-pause") && ($("btn-pause").style.display = "", $("btn-pause").textContent = e.paused ? t_("btnResume") : t_("btnPause")), $("btn-skip") && ($("btn-skip").style.display = t ? "none" : ""), $("btn-focus-set") && ($("btn-focus-set").style.display = "none"), $("focus-set-panel") && ($("focus-set-panel").style.display = "none");
+    $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0)), $("fr-cycles") && ($("fr-cycles").textContent = e.isSchedule ? t_("active") : t_("cyclesDone").replace("$count$", (e.cyclesCompleted || 0))), $("focus-phase") && ($("focus-phase").textContent = e.isSchedule ? t_("schedule") : (t ? t_("work") : "long_break" === e.phase ? t_("longBreak") : t_("shortBreak")), $("focus-phase").className = "focus-phase " + (e.isSchedule ? "work" : (t ? "work" : "brk"))), $("focus-title") && ($("focus-title").textContent = e.isSchedule ? t_("deepWork") : (t ? t_("deepWork") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase"))), $("focus-sub") && ($("focus-sub").textContent = e.isSchedule ? t_("scheduledSession") : ((e.cyclesCompleted || 0) === 1 ? t_("cyclesCompleted").replace("$count$", 1) : t_("cyclesCompletedPlural").replace("$count$", (e.cyclesCompleted || 0)))), $("btn-start") && ($("btn-start").style.display = "none"), $("btn-stop") && ($("btn-stop").style.display = ""), $("btn-pause") && ($("btn-pause").style.display = "", $("btn-pause").textContent = e.paused ? t_("btnResume") : t_("btnPause"), $("btn-pause").dataset.state = e.paused ? "paused" : "running"), $("btn-skip") && ($("btn-skip").style.display = t ? "none" : ""), $("btn-focus-set") && ($("btn-focus-set").style.display = "none"), $("focus-set-panel") && ($("focus-set-panel").style.display = "none");
     var n = $("pause-warning");
     if (n)
         if (e.paused && e.active) {
@@ -634,7 +635,7 @@ $("btn-stop") && $("btn-stop").addEventListener("click", async () => {
 $("btn-pause") && $("btn-pause").addEventListener("click", async () => {
     if (_focusBusy) return; _focusBusy = true;
     try {
-        const isResuming = $("btn-pause").textContent.includes("Resume") || $("btn-pause").textContent.includes("Reanudar");
+        const isResuming = $("btn-pause").dataset.state === "paused";
         if (!isResuming) {
             const confirmed = await showCustomConfirm(
                 t_("confirmPauseDesc") || "Sessions can only be paused for up to 5 minutes. After 5 minutes, your session will automatically end.",
