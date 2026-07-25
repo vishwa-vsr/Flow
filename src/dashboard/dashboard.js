@@ -5254,9 +5254,9 @@ document.body.appendChild(overlay);
         const nav = document.createElement("div");
         nav.className = "sm-tabs";
         setSafeHTML(nav, `
-      <button type="button" class="sm-tab is-active" data-pane="sites">${t_("siteList") || "Site List"}</button>
-      <button type="button" class="sm-tab" data-pane="presets">${t_("smartPresetsAndCategories") || "Smart Presets & Categories"}</button>
-      <button type="button" class="sm-tab" data-pane="tweaks">${t_("advancedTweaks") || "Advanced Tweaks"}</button>
+      <button type="button" class="sm-tab is-active" data-pane="sites" data-i18n="siteList">${t_("siteList") || "Site List"}</button>
+      <button type="button" class="sm-tab" data-pane="presets" data-i18n="smartPresetsAndCategories">${t_("smartPresetsAndCategories") || "Smart Presets & Categories"}</button>
+      <button type="button" class="sm-tab" data-pane="tweaks" data-i18n="advancedTweaks">${t_("advancedTweaks") || "Advanced Tweaks"}</button>
     `);
         const ph = sm.querySelector(".ph");
         ph.parentNode.insertBefore(nav, ph.nextSibling);
@@ -6073,7 +6073,7 @@ document.body.appendChild(overlay);
             const rulesSearchEl = $("rules-search");
             if (rulesSearchEl) {
                 rulesSearchEl.value = "";
-                rulesSearchEl.placeholder = window.activeRuleTab === "block" ? "Search blocked sites…" : (window.activeRuleTab === "allow" ? "Search allowed sites…" : "Search ignored sites…");
+                rulesSearchEl.placeholder = window.activeRuleTab === "block" ? (t_("searchBlockedSites") || "Search blocked sites...") : (window.activeRuleTab === "allow" ? (t_("searchAllowedSites") || "Search allowed sites...") : (t_("searchIgnoredSites") || "Search ignored sites..."));
             }
             
             renderCombined();
@@ -6460,7 +6460,7 @@ listContainer.appendChild(row);
                     white-space: nowrap;
                     box-sizing: border-box;
                 `;
-                setSafeHTML(slot, `+ Preset`);
+                setSafeHTML(slot, `<span data-i18n="addPreset">${t_("addPreset") || "+ Preset"}</span>`);
 // Add hover style changes
                 slot.addEventListener("mouseover", () => {
                     slot.style.borderColor = "var(--green)";

@@ -2808,5 +2808,21 @@
   "enterPinToChangeIt": {
     "message": "请输入当前 PIN 码以将其更改。",
     "description": "Subtitle instruction when changing PIN."
+  },
+  "addPreset": {
+    "message": "+ 预设",
+    "description": "Label for preset button in rule form."
+  },
+  "searchBlockedSites": {
+    "message": "搜索已阻止的网站...",
+    "description": "Placeholder for blocked sites search bar."
+  },
+  "searchAllowedSites": {
+    "message": "搜索已允许的网站...",
+    "description": "Placeholder for allowed sites search bar."
+  },
+  "searchIgnoredSites": {
+    "message": "搜索忽略的网站...",
+    "description": "Placeholder for ignored sites search bar."
   }
 }

@@ -2808,5 +2808,21 @@
   "enterPinToChangeIt": {
     "message": "Enter current PIN to change it.",
     "description": "Subtitle instruction when changing PIN."
+  },
+  "addPreset": {
+    "message": "+ Preset",
+    "description": "Label for preset button in rule form."
+  },
+  "searchBlockedSites": {
+    "message": "Search blocked sites...",
+    "description": "Placeholder for blocked sites search bar."
+  },
+  "searchAllowedSites": {
+    "message": "Search allowed sites...",
+    "description": "Placeholder for allowed sites search bar."
+  },
+  "searchIgnoredSites": {
+    "message": "Search ignored sites...",
+    "description": "Placeholder for ignored sites search bar."
   }
 }
