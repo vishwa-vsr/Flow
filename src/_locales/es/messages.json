@@ -1162,11 +1162,11 @@
     "description": "Dropdown choice."
   },
   "langEnglish": {
-    "message": "English",
+    "message": "Inglés",
     "description": "Language choice."
   },
   "langSpanish": {
-    "message": "Español (Informal/Blunt)",
+    "message": "Español",
     "description": "Language choice."
   },
   "langChineseSimplified": {
@@ -2894,19 +2894,19 @@
     "message": "誘惑"
   },
   "communication": {
-    "message": "コミュニケーション"
+    "message": "Comunicación"
   },
   "uncategorized": {
     "message": "未分類"
   },
   "pause": {
-    "message": "一時停止"
+    "message": "Pausar"
   },
   "stop": {
     "message": "停止"
   },
   "skip": {
-    "message": "スキップ"
+    "message": "Omitir"
   },
   "settingsTitle": {
     "message": "設定"

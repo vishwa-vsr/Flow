@@ -2895,19 +2895,19 @@
     "message": "誘惑"
   },
   "communication": {
-    "message": "コミュニケーション"
+    "message": "沟通"
   },
   "uncategorized": {
     "message": "未分類"
   },
   "pause": {
-    "message": "一時停止"
+    "message": "暂停"
   },
   "stop": {
     "message": "停止"
   },
   "skip": {
-    "message": "スキップ"
+    "message": "跳过"
   },
   "settingsTitle": {
     "message": "設定"

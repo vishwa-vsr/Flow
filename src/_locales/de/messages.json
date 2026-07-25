@@ -31,11 +31,11 @@
     "description": "Label for the analytics section or button."
   },
   "toggleTheme": {
-    "message": "Toggle theme",
+    "message": "Design umschalten",
     "description": "Tooltip for the theme toggle button."
   },
   "privacyMode": {
-    "message": "Privacy Mode / Pause Tracking",
+    "message": "Datenschutzmodus / Tracking pausieren",
     "description": "Label for the privacy mode toggle that pauses tracking."
   },
   "settings": {
@@ -73,7 +73,7 @@
     "message": "Wochenziel"
   },
   "goalDone": {
-    "message": "$h$h $m$m done",
+    "message": "$h$h $m$m erledigt",
     "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
     "placeholders": {
       "h": {
@@ -204,7 +204,7 @@
     "message": "Website blockieren"
   },
   "defaultInstant": {
-    "message": "Default (Instant)",
+    "message": "Standard (Sofort)",
     "description": "Label for the default instant-block mode."
   },
   "confirmBlockTitle": {
@@ -212,7 +212,7 @@
     "description": "Title of the custom confirmation modal when blocking a site."
   },
   "confirmBlock": {
-    "message": "Are you sure you want to block $domain$? This will reload the tab and block access to this site.",
+    "message": "Möchtest du $domain$ wirklich blockieren? Dadurch wird der Tab neu geladen und der Zugriff auf diese Seite gesperrt.",
     "description": "Confirmation dialog when blocking a site.",
     "placeholders": {
       "domain": {
@@ -311,7 +311,7 @@
     "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
   },
   "hDone": {
-    "message": "$h$h $m$m done",
+    "message": "$h$h $m$m erledigt",
     "description": "Hours and minutes completed. Example: 1h 45m done.",
     "placeholders": {
       "h": {
@@ -339,7 +339,7 @@
     }
   },
   "blockedPageTitle": {
-    "message": "Blocked — Flow",
+    "message": "Blockiert — Flow",
     "description": "Page title for the blocked site page."
   },
   "blockedMsg1Emoji": {
@@ -347,11 +347,11 @@
     "description": "Emoji for blocked message variant 1."
   },
   "blockedMsg1Head": {
-    "message": "Not today, champ.",
+    "message": "Heute nicht, Champion.",
     "description": "Heading for blocked message variant 1."
   },
   "blockedMsg1Sub": {
-    "message": "Your future self said NO. They were very firm about it.",
+    "message": "Dein zukünftiges Ich hat NEIN gesagt. Es war sehr bestimmt.",
     "description": "Subtext for blocked message variant 1."
   },
   "blockedMsg2Emoji": {
@@ -359,11 +359,11 @@
     "description": "Emoji for blocked message variant 2."
   },
   "blockedMsg2Head": {
-    "message": "ACCESS DENIED.",
+    "message": "ZUGRIFF VERWEIGERT.",
     "description": "Heading for blocked message variant 2."
   },
   "blockedMsg2Sub": {
-    "message": "The productivity bot has spoken. Resistance is futile.",
+    "message": "Der Produktivitäts-Bot hat gesprochen. Widerstand ist zwecklos.",
     "description": "Subtext for blocked message variant 2."
   },
   "blockedMsg3Emoji": {
@@ -371,11 +371,11 @@
     "description": "Emoji for blocked message variant 3."
   },
   "blockedMsg3Head": {
-    "message": "Big Brain Move.",
+    "message": "Ein genialer Schachzug.",
     "description": "Heading for blocked message variant 3."
   },
   "blockedMsg3Sub": {
-    "message": "You blocked this. Past-you was smarter than you right now.",
+    "message": "Du hast dies blockiert. Dein vergangenes Ich war schlauer als du jetzt bist.",
     "description": "Subtext for blocked message variant 3."
   },
   "blockedMsg4Emoji": {
@@ -383,11 +383,11 @@
     "description": "Emoji for blocked message variant 4."
   },
   "blockedMsg4Head": {
-    "message": "The door is locked.",
+    "message": "Die Tür ist verschlossen.",
     "description": "Heading for blocked message variant 4."
   },
   "blockedMsg4Sub": {
-    "message": "You put the lock there. You gave me the key. Not giving it back.",
+    "message": "Du hast das Schloss angebracht. Du hast mir den Schlüssel gegeben. Ich gebe ihn nicht zurück.",
     "description": "Subtext for blocked message variant 4."
   },
   "blockedMsg5Emoji": {
@@ -395,11 +395,11 @@
     "description": "Emoji for blocked message variant 5."
   },
   "blockedMsg5Head": {
-    "message": "Your discipline called.",
+    "message": "Deine Disziplin hat angerufen.",
     "description": "Heading for blocked message variant 5."
   },
   "blockedMsg5Sub": {
-    "message": "It wants you back. It misses you. Go do the thing.",
+    "message": "Sie will dich zurück. Sie vermisst dich. Geh und tu was zu tun ist.",
     "description": "Subtext for blocked message variant 5."
   },
   "blockedMsg6Emoji": {
@@ -407,11 +407,11 @@
     "description": "Emoji for blocked message variant 6."
   },
   "blockedMsg6Head": {
-    "message": "NOPE. Absolutely not.",
+    "message": "NEIN. Absolut nicht.",
     "description": "Heading for blocked message variant 6."
   },
   "blockedMsg6Sub": {
-    "message": "Come back when you earned it. You know what to do.",
+    "message": "Komm wieder, wenn du es dir verdient hast. Du weißt, was zu tun ist.",
     "description": "Subtext for blocked message variant 6."
   },
   "blockedMsg7Emoji": {
@@ -419,11 +419,11 @@
     "description": "Emoji for blocked message variant 7."
   },
   "blockedMsg7Head": {
-    "message": "Stay hard.",
+    "message": "Bleib hart.",
     "description": "Heading for blocked message variant 7."
   },
   "blockedMsg7Sub": {
-    "message": "The work does not do itself. Go back to it.",
+    "message": "Die Arbeit erledigt sich nicht von selbst. Geh wieder an die Arbeit.",
     "description": "Subtext for blocked message variant 7."
   },
   "blockedMsg8Emoji": {
@@ -435,75 +435,75 @@
     "description": "Heading for blocked message variant 8."
   },
   "blockedMsg8Sub": {
-    "message": "That is the sound of procrastination. Don't be a chicken.",
+    "message": "Das ist das Geräusch des Aufschiebens. Sei kein Huhn.",
     "description": "Subtext for blocked message variant 8."
   },
   "neutralBlockHead": {
-    "message": "This site is blocked",
+    "message": "Diese Seite ist blockiert",
     "description": "Neutral heading when a site is blocked without a fun message."
   },
   "neutralBlockSub": {
-    "message": "Access is restricted by your Flow rules.",
+    "message": "Der Zugriff wird durch deine Flow-Regeln eingeschränkt.",
     "description": "Neutral subtext for blocked site."
   },
   "ruleInstantBlock": {
-    "message": "Instant Block Active",
+    "message": "Sofortblockade aktiv",
     "description": "Badge text for an instant block rule."
   },
   "ruleScheduleBlock": {
-    "message": "Schedule Block Active",
+    "message": "Zeitplan-Blockade aktiv",
     "description": "Badge text for a schedule-based block rule."
   },
   "ruleTimeLimitReached": {
-    "message": "Daily Limit Reached",
+    "message": "Tageslimit erreicht",
     "description": "Badge text when the daily time limit is reached."
   },
   "ruleSessionLimitReached": {
-    "message": "Session Limit Reached",
+    "message": "Sitzungslimit erreicht",
     "description": "Badge text when the per-session time limit is reached."
   },
   "ruleManuallyBlocked": {
-    "message": "Manually Blocked",
+    "message": "Manuell blockiert",
     "description": "Badge text when a site was manually blocked by the user."
   },
   "ruleTweakBlocked": {
-    "message": "Distracting Section Blocked",
+    "message": "Ablenkender Bereich blockiert",
     "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
   },
   "ruleDetailInstant": {
-    "message": "This site is set to always block.",
+    "message": "Diese Seite ist immer blockiert.",
     "description": "Detail text explaining an instant block rule."
   },
   "ruleDetailSchedule": {
-    "message": "This site is blocked during your scheduled block hours.",
+    "message": "Diese Seite ist während deiner festgelegten Blockzeiten blockiert.",
     "description": "Detail text explaining a schedule block rule."
   },
   "ruleDetailTimeLimit": {
-    "message": "You have hit your daily time limit for this site.",
+    "message": "Du hast dein tägliches Zeitlimit für diese Seite erreicht.",
     "description": "Detail text explaining the daily time limit was reached."
   },
   "ruleDetailSessionLimit": {
-    "message": "You have hit your per-session limit for this site. Take a break!",
+    "message": "Du hast dein Sitzungslimit für diese Seite erreicht. Mach eine Pause!",
     "description": "Detail text explaining the session limit was reached."
   },
   "ruleDetailManual": {
-    "message": "You added this site to your block list.",
+    "message": "Du hast diese Seite zu deiner Blockierliste hinzugefügt.",
     "description": "Detail text explaining the site was manually blocked."
   },
   "ruleDetailTweak": {
-    "message": "Access to this specific section is blocked by your Advanced Site Tweaks.",
+    "message": "Der Zugriff auf diesen bestimmten Bereich wird durch deine erweiterten Seitenanpassungen blockiert.",
     "description": "Detail text explaining a site tweak block."
   },
   "blockRuleActive": {
-    "message": "Block Rule Active",
+    "message": "Blockierregel aktiv",
     "description": "Generic badge for any active block rule."
   },
   "blockedByFlow": {
-    "message": "Blocked by Flow",
+    "message": "Von Flow blockiert",
     "description": "Generic blocked indicator."
   },
   "dailyLimitBadge": {
-    "message": "Daily limit · $mins$ min spent",
+    "message": "Tageslimit · $mins$ Min verbracht",
     "description": "Badge showing daily limit and time spent.",
     "placeholders": {
       "mins": {
@@ -513,7 +513,7 @@
     }
   },
   "blockedUntil": {
-    "message": "Blocked until $time$",
+    "message": "Blockiert bis $time$",
     "description": "Shows when the block will be lifted.",
     "placeholders": {
       "time": {
@@ -523,11 +523,11 @@
     }
   },
   "cooldownOver": {
-    "message": "Cooldown over! Refresh page to visit.",
+    "message": "Abklingzeit vorbei! Seite neu laden, um sie zu besuchen.",
     "description": "Message shown when the cooldown timer has expired."
   },
   "takeABreak": {
-    "message": "Take a break · unblocking in $time$",
+    "message": "Mach eine Pause · Entsperrung um $time$",
     "description": "Cooldown message showing time until unblock.",
     "placeholders": {
       "time": {
@@ -537,7 +537,7 @@
     }
   },
   "blockedUntilSchedule": {
-    "message": "This site is blocked until $time$ by your schedule.",
+    "message": "Diese Seite ist bis $time$ durch deinen Zeitplan blockiert.",
     "description": "Tells user when the schedule block lifts.",
     "placeholders": {
       "time": {
@@ -547,75 +547,75 @@
     }
   },
   "defaultRuleDetail": {
-    "message": "This site has been blocked by one of your rules.",
+    "message": "Diese Seite wurde durch eine deiner Regeln blockiert.",
     "description": "Fallback detail text for an unknown block rule."
   },
   "goDoSomethingUseful": {
-    "message": "Go do something useful:",
+    "message": "Geh etwas Nützliches tun:",
     "description": "Heading above helpful link suggestions on the blocked page."
   },
   "takeBackBtn": {
-    "message": "← Take me back",
+    "message": "← Bring mich zurück",
     "description": "Button to navigate back to the previous page."
   },
   "manageBlockRules": {
-    "message": "Manage block rules →",
+    "message": "Blockierregeln verwalten →",
     "description": "Link to the dashboard to manage block rules."
   },
   "thisSite": {
-    "message": "this site",
+    "message": "diese Seite",
     "description": "Generic label referring to the current site."
   },
   "quote1": {
-    "message": "\"Future you is watching. Make them proud.\"",
+    "message": "\"Dein zukünftiges Ich schaut zu. Mach es stolz.\"",
     "description": "Motivational quote 1."
   },
   "quote2": {
-    "message": "\"Discipline is choosing between what you want now and what you want most.\"",
+    "message": "\"Disziplin bedeutet, sich zwischen dem zu entscheiden, was man jetzt will, und dem, was man am meisten will.\"",
     "description": "Motivational quote 2."
   },
   "quote3": {
-    "message": "\"Deep work beats busy work.\"",
+    "message": "\"Deep Work schlägt Busy Work.\"",
     "description": "Motivational quote 3."
   },
   "quote4": {
-    "message": "\"Small steps every day build big results.\"",
+    "message": "\"Kleine Schritte jeden Tag bringen große Ergebnisse.\"",
     "description": "Motivational quote 4."
   },
   "quote5": {
-    "message": "\"You don't need more time. You need more focus.\"",
+    "message": "\"Du brauchst nicht mehr Zeit. Du brauchst mehr Fokus.\"",
     "description": "Motivational quote 5."
   },
   "quote6": {
-    "message": "\"What you do today matters more than you think.\"",
+    "message": "\"Was du heute tust, zählt mehr, als du denkst.\"",
     "description": "Motivational quote 6."
   },
   "quote7": {
-    "message": "\"The obstacle is the way.\"",
+    "message": "\"Das Hindernis ist der Weg.\"",
     "description": "Motivational quote 7."
   },
   "quote8": {
-    "message": "\"Suffer the pain of discipline or suffer the pain of regret.\"",
+    "message": "\"Ertrage den Schmerz der Disziplin oder ertrage den Schmerz des Bedauerns.\"",
     "description": "Motivational quote 8."
   },
   "quote9": {
-    "message": "\"Your focus determines your reality.\"",
+    "message": "\"Dein Fokus bestimmt deine Realität.\"",
     "description": "Motivational quote 9."
   },
   "quote10": {
-    "message": "\"Be so good they cannot ignore you.\"",
+    "message": "\"Sei so gut, dass sie dich nicht ignorieren können.\"",
     "description": "Motivational quote 10."
   },
   "quote11": {
-    "message": "\"Discipline equals freedom.\"",
+    "message": "\"Disziplin ist Freiheit.\"",
     "description": "Motivational quote 11."
   },
   "privacyModeTitle": {
-    "message": "Privacy Mode / Pause Tracking",
+    "message": "Datenschutzmodus / Tracking pausieren",
     "description": "Tooltip for privacy mode toggle."
   },
   "pausedTime": {
-    "message": "Paused: $time$",
+    "message": "Pausiert: $time$",
     "description": "Paused timer display.",
     "placeholders": {
       "time": {
@@ -629,15 +629,15 @@
     "description": "Label for the site manager button or section."
   },
   "settingsLocked": {
-    "message": "Settings Locked",
+    "message": "Einstellungen gesperrt",
     "description": "Title when settings are passcode locked."
   },
   "incorrectPinTryAgain": {
-    "message": "Incorrect PIN — try again",
+    "message": "Falsche PIN — versuche es erneut",
     "description": "PIN mismatch warning."
   },
   "analyticsDesc": {
-    "message": "Your complete productivity picture.",
+    "message": "Dein komplettes Produktivitätsbild.",
     "description": "Analytics section description."
   },
   "timeDistribution": {
@@ -663,15 +663,15 @@
     "message": "Vergleich"
   },
   "insights": {
-    "message": "Insights",
+    "message": "Einblicke",
     "description": "Insights tab title."
   },
   "7days": {
-    "message": "7 days",
+    "message": "7 Tage",
     "description": "Range selection button label."
   },
   "30days": {
-    "message": "30 days",
+    "message": "30 Tage",
     "description": "Range selection button label."
   },
   "customRange": {
@@ -713,7 +713,7 @@
     "message": "Erfasste Tage"
   },
   "searchSites": {
-    "message": "Search sites…",
+    "message": "Seiten suchen…",
     "description": "Filter placeholder."
   },
   "domain": {
@@ -721,81 +721,81 @@
     "description": "Site manager table header."
   },
   "actions": {
-    "message": "Actions",
+    "message": "Aktionen",
     "description": "Site manager table header."
   },
   "category": {
-    "message": "Category",
+    "message": "Kategorie",
     "description": "Site manager table header."
   },
   "avgDay": {
-    "message": "Avg/Day",
+    "message": "Ø/Tag",
     "description": "Average usage per day table header."
   },
   "loadingSites": {
-    "message": "Loading sites…",
+    "message": "Seiten werden geladen…",
     "description": "Loader text."
   },
   "totalWorkStudy": {
-    "message": "Total Work/Study",
+    "message": "Gesamtarbeit/Studium",
     "description": "Focus category sum label."
   },
   "totalDistraction": {
-    "message": "Total Distraction",
+    "message": "Gesamte Ablenkung",
     "description": "Distraction category sum label."
   },
   "productivityRatio": {
-    "message": "Productivity Ratio",
+    "message": "Produktivitätsverhältnis",
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
     "message": "Gute Tage (365T)"
   },
   "wastedDays365d": {
-    "message": "Wasted (365d)",
+    "message": "Verschwendet (365T)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
     "message": "365-Tage-Konsistenz"
   },
   "heatmapHelp": {
-    "message": "Each square is one day. Greener = more focus time. Red = wasted day.",
+    "message": "Jedes Quadrat ist ein Tag. Grüner = mehr Fokuszeit. Rot = verschwendeter Tag.",
     "description": "Description of yearly heatmap."
   },
   "clickToCustomizeThresholds": {
-    "message": "Click to customize thresholds",
+    "message": "Klicken, um Schwellenwerte anzupassen",
     "description": "Legend customization tooltip."
   },
   "less": {
-    "message": "Less",
+    "message": "Weniger",
     "description": "Heatmap legend lower label."
   },
   "more": {
-    "message": "More",
+    "message": "Mehr",
     "description": "Heatmap legend higher label."
   },
   "wasted": {
-    "message": "Wasted",
+    "message": "Verschwendet",
     "description": "Heatmap legend wasted day label."
   },
   "buildingHeatmap": {
-    "message": "Building heatmap…",
+    "message": "Heatmap erstellen…",
     "description": "Heatmap builder indicator."
   },
   "weekdayVsWeekend": {
-    "message": "Weekday vs Weekend",
+    "message": "Wochentag vs. Wochenende",
     "description": "Split comparison chart label."
   },
   "mostProductiveDay": {
-    "message": "Most Productive Day",
+    "message": "Produktivster Tag",
     "description": "Day of week with highest productivity."
   },
   "focusDesc": {
-    "message": "Lock in, track goals, and build your streak.",
+    "message": "Fokussiere dich, verfolge Ziele und baue deinen Streak auf.",
     "description": "Focus section subtitle."
   },
   "zeroCycles": {
-    "message": "0 cycles",
+    "message": "0 Zyklen",
     "description": "Zero completed cycles."
   },
   "startFocus": {
@@ -809,14 +809,14 @@
     "message": "Fokus-Zeitpläne"
   },
   "goalsStreak": {
-    "message": "Goals & Streak",
+    "message": "Ziele & Streak",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
     "message": "Wöchentliches Ziel (Std.)"
   },
   "dailyStreakMin": {
-    "message": "Daily Streak Min (m)",
+    "message": "Tägliches Streak-Minimum (m)",
     "description": "Config label."
   },
   "startWeekOn": {
@@ -824,25 +824,25 @@
     "description": "Config label."
   },
   "monday": {
-    "message": "Monday",
+    "message": "Montag",
     "description": "Weekday name."
   },
   "sunday": {
-    "message": "Sunday",
+    "message": "Sonntag",
     "description": "Weekday name."
   },
   "countTowardsGoals": {
     "message": "Zu Zielen zählen"
   },
   "saveGoals": {
-    "message": "Save Goals",
+    "message": "Ziele speichern",
     "description": "Action button label."
   },
   "weekProgress": {
     "message": "Wochenfortschritt"
   },
   "zeroGoalDone": {
-    "message": "0h 0m done",
+    "message": "0h 0m erledigt",
     "description": "No progress yet."
   },
   "noGoal": {
@@ -853,123 +853,123 @@
     "message": "Verlauf"
   },
   "clearHistory": {
-    "message": "Clear History",
+    "message": "Verlauf löschen",
     "description": "Delete history tooltip."
   },
   "noFocusSessions": {
-    "message": "No focus sessions yet.",
+    "message": "Noch keine Fokus-Sessions.",
     "description": "Empty state label."
   },
   "siteManagerDesc": {
-    "message": "Tag sites for analytics, or block them entirely.",
+    "message": "Markiere Seiten für Analysen oder blockiere sie vollständig.",
     "description": "Site manager subtitle."
   },
   "ruleManager": {
-    "message": "Rule Manager",
+    "message": "Regelmanager",
     "description": "Block page inner card title."
   },
   "blockList": {
-    "message": "Block List",
+    "message": "Blockierliste",
     "description": "Config category."
   },
   "allowlist": {
-    "message": "Allowlist",
+    "message": "Erlaubnisliste",
     "description": "Config category."
   },
   "neverTrack": {
-    "message": "Never Track",
+    "message": "Niemals verfolgen",
     "description": "Config category."
   },
   "searchRules": {
-    "message": "Search rules…",
+    "message": "Regeln suchen…",
     "description": "Rules filter placeholder."
   },
   "domainName": {
-    "message": "Domain Name",
+    "message": "Domainname",
     "description": "Input field label."
   },
   "egDomain": {
-    "message": "e.g. reddit.com",
+    "message": "z.B. reddit.com",
     "description": "Placeholder."
   },
   "redirectToOptional": {
-    "message": "Redirect To (Optional)",
+    "message": "Weiterleiten zu (Optional)",
     "description": "Input field label."
   },
   "egRedirect": {
-    "message": "e.g. pw.live",
+    "message": "z.B. pw.live",
     "description": "Placeholder."
   },
   "addNewRule": {
-    "message": "+ Add New Rule",
+    "message": "+ Neue Regel hinzufügen",
     "description": "Action button."
   },
   "bulkEdit": {
-    "message": "Bulk Edit",
+    "message": "Massenbearbeitung",
     "description": "Action button."
   },
   "egAllowDomain": {
-    "message": "e.g. gmail.com",
+    "message": "z.B. gmail.com",
     "description": "Placeholder."
   },
   "addToAllowlist": {
-    "message": "+ Add to Allowlist",
+    "message": "+ Zur Erlaubnisliste hinzufügen",
     "description": "Action button."
   },
   "domainNamePlural": {
-    "message": "Domain Name(s)",
+    "message": "Domainname(n)",
     "description": "Input field label."
   },
   "egNeverTrackDomain": {
-    "message": "e.g. bank.com, private.com",
+    "message": "z.B. bank.com, private.com",
     "description": "Placeholder."
   },
   "addToNeverTrack": {
-    "message": "+ Add to Never-Track",
+    "message": "+ Zu Niemals verfolgen hinzufügen",
     "description": "Action button."
   },
   "tipClick": {
-    "message": "Tip: Click ",
+    "message": "Tipp: Klicke ",
     "description": "Helpful hint start."
   },
   "tipRuleDetails": {
-    "message": " on any rule to set time limits, schedules, or a cool-down timer.",
+    "message": " bei einer beliebigen Regel, um Zeitlimits, Zeitpläne oder einen Abklingzeit-Timer festzulegen.",
     "description": "Helpful hint body."
   },
   "deleteSelected": {
-    "message": "Delete Selected",
+    "message": "Ausgewählte löschen",
     "description": "Bulk action button."
   },
   "type": {
-    "message": "Type",
+    "message": "Typ",
     "description": "Table column header."
   },
   "mode": {
-    "message": "Mode",
+    "message": "Modus",
     "description": "Table column header."
   },
   "dailyLimit": {
-    "message": "Daily Limit",
+    "message": "Tageslimit",
     "description": "Table column header."
   },
   "noBlockingRules": {
-    "message": "No blocking rules yet.",
+    "message": "Noch keine Blockierregeln.",
     "description": "Empty state label."
   },
   "freeTimeHours": {
-    "message": "Free-time hours (no blocking)",
+    "message": "Freizeit-Stunden (keine Blockade)",
     "description": "Card sub-title."
   },
   "filterByCategory": {
-    "message": "🔍 Filter by Category",
+    "message": "🔍 Nach Kategorie filtern",
     "description": "Card title."
   },
   "searchSitesInCategories": {
-    "message": "Search sites in categories…",
+    "message": "Seiten in Kategorien suchen…",
     "description": "Placeholder."
   },
   "trackLabelSite": {
-    "message": "+ Track / Label Site",
+    "message": "+ Seite tracken / labeln",
     "description": "Action button."
   },
   "settingsDesc": {
@@ -1031,7 +1031,7 @@
     "message": "Zeit weiter erfassen, wenn Audio oder Video abgespielt wird (auch im Leerlauf)."
   },
   "ignoreQuickVisits": {
-    "message": "Ignore Quick Visits",
+    "message": "Kurze Besuche ignorieren",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
@@ -1041,15 +1041,15 @@
     "message": "Aus (alles erfassen)"
   },
   "3seconds": {
-    "message": "3 seconds",
+    "message": "3 Sekunden",
     "description": "Dropdown choice."
   },
   "5seconds": {
-    "message": "5 seconds",
+    "message": "5 Sekunden",
     "description": "Dropdown choice."
   },
   "10seconds": {
-    "message": "10 seconds",
+    "message": "10 Sekunden",
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
@@ -1077,15 +1077,15 @@
     "message": "Nach 3 Jahren"
   },
   "foreverKeepAll": {
-    "message": "Forever (keep all)",
+    "message": "Für immer (alle behalten)",
     "description": "Dropdown choice."
   },
   "weeklyAutoBackup": {
-    "message": "Weekly Auto-Backup",
+    "message": "Wöchentliches Auto-Backup",
     "description": "Settings config option."
   },
   "weeklyAutoBackupDesc": {
-    "message": "Automatically export and download your tracking stats and rules once a week.",
+    "message": "Exportiere und lade deine Tracking-Statistiken und Regeln einmal pro Woche automatisch herunter.",
     "description": "Settings config option description."
   },
   "appearance": {
@@ -1109,47 +1109,47 @@
     "description": "Settings config option description."
   },
   "systemDefault": {
-    "message": "System Default",
+    "message": "Systemstandard",
     "description": "Dropdown choice."
   },
   "langEnglish": {
-    "message": "English",
+    "message": "Englisch",
     "description": "Language choice."
   },
   "langSpanish": {
-    "message": "Español (Informal/Blunt)",
+    "message": "Spanisch (Informell/Direkt)",
     "description": "Language choice."
   },
   "langChineseSimplified": {
-    "message": "Chinese (Simplified) / 简体中文",
+    "message": "Chinesisch (Vereinfacht) / 简体中文",
     "description": "Language choice."
   },
   "langChineseTraditional": {
-    "message": "Chinese (Traditional) / 繁體中文",
+    "message": "Chinesisch (Traditionell) / 繁體中文",
     "description": "Language choice."
   },
   "langChineseHongKong": {
-    "message": "Chinese (Hong Kong) / 繁體中文 (香港)",
+    "message": "Chinesisch (Hongkong) / 繁體中文 (香港)",
     "description": "Language choice."
   },
   "langJapanese": {
-    "message": "Japanese / 日本語",
+    "message": "Japanisch / 日本語",
     "description": "Language choice."
   },
   "langGerman": {
-    "message": "German / Deutsch",
+    "message": "Deutsch",
     "description": "Language choice."
   },
   "langPortugueseBrazil": {
-    "message": "Portuguese (Brazil) / Português (Brasil)",
+    "message": "Portugiesisch (Brasilien) / Português (Brasil)",
     "description": "Language choice."
   },
   "averageLine": {
-    "message": "Average Line",
+    "message": "Durchschnittslinie",
     "description": "Chart option."
   },
   "lineChart": {
-    "message": "Line",
+    "message": "Linie",
     "description": "Chart type toggle."
   },
   "barChart": {
@@ -1157,35 +1157,35 @@
     "description": "Chart type toggle."
   },
   "reduceTime": {
-    "message": "Reduce Time",
+    "message": "Zeit reduzieren",
     "description": "Daily stats card action."
   },
   "howManyMinutesRemove": {
-    "message": "How many minutes do you want to remove for $1?",
+    "message": "Wie viele Minuten möchtest du für $1 entfernen?",
     "description": "Prompt message in the time reduction modal."
   },
   "remove": {
-    "message": "Remove",
+    "message": "Entfernen",
     "description": "Action button label."
   },
   "minutes": {
-    "message": "Minutes",
+    "message": "Minuten",
     "description": "Input field placeholder."
   },
   "momComparison": {
-    "message": "Month-over-Month",
+    "message": "Monatsvergleich",
     "description": "Settings card label."
   },
   "momComparisonDesc": {
-    "message": "Comparing this month's active time vs last month.",
+    "message": "Vergleich der aktiven Zeit dieses Monats mit dem letzten Monat.",
     "description": "Card description."
   },
   "focusVsDistraction": {
-    "message": "Focus vs. Distraction",
+    "message": "Fokus vs. Ablenkung",
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$focusPct$% Focus",
+    "message": "$focusPct$% Fokus",
     "description": "Focus percentage summary.",
     "placeholders": {
       "focusPct": {
@@ -1195,7 +1195,7 @@
     }
   },
   "pctDistraction": {
-    "message": "$distPct$% Distraction",
+    "message": "$distPct$% Ablenkung",
     "description": "Distraction percentage summary.",
     "placeholders": {
       "distPct": {
@@ -1205,7 +1205,7 @@
     }
   },
   "focusSplitDesc": {
-    "message": "You focused for $focusedTime$ and were distracted for $distractedTime$.",
+    "message": "Du hast dich für $focusedTime$ fokussiert und warst für $distractedTime$ abgelenkt.",
     "description": "Productivity split description sentence.",
     "placeholders": {
       "focusedTime": {
@@ -1219,95 +1219,95 @@
     }
   },
   "noFocusDistTimeRange": {
-    "message": "No focus or distraction time tracked in this range.",
+    "message": "In diesem Zeitraum wurde keine Fokus- oder Ablenkungszeit erfasst.",
     "description": "Placeholder text."
   },
   "pinSiteToTop": {
-    "message": "Pin site to top",
+    "message": "Seite oben anheften",
     "description": "Tooltip text."
   },
   "unpinSite": {
-    "message": "Unpin site",
+    "message": "Seite loslösen",
     "description": "Tooltip text."
   },
   "visitSite": {
-    "message": "Visit site",
+    "message": "Seite besuchen",
     "description": "Tooltip text."
   },
   "addOrEditRule": {
-    "message": "Add or Edit Rule",
+    "message": "Regel hinzufügen oder bearbeiten",
     "description": "Tooltip text."
   },
   "autoCategorized": {
-    "message": "Auto-categorized",
+    "message": "Automatisch kategorisiert",
     "description": "Tooltip text."
   },
   "totalTracked": {
-    "message": "Total Tracked",
+    "message": "Gesamt erfasst",
     "description": "Daily stat title."
   },
   "activeTimeline": {
-    "message": "24-Hour Active Timeline",
+    "message": "24-Stunden-Aktive-Zeitleiste",
     "description": "Section header."
   },
   "heatmapThresholds": {
-    "message": "Heatmap Thresholds",
+    "message": "Heatmap-Schwellenwerte",
     "description": "Modal title."
   },
   "minActiveTimeMins": {
-    "message": "Minimum Active Time (minutes)",
+    "message": "Mindest aktive Zeit (Minuten)",
     "description": "Config setting label."
   },
   "minActiveTimeDesc": {
-    "message": "Minimum total tracked time to color a day.",
+    "message": "Mindestgesamtzeit, um einen Tag zu färben.",
     "description": "Config option helper text."
   },
   "ratioThresholdPct": {
-    "message": "Ratio Threshold (%)",
+    "message": "Verhältnis-Schwellenwert (%)",
     "description": "Config setting label."
   },
   "ratioThresholdDesc": {
-    "message": "If your focus ratio is below this %, the day is Wasted (Red). Otherwise, it is Active (Green).",
+    "message": "Wenn deine Fokusrate unter diesem % liegt, ist der Tag verschwendet (Rot). Ansonsten ist er aktiv (Grün).",
     "description": "Config option helper text."
   },
   "showWastedDays": {
-    "message": "Show Wasted Days (Red)",
+    "message": "Verschwendete Tage anzeigen (Rot)",
     "description": "Config setting label."
   },
   "showWastedDaysDesc": {
-    "message": "Highlight high-distraction days as red blocks.",
+    "message": "Hebe Tage mit hoher Ablenkung als rote Blöcke hervor.",
     "description": "Config option helper text."
   },
   "focusCategories": {
-    "message": "Focus Categories",
+    "message": "Fokuskategorien",
     "description": "Config setting label."
   },
   "selectFocusCatsDesc": {
-    "message": "Select which categories count towards your daily Focus Time.",
+    "message": "Wähle aus, welche Kategorien zu deiner täglichen Fokuszeit zählen.",
     "description": "Config option helper text."
   },
   "activeHrs": {
-    "message": "$1 active",
+    "message": "$1 aktiv",
     "description": "Label showing tracked active time hours."
   },
   "noActiveTimeTracked": {
-    "message": "No active time tracked yet.",
+    "message": "Noch keine aktive Zeit erfasst.",
     "description": "Placeholder text."
   },
   "vsLastMonth": {
-    "message": "vs $1 last month ($2)",
+    "message": "vs $1 letzter Monat ($2)",
     "description": "MoM status comparison description."
   },
   "vsLastMonthNoChange": {
-    "message": "vs $1 last month (no change)",
+    "message": "vs $1 letzter Monat (keine Änderung)",
     "description": "MoM status comparison description."
   },
   "increase": {
-    "message": "increase",
+    "message": "Anstieg",
     "description": "Label indicating value increase."
   },
   "decrease": {
-    "message": "decrease",
+    "message": "Rückgang",
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
@@ -1317,19 +1317,19 @@
     "message": "PIN-Schutzstatus:"
   },
   "notSet": {
-    "message": "Not Set",
+    "message": "Nicht festgelegt",
     "description": "PIN status."
   },
   "set6DigitPin": {
-    "message": "Set 6-digit PIN",
+    "message": "6-stellige PIN festlegen",
     "description": "Input placeholder."
   },
   "confirm6DigitPin": {
-    "message": "Confirm 6-digit PIN",
+    "message": "6-stellige PIN bestätigen",
     "description": "Input placeholder."
   },
   "savePin": {
-    "message": "Save PIN",
+    "message": "PIN speichern",
     "description": "Action button."
   },
   "changePin": {
@@ -1486,7 +1486,7 @@
     "message": "Import aus Web Activity Time Tracker"
   },
   "importFromWattDesc": {
-    "message": "Upload your exported CSV file to merge your past tracking history.",
+    "message": "Lade deine exportierte CSV-Datei hoch, um deinen bisherigen Tracking-Verlauf zusammenzuführen.",
     "description": "Settings config option description."
   },
   "importFromTt": {
@@ -1508,35 +1508,35 @@
     "message": "+ Lokales Backup erstellen"
   },
   "editFreeTime": {
-    "message": "Edit Free-time",
+    "message": "Freizeit bearbeiten",
     "description": "Modal title."
   },
   "fromTime": {
-    "message": "From Time",
+    "message": "Von Zeit",
     "description": "Input field label."
   },
   "toTime": {
-    "message": "To Time",
+    "message": "Bis Zeit",
     "description": "Input field label."
   },
   "activeDays": {
-    "message": "Active Days",
+    "message": "Aktive Tage",
     "description": "Input field label."
   },
   "saveChanges": {
-    "message": "Save Changes",
+    "message": "Änderungen speichern",
     "description": "Action button."
   },
   "tagMonitor": {
-    "message": "Tag / Monitor",
+    "message": "Label / Monitor",
     "description": "Tab segment title."
   },
   "quickApplyPreset": {
-    "message": "Quick Apply Preset",
+    "message": "Preset schnell anwenden",
     "description": "Select label."
   },
   "selectPresetToApply": {
-    "message": "-- Select a Preset to Apply --",
+    "message": "-- Wähle ein Preset zur Anwendung --",
     "description": "Option label."
   },
   "egDomainNoPrefix": {
@@ -1544,107 +1544,107 @@
     "description": "Placeholder."
   },
   "activeRulesSelectMultiple": {
-    "message": "Active Rules (Select multiple)",
+    "message": "Aktive Regeln (Mehrere auswählen)",
     "description": "Sub-header label."
   },
   "dailyTimeLimit": {
-    "message": "Daily time limit",
+    "message": "Tägliches Zeitlimit",
     "description": "Rule mode option."
   },
   "dailyLimitMinutes": {
-    "message": "Daily limit (minutes) (0 = always blocked)",
+    "message": "Tageslimit (Minuten) (0 = immer blockiert)",
     "description": "Input field label."
   },
   "perSessionLimit": {
-    "message": "Per-Session Limit",
+    "message": "Limit pro Sitzung",
     "description": "Rule mode option."
   },
   "sessionSettings": {
-    "message": "Session Settings",
+    "message": "Sitzungseinstellungen",
     "description": "Input block title."
   },
   "timeLimitMinutes": {
-    "message": "Time Limit (minutes)",
+    "message": "Zeitlimit (Minuten)",
     "description": "Input field label."
   },
   "breakCooldownMinutes": {
-    "message": "Break / Cooldown (minutes)",
+    "message": "Pause / Abklingzeit (Minuten)",
     "description": "Input field label."
   },
   "scheduleBased": {
-    "message": "Schedule based",
+    "message": "Zeitplanbasiert",
     "description": "Rule mode option."
   },
   "timeWindows": {
-    "message": "Time windows",
+    "message": "Zeitfenster",
     "description": "Input field label."
   },
   "addWindow": {
-    "message": "+ Add window",
+    "message": "+ Fenster hinzufügen",
     "description": "Action button."
   },
   "cooldownSite": {
-    "message": "Cool-down site",
+    "message": "Abklingzeit-Seite",
     "description": "Rule mode option."
   },
   "cooldownSettings": {
-    "message": "Cool-down Settings",
+    "message": "Abklingzeit-Einstellungen",
     "description": "Input block title."
   },
   "waitTimeSec": {
-    "message": "Wait Time (sec)",
+    "message": "Wartezeit (Sek)",
     "description": "Input field label."
   },
   "frequency": {
-    "message": "Frequency",
+    "message": "Häufigkeit",
     "description": "Input field label."
   },
   "everyVisit": {
-    "message": "Every visit",
+    "message": "Jeder Besuch",
     "description": "Option choice."
   },
   "oncePerDay": {
-    "message": "Once a day",
+    "message": "Einmal am Tag",
     "description": "Option choice."
   },
   "every10min": {
-    "message": "Every 10 min",
+    "message": "Alle 10 Min",
     "description": "Option choice."
   },
   "optDistraction": {
-    "message": "⚡ Distraction",
+    "message": "⚡ Ablenkung",
     "description": "Category choice."
   },
   "optProductivity": {
-    "message": "💻 Productivity",
+    "message": "💻 Produktivität",
     "description": "Category choice."
   },
   "optLearning": {
-    "message": "📚 Learning",
+    "message": "📚 Lernen",
     "description": "Category choice."
   },
   "optCommunication": {
-    "message": "💬 Communication",
+    "message": "💬 Kommunikation",
     "description": "Category choice."
   },
   "optUncategorized": {
-    "message": "❓ Uncategorized",
+    "message": "❓ Unkategorisiert",
     "description": "Category choice."
   },
   "assignCategoryDesc": {
-    "message": "This assigns a category for statistics without blocking the site.",
+    "message": "Dies weist eine Kategorie für Statistiken zu, ohne die Seite zu blockieren.",
     "description": "Explanation text."
   },
   "saveTag": {
-    "message": "Save Tag",
+    "message": "Label speichern",
     "description": "Action button."
   },
   "areYouSure": {
-    "message": "Are you sure?",
+    "message": "Bist du sicher?",
     "description": "Modal title."
   },
   "cannotBeUndone": {
-    "message": "This action cannot be undone.",
+    "message": "Diese Aktion kann nicht rückgängig gemacht werden.",
     "description": "Modal sub-text warning."
   },
   "confirm": {
@@ -1652,67 +1652,67 @@
     "description": "Action button."
   },
   "privacyModalDesc": {
-    "message": "Pause all time-tracking and network-level blocking. Choose how long you want to pause:",
+    "message": "Pausiere alle Zeiterfassungen und Blockaden auf Netzwerkebene. Wähle, wie lange du pausieren möchtest:",
     "description": "Modal sub-text warning."
   },
   "createBlockPreset": {
-    "message": "Create Block Preset",
+    "message": "Block-Preset erstellen",
     "description": "Modal title."
   },
   "presetName": {
-    "message": "Preset Name",
+    "message": "Preset-Name",
     "description": "Label."
   },
   "egPresetName": {
-    "message": "e.g. Strict Mode",
+    "message": "z.B. Strikter Modus",
     "description": "Placeholder."
   },
   "rulesConfiguration": {
-    "message": "Rules Configuration",
+    "message": "Regelkonfiguration",
     "description": "Sub-header label."
   },
   "savePreset": {
-    "message": "Save Preset",
+    "message": "Preset speichern",
     "description": "Action button."
   },
   "timeAdjusted": {
-    "message": "Time adjusted",
+    "message": "Zeit angepasst",
     "description": "Toast notice."
   },
   "adjustFailed": {
-    "message": "Adjust failed",
+    "message": "Anpassung fehlgeschlagen",
     "description": "Toast notice."
   },
   "undoNeverTrackRestored": {
-    "message": "Undo: never-track restored",
+    "message": "Rückgängig: Niemals verfolgen wiederhergestellt",
     "description": "Toast notice."
   },
   "undoRuleRestored": {
-    "message": "Undo: rule restored",
+    "message": "Rückgängig: Regel wiederhergestellt",
     "description": "Toast notice."
   },
   "undoAllowRuleRestored": {
-    "message": "Undo: allow-rule restored",
+    "message": "Rückgängig: Erlaubnisregel wiederhergestellt",
     "description": "Toast notice."
   },
   "removed": {
-    "message": "Removed",
+    "message": "Entfernt",
     "description": "Toast notice."
   },
   "thresholdsUpdated": {
-    "message": "Thresholds updated",
+    "message": "Schwellenwerte aktualisiert",
     "description": "Toast notice."
   },
   "noItemsSelected": {
-    "message": "No items selected",
+    "message": "Keine Elemente ausgewählt",
     "description": "Toast notice."
   },
   "deleteRules": {
-    "message": "Delete Rules",
+    "message": "Regeln löschen",
     "description": "Confirm title."
   },
   "deleteRulesConfirm": {
-    "message": "Delete $count$ rules?",
+    "message": "$count$ Regeln löschen?",
     "description": "Confirm body.",
     "placeholders": {
       "count": {
@@ -1722,15 +1722,15 @@
     }
   },
   "itemsDeleted": {
-    "message": "Items deleted",
+    "message": "Elemente gelöscht",
     "description": "Toast notice."
   },
   "enterDomain": {
-    "message": "Enter a domain",
+    "message": "Gib eine Domain ein",
     "description": "Toast notice."
   },
   "taggedSuccessfully": {
-    "message": "$domain$ tagged successfully",
+    "message": "$domain$ erfolgreich gelabelt",
     "description": "Toast notice.",
     "placeholders": {
       "domain": {
@@ -1740,47 +1740,47 @@
     }
   },
   "studyGoalsSaved": {
-    "message": "Study goals saved",
+    "message": "Lernziele gespeichert",
     "description": "Toast notice."
   },
   "pickBothDates": {
-    "message": "Pick both dates",
+    "message": "Wähle beide Daten",
     "description": "Toast notice."
   },
   "endDateBeforeStart": {
-    "message": "End date is before start",
+    "message": "Enddatum liegt vor Startdatum",
     "description": "Toast notice."
   },
   "removedException": {
-    "message": "Removed exception",
+    "message": "Ausnahme entfernt",
     "description": "Toast notice."
   },
   "selectAtLeastOneDay": {
-    "message": "Select at least one day",
+    "message": "Wähle mindestens einen Tag aus",
     "description": "Toast notice."
   },
   "freeTimeSaved": {
-    "message": "Free-time slot saved successfully!",
+    "message": "Freizeit-Slot erfolgreich gespeichert!",
     "description": "Toast notice."
   },
   "sessionDeleted": {
-    "message": "Session deleted",
+    "message": "Sitzung gelöscht",
     "description": "Toast notice."
   },
   "alreadyAdded": {
-    "message": "Already added",
+    "message": "Bereits hinzugefügt",
     "description": "Toast notice."
   },
   "exceptionAdded": {
-    "message": "Exception added",
+    "message": "Ausnahme hinzugefügt",
     "description": "Toast notice."
   },
   "settingsSaved": {
-    "message": "Settings saved",
+    "message": "Einstellungen gespeichert",
     "description": "Toast notice."
   },
   "errorSavingSettings": {
-    "message": "Error saving settings: $error$",
+    "message": "Fehler beim Speichern der Einstellungen: $error$",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
@@ -1790,95 +1790,95 @@
     }
   },
   "pinSavedActive": {
-    "message": "PIN saved & active",
+    "message": "PIN gespeichert & aktiv",
     "description": "Toast notice."
   },
   "pinRemoved": {
-    "message": "PIN Removed",
+    "message": "PIN entfernt",
     "description": "Toast notice."
   },
   "resetStatsConfirm": {
-    "message": "Delete ALL statistics? This cannot be undone.",
+    "message": "ALLE Statistiken löschen? Dies kann nicht rückgängig gemacht werden.",
     "description": "Confirm body."
   },
   "resetConfirmBtn": {
-    "message": "Reset",
+    "message": "Zurücksetzen",
     "description": "Confirm action."
   },
   "clearRules": {
-    "message": "Clear Rules",
+    "message": "Regeln löschen",
     "description": "Confirm title."
   },
   "clearRulesConfirm": {
-    "message": "Remove all block/allow rules?",
+    "message": "Alle Block-/Erlaubnisregeln entfernen?",
     "description": "Confirm body."
   },
   "clearConfirmBtn": {
-    "message": "Clear",
+    "message": "Löschen",
     "description": "Confirm action."
   },
   "rulesCleared": {
-    "message": "Rules cleared",
+    "message": "Regeln gelöscht",
     "description": "Toast notice."
   },
   "clearCategories": {
-    "message": "Clear Categories",
+    "message": "Kategorien löschen",
     "description": "Confirm title."
   },
   "clearCategoriesConfirm": {
-    "message": "Remove all custom categories?",
+    "message": "Alle benutzerdefinierten Kategorien entfernen?",
     "description": "Confirm body."
   },
   "categoriesCleared": {
-    "message": "Categories cleared",
+    "message": "Kategorien gelöscht",
     "description": "Toast notice."
   },
   "clearHistoryConfirm": {
-    "message": "Clear history?",
+    "message": "Verlauf löschen?",
     "description": "Confirm body."
   },
   "cleared": {
-    "message": "Cleared",
+    "message": "Gelöscht",
     "description": "Toast notice."
   },
   "exportFailed": {
-    "message": "Export failed",
+    "message": "Export fehlgeschlagen",
     "description": "Toast notice."
   },
   "backupDownloaded": {
-    "message": "Backup downloaded",
+    "message": "Backup heruntergeladen",
     "description": "Toast notice."
   },
   "restoreBackup": {
-    "message": "Restore Backup",
+    "message": "Backup wiederherstellen",
     "description": "Confirm title."
   },
   "restoreBackupConfirm": {
-    "message": "Restoring will REPLACE all current data. Continue?",
+    "message": "Die Wiederherstellung ERSETZT alle aktuellen Daten. Fortfahren?",
     "description": "Confirm body."
   },
   "restoreConfirmBtn": {
-    "message": "Restore",
+    "message": "Wiederherstellen",
     "description": "Confirm action."
   },
   "restoredReloading": {
-    "message": "Restored — reloading…",
+    "message": "Wiederhergestellt — neu laden…",
     "description": "Toast notice."
   },
   "invalidJsonFile": {
-    "message": "Invalid JSON file",
+    "message": "Ungültige JSON-Datei",
     "description": "Toast notice."
   },
   "importLogsWattConfirm": {
-    "message": "This will merge Web Activity Time Tracker logs into Flow's history.\n\nWarning: If you import the same spreadsheet twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "Dies wird Web Activity Time Tracker Logs in den Verlauf von Flow zusammenführen.\n\nWarnung: Wenn du dasselbe Spreadsheet zweimal importierst, wird die erfasste Zeit zweimal hinzugefügt. Klicke auf OK, um fortzufahren.",
     "description": "Confirm body."
   },
   "importConfirmBtn": {
-    "message": "Import",
+    "message": "Importieren",
     "description": "Confirm action."
   },
   "successfullyImportedDays": {
-    "message": "Successfully imported $count$ days! Reloading...",
+    "message": "$count$ Tage erfolgreich importiert! Neu laden...",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -1888,7 +1888,7 @@
     }
   },
   "importFailedErr": {
-    "message": "Import failed: $error$",
+    "message": "Import fehlgeschlagen: $error$",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
@@ -1898,19 +1898,19 @@
     }
   },
   "invalidFile": {
-    "message": "Invalid file",
+    "message": "Ungültige Datei",
     "description": "Default error."
   },
   "importLogsTtConfirm": {
-    "message": "This will merge Time Tracker JSON logs into Flow's history.\n\nWarning: If you import the same JSON file twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "Dies wird Time Tracker JSON Logs in den Verlauf von Flow zusammenführen.\n\nWarnung: Wenn du dieselbe JSON-Datei zweimal importierst, wird die erfasste Zeit zweimal hinzugefügt. Klicke auf OK, um fortzufahren.",
     "description": "Confirm body."
   },
   "importLogsWtConfirm": {
-    "message": "This will merge Webtime Tracker CSV logs into Flow's history.\n\nWarning: If you import the same CSV file twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "Dies wird Webtime Tracker CSV Logs in den Verlauf von Flow zusammenführen.\n\nWarnung: Wenn du dieselbe CSV-Datei zweimal importierst, wird die erfasste Zeit zweimal hinzugefügt. Klicke auf OK, um fortzufahren.",
     "description": "Confirm body."
   },
   "activatedPreset": {
-    "message": "Activated preset: $name$",
+    "message": "Aktiviertes Preset: $name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -1920,39 +1920,39 @@
     }
   },
   "presetSavedSuccessfully": {
-    "message": "Preset saved successfully!",
+    "message": "Preset erfolgreich gespeichert!",
     "description": "Toast notice."
   },
   "scheduleDeleted": {
-    "message": "Schedule deleted",
+    "message": "Zeitplan gelöscht",
     "description": "Toast notice."
   },
   "scheduleUpdated": {
-    "message": "Schedule updated",
+    "message": "Zeitplan aktualisiert",
     "description": "Toast notice."
   },
   "scheduleAdded": {
-    "message": "Schedule added",
+    "message": "Zeitplan hinzugefügt",
     "description": "Toast notice."
   },
   "enterValidDomain": {
-    "message": "Please enter a valid domain",
+    "message": "Bitte gib eine gültige Domain ein",
     "description": "Toast notice."
   },
   "domainAlreadyAllowed": {
-    "message": "Domain already allowed",
+    "message": "Domain bereits erlaubt",
     "description": "Toast notice."
   },
   "addedToAllowlist": {
-    "message": "Added to Allowlist",
+    "message": "Zur Erlaubnisliste hinzugefügt",
     "description": "Toast notice."
   },
   "enterValidDomains": {
-    "message": "Please enter valid domain(s)",
+    "message": "Bitte gib gültige Domain(s) ein",
     "description": "Toast notice."
   },
   "addedDomainsToNeverTrack": {
-    "message": "Added $count$ domain(s) to Never-Track",
+    "message": "$count$ Domain(s) zu Niemals verfolgen hinzugefügt",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -1962,59 +1962,59 @@
     }
   },
   "domainsAlreadyInList": {
-    "message": "Domains already in list",
+    "message": "Domains bereits in der Liste",
     "description": "Toast notice."
   },
   "trackingResumed": {
-    "message": "Tracking resumed",
+    "message": "Tracking fortgesetzt",
     "description": "Toast notice."
   },
   "privacyModeEnabled": {
-    "message": "Privacy Mode enabled",
+    "message": "Datenschutzmodus aktiviert",
     "description": "Toast notice."
   },
   "backupRestoredReloading": {
-    "message": "Backup restored — reloading...",
+    "message": "Backup wiederhergestellt — neu laden...",
     "description": "Toast notice."
   },
   "downloadStarted": {
-    "message": "Download started",
+    "message": "Download gestartet",
     "description": "Toast notice."
   },
   "failedDownloadData": {
-    "message": "Failed to download data",
+    "message": "Daten konnten nicht heruntergeladen werden",
     "description": "Toast notice."
   },
   "deleteBackupConfirm": {
-    "message": "Permanently delete this backup from history?",
+    "message": "Dieses Backup dauerhaft aus dem Verlauf löschen?",
     "description": "Confirm body."
   },
   "deleteConfirmBtn": {
-    "message": "Delete",
+    "message": "Löschen",
     "description": "Confirm action."
   },
   "backupDeleted": {
-    "message": "Backup deleted",
+    "message": "Backup gelöscht",
     "description": "Toast notice."
   },
   "deleteFailed": {
-    "message": "Delete failed",
+    "message": "Löschen fehlgeschlagen",
     "description": "Toast notice."
   },
   "localBackupCreated": {
-    "message": "Local backup created",
+    "message": "Lokales Backup erstellt",
     "description": "Toast notice."
   },
   "backupCreationFailed": {
-    "message": "Backup creation failed",
+    "message": "Backup-Erstellung fehlgeschlagen",
     "description": "Toast notice."
   },
   "enterDomainFirstToBlockInstantly": {
-    "message": "Enter a domain name first to block instantly",
+    "message": "Gib zuerst einen Domainnamen ein, um ihn sofort zu blockieren",
     "description": "Toast notice."
   },
   "siteBlockedUnderPreset": {
-    "message": "Site blocked under $name$",
+    "message": "Seite blockiert unter $name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2024,7 +2024,7 @@
     }
   },
   "deletePresetConfirm": {
-    "message": "Are you sure you want to delete preset \"$name$\"?",
+    "message": "Bist du sicher, dass du das Preset \"$name$\" löschen möchtest?",
     "description": "Confirm body.",
     "placeholders": {
       "name": {
@@ -2034,27 +2034,27 @@
     }
   },
   "presetDeleted": {
-    "message": "Preset deleted",
+    "message": "Preset gelöscht",
     "description": "Toast notice."
   },
   "presetNameRequired": {
-    "message": "Preset name is required",
+    "message": "Preset-Name ist erforderlich",
     "description": "Toast notice."
   },
   "maxCustomPresetsLimit": {
-    "message": "You can add up to 3 custom presets",
+    "message": "Du kannst bis zu 3 benutzerdefinierte Presets hinzufügen",
     "description": "Toast notice."
   },
   "presetCreated": {
-    "message": "Preset created",
+    "message": "Preset erstellt",
     "description": "Toast notice."
   },
   "presetUpdated": {
-    "message": "Preset updated",
+    "message": "Preset aktualisiert",
     "description": "Toast notice."
   },
   "appliedPreset": {
-    "message": "Applied preset: $name$",
+    "message": "Angewandtes Preset: $name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2064,11 +2064,11 @@
     }
   },
   "undo10s": {
-    "message": "Undo (10s)",
+    "message": "Rückgängig (10s)",
     "description": "Undo text label."
   },
   "undoXs": {
-    "message": "Undo ($secs$s)",
+    "message": "Rückgängig ($secs$s)",
     "description": "Undo countdown.",
     "placeholders": {
       "secs": {
@@ -2078,39 +2078,39 @@
     }
   },
   "editBlockRule": {
-    "message": "Edit Block Rule",
+    "message": "Blockierregel bearbeiten",
     "description": "Modal title."
   },
   "startWork": {
-    "message": "▶ Start Work",
+    "message": "▶ Arbeit starten",
     "description": "Action button."
   },
   "startBreak": {
-    "message": "▶ Start Break",
+    "message": "▶ Pause starten",
     "description": "Action button."
   },
   "scheduledFocus": {
-    "message": "Scheduled Focus",
+    "message": "Geplanter Fokus",
     "description": "Focus mode timer subtext."
   },
   "pinLengthError": {
-    "message": "PIN must be exactly 6 digits",
+    "message": "PIN muss genau 6 Ziffern lang sein",
     "description": "PIN configuration error."
   },
   "pinsDoNotMatch": {
-    "message": "PINs do not match",
+    "message": "PINs stimmen nicht überein",
     "description": "PIN configuration error."
   },
   "readingFile": {
-    "message": "Reading file...",
+    "message": "Datei lesen...",
     "description": "Migration progress status."
   },
   "parsingCsvData": {
-    "message": "Parsing CSV data...",
+    "message": "CSV-Daten verarbeiten...",
     "description": "Migration progress status."
   },
   "mergingDaysOfHistory": {
-    "message": "Merging $count$ days of history...",
+    "message": "$count$ Tage Verlauf zusammenführen...",
     "description": "Migration progress status.",
     "placeholders": {
       "count": {
@@ -2120,11 +2120,11 @@
     }
   },
   "finalizingAndReloading": {
-    "message": "Finalizing and reloading...",
+    "message": "Abschließen und neu laden...",
     "description": "Migration progress status."
   },
   "importingDataDayOf": {
-    "message": "Importing data: Day $current$ of $total$...",
+    "message": "Daten importieren: Tag $current$ von $total$...",
     "description": "Migration progress status.",
     "placeholders": {
       "current": {
@@ -2138,23 +2138,23 @@
     }
   },
   "creatingPreImportBackup": {
-    "message": "Creating pre-import backup...",
+    "message": "Pre-Import-Backup erstellen...",
     "description": "Migration progress status."
   },
   "parsingJsonData": {
-    "message": "Parsing JSON data...",
+    "message": "JSON-Daten verarbeiten...",
     "description": "Migration progress status."
   },
   "creating": {
-    "message": "Creating...",
+    "message": "Erstellen...",
     "description": "Button progress indicator."
   },
   "editBlockPreset": {
-    "message": "Edit Block Preset",
+    "message": "Block-Preset bearbeiten",
     "description": "Modal title."
   },
   "pausedAlways": {
-    "message": "Paused (Always)",
+    "message": "Pausiert (Immer)",
     "description": "Indefinite pause status."
   },
   "delete": {
@@ -2166,27 +2166,27 @@
     "description": "Generic tooltip or button."
   },
   "restoreThisBackup": {
-    "message": "Restore this backup",
+    "message": "Dieses Backup wiederherstellen",
     "description": "Tooltip."
   },
   "downloadJsonFile": {
-    "message": "Download JSON file",
+    "message": "JSON-Datei herunterladen",
     "description": "Tooltip."
   },
   "deleteThisBackup": {
-    "message": "Delete this backup",
+    "message": "Dieses Backup löschen",
     "description": "Tooltip."
   },
   "egMorningFocus": {
-    "message": "e.g. Morning Focus",
+    "message": "z.B. Morgenfokus",
     "description": "Schedule input placeholder."
   },
   "quickStart": {
-    "message": "Quick Start",
+    "message": "Schnellstart",
     "description": "Button tooltip."
   },
   "editSettings": {
-    "message": "Edit Settings",
+    "message": "Einstellungen bearbeiten",
     "description": "Button tooltip."
   },
   "daySundayLetter": {
@@ -2230,7 +2230,7 @@
     "message": "45 Tage"
   },
   "trackLocalFiles": {
-    "message": "Track Local Files",
+    "message": "Lokale Dateien tracken",
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
@@ -2243,7 +2243,7 @@
     "message": "Lustige Blockierungsseite anzeigen"
   },
   "timeLimitWarning": {
-    "message": "Time limit warning before block",
+    "message": "Zeitlimit-Warnung vor Blockierung",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
@@ -2253,14 +2253,14 @@
     "message": "Sek"
   },
   "tabLimiter": {
-    "message": "Tab limiter per domain",
+    "message": "Tab-Limit pro Domain",
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
     "message": "Auf 0 setzen zum Deaktivieren."
   },
   "tabsMax": {
-    "message": "tabs max",
+    "message": "Tabs max",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
@@ -2291,7 +2291,7 @@
     "message": "Zeigt \"idl\" auf dem Badge an, wenn das Tracking pausiert oder inaktiv ist."
   },
   "dataRollover": {
-    "message": "Data & Rollover",
+    "message": "Daten & Übertrag",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
@@ -2313,23 +2313,23 @@
     }
   },
   "tuesday": {
-    "message": "Tuesday",
+    "message": "Dienstag",
     "description": "Weekday name."
   },
   "wednesday": {
-    "message": "Wednesday",
+    "message": "Mittwoch",
     "description": "Weekday name."
   },
   "thursday": {
-    "message": "Thursday",
+    "message": "Donnerstag",
     "description": "Weekday name."
   },
   "friday": {
-    "message": "Friday",
+    "message": "Freitag",
     "description": "Weekday name."
   },
   "saturday": {
-    "message": "Saturday",
+    "message": "Samstag",
     "description": "Weekday name."
   },
   "sun": {
@@ -2361,27 +2361,27 @@
     "description": "Abbreviated weekday name."
   },
   "everyday": {
-    "message": "Everyday",
+    "message": "Jeden Tag",
     "description": "Schedule frequency label."
   },
   "weekdays": {
-    "message": "Weekdays",
+    "message": "Wochentags",
     "description": "Schedule frequency label."
   },
   "focusSession": {
-    "message": "Focus Session",
+    "message": "Fokus-Session",
     "description": "Default focus session name."
   },
   "addSchedule": {
-    "message": "Add Schedule",
+    "message": "Zeitplan hinzufügen",
     "description": "Add schedule button."
   },
   "notEnoughDataYet": {
-    "message": "Not enough data yet",
+    "message": "Noch nicht genug Daten",
     "description": "Empty state analytics label."
   },
   "label": {
-    "message": "Label",
+    "message": "Bezeichnung",
     "description": "Text input label."
   },
   "start": {
@@ -2393,47 +2393,47 @@
     "description": "Time input label."
   },
   "categoriesToBlock": {
-    "message": "Categories to Block",
+    "message": "Zu blockierende Kategorien",
     "description": "Categories select section header."
   },
   "preScheduleNotification": {
-    "message": "Pre-Schedule Notification",
+    "message": "Vorab-Benachrichtigung",
     "description": "Option label."
   },
   "preScheduleNotificationDesc": {
-    "message": "Get notified before the session starts.",
+    "message": "Werde benachrichtigt, bevor die Session beginnt.",
     "description": "Option sublabel."
   },
   "disabled": {
-    "message": "Disabled",
+    "message": "Deaktiviert",
     "description": "Option setting selection."
   },
   "oneMinBefore": {
-    "message": "1 min before",
+    "message": "1 Min. vorher",
     "description": "Option setting selection."
   },
   "fiveMinsBefore": {
-    "message": "5 mins before",
+    "message": "5 Min. vorher",
     "description": "Option setting selection."
   },
   "tenMinsBefore": {
-    "message": "10 mins before",
+    "message": "10 Min. vorher",
     "description": "Option setting selection."
   },
   "fifteenMinsBefore": {
-    "message": "15 mins before",
+    "message": "15 Min. vorher",
     "description": "Option setting selection."
   },
   "editFocusSchedule": {
-    "message": "Edit Focus Schedule",
+    "message": "Fokus-Zeitplan bearbeiten",
     "description": "Dialog title."
   },
   "addFocusSchedule": {
-    "message": "Add Focus Schedule",
+    "message": "Fokus-Zeitplan hinzufügen",
     "description": "Dialog title."
   },
   "bestDowStat": {
-    "message": "$day$ — avg $time$ of focus",
+    "message": "$day$ — Ø $time$ Fokus",
     "description": "Best day of week performance metric.",
     "placeholders": {
       "day": {
@@ -2447,39 +2447,39 @@
     }
   },
   "editPreset": {
-    "message": "Edit Preset",
+    "message": "Preset bearbeiten",
     "description": "Modal title."
   },
   "workTimeMin": {
-    "message": "Work Time (min)",
+    "message": "Arbeitszeit (Min)",
     "description": "Input field label."
   },
   "breakTimeMin": {
-    "message": "Break Time (min)",
+    "message": "Pausenzeit (Min)",
     "description": "Input field label."
   },
   "longBreakMin": {
-    "message": "Long Break (min)",
+    "message": "Lange Pause (Min)",
     "description": "Input field label."
   },
   "enableNotifications": {
-    "message": "Enable Notifications",
+    "message": "Benachrichtigungen aktivieren",
     "description": "Toggle switch label."
   },
   "epNotifyDesc": {
-    "message": "Receive push alerts when focus periods or breaks end.",
+    "message": "Erhalte Push-Meldungen, wenn Fokusphasen oder Pausen enden.",
     "description": "Help text."
   },
   "autoStartNextCycle": {
-    "message": "Auto-Start Next Cycle",
+    "message": "Nächsten Zyklus automatisch starten",
     "description": "Toggle switch label."
   },
   "epAutoStartDesc": {
-    "message": "Automatically transition to the next work cycle or break.",
+    "message": "Automatisch in den nächsten Arbeitszyklus oder die nächste Pause wechseln.",
     "description": "Help text."
   },
   "categoriesToBlockDuringFocus": {
-    "message": "Categories to Block during focus",
+    "message": "Kategorien, die während des Fokus blockiert werden sollen",
     "description": "Checkbox group header."
   },
   "presetPomodoro": {
@@ -2491,7 +2491,7 @@
     "description": "Built-in preset name."
   },
   "presetShortSprint": {
-    "message": "Short Sprint",
+    "message": "Kurzer Sprint",
     "description": "Built-in preset name."
   },
   "presetFlow": {
@@ -2503,7 +2503,7 @@
     "description": "Placeholder text."
   },
   "startFirstSession": {
-    "message": "Start First Session",
+    "message": "Erste Session starten",
     "description": "Button label."
   },
   "siteList": {
@@ -2519,15 +2519,15 @@
     "description": "Tab title."
   },
   "addFreetime": {
-    "message": "Add Free-time",
+    "message": "Freizeit hinzufügen",
     "description": "Button label."
   },
   "addBlockRule": {
-    "message": "Add Block Rule",
+    "message": "Blockierregel hinzufügen",
     "description": "Modal title."
   },
   "siteCountSingle": {
-    "message": "$count$ site",
+    "message": "$count$ Seite",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2537,7 +2537,7 @@
     }
   },
   "siteCountPlural": {
-    "message": "$count$ sites",
+    "message": "$count$ Seiten",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2547,67 +2547,67 @@
     }
   },
   "minActiveTimeShort": {
-    "message": "Min Active Time (m)",
+    "message": "Min. aktive Zeit (m)",
     "description": "Short label for sidebar settings."
   },
   "ratioThresholdShort": {
-    "message": "Ratio Threshold (%)",
+    "message": "Verhältnis-Schwellenwert (%)",
     "description": "Short label for sidebar settings."
   },
   "averageFocus": {
-    "message": "Average Focus",
+    "message": "Durchschnittlicher Fokus",
     "description": "Chart line label."
   },
   "noRulesYet": {
-    "message": "No rules yet",
+    "message": "Noch keine Regeln",
     "description": "Placeholder header."
   },
   "blockSitesToGetStarted": {
-    "message": "Block distracting sites to get started.",
+    "message": "Blockiere ablenkende Seiten, um zu beginnen.",
     "description": "Placeholder description."
   },
   "noExceptionsYet": {
-    "message": "No exceptions yet",
+    "message": "Noch keine Ausnahmen",
     "description": "Placeholder header."
   },
   "allowSitesDesc": {
-    "message": "Allow sites that bypass all blocking rules.",
+    "message": "Erlaube Seiten, die alle Blockierregeln umgehen.",
     "description": "Placeholder description."
   },
   "noDomainsIgnored": {
-    "message": "No domains ignored",
+    "message": "Keine Domains ignoriert",
     "description": "Placeholder header."
   },
   "neverTrackDesc": {
-    "message": "Domains on this list will never be tracked for analytics.",
+    "message": "Domains auf dieser Liste werden nie für Analysen erfasst.",
     "description": "Placeholder description."
   },
   "freetimeHoursTitle": {
-    "message": "Free-time Hours",
+    "message": "Freizeit-Stunden",
     "description": "Section header."
   },
   "editCategory": {
-    "message": "Edit Category",
+    "message": "Kategorie bearbeiten",
     "description": "Title for custom category edit modal."
   },
   "categoryName": {
-    "message": "Category Name",
+    "message": "Kategoriename",
     "description": "Label for category name input field."
   },
   "emojiIcon": {
-    "message": "Emoji Icon",
+    "message": "Emoji-Symbol",
     "description": "Label for category emoji input field."
   },
   "accentColor": {
-    "message": "Accent Color",
+    "message": "Akzentfarbe",
     "description": "Label for category accent color picker."
   },
   "presetSwatches": {
-    "message": "Preset Swatches",
+    "message": "Voreingestellte Farbfelder",
     "description": "Label for color preset swatches."
   },
   "resetToDefault": {
-    "message": "Reset to Default",
+    "message": "Auf Standard zurücksetzen",
     "description": "Button text to reset category to default settings."
   },
   "save": {

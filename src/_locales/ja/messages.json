@@ -31,11 +31,11 @@
     "description": "Label for the analytics section or button."
   },
   "toggleTheme": {
-    "message": "Toggle theme",
+    "message": "テーマを切り替える",
     "description": "Tooltip for the theme toggle button."
   },
   "privacyMode": {
-    "message": "Privacy Mode / Pause Tracking",
+    "message": "プライバシーモード / トラッキングを一時停止",
     "description": "Label for the privacy mode toggle that pauses tracking."
   },
   "settings": {
@@ -73,7 +73,7 @@
     "message": "週間目標"
   },
   "goalDone": {
-    "message": "$h$h $m$m done",
+    "message": "$h$h $m$m 完了",
     "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
     "placeholders": {
       "h": {
@@ -204,7 +204,7 @@
     "message": "サイトをブロック"
   },
   "defaultInstant": {
-    "message": "Default (Instant)",
+    "message": "デフォルト (即時)",
     "description": "Label for the default instant-block mode."
   },
   "confirmBlockTitle": {
@@ -212,7 +212,7 @@
     "description": "Title of the custom confirmation modal when blocking a site."
   },
   "confirmBlock": {
-    "message": "Are you sure you want to block $domain$? This will reload the tab and block access to this site.",
+    "message": "本当に $domain$ をブロックしますか？タブが再読み込みされ、このサイトへのアクセスがブロックされます。",
     "description": "Confirmation dialog when blocking a site.",
     "placeholders": {
       "domain": {
@@ -311,7 +311,7 @@
     "description": "Tooltip explaining privacy mode is unavailable during focus sessions."
   },
   "hDone": {
-    "message": "$h$h $m$m done",
+    "message": "$h$h $m$m 完了",
     "description": "Hours and minutes completed. Example: 1h 45m done.",
     "placeholders": {
       "h": {
@@ -339,7 +339,7 @@
     }
   },
   "blockedPageTitle": {
-    "message": "Blocked — Flow",
+    "message": "ブロックされました — Flow",
     "description": "Page title for the blocked site page."
   },
   "blockedMsg1Emoji": {
@@ -347,11 +347,11 @@
     "description": "Emoji for blocked message variant 1."
   },
   "blockedMsg1Head": {
-    "message": "Not today, champ.",
+    "message": "今日はダメだ、チャンピオン。",
     "description": "Heading for blocked message variant 1."
   },
   "blockedMsg1Sub": {
-    "message": "Your future self said NO. They were very firm about it.",
+    "message": "未来のあなたが「NO」と言っています。固い決意です。",
     "description": "Subtext for blocked message variant 1."
   },
   "blockedMsg2Emoji": {
@@ -359,11 +359,11 @@
     "description": "Emoji for blocked message variant 2."
   },
   "blockedMsg2Head": {
-    "message": "ACCESS DENIED.",
+    "message": "アクセス拒否。",
     "description": "Heading for blocked message variant 2."
   },
   "blockedMsg2Sub": {
-    "message": "The productivity bot has spoken. Resistance is futile.",
+    "message": "生産性ボットの決定です。抵抗は無意味です。",
     "description": "Subtext for blocked message variant 2."
   },
   "blockedMsg3Emoji": {
@@ -371,11 +371,11 @@
     "description": "Emoji for blocked message variant 3."
   },
   "blockedMsg3Head": {
-    "message": "Big Brain Move.",
+    "message": "賢明な判断。",
     "description": "Heading for blocked message variant 3."
   },
   "blockedMsg3Sub": {
-    "message": "You blocked this. Past-you was smarter than you right now.",
+    "message": "あなたがこれをブロックしました。過去のあなたは今のあなたより賢かったのです。",
     "description": "Subtext for blocked message variant 3."
   },
   "blockedMsg4Emoji": {
@@ -383,11 +383,11 @@
     "description": "Emoji for blocked message variant 4."
   },
   "blockedMsg4Head": {
-    "message": "The door is locked.",
+    "message": "ドアは施錠されています。",
     "description": "Heading for blocked message variant 4."
   },
   "blockedMsg4Sub": {
-    "message": "You put the lock there. You gave me the key. Not giving it back.",
+    "message": "あなたが鍵をかけました。鍵は返しませんよ。",
     "description": "Subtext for blocked message variant 4."
   },
   "blockedMsg5Emoji": {
@@ -395,11 +395,11 @@
     "description": "Emoji for blocked message variant 5."
   },
   "blockedMsg5Head": {
-    "message": "Your discipline called.",
+    "message": "自制心からの呼び出しです。",
     "description": "Heading for blocked message variant 5."
   },
   "blockedMsg5Sub": {
-    "message": "It wants you back. It misses you. Go do the thing.",
+    "message": "戻ってきてほしいそうです。さあ、やるべきことをやりましょう。",
     "description": "Subtext for blocked message variant 5."
   },
   "blockedMsg6Emoji": {
@@ -407,11 +407,11 @@
     "description": "Emoji for blocked message variant 6."
   },
   "blockedMsg6Head": {
-    "message": "NOPE. Absolutely not.",
+    "message": "ダメ。絶対に。",
     "description": "Heading for blocked message variant 6."
   },
   "blockedMsg6Sub": {
-    "message": "Come back when you earned it. You know what to do.",
+    "message": "ふさわしい成果を上げてから戻ってきてください。やるべきことは分かっていますね。",
     "description": "Subtext for blocked message variant 6."
   },
   "blockedMsg7Emoji": {
@@ -419,11 +419,11 @@
     "description": "Emoji for blocked message variant 7."
   },
   "blockedMsg7Head": {
-    "message": "Stay hard.",
+    "message": "気を引き締めて。",
     "description": "Heading for blocked message variant 7."
   },
   "blockedMsg7Sub": {
-    "message": "The work does not do itself. Go back to it.",
+    "message": "仕事は勝手に終わりません。作業に戻りましょう。",
     "description": "Subtext for blocked message variant 7."
   },
   "blockedMsg8Emoji": {
@@ -431,79 +431,79 @@
     "description": "Emoji for blocked message variant 8."
   },
   "blockedMsg8Head": {
-    "message": "Bock bock bock!",
+    "message": "コッコッコッ！",
     "description": "Heading for blocked message variant 8."
   },
   "blockedMsg8Sub": {
-    "message": "That is the sound of procrastination. Don't be a chicken.",
+    "message": "それは先延ばしの音です。臆病風に吹かれないで。",
     "description": "Subtext for blocked message variant 8."
   },
   "neutralBlockHead": {
-    "message": "This site is blocked",
+    "message": "このサイトはブロックされています",
     "description": "Neutral heading when a site is blocked without a fun message."
   },
   "neutralBlockSub": {
-    "message": "Access is restricted by your Flow rules.",
+    "message": "Flowのルールによりアクセスが制限されています。",
     "description": "Neutral subtext for blocked site."
   },
   "ruleInstantBlock": {
-    "message": "Instant Block Active",
+    "message": "即時ブロックがアクティブ",
     "description": "Badge text for an instant block rule."
   },
   "ruleScheduleBlock": {
-    "message": "Schedule Block Active",
+    "message": "スケジュールブロックがアクティブ",
     "description": "Badge text for a schedule-based block rule."
   },
   "ruleTimeLimitReached": {
-    "message": "Daily Limit Reached",
+    "message": "1日の制限時間に達しました",
     "description": "Badge text when the daily time limit is reached."
   },
   "ruleSessionLimitReached": {
-    "message": "Session Limit Reached",
+    "message": "セッション制限に達しました",
     "description": "Badge text when the per-session time limit is reached."
   },
   "ruleManuallyBlocked": {
-    "message": "Manually Blocked",
+    "message": "手動でブロックされました",
     "description": "Badge text when a site was manually blocked by the user."
   },
   "ruleTweakBlocked": {
-    "message": "Distracting Section Blocked",
+    "message": "気を散らすセクションがブロックされました",
     "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
   },
   "ruleDetailInstant": {
-    "message": "This site is set to always block.",
+    "message": "このサイトは常にブロックするように設定されています。",
     "description": "Detail text explaining an instant block rule."
   },
   "ruleDetailSchedule": {
-    "message": "This site is blocked during your scheduled block hours.",
+    "message": "このサイトはスケジュールされたブロック時間中はブロックされます。",
     "description": "Detail text explaining a schedule block rule."
   },
   "ruleDetailTimeLimit": {
-    "message": "You have hit your daily time limit for this site.",
+    "message": "このサイトの1日の制限時間に達しました。",
     "description": "Detail text explaining the daily time limit was reached."
   },
   "ruleDetailSessionLimit": {
-    "message": "You have hit your per-session limit for this site. Take a break!",
+    "message": "このサイトのセッション制限に達しました。休憩しましょう！",
     "description": "Detail text explaining the session limit was reached."
   },
   "ruleDetailManual": {
-    "message": "You added this site to your block list.",
+    "message": "このサイトをブロックリストに追加しました。",
     "description": "Detail text explaining the site was manually blocked."
   },
   "ruleDetailTweak": {
-    "message": "Access to this specific section is blocked by your Advanced Site Tweaks.",
+    "message": "高度なサイト調整により、この特定のセクションへのアクセスはブロックされています。",
     "description": "Detail text explaining a site tweak block."
   },
   "blockRuleActive": {
-    "message": "Block Rule Active",
+    "message": "ブロックルールがアクティブ",
     "description": "Generic badge for any active block rule."
   },
   "blockedByFlow": {
-    "message": "Blocked by Flow",
+    "message": "Flowによってブロックされました",
     "description": "Generic blocked indicator."
   },
   "dailyLimitBadge": {
-    "message": "Daily limit · $mins$ min spent",
+    "message": "1日の制限 · $mins$分 経過",
     "description": "Badge showing daily limit and time spent.",
     "placeholders": {
       "mins": {
@@ -513,7 +513,7 @@
     }
   },
   "blockedUntil": {
-    "message": "Blocked until $time$",
+    "message": "$time$ までブロックされています",
     "description": "Shows when the block will be lifted.",
     "placeholders": {
       "time": {
@@ -523,11 +523,11 @@
     }
   },
   "cooldownOver": {
-    "message": "Cooldown over! Refresh page to visit.",
+    "message": "クールダウン終了！ページを更新してアクセスしてください。",
     "description": "Message shown when the cooldown timer has expired."
   },
   "takeABreak": {
-    "message": "Take a break · unblocking in $time$",
+    "message": "休憩しましょう · $time$ にブロック解除",
     "description": "Cooldown message showing time until unblock.",
     "placeholders": {
       "time": {
@@ -537,7 +537,7 @@
     }
   },
   "blockedUntilSchedule": {
-    "message": "This site is blocked until $time$ by your schedule.",
+    "message": "このサイトはスケジュールにより $time$ までブロックされています。",
     "description": "Tells user when the schedule block lifts.",
     "placeholders": {
       "time": {
@@ -547,75 +547,75 @@
     }
   },
   "defaultRuleDetail": {
-    "message": "This site has been blocked by one of your rules.",
+    "message": "このサイトはルールの1つによってブロックされています。",
     "description": "Fallback detail text for an unknown block rule."
   },
   "goDoSomethingUseful": {
-    "message": "Go do something useful:",
+    "message": "有意義なことをしましょう：",
     "description": "Heading above helpful link suggestions on the blocked page."
   },
   "takeBackBtn": {
-    "message": "← Take me back",
+    "message": "← 戻る",
     "description": "Button to navigate back to the previous page."
   },
   "manageBlockRules": {
-    "message": "Manage block rules →",
+    "message": "ブロックルールを管理 →",
     "description": "Link to the dashboard to manage block rules."
   },
   "thisSite": {
-    "message": "this site",
+    "message": "このサイト",
     "description": "Generic label referring to the current site."
   },
   "quote1": {
-    "message": "\"Future you is watching. Make them proud.\"",
+    "message": "「未来のあなたが見ています。彼らを誇りに思わせましょう。」",
     "description": "Motivational quote 1."
   },
   "quote2": {
-    "message": "\"Discipline is choosing between what you want now and what you want most.\"",
+    "message": "「規律とは、今欲しいものと最も欲しいものを選ぶことだ。」",
     "description": "Motivational quote 2."
   },
   "quote3": {
-    "message": "\"Deep work beats busy work.\"",
+    "message": "「深い仕事は忙しいだけの仕事に勝る。」",
     "description": "Motivational quote 3."
   },
   "quote4": {
-    "message": "\"Small steps every day build big results.\"",
+    "message": "「毎日の小さな一歩が大きな結果を生む。」",
     "description": "Motivational quote 4."
   },
   "quote5": {
-    "message": "\"You don't need more time. You need more focus.\"",
+    "message": "「時間ではなく、集中力が足りないのだ。」",
     "description": "Motivational quote 5."
   },
   "quote6": {
-    "message": "\"What you do today matters more than you think.\"",
+    "message": "「今日あなたがすることが、思っている以上に重要だ。」",
     "description": "Motivational quote 6."
   },
   "quote7": {
-    "message": "\"The obstacle is the way.\"",
+    "message": "「障害こそが道となる。」",
     "description": "Motivational quote 7."
   },
   "quote8": {
-    "message": "\"Suffer the pain of discipline or suffer the pain of regret.\"",
+    "message": "「規律の痛みを味わうか、後悔の痛みを味わうかだ。」",
     "description": "Motivational quote 8."
   },
   "quote9": {
-    "message": "\"Your focus determines your reality.\"",
+    "message": "「あなたの集中が現実を決める。」",
     "description": "Motivational quote 9."
   },
   "quote10": {
-    "message": "\"Be so good they cannot ignore you.\"",
+    "message": "「無視できないほど優秀になれ。」",
     "description": "Motivational quote 10."
   },
   "quote11": {
-    "message": "\"Discipline equals freedom.\"",
+    "message": "「規律は自由である。」",
     "description": "Motivational quote 11."
   },
   "privacyModeTitle": {
-    "message": "Privacy Mode / Pause Tracking",
+    "message": "プライバシーモード / トラッキングを一時停止",
     "description": "Tooltip for privacy mode toggle."
   },
   "pausedTime": {
-    "message": "Paused: $time$",
+    "message": "一時停止中: $time$",
     "description": "Paused timer display.",
     "placeholders": {
       "time": {
@@ -629,15 +629,15 @@
     "description": "Label for the site manager button or section."
   },
   "settingsLocked": {
-    "message": "Settings Locked",
+    "message": "設定はロックされています",
     "description": "Title when settings are passcode locked."
   },
   "incorrectPinTryAgain": {
-    "message": "Incorrect PIN — try again",
+    "message": "PINが間違っています — もう一度お試しください",
     "description": "PIN mismatch warning."
   },
   "analyticsDesc": {
-    "message": "Your complete productivity picture.",
+    "message": "あなたの生産性の全体像。",
     "description": "Analytics section description."
   },
   "timeDistribution": {
@@ -663,15 +663,15 @@
     "message": "比較"
   },
   "insights": {
-    "message": "Insights",
+    "message": "インサイト",
     "description": "Insights tab title."
   },
   "7days": {
-    "message": "7 days",
+    "message": "7日間",
     "description": "Range selection button label."
   },
   "30days": {
-    "message": "30 days",
+    "message": "30日間",
     "description": "Range selection button label."
   },
   "customRange": {
@@ -713,89 +713,89 @@
     "message": "記録日数"
   },
   "searchSites": {
-    "message": "Search sites…",
+    "message": "サイトを検索…",
     "description": "Filter placeholder."
   },
   "domain": {
-    "message": "Domain",
+    "message": "ドメイン",
     "description": "Site manager table header."
   },
   "actions": {
-    "message": "Actions",
+    "message": "アクション",
     "description": "Site manager table header."
   },
   "category": {
-    "message": "Category",
+    "message": "カテゴリ",
     "description": "Site manager table header."
   },
   "avgDay": {
-    "message": "Avg/Day",
+    "message": "平均/日",
     "description": "Average usage per day table header."
   },
   "loadingSites": {
-    "message": "Loading sites…",
+    "message": "サイトを読み込み中…",
     "description": "Loader text."
   },
   "totalWorkStudy": {
-    "message": "Total Work/Study",
+    "message": "仕事/学習の合計",
     "description": "Focus category sum label."
   },
   "totalDistraction": {
-    "message": "Total Distraction",
+    "message": "気を散らす時間の合計",
     "description": "Distraction category sum label."
   },
   "productivityRatio": {
-    "message": "Productivity Ratio",
+    "message": "生産性比率",
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
     "message": "良い日 (365日)"
   },
   "wastedDays365d": {
-    "message": "Wasted (365d)",
+    "message": "無駄にした日数 (365日)",
     "description": "Number of low productivity days."
   },
   "consistency365": {
     "message": "365日の一貫性"
   },
   "heatmapHelp": {
-    "message": "Each square is one day. Greener = more focus time. Red = wasted day.",
+    "message": "各四角は1日を表します。緑が濃いほど集中した時間。赤は無駄にした日です。",
     "description": "Description of yearly heatmap."
   },
   "clickToCustomizeThresholds": {
-    "message": "Click to customize thresholds",
+    "message": "クリックしてしきい値をカスタマイズ",
     "description": "Legend customization tooltip."
   },
   "less": {
-    "message": "Less",
+    "message": "少ない",
     "description": "Heatmap legend lower label."
   },
   "more": {
-    "message": "More",
+    "message": "多い",
     "description": "Heatmap legend higher label."
   },
   "wasted": {
-    "message": "Wasted",
+    "message": "無駄にした日",
     "description": "Heatmap legend wasted day label."
   },
   "buildingHeatmap": {
-    "message": "Building heatmap…",
+    "message": "ヒートマップを作成中…",
     "description": "Heatmap builder indicator."
   },
   "weekdayVsWeekend": {
-    "message": "Weekday vs Weekend",
+    "message": "平日 vs 週末",
     "description": "Split comparison chart label."
   },
   "mostProductiveDay": {
-    "message": "Most Productive Day",
+    "message": "最も生産的な日",
     "description": "Day of week with highest productivity."
   },
   "focusDesc": {
-    "message": "Lock in, track goals, and build your streak.",
+    "message": "集中し、目標を追跡し、連続記録を作りましょう。",
     "description": "Focus section subtitle."
   },
   "zeroCycles": {
-    "message": "0 cycles",
+    "message": "0 サイクル",
     "description": "Zero completed cycles."
   },
   "startFocus": {
@@ -809,14 +809,14 @@
     "message": "集中スケジュール"
   },
   "goalsStreak": {
-    "message": "Goals & Streak",
+    "message": "目標と連続記録",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
     "message": "週間目標 (時間)"
   },
   "dailyStreakMin": {
-    "message": "Daily Streak Min (m)",
+    "message": "1日の連続記録の最小値 (分)",
     "description": "Config label."
   },
   "startWeekOn": {
@@ -824,25 +824,25 @@
     "description": "Config label."
   },
   "monday": {
-    "message": "Monday",
+    "message": "月曜日",
     "description": "Weekday name."
   },
   "sunday": {
-    "message": "Sunday",
+    "message": "日曜日",
     "description": "Weekday name."
   },
   "countTowardsGoals": {
     "message": "目標にカウント"
   },
   "saveGoals": {
-    "message": "Save Goals",
+    "message": "目標を保存",
     "description": "Action button label."
   },
   "weekProgress": {
     "message": "今週の進捗"
   },
   "zeroGoalDone": {
-    "message": "0h 0m done",
+    "message": "0h 0m 完了",
     "description": "No progress yet."
   },
   "noGoal": {
@@ -853,123 +853,123 @@
     "message": "履歴"
   },
   "clearHistory": {
-    "message": "Clear History",
+    "message": "履歴をクリア",
     "description": "Delete history tooltip."
   },
   "noFocusSessions": {
-    "message": "No focus sessions yet.",
+    "message": "フォーカスセッションはまだありません。",
     "description": "Empty state label."
   },
   "siteManagerDesc": {
-    "message": "Tag sites for analytics, or block them entirely.",
+    "message": "分析のためにサイトにタグを付けるか、完全にブロックします。",
     "description": "Site manager subtitle."
   },
   "ruleManager": {
-    "message": "Rule Manager",
+    "message": "ルールマネージャー",
     "description": "Block page inner card title."
   },
   "blockList": {
-    "message": "Block List",
+    "message": "ブロックリスト",
     "description": "Config category."
   },
   "allowlist": {
-    "message": "Allowlist",
+    "message": "許可リスト",
     "description": "Config category."
   },
   "neverTrack": {
-    "message": "Never Track",
+    "message": "追跡しない",
     "description": "Config category."
   },
   "searchRules": {
-    "message": "Search rules…",
+    "message": "ルールを検索…",
     "description": "Rules filter placeholder."
   },
   "domainName": {
-    "message": "Domain Name",
+    "message": "ドメイン名",
     "description": "Input field label."
   },
   "egDomain": {
-    "message": "e.g. reddit.com",
+    "message": "例: reddit.com",
     "description": "Placeholder."
   },
   "redirectToOptional": {
-    "message": "Redirect To (Optional)",
+    "message": "リダイレクト先 (オプション)",
     "description": "Input field label."
   },
   "egRedirect": {
-    "message": "e.g. pw.live",
+    "message": "例: pw.live",
     "description": "Placeholder."
   },
   "addNewRule": {
-    "message": "+ Add New Rule",
+    "message": "+ 新しいルールを追加",
     "description": "Action button."
   },
   "bulkEdit": {
-    "message": "Bulk Edit",
+    "message": "一括編集",
     "description": "Action button."
   },
   "egAllowDomain": {
-    "message": "e.g. gmail.com",
+    "message": "例: gmail.com",
     "description": "Placeholder."
   },
   "addToAllowlist": {
-    "message": "+ Add to Allowlist",
+    "message": "+ 許可リストに追加",
     "description": "Action button."
   },
   "domainNamePlural": {
-    "message": "Domain Name(s)",
+    "message": "ドメイン名",
     "description": "Input field label."
   },
   "egNeverTrackDomain": {
-    "message": "e.g. bank.com, private.com",
+    "message": "例: bank.com, private.com",
     "description": "Placeholder."
   },
   "addToNeverTrack": {
-    "message": "+ Add to Never-Track",
+    "message": "+ 追跡しないリストに追加",
     "description": "Action button."
   },
   "tipClick": {
-    "message": "Tip: Click ",
+    "message": "ヒント: ルールをクリックして",
     "description": "Helpful hint start."
   },
   "tipRuleDetails": {
-    "message": " on any rule to set time limits, schedules, or a cool-down timer.",
+    "message": "制限時間、スケジュール、またはクールダウンタイマーを設定します。",
     "description": "Helpful hint body."
   },
   "deleteSelected": {
-    "message": "Delete Selected",
+    "message": "選択したものを削除",
     "description": "Bulk action button."
   },
   "type": {
-    "message": "Type",
+    "message": "タイプ",
     "description": "Table column header."
   },
   "mode": {
-    "message": "Mode",
+    "message": "モード",
     "description": "Table column header."
   },
   "dailyLimit": {
-    "message": "Daily Limit",
+    "message": "1日の制限",
     "description": "Table column header."
   },
   "noBlockingRules": {
-    "message": "No blocking rules yet.",
+    "message": "ブロックルールはまだありません。",
     "description": "Empty state label."
   },
   "freeTimeHours": {
-    "message": "Free-time hours (no blocking)",
+    "message": "フリータイム時間 (ブロックなし)",
     "description": "Card sub-title."
   },
   "filterByCategory": {
-    "message": "🔍 Filter by Category",
+    "message": "🔍 カテゴリで絞り込む",
     "description": "Card title."
   },
   "searchSitesInCategories": {
-    "message": "Search sites in categories…",
+    "message": "カテゴリ内のサイトを検索…",
     "description": "Placeholder."
   },
   "trackLabelSite": {
-    "message": "+ Track / Label Site",
+    "message": "+ サイトを追跡/ラベル付け",
     "description": "Action button."
   },
   "settingsDesc": {
@@ -1031,7 +1031,7 @@
     "message": "音声や動画が再生中の場合は（アイドル時でも）追跡を継続します。"
   },
   "ignoreQuickVisits": {
-    "message": "Ignore Quick Visits",
+    "message": "短い訪問を無視する",
     "description": "Settings config option."
   },
   "ignoreQuickVisitsDesc": {
@@ -1041,15 +1041,15 @@
     "message": "オフ (すべて追跡)"
   },
   "3seconds": {
-    "message": "3 seconds",
+    "message": "3秒",
     "description": "Dropdown choice."
   },
   "5seconds": {
-    "message": "5 seconds",
+    "message": "5秒",
     "description": "Dropdown choice."
   },
   "10seconds": {
-    "message": "10 seconds",
+    "message": "10秒",
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
@@ -1077,15 +1077,15 @@
     "message": "3年後"
   },
   "foreverKeepAll": {
-    "message": "Forever (keep all)",
+    "message": "無期限 (すべて保持)",
     "description": "Dropdown choice."
   },
   "weeklyAutoBackup": {
-    "message": "Weekly Auto-Backup",
+    "message": "毎週の自動バックアップ",
     "description": "Settings config option."
   },
   "weeklyAutoBackupDesc": {
-    "message": "Automatically export and download your tracking stats and rules once a week.",
+    "message": "週に1回、追跡統計とルールを自動的にエクスポートしてダウンロードします。",
     "description": "Settings config option description."
   },
   "appearance": {
@@ -1109,47 +1109,47 @@
     "description": "Settings config option description."
   },
   "systemDefault": {
-    "message": "System Default",
+    "message": "システムデフォルト",
     "description": "Dropdown choice."
   },
   "langEnglish": {
-    "message": "English",
+    "message": "英語",
     "description": "Language choice."
   },
   "langSpanish": {
-    "message": "Español (Informal/Blunt)",
+    "message": "スペイン語 (カジュアル/率直)",
     "description": "Language choice."
   },
   "langChineseSimplified": {
-    "message": "Chinese (Simplified) / 简体中文",
+    "message": "中国語 (簡体字) / 简体中文",
     "description": "Language choice."
   },
   "langChineseTraditional": {
-    "message": "Chinese (Traditional) / 繁體中文",
+    "message": "中国語 (繁体字) / 繁體中文",
     "description": "Language choice."
   },
   "langChineseHongKong": {
-    "message": "Chinese (Hong Kong) / 繁體中文 (香港)",
+    "message": "中国語 (香港) / 繁體中文 (香港)",
     "description": "Language choice."
   },
   "langJapanese": {
-    "message": "Japanese / 日本語",
+    "message": "日本語",
     "description": "Language choice."
   },
   "langGerman": {
-    "message": "German / Deutsch",
+    "message": "ドイツ語 / Deutsch",
     "description": "Language choice."
   },
   "langPortugueseBrazil": {
-    "message": "Portuguese (Brazil) / Português (Brasil)",
+    "message": "ポルトガル語 (ブラジル) / Português (Brasil)",
     "description": "Language choice."
   },
   "averageLine": {
-    "message": "Average Line",
+    "message": "平均線",
     "description": "Chart option."
   },
   "lineChart": {
-    "message": "Line",
+    "message": "折れ線",
     "description": "Chart type toggle."
   },
   "barChart": {
@@ -1157,35 +1157,35 @@
     "description": "Chart type toggle."
   },
   "reduceTime": {
-    "message": "Reduce Time",
+    "message": "時間を減らす",
     "description": "Daily stats card action."
   },
   "howManyMinutesRemove": {
-    "message": "How many minutes do you want to remove for $1?",
+    "message": "$1 から何分減らしますか？",
     "description": "Prompt message in the time reduction modal."
   },
   "remove": {
-    "message": "Remove",
+    "message": "削除",
     "description": "Action button label."
   },
   "minutes": {
-    "message": "Minutes",
+    "message": "分",
     "description": "Input field placeholder."
   },
   "momComparison": {
-    "message": "Month-over-Month",
+    "message": "前月比",
     "description": "Settings card label."
   },
   "momComparisonDesc": {
-    "message": "Comparing this month's active time vs last month.",
+    "message": "今月のアクティブ時間を先月と比較します。",
     "description": "Card description."
   },
   "focusVsDistraction": {
-    "message": "Focus vs. Distraction",
+    "message": "集中 vs 気の散り",
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$focusPct$% Focus",
+    "message": "$focusPct$% 集中",
     "description": "Focus percentage summary.",
     "placeholders": {
       "focusPct": {
@@ -1195,7 +1195,7 @@
     }
   },
   "pctDistraction": {
-    "message": "$distPct$% Distraction",
+    "message": "$distPct$% 気の散り",
     "description": "Distraction percentage summary.",
     "placeholders": {
       "distPct": {
@@ -1205,7 +1205,7 @@
     }
   },
   "focusSplitDesc": {
-    "message": "You focused for $focusedTime$ and were distracted for $distractedTime$.",
+    "message": "あなたは $focusedTime$ 集中し、$distractedTime$ 気を散らしました。",
     "description": "Productivity split description sentence.",
     "placeholders": {
       "focusedTime": {
@@ -1219,95 +1219,95 @@
     }
   },
   "noFocusDistTimeRange": {
-    "message": "No focus or distraction time tracked in this range.",
+    "message": "この期間内に集中または気を散らした時間は記録されていません。",
     "description": "Placeholder text."
   },
   "pinSiteToTop": {
-    "message": "Pin site to top",
+    "message": "サイトをトップにピン留め",
     "description": "Tooltip text."
   },
   "unpinSite": {
-    "message": "Unpin site",
+    "message": "サイトのピン留めを解除",
     "description": "Tooltip text."
   },
   "visitSite": {
-    "message": "Visit site",
+    "message": "サイトにアクセス",
     "description": "Tooltip text."
   },
   "addOrEditRule": {
-    "message": "Add or Edit Rule",
+    "message": "ルールを追加または編集",
     "description": "Tooltip text."
   },
   "autoCategorized": {
-    "message": "Auto-categorized",
+    "message": "自動分類",
     "description": "Tooltip text."
   },
   "totalTracked": {
-    "message": "Total Tracked",
+    "message": "追跡の合計",
     "description": "Daily stat title."
   },
   "activeTimeline": {
-    "message": "24-Hour Active Timeline",
+    "message": "24時間アクティブタイムライン",
     "description": "Section header."
   },
   "heatmapThresholds": {
-    "message": "Heatmap Thresholds",
+    "message": "ヒートマップのしきい値",
     "description": "Modal title."
   },
   "minActiveTimeMins": {
-    "message": "Minimum Active Time (minutes)",
+    "message": "最小アクティブ時間 (分)",
     "description": "Config setting label."
   },
   "minActiveTimeDesc": {
-    "message": "Minimum total tracked time to color a day.",
+    "message": "1日を色付けするための最小合計追跡時間。",
     "description": "Config option helper text."
   },
   "ratioThresholdPct": {
-    "message": "Ratio Threshold (%)",
+    "message": "比率のしきい値 (%)",
     "description": "Config setting label."
   },
   "ratioThresholdDesc": {
-    "message": "If your focus ratio is below this %, the day is Wasted (Red). Otherwise, it is Active (Green).",
+    "message": "集中率がこの%未満の場合、その日は無駄 (赤) となります。それ以外の場合はアクティブ (緑) です。",
     "description": "Config option helper text."
   },
   "showWastedDays": {
-    "message": "Show Wasted Days (Red)",
+    "message": "無駄にした日を表示 (赤)",
     "description": "Config setting label."
   },
   "showWastedDaysDesc": {
-    "message": "Highlight high-distraction days as red blocks.",
+    "message": "気を散らした日を赤いブロックとして強調表示します。",
     "description": "Config option helper text."
   },
   "focusCategories": {
-    "message": "Focus Categories",
+    "message": "集中カテゴリ",
     "description": "Config setting label."
   },
   "selectFocusCatsDesc": {
-    "message": "Select which categories count towards your daily Focus Time.",
+    "message": "1日の集中時間にカウントするカテゴリを選択します。",
     "description": "Config option helper text."
   },
   "activeHrs": {
-    "message": "$1 active",
+    "message": "$1 アクティブ",
     "description": "Label showing tracked active time hours."
   },
   "noActiveTimeTracked": {
-    "message": "No active time tracked yet.",
+    "message": "アクティブな時間はまだ記録されていません。",
     "description": "Placeholder text."
   },
   "vsLastMonth": {
-    "message": "vs $1 last month ($2)",
+    "message": "先月の $1 と比較して ($2)",
     "description": "MoM status comparison description."
   },
   "vsLastMonthNoChange": {
-    "message": "vs $1 last month (no change)",
+    "message": "先月の $1 と比較して (変化なし)",
     "description": "MoM status comparison description."
   },
   "increase": {
-    "message": "increase",
+    "message": "増加",
     "description": "Label indicating value increase."
   },
   "decrease": {
-    "message": "decrease",
+    "message": "減少",
     "description": "Label indicating value decrease."
   },
   "accessControlSafety": {
@@ -1317,19 +1317,19 @@
     "message": "PIN保護ステータス:"
   },
   "notSet": {
-    "message": "Not Set",
+    "message": "未設定",
     "description": "PIN status."
   },
   "set6DigitPin": {
-    "message": "Set 6-digit PIN",
+    "message": "6桁のPINを設定",
     "description": "Input placeholder."
   },
   "confirm6DigitPin": {
-    "message": "Confirm 6-digit PIN",
+    "message": "6桁のPINを確認",
     "description": "Input placeholder."
   },
   "savePin": {
-    "message": "Save PIN",
+    "message": "PINを保存",
     "description": "Action button."
   },
   "changePin": {
@@ -1486,7 +1486,7 @@
     "message": "Web Activity Time Trackerからインポート"
   },
   "importFromWattDesc": {
-    "message": "Upload your exported CSV file to merge your past tracking history.",
+    "message": "エクスポートしたCSVファイルをアップロードして、過去の追跡履歴を統合します。",
     "description": "Settings config option description."
   },
   "importFromTt": {
@@ -1508,143 +1508,143 @@
     "message": "+ ローカルバックアップを作成"
   },
   "editFreeTime": {
-    "message": "Edit Free-time",
+    "message": "フリータイムを編集",
     "description": "Modal title."
   },
   "fromTime": {
-    "message": "From Time",
+    "message": "開始時間",
     "description": "Input field label."
   },
   "toTime": {
-    "message": "To Time",
+    "message": "終了時間",
     "description": "Input field label."
   },
   "activeDays": {
-    "message": "Active Days",
+    "message": "アクティブな曜日",
     "description": "Input field label."
   },
   "saveChanges": {
-    "message": "Save Changes",
+    "message": "変更を保存",
     "description": "Action button."
   },
   "tagMonitor": {
-    "message": "Tag / Monitor",
+    "message": "タグ / 監視",
     "description": "Tab segment title."
   },
   "quickApplyPreset": {
-    "message": "Quick Apply Preset",
+    "message": "プリセットをクイック適用",
     "description": "Select label."
   },
   "selectPresetToApply": {
-    "message": "-- Select a Preset to Apply --",
+    "message": "適用するプリセットを選択…",
     "description": "Option label."
   },
   "egDomainNoPrefix": {
-    "message": "reddit.com",
+    "message": "例: reddit.com (wwwやhttpsは不要)",
     "description": "Placeholder."
   },
   "activeRulesSelectMultiple": {
-    "message": "Active Rules (Select multiple)",
+    "message": "アクティブルール (複数選択可)",
     "description": "Sub-header label."
   },
   "dailyTimeLimit": {
-    "message": "Daily time limit",
+    "message": "1日の制限時間",
     "description": "Rule mode option."
   },
   "dailyLimitMinutes": {
-    "message": "Daily limit (minutes) (0 = always blocked)",
+    "message": "1日の制限 (分)",
     "description": "Input field label."
   },
   "perSessionLimit": {
-    "message": "Per-Session Limit",
+    "message": "セッションごとの制限",
     "description": "Rule mode option."
   },
   "sessionSettings": {
-    "message": "Session Settings",
+    "message": "セッション設定",
     "description": "Input block title."
   },
   "timeLimitMinutes": {
-    "message": "Time Limit (minutes)",
+    "message": "制限時間 (分)",
     "description": "Input field label."
   },
   "breakCooldownMinutes": {
-    "message": "Break / Cooldown (minutes)",
+    "message": "休憩/クールダウン (分)",
     "description": "Input field label."
   },
   "scheduleBased": {
-    "message": "Schedule based",
+    "message": "スケジュールベース",
     "description": "Rule mode option."
   },
   "timeWindows": {
-    "message": "Time windows",
+    "message": "時間枠",
     "description": "Input field label."
   },
   "addWindow": {
-    "message": "+ Add window",
+    "message": "+ 時間枠を追加",
     "description": "Action button."
   },
   "cooldownSite": {
-    "message": "Cool-down site",
+    "message": "クールダウン (サイトへ向かう前に待機)",
     "description": "Rule mode option."
   },
   "cooldownSettings": {
-    "message": "Cool-down Settings",
+    "message": "クールダウン設定",
     "description": "Input block title."
   },
   "waitTimeSec": {
-    "message": "Wait Time (sec)",
+    "message": "待機時間 (秒)",
     "description": "Input field label."
   },
   "frequency": {
-    "message": "Frequency",
+    "message": "頻度",
     "description": "Input field label."
   },
   "everyVisit": {
-    "message": "Every visit",
+    "message": "毎回の訪問時",
     "description": "Option choice."
   },
   "oncePerDay": {
-    "message": "Once a day",
+    "message": "1日1回",
     "description": "Option choice."
   },
   "every10min": {
-    "message": "Every 10 min",
+    "message": "10分ごと",
     "description": "Option choice."
   },
   "optDistraction": {
-    "message": "⚡ Distraction",
+    "message": "気を散らす",
     "description": "Category choice."
   },
   "optProductivity": {
-    "message": "💻 Productivity",
+    "message": "生産性",
     "description": "Category choice."
   },
   "optLearning": {
-    "message": "📚 Learning",
+    "message": "学習",
     "description": "Category choice."
   },
   "optCommunication": {
-    "message": "💬 Communication",
+    "message": "コミュニケーション",
     "description": "Category choice."
   },
   "optUncategorized": {
-    "message": "❓ Uncategorized",
+    "message": "未分類",
     "description": "Category choice."
   },
   "assignCategoryDesc": {
-    "message": "This assigns a category for statistics without blocking the site.",
+    "message": "このサイトを分類して、より良いインサイトを得ましょう。",
     "description": "Explanation text."
   },
   "saveTag": {
-    "message": "Save Tag",
+    "message": "タグを保存",
     "description": "Action button."
   },
   "areYouSure": {
-    "message": "Are you sure?",
+    "message": "本当によろしいですか？",
     "description": "Modal title."
   },
   "cannotBeUndone": {
-    "message": "This action cannot be undone.",
+    "message": "この操作は元に戻せません。",
     "description": "Modal sub-text warning."
   },
   "confirm": {
@@ -1652,67 +1652,67 @@
     "description": "Action button."
   },
   "privacyModalDesc": {
-    "message": "Pause all time-tracking and network-level blocking. Choose how long you want to pause:",
+    "message": "トラッキングとブロックを一時停止しますか？",
     "description": "Modal sub-text warning."
   },
   "createBlockPreset": {
-    "message": "Create Block Preset",
+    "message": "ブロックプリセットを作成",
     "description": "Modal title."
   },
   "presetName": {
-    "message": "Preset Name",
+    "message": "プリセット名",
     "description": "Label."
   },
   "egPresetName": {
-    "message": "e.g. Strict Mode",
+    "message": "例: モーニングフォーカス",
     "description": "Placeholder."
   },
   "rulesConfiguration": {
-    "message": "Rules Configuration",
+    "message": "ルール構成",
     "description": "Sub-header label."
   },
   "savePreset": {
-    "message": "Save Preset",
+    "message": "プリセットを保存",
     "description": "Action button."
   },
   "timeAdjusted": {
-    "message": "Time adjusted",
+    "message": "時間が正常に調整されました",
     "description": "Toast notice."
   },
   "adjustFailed": {
-    "message": "Adjust failed",
+    "message": "時間の調整に失敗しました",
     "description": "Toast notice."
   },
   "undoNeverTrackRestored": {
-    "message": "Undo: never-track restored",
+    "message": "元に戻しました：追跡しないルールが復元されました",
     "description": "Toast notice."
   },
   "undoRuleRestored": {
-    "message": "Undo: rule restored",
+    "message": "元に戻しました：ブロックルールが復元されました",
     "description": "Toast notice."
   },
   "undoAllowRuleRestored": {
-    "message": "Undo: allow-rule restored",
+    "message": "元に戻しました：許可ルールが復元されました",
     "description": "Toast notice."
   },
   "removed": {
-    "message": "Removed",
+    "message": "削除されました",
     "description": "Toast notice."
   },
   "thresholdsUpdated": {
-    "message": "Thresholds updated",
+    "message": "ヒートマップのしきい値が更新されました",
     "description": "Toast notice."
   },
   "noItemsSelected": {
-    "message": "No items selected",
+    "message": "項目が選択されていません",
     "description": "Toast notice."
   },
   "deleteRules": {
-    "message": "Delete Rules",
+    "message": "ルールを削除",
     "description": "Confirm title."
   },
   "deleteRulesConfirm": {
-    "message": "Delete $count$ rules?",
+    "message": "選択したルールを削除しますか？",
     "description": "Confirm body.",
     "placeholders": {
       "count": {
@@ -1722,15 +1722,15 @@
     }
   },
   "itemsDeleted": {
-    "message": "Items deleted",
+    "message": "項目が削除されました",
     "description": "Toast notice."
   },
   "enterDomain": {
-    "message": "Enter a domain",
+    "message": "ドメインを入力してください",
     "description": "Toast notice."
   },
   "taggedSuccessfully": {
-    "message": "$domain$ tagged successfully",
+    "message": "タグ付けに成功しました",
     "description": "Toast notice.",
     "placeholders": {
       "domain": {
@@ -1740,47 +1740,47 @@
     }
   },
   "studyGoalsSaved": {
-    "message": "Study goals saved",
+    "message": "仕事/学習の目標が保存されました",
     "description": "Toast notice."
   },
   "pickBothDates": {
-    "message": "Pick both dates",
+    "message": "開始日と終了日の両方を選択してください",
     "description": "Toast notice."
   },
   "endDateBeforeStart": {
-    "message": "End date is before start",
+    "message": "終了日は開始日より後にする必要があります",
     "description": "Toast notice."
   },
   "removedException": {
-    "message": "Removed exception",
+    "message": "例外が削除されました",
     "description": "Toast notice."
   },
   "selectAtLeastOneDay": {
-    "message": "Select at least one day",
+    "message": "少なくとも1日を選択してください",
     "description": "Toast notice."
   },
   "freeTimeSaved": {
-    "message": "Free-time slot saved successfully!",
+    "message": "フリータイムのスケジュールが保存されました",
     "description": "Toast notice."
   },
   "sessionDeleted": {
-    "message": "Session deleted",
+    "message": "セッションが削除されました",
     "description": "Toast notice."
   },
   "alreadyAdded": {
-    "message": "Already added",
+    "message": "既に追加されています",
     "description": "Toast notice."
   },
   "exceptionAdded": {
-    "message": "Exception added",
+    "message": "例外が追加されました",
     "description": "Toast notice."
   },
   "settingsSaved": {
-    "message": "Settings saved",
+    "message": "設定が保存されました",
     "description": "Toast notice."
   },
   "errorSavingSettings": {
-    "message": "Error saving settings: $error$",
+    "message": "設定の保存中にエラーが発生しました",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
@@ -1790,127 +1790,135 @@
     }
   },
   "pinSavedActive": {
-    "message": "PIN saved & active",
+    "message": "PINが保存され、アクティブになりました",
     "description": "Toast notice."
   },
   "pinRemoved": {
-    "message": "PIN Removed",
+    "message": "PINが削除されました",
     "description": "Toast notice."
   },
   "resetStatsConfirm": {
-    "message": "Delete ALL statistics? This cannot be undone.",
+    "message": "この操作により、すべての追跡データと履歴が削除されます。続行しますか？",
     "description": "Confirm body."
   },
   "resetConfirmBtn": {
-    "message": "Reset",
+    "message": "はい、統計をリセットします",
     "description": "Confirm action."
   },
   "clearRules": {
-    "message": "Clear Rules",
+    "message": "すべてのルールをクリア",
     "description": "Confirm title."
   },
   "clearRulesConfirm": {
-    "message": "Remove all block/allow rules?",
+    "message": "これにより、すべてのブロック、許可、および追跡しないルールが削除されます。",
     "description": "Confirm body."
   },
   "clearConfirmBtn": {
-    "message": "Clear",
+    "message": "はい、ルールをクリアします",
     "description": "Confirm action."
   },
   "rulesCleared": {
-    "message": "Rules cleared",
+    "message": "すべてのルールがクリアされました",
     "description": "Toast notice."
   },
   "clearCategories": {
-    "message": "Clear Categories",
+    "message": "すべてのサイトカテゴリをクリア",
     "description": "Confirm title."
   },
   "clearCategoriesConfirm": {
-    "message": "Remove all custom categories?",
+    "message": "これにより、すべてのサイトからカスタムカテゴリタグが削除されます。",
     "description": "Confirm body."
   },
   "categoriesCleared": {
-    "message": "Categories cleared",
+    "message": "サイトカテゴリがクリアされました",
     "description": "Toast notice."
   },
   "clearHistoryConfirm": {
-    "message": "Clear history?",
+    "message": "すべての履歴が消去されます。本当によろしいですか？",
     "description": "Confirm body."
   },
   "cleared": {
-    "message": "Cleared",
+    "message": "クリアされました",
     "description": "Toast notice."
   },
   "exportFailed": {
-    "message": "Export failed",
+    "message": "エクスポートに失敗しました",
     "description": "Toast notice."
   },
   "backupDownloaded": {
-    "message": "Backup downloaded",
+    "message": "バックアップがダウンロードされました",
     "description": "Toast notice."
   },
   "restoreBackup": {
-    "message": "Restore Backup",
+    "message": "バックアップを復元",
     "description": "Confirm title."
   },
   "restoreBackupConfirm": {
-    "message": "Restoring will REPLACE all current data. Continue?",
+    "message": "既存のすべてのデータとルールは、このバックアップのデータに置き換えられます。",
     "description": "Confirm body."
   },
   "restoreConfirmBtn": {
-    "message": "Restore",
+    "message": "はい、復元します",
     "description": "Confirm action."
   },
   "restoredReloading": {
-    "message": "Restored — reloading…",
+    "message": "正常に復元されました。再読み込み中...",
     "description": "Toast notice."
   },
   "invalidJsonFile": {
-    "message": "Invalid JSON file",
+    "message": "無効なJSONファイルです",
     "description": "Toast notice."
   },
   "importLogsWattConfirm": {
-    "message": "This will merge Web Activity Time Tracker logs into Flow's history.\n\nWarning: If you import the same spreadsheet twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "Web Activity Time Trackerの履歴をインポートしますか？",
     "description": "Confirm body."
   },
   "importConfirmBtn": {
-    "message": "Import",
+    "message": "はい、インポートします",
     "description": "Confirm action."
   },
   "successfullyImportedDays": {
-    "message": "Successfully imported $count$ days! Reloading...",
+    "message": "$days$ 日分の履歴を正常にインポートしました！",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
         "content": "$1",
         "example": "50"
+      },
+      "days": {
+        "content": "$2",
+        "example": "days"
       }
     }
   },
   "importFailedErr": {
-    "message": "Import failed: $error$",
+    "message": "インポートに失敗しました： $err$",
     "description": "Toast notice.",
     "placeholders": {
       "error": {
         "content": "$1",
         "example": "File missing"
+      },
+      "err": {
+        "content": "$2",
+        "example": "err"
       }
     }
   },
   "invalidFile": {
-    "message": "Invalid file",
+    "message": "無効なファイルです",
     "description": "Default error."
   },
   "importLogsTtConfirm": {
-    "message": "This will merge Time Tracker JSON logs into Flow's history.\n\nWarning: If you import the same JSON file twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "TimeTrackerの履歴をインポートしますか？",
     "description": "Confirm body."
   },
   "importLogsWtConfirm": {
-    "message": "This will merge Webtime Tracker CSV logs into Flow's history.\n\nWarning: If you import the same CSV file twice, it will add the tracked time twice. Click OK to proceed.",
+    "message": "WebTimerの履歴をインポートしますか？",
     "description": "Confirm body."
   },
   "activatedPreset": {
-    "message": "Activated preset: $name$",
+    "message": "アクティブ化されたプリセット: $name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -1920,39 +1928,39 @@
     }
   },
   "presetSavedSuccessfully": {
-    "message": "Preset saved successfully!",
+    "message": "プリセットが正常に保存されました",
     "description": "Toast notice."
   },
   "scheduleDeleted": {
-    "message": "Schedule deleted",
+    "message": "スケジュールが削除されました",
     "description": "Toast notice."
   },
   "scheduleUpdated": {
-    "message": "Schedule updated",
+    "message": "スケジュールが更新されました",
     "description": "Toast notice."
   },
   "scheduleAdded": {
-    "message": "Schedule added",
+    "message": "スケジュールが追加されました",
     "description": "Toast notice."
   },
   "enterValidDomain": {
-    "message": "Please enter a valid domain",
+    "message": "有効なドメインを入力してください",
     "description": "Toast notice."
   },
   "domainAlreadyAllowed": {
-    "message": "Domain already allowed",
+    "message": "このドメインは既に許可されています",
     "description": "Toast notice."
   },
   "addedToAllowlist": {
-    "message": "Added to Allowlist",
+    "message": "許可リストに追加されました",
     "description": "Toast notice."
   },
   "enterValidDomains": {
-    "message": "Please enter valid domain(s)",
+    "message": "有効なドメインを入力してください",
     "description": "Toast notice."
   },
   "addedDomainsToNeverTrack": {
-    "message": "Added $count$ domain(s) to Never-Track",
+    "message": "$count$ 個のドメインを追跡しないリストに追加しました",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -1962,69 +1970,73 @@
     }
   },
   "domainsAlreadyInList": {
-    "message": "Domains already in list",
+    "message": "これらのドメインは既にリストにあります",
     "description": "Toast notice."
   },
   "trackingResumed": {
-    "message": "Tracking resumed",
+    "message": "トラッキングが再開されました",
     "description": "Toast notice."
   },
   "privacyModeEnabled": {
-    "message": "Privacy Mode enabled",
+    "message": "プライバシーモードが有効になりました",
     "description": "Toast notice."
   },
   "backupRestoredReloading": {
-    "message": "Backup restored — reloading...",
+    "message": "バックアップが復元されました。再読み込み中...",
     "description": "Toast notice."
   },
   "downloadStarted": {
-    "message": "Download started",
+    "message": "ダウンロードが開始されました",
     "description": "Toast notice."
   },
   "failedDownloadData": {
-    "message": "Failed to download data",
+    "message": "データのダウンロードに失敗しました",
     "description": "Toast notice."
   },
   "deleteBackupConfirm": {
-    "message": "Permanently delete this backup from history?",
+    "message": "このバックアップを削除しますか？",
     "description": "Confirm body."
   },
   "deleteConfirmBtn": {
-    "message": "Delete",
+    "message": "はい、削除します",
     "description": "Confirm action."
   },
   "backupDeleted": {
-    "message": "Backup deleted",
+    "message": "バックアップが削除されました",
     "description": "Toast notice."
   },
   "deleteFailed": {
-    "message": "Delete failed",
+    "message": "削除に失敗しました",
     "description": "Toast notice."
   },
   "localBackupCreated": {
-    "message": "Local backup created",
+    "message": "ローカルバックアップが作成されました",
     "description": "Toast notice."
   },
   "backupCreationFailed": {
-    "message": "Backup creation failed",
+    "message": "バックアップの作成に失敗しました",
     "description": "Toast notice."
   },
   "enterDomainFirstToBlockInstantly": {
-    "message": "Enter a domain name first to block instantly",
+    "message": "即座にブロックするには、まずドメインを入力してください",
     "description": "Toast notice."
   },
   "siteBlockedUnderPreset": {
-    "message": "Site blocked under $name$",
+    "message": "サイトが '$preset$' プリセットの下でブロックされました",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
         "content": "$1",
         "example": "Strict Mode"
+      },
+      "preset": {
+        "content": "$2",
+        "example": "preset"
       }
     }
   },
   "deletePresetConfirm": {
-    "message": "Are you sure you want to delete preset \"$name$\"?",
+    "message": "このプリセットを削除しますか？",
     "description": "Confirm body.",
     "placeholders": {
       "name": {
@@ -2034,27 +2046,27 @@
     }
   },
   "presetDeleted": {
-    "message": "Preset deleted",
+    "message": "プリセットが削除されました",
     "description": "Toast notice."
   },
   "presetNameRequired": {
-    "message": "Preset name is required",
+    "message": "プリセット名が必要です",
     "description": "Toast notice."
   },
   "maxCustomPresetsLimit": {
-    "message": "You can add up to 3 custom presets",
+    "message": "カスタムプリセットは最大5つまでです",
     "description": "Toast notice."
   },
   "presetCreated": {
-    "message": "Preset created",
+    "message": "プリセットが作成されました",
     "description": "Toast notice."
   },
   "presetUpdated": {
-    "message": "Preset updated",
+    "message": "プリセットが更新されました",
     "description": "Toast notice."
   },
   "appliedPreset": {
-    "message": "Applied preset: $name$",
+    "message": "適用されたプリセット: $name$",
     "description": "Toast notice.",
     "placeholders": {
       "name": {
@@ -2064,67 +2076,75 @@
     }
   },
   "undo10s": {
-    "message": "Undo (10s)",
+    "message": "元に戻す (10秒)",
     "description": "Undo text label."
   },
   "undoXs": {
-    "message": "Undo ($secs$s)",
+    "message": "元に戻す ($time$秒)",
     "description": "Undo countdown.",
     "placeholders": {
       "secs": {
         "content": "$1",
         "example": "10"
+      },
+      "time": {
+        "content": "$2",
+        "example": "time"
       }
     }
   },
   "editBlockRule": {
-    "message": "Edit Block Rule",
+    "message": "ブロックルールを編集",
     "description": "Modal title."
   },
   "startWork": {
-    "message": "▶ Start Work",
+    "message": "作業開始",
     "description": "Action button."
   },
   "startBreak": {
-    "message": "▶ Start Break",
+    "message": "休憩開始",
     "description": "Action button."
   },
   "scheduledFocus": {
-    "message": "Scheduled Focus",
+    "message": "スケジュールされたフォーカス",
     "description": "Focus mode timer subtext."
   },
   "pinLengthError": {
-    "message": "PIN must be exactly 6 digits",
+    "message": "PINは正確に6桁である必要があります。",
     "description": "PIN configuration error."
   },
   "pinsDoNotMatch": {
-    "message": "PINs do not match",
+    "message": "PINが一致しません。もう一度お試しください。",
     "description": "PIN configuration error."
   },
   "readingFile": {
-    "message": "Reading file...",
+    "message": "ファイルを読み込み中...",
     "description": "Migration progress status."
   },
   "parsingCsvData": {
-    "message": "Parsing CSV data...",
+    "message": "CSVデータを解析中...",
     "description": "Migration progress status."
   },
   "mergingDaysOfHistory": {
-    "message": "Merging $count$ days of history...",
+    "message": "履歴を統合中 ($days$ 日)...",
     "description": "Migration progress status.",
     "placeholders": {
       "count": {
         "content": "$1",
         "example": "50"
+      },
+      "days": {
+        "content": "$2",
+        "example": "days"
       }
     }
   },
   "finalizingAndReloading": {
-    "message": "Finalizing and reloading...",
+    "message": "最終処理と再読み込み中...",
     "description": "Migration progress status."
   },
   "importingDataDayOf": {
-    "message": "Importing data: Day $current$ of $total$...",
+    "message": "データインポート中 ($current$ / $total$ 日)",
     "description": "Migration progress status.",
     "placeholders": {
       "current": {
@@ -2138,23 +2158,23 @@
     }
   },
   "creatingPreImportBackup": {
-    "message": "Creating pre-import backup...",
+    "message": "インポート前バックアップを作成中...",
     "description": "Migration progress status."
   },
   "parsingJsonData": {
-    "message": "Parsing JSON data...",
+    "message": "JSONデータを解析中...",
     "description": "Migration progress status."
   },
   "creating": {
-    "message": "Creating...",
+    "message": "作成中...",
     "description": "Button progress indicator."
   },
   "editBlockPreset": {
-    "message": "Edit Block Preset",
+    "message": "ブロックプリセットを編集",
     "description": "Modal title."
   },
   "pausedAlways": {
-    "message": "Paused (Always)",
+    "message": "常に一時停止",
     "description": "Indefinite pause status."
   },
   "delete": {
@@ -2166,27 +2186,27 @@
     "description": "Generic tooltip or button."
   },
   "restoreThisBackup": {
-    "message": "Restore this backup",
+    "message": "このバックアップを復元",
     "description": "Tooltip."
   },
   "downloadJsonFile": {
-    "message": "Download JSON file",
+    "message": "JSONファイルをダウンロード",
     "description": "Tooltip."
   },
   "deleteThisBackup": {
-    "message": "Delete this backup",
+    "message": "このバックアップを削除",
     "description": "Tooltip."
   },
   "egMorningFocus": {
-    "message": "e.g. Morning Focus",
+    "message": "例: モーニングフォーカス",
     "description": "Schedule input placeholder."
   },
   "quickStart": {
-    "message": "Quick Start",
+    "message": "クイックスタート",
     "description": "Button tooltip."
   },
   "editSettings": {
-    "message": "Edit Settings",
+    "message": "設定を編集",
     "description": "Button tooltip."
   },
   "daySundayLetter": {
@@ -2230,7 +2250,7 @@
     "message": "45日間"
   },
   "trackLocalFiles": {
-    "message": "Track Local Files",
+    "message": "ローカルファイルを追跡する (file://)",
     "description": "Track local files option"
   },
   "trackLocalFilesDesc": {
@@ -2243,7 +2263,7 @@
     "message": "面白いブロックページを表示"
   },
   "timeLimitWarning": {
-    "message": "Time limit warning before block",
+    "message": "警告: 制限時間は、この拡張機能のポップアップが開いている間はカウントされません。",
     "description": "Warning duration option"
   },
   "timeLimitWarningDesc": {
@@ -2253,14 +2273,14 @@
     "message": "秒"
   },
   "tabLimiter": {
-    "message": "Tab limiter per domain",
+    "message": "タブ制限",
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
     "message": "0に設定すると無効になります。"
   },
   "tabsMax": {
-    "message": "tabs max",
+    "message": "最大タブ数",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
@@ -2291,7 +2311,7 @@
     "message": "時間追跡が停止中または非アクティブな場合にバッジに「idl」と表示します。"
   },
   "dataRollover": {
-    "message": "Data & Rollover",
+    "message": "データ更新時間",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
@@ -2313,23 +2333,23 @@
     }
   },
   "tuesday": {
-    "message": "Tuesday",
+    "message": "火曜日",
     "description": "Weekday name."
   },
   "wednesday": {
-    "message": "Wednesday",
+    "message": "水曜日",
     "description": "Weekday name."
   },
   "thursday": {
-    "message": "Thursday",
+    "message": "木曜日",
     "description": "Weekday name."
   },
   "friday": {
-    "message": "Friday",
+    "message": "金曜日",
     "description": "Weekday name."
   },
   "saturday": {
-    "message": "Saturday",
+    "message": "土曜日",
     "description": "Weekday name."
   },
   "sun": {
@@ -2361,31 +2381,31 @@
     "description": "Abbreviated weekday name."
   },
   "everyday": {
-    "message": "Everyday",
+    "message": "毎日",
     "description": "Schedule frequency label."
   },
   "weekdays": {
-    "message": "Weekdays",
+    "message": "平日",
     "description": "Schedule frequency label."
   },
   "focusSession": {
-    "message": "Focus Session",
+    "message": "フォーカスセッション",
     "description": "Default focus session name."
   },
   "addSchedule": {
-    "message": "Add Schedule",
+    "message": "+ スケジュールを追加",
     "description": "Add schedule button."
   },
   "notEnoughDataYet": {
-    "message": "Not enough data yet",
+    "message": "まだデータが不足しています",
     "description": "Empty state analytics label."
   },
   "label": {
-    "message": "Label",
+    "message": "ラベル",
     "description": "Text input label."
   },
   "start": {
-    "message": "Start",
+    "message": "開始",
     "description": "Time input label."
   },
   "end": {
@@ -2393,47 +2413,47 @@
     "description": "Time input label."
   },
   "categoriesToBlock": {
-    "message": "Categories to Block",
+    "message": "ブロックするカテゴリ",
     "description": "Categories select section header."
   },
   "preScheduleNotification": {
-    "message": "Pre-Schedule Notification",
+    "message": "スケジュール前通知",
     "description": "Option label."
   },
   "preScheduleNotificationDesc": {
-    "message": "Get notified before the session starts.",
+    "message": "スケジュールが開始される前にデスクトップ通知を受け取ります。",
     "description": "Option sublabel."
   },
   "disabled": {
-    "message": "Disabled",
+    "message": "無効",
     "description": "Option setting selection."
   },
   "oneMinBefore": {
-    "message": "1 min before",
+    "message": "1分前",
     "description": "Option setting selection."
   },
   "fiveMinsBefore": {
-    "message": "5 mins before",
+    "message": "5分前",
     "description": "Option setting selection."
   },
   "tenMinsBefore": {
-    "message": "10 mins before",
+    "message": "10分前",
     "description": "Option setting selection."
   },
   "fifteenMinsBefore": {
-    "message": "15 mins before",
+    "message": "15分前",
     "description": "Option setting selection."
   },
   "editFocusSchedule": {
-    "message": "Edit Focus Schedule",
+    "message": "フォーカススケジュールを編集",
     "description": "Dialog title."
   },
   "addFocusSchedule": {
-    "message": "Add Focus Schedule",
+    "message": "フォーカススケジュールを追加",
     "description": "Dialog title."
   },
   "bestDowStat": {
-    "message": "$day$ — avg $time$ of focus",
+    "message": "一番集中できた曜日は $day$（平均 $avg$）です。",
     "description": "Best day of week performance metric.",
     "placeholders": {
       "day": {
@@ -2443,59 +2463,63 @@
       "time": {
         "content": "$2",
         "example": "2h 15m"
+      },
+      "avg": {
+        "content": "$3",
+        "example": "avg"
       }
     }
   },
   "editPreset": {
-    "message": "Edit Preset",
+    "message": "プリセットを編集",
     "description": "Modal title."
   },
   "workTimeMin": {
-    "message": "Work Time (min)",
+    "message": "作業時間 (分)",
     "description": "Input field label."
   },
   "breakTimeMin": {
-    "message": "Break Time (min)",
+    "message": "休憩時間 (分)",
     "description": "Input field label."
   },
   "longBreakMin": {
-    "message": "Long Break (min)",
+    "message": "長い休憩時間 (分)",
     "description": "Input field label."
   },
   "enableNotifications": {
-    "message": "Enable Notifications",
+    "message": "通知を有効にする",
     "description": "Toggle switch label."
   },
   "epNotifyDesc": {
-    "message": "Receive push alerts when focus periods or breaks end.",
+    "message": "セッションが開始または終了したときに通知を受け取ります。",
     "description": "Help text."
   },
   "autoStartNextCycle": {
-    "message": "Auto-Start Next Cycle",
+    "message": "次のサイクルを自動開始",
     "description": "Toggle switch label."
   },
   "epAutoStartDesc": {
-    "message": "Automatically transition to the next work cycle or break.",
+    "message": "手動で開始しなくても、休憩/作業セッションを自動的に開始します。",
     "description": "Help text."
   },
   "categoriesToBlockDuringFocus": {
-    "message": "Categories to Block during focus",
+    "message": "フォーカス中にブロックするカテゴリ",
     "description": "Checkbox group header."
   },
   "presetPomodoro": {
-    "message": "Pomodoro",
+    "message": "ポモドーロ",
     "description": "Built-in preset name."
   },
   "presetDeepWork": {
-    "message": "Deep Work",
+    "message": "ディープワーク",
     "description": "Built-in preset name."
   },
   "presetShortSprint": {
-    "message": "Short Sprint",
+    "message": "ショートスプリント",
     "description": "Built-in preset name."
   },
   "presetFlow": {
-    "message": "Flow",
+    "message": "フロー",
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
@@ -2503,7 +2527,7 @@
     "description": "Placeholder text."
   },
   "startFirstSession": {
-    "message": "Start First Session",
+    "message": "最初のセッションを開始",
     "description": "Button label."
   },
   "siteList": {
@@ -2519,15 +2543,15 @@
     "description": "Tab title."
   },
   "addFreetime": {
-    "message": "Add Free-time",
+    "message": "+ フリータイムを追加",
     "description": "Button label."
   },
   "addBlockRule": {
-    "message": "Add Block Rule",
+    "message": "+ ブロックルールを追加",
     "description": "Modal title."
   },
   "siteCountSingle": {
-    "message": "$count$ site",
+    "message": "1 サイト",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2537,7 +2561,7 @@
     }
   },
   "siteCountPlural": {
-    "message": "$count$ sites",
+    "message": "$count$ サイト",
     "description": "Plural count.",
     "placeholders": {
       "count": {
@@ -2547,67 +2571,67 @@
     }
   },
   "minActiveTimeShort": {
-    "message": "Min Active Time (m)",
+    "message": "最小アクティブ時間",
     "description": "Short label for sidebar settings."
   },
   "ratioThresholdShort": {
-    "message": "Ratio Threshold (%)",
+    "message": "比率のしきい値",
     "description": "Short label for sidebar settings."
   },
   "averageFocus": {
-    "message": "Average Focus",
+    "message": "平均集中",
     "description": "Chart line label."
   },
   "noRulesYet": {
-    "message": "No rules yet",
+    "message": "まだルールがありません",
     "description": "Placeholder header."
   },
   "blockSitesToGetStarted": {
-    "message": "Block distracting sites to get started.",
+    "message": "サイトをブロックして開始しましょう。",
     "description": "Placeholder description."
   },
   "noExceptionsYet": {
-    "message": "No exceptions yet",
+    "message": "まだ例外はありません",
     "description": "Placeholder header."
   },
   "allowSitesDesc": {
-    "message": "Allow sites that bypass all blocking rules.",
+    "message": "ブロックルールをバイパスするサイトを許可します。",
     "description": "Placeholder description."
   },
   "noDomainsIgnored": {
-    "message": "No domains ignored",
+    "message": "無視されたドメインはありません",
     "description": "Placeholder header."
   },
   "neverTrackDesc": {
-    "message": "Domains on this list will never be tracked for analytics.",
+    "message": "これらのドメインは追跡または記録されません。",
     "description": "Placeholder description."
   },
   "freetimeHoursTitle": {
-    "message": "Free-time Hours",
+    "message": "フリータイム",
     "description": "Section header."
   },
   "editCategory": {
-    "message": "Edit Category",
+    "message": "カテゴリを編集",
     "description": "Title for custom category edit modal."
   },
   "categoryName": {
-    "message": "Category Name",
+    "message": "カテゴリ名",
     "description": "Label for category name input field."
   },
   "emojiIcon": {
-    "message": "Emoji Icon",
+    "message": "絵文字アイコン",
     "description": "Label for category emoji input field."
   },
   "accentColor": {
-    "message": "Accent Color",
+    "message": "アクセントカラー",
     "description": "Label for category accent color picker."
   },
   "presetSwatches": {
-    "message": "Preset Swatches",
+    "message": "プリセットスウォッチ",
     "description": "Label for color preset swatches."
   },
   "resetToDefault": {
-    "message": "Reset to Default",
+    "message": "デフォルトにリセット",
     "description": "Button text to reset category to default settings."
   },
   "save": {
