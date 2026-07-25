@@ -113,8 +113,8 @@ function catEmoji(e) {
 }
 
 function catLabel(e, t) {
-    var label = CAT_LABELS ? CAT_LABELS[e] : null;
-    if (!label || (typeof DEFAULT_CAT_LABELS !== "undefined" && label === DEFAULT_CAT_LABELS[e])) {
+    var label = (CAT_LABELS && CAT_LABELS[e]) ? CAT_LABELS[e] : null;
+    if (!label) {
         var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
         var trans = t_(key);
         if (trans && trans !== key) label = trans;
@@ -1510,7 +1510,7 @@ async function renderInsights() {
                       ${["productivity", "learning", "communication", "distraction", "uncategorized"].map(c => `
                         <label style="display:flex;align-items:center;gap:var(--space-xs);font-size:14px;color:var(--tx);cursor:pointer;">
                           <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="accent-color:var(--green);width:16px;height:16px;"/>
-                          <span style="text-transform:capitalize;">${t_("cat" + c.charAt(0).toUpperCase() + c.slice(1)) || c}</span>
+                          <span>${catEmoji(c)} ${catLabel(c, false)}</span>
                         </label>
                       `).join('')}
                     </div>
@@ -2618,7 +2618,7 @@ async function renderOverview() {
         s[e] = t.sites || {}, Object.keys(t).forEach(e => {
             "sites" === e ? Object.entries(t.sites || {}).forEach(([e, t]) => i.sites[e] = (i.sites[e] || 0) + t) : "number" == typeof t[e] && (i[e] = (i[e] || 0) + t[e])
         })
-    }), $("an-total") && ($("an-total").textContent = fmt(allCats().reduce((e, t) => e + (i[t] || 0), 0))), $("an-prod") && ($("an-prod").textContent = fmt(i.productivity || 0)), $("an-lrn") && ($("an-lrn").textContent = fmt(i.learning || 0)), $("an-comms") && ($("an-comms").textContent = fmt(i.communication || 0)), $("an-dist") && ($("an-dist").textContent = fmt(i.distraction || 0));
+    }), $("an-total") && ($("an-total").textContent = fmt(allCats().reduce((e, t) => e + (i[t] || 0), 0))), $("an-prod") && ($("an-prod").textContent = fmt(i.productivity || 0), $("an-prod").nextElementSibling && ($("an-prod").nextElementSibling.textContent = catLabel("productivity", !1))), $("an-lrn") && ($("an-lrn").textContent = fmt(i.learning || 0), $("an-lrn").nextElementSibling && ($("an-lrn").nextElementSibling.textContent = catLabel("learning", !1))), $("an-comms") && ($("an-comms").textContent = fmt(i.communication || 0), $("an-comms").nextElementSibling && ($("an-comms").nextElementSibling.textContent = catLabel("communication", !1))), $("an-dist") && ($("an-dist").textContent = fmt(i.distraction || 0), $("an-dist").nextElementSibling && ($("an-dist").nextElementSibling.textContent = catLabel("distraction", !1)));
     const totalsResp = await msg("STATS_GET_ALLTIME_TOTALS");
     const totalDaysResp = await msg("STATS_GET_TOTAL_DAYS");
     const totals = totalsResp?.allTimeTotals || {};
@@ -2669,15 +2669,21 @@ async function renderOverview() {
             type: "doughnut",
             data: {
                 labels: [
-                    t_("catProductivity") || "Productivity",
-                    t_("catLearning") || "Learning",
-                    t_("catCommunication") || "Communication",
-                    t_("catDistraction") || "Distraction",
-                    t_("catUncategorized") || "Uncategorized"
+                    catLabel("productivity", false),
+                    catLabel("learning", false),
+                    catLabel("communication", false),
+                    catLabel("distraction", false),
+                    catLabel("uncategorized", false)
                 ],
                 datasets: [{
                     data: dataVals,
-                    backgroundColor: ["#05D581", "#A855F7", "#5C9CFC", "#F46B7A", "#71717A"],
+                    backgroundColor: [
+                        catColor("productivity"),
+                        catColor("learning"),
+                        catColor("communication"),
+                        catColor("distraction"),
+                        catColor("uncategorized")
+                    ],
                     borderWidth: 0,
                     hoverOffset: 4
                 }]
@@ -2723,11 +2729,11 @@ async function renderOverview() {
     if (legendEl) {
         legendEl.innerHTML = "";
         const catsList = [
-            { id: "productivity", color: "#05D581", label: t_("catProductivity") || "Productivity" },
-            { id: "learning", color: "#A855F7", label: t_("catLearning") || "Learning" },
-            { id: "communication", color: "#5C9CFC", label: t_("catCommunication") || "Communication" },
-            { id: "distraction", color: "#F46B7A", label: t_("catDistraction") || "Distraction" },
-            { id: "uncategorized", color: "#71717A", label: t_("catUncategorized") || "Uncategorized" }
+            { id: "productivity", color: catColor("productivity"), label: catLabel("productivity", false) },
+            { id: "learning", color: catColor("learning"), label: catLabel("learning", false) },
+            { id: "communication", color: catColor("communication"), label: catLabel("communication", false) },
+            { id: "distraction", color: catColor("distraction"), label: catLabel("distraction", false) },
+            { id: "uncategorized", color: catColor("uncategorized"), label: catLabel("uncategorized", false) }
         ];
         catsList.forEach(c => {
             let secs = 0;
@@ -2865,28 +2871,28 @@ async function renderDailyBreakdown() {
             var h = "";
             [{
                 c: "productivity",
-                l: "Productivity",
-                col: "var(--green)",
+                l: catLabel("productivity", false),
+                col: catColor("productivity"),
                 v: s
             }, {
                 c: "learning",
-                l: "Learning",
-                col: "var(--purple)",
+                l: catLabel("learning", false),
+                col: catColor("learning"),
                 v: o
             }, {
                 c: "communication",
-                l: "Communication",
-                col: "var(--blue)",
+                l: catLabel("communication", false),
+                col: catColor("communication"),
                 v: r
             }, {
                 c: "distraction",
-                l: "Distraction",
-                col: "var(--red)",
+                l: catLabel("distraction", false),
+                col: catColor("distraction"),
                 v: l
             }, {
                 c: "uncategorized",
-                l: "Uncategorized",
-                col: "var(--tx4)",
+                l: catLabel("uncategorized", false),
+                col: catColor("uncategorized"),
                 v: c
             }].forEach(e => {
                 e.v > 0 && d && (h += `<div class="db-bar-segment" style="width:${e.v / d * 100}%; background:${e.col};"></div>`)
@@ -2947,28 +2953,28 @@ async function renderDailyBreakdown() {
                 <!-- Productivity -->
                 <div class="db-stat-box" style="--glow-color: rgba(5, 213, 129, 0.15); --glow-border: rgba(5, 213, 129, 0.2); --glow-shadow: rgba(5, 213, 129, 0.1); opacity: ${s > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">${t_("catProductivity") || "Productivity"}</span>
+                    <span class="db-stat-title">${catLabel("productivity", false)}</span>
                     <span class="db-stat-value num" style="color: var(--green);">${fmt(s)}</span>
                   </div>
                 </div>
                 <!-- Learning -->
                 <div class="db-stat-box" style="--glow-color: rgba(168, 85, 247, 0.15); --glow-border: rgba(168, 85, 247, 0.2); --glow-shadow: rgba(168, 85, 247, 0.1); opacity: ${o > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">${t_("catLearning") || "Learning"}</span>
+                    <span class="db-stat-title">${catLabel("learning", false)}</span>
                     <span class="db-stat-value num" style="color: var(--purple);">${fmt(o)}</span>
                   </div>
                 </div>
                 <!-- Communication -->
                 <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1); opacity: ${r > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">${t_("catCommunication") || "Communication"}</span>
+                    <span class="db-stat-title">${catLabel("communication", false)}</span>
                     <span class="db-stat-value num" style="color: var(--blue);">${fmt(r)}</span>
                   </div>
                 </div>
                 <!-- Distraction -->
                 <div class="db-stat-box" style="--glow-color: rgba(244, 107, 122, 0.15); --glow-border: rgba(244, 107, 122, 0.2); --glow-shadow: rgba(244, 107, 122, 0.1); opacity: ${l > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
-                    <span class="db-stat-title">${t_("catDistraction") || "Distraction"}</span>
+                    <span class="db-stat-title">${catLabel("distraction", false)}</span>
                     <span class="db-stat-value num" style="color: var(--red);">${fmt(l)}</span>
                   </div>
                 </div>
@@ -4860,12 +4866,12 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
         { id: "short-sprint", emoji: "⚡", name: "Short Sprint", work: 15, brk: 3, long: 10, longBrk: 10, cycles: 4, strict: false, cats: [], blockCats: [], notify: true, autoStart: true },
         { id: "custom", emoji: "🌊", name: "Flow", work: 25, brk: 5, long: 15, longBrk: 15, cycles: 4, strict: false, cats: [], blockCats: [], notify: true, autoStart: true },
     ];
-    const CATS = [
-        { v: "distraction", l: "⚡ Distraction" },
-        { v: "communication", l: "💬 Communication" },
-        { v: "uncategorized", l: "❓ Uncategorized" },
-        { v: "productivity", l: "💻 Productivity" },
-        { v: "learning", l: "📚 Learning" },
+    const getCatsList = () => [
+        { v: "distraction", l: `${catEmoji("distraction")} ${catLabel("distraction", false)}` },
+        { v: "communication", l: `${catEmoji("communication")} ${catLabel("communication", false)}` },
+        { v: "uncategorized", l: `${catEmoji("uncategorized")} ${catLabel("uncategorized", false)}` },
+        { v: "productivity", l: `${catEmoji("productivity")} ${catLabel("productivity", false)}` },
+        { v: "learning", l: `${catEmoji("learning")} ${catLabel("learning", false)}` },
     ];
 
     async function loadStore() {
@@ -5114,7 +5120,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             <div id="ep-cats-section" style="display: block;">
               <div class="slbl" style="margin-bottom:10px;">${t_("categoriesToBlockDuringFocus") || "Categories to Block during focus"}</div>
               <div id="ep-cats-grid" class="c-checkbox-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                ${CATS.map(c => {
+                ${getCatsList().map(c => {
                   const checked = (p.cats || p.blockCats || []).includes(c.v);
                   return `
                     <label class="c-checkbox-lbl" style="padding:10px; font-size:13px; font-weight:700; margin:0;">
@@ -5812,9 +5818,9 @@ document.body.appendChild(overlay);
           <div class="pb-cats-section" id="nsched-cats-sec">
             <div class="pb-cats-title" style="font-size:13px;font-weight:800;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;" data-i18n="categoriesToBlock">Categories to Block</div>
             <div class="pb-cats" id="nsched-cats" style="display:flex;flex-direction:column;gap:12px;">
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="distraction" ${!sched.blockCats || sched.blockCats.includes("distraction") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">⚡ <span data-i18n="catDistraction">Distraction</span></span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="communication" ${!sched.blockCats || sched.blockCats.includes("communication") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">💬 <span data-i18n="catCommunication">Communication</span></span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="uncategorized" ${!sched.blockCats || sched.blockCats.includes("uncategorized") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">❓ <span data-i18n="catUncategorized">Uncategorized</span></span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="distraction" ${!sched.blockCats || sched.blockCats.includes("distraction") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("distraction")} ${catLabel("distraction", false)}</span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="communication" ${!sched.blockCats || sched.blockCats.includes("communication") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("communication")} ${catLabel("communication", false)}</span></label>
+              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="uncategorized" ${!sched.blockCats || sched.blockCats.includes("uncategorized") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("uncategorized")} ${catLabel("uncategorized", false)}</span></label>
             </div>
           </div>
           <div class="pb-strict-row" style="padding-top:16px;border-top:1px solid var(--bd)">

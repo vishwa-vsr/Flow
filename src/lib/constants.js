@@ -63,6 +63,26 @@
     root.rebuildCatMeta();
   };
 
+  root.getCatLabel = function (key) {
+    if (root.CAT_LABELS && root.CAT_LABELS[key]) return root.CAT_LABELS[key];
+    if (typeof t_ === "function") {
+      var k = "cat" + key.charAt(0).toUpperCase() + key.slice(1);
+      var tr = t_(k);
+      if (tr && tr !== k) return tr;
+    }
+    return key;
+  };
+
+  root.getCatEmoji = function (key) {
+    if (root.CAT_EMOJI && root.CAT_EMOJI[key]) return root.CAT_EMOJI[key];
+    return "🏷️";
+  };
+
+  root.getCatColor = function (key) {
+    if (root.CAT_COLORS && root.CAT_COLORS[key]) return root.CAT_COLORS[key];
+    return "#555555";
+  };
+
   root.rebuildCatMeta();
 
   root.DEFAULT_CATS = ["productivity", "learning", "distraction", "communication", "uncategorized"];

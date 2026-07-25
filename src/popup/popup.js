@@ -420,23 +420,23 @@ function renderDonut(e, t) {
             c.textContent = "";
             if (t.total) {
                 [{
-                    label: t_("catProductivity"),
+                    label: (typeof getCatLabel === "function" ? getCatLabel("productivity") : (CAT_LABELS?.productivity || t_("catProductivity"))),
                     secs: t.prod,
-                    color: "var(--green)"
+                    color: (typeof getCatColor === "function" ? getCatColor("productivity") : "var(--green)")
                 }, {
-                    label: t_("catLearning"),
+                    label: (typeof getCatLabel === "function" ? getCatLabel("learning") : (CAT_LABELS?.learning || t_("catLearning"))),
                     secs: t.lrn,
-                    color: "var(--purple)"
+                    color: (typeof getCatColor === "function" ? getCatColor("learning") : "var(--purple)")
                 }, {
-                    label: t_("catCommunication"),
+                    label: (typeof getCatLabel === "function" ? getCatLabel("communication") : (CAT_LABELS?.communication || t_("catCommunication"))),
                     secs: t.comms,
-                    color: "var(--blue)"
+                    color: (typeof getCatColor === "function" ? getCatColor("communication") : "var(--blue)")
                 }, {
-                    label: t_("catDistraction"),
+                    label: (typeof getCatLabel === "function" ? getCatLabel("distraction") : (CAT_LABELS?.distraction || t_("catDistraction"))),
                     secs: t.dist,
-                    color: "var(--red)"
+                    color: (typeof getCatColor === "function" ? getCatColor("distraction") : "var(--red)")
                 }, {
-                    label: t_("catUncategorized"),
+                    label: (typeof getCatLabel === "function" ? getCatLabel("uncategorized") : (CAT_LABELS?.uncategorized || t_("catUncategorized"))),
                     secs: t.other,
                     color: "var(--tx3)"
                 }].filter(e => e.secs > 0).forEach(e => {
@@ -501,8 +501,10 @@ function renderDonut(e, t) {
 
 function buildCatSelector(e, t, s) {
     var a = `<select class="sel-cat" data-domain="${escHTML(e)}" style="font-size:10px; padding:4px 8px; border-radius:999px; background:${s}22; color:${s}; border:1px solid ${s}55; outline:none; cursor:pointer; font-weight:800; text-transform:uppercase; appearance:none; text-align:center;">`;
-    return ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(e => {
-        a += `<option value="${e}" ${e === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${t_("cat" + e.charAt(0).toUpperCase() + e.slice(1)) || CAT_LABELS[e]}</option>`
+    return ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(catKey => {
+        const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (CAT_LABELS?.[catKey] || catKey));
+        const emoji = (typeof getCatEmoji === "function" ? getCatEmoji(catKey) : (CAT_EMOJI?.[catKey] || ""));
+        a += `<option value="${catKey}" ${catKey === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${emoji} ${lbl}</option>`
     }), a += "</select>"
 }
 
