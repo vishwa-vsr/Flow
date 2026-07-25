@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dynamic Category Rendering:** Updated Analytics Overview cards, Donut Chart & Legend, Heatmap Settings modal, Daily Breakdown tab, Count Towards Goals checkboxes, and Popup dropdowns to render custom category names, emojis, and accent colors dynamically.
 - **Theme Cycling Optimization:** Streamlined popup theme switching to transition directly from `cinematic` to `dark` theme, skipping deprecated custom theme states.
 - **Site Name Typography (Manrope Font):** Updated site domain names across Top Sites, Daily Breakdown, and Site Manager lists to use the embedded `Manrope` font (`manrope.woff2`) for clean typography consistency.
+- **Search Input Glow Removal:** Removed green focus `box-shadow` glows and outlines from all search bars (`.ff-search`) and text input fields across Top Sites, Site Manager, and modals.
 
 ### Fixed
 - **Rule Unique ID Queue:** Implemented task queuing for `declarativeNetRequest` dynamic rule updates to serialize background rule modifications and eliminate duplicate rule ID errors.
