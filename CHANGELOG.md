@@ -14,10 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **Flat Modern UI (Green Glow Removal):** Removed green `box-shadow` glows from active Quick Preset cards, Count Towards Goals checkboxes, play button hovers, logo animations, day dots, and popup category selection pills for a clean, modern aesthetic.
 - **Dynamic Category Rendering:** Updated Analytics Overview cards, Donut Chart & Legend, Heatmap Settings modal, Daily Breakdown tab, Count Towards Goals checkboxes, and Popup dropdowns to render custom category names, emojis, and accent colors dynamically.
+- **Theme Cycling Optimization:** Streamlined popup theme switching to transition directly from `cinematic` to `dark` theme, skipping deprecated custom theme states.
 
 ### Fixed
 - **Rule Unique ID Queue:** Implemented task queuing for `declarativeNetRequest` dynamic rule updates to serialize background rule modifications and eliminate duplicate rule ID errors.
 - **Heatmap Thresholds Modal Stacking:** Fixed duplicate event listener registration and overlay stacking when switching tabs, ensuring the Cancel button, Cross (✕) button, and backdrop click close the modal immediately.
+- **Instant Category Edit Re-rendering:** Fixed delayed UI updates when saving or resetting category edits, triggering immediate live re-renders across Focus Mode and Analytics tabs.
 
 ## [10.0.2] - 2026-07-12
 
