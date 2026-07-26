@@ -395,19 +395,19 @@ function renderDonut(e, t) {
         var a = 2 * Math.PI * 50,
             n = [{
                 cat: "productivity",
-                color: "var(--green)"
+                color: (typeof getCatColor === "function" ? getCatColor("productivity") : "var(--green)")
             }, {
                 cat: "learning",
-                color: "var(--purple)"
+                color: (typeof getCatColor === "function" ? getCatColor("learning") : "var(--purple)")
             }, {
                 cat: "communication",
-                color: "var(--blue)"
+                color: (typeof getCatColor === "function" ? getCatColor("communication") : "var(--blue)")
             }, {
                 cat: "distraction",
-                color: "var(--red)"
+                color: (typeof getCatColor === "function" ? getCatColor("distraction") : "var(--red)")
             }, {
                 cat: "uncategorized",
-                color: "var(--tx3)"
+                color: (typeof getCatColor === "function" ? getCatColor("uncategorized") : "var(--tx3)")
             }].filter(t => (e[t.cat] || 0) > 0),
             o = 0;
         n.forEach(n => {
@@ -717,6 +717,17 @@ async function initPopup() {
             applyCustomCategories(syncCustom.customCategories);
         }
     } catch (_) {}
+
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+        if (areaName === "sync" && changes.customCategories) {
+            if (typeof applyCustomCategories === "function") {
+                applyCustomCategories(changes.customCategories.newValue);
+            }
+            if (typeof renderAll === "function") {
+                renderAll();
+            }
+        }
+    });
 
     if (typeof initI18n === "function") {
         await initI18n();

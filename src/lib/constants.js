@@ -83,6 +83,16 @@
     return "#555555";
   };
 
+  root.hexToRgba = function (hex, alpha) {
+    if (alpha === undefined) alpha = 1;
+    if (!hex || typeof hex !== "string") return "rgba(85, 85, 85, " + alpha + ")";
+    var c = hex.trim().replace("#", "");
+    if (c.length === 3) c = c.split("").map(function(x) { return x + x; }).join("");
+    if (c.length !== 6) return "rgba(85, 85, 85, " + alpha + ")";
+    var num = parseInt(c, 16);
+    return "rgba(" + ((num >> 16) & 255) + ", " + ((num >> 8) & 255) + ", " + (num & 255) + ", " + alpha + ")";
+  };
+
   root.rebuildCatMeta();
 
   root.DEFAULT_CATS = ["productivity", "learning", "distraction", "communication", "uncategorized"];

@@ -172,8 +172,18 @@ chrome.storage.onChanged.addListener((e, t) => {
         }
 
     }
-    if ("sync" === t && e.settings) {
-        applyTheme();
+    if ("sync" === t) {
+        if (e.settings) {
+            applyTheme();
+        }
+        if (e.customCategories) {
+            if (typeof applyCustomCategories === "function") {
+                applyCustomCategories(e.customCategories.newValue);
+            }
+            renderCategories();
+            loadWeeklyGoalSettings();
+            loadAnalytics();
+        }
     }
 }); $("btn-dark-mode") && $("btn-dark-mode").addEventListener("click", () => sLocal({
     theme: "dark"
@@ -1958,11 +1968,35 @@ function showTooltip(e, t, a) {
     if (_ttR.bottom > window.innerHeight - 8) tooltipEl.style.top = (mouseY - _ttR.height) + "px";
 }
 
+function attachChartWheelScroll(scrollEl) {
+    if (!scrollEl || scrollEl._wheelAttached) return;
+    scrollEl._wheelAttached = true;
+    scrollEl.addEventListener("wheel", (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+        const delta = e.deltaY;
+        if (!delta) return;
+
+        const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+        if (maxScroll <= 0) return;
+
+        const cur = scrollEl.scrollLeft;
+        const canScrollRight = delta > 0 && cur < maxScroll - 1;
+        const canScrollLeft = delta < 0 && cur > 1;
+
+        if (canScrollRight || canScrollLeft) {
+            e.preventDefault();
+            scrollEl.scrollLeft += delta;
+        }
+    }, { passive: false });
+}
+
 function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, selectedCats, daySiteLogs) {
     const scrollEl = document.getElementById(scrollId);
     if (scrollEl) {
         scrollEl.style.paddingLeft = '50px';
         scrollEl.style.paddingRight = '50px';
+        attachChartWheelScroll(scrollEl);
     }
 
     const canvasEl = document.getElementById(canvasId);
@@ -1997,11 +2031,11 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
     const activeCats = selectedCats.length ? selectedCats : ["uncategorized"];
     
     const catGradients = {
-        productivity: { solid: '#05D581', fade: 'rgba(5, 213, 129, 0.15)' },
-        learning: { solid: '#A855F7', fade: 'rgba(168, 85, 247, 0.15)' },
-        communication: { solid: '#5C9CFC', fade: 'rgba(92, 156, 252, 0.15)' },
-        distraction: { solid: '#F46B7A', fade: 'rgba(244, 107, 122, 0.15)' },
-        uncategorized: { solid: '#71717A', fade: 'rgba(113, 113, 122, 0.15)' }
+        productivity: { solid: catColor('productivity'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('productivity'), 0.15) : 'rgba(5, 213, 129, 0.15)') },
+        learning: { solid: catColor('learning'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('learning'), 0.15) : 'rgba(168, 85, 247, 0.15)') },
+        communication: { solid: catColor('communication'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('communication'), 0.15) : 'rgba(92, 156, 252, 0.15)') },
+        distraction: { solid: catColor('distraction'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('distraction'), 0.15) : 'rgba(244, 107, 122, 0.15)') },
+        uncategorized: { solid: catColor('uncategorized'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('uncategorized'), 0.15) : 'rgba(113, 113, 122, 0.15)') }
     };
     
     let maxVal = 0;
@@ -2280,6 +2314,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
     if (scrollEl) {
         scrollEl.style.paddingLeft = '50px';
         scrollEl.style.paddingRight = '50px';
+        attachChartWheelScroll(scrollEl);
     }
 
     const canvasEl = document.getElementById(canvasId);
@@ -2311,11 +2346,11 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
     const gridColor = isLight ? "rgba(15, 23, 42, 0.04)" : "rgba(255, 255, 255, 0.04)";
 
     const catGradients = {
-        productivity: { solid: '#05D581', fade: 'rgba(5, 213, 129, 0.15)' },
-        learning: { solid: '#A855F7', fade: 'rgba(168, 85, 247, 0.15)' },
-        communication: { solid: '#5C9CFC', fade: 'rgba(92, 156, 252, 0.15)' },
-        distraction: { solid: '#F46B7A', fade: 'rgba(244, 107, 122, 0.15)' },
-        uncategorized: { solid: '#71717A', fade: 'rgba(113, 113, 122, 0.15)' }
+        productivity: { solid: catColor('productivity'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('productivity'), 0.15) : 'rgba(5, 213, 129, 0.15)') },
+        learning: { solid: catColor('learning'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('learning'), 0.15) : 'rgba(168, 85, 247, 0.15)') },
+        communication: { solid: catColor('communication'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('communication'), 0.15) : 'rgba(92, 156, 252, 0.15)') },
+        distraction: { solid: catColor('distraction'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('distraction'), 0.15) : 'rgba(244, 107, 122, 0.15)') },
+        uncategorized: { solid: catColor('uncategorized'), fade: (typeof hexToRgba === "function" ? hexToRgba(catColor('uncategorized'), 0.15) : 'rgba(113, 113, 122, 0.15)') }
     };
 
     const datasets = [];
@@ -2968,31 +3003,31 @@ async function renderDailyBreakdown() {
                   </div>
                 </div>
                 <!-- Productivity -->
-                <div class="db-stat-box" style="--glow-color: rgba(5, 213, 129, 0.15); --glow-border: rgba(5, 213, 129, 0.2); --glow-shadow: rgba(5, 213, 129, 0.1); opacity: ${s > 0 ? "1" : "0.35"};">
+                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.15) : "rgba(5, 213, 129, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.2) : "rgba(5, 213, 129, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.1) : "rgba(5, 213, 129, 0.1)")}; opacity: ${s > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
                     <span class="db-stat-title">${catLabel("productivity", false)}</span>
-                    <span class="db-stat-value num" style="color: var(--green);">${fmt(s)}</span>
+                    <span class="db-stat-value num" style="color: ${catColor("productivity")};">${fmt(s)}</span>
                   </div>
                 </div>
                 <!-- Learning -->
-                <div class="db-stat-box" style="--glow-color: rgba(168, 85, 247, 0.15); --glow-border: rgba(168, 85, 247, 0.2); --glow-shadow: rgba(168, 85, 247, 0.1); opacity: ${o > 0 ? "1" : "0.35"};">
+                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.15) : "rgba(168, 85, 247, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.2) : "rgba(168, 85, 247, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.1) : "rgba(168, 85, 247, 0.1)")}; opacity: ${o > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
                     <span class="db-stat-title">${catLabel("learning", false)}</span>
-                    <span class="db-stat-value num" style="color: var(--purple);">${fmt(o)}</span>
+                    <span class="db-stat-value num" style="color: ${catColor("learning")};">${fmt(o)}</span>
                   </div>
                 </div>
                 <!-- Communication -->
-                <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1); opacity: ${r > 0 ? "1" : "0.35"};">
+                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.15) : "rgba(92, 156, 252, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.2) : "rgba(92, 156, 252, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.1) : "rgba(92, 156, 252, 0.1)")}; opacity: ${r > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
                     <span class="db-stat-title">${catLabel("communication", false)}</span>
-                    <span class="db-stat-value num" style="color: var(--blue);">${fmt(r)}</span>
+                    <span class="db-stat-value num" style="color: ${catColor("communication")};">${fmt(r)}</span>
                   </div>
                 </div>
                 <!-- Distraction -->
-                <div class="db-stat-box" style="--glow-color: rgba(244, 107, 122, 0.15); --glow-border: rgba(244, 107, 122, 0.2); --glow-shadow: rgba(244, 107, 122, 0.1); opacity: ${l > 0 ? "1" : "0.35"};">
+                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.15) : "rgba(244, 107, 122, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.2) : "rgba(244, 107, 122, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.1) : "rgba(244, 107, 122, 0.1)")}; opacity: ${l > 0 ? "1" : "0.35"};">
                   <div class="db-stat-info">
                     <span class="db-stat-title">${catLabel("distraction", false)}</span>
-                    <span class="db-stat-value num" style="color: var(--red);">${fmt(l)}</span>
+                    <span class="db-stat-value num" style="color: ${catColor("distraction")};">${fmt(l)}</span>
                   </div>
                 </div>
               </div>
@@ -3022,11 +3057,11 @@ async function renderDailyBreakdown() {
               <div class="db-bar-container">
                 <div class="db-bar-wrap">${h}</div>
                 <div class="db-bar-legend">
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--green)"></span> ${catLabel("productivity", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--purple)"></span> ${catLabel("learning", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--blue)"></span> ${catLabel("communication", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--red)"></span> ${catLabel("distraction", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:var(--tx4)"></span> ${catLabel("uncategorized", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("productivity")}"></span> ${catLabel("productivity", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("learning")}"></span> ${catLabel("learning", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("communication")}"></span> ${catLabel("communication", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("distraction")}"></span> ${catLabel("distraction", !1)}</div>
+                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("uncategorized")}"></span> ${catLabel("uncategorized", !1)}</div>
                 </div>
               </div>
               ${y}
@@ -3205,11 +3240,31 @@ async function renderTrend() {
     const distLabel = $("tog-trend-dist-lbl");
     const uncLabel = $("tog-trend-unc-lbl");
 
-    if (prodLabel) prodLabel.textContent = `${catLabel("productivity", !1)} (${formatMinsToHours(prodTotal)})`;
-    if (lrnLabel) lrnLabel.textContent = `${catLabel("learning", !1)} (${formatMinsToHours(lrnTotal)})`;
-    if (commLabel) commLabel.textContent = `${catLabel("communication", !1)} (${formatMinsToHours(commTotal)})`;
-    if (distLabel) distLabel.textContent = `${catLabel("distraction", !1)} (${formatMinsToHours(distTotal)})`;
-    if (uncLabel) uncLabel.textContent = `${catLabel("uncategorized", !1)} (${formatMinsToHours(uncTotal)})`;
+    if (prodLabel) {
+        prodLabel.textContent = `${catLabel("productivity", !1)} (${formatMinsToHours(prodTotal)})`;
+        const dot = $("tog-trend-prod")?.nextElementSibling;
+        if (dot) dot.style.background = catColor("productivity");
+    }
+    if (lrnLabel) {
+        lrnLabel.textContent = `${catLabel("learning", !1)} (${formatMinsToHours(lrnTotal)})`;
+        const dot = $("tog-trend-lrn")?.nextElementSibling;
+        if (dot) dot.style.background = catColor("learning");
+    }
+    if (commLabel) {
+        commLabel.textContent = `${catLabel("communication", !1)} (${formatMinsToHours(commTotal)})`;
+        const dot = $("tog-trend-comm")?.nextElementSibling;
+        if (dot) dot.style.background = catColor("communication");
+    }
+    if (distLabel) {
+        distLabel.textContent = `${catLabel("distraction", !1)} (${formatMinsToHours(distTotal)})`;
+        const dot = $("tog-trend-dist")?.nextElementSibling;
+        if (dot) dot.style.background = catColor("distraction");
+    }
+    if (uncLabel) {
+        uncLabel.textContent = `${catLabel("uncategorized", !1)} (${formatMinsToHours(uncTotal)})`;
+        const dot = $("tog-trend-unc")?.nextElementSibling;
+        if (dot) dot.style.background = catColor("uncategorized");
+    }
 
     // Productivity vs Distraction Split Card
     const focusMins = prodTotal + lrnTotal;

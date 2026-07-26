@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.4] - 2026-07-26
+
+### Fixed
+- **Dynamic Category Color Propagation in Timeline & Charts:** Fixed custom category color updates (e.g. changing Learning/Study accent color) to dynamically recalculate and repaint timeline blocks, card stat numbers, glow indicators, and legend dots in the 24-Hour Active Timeline and Daily Breakdown views.
+- **Comparison Tab Dynamic Category Styling:** Updated Comparison tab line and bar chart gradient fills, dataset border colors, and top chart toggle dots (`chart-tog-dot`) to dynamically render active custom category accent colors instead of fallback hardcoded styles.
+- **Extension Popup SVG Donut & Live Storage Sync:** Fixed popup SVG donut chart arc segments to dynamically pull custom category accent colors, and added a live `chrome.storage.onChanged` listener to instantly reflect category edits made in the dashboard without manual popup re-opens.
+- **Comparison Chart Horizontal Wheel Scrolling:** Fixed an issue where rotating the mouse wheel over the wide comparison charts scrolled the web page vertically up and down instead of sliding the chart horizontally. Added smart wheel listener that converts wheel scroll into horizontal chart sliding, and smoothly hands control back to normal web page scrolling once the chart boundary is reached.
+
 ## [10.0.3] - 2026-07-25
 
 ### Added
