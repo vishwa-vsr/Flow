@@ -59,11 +59,18 @@ function getLocale() {
 }
 
 function getPresetName(id, name) {
+    if (name) {
+        if (id === "pomodoro" && name !== "Pomodoro") return name;
+        if (id === "deep-work" && name !== "Deep Work") return name;
+        if (id === "short-sprint" && name !== "Short Sprint") return name;
+        if (id === "custom" && name !== "Flow") return name;
+        if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
+    }
     if (id === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
     if (id === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
     if (id === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
     if (id === "custom") return t_("presetFlow") || name || "Flow";
-    return name;
+    return name || id;
 }
 
 async function applyTheme() {
@@ -5226,7 +5233,15 @@ document.body.appendChild(overlay);
             overlay.querySelector("#ep-cancel").addEventListener("click", () => overlay.remove());
 
             overlay.querySelector("#ep-save").addEventListener("click", async () => {
-                const nameVal = overlay.querySelector("#ep-name").value.trim() || p.name;
+                const rawName = overlay.querySelector("#ep-name").value.trim();
+                let nameVal = rawName;
+                if (!nameVal) {
+                    if (p.id === "pomodoro") nameVal = "Pomodoro";
+                    else if (p.id === "deep-work") nameVal = "Deep Work";
+                    else if (p.id === "short-sprint") nameVal = "Short Sprint";
+                    else if (p.id === "custom") nameVal = "Flow";
+                    else nameVal = p.name || "Custom";
+                }
                 const workVal = Math.max(1, Math.min(180, parseInt(overlay.querySelector("#ep-work").value, 10) || 25));
                 const brkInputVal = parseInt(overlay.querySelector("#ep-brk").value, 10);
                 const brkVal = Math.max(0, Math.min(60, isNaN(brkInputVal) ? 5 : brkInputVal));

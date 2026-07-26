@@ -652,13 +652,28 @@ $("btn-skip") && $("btn-skip").addEventListener("click", async () => {
     try { renderFocus((await msg("FOCUS_SKIP"))?.focusState); }
     finally { _focusBusy = false; }
 });
+function getPresetName(id, name) {
+    if (name) {
+        if (id === "pomodoro" && name !== "Pomodoro") return name;
+        if (id === "deep-work" && name !== "Deep Work") return name;
+        if (id === "short-sprint" && name !== "Short Sprint") return name;
+        if (id === "custom" && name !== "Flow") return name;
+        if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
+    }
+    if (id === "pomodoro") return typeof t_ === "function" ? (t_("presetPomodoro") || name || "Pomodoro") : (name || "Pomodoro");
+    if (id === "deep-work") return typeof t_ === "function" ? (t_("presetDeepWork") || name || "Deep Work");
+    if (id === "short-sprint") return typeof t_ === "function" ? (t_("presetShortSprint") || name || "Short Sprint") : (name || "Short Sprint");
+    if (id === "custom") return typeof t_ === "function" ? (t_("presetFlow") || name || "Flow") : (name || "Flow");
+    return name || id;
+}
+
 async function updatePresetNameInSettings() {
     var pres = await msg("PRESETS_GET");
     if (pres && pres.presets) {
         var ap = pres.presets.find(p => p.id === pres.activeId) || pres.presets[0];
         var nameEl = $("p-settings-preset-name");
         if (nameEl && ap) {
-            nameEl.textContent = " · " + ap.name;
+            nameEl.textContent = " · " + getPresetName(ap.id, ap.name);
         }
     }
 }
@@ -751,7 +766,7 @@ async function initPopup() {
     if (pres && pres.presets) ap = pres.presets.find(p => p.id === pres.activeId) || pres.presets[0];
     var nameEl = $("p-settings-preset-name");
     if (nameEl && ap) {
-        nameEl.textContent = " · " + ap.name;
+        nameEl.textContent = " · " + getPresetName(ap.id, ap.name);
     }
     window._focusWorkMins = ap ? ap.work : 25;
     window._focusBreakMins = ap ? ap.brk : 5;
@@ -933,7 +948,7 @@ async function renderPresetRail(pres) {
     var locked = !!(fs && fs.focusState && fs.focusState.active);
     setSafeHTML(rail, pres.presets.map(p => {
         var isAct = p.id === active;
-        return '<button title="' + escHTML(p.name || '') + (locked ? ' (locked while focus is running)' : '') +
+        return '<button title="' + escHTML(getPresetName(p.id, p.name)) + (locked ? ' (locked while focus is running)' : '') +
             '" data-pid="' + escHTML(p.id || '') + '" ' + (locked ? 'disabled' : '') +
             ' style="background:' + (isAct ? 'var(--bg3)' : 'transparent') +
             ';border:1px solid ' + (isAct ? 'var(--bd2)' : 'transparent') +
