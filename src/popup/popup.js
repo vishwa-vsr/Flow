@@ -660,10 +660,10 @@ function getPresetName(id, name) {
         if (id === "custom" && name !== "Flow") return name;
         if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
     }
-    if (id === "pomodoro") return typeof t_ === "function" ? (t_("presetPomodoro") || name || "Pomodoro") : (name || "Pomodoro");
-    if (id === "deep-work") return typeof t_ === "function" ? (t_("presetDeepWork") || name || "Deep Work");
-    if (id === "short-sprint") return typeof t_ === "function" ? (t_("presetShortSprint") || name || "Short Sprint") : (name || "Short Sprint");
-    if (id === "custom") return typeof t_ === "function" ? (t_("presetFlow") || name || "Flow") : (name || "Flow");
+    if (id === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
+    if (id === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
+    if (id === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
+    if (id === "custom") return t_("presetFlow") || name || "Flow";
     return name || id;
 }
 
