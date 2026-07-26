@@ -891,18 +891,25 @@ let isPrivacyActive = _loc.privacyModeActive === true;
         const isLocal = e.startsWith(BLOCKED_PAGE);
         const exclusions = SSO_EXCLUSIONS.filter(ex => ex === t.toLowerCase().trim() || ex.endsWith("." + t.toLowerCase().trim()));
         if (isLocal) {
+            const [path, query] = e.split("?");
+            const relativePath = path.startsWith("/") ? path : "/" + path;
+            const separator = query ? "&" : "?";
+            const fullPath = relativePath + (query ? "?" + query : "") + separator + "d=" + safeBtoa(t);
             return {
                 id: a + 1,
                 priority: 1,
                 action: {
-                    type: "block"
+                    type: "redirect",
+                    redirect: {
+                        extensionPath: fullPath
+                    }
                 },
                 condition: {
                     urlFilter: `||${t}`,
                     resourceTypes: ["main_frame"],
                     ...(exclusions.length > 0 ? { excludedRequestDomains: exclusions } : {})
                 }
-            }
+            };
         } else {
             let targetUrl = e;
             if (!e.startsWith("http")) {
@@ -1368,6 +1375,7 @@ async function startFocus(scheduledDurationMins = null) {
         remaining: e,
         paused: !1,
         cyclesCompleted: 0,
+        totalCycles: scheduledDurationMins !== null ? 1 : (preset ? (preset.cycles || 4) : 4),
         startedAt: Date.now(),
         phaseEndsAt: Date.now() + 1e3 * e,
         durationMins: 0,
@@ -1496,14 +1504,12 @@ async function handleFocusPhaseEnd() {
         focusState.durationMins += Math.round(focusState.fullDuration / 60);
         focusState.cyclesCompleted++;
 
-
-
         if (focusState.isSchedule) {
             return await endFocusSession();
         }
 
-        if (focusState.cyclesCompleted % o === 0) {
-            if (s > 0) {
+        if (focusState.cyclesCompleted >= o) {
+            if (s > 0 && o > 1) {
                 focusState.phase = "long_break";
                 focusState.fullDuration = s;
                 focusState.remaining = s;
@@ -1515,6 +1521,21 @@ async function handleFocusPhaseEnd() {
                             iconUrl: t,
                             title: "Work Period Over! ☕",
                             message: "Time for a well-deserved long break!"
+                        });
+                    }
+                } catch (t) { }
+            } else if (a > 0) {
+                focusState.phase = "short_break";
+                focusState.fullDuration = a;
+                focusState.remaining = a;
+                try {
+                    if (!ap || ap.notify !== false) {
+                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
+                        chrome.notifications.create("focus_break_start_" + Date.now(), {
+                            type: "basic",
+                            iconUrl: t,
+                            title: "Work Period Over! ☕",
+                            message: "Time for a short break."
                         });
                     }
                 } catch (t) { }
@@ -1545,7 +1566,7 @@ async function handleFocusPhaseEnd() {
             }
         }
     } else {
-        if ("long_break" === focusState.phase && focusState.cyclesCompleted >= o) {
+        if (focusState.cyclesCompleted >= o) {
             return await endFocusSession();
         } else {
             focusState.phase = "work";
@@ -2228,7 +2249,13 @@ async function handle(t, e) {
                 }
             };
         case "FOCUS_GET_STATE":
-            return syncFocusRemaining(), {
+            await restoreState();
+            if (focusState.active && !focusState.paused && focusState.phaseEndsAt && Date.now() >= focusState.phaseEndsAt) {
+                await handleFocusPhaseEnd();
+            } else {
+                syncFocusRemaining();
+            }
+            return {
                 focusState: {
                     ...focusState
                 }
@@ -2740,6 +2767,7 @@ chrome.runtime.onMessage.addListener((t, e, a) => (handle(t, e).then(a).catch(t 
                             const _scId = _sc.id || (_sc.startTime + _sc.endTime);
                             const _stoppedKey = `stopped_sched_${_scId}_at`;
                             if (isTimeWindowActive(_sc.startTime, _sc.endTime, _sc.days)) {
+                                if (focusState.active) break;
                                 let _windowMins = (parseInt(_sc.endTime.split(":")[0]) * 60 + parseInt(_sc.endTime.split(":")[1])) - (parseInt(_sc.startTime.split(":")[0]) * 60 + parseInt(_sc.startTime.split(":")[1]));
                                 if (_windowMins < 0) _windowMins += 1440;
                                 

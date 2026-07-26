@@ -149,20 +149,20 @@
     "description": "Label indicating when focus mode will automatically stop."
   },
   "btnStart": {
-    "message": "▶ Iniciar",
+    "message": "Iniciar",
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ Detener"
+    "message": "Detener"
   },
   "btnSkip": {
-    "message": "⏭ Saltar"
+    "message": "Saltar"
   },
   "btnPause": {
-    "message": "⏸ Pausar"
+    "message": "Pausar"
   },
   "btnResume": {
-    "message": "▶ Reanudar",
+    "message": "Reanudar",
     "description": "Label for the resume button."
   },
   "loading": {

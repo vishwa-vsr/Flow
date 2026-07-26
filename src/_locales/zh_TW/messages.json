@@ -150,20 +150,20 @@
     "description": "Label indicating when focus mode will automatically stop."
   },
   "btnStart": {
-    "message": "▶ 開始",
+    "message": "開始",
     "description": "Label for the start button."
   },
   "btnStop": {
-    "message": "■ 停止"
+    "message": "停止"
   },
   "btnSkip": {
-    "message": "⏭ 跳過"
+    "message": "跳過"
   },
   "btnPause": {
-    "message": "⏸ 暫停"
+    "message": "暫停"
   },
   "btnResume": {
-    "message": "▶ 履歷",
+    "message": "恢復",
     "description": "Label for the resume button."
   },
   "loading": {

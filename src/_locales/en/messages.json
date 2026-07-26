@@ -123,19 +123,19 @@
     "message": "⏱ Auto-stops in"
   },
   "btnStart": {
-    "message": "▶ Start"
+    "message": "Start"
   },
   "btnStop": {
-    "message": "■ Stop"
+    "message": "Stop"
   },
   "btnSkip": {
-    "message": "⏭ Skip"
+    "message": "Skip"
   },
   "btnPause": {
-    "message": "⏸ Pause"
+    "message": "Pause"
   },
   "btnResume": {
-    "message": "▶ Resume"
+    "message": "Resume"
   },
   "loading": {
     "message": "Loading..."

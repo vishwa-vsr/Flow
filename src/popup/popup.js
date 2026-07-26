@@ -599,7 +599,20 @@ function renderFocus(e) {
         s = $("focus-card");
     s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
     var a = t ? 60 * window._focusWorkMins : "long_break" === e.phase ? 60 * window._focusLongBreakMins : 60 * window._focusBreakMins;
-    $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0)), $("fr-cycles") && ($("fr-cycles").textContent = e.isSchedule ? t_("active") : t_("cyclesDone").replace("$count$", (e.cyclesCompleted || 0))), $("focus-phase") && ($("focus-phase").textContent = e.isSchedule ? t_("schedule") : (t ? t_("work") : "long_break" === e.phase ? t_("longBreak") : t_("shortBreak")), $("focus-phase").className = "focus-phase " + (e.isSchedule ? "work" : (t ? "work" : "brk"))), $("focus-title") && ($("focus-title").textContent = e.isSchedule ? t_("deepWork") : (t ? t_("deepWork") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase"))), $("focus-sub") && ($("focus-sub").textContent = e.isSchedule ? t_("scheduledSession") : ((e.cyclesCompleted || 0) === 1 ? t_("cyclesCompleted").replace("$count$", 1) : t_("cyclesCompletedPlural").replace("$count$", (e.cyclesCompleted || 0)))), $("btn-start") && ($("btn-start").style.display = "none"), $("btn-stop") && ($("btn-stop").style.display = ""), $("btn-pause") && ($("btn-pause").style.display = "", $("btn-pause").textContent = e.paused ? t_("btnResume") : t_("btnPause"), $("btn-pause").dataset.state = e.paused ? "paused" : "running"), $("btn-skip") && ($("btn-skip").style.display = t ? "none" : ""), $("btn-focus-set") && ($("btn-focus-set").style.display = "none"), $("focus-set-panel") && ($("focus-set-panel").style.display = "none");
+    $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0));
+    let totalC = e.totalCycles || 4;
+    let cycText = "";
+    if (e.isSchedule) {
+        cycText = t_("active");
+    } else if (e.phase === "work") {
+        let currentC = Math.min((e.cyclesCompleted || 0) + 1, totalC);
+        cycText = `Cycle ${currentC} of ${totalC}`;
+    } else if (e.phase === "long_break") {
+        cycText = t_("longBreak") || "Long Break";
+    } else {
+        cycText = `Break ${e.cyclesCompleted || 1} of ${totalC}`;
+    }
+    $("fr-cycles") && ($("fr-cycles").textContent = cycText), $("focus-phase") && ($("focus-phase").textContent = e.isSchedule ? t_("schedule") : (t ? t_("work") : "long_break" === e.phase ? t_("longBreak") : t_("shortBreak")), $("focus-phase").className = "focus-phase " + (e.isSchedule ? "work" : (t ? "work" : "brk"))), $("focus-title") && ($("focus-title").textContent = e.isSchedule ? t_("deepWork") : (t ? t_("deepWork") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase"))), $("focus-sub") && ($("focus-sub").textContent = e.isSchedule ? t_("scheduledSession") : cycText), $("btn-start") && ($("btn-start").style.display = "none"), $("btn-stop") && ($("btn-stop").style.display = ""), $("btn-pause") && ($("btn-pause").style.display = "", $("btn-pause").textContent = e.paused ? t_("btnResume") : t_("btnPause"), $("btn-pause").dataset.state = e.paused ? "paused" : "running"), $("btn-skip") && ($("btn-skip").style.display = t ? "none" : ""), $("btn-focus-set") && ($("btn-focus-set").style.display = "none"), $("focus-set-panel") && ($("focus-set-panel").style.display = "none");
     var n = $("pause-warning");
     if (n)
         if (e.paused && e.active) {

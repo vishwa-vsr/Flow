@@ -128,19 +128,19 @@
     "message": "⏱ 自動停止まで"
   },
   "btnStart": {
-    "message": "▶ スタート"
+    "message": "スタート"
   },
   "btnStop": {
-    "message": "■ ストップ"
+    "message": "ストップ"
   },
   "btnSkip": {
-    "message": "⏭ スキップ"
+    "message": "スキップ"
   },
   "btnPause": {
-    "message": "⏸ 一時停止"
+    "message": "一時停止"
   },
   "btnResume": {
-    "message": "▶ 再開"
+    "message": "再開"
   },
   "loading": {
     "message": "読み込み中..."

@@ -740,6 +740,13 @@ function getSlots() {
     }), e
 }
 
+function normalizeCdFreq(f) {
+    if (!f || f === "always") return "everyVisit";
+    if (f === "daily") return "oncePerDay";
+    if (f === "session") return "every10min";
+    return f;
+}
+
 function openModal(e) {
     var t = rules.find(t => t.id === e);
     if (!t) return;
@@ -751,7 +758,7 @@ function openModal(e) {
 
     // Cool-down Settings
     $("m-cd-wait").value = t.cooldownTimer || 10;
-    $("m-cd-freq").value = t.cooldownFrequency || "always";
+    $("m-cd-freq").value = normalizeCdFreq(t.cooldownFrequency);
 
     if (isInstant) {
         isTimeLimit = true;
@@ -1140,7 +1147,7 @@ function renderCategories() {
 
 function renderFocus(e, t = 25) {
     if (!e || !e.active) {
-        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = t_("zeroCycles")), $("fpb") && ($("fpb").textContent = t_("work"), $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = ""), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
+        $("frf") && $("frf").setAttribute("stroke-dashoffset", FCIRC), $("ftb") && ($("ftb").textContent = t + ":00"), $("fcyc") && ($("fcyc").textContent = t_("zeroCycles")), $("fpb") && ($("fpb").textContent = t_("work"), $("fpb").style.color = "var(--green)"), $("frf") && ($("frf").style.stroke = "var(--green)"), $("logo-img") && ($("logo-img").className = ""), $("btn-fs") && ($("btn-fs").style.display = "inline-flex"), $("btn-fst") && ($("btn-fst").style.display = "none"), $("btn-fp") && ($("btn-fp").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), $("frf") && ($("frf").style.opacity = "1");
         let e = document.getElementById("dynamic-favicon");
         return void (e && (e.href = "../assets/icons/icon128.png"))
     }
@@ -1148,7 +1155,37 @@ function renderFocus(e, t = 25) {
     var a = "work" === e.phase,
         n = e.fullDuration || (a ? 1500 : "long_break" === e.phase ? 900 : 300),
         i = Math.max(0, 1 - Math.min(1, (e.remaining || 0) / n));
-    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? t_("work") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase")), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0)), $("fcyc") && ($("fcyc").textContent = e.isSchedule ? t_("scheduledFocus") : (e.cyclesCompleted === 1 ? t_("cyclesCompleted", [e.cyclesCompleted]) : t_("cyclesCompletedPlural", [e.cyclesCompleted]))), $("btn-fs") && ($("btn-fs").style.display = "none"), $("btn-fst") && ($("btn-fst").style.display = ""), $("btn-fp") && ($("btn-fp").style.display = "", $("btn-fp").dataset.state = e.paused ? "paused" : "running", e.paused ? (e.remaining === n ? $("btn-fp").textContent = "work" === e.phase ? t_("startWork") : t_("startBreak") : $("btn-fp").textContent = t_("btnResume"), $("frf") && ($("frf").style.opacity = "0.5")) : ($("btn-fp").textContent = t_("btnPause"), $("frf") && ($("frf").style.opacity = "1"))), $("btn-skip") && ($("btn-skip").style.display = a ? "none" : "");
+    $("frf") && ($("frf").style.stroke = a ? "var(--green)" : "var(--amber)", $("frf").setAttribute("stroke-dashoffset", (FCIRC * i).toFixed(1))), $("fpb") && ($("fpb").style.color = a ? "var(--green)" : "var(--amber)", $("fpb").textContent = a ? t_("work") : "long_break" === e.phase ? t_("longBreakPhase") : t_("shortBreakPhase")), $("ftb") && ($("ftb").textContent = fmtT(e.remaining || 0));
+    
+    let totalC = e.totalCycles || 4;
+    let cycText = "";
+    if (e.isSchedule) {
+        cycText = t_("scheduledFocus") || "Scheduled Session";
+    } else if (e.phase === "work") {
+        let currentC = Math.min((e.cyclesCompleted || 0) + 1, totalC);
+        cycText = `Cycle ${currentC} of ${totalC}`;
+    } else if (e.phase === "long_break") {
+        cycText = t_("longBreakPhase") || "Long Break";
+    } else {
+        cycText = `Break ${e.cyclesCompleted || 1} of ${totalC}`;
+    }
+    $("fcyc") && ($("fcyc").textContent = cycText);
+
+    $("btn-fs") && ($("btn-fs").style.display = "none");
+    if ($("btn-fst")) $("btn-fst").style.display = "inline-flex";
+    if ($("btn-skip")) $("btn-skip").style.display = a ? "none" : "inline-flex";
+    if ($("btn-fp")) {
+        $("btn-fp").style.display = "inline-flex";
+        $("btn-fp").dataset.state = e.paused ? "paused" : "running";
+        const fpTxt = e.paused ? (e.remaining === n ? ("work" === e.phase ? t_("startWork") : t_("startBreak")) : t_("btnResume")) : t_("btnPause");
+        const fpSpan = $("btn-fp").querySelector("span");
+        if (fpSpan) {
+            fpSpan.textContent = fpTxt;
+        } else {
+            $("btn-fp").textContent = fpTxt;
+        }
+        if ($("frf")) $("frf").style.opacity = e.paused ? "0.5" : "1";
+    }
     // Bug #5 fix: reuse the single off-screen canvas instead of allocating each tick
     const s = _favCanvas;
     s.width = 32; s.height = 32; // resetting width clears the canvas
@@ -6693,7 +6730,7 @@ listContainer.appendChild(row);
             $("p-mode-schedule").checked = !!c.scheduleEnabled;
             $("p-mode-cooldown").checked = !!c.cooldownEnabled;
             $("p-cd-wait").value = c.cooldownTimer || 10;
-            $("p-cd-freq").value = c.cooldownFrequency || "always";
+            $("p-cd-freq").value = normalizeCdFreq(c.cooldownFrequency);
             
             $("p-mode-session").checked = !!c.sessionLimitEnabled;
             $("p-session-limit").value = c.sessionLimitSecs ? Math.round(c.sessionLimitSecs / 60) : 5;
@@ -6938,7 +6975,7 @@ slot.querySelector(".btn-del-p-sched").addEventListener("click", () => {
                 $("m-mode-schedule").checked = !!c.scheduleEnabled;
                 $("m-mode-cooldown").checked = !!c.cooldownEnabled;
                 $("m-cd-wait").value = c.cooldownTimer || 10;
-                $("m-cd-freq").value = c.cooldownFrequency || "always";
+                $("m-cd-freq").value = normalizeCdFreq(c.cooldownFrequency);
 
                 $("m-mode-session").checked = !!c.sessionLimitEnabled;
                 $("m-session-limit").value = c.sessionLimitSecs ? Math.round(c.sessionLimitSecs / 60) : 5;

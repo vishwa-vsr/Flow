@@ -128,19 +128,19 @@
     "message": "⏱ Para automaticamente em"
   },
   "btnStart": {
-    "message": "▶ Iniciar"
+    "message": "Iniciar"
   },
   "btnStop": {
-    "message": "■ Parar"
+    "message": "Parar"
   },
   "btnSkip": {
-    "message": "⏭ Pular"
+    "message": "Pular"
   },
   "btnPause": {
-    "message": "⏸ Pausar"
+    "message": "Pausar"
   },
   "btnResume": {
-    "message": "▶ Retomar"
+    "message": "Retomar"
   },
   "loading": {
     "message": "Carregando..."

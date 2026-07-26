@@ -128,19 +128,19 @@
     "message": "⏱ Automatischer Stopp in"
   },
   "btnStart": {
-    "message": "▶ Start"
+    "message": "Start"
   },
   "btnStop": {
-    "message": "■ Stopp"
+    "message": "Stopp"
   },
   "btnSkip": {
-    "message": "⏭ Überspringen"
+    "message": "Überspringen"
   },
   "btnPause": {
-    "message": "⏸ Pause"
+    "message": "Pause"
   },
   "btnResume": {
-    "message": "▶ Fortsetzen"
+    "message": "Fortsetzen"
   },
   "loading": {
     "message": "Wird geladen..."

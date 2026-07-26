@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.5] - 2026-07-26
+
+### Fixed
+- **Firefox Bookmark & Search Bar Navigation Redirection:** Fixed an issue in Mozilla Firefox where clicking a blocked site from the bookmark bar or address/search bar failed to open the custom Block Screen page (`blocked/index.html`). Updated declarativeNetRequest rules from hard-blocking network requests (`type: "block"`) to native extension redirects (`type: "redirect"` with `extensionPath`), enabling instant network-level redirection directly to the blocked page across all navigation sources in Firefox.
+- **Focus Mode Action Button Alignment:** Fixed vertical misalignment between SVG icons and text labels on Focus action buttons ("Stop" and "Skip") by enforcing flexbox centering (`display: inline-flex`, `align-items: center`, `gap: 8px`) across global button styles and preserving SVG elements during state updates.
+- **Focus Timer Cycle Completion & Auto-Restart Fix:** Fixed an issue where completing focus cycles caused the timer to endlessly restart from 0 cycles. Synchronized `FOCUS_GET_STATE` in the background service worker to evaluate phase completion synchronously, prevented background schedule alarms from resetting active sessions, and added explicit `Cycle X of Y` progress indicators across the Dashboard and Extension Popup.
+
 ## [10.0.4] - 2026-07-26
 
 ### Fixed
