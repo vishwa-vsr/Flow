@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "先進的生產力追蹤器和網路層級幹擾攔截器。",
+    "message": "攔截分心網站，記錄螢幕使用時間，藉助番茄鐘保持專注。100%免費、私密且本地運行。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

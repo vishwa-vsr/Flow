@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Advanced productivity tracker and network-level distraction blocker.",
+    "message": "Block distracting websites, track screen time, and stay focused with Pomodoro timers. 100% free, private & local.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

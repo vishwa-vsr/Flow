@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Rastreador de productividad avanzado y bloqueador de distracciones a nivel de red.",
+    "message": "Bloquea sitios distractores, rastrea tu tiempo en pantalla y concéntrate con temporizadores Pomodoro. 100% gratis, privado y local.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

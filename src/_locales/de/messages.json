@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Erweiterter Produktivitäts-Tracker und Ablenkungsblocker auf Netzwerkebene.",
+    "message": "Ablenkende Websites blockieren, Bildschirmzeit verfolgen und mit Pomodoro-Timern fokussiert bleiben. 100% kostenlos, privat & lokal.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

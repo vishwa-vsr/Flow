@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Rastreador avançado de produtividade e bloqueador de distrações em nível de rede.",
+    "message": "Bloqueie sites distrativos, acompanhe seu tempo de tela e mantenha o foco com cronômetros Pomodoro. 100% gratuito, privado e local.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
