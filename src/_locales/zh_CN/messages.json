@@ -102,7 +102,7 @@
     "description": "Prompt shown when the user has not configured a weekly goal."
   },
   "goalHit": {
-    "message": "进球了！ ✓",
+    "message": "目标已达成！ ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {

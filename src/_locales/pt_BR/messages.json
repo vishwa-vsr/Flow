@@ -90,7 +90,7 @@
     "message": "Defina a meta nas Configurações"
   },
   "goalHit": {
-    "message": "Goal hit! ✓",
+    "message": "Meta atingida! ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {

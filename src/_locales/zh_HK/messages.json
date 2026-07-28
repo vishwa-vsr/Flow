@@ -102,11 +102,11 @@
     "description": "Prompt shown when the user has not configured a weekly goal."
   },
   "goalHit": {
-    "message": "進球了！ ✓",
+    "message": "目標已達成！ ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {
-    "message": "定時器設定",
+    "message": "計時器設定",
     "description": "Title for the Pomodoro timer settings panel."
   },
   "workMin": {

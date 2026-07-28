@@ -90,7 +90,7 @@
     "message": "Ziel in Einstellungen festlegen"
   },
   "goalHit": {
-    "message": "Goal hit! ✓",
+    "message": "Ziel erreicht! ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {

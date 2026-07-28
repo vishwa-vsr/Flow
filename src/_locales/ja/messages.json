@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "気散じなサイトをブロックし、画面時間を記録。ポモドーロタイマーで集中力を維持。100%無料、プライベート＆ローカル。",
+    "message": "集中を妨げるサイトをブロックし、画面時間を記録。ポモドーロタイマーで作業効率を向上。100%無料、プライベート＆ローカル。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
@@ -87,10 +87,10 @@
     }
   },
   "setGoalInSettings": {
-    "message": "設定で目標を設定"
+    "message": "設定から目標を登録"
   },
   "goalHit": {
-    "message": "Goal hit! ✓",
+    "message": "目標達成！ ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {

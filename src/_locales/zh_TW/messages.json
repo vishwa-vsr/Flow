@@ -36,7 +36,7 @@
     "description": "Tooltip for the theme toggle button."
   },
   "privacyMode": {
-    "message": "隱私模式/暫停跟踪",
+    "message": "隱私模式 / 暫停追蹤",
     "description": "Label for the privacy mode toggle that pauses tracking."
   },
   "settings": {
@@ -44,7 +44,7 @@
     "description": "Label for the settings button or section."
   },
   "pauseTrackingBlocking": {
-    "message": "暫停追蹤和阻止",
+    "message": "暫停追蹤與攔截",
     "description": "Title for the pause tracking and blocking panel."
   },
   "pauseFor30Min": {
@@ -60,11 +60,11 @@
     "description": "Option to pause tracking indefinitely until manually resumed."
   },
   "privacyModeActive": {
-    "message": "隱私模式已激活",
+    "message": "隱私模式已啟用",
     "description": "Status indicator when privacy mode is currently on."
   },
   "trackingBlockingPaused": {
-    "message": "追蹤和阻止已暫停",
+    "message": "追蹤與攔截已暫停",
     "description": "Status message when tracking and blocking are paused."
   },
   "resume": {
@@ -102,11 +102,11 @@
     "description": "Prompt shown when the user has not configured a weekly goal."
   },
   "goalHit": {
-    "message": "進球了！ ✓",
+    "message": "目標已達成！ ✓",
     "description": "Message shown when the weekly goal has been reached."
   },
   "timerSettings": {
-    "message": "定時器設定",
+    "message": "計時器設定",
     "description": "Title for the Pomodoro timer settings panel."
   },
   "workMin": {
