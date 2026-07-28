@@ -1,3 +1,5 @@
+import { uid, sanitizeDomain, formatTime12 } from "./modules/utils-helpers.js";
+
 var $ = function (e) {
     return document.getElementById(e)
 },
@@ -136,22 +138,6 @@ function allCats() {
     return DEFAULT_CATS;
 }
 
-function uid() {
-    return (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : (Math.random().toString(36).slice(2) + Date.now().toString(36));
-}
-// Bug #3 fix: sanitize domain strings before injecting into innerHTML
-function sanitizeDomain(d) {
-    return String(d).replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-function formatTime12(time24) {
-    if (!time24) return "—";
-    const parts = time24.split(":");
-    let h = parseInt(parts[0], 10);
-    const m = parts[1] || "00";
-    const ampm = h >= 12 ? "PM" : "AM";
-    h = h % 12 || 12;
-    return `${h}:${m.toString().padStart(2, "0")} ${ampm}`;
-}
 applyTheme();
 chrome.storage.onChanged.addListener((e, t) => {
     if ("local" === t) {

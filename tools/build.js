@@ -92,6 +92,7 @@ function minifyJs(srcPath, dstPath) {
     const esbuild = require('esbuild');
     esbuild.buildSync({
       entryPoints: [srcPath],
+      bundle: true,
       minify: true,
       target: 'chrome90',
       outfile: dstPath,
