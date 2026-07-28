@@ -316,12 +316,13 @@ async function renderGranularBlocksUI() {
 
     a.textContent = "";
     var n = (await gLocal(["granularRules"])).granularRules || {};
-    Object.keys(GRANULAR_SITES_DASHBOARD).forEach(e => {
+    const granularSitesMap = (typeof window !== "undefined" && window.GRANULAR_SITES) ? window.GRANULAR_SITES : (self.GRANULAR_SITES || {});
+    Object.keys(granularSitesMap).forEach(e => {
         var t = document.createElement("div");
         t.className = "card";
         var i = `<div style="padding:16px; border-bottom:1px solid var(--bd); font-weight:800; display:flex; align-items:center; gap:8px;">${getFav(e)} ${e}</div>`,
             s = '<div style="padding:16px; display:flex; flex-direction:column; gap:12px;">';
-        GRANULAR_SITES_DASHBOARD[e].forEach(t => {
+        granularSitesMap[e].forEach(t => {
             var a = n[e] && n[e][t.id] ? "checked" : "";
             const tweakLabel = t_(`tweak_${t.id.replace(/-/g, '_')}`) || t.label;
             s += `\n              <div style="display:flex; justify-content:space-between; align-items:center;">\n                 <span style="font-size:13px; font-weight:600; color:var(--tx2)">${tweakLabel}</span>\n                 <label class="tog"><input type="checkbox" class="g-db-cb" data-d="${e}" data-r="${t.id}" ${a}><span class="ttrack"></span></label>\n              </div>`
