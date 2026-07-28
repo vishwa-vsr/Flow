@@ -1,6 +1,7 @@
 import { uid, sanitizeDomain, formatTime12 } from "./modules/utils-helpers.js";
 import { getPresetName, catColor, catEmoji, catLabel, allCats } from "./modules/category-helpers.js";
 import { showEditPresetModal as showEditPresetModalModule } from "./modules/preset-editor.js";
+import { updDots, showPass, checkGate, promptPinIfEnabled, initPinEventListeners } from "./modules/pin-security.js";
 
 var $ = function (e) {
     return document.getElementById(e)
@@ -157,114 +158,40 @@ function toast(e, t) {
     clearTimeout(a._tid);
     a._tid = setTimeout(() => a.className = "toast hide", TOAST_DURATION[t] ?? 3500);
 }
-var pcRes = null,
-    pcBuf = "";
+initPinEventListeners();
 
-function showPass(e = !1, t, a) {
-    const titleText = t || t_("settingsLocked") || "Settings Locked";
-    const descText = a || t_("enterPin") || "Enter your 6-digit PIN to continue";
-    return new Promise(n => {
-        pcRes = n, pcBuf = "", updDots(), $("pc-title") && ($("pc-title").textContent = titleText), $("pc-desc") && ($("pc-desc").textContent = descText), $("pcerr").classList.add("hide"), e ? $("pccancel").classList.remove("hide") : $("pccancel").classList.add("hide"), $("pcOverlay").classList.remove("hide")
-    })
-}
-
-function updDots() {
-    $("pdots").querySelectorAll("span").forEach((e, t) => e.classList.toggle("on", t < pcBuf.length))
-}
-async function checkGate() {
-    var e = (await gSync(["settings"])).settings || {};
-    if (!e.passcodeHash || !1 === e.lockSettings) return !0;
-    for (;;) {
-        if (await showPass(!1, t_("settingsLocked") || "Settings Locked", t_("enterPinToAccessSettings") || "Enter your 6-digit PIN to access settings.")) return !0;
-    }
-}
-async function promptPinIfEnabled(e) {
-    var t = (await gSync(["settings"])).settings || {};
-    return !t.passcodeHash || !1 === t[e] || await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToPerformAction") || "Enter your PIN to perform this action.")
-}
 document.addEventListener("keydown", e => {
-    const t = $("pcOverlay");
-    if (t && !t.classList.contains("hide")) {
-        if (e.key >= "0" && e.key <= "9") {
+    const confModal = $("confirm-modal");
+    if (confModal && !confModal.classList.contains("hide")) {
+        if ("Enter" === e.key) {
             e.preventDefault();
             e.stopPropagation();
-            if (pcBuf.length < 6) {
-                pcBuf += e.key;
-                updDots();
-            }
-        } else if ("Backspace" === e.key) {
-            e.preventDefault();
-            e.stopPropagation();
-            pcBuf = pcBuf.slice(0, -1);
-            updDots();
-        } else if ("Enter" === e.key) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (pcBuf.length >= 4) {
-                $("pcok").click();
-            }
-        } else if ("Escape" === e.key && $("pccancel") && !$("pccancel").classList.contains("hide")) {
-            e.preventDefault();
-            e.stopPropagation();
-            $("pccancel").click();
-        }
-    } else {
-        const confModal = $("confirm-modal");
-        if (confModal && !confModal.classList.contains("hide")) {
-            if ("Enter" === e.key) {
-                e.preventDefault();
-                e.stopPropagation();
-                $("confirm-modal-yes").click();
-            } else if ("Escape" === e.key) {
-                e.preventDefault();
-                e.stopPropagation();
-                $("confirm-modal-no").click();
-            }
+            $("confirm-modal-yes").click();
         } else if ("Escape" === e.key) {
-            let closedAny = false;
-            const ftModal = $("free-time-modal");
-            if (ftModal && !ftModal.classList.contains("hide")) {
-                ftModal.classList.add("hide");
-                closedAny = true;
-            }
-            const arModal = $("add-rule-modal");
-            if (arModal && !arModal.classList.contains("hide")) {
-                arModal.classList.add("hide");
-                closedAny = true;
-            }
-            const sModal = $("scrubModal");
-            if (sModal && !sModal.classList.contains("hide")) {
-                sModal.classList.add("hide");
-                closedAny = true;
-            }
-            if (closedAny) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            e.preventDefault();
+            e.stopPropagation();
+            $("confirm-modal-no").click();
         }
-    }
-}, !0), $("pccancel").addEventListener("click", () => {
-    $("pcOverlay").classList.add("hide"), pcRes && pcRes(!1)
-}), document.querySelectorAll(".pk[data-n]").forEach(e => e.addEventListener("click", () => {
-    pcBuf.length >= 6 || (pcBuf += e.getAttribute("data-n"), updDots())
-})), $("pclr").addEventListener("click", () => {
-    pcBuf = pcBuf.slice(0, -1), updDots()
-}), $("pcok").addEventListener("click", async () => {
-    if (pcBuf.length >= 4) {
-        var e = await gSync(["settings"]);
-        const settings = e.settings || {};
-        const res = await verifyAndMigratePin(pcBuf, settings.passcodeHash);
-        if (res.success) {
-            if (res.migratedHash) {
-                settings.passcodeHash = res.migratedHash;
-                await sSync({ settings });
-            }
-            $("pcOverlay").classList.add("hide");
-            pcRes && pcRes(!0);
-        } else {
-            $("pcerr").classList.remove("hide");
-            pcBuf = "";
-            updDots();
+    } else if ("Escape" === e.key) {
+        let closedAny = false;
+        const ftModal = $("free-time-modal");
+        if (ftModal && !ftModal.classList.contains("hide")) {
+            ftModal.classList.add("hide");
+            closedAny = true;
+        }
+        const arModal = $("add-rule-modal");
+        if (arModal && !arModal.classList.contains("hide")) {
+            arModal.classList.add("hide");
+            closedAny = true;
+        }
+        const sModal = $("scrubModal");
+        if (sModal && !sModal.classList.contains("hide")) {
+            sModal.classList.add("hide");
+            closedAny = true;
+        }
+        if (closedAny) {
+            e.preventDefault();
+            e.stopPropagation();
         }
     }
 });
