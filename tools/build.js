@@ -90,9 +90,11 @@ function minifyJsFallback(code) {
 function minifyJs(srcPath, dstPath) {
   try {
     const esbuild = require('esbuild');
+    const content = fs.readFileSync(srcPath, 'utf8');
+    const hasImports = /import\s+[\s\S]*?from/.test(content);
     esbuild.buildSync({
       entryPoints: [srcPath],
-      bundle: true,
+      bundle: hasImports,
       minify: true,
       target: 'chrome90',
       outfile: dstPath,
