@@ -1,4 +1,5 @@
 import { uid, sanitizeDomain, formatTime12 } from "./modules/utils-helpers.js";
+import { getPresetName, catColor, catEmoji, catLabel, allCats } from "./modules/category-helpers.js";
 
 var $ = function (e) {
     return document.getElementById(e)
@@ -60,43 +61,6 @@ function getLocale() {
     return loc.replace(/_/g, "-").replace(/\s+/g, "-");
 }
 
-function getPresetName(id, name) {
-    if (name) {
-        if (id === "pomodoro" && name !== "Pomodoro") return name;
-        if (id === "deep-work" && name !== "Deep Work") return name;
-        if (id === "short-sprint" && name !== "Short Sprint") return name;
-        if (id === "custom" && name !== "Flow") return name;
-        if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
-    }
-    if (id === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
-    if (id === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
-    if (id === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
-    if (id === "custom") return t_("presetFlow") || name || "Flow";
-    return name || id;
-}
-
-async function applyTheme() {
-    const e = await gLocal(["theme"]);
-    let currentTheme = e.theme;
-    
-    // Fallback to dark if custom is chosen, since we completely removed custom appearance
-    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain") {
-        currentTheme = "dark";
-        await sLocal({ theme: "dark" });
-    }
-    
-    const t = "light" === currentTheme,
-          a = "cinematic" === currentTheme;
-          
-    document.documentElement.classList.toggle("light", t);
-    document.documentElement.classList.toggle("cinematic", a);
-    document.documentElement.classList.remove("custom");
-    document.documentElement.setAttribute("data-os-theme", "nothing");
-}
-
-
-
-
 function hideAnalyticsHeader() {
     const _desc = $("analytics-page-header-desc");
     if (_desc) {
@@ -113,29 +77,22 @@ function hideAnalyticsHeader() {
     document.querySelectorAll('[data-atab="trend"]').forEach(e => e.textContent = t_("comparison"));
 }
 
-function catColor(e) {
-    if (CAT_COLORS && CAT_COLORS[e]) return CAT_COLORS[e];
-    return (CAT_META[e] || { color: "#555555" }).color || "#555555";
-}
-
-function catEmoji(e) {
-    if (CAT_EMOJI && CAT_EMOJI[e]) return CAT_EMOJI[e];
-    return (CAT_META[e] || { emoji: "🏷️" }).emoji || "🏷️";
-}
-
-function catLabel(e, t) {
-    var label = (CAT_LABELS && CAT_LABELS[e]) ? CAT_LABELS[e] : null;
-    if (!label) {
-        var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
-        var trans = t_(key);
-        if (trans && trans !== key) label = trans;
+async function applyTheme() {
+    const e = await gLocal(["theme"]);
+    let currentTheme = e.theme;
+    
+    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain") {
+        currentTheme = "dark";
+        await sLocal({ theme: "dark" });
     }
-    if (!label) label = (CAT_META[e] || { label: e }).label;
-    return t ? label + " ✨" : label;
-}
-
-function allCats() {
-    return DEFAULT_CATS;
+    
+    const t = "light" === currentTheme,
+          a = "cinematic" === currentTheme;
+          
+    document.documentElement.classList.toggle("light", t);
+    document.documentElement.classList.toggle("cinematic", a);
+    document.documentElement.classList.remove("custom");
+    document.documentElement.setAttribute("data-os-theme", "nothing");
 }
 
 applyTheme();
