@@ -1462,87 +1462,62 @@ async function skipFocus() {
     }), updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules()
 }
 
+let _isHandlingPhaseEnd = false;
 async function handleFocusPhaseEnd() {
+    if (_isHandlingPhaseEnd) return;
     if (!focusState.active || focusState.paused || !focusState.phaseEndsAt) return;
-    const ap = await getActivePreset();
-    const e = 60 * ((ap && ap.work) ?? 25),
-        a = 60 * ((ap && ap.brk) ?? 5),
-        s = 60 * ((ap && ap.longBrk) ?? 15),
-        o = (ap && ap.cycles) ?? 4;
-    const endFocusSession = async () => {
-        if (await chrome.alarms.clear(FOCUS_ALARM), await chrome.alarms.clear(PAUSE_EXPLOIT_ALARM), focusState.durationMins > 0 || focusState.cyclesCompleted > 0) {
-            const {
-                focusHistory: t = []
-            } = await gLocal(["focusHistory"]);
-            t.push({
-                date: todayKey(),
-                startedAt: focusState.startedAt,
-                durationMins: focusState.durationMins || 0,
-                cyclesCompleted: focusState.cyclesCompleted || 0,
-                presetId: focusState.presetId || "pomodoro",
-                isSchedule: focusState.isSchedule || false
-            });
-            await sLocal({ focusHistory: t.slice(-365) });
-        }
-        focusState.active = !1, focusState.paused = !1, focusState.phaseEndsAt = null;
-        try { await chrome.storage.local.set({ userStoppedFocus: true, userStoppedAt: Date.now() }); } catch (_) { }
-        try {
-            if (!ap || ap.notify !== false) {
-                let t = chrome.runtime.getURL("assets/icons/icon128.png");
-                chrome.notifications.create("focus_done_" + Date.now(), {
-                    type: "basic",
-                    iconUrl: t,
-                    title: "Session Complete! 🎉",
-                    message: focusState.isSchedule ? "Your scheduled session has ended. Great work!" : "All " + focusState.cyclesCompleted + " cycle(s) done. Great work!"
+    _isHandlingPhaseEnd = true;
+    try {
+        const ap = await getActivePreset();
+        const e = 60 * ((ap && ap.work) ?? 25),
+            a = 60 * ((ap && ap.brk) ?? 5),
+            s = 60 * ((ap && ap.longBrk) ?? 15),
+            o = (ap && ap.cycles) ?? 4;
+        const currentCyclesDone = focusState.cyclesCompleted + ("work" === focusState.phase ? 1 : 0);
+
+        const endFocusSession = async () => {
+            if (await chrome.alarms.clear(FOCUS_ALARM), await chrome.alarms.clear(PAUSE_EXPLOIT_ALARM), focusState.durationMins > 0 || focusState.cyclesCompleted > 0) {
+                const {
+                    focusHistory: t = []
+                } = await gLocal(["focusHistory"]);
+                t.push({
+                    date: todayKey(),
+                    startedAt: focusState.startedAt,
+                    durationMins: focusState.durationMins || 0,
+                    cyclesCompleted: focusState.cyclesCompleted || 0,
+                    presetId: focusState.presetId || "pomodoro",
+                    isSchedule: focusState.isSchedule || false
                 });
+                await sLocal({ focusHistory: t.slice(-365) });
             }
-        } catch (t) { }
-        updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules();
-    };
+            const completedCount = focusState.cyclesCompleted;
+            focusState.active = !1;
+            focusState.paused = !1;
+            focusState.phaseEndsAt = null;
+            focusState.cyclesCompleted = 0;
+            try { await chrome.storage.local.set({ userStoppedFocus: true, userStoppedAt: Date.now() }); } catch (_) { }
+            try {
+                if (!ap || ap.notify !== false) {
+                    let t = chrome.runtime.getURL("assets/icons/icon128.png");
+                    chrome.notifications.create("focus_done_" + Date.now(), {
+                        type: "basic",
+                        iconUrl: t,
+                        title: "Session Complete! 🎉",
+                        message: focusState.isSchedule ? "Your scheduled session has ended. Great work!" : "All " + completedCount + " cycle(s) done. Great work!"
+                    });
+                }
+            } catch (t) { }
+            updateBadge(), await saveFocus(), broadcastFocus(), await updateDNRRules();
+        };
 
-    if ("work" === focusState.phase) {
-        focusState.durationMins += Math.round(focusState.fullDuration / 60);
-        focusState.cyclesCompleted++;
+        if ("work" === focusState.phase) {
+            focusState.durationMins += Math.round(focusState.fullDuration / 60);
+            focusState.cyclesCompleted++;
 
-        if (focusState.isSchedule) {
-            return await endFocusSession();
-        }
-
-        if (focusState.cyclesCompleted >= o) {
-            if (s > 0 && o > 1) {
-                focusState.phase = "long_break";
-                focusState.fullDuration = s;
-                focusState.remaining = s;
-                try {
-                    if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
-                        chrome.notifications.create("focus_break_start_" + Date.now(), {
-                            type: "basic",
-                            iconUrl: t,
-                            title: "Work Period Over! ☕",
-                            message: "Time for a well-deserved long break!"
-                        });
-                    }
-                } catch (t) { }
-            } else if (a > 0) {
-                focusState.phase = "short_break";
-                focusState.fullDuration = a;
-                focusState.remaining = a;
-                try {
-                    if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
-                        chrome.notifications.create("focus_break_start_" + Date.now(), {
-                            type: "basic",
-                            iconUrl: t,
-                            title: "Work Period Over! ☕",
-                            message: "Time for a short break."
-                        });
-                    }
-                } catch (t) { }
-            } else {
+            if (focusState.isSchedule || focusState.cyclesCompleted >= o) {
                 return await endFocusSession();
             }
-        } else {
+
             if (a > 0) {
                 focusState.phase = "short_break";
                 focusState.fullDuration = a;
@@ -1564,44 +1539,47 @@ async function handleFocusPhaseEnd() {
                 focusState.remaining = e;
                 focusState.startedAt = Date.now();
             }
-        }
-    } else {
-        if (focusState.cyclesCompleted >= o) {
-            return await endFocusSession();
         } else {
-            focusState.phase = "work";
-            focusState.fullDuration = e;
-            focusState.remaining = e;
-            focusState.startedAt = Date.now();
-            try {
-                if (!ap || ap.notify !== false) {
-                    let t = chrome.runtime.getURL("assets/icons/icon128.png");
-                    chrome.notifications.create("focus_work_" + Date.now(), {
-                        type: "basic",
-                        iconUrl: t,
-                        title: "Break Over!",
-                        message: "Time to focus."
-                    });
-                }
-            } catch (t) { }
+            if (focusState.cyclesCompleted >= o) {
+                return await endFocusSession();
+            } else {
+                focusState.phase = "work";
+                focusState.fullDuration = e;
+                focusState.remaining = e;
+                focusState.startedAt = Date.now();
+                try {
+                    if (!ap || ap.notify !== false) {
+                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
+                        chrome.notifications.create("focus_work_" + Date.now(), {
+                            type: "basic",
+                            iconUrl: t,
+                            title: "Break Over!",
+                            message: "Time to focus."
+                        });
+                    }
+                } catch (t) { }
+            }
         }
+
+        if (!focusState.active) return;
+
+        if (ap && ap.autoStart) {
+            focusState.paused = !1;
+            focusState.startedAt = Date.now();
+            focusState.phaseEndsAt = Date.now() + 1e3 * focusState.fullDuration;
+            await chrome.alarms.create(FOCUS_ALARM, {
+                when: focusState.phaseEndsAt
+            });
+        } else {
+            focusState.paused = !0;
+            focusState.phaseEndsAt = null;
+        }
+        updateBadge();
+        await saveFocus();
+        broadcastFocus();
+    } finally {
+        _isHandlingPhaseEnd = false;
     }
-    if (!focusState.active) return;
-    if (ap && ap.autoStart) {
-        focusState.paused = !1;
-        focusState.startedAt = Date.now();
-        focusState.phaseEndsAt = Date.now() + 1e3 * focusState.fullDuration;
-        await chrome.alarms.create(FOCUS_ALARM, {
-            when: focusState.phaseEndsAt
-        });
-    } else {
-        focusState.paused = !0;
-        focusState.phaseEndsAt = null;
-    }
-    updateBadge();
-    await saveFocus();
-    broadcastFocus();
-    await updateDNRRules();
 }
 
 async function computeStreak(dat) {
