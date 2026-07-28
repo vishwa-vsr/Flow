@@ -307,7 +307,7 @@ function openScrubModal(e, t, a) {
     $("scrubModal").classList.remove("hide");
     setTimeout(() => $("scrub-mins").focus(), 50);
 }
-async function renderGranularBlocksUI() {
+async function renderGranularBlocksUI(force = false) {
     let host = document.getElementById("ff-granular-host") || document.getElementById("tab-sitemanager");
     if (!host) return;
     let t = document.getElementById("granular-ui-wrapper");
@@ -326,6 +326,8 @@ async function renderGranularBlocksUI() {
     }
     let a = document.getElementById("granular-blocks-grid");
     if (!a) return;
+
+    if (a.children.length > 0 && !force) return;
 
     a.textContent = "";
     var n = (await gLocal(["granularRules"])).granularRules || {};
