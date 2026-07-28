@@ -21,7 +21,7 @@ If you find a bug or have an idea to improve Flow, please open a [GitHub Issue](
 - Your browser and operating system details.
 
 ### 2. Help Translate
-Flow is localized into multiple languages. If you want to help translate the extension, please check out our [Translation Guide](./TRANSLATING.md) or join the discussion in our [GitHub Discussions](https://github.com/vishwa-vsr/Flow/discussions/4).
+Flow is localized into multiple languages, but our translations are currently AI-generated! If you're a native speaker of German, Japanese, Chinese, Spanish, or Portuguese, feel free to open a PR or join our [Translation Discussion](https://github.com/vishwa-vsr/Flow/discussions/4) to help us polish them. For step-by-step instructions, check out our [Translation Guide](./TRANSLATING.md).
 
 ### 3. Code Contributions (Pull Requests)
 *Note: To build and contribute to the project, you need **Node.js** (for compiling and minifying files) and **Python** (only if you want to run the translation analysis scripts inside `tools/`).*

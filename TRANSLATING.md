@@ -2,6 +2,8 @@
 
 Thank you for helping to translate Flow! Your contributions make this extension accessible to students, developers, and professionals all around the world.
 
+> 🤖 **Note:** Our current translations are AI-generated! If you're a native speaker of German, Japanese, Chinese, Spanish, or Portuguese, feel free to open a PR or leave a comment in our discussion thread to polish our translations.
+
 There are two ways you can help us translate Flow.
 
 ---
