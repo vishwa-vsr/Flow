@@ -1471,9 +1471,8 @@ async function handleFocusPhaseEnd() {
         const ap = await getActivePreset();
         const e = 60 * ((ap && ap.work) ?? 25),
             a = 60 * ((ap && ap.brk) ?? 5),
-            s = 60 * ((ap && ap.longBrk) ?? 15),
+            s = 60 * ((ap && (ap.longBrk ?? ap.long)) ?? 15),
             o = (ap && ap.cycles) ?? 4;
-        const currentCyclesDone = focusState.cyclesCompleted + ("work" === focusState.phase ? 1 : 0);
 
         const endFocusSession = async () => {
             if (await chrome.alarms.clear(FOCUS_ALARM), await chrome.alarms.clear(PAUSE_EXPLOIT_ALARM), focusState.durationMins > 0 || focusState.cyclesCompleted > 0) {
@@ -1514,33 +1513,54 @@ async function handleFocusPhaseEnd() {
             focusState.durationMins += Math.round(focusState.fullDuration / 60);
             focusState.cyclesCompleted++;
 
-            if (focusState.isSchedule || focusState.cyclesCompleted >= o) {
+            if (focusState.isSchedule) {
                 return await endFocusSession();
             }
 
-            if (a > 0) {
-                focusState.phase = "short_break";
-                focusState.fullDuration = a;
-                focusState.remaining = a;
-                try {
-                    if (!ap || ap.notify !== false) {
-                        let t = chrome.runtime.getURL("assets/icons/icon128.png");
-                        chrome.notifications.create("focus_break_start_" + Date.now(), {
-                            type: "basic",
-                            iconUrl: t,
-                            title: "Work Period Over! ☕",
-                            message: "Time for a short break."
-                        });
-                    }
-                } catch (t) { }
+            if (focusState.cyclesCompleted >= o) {
+                if (s > 0) {
+                    focusState.phase = "long_break";
+                    focusState.fullDuration = s;
+                    focusState.remaining = s;
+                    try {
+                        if (!ap || ap.notify !== false) {
+                            let t = chrome.runtime.getURL("assets/icons/icon128.png");
+                            chrome.notifications.create("focus_break_start_" + Date.now(), {
+                                type: "basic",
+                                iconUrl: t,
+                                title: "Work Period Over! ☕",
+                                message: "Time for a well-deserved long break!"
+                            });
+                        }
+                    } catch (t) { }
+                } else {
+                    return await endFocusSession();
+                }
             } else {
-                focusState.phase = "work";
-                focusState.fullDuration = e;
-                focusState.remaining = e;
-                focusState.startedAt = Date.now();
+                if (a > 0) {
+                    focusState.phase = "short_break";
+                    focusState.fullDuration = a;
+                    focusState.remaining = a;
+                    try {
+                        if (!ap || ap.notify !== false) {
+                            let t = chrome.runtime.getURL("assets/icons/icon128.png");
+                            chrome.notifications.create("focus_break_start_" + Date.now(), {
+                                type: "basic",
+                                iconUrl: t,
+                                title: "Work Period Over! ☕",
+                                message: "Time for a short break."
+                            });
+                        }
+                    } catch (t) { }
+                } else {
+                    focusState.phase = "work";
+                    focusState.fullDuration = e;
+                    focusState.remaining = e;
+                    focusState.startedAt = Date.now();
+                }
             }
         } else {
-            if (focusState.cyclesCompleted >= o) {
+            if ("long_break" === focusState.phase || focusState.cyclesCompleted >= o) {
                 return await endFocusSession();
             } else {
                 focusState.phase = "work";
@@ -1577,6 +1597,7 @@ async function handleFocusPhaseEnd() {
         updateBadge();
         await saveFocus();
         broadcastFocus();
+        await updateDNRRules();
     } finally {
         _isHandlingPhaseEnd = false;
     }
