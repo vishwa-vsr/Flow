@@ -308,42 +308,60 @@ function openScrubModal(e, t, a) {
     setTimeout(() => $("scrub-mins").focus(), 50);
 }
 async function renderGranularBlocksUI() {
-    let e = document.getElementById("tab-sitemanager");
-    if (!e) return;
+    let host = document.getElementById("ff-granular-host") || document.getElementById("tab-sitemanager");
+    if (!host) return;
     let t = document.getElementById("granular-ui-wrapper");
-    t || (t = document.createElement("div"), t.id = "granular-ui-wrapper", setSafeHTML(t, '\n           <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:24px 0 12px;display:flex;align-items:center;gap:8px">\n               <span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Advanced Site Tweaks\n           </div>\n           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:32px;"></div>\n        '), e.insertBefore(t, e.firstChild));
+    if (!t) {
+        t = document.createElement("div");
+        t.id = "granular-ui-wrapper";
+        setSafeHTML(t, `
+           <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:24px 0 12px;display:flex;align-items:center;gap:8px">
+               <span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Advanced Site Tweaks
+           </div>
+           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:32px;"></div>
+        `);
+        host.appendChild(t);
+    } else if (t.parentElement !== host) {
+        host.appendChild(t);
+    }
     let a = document.getElementById("granular-blocks-grid");
+    if (!a) return;
 
     a.textContent = "";
     var n = (await gLocal(["granularRules"])).granularRules || {};
     const granularSitesMap = (typeof window !== "undefined" && window.GRANULAR_SITES) ? window.GRANULAR_SITES : (self.GRANULAR_SITES || {});
     Object.keys(granularSitesMap).forEach(e => {
-        var t = document.createElement("div");
-        t.className = "card";
+        var card = document.createElement("div");
+        card.className = "card";
         var i = `<div style="padding:16px; border-bottom:1px solid var(--bd); font-weight:800; display:flex; align-items:center; gap:8px;">${getFav(e)} ${e}</div>`,
             s = '<div style="padding:16px; display:flex; flex-direction:column; gap:12px;">';
         granularSitesMap[e].forEach(t => {
-            var a = n[e] && n[e][t.id] ? "checked" : "";
+            var checked = n[e] && n[e][t.id] ? "checked" : "";
             const tweakLabel = t_(`tweak_${t.id.replace(/-/g, '_')}`) || t.label;
-            s += `\n              <div style="display:flex; justify-content:space-between; align-items:center;">\n                 <span style="font-size:13px; font-weight:600; color:var(--tx2)">${tweakLabel}</span>\n                 <label class="tog"><input type="checkbox" class="g-db-cb" data-d="${e}" data-r="${t.id}" ${a}><span class="ttrack"></span></label>\n              </div>`
-        }), s += "</div>", setSafeHTML(t, i + s), a.appendChild(t)
-    }), document.querySelectorAll(".g-db-cb").forEach(e => {
+            s += `\n              <div style="display:flex; justify-content:space-between; align-items:center;">\n                 <span style="font-size:13px; font-weight:600; color:var(--tx2)">${tweakLabel}</span>\n                 <label class="tog"><input type="checkbox" class="g-db-cb" data-d="${e}" data-r="${t.id}" ${checked}><span class="ttrack"></span></label>\n              </div>`;
+        });
+        s += "</div>";
+        setSafeHTML(card, i + s);
+        a.appendChild(card);
+    });
+
+    document.querySelectorAll(".g-db-cb").forEach(e => {
         e.addEventListener("change", async e => {
-            // FF v4.8 — PIN only when DISABLING (un-hiding) a tweak.
             const turningOff = !e.target.checked;
             const okPin = turningOff ? await promptPinIfEnabled("lockTweaks") : true;
             if (okPin) {
-                var t = e.target.getAttribute("data-d"),
-                    a = e.target.getAttribute("data-r"),
-                    n = e.target.checked,
-                    i = (await gLocal(["granularRules"])).granularRules || {};
-                i[t] || (i[t] = {}), i[t][a] = n, await sLocal({
-                    granularRules: i
-                })
-            } else e.target.checked = !e.target.checked
-        })
-    })
+                var d = e.target.getAttribute("data-d"),
+                    r = e.target.getAttribute("data-r"),
+                    val = e.target.checked,
+                    rulesMap = (await gLocal(["granularRules"])).granularRules || {};
+                rulesMap[d] || (rulesMap[d] = {});
+                rulesMap[d][r] = val;
+                await sLocal({ granularRules: rulesMap });
+            } else e.target.checked = !e.target.checked;
+        });
+    });
 }
+window.renderGranularBlocksUI = renderGranularBlocksUI;
 async function saveRulesAndSync(newRules) {
     rules = newRules;
     await sLocal({ blockRules: newRules });
@@ -5120,6 +5138,9 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
                 sm.querySelectorAll(".sm-pane").forEach((p) => p.classList.remove("is-active"));
                 const pane = sm.querySelector("#sm-pane-" + b.dataset.pane);
                 if (pane) pane.classList.add("is-active");
+                if (b.dataset.pane === "tweaks") {
+                    renderGranularBlocksUI();
+                }
             });
         });
 
@@ -5490,6 +5511,9 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
     function runAll() {
         fixGranularPlacement();
+        if (typeof renderGranularBlocksUI === "function") {
+            renderGranularBlocksUI();
+        }
         moveSettingsCardsToSiteManager();
     }
 
