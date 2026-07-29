@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Ablenkende Websites blockieren, Bildschirmzeit verfolgen und mit Pomodoro-Timern fokussiert bleiben. 100% kostenlos, privat & lokal.",
+    "message": "Ablenkende Websites blockieren, Bildschirmzeit verfolgen und mit Pomodoro-Timern fokussiert bleiben. Privat & lokal.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "拦截分心网站，记录屏幕使用时间，借助番茄钟保持专注。100%免费、私密且本地运行。",
+    "message": "拦截分心网站，记录屏幕使用时间，借助番茄钟保持专注。私密且本地运行。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

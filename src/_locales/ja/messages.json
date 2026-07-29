@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "集中を妨げるサイトをブロックし、画面時間を記録。ポモドーロタイマーで作業効率を向上。100%無料、プライベート＆ローカル。",
+    "message": "集中を妨げるサイトをブロックし、画面時間を記録。ポモドーロタイマーで作業効率を向上。プライベート＆ローカル。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Bloquea sitios distractores, rastrea tu tiempo en pantalla y concéntrate con temporizadores Pomodoro. 100% gratis, privado y local.",
+    "message": "Bloquea sitios distractores, rastrea tu tiempo en pantalla y concéntrate con temporizadores Pomodoro. Privado y local.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

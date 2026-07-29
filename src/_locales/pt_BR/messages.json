@@ -4,7 +4,7 @@
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Bloqueie sites distrativos, acompanhe seu tempo de tela e mantenha o foco com cronômetros Pomodoro. 100% gratuito, privado e local.",
+    "message": "Bloqueie sites distrativos, acompanhe seu tempo de tela e mantenha o foco com cronômetros Pomodoro. Privado e local.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
