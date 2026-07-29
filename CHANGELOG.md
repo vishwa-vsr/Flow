@@ -5,20 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [10.0.7] - 2026-07-29
+## [10.0.6] - 2026-07-28
 
 ### Changed
 - **Modular Dashboard Architecture Refactor**: Refactored the monolithic `dashboard.js` script into modular sub-modules under `src/dashboard/modules/` (`preset-editor.js`, `pin-security.js`, `category-helpers.js`, `utils-helpers.js`). Updated build tooling (`tools/build.js`) to bundle ES modules automatically while maintaining standalone global script scopes.
+- **Localized Translation Quality & Accuracy Upgrade:** Polished translations across Japanese (`ja`), German (`de`), Brazilian Portuguese (`pt_BR`), Spanish (`es`), Simplified Chinese (`zh_CN`), Traditional Chinese (`zh_TW`), and Hong Kong Chinese (`zh_HK`). Fixed awkward phrasing (such as archaic Japanese terms for distractions), updated Taiwanese & Hong Kong software UI terminology (`啟用` / `攔截` / `追蹤`), and corrected weekly goal completion translations across Chinese locales (`目標已達成！`).
+- **Translation & Contribution Guidelines:** Updated `TRANSLATING.md` and `CONTRIBUTING.md` to highlight AI-generated translations and invite native speakers of German, Japanese, Chinese, Spanish, and Portuguese to contribute translation polish via Pull Requests or GitHub Discussions.
 
 ### Fixed
 - **Advanced Site Tweaks UI & Anti-Flicker Fix**: Resolved an issue where opening Advanced Site Tweaks displayed an empty screen or flickered for several seconds due to redundant DOM re-renders. Mounted tweak cards directly inside `#ff-granular-host` and added anti-flicker render guards.
 - **Focus Timer Cycle Completion & Long Break Transitions**: Fixed a timer loop issue where completing the final focus cycle auto-restarted an extra work session. Guaranteed clean session completion upon finishing all target cycles and enabled automatic Long Break transitions before session wrap-up.
-
-## [10.0.6] - 2026-07-28
-
-### Changed
-- **Localized Translation Quality & Accuracy Upgrade:** Polished translations across Japanese (`ja`), German (`de`), Brazilian Portuguese (`pt_BR`), Spanish (`es`), Simplified Chinese (`zh_CN`), Traditional Chinese (`zh_TW`), and Hong Kong Chinese (`zh_HK`). Fixed awkward phrasing (such as archaic Japanese terms for distractions), updated Taiwanese & Hong Kong software UI terminology (`啟用` / `攔截` / `追蹤`), and corrected weekly goal completion translations across Chinese locales (`目標已達成！`).
-- **Translation & Contribution Guidelines:** Updated `TRANSLATING.md` and `CONTRIBUTING.md` to highlight AI-generated translations and invite native speakers of German, Japanese, Chinese, Spanish, and Portuguese to contribute translation polish via Pull Requests or GitHub Discussions.
 
 ## [10.0.5] - 2026-07-26
 
