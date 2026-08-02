@@ -15,7 +15,9 @@ const readline = require('readline');
 const { execSync } = require('child_process');
 
 const SRC_DIR = path.join(__dirname, '..', 'src');
-const PARENT_DIR = path.join(__dirname, '..', '..');
+const FLOW_SOURCE_DIR = path.join(__dirname, '..');
+const DIST_DIR = path.join(FLOW_SOURCE_DIR, 'dist');
+const RELEASE_DIR = path.join(FLOW_SOURCE_DIR, 'release');
 
 // Files and folders to skip copying
 const SKIP = new Set([
@@ -31,7 +33,11 @@ const SKIP = new Set([
   'design.md',
   'README.md',
   '.github',
-  'tools'
+  'tools',
+  'docs',
+  'dist',
+  'release',
+  'backup'
 ]);
 
 // Helper to ask user questions in the terminal
@@ -183,7 +189,7 @@ function processFile(srcPath, dstPath) {
 
 // Build a target directory (Chrome, Firefox, or Edge)
 function buildTarget(targetName, isFirefox = false) {
-  const targetDir = path.join(PARENT_DIR, targetName);
+  const targetDir = path.join(DIST_DIR, targetName);
   console.log('='.repeat(60));
   console.log(`  Flow Build: ${targetName}`);
   console.log('='.repeat(60));
@@ -325,7 +331,7 @@ async function checkVersionAndBackup(skipPrompt) {
   }
 
   if (ans === 'y' || ans === 'yes') {
-    const backupRoot = path.join(PARENT_DIR, 'backup');
+    const backupRoot = path.join(FLOW_SOURCE_DIR, 'backup');
     fs.mkdirSync(backupRoot, { recursive: true });
 
     const backupFolder = path.join(backupRoot, `flow-source-backup-v${currentVersion}`);
@@ -545,20 +551,25 @@ function verifyLocaleParity() {
 
   if (shouldBuild) {
     verifyLocaleParity();
-    buildTarget('flow-dist', false);
-    buildTarget('flow-edge', false);
-    buildTarget('flow-firefox', true);
+    fs.mkdirSync(DIST_DIR, { recursive: true });
+    fs.mkdirSync(RELEASE_DIR, { recursive: true });
 
-    // Clean up old archives in parent directory
-    const parentFiles = fs.readdirSync(PARENT_DIR);
-    parentFiles.forEach(item => {
-      if (item.endsWith('.zip') && (item.startsWith('flow-dist-v') || item.startsWith('flow-edge-v') || item.startsWith('flow-firefox-v') || item.startsWith('flow-source-v'))) {
-        try {
-          fs.unlinkSync(path.join(PARENT_DIR, item));
-          console.log(`  [Cleanup] Removed old archive: ${item}`);
-        } catch (e) {}
-      }
-    });
+    buildTarget('chrome', false);
+    buildTarget('edge', false);
+    buildTarget('firefox', true);
+
+    // Clean up old archives in release directory
+    if (fs.existsSync(RELEASE_DIR)) {
+      const releaseFiles = fs.readdirSync(RELEASE_DIR);
+      releaseFiles.forEach(item => {
+        if (item.endsWith('.zip') && (item.startsWith('flow-dist-v') || item.startsWith('flow-edge-v') || item.startsWith('flow-firefox-v') || item.startsWith('flow-source-v'))) {
+          try {
+            fs.unlinkSync(path.join(RELEASE_DIR, item));
+            console.log(`  [Cleanup] Removed old archive: ${item}`);
+          } catch (e) {}
+        }
+      });
+    }
 
     // Get current version
     let version = '10.0.0';
@@ -584,16 +595,20 @@ function verifyLocaleParity() {
       console.log('  Packaging Zip Archives for Store Uploads');
       console.log('='.repeat(60));
 
-      const zipTargets = ['flow-dist', 'flow-edge', 'flow-firefox'];
+      const zipTargets = [
+        { name: 'chrome', zipName: 'flow-dist' },
+        { name: 'edge', zipName: 'flow-edge' },
+        { name: 'firefox', zipName: 'flow-firefox' }
+      ];
       for (const t of zipTargets) {
-        const dirPath = path.join(PARENT_DIR, t);
-        const zipPath = path.join(PARENT_DIR, `${t}-v${version}.zip`);
+        const dirPath = path.join(DIST_DIR, t.name);
+        const zipPath = path.join(RELEASE_DIR, `${t.zipName}-v${version}.zip`);
         // Filter out instruction files when zipping
         await zipDirectory(dirPath, zipPath, (item) => item === 'RESTORE_INSTRUCTIONS.txt');
       }
 
       // Zip the source files
-      const sourceZipPath = path.join(PARENT_DIR, `flow-source-v${version}.zip`);
+      const sourceZipPath = path.join(RELEASE_DIR, `flow-source-v${version}.zip`);
       await zipDirectory(SRC_DIR, sourceZipPath, (item, stat, zipPath) => {
         // Skip unnecessary system/dev folders in source package, but keep build.js and package.json for reviewers
         const skipSet = new Set(SKIP);
