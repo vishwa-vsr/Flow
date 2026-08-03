@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Reorganized Build Output Structure**: Cleaned up project root by routing compiled browser distribution builds into structured `dist/` subdirectories (`dist/chrome`, `dist/edge`, `dist/firefox`) and store upload archives into `release/`.
 - **Documentation & User Guide Updates**: Updated `README.md` and repository developer guidelines to reflect the updated directory structure and build workflow.
 
+### Fixed
+- **Card Double Corner Outline Fix**: Removed legacy inner top highlight shadow lines (`inset 0 1px 0`) clashing with outer rounded card borders, eliminating double outline artifacts across all dashboard section cards, stat containers, and modal popups.
+
 ## [10.0.6] - 2026-07-28
 
 ### Changed
