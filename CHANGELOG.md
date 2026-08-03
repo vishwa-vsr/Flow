@@ -8,8 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [10.0.7] - 2026-08-03
 
 ### Changed
+- **Global Thin Custom Scrollbar**: Added extension-wide sleek 6px custom scrollbar across Chrome, Edge, and Firefox (`scrollbar-width: thin`), automatically adapting to Dark and Light mode themes across all dashboards, popups, and settings panels.
+- **Solid Theme-Adaptive Modal Surfaces**: Replaced see-through glass text bleed-through on all dashboard popups, chart tooltips, and calendar hover boxes with solid, high-contrast theme surfaces (`#141414` in Dark Mode, `#ffffff` in Light Mode) while preserving smooth screen backdrop dimming.
+- **Confirmation Modal UI Overhaul**: Upgraded `confirm-modal` layout across Danger Zone ("Clear Rules", "Reset Stats", "Clear Categories") and Backup & Restore alerts with a modern header-divided title bar, clean SVG warning icons, and high-contrast red action buttons.
 - **Star Emoji (`✨`) UI Removal**: Removed the auto-categorized star indicator icon from Site Manager domain rows for a cleaner visual interface.
-- **Built-in Category Dictionary Expansion**: Expanded the default `AUTO_CATEGORIES` dictionary with over 50 popular study, learning (Physics Wallah, JEE portals, documentation), AI tools (Gemini, ChatGPT, Claude, Perplexity), productivity, and communication sites.
+- **Built-in Category Dictionary Expansion**: Expanded the default `AUTO_CATEGORIES` dictionary with over 50 popular study, learning (Physics Wallah, JEE portals, coding docs), AI tools (Gemini, ChatGPT, Claude, Perplexity), productivity, and communication sites.
 - **Reorganized Build Output Structure**: Cleaned up project root by routing compiled browser distribution builds into structured `dist/` subdirectories (`dist/chrome`, `dist/edge`, `dist/firefox`) and store upload archives into `release/`.
 - **Documentation & User Guide Updates**: Updated `README.md` and repository developer guidelines to reflect the updated directory structure and build workflow.
 
