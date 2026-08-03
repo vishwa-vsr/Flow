@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.8] - 2026-08-03
+
+### Changed
+- **Star Emoji (`✨`) UI Removal**: Removed the auto-categorized star indicator icon from Site Manager domain rows for a cleaner visual interface.
+- **Built-in Category Dictionary Expansion**: Expanded the default `AUTO_CATEGORIES` dictionary with over 50 popular study, learning (Physics Wallah, JEE portals, documentation), AI tools (Gemini, ChatGPT, Claude, Perplexity), productivity, and communication sites.
+
 ## [10.0.7] - 2026-08-03
 
 ### Changed
