@@ -851,12 +851,12 @@
 
     .db-card:hover {
       border-color: var(--bd2);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: none;
     }
 
     html.light .db-card:hover {
       border-color: var(--bd2);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      box-shadow: none;
     }
 
     .db-hero {
@@ -903,7 +903,7 @@
       gap: 8px;
       transition: var(--trans);
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: none;
     }
 
     .db-stat-box::before {
@@ -918,7 +918,7 @@
     .db-stat-box:hover {
       background: var(--surface-elevated);
       border-color: var(--glow-border, var(--bd2));
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-sm);
     }
 
     .db-stat-info {
@@ -1065,14 +1065,14 @@
       border-radius: var(--btn-radius);
       border: 1px solid var(--glass-bd);
       border-left: 4px solid var(--border-color, transparent);
-      box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-xs);
       transition: var(--trans);
     }
 
     .db-site-pill:hover {
       background: var(--surface-elevated);
       border-color: var(--bd2);
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-sm);
     }
 
     .db-site-left {
@@ -1653,14 +1653,14 @@
       background: var(--glass-bg) !important;
       border: 1px solid var(--glass-bd) !important;
       border-radius: var(--btn-radius) !important;
-      box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+      box-shadow: var(--shadow-xs) !important;
       transition: var(--trans) !important;
     }
 
     .preset-card:hover {
       background: var(--surface-elevated) !important;
       border-color: var(--bd3) !important;
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+      box-shadow: var(--shadow-sm) !important;
     }
 
     .preset-card.is-active {
