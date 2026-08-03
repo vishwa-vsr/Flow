@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Built-in Category Dictionary Expansion**: Expanded the default `AUTO_CATEGORIES` dictionary with over 50 popular study, learning (Physics Wallah, JEE portals, coding docs), AI tools (Gemini, ChatGPT, Claude, Perplexity), productivity, and communication sites.
 - **Reorganized Build Output Structure**: Cleaned up project root by routing compiled browser distribution builds into structured `dist/` subdirectories (`dist/chrome`, `dist/edge`, `dist/firefox`) and store upload archives into `release/`.
 - **Documentation & User Guide Updates**: Updated `README.md` and repository developer guidelines to reflect the updated directory structure and build workflow.
+- **Open-Source License Relicensing**: Relicensed the project under the [GNU General Public License v3.0 (GPLv3)](./LICENSE) under copyright holder `vishaw-vsr` to legally protect source code against closed-source clones while preserving open community copyleft protections.
 
 ### Fixed
 - **Card Double Corner Outline Fix**: Removed legacy inner top highlight shadow lines (`inset 0 1px 0`) clashing with outer rounded card borders, eliminating double outline artifacts across all dashboard section cards, stat containers, and modal popups.
