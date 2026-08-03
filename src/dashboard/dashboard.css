@@ -121,18 +121,50 @@
     .navbar {
       display: flex;
       justify-content: center;
-      background: var(--bg2);
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--bd);
+      border-bottom: 1px solid var(--bd-subtle);
       padding: 16px 24px;
       transition: var(--trans)
     }
 
-    html.light .navbar {
+    .card,
+    .ac,
+    .at-card {
       background: var(--bg2);
-      border-bottom: 1px solid var(--bd)
+      border: 1px solid var(--bd);
+      border-radius: var(--card-radius);
+      position: relative;
+      overflow: hidden;
+      transition: var(--trans);
+    }
+
+    html.light .card,
+    html.light .ac,
+    html.light .at-card {
+      background: var(--bg2);
+      border: 1px solid var(--bd);
+    }
+
+    .overlay .card,
+    .overlay-card,
+    .cat-edit-modal,
+    .ff-modal-card {
+      background: var(--bg2) !important;
+      border: 1px solid var(--bd2) !important;
+      box-shadow: var(--shadow-lg) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      max-height: 85vh;
+    }
+
+    html.light .navbar {
+      background: var(--glass-bg);
+      border-bottom: 1px solid var(--glass-bd)
     }
 
     html.light .ni:hover {
@@ -861,8 +893,8 @@
 
     .db-stat-box {
       position: relative;
-      background: var(--bg3);
-      border: 1px solid var(--bd);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
       border-radius: var(--card-radius);
       padding: var(--space-md) var(--space-lg);
       display: flex;
@@ -1031,9 +1063,9 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--space-sm) var(--space-md);
-      background: var(--bg3);
+      background: var(--glass-bg);
       border-radius: var(--btn-radius);
-      border: 1px solid var(--bd);
+      border: 1px solid var(--glass-bd);
       border-left: 4px solid var(--border-color, transparent);
       box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: var(--trans);
@@ -1362,7 +1394,7 @@
       gap: 8px;
       padding: 6px 12px;
       background: var(--surface-elevated);
-      border: 1px solid var(--bd);
+      border: 1px solid var(--glass-bd);
       border-radius: 99px;
       font-size: 12px;
       font-weight: 700;
@@ -1620,10 +1652,10 @@
 
     /* Tactile Preset Switches & Edit Modal CSS */
     .preset-card {
-      background: var(--bg2) !important;
-      border: 1px solid var(--bd) !important;
+      background: var(--glass-bg) !important;
+      border: 1px solid var(--glass-bd) !important;
       border-radius: var(--btn-radius) !important;
-      box-shadow: var(--shadow-xs) !important;
+      box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
       transition: var(--trans) !important;
     }
 
