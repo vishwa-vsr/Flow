@@ -205,21 +205,18 @@ function showConfirm(title, message, options = {}) {
         .replace(/[&<>'\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c] || c))
         .replace(/\n/g, "<br>");
     setSafeHTML(document.getElementById("confirm-modal-message"), escapedMessage);
-    const iconSpan = document.getElementById("confirm-modal-icon");
-    if (options.icon) {
-        iconSpan.textContent = options.icon;
-    } else {
-        iconSpan.textContent = "⚠️";
-    }
+    const iconWrap = document.getElementById("confirm-modal-icon-wrap");
     const yesBtn = document.getElementById("confirm-modal-yes");
     const noBtn = document.getElementById("confirm-modal-no");
     yesBtn.textContent = options.confirmText || "Confirm";
     noBtn.textContent = options.cancelText || "Cancel";
     if (options.isDestructive) {
+        if (iconWrap) iconWrap.style.color = "var(--red)";
         yesBtn.style.background = "var(--red)";
         yesBtn.style.borderColor = "var(--red)";
         yesBtn.style.color = "#ffffff";
     } else {
+        if (iconWrap) iconWrap.style.color = "var(--amber)";
         yesBtn.style.background = "var(--green)";
         yesBtn.style.borderColor = "rgba(255,255,255,.08)";
         yesBtn.style.color = "#0a0a0a";
