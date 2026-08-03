@@ -34,9 +34,9 @@
   --trans:background .22s cubic-bezier(.4,0,.2,1), color .22s cubic-bezier(.4,0,.2,1), border-color .22s cubic-bezier(.4,0,.2,1), box-shadow .22s cubic-bezier(.4,0,.2,1), transform .22s cubic-bezier(.4,0,.2,1), opacity .22s cubic-bezier(.4,0,.2,1);
   --trans-fast:background .15s cubic-bezier(.4,0,.2,1), color .15s cubic-bezier(.4,0,.2,1), border-color .15s cubic-bezier(.4,0,.2,1), box-shadow .15s cubic-bezier(.4,0,.2,1), transform .15s cubic-bezier(.4,0,.2,1), opacity .15s cubic-bezier(.4,0,.2,1);
 
-  /* glass / surface — used by dashboard glassmorphism */
-  --glass-bg:rgba(24,24,24,0.65);
-  --glass-bd:rgba(255,255,255,0.08);
+  /* surface — solid surface redirection */
+  --glass-bg: var(--bg2);
+  --glass-bd: var(--bd);
   --surface-subtle:rgba(255,255,255,0.015);
   --surface-elevated:rgba(255,255,255,0.03);
   --bd-subtle:rgba(255,255,255,0.04);
@@ -59,9 +59,9 @@ html.light{
   --shadow-sm:0 2px 8px rgba(0,0,0,.06);
   --shadow-md:0 8px 20px rgba(0,0,0,.08);
   --shadow-lg:0 20px 48px rgba(0,0,0,.10);
-  /* glass / surface — light mode overrides */
-  --glass-bg:rgba(255,255,255,0.75);
-  --glass-bd:rgba(0,0,0,0.12);
+  /* surface — light mode overrides */
+  --glass-bg: var(--bg2);
+  --glass-bd: var(--bd);
   --surface-subtle:rgba(0,0,0,0.015);
   --surface-elevated:rgba(0,0,0,0.03);
   --bd-subtle:rgba(0,0,0,0.04);

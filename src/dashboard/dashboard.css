@@ -121,9 +121,7 @@
     .navbar {
       display: flex;
       justify-content: center;
-      background: var(--glass-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: var(--bg2);
       position: sticky;
       top: 0;
       z-index: 100;
