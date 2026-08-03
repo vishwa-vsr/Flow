@@ -413,3 +413,33 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   background-color: transparent;
 }
 
+/* ═══════ GLOBAL THIN CUSTOM SCROLLBAR (Chrome, Edge, Firefox) ═══════ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+html.light * {
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+
