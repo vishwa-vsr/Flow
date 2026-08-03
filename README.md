@@ -17,7 +17,7 @@
     <a href="./LICENSE"><img src="https://img.shields.io/github/license/vishwa-vsr/Flow" alt="License" valign="middle"></a>
   </p>
   
-  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.4</b></i></p>
+  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.7</b></i></p>
 
   <br>
   
@@ -101,7 +101,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
    * Microsoft Edge: `edge://extensions`
 3. Toggle on **Developer mode** in the top right corner.
 4. Click **Load unpacked** in the top left corner.
-5. Select the `src` folder (to run raw, unminified code) or the `flow-dist` folder (if you ran the build script) from the files you downloaded.
+5. Select the `src` folder (to run raw, unminified code) or the `dist/chrome` folder (if you ran the build script) from the files you downloaded.
 6. **Pin Flow** to your browser toolbar for quick access!
 
 ---
@@ -127,6 +127,15 @@ flow-source/
   │    ├── dashboard/              <-- Premium visual statistics screen
   │    ├── popup/                  <-- Main dropdown focus timer card
   │    └── utils.js                <-- DOM/UI interface helper functions
+  ├── dist/                        <-- Compiled browser builds (ignored by git)
+  │    ├── chrome/                 <-- Unpacked Chrome extension build
+  │    ├── edge/                   <-- Unpacked Edge extension build
+  │    └── firefox/                <-- Unpacked Firefox extension build
+  ├── release/                     <-- Packaged store upload zip archives (ignored by git)
+  ├── docs/                        <-- Documentation & roadmap notes (ignored by git)
+  │    ├── master_user_feedback.md <-- Consolidated user feedback log
+  │    ├── IDEAS.md                <-- Ideas & feature roadmap
+  │    └── market_research_report.md
   ├── tools/
   │    ├── build.js                <-- Standard optimized minifier builder
   │    ├── languages_analysis.html <-- Translation stats checking interface
@@ -168,7 +177,7 @@ To generate the minified production packages submitted to browser extension stor
 > [!WARNING]
 > **Windows Users**: If PowerShell blocks running the npm command due to script policies, run the build script directly with Node: `node tools/build.js --yes`, or bypass execution policies with `powershell -ExecutionPolicy Bypass -Command "npm run build"`.
 
-5. The build script outputs optimized builds into `flow-dist/` (for Chrome), `flow-edge/` (for Edge), and `flow-firefox/` (for Firefox).
+5. The build script outputs optimized builds into `dist/chrome/` (for Chrome), `dist/edge/` (for Edge), and `dist/firefox/` (for Firefox), and saves packaged `.zip` files in `release/`.
 
 ### Notes on the Build Process
 * The build script (`tools/build.js`) does **not** rely on complex bundlers.

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.7] - 2026-08-03
+
+### Changed
+- **Reorganized Build Output Structure**: Cleaned up project root by routing compiled browser distribution builds into structured `dist/` subdirectories (`dist/chrome`, `dist/edge`, `dist/firefox`) and store upload archives into `release/`.
+- **Documentation & User Guide Updates**: Updated `README.md` and repository developer guidelines to reflect the updated directory structure and build workflow.
+
 ## [10.0.6] - 2026-07-28
 
 ### Changed
