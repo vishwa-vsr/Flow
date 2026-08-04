@@ -458,3 +458,103 @@ html.light * {
   vertical-align: middle;
 }
 
+/* Animated Custom Dropdown Component */
+.ff-dropdown {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+
+.ff-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--bg3);
+  color: var(--tx);
+  border: 1px solid var(--bd2);
+  transition: var(--trans-fast);
+  outline: none;
+  text-transform: capitalize;
+  line-height: 1;
+}
+
+.ff-dropdown-btn:hover {
+  background: var(--bg4);
+  border-color: var(--bd3);
+}
+
+.ff-dropdown-arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: currentColor;
+  flex-shrink: 0;
+  display: block;
+}
+
+.ff-dropdown.open .ff-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.ff-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 155px;
+  background: var(--bg2);
+  border: 1px solid var(--bd2);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  z-index: 99999;
+  padding: 4px;
+  display: none;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ff-dropdown.open .ff-dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.ff-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: var(--tx);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--trans-fast);
+}
+
+.ff-dropdown-item:hover {
+  background: var(--bg3);
+}
+
+.ff-dropdown-item.selected {
+  background: var(--bg4);
+  color: var(--tx);
+}
+
+.ff-dropdown-item .ff-check-icon {
+  margin-left: auto;
+  width: 14px;
+  height: 14px;
+  color: var(--green);
+}
+

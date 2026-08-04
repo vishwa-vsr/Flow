@@ -502,11 +502,34 @@ function renderDonut(e, t) {
 }
 
 function buildCatSelector(e, t, s) {
-    var a = `<select class="sel-cat" data-domain="${escHTML(e)}" style="font-size:10px; padding:4px 8px; border-radius:999px; background:${s}22; color:${s}; border:1px solid ${s}55; outline:none; cursor:pointer; font-weight:800; text-transform:uppercase; appearance:none; text-align:center; box-shadow:none !important;">`;
-    return ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(catKey => {
+    const currentLbl = (typeof getCatLabel === "function" ? getCatLabel(t) : (CAT_LABELS?.[t] || t));
+    const currentEmoji = (typeof catEmoji === "function" ? catEmoji(t) : "");
+    let menuItems = "";
+    ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(catKey => {
         const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (CAT_LABELS?.[catKey] || catKey));
-        a += `<option value="${catKey}" ${catKey === t ? "selected" : ""} style="background:var(--bg2); color:var(--tx); text-transform:capitalize;">${lbl}</option>`
-    }), a += "</select>"
+        const emoji = (typeof catEmoji === "function" ? catEmoji(catKey) : "");
+        const isSelected = catKey === t;
+        const color = CAT_COLORS[catKey] || "#555555";
+        menuItems += `
+          <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
+            <span>${emoji} ${lbl}</span>
+            ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+          </button>
+        `;
+    });
+
+    return `
+    <div class="ff-dropdown" data-domain="${escHTML(e)}">
+      <button type="button" class="ff-dropdown-btn" style="background:${s}22; color:${s}; border-color:${s}55;">
+        <span>${currentEmoji} ${currentLbl}</span>
+        <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="ff-dropdown-menu">
+        ${menuItems}
+      </div>
+    </div>
+    `;
 }
 
 function renderDynamicList(e, t) {
@@ -567,26 +590,51 @@ function renderDynamicList(e, t) {
             setSafeHTML(s, htmlParts.join(""));
         }
         
-        s.querySelectorAll(".sel-cat").forEach(selectEl => {
-            selectEl.addEventListener("change", async evt => {
-                var t = evt.target.getAttribute("data-domain") || selectEl.getAttribute("data-domain"),
-                    catVal = evt.target.value;
-                const cleanDom = sanitizeDomain(t);
-                siteCats[t] = catVal;
-                siteCats[cleanDom] = catVal;
-                if (cleanDom.startsWith("www.")) siteCats[cleanDom.replace(/^www\./, "")] = catVal;
-                else siteCats["www." + cleanDom] = catVal;
-                window.siteCats = siteCats;
-                window.siteCategories = siteCats;
-                
-                await sLocal({ siteCategories: siteCats });
-                await msg("CATEGORIZE_SITE", {
-                    domain: cleanDom,
-                    category: catVal
+        // Attach click and toggle handlers to custom animated dropdowns
+        s.querySelectorAll(".ff-dropdown").forEach(dropdownEl => {
+            const btn = dropdownEl.querySelector(".ff-dropdown-btn");
+            const domain = dropdownEl.getAttribute("data-domain");
+
+            if (btn) {
+                btn.addEventListener("click", (evt) => {
+                    evt.stopPropagation();
+                    const isOpen = dropdownEl.classList.contains("open");
+                    document.querySelectorAll(".ff-dropdown.open").forEach(other => {
+                        if (other !== dropdownEl) other.classList.remove("open");
+                    });
+                    dropdownEl.classList.toggle("open", !isOpen);
                 });
-                await loadViewData();
+            }
+
+            dropdownEl.querySelectorAll(".ff-dropdown-item").forEach(itemBtn => {
+                itemBtn.addEventListener("click", async (evt) => {
+                    evt.stopPropagation();
+                    const catVal = itemBtn.getAttribute("data-cat");
+                    dropdownEl.classList.remove("open");
+                    const cleanDom = sanitizeDomain(domain);
+                    siteCats[domain] = catVal;
+                    siteCats[cleanDom] = catVal;
+                    if (cleanDom.startsWith("www.")) siteCats[cleanDom.replace(/^www\./, "")] = catVal;
+                    else siteCats["www." + cleanDom] = catVal;
+                    window.siteCats = siteCats;
+                    window.siteCategories = siteCats;
+                    
+                    await sLocal({ siteCategories: siteCats });
+                    await msg("CATEGORIZE_SITE", {
+                        domain: cleanDom,
+                        category: catVal
+                    });
+                    await loadViewData();
+                });
             });
         });
+
+        if (!window._ffDropdownClickOutsideAdded) {
+            document.addEventListener("click", () => {
+                document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
+            });
+            window._ffDropdownClickOutsideAdded = true;
+        }
     }
 }
 async function loadWeeklyGoal() {
