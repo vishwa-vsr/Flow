@@ -566,15 +566,23 @@ function renderDynamicList(e, t) {
             setSafeHTML(s, htmlParts.join(""));
         }
         
-        s.querySelectorAll(".sel-cat").forEach(e => {
-            e.addEventListener("change", async e => {
-                var t = e.target.getAttribute("data-domain"),
-                    s = e.target.value;
-                siteCats[t] = s, await msg("CATEGORIZE_SITE", {
-                    domain: t,
-                    category: s
-                }), loadViewData()
-            })
+        s.querySelectorAll(".sel-cat").forEach(selectEl => {
+            selectEl.addEventListener("change", async evt => {
+                var t = evt.target.getAttribute("data-domain") || selectEl.getAttribute("data-domain"),
+                    catVal = evt.target.value;
+                const cleanDom = sanitizeDomain(t);
+                siteCats[t] = catVal;
+                siteCats[cleanDom] = catVal;
+                if (cleanDom.startsWith("www.")) siteCats[cleanDom.replace(/^www\./, "")] = catVal;
+                else siteCats["www." + cleanDom] = catVal;
+                
+                await sLocal({ siteCategories: siteCats });
+                await msg("CATEGORIZE_SITE", {
+                    domain: cleanDom,
+                    category: catVal
+                });
+                await loadViewData();
+            });
         });
     }
 }

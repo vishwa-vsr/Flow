@@ -949,11 +949,13 @@ async function tagSite(e, t) {
     siteCategories[cleanDom] = t;
     if (cleanDom.startsWith("www.")) {
         siteCategories[cleanDom.replace(/^www\./, "")] = t;
+    } else {
+        siteCategories["www." + cleanDom] = t;
     }
     if (hiddenDefaultSites.includes(cleanDom)) {
         hiddenDefaultSites = hiddenDefaultSites.filter(d => d !== cleanDom);
     }
-    await sLocal({ hiddenDefaultSites: hiddenDefaultSites });
+    await sLocal({ siteCategories: siteCategories, hiddenDefaultSites: hiddenDefaultSites });
     await msg("CATEGORIZE_SITE", {
         domain: cleanDom,
         category: t
