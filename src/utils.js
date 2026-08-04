@@ -73,7 +73,7 @@ async function hashPinStretched(pin, salt, iterations = 100000) {
     return current;
 }
 
-async function hashPinPBKDF2(pin, saltHex, iterations = 10000) {
+async function hashPinPBKDF2(pin, saltHex, iterations = 600000) {
     const pinBytes = new TextEncoder().encode(pin);
     const saltBytes = new Uint8Array((saltHex.match(/.{1,2}/g) || []).map(byte => parseInt(byte, 16)));
     const baseKey = await crypto.subtle.importKey(
@@ -111,8 +111,8 @@ async function hashPinOld(e) {
 
 async function hashPin(e) {
     const salt = generateRandomSalt();
-    const stretched = await hashPinPBKDF2(e, salt, 10000);
-    return `v3:10000:${salt}:${stretched}`;
+    const stretched = await hashPinPBKDF2(e, salt, 600000);
+    return `v3:600000:${salt}:${stretched}`;
 }
 
 async function verifyAndMigratePin(pin, storedHash) {
@@ -132,10 +132,10 @@ async function verifyAndMigratePin(pin, storedHash) {
         }
         const computed = await hashPinPBKDF2(pin, salt, iterations);
         if (computed === target) {
-            if (iterations !== 10000) {
+            if (iterations < 600000) {
                 const newSalt = generateRandomSalt();
-                const newHash = await hashPinPBKDF2(pin, newSalt, 10000);
-                const migratedHash = `v3:10000:${newSalt}:${newHash}`;
+                const newHash = await hashPinPBKDF2(pin, newSalt, 600000);
+                const migratedHash = `v3:600000:${newSalt}:${newHash}`;
                 return { success: true, migratedHash: migratedHash };
             }
             return { success: true, migratedHash: null };
@@ -149,8 +149,8 @@ async function verifyAndMigratePin(pin, storedHash) {
         const computed = await hashPinStretched(pin, salt, 100000);
         if (computed === target) {
             const newSalt = generateRandomSalt();
-            const newHash = await hashPinPBKDF2(pin, newSalt, 10000);
-            const migratedHash = `v3:10000:${newSalt}:${newHash}`;
+            const newHash = await hashPinPBKDF2(pin, newSalt, 600000);
+            const migratedHash = `v3:600000:${newSalt}:${newHash}`;
             return { success: true, migratedHash: migratedHash };
         }
         return { success: false };
@@ -162,8 +162,8 @@ async function verifyAndMigratePin(pin, storedHash) {
         const computed = await hashPinStretched(pin, salt, 1000);
         if (computed === target) {
             const newSalt = generateRandomSalt();
-            const newHash = await hashPinPBKDF2(pin, newSalt, 10000);
-            const migratedHash = `v3:10000:${newSalt}:${newHash}`;
+            const newHash = await hashPinPBKDF2(pin, newSalt, 600000);
+            const migratedHash = `v3:600000:${newSalt}:${newHash}`;
             return { success: true, migratedHash: migratedHash };
         }
         return { success: false };
@@ -171,8 +171,8 @@ async function verifyAndMigratePin(pin, storedHash) {
     const oldComputed = await hashPinOld(pin);
     if (oldComputed === storedHash) {
         const newSalt = generateRandomSalt();
-        const newHash = await hashPinPBKDF2(pin, newSalt, 10000);
-        const migratedHash = `v3:10000:${newSalt}:${newHash}`;
+        const newHash = await hashPinPBKDF2(pin, newSalt, 600000);
+        const migratedHash = `v3:600000:${newSalt}:${newHash}`;
         return { success: true, migratedHash: migratedHash };
     }
     return { success: false };
