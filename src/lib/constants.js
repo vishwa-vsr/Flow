@@ -311,22 +311,29 @@
     const hidden = hiddenSites || root.hiddenDefaultSites || (typeof hiddenDefaultSites !== "undefined" ? hiddenDefaultSites : []);
     const auto = root.AUTO_CATEGORIES || {};
 
+    if (!domainStr) return { cat: "uncategorized", auto: false };
+    const cleanDom = domainStr.toLowerCase().trim().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+
+    // 1. Prioritize clean/apex domain custom category overrides
+    if (cats[cleanDom]) return { cat: cats[cleanDom], auto: false };
     if (cats[domainStr]) return { cat: cats[domainStr], auto: false };
-    
-    const parts = domainStr.split(".");
+
+    const parts = cleanDom.split(".");
     for (let i = 1; i < parts.length - 1; i++) {
         const sub = parts.slice(i).join(".");
         if (cats[sub]) return { cat: cats[sub], auto: false };
     }
 
-    if (hidden.includes(domainStr)) return { cat: "uncategorized", auto: false };
+    if (hidden.includes(cleanDom) || hidden.includes(domainStr)) return { cat: "uncategorized", auto: false };
     for (let i = 1; i < parts.length - 1; i++) {
         const sub = parts.slice(i).join(".");
         if (hidden.includes(sub)) return { cat: "uncategorized", auto: false };
     }
 
+    // 2. Built-in dictionary fallbacks
+    if (auto[cleanDom]) return { cat: auto[cleanDom], auto: true };
     if (auto[domainStr]) return { cat: auto[domainStr], auto: true };
-    const subAuto = parts.length > 2 ? parts.slice(1).join(".") : domainStr;
+    const subAuto = parts.length > 2 ? parts.slice(1).join(".") : cleanDom;
     if (auto[subAuto]) return { cat: auto[subAuto], auto: true };
 
     return { cat: "uncategorized", auto: false };
