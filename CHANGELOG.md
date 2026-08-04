@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [10.0.7] - 2026-08-03
+## [10.0.7] - 2026-08-04
 
 ### Changed
+- **Hollow SVG Rounded Rectangle Focus Timer Badge**: Transformed the popup focus timer into a wide rounded rectangle badge with a transparent center (`fill="none"`) and right-aligned session details (*"Ready to focus?"*). Features an animated SVG border stroke (`stroke: var(--green)` / `stroke: var(--amber)`) that un-fills clockwise around the rectangle corners as focus or break time ticks down, giving long timer values (`90:00`, `120:00`, `1h 30m`) plenty of horizontal breathing room.
 - **Global Thin Custom Scrollbar**: Added extension-wide sleek 6px custom scrollbar across Chrome, Edge, and Firefox (`scrollbar-width: thin`), automatically adapting to Dark and Light mode themes across all dashboards, popups, and settings panels.
 - **Solid Theme-Adaptive Modal Surfaces**: Replaced see-through glass text bleed-through on all dashboard popups, chart tooltips, and calendar hover boxes with solid, high-contrast theme surfaces (`#141414` in Dark Mode, `#ffffff` in Light Mode) while preserving smooth screen backdrop dimming.
 - **Confirmation Modal UI Overhaul**: Upgraded `confirm-modal` layout across Danger Zone ("Clear Rules", "Reset Stats", "Clear Categories") and Backup & Restore alerts with a modern header-divided title bar, clean SVG warning icons, and high-contrast red action buttons.
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Open-Source License Relicensing**: Relicensed the project under the [GNU General Public License v3.0 (GPLv3)](./LICENSE) under copyright holder `vishaw-vsr` to legally protect source code against closed-source clones while preserving open community copyleft protections.
 
 ### Fixed
+- **Focus Button Icon Alignment & Visibility State Fix**: Enforced global flex alignment (`display: inline-flex; align-items: center; justify-content: center; gap: 8px; line-height: 1;`) across all focus action buttons (`Start`, `Stop`, `Pause`, `Skip`) in both Popup and Dashboard, while ensuring inactive buttons (`Stop`, `Pause`, `Skip`) hide properly when focus is inactive. Stripped leftover inline style clutter from HTML button tags.
 - **Card Double Corner Outline Fix**: Removed legacy inner top highlight shadow lines (`inset 0 1px 0`) clashing with outer rounded card borders, eliminating double outline artifacts across all dashboard section cards, stat containers, and modal popups.
 
 ## [10.0.6] - 2026-07-28
