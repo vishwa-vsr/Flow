@@ -629,15 +629,18 @@ function renderDynamicList(e, t) {
             });
         });
 
-        if (!window._ffDropdownClickOutsideAdded) {
-            window.addEventListener("click", (evt) => {
-                if (!evt.target.closest(".ff-dropdown")) {
-                    document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
-                }
-            }, true);
-            window._ffDropdownClickOutsideAdded = true;
-        }
+        window._ffDropdownClickOutsideAdded = true;
     }
+}
+
+// Global capture phase click-outside listener
+if (!window._ffGlobalDropdownClickOutsideAdded) {
+    window.addEventListener("click", (evt) => {
+        if (!evt.target.closest(".ff-dropdown")) {
+            document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
+        }
+    }, true);
+    window._ffGlobalDropdownClickOutsideAdded = true;
 }
 async function loadWeeklyGoal() {
     var e = await msg("STATS_GET_WEEK"),

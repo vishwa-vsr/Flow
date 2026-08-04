@@ -1041,18 +1041,22 @@ function initCustomDropdowns(containerEl, onSelectCallback) {
         });
     });
 
-    if (!window._ffDropdownClickOutsideAdded) {
-        window.addEventListener("click", (evt) => {
-            if (!evt.target.closest(".ff-dropdown")) {
-                document.querySelectorAll(".ff-dropdown.open").forEach(d => {
-                    d.classList.remove("open");
-                    d.closest(".card")?.classList.remove("ff-card-open");
-                    d.closest(".trow")?.classList.remove("ff-trow-open");
-                });
-            }
-        }, true);
         window._ffDropdownClickOutsideAdded = true;
     }
+}
+
+// Global capture-phase click-outside listener for all custom dropdowns
+if (!window._ffGlobalDropdownClickOutsideAdded) {
+    window.addEventListener("click", (evt) => {
+        if (!evt.target.closest(".ff-dropdown")) {
+            document.querySelectorAll(".ff-dropdown.open").forEach(d => {
+                d.classList.remove("open");
+                d.closest(".card")?.classList.remove("ff-card-open");
+                d.closest(".trow")?.classList.remove("ff-trow-open");
+            });
+        }
+    }, true);
+    window._ffGlobalDropdownClickOutsideAdded = true;
 }
 
 function upgradeSelectToCustomDropdown(selectEl) {
@@ -1146,11 +1150,28 @@ function upgradeSelectToCustomDropdown(selectEl) {
 }
 
 function upgradeAllSettingsSelects() {
-    const ids = ["idle-timeout-sel", "max-gap-sel", "min-visit-sel", "day-rollover-sel", "data-retention-sel", "lang-sel", "week-start-select", "mon-cat"];
-    ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) upgradeSelectToCustomDropdown(el);
+    document.querySelectorAll("select").forEach(sel => {
+        if (!sel.classList.contains("custom-dropdown-ignore")) {
+            upgradeSelectToCustomDropdown(sel);
+        }
     });
+
+    if (!window._ffUniversalDropdownObserver && document.body) {
+        window._ffUniversalDropdownObserver = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) {
+                        if (node.tagName === "SELECT") {
+                            upgradeSelectToCustomDropdown(node);
+                        } else if (node.querySelectorAll) {
+                            node.querySelectorAll("select").forEach(s => upgradeSelectToCustomDropdown(s));
+                        }
+                    }
+                });
+            }
+        });
+        window._ffUniversalDropdownObserver.observe(document.body, { childList: true, subtree: true });
+    }
 }
 
 function renderCategories() {
