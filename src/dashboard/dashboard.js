@@ -1037,6 +1037,7 @@ function initCustomDropdowns(containerEl, onSelectCallback) {
                 if (typeof onSelectCallback === "function") {
                     await onSelectCallback(domain, catVal);
                 }
+            });
         });
     });
 }
