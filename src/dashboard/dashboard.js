@@ -3071,7 +3071,6 @@ async function renderTopSites() {
       <span class="dom" style="display:flex; align-items:center; gap:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
         ${getFav(e[0])}
         <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>
-        ${t.auto ? `<span style="font-size:11px;color:var(--tx3);" title="${t_('autoCategorized')}">?</span>` : ""}
       </span>
       <div style="display:flex; align-items:center; gap:10px; justify-content:flex-start; margin-left: -12px;">
         <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? t_('unpinSite') : t_('pinSiteToTop')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">

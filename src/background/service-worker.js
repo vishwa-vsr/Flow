@@ -1065,9 +1065,6 @@ async function categorize(t) {
         const a = s.slice(t).join(".");
         if (hidden.includes(a)) return "uncategorized";
     }
-    // Bug#8 fix: guard empty domain so t.endsWith(".") doesn't match everything
-    const o = a.find(e => e.domain && (t === e.domain || t.endsWith("." + e.domain)));
-    if (o) return o.category || "distraction";
     if (AUTO_CATEGORIES[t]) return AUTO_CATEGORIES[t];
     const i = s.length > 2 ? s.slice(1).join(".") : t;
     if (AUTO_CATEGORIES[i]) return AUTO_CATEGORIES[i];
