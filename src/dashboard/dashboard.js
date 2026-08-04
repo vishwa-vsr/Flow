@@ -1049,6 +1049,104 @@ function initCustomDropdowns(containerEl, onSelectCallback) {
     }
 }
 
+function upgradeSelectToCustomDropdown(selectEl) {
+    if (!selectEl || selectEl.dataset.ffUpgraded === "true") return;
+    selectEl.dataset.ffUpgraded = "true";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "ff-dropdown ff-dropdown-settings";
+    if (selectEl.style.width) {
+        wrapper.style.width = selectEl.style.width;
+    }
+
+    const updateUI = () => {
+        const selectedOpt = selectEl.options[selectEl.selectedIndex] || selectEl.options[0];
+        const btnLabel = wrapper.querySelector(".ff-dropdown-btn > span:first-child");
+        if (btnLabel && selectedOpt) {
+            btnLabel.textContent = selectedOpt.textContent;
+        }
+        wrapper.querySelectorAll(".ff-dropdown-item").forEach(itemBtn => {
+            const isSelected = itemBtn.getAttribute("data-value") === selectEl.value;
+            itemBtn.classList.toggle("selected", isSelected);
+            let chk = itemBtn.querySelector(".ff-check-icon");
+            if (isSelected && !chk) {
+                const checkSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                checkSvg.setAttribute("class", "ff-check-icon");
+                checkSvg.setAttribute("viewBox", "0 0 24 24");
+                checkSvg.setAttribute("fill", "none");
+                checkSvg.setAttribute("stroke", "currentColor");
+                checkSvg.setAttribute("stroke-width", "3");
+                checkSvg.setAttribute("stroke-linecap", "round");
+                checkSvg.setAttribute("stroke-linejoin", "round");
+                const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+                polyline.setAttribute("points", "20 6 9 17 4 12");
+                checkSvg.appendChild(polyline);
+                itemBtn.appendChild(checkSvg);
+            } else if (!isSelected && chk) {
+                chk.remove();
+            }
+        });
+    };
+
+    const selectedOpt = selectEl.options[selectEl.selectedIndex] || selectEl.options[0];
+    const initialLabel = selectedOpt ? selectedOpt.textContent : "";
+
+    let itemsHtml = "";
+    Array.from(selectEl.options).forEach(opt => {
+        const isSelected = opt.value === selectEl.value;
+        itemsHtml += `
+          <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-value="${escHTML(opt.value)}">
+            <span>${escHTML(opt.textContent)}</span>
+            ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+          </button>
+        `;
+    });
+
+    setSafeHTML(wrapper, `
+      <button type="button" class="ff-dropdown-btn">
+        <span>${escHTML(initialLabel)}</span>
+        <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="ff-dropdown-menu">
+        ${itemsHtml}
+      </div>
+    `);
+
+    selectEl.style.display = "none";
+    selectEl.parentNode.insertBefore(wrapper, selectEl.nextSibling);
+
+    const btn = wrapper.querySelector(".ff-dropdown-btn");
+    btn.addEventListener("click", (evt) => {
+        evt.stopPropagation();
+        const isOpen = wrapper.classList.contains("open");
+        document.querySelectorAll(".ff-dropdown.open").forEach(other => {
+            if (other !== wrapper) other.classList.remove("open");
+        });
+        wrapper.classList.toggle("open", !isOpen);
+    });
+
+    wrapper.querySelectorAll(".ff-dropdown-item").forEach(itemBtn => {
+        itemBtn.addEventListener("click", (evt) => {
+            evt.stopPropagation();
+            const val = itemBtn.getAttribute("data-value");
+            selectEl.value = val;
+            selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+            wrapper.classList.remove("open");
+            updateUI();
+        });
+    });
+
+    selectEl.addEventListener("change", updateUI);
+}
+
+function upgradeAllSettingsSelects() {
+    const ids = ["idle-timeout-sel", "max-gap-sel", "min-visit-sel", "day-rollover-sel", "data-retention-sel", "lang-sel", "week-start-select", "mon-cat"];
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) upgradeSelectToCustomDropdown(el);
+    });
+}
+
 function renderCategories() {
     renderCatSquares();
     var e = $("cat-groups");
@@ -3157,7 +3255,7 @@ async function renderTopSites() {
                 var t = getEffectiveCat(e[0]),
                     a = document.createElement("div");
                 a.className = "siterow";
-                a.style.gridTemplateColumns = "minmax(140px, 1fr) 80px 170px 75px 75px";
+                a.style.gridTemplateColumns = "minmax(140px, 1fr) 110px 170px 75px 75px";
                 const isPinned = pinnedSites.includes(e[0]);
                 var n = buildCustomDropdownHtml(e[0], t.cat);
 
@@ -3166,7 +3264,7 @@ async function renderTopSites() {
         ${getFav(e[0])}
         <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>
       </span>
-      <div style="display:flex; align-items:center; gap:6px; justify-content:flex-start; margin-left: 0px;">
+      <div style="display:flex; align-items:center; gap:6px; justify-content:flex-end; padding-right: 8px;">
         <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? t_('unpinSite') : t_('pinSiteToTop')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
         </button>
@@ -3751,6 +3849,7 @@ async function loadExtendedSettings(preloadedSettings) {
         $("day-rollover-sel") && ($("day-rollover-sel").value = e.dayRolloverHour !== undefined ? e.dayRolloverHour : 0),
         $("data-retention-sel") && ($("data-retention-sel").value = e.dataRetentionDays !== undefined ? e.dataRetentionDays : 365),
         $("lang-sel") && ($("lang-sel").value = e.language || "default"),
+        upgradeAllSettingsSelects(),
         renderWhitelist((await gLocal(["idleWhitelist"])).idleWhitelist || []), 
         $("pin-status-badge")) {
         const updateIdleBadgeVisibility = () => {
