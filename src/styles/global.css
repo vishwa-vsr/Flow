@@ -486,6 +486,11 @@ html.light * {
   line-height: 1;
 }
 
+#dynamic-list .ff-dropdown-btn {
+  width: 115px;
+  padding: 4px 8px;
+}
+
 .ff-dropdown-btn > span:first-child {
   overflow: hidden;
   text-overflow: ellipsis;

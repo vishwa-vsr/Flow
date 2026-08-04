@@ -3289,7 +3289,7 @@ async function renderTopSites() {
         ${getFav(e[0])}
         <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>
       </span>
-      <div style="display:flex; align-items:center; gap:6px; justify-content:flex-end; padding-right: 8px;">
+      <div style="display:flex; align-items:center; gap:6px; justify-content:center;">
         <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? t_('unpinSite') : t_('pinSiteToTop')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
         </button>
