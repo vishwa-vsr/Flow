@@ -976,6 +976,79 @@ async function tagSite(e, t) {
     renderCategories();
 }
 
+function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
+    const cleanDom = typeof sanitizeDomain === "function" ? sanitizeDomain(domain) : domain;
+    const catKeys = (typeof allCats === "function" ? allCats() : ["productivity", "learning", "distraction", "communication", "uncategorized"]);
+    const currentLbl = (typeof getCatLabel === "function" ? getCatLabel(currentCat) : (typeof catLabel === "function" ? catLabel(currentCat, !1) : currentCat));
+    const currentEmoji = (typeof catEmoji === "function" ? catEmoji(currentCat) : "");
+    const color = (typeof catColor === "function" ? catColor(currentCat) : (CAT_COLORS?.[currentCat] || "#555555"));
+
+    let itemsHtml = "";
+    catKeys.forEach(catKey => {
+        const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (typeof catLabel === "function" ? catLabel(catKey, !1) : catKey));
+        const emoji = (typeof catEmoji === "function" ? catEmoji(catKey) : "");
+        const isSelected = catKey === currentCat;
+        const itemColor = (typeof catColor === "function" ? catColor(catKey) : (CAT_COLORS?.[catKey] || "#555555"));
+
+        itemsHtml += `
+          <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${itemColor}; flex-shrink:0;"></span>
+            <span>${emoji} ${lbl}</span>
+            ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+          </button>
+        `;
+    });
+
+    return `
+    <div class="ff-dropdown ${customClass}" data-domain="${escHTML(cleanDom)}">
+      <button type="button" class="ff-dropdown-btn" style="background:${color}22; color:${color}; border-color:${color}55;">
+        <span>${currentEmoji} ${currentLbl}</span>
+        <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="ff-dropdown-menu">
+        ${itemsHtml}
+      </div>
+    </div>
+    `;
+}
+
+function initCustomDropdowns(containerEl, onSelectCallback) {
+    if (!containerEl) return;
+    containerEl.querySelectorAll(".ff-dropdown").forEach(dropdownEl => {
+        const btn = dropdownEl.querySelector(".ff-dropdown-btn");
+        const domain = dropdownEl.getAttribute("data-domain");
+
+        if (btn) {
+            btn.addEventListener("click", (evt) => {
+                evt.stopPropagation();
+                const isOpen = dropdownEl.classList.contains("open");
+                document.querySelectorAll(".ff-dropdown.open").forEach(other => {
+                    if (other !== dropdownEl) other.classList.remove("open");
+                });
+                dropdownEl.classList.toggle("open", !isOpen);
+            });
+        }
+
+        dropdownEl.querySelectorAll(".ff-dropdown-item").forEach(itemBtn => {
+            itemBtn.addEventListener("click", async (evt) => {
+                evt.stopPropagation();
+                const catVal = itemBtn.getAttribute("data-cat");
+                dropdownEl.classList.remove("open");
+                if (typeof onSelectCallback === "function") {
+                    await onSelectCallback(domain, catVal);
+                }
+            });
+        });
+    });
+
+    if (!window._ffDropdownClickOutsideAdded) {
+        document.addEventListener("click", () => {
+            document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
+        });
+        window._ffDropdownClickOutsideAdded = true;
+    }
+}
+
 function renderCategories() {
     renderCatSquares();
     var e = $("cat-groups");
@@ -1021,12 +1094,12 @@ function renderCategories() {
                 var t = document.createElement("div");
                 t.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px 16px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px";
                 const cleanDom = sanitizeDomain(e.domain);
-                var n = `<select class="sel" data-domain="${cleanDom}" style="padding:8px 12px;font-size:13px;width:auto">`;
-                allCats().forEach(e => n += `<option value="${e}"${e === a ? " selected" : ""}>${catEmoji(e)} ${catLabel(e, !1)}</option>`), n += "</select>", setSafeHTML(t, `<span style="font-family:monospace;font-size:15px;font-weight:700;flex:1;word-break:break-all;display:flex;align-items:center;gap:8px;">${getFav(e.domain)} ${cleanDom}</span>${n}<button class="bic cat-rule-btn" data-domain="${cleanDom}" title="Add or Edit Rule"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button><button class="bic del rm-cat" data-domain="${cleanDom}">✕</button>`), i.appendChild(t)
-            }), i.querySelectorAll(".sel").forEach(selectEl => selectEl.addEventListener("change", async evt => {
-                const dom = evt.target.getAttribute("data-domain") || selectEl.getAttribute("data-domain");
-                await tagSite(dom, evt.target.value);
-            })), i.querySelectorAll(".rm-cat").forEach(el => el.addEventListener("click", async () => {
+                var n = buildCustomDropdownHtml(cleanDom, a);
+                setSafeHTML(t, `<span style="font-family:monospace;font-size:15px;font-weight:700;flex:1;word-break:break-all;display:flex;align-items:center;gap:8px;">${getFav(e.domain)} ${cleanDom}</span>${n}<button class="bic cat-rule-btn" data-domain="${cleanDom}" title="Add or Edit Rule"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button><button class="bic del rm-cat" data-domain="${cleanDom}">✕</button>`);
+                i.appendChild(t);
+            }), initCustomDropdowns(i, async (dom, newCat) => {
+                await tagSite(dom, newCat);
+            }), i.querySelectorAll(".rm-cat").forEach(el => el.addEventListener("click", async () => {
                 const dom = el.getAttribute("data-domain");
                 delete siteCategories[dom];
                 const isDefault = (d) => {
@@ -3086,8 +3159,7 @@ async function renderTopSites() {
                 a.className = "siterow";
                 a.style.gridTemplateColumns = "minmax(180px, 1.3fr) 90px 150px 75px 75px";
                 const isPinned = pinnedSites.includes(e[0]);
-                var n = `<select class="sel" data-domain="${e[0]}" style="padding:4px 8px;font-size:12px;width:100% !important;box-sizing:border-box;">`;
-                allCats().forEach(e => n += `<option value="${e}"${e === t.cat ? " selected" : ""}>${catEmoji(e)} ${catLabel(e, !1)}</option>`), n += "</select>";
+                var n = buildCustomDropdownHtml(e[0], t.cat);
 
                 setSafeHTML(a, `
       <span class="dom" style="display:flex; align-items:center; gap:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
@@ -3109,8 +3181,8 @@ async function renderTopSites() {
       <span class="stat-pill">${fmt(e[1])}</span>
       <span class="stat-pill">~${fmt(Math.round(e[1] / l))}</span>
     `);
-a.querySelector(".sel")?.addEventListener("change", async function () {
-                    await tagSite(this.getAttribute("data-domain"), this.value);
+                initCustomDropdowns(a, async (dom, newCat) => {
+                    await tagSite(dom, newCat);
                     await loadAnalytics();
                 });
 
