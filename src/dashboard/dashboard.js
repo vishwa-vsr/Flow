@@ -945,13 +945,17 @@ function openEditCategoryModal(catKey) {
     });
 }
 async function tagSite(e, t) {
-    siteCategories[e] = t;
-    if (hiddenDefaultSites.includes(e)) {
-        hiddenDefaultSites = hiddenDefaultSites.filter(d => d !== e);
+    const cleanDom = sanitizeDomain(e);
+    siteCategories[cleanDom] = t;
+    if (cleanDom.startsWith("www.")) {
+        siteCategories[cleanDom.replace(/^www\./, "")] = t;
+    }
+    if (hiddenDefaultSites.includes(cleanDom)) {
+        hiddenDefaultSites = hiddenDefaultSites.filter(d => d !== cleanDom);
     }
     await sLocal({ hiddenDefaultSites: hiddenDefaultSites });
     await msg("CATEGORIZE_SITE", {
-        domain: e,
+        domain: cleanDom,
         category: t
     });
     renderCategories();
@@ -978,32 +982,35 @@ function renderCategories() {
         if (t[a] && t[a].length && ("all" === selectedCat || selectedCat === a)) {
             var n = document.createElement("div");
             const totalCountStr = t[a].length === 1 ? (t_("siteCountSingle", ["1"]) || "1 site") : (t_("siteCountPlural", [String(t[a].length)]) || `${t[a].length} sites`);
-            n.className = "card";
-            const hdrEditBtnHtml = (a !== "uncategorized" && a !== "all") ? `
-                <button type="button" class="hdr-cat-edit-btn" data-cat="${a}" title="Edit Category" style="background:var(--bg4); border:1px solid var(--bd); color:var(--tx2); padding:5px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px; transition:var(--trans);">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                    </svg>
-                    Edit
-                </button>
-            ` : "";
-
-            setSafeHTML(n, `<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--bd2)"><span style="width:12px;height:12px;border-radius:50%;background:${catColor(a)}"></span><span style="font-size:16px;font-weight:800;flex:1;color:var(--tx)">${catEmoji(a)} ${catLabel(a, !1)}</span>${hdrEditBtnHtml}<span style="font-size:12px;color:var(--tx3);background:var(--bg4);padding:6px 12px;border-radius:999px;font-weight:700">${totalCountStr}</span></div>`);
-            
-            const btn = n.querySelector(".hdr-cat-edit-btn");
-            if (btn) {
-                btn.addEventListener("click", () => openEditCategoryModal(a));
-            }
-            var i = document.createElement("div");
+            const catLabelStr = (typeof getCatLabel === "function" ? getCatLabel(a) : (catLabel(a, !1) || a));
+            const catEmojiStr = (typeof getCatEmoji === "function" ? getCatEmoji(a) : (catEmoji(a) || "🏷️"));
+            n.className = "card card-spacious", n.style.marginBottom = "16px";
+            setSafeHTML(n, `
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--bd); padding-bottom:16px; margin-bottom:16px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${catColor(a)};"></span>
+            <span style="font-size:18px; font-weight:800; color:var(--tx);">${catEmojiStr} ${catLabelStr}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="bs bs-sm cat-edit-btn" data-cat="${a}" style="padding:6px 12px; font-size:12px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              ${t_("edit") || "Edit"}
+            </button>
+            <span class="bs" style="background:var(--bg3); border-color:var(--bd); color:var(--tx2); font-weight:700;">${totalCountStr}</span>
+          </div>
+        </div>
+        <div class="cat-group-list"></div>
+      `);
+            var i = n.querySelector(".cat-group-list");
             t[a].forEach(e => {
                 var t = document.createElement("div");
                 t.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px 16px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px";
                 const cleanDom = sanitizeDomain(e.domain);
                 var n = `<select class="sel" data-domain="${cleanDom}" style="padding:8px 12px;font-size:13px;width:auto">`;
                 allCats().forEach(e => n += `<option value="${e}"${e === a ? " selected" : ""}>${catEmoji(e)} ${catLabel(e, !1)}</option>`), n += "</select>", setSafeHTML(t, `<span style="font-family:monospace;font-size:15px;font-weight:700;flex:1;word-break:break-all;display:flex;align-items:center;gap:8px;">${getFav(e.domain)} ${cleanDom}</span>${n}<button class="bic cat-rule-btn" data-domain="${cleanDom}" title="Add or Edit Rule"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button><button class="bic del rm-cat" data-domain="${cleanDom}">✕</button>`), i.appendChild(t)
-            }), i.querySelectorAll(".sel").forEach(e => e.addEventListener("change", async t => {
-                await tagSite(e.getAttribute("data-domain"), e.value)
+            }), i.querySelectorAll(".sel").forEach(selectEl => selectEl.addEventListener("change", async evt => {
+                const dom = evt.target.getAttribute("data-domain") || selectEl.getAttribute("data-domain");
+                await tagSite(dom, evt.target.value);
             })), i.querySelectorAll(".rm-cat").forEach(el => el.addEventListener("click", async () => {
                 const dom = el.getAttribute("data-domain");
                 delete siteCategories[dom];
@@ -3088,7 +3095,8 @@ async function renderTopSites() {
       <span class="stat-pill">~${fmt(Math.round(e[1] / l))}</span>
     `);
 a.querySelector(".sel")?.addEventListener("change", async function () {
-                    await tagSite(this.getAttribute("data-domain"), this.value), loadAnalytics()
+                    await tagSite(this.getAttribute("data-domain"), this.value);
+                    await loadAnalytics();
                 });
 
                 a.querySelector(".top-site-pin-btn")?.addEventListener("click", function () {

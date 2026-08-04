@@ -2394,11 +2394,23 @@ async function handle(t, e) {
             const {
                 siteCategories: e = {}
             } = await gLocal(["siteCategories"]);
-            return e[t.domain] = t.category, await sLocal({
-                siteCategories: e
-            }), {
-                ok: !0
+            const clean = sanitizeDomain(t.domain);
+            e[t.domain] = t.category;
+            e[clean] = t.category;
+            if (clean.startsWith("www.")) {
+                e[clean.replace(/^www\./, "")] = t.category;
+            } else {
+                e["www." + clean] = t.category;
             }
+            await sLocal({
+                siteCategories: e
+            });
+            if (_storCache.local && _storCache.local.data) {
+                _storCache.local.data.siteCategories = e;
+            }
+            return {
+                ok: !0
+            };
         }
         case "GET_VISITED_SITES": {
             await FFDB.ensureMigrated();
