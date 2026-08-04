@@ -288,6 +288,22 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   opacity: 1 !important;
 }
 
+/* Report Issue button polish & responsive collapse for small screens */
+.report-issue-btn {
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  transition: var(--trans-fast);
+}
+
+@media (max-width: 768px) {
+  .report-issue-btn .report-btn-text {
+    display: none;
+  }
+  .report-issue-btn {
+    padding: 6px 8px !important;
+  }
+}
+
 /* smoother toggles for popup / dashboard */
 .tog input:focus-visible + .ttrack{outline:2px solid var(--green);outline-offset:2px}
 
