@@ -471,7 +471,7 @@ html.light * {
   justify-content: space-between;
   gap: 6px;
   padding: 5px 12px;
-  width: 140px;
+  width: 160px;
   box-sizing: border-box;
   border-radius: 999px;
   font-size: 11px;
@@ -516,7 +516,7 @@ html.light * {
   position: absolute;
   top: calc(100% + 4px);
   right: 0;
-  min-width: 155px;
+  min-width: 170px;
   background: var(--bg2);
   border: 1px solid var(--bd2);
   border-radius: 12px;
