@@ -198,8 +198,9 @@
     }
 
     #logo-img.on {
-      animation: pulse 2s infinite;
-      box-shadow: none;
+      animation: none !important;
+      box-shadow: none !important;
+      opacity: 1 !important;
     }
 
     @keyframes pulse {

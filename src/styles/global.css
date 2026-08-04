@@ -280,10 +280,12 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .icon-btn{transition:var(--trans)}
 .icon-btn:hover{transform:translateY(-1px)}
 
-/* logo - disable glow effect during focus session */
+/* logo - disable glow & pulse fading animation during focus session */
 #logo-img, #logo-img.on, #logo-img.focus-on, .logo-dot.focus-on {
+  animation: none !important;
   box-shadow: none !important;
   filter: none !important;
+  opacity: 1 !important;
 }
 
 /* smoother toggles for popup / dashboard */
