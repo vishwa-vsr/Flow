@@ -444,17 +444,17 @@ html.light * {
 
 /* Permanent Focus Button Icon & Text Alignment */
 .fbtn, button.fbtn, .btn-focus-action, #btn-fst, #btn-fpause, #btn-skip, #btn-fgo, #btn-start, #btn-stop, #btn-pause {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  line-height: 1 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
 }
 
 .fbtn svg, button.fbtn svg, .btn-focus-action svg, #btn-fst svg, #btn-fpause svg, #btn-skip svg, #btn-fgo svg, #btn-start svg, #btn-stop svg, #btn-pause svg {
-  display: block !important;
-  flex-shrink: 0 !important;
-  margin: 0 !important;
-  vertical-align: middle !important;
+  display: block;
+  flex-shrink: 0;
+  margin: 0;
+  vertical-align: middle;
 }
 
