@@ -470,7 +470,9 @@ html.light * {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 5px 12px;
+  width: 140px;
+  box-sizing: border-box;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 800;
@@ -482,6 +484,14 @@ html.light * {
   outline: none;
   text-transform: capitalize;
   line-height: 1;
+}
+
+.ff-dropdown-btn > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  text-align: left;
 }
 
 .ff-dropdown-btn:hover {
