@@ -5,6 +5,11 @@
 (function (root) {
   root.FF_CONSTANTS_VERSION = "6.4";
 
+  root.sanitizeDomain = function (d) {
+    if (!d) return "";
+    return String(d).toLowerCase().trim().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
+  };
+
   root.DEFAULT_CAT_COLORS = {
     productivity: "#05D581",
     learning: "#A855F7",

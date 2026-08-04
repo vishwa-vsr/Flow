@@ -23,6 +23,11 @@ function escHTML(e) {
     return String(e).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c] || c));
 }
 
+function sanitizeDomain(d) {
+    if (!d) return "";
+    return String(d).toLowerCase().trim().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 function setSafeHTML(el, html) {
     if (!el) return;
     const isSVG = el.namespaceURI === "http://www.w3.org/2000/svg" || el.tagName.toLowerCase() === "svg";
