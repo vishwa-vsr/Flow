@@ -280,6 +280,12 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .icon-btn{transition:var(--trans)}
 .icon-btn:hover{transform:translateY(-1px)}
 
+/* logo - disable glow effect during focus session */
+#logo-img, #logo-img.on, #logo-img.focus-on, .logo-dot.focus-on {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
 /* smoother toggles for popup / dashboard */
 .tog input:focus-visible + .ttrack{outline:2px solid var(--green);outline-offset:2px}
 
