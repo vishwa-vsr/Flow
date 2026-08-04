@@ -28,7 +28,8 @@ var $ = function (e) {
 window.siteCategories = siteCategories;
 window.siteCats = siteCategories;
 window.hiddenDefaultSites = hiddenDefaultSites;
-    FCIRC = 2 * Math.PI * 106,
+
+var FCIRC = 2 * Math.PI * 106,
     selectedCat = "all",
     currentView = "today",
     analyticsRange = 7,
