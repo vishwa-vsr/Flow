@@ -630,9 +630,11 @@ function renderDynamicList(e, t) {
         });
 
         if (!window._ffDropdownClickOutsideAdded) {
-            document.addEventListener("click", () => {
-                document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
-            });
+            window.addEventListener("click", (evt) => {
+                if (!evt.target.closest(".ff-dropdown")) {
+                    document.querySelectorAll(".ff-dropdown.open").forEach(d => d.classList.remove("open"));
+                }
+            }, true);
             window._ffDropdownClickOutsideAdded = true;
         }
     }
