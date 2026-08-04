@@ -1,6 +1,6 @@
 // FF v6.16: msg() now lives in utils.js (shared with dashboard). Removed the
 // duplicate that used to live here and silently shadow it.
-var FR_C = 2 * Math.PI * 34,
+var FR_C = 307.4,
     currentView = "today",
     siteCats = {},
     AUTO_CATEGORIES = {};
