@@ -1037,12 +1037,8 @@ function initCustomDropdowns(containerEl, onSelectCallback) {
                 if (typeof onSelectCallback === "function") {
                     await onSelectCallback(domain, catVal);
                 }
-            });
         });
     });
-
-        window._ffDropdownClickOutsideAdded = true;
-    }
 }
 
 // Global capture-phase click-outside listener for all custom dropdowns
