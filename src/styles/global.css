@@ -599,10 +599,26 @@ html.light * {
   overflow-y: auto;
   left: 0;
   right: auto;
+  z-index: 999999 !important;
 }
 
 .ff-dropdown-settings .ff-dropdown-item {
   font-size: 13px;
   font-weight: 600;
   padding: 8px 12px;
+}
+
+.trow {
+  position: relative;
+}
+
+/* Ensure cards & rows containing open dropdowns don't clip them */
+.card.ff-card-open,
+.trow.ff-trow-open,
+.card:has(.ff-dropdown.open),
+.trow:has(.ff-dropdown.open),
+.settings-col:has(.ff-dropdown.open) {
+  overflow: visible !important;
+  z-index: 10000 !important;
+  position: relative !important;
 }
