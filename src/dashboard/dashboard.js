@@ -3157,7 +3157,7 @@ async function renderTopSites() {
                 var t = getEffectiveCat(e[0]),
                     a = document.createElement("div");
                 a.className = "siterow";
-                a.style.gridTemplateColumns = "minmax(160px, 1.3fr) 55px 175px 75px 75px";
+                a.style.gridTemplateColumns = "minmax(140px, 1fr) 80px 170px 75px 75px";
                 const isPinned = pinnedSites.includes(e[0]);
                 var n = buildCustomDropdownHtml(e[0], t.cat);
 
@@ -3166,7 +3166,7 @@ async function renderTopSites() {
         ${getFav(e[0])}
         <span style="color:var(--tx); font-weight:800; font-size:15px; margin-left:4px;">${e[0]}</span>
       </span>
-      <div style="display:flex; align-items:center; gap:4px; justify-content:flex-start; margin-left: -6px;">
+      <div style="display:flex; align-items:center; gap:6px; justify-content:flex-start; margin-left: 0px;">
         <button class="top-site-pin-btn pinned-${isPinned}" data-domain="${e[0]}" title="${isPinned ? t_('unpinSite') : t_('pinSiteToTop')}" style="background:none; border:none; cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center; transition: color 0.2s;">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
         </button>
