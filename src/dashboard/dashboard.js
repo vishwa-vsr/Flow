@@ -23,7 +23,11 @@ var $ = function (e) {
     neverTrackDomains = [],
     siteCategories = {},
     visitedSites = [],
-    hiddenDefaultSites = [],
+    hiddenDefaultSites = [];
+
+window.siteCategories = siteCategories;
+window.siteCats = siteCategories;
+window.hiddenDefaultSites = hiddenDefaultSites;
     FCIRC = 2 * Math.PI * 106,
     selectedCat = "all",
     currentView = "today",
@@ -107,9 +111,12 @@ chrome.storage.onChanged.addListener((e, t) => {
         if (e.siteCategories || e.hiddenDefaultSites) {
             if (e.siteCategories) {
                 siteCategories = e.siteCategories.newValue || {};
+                window.siteCategories = siteCategories;
+                window.siteCats = siteCategories;
             }
             if (e.hiddenDefaultSites) {
                 hiddenDefaultSites = e.hiddenDefaultSites.newValue || [];
+                window.hiddenDefaultSites = hiddenDefaultSites;
             }
             const activeNav = document.querySelector(".ni.act");
             if (activeNav && activeNav.getAttribute("data-tab") === "sitemanager") {
@@ -710,7 +717,10 @@ function openModal(e) {
 async function loadCategories() {
     var e = await gLocal(["siteCategories", "hiddenDefaultSites"]);
     siteCategories = e.siteCategories || {};
+    window.siteCategories = siteCategories;
+    window.siteCats = siteCategories;
     hiddenDefaultSites = e.hiddenDefaultSites || [];
+    window.hiddenDefaultSites = hiddenDefaultSites;
     var syncRes = await gSync(["customCategories"]);
     if (syncRes && syncRes.customCategories && typeof applyCustomCategories === "function") {
         applyCustomCategories(syncRes.customCategories);
@@ -952,9 +962,12 @@ async function tagSite(e, t) {
     } else {
         siteCategories["www." + cleanDom] = t;
     }
+    window.siteCategories = siteCategories;
+    window.siteCats = siteCategories;
     if (hiddenDefaultSites.includes(cleanDom)) {
         hiddenDefaultSites = hiddenDefaultSites.filter(d => d !== cleanDom);
     }
+    window.hiddenDefaultSites = hiddenDefaultSites;
     await sLocal({ siteCategories: siteCategories, hiddenDefaultSites: hiddenDefaultSites });
     await msg("CATEGORIZE_SITE", {
         domain: cleanDom,

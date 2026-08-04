@@ -331,12 +331,13 @@ function recalculateDayStats(entry) {
 async function loadViewData() {
     $("donut-sublbl") && ($("donut-sublbl").textContent = "total" === currentView ? t_("sublblAllTime") : t_("sublblToday"));
     
-    // Load hiddenDefaultSites
-    const storageData = await gLocal(["hiddenDefaultSites"]);
+    // Load hiddenDefaultSites and siteCategories directly from storage
+    const storageData = await gLocal(["siteCategories", "hiddenDefaultSites"]);
+    siteCats = storageData.siteCategories || {};
+    window.siteCats = siteCats;
+    window.siteCategories = siteCats;
     hiddenDefaultSites = storageData.hiddenDefaultSites || [];
-    
-    var e = await msg("GET_SITE_CATEGORIES");
-    siteCats = e && e.siteCategories || {};
+    window.hiddenDefaultSites = hiddenDefaultSites;
     var t = await msg("GET_AUTO_CATEGORIES");
     AUTO_CATEGORIES = t && t.autoCategories || {};
     var s = {},
@@ -575,6 +576,8 @@ function renderDynamicList(e, t) {
                 siteCats[cleanDom] = catVal;
                 if (cleanDom.startsWith("www.")) siteCats[cleanDom.replace(/^www\./, "")] = catVal;
                 else siteCats["www." + cleanDom] = catVal;
+                window.siteCats = siteCats;
+                window.siteCategories = siteCats;
                 
                 await sLocal({ siteCategories: siteCats });
                 await msg("CATEGORIZE_SITE", {
