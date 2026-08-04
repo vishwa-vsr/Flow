@@ -592,14 +592,15 @@ async function loadWeeklyGoal() {
 }
 
 function renderFocus(e) {
-    if (!e || !e.active) return $("focus-card") && ($("focus-card").className = "focus-section"), $("fr-fill") && ($("fr-fill").className = "fr-fill work", $("fr-fill").setAttribute("stroke-dashoffset", FR_C)), $("fr-time") && ($("fr-time").textContent = window._focusWorkMins + ":00"), $("fr-cycles") && ($("fr-cycles").textContent = t_("cyclesDone").replace("$count$", "0")), $("focus-title") && ($("focus-title").textContent = t_("readyToFocus")), $("focus-sub") && ($("focus-sub").textContent = t_("minWorkBreak").replace("$work$", window._focusWorkMins).replace("$break$", window._focusBreakMins)), $("focus-phase") && ($("focus-phase").textContent = t_("pomodoro"), $("focus-phase").className = "focus-phase"), $("logo-img") && ($("logo-img").className = ""), $("btn-start") && ($("btn-start").style.display = ""), $("btn-stop") && ($("btn-stop").style.display = "none"), $("btn-pause") && ($("btn-pause").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), void ($("btn-focus-set") && ($("btn-focus-set").style.display = "flex"));
+    if (!e || !e.active) return $("focus-card") && ($("focus-card").className = "focus-section"), $("focus-rect") && ($("focus-rect").className = "focus-rect"), $("fr-bar") && ($("fr-bar").className = "fr-progress-bar work", $("fr-bar").style.width = "0%"), $("fr-fill") && ($("fr-fill").className = "fr-fill work", $("fr-fill").setAttribute("stroke-dashoffset", FR_C)), $("fr-time") && ($("fr-time").textContent = window._focusWorkMins + ":00"), $("fr-cycles") && ($("fr-cycles").textContent = t_("cyclesDone").replace("$count$", "0")), $("focus-title") && ($("focus-title").textContent = t_("readyToFocus")), $("focus-sub") && ($("focus-sub").textContent = t_("minWorkBreak").replace("$work$", window._focusWorkMins).replace("$break$", window._focusBreakMins)), $("focus-phase") && ($("focus-phase").textContent = t_("pomodoro"), $("focus-phase").className = "focus-phase"), $("logo-img") && ($("logo-img").className = ""), $("btn-start") && ($("btn-start").style.display = ""), $("btn-stop") && ($("btn-stop").style.display = "none"), $("btn-pause") && ($("btn-pause").style.display = "none"), $("btn-skip") && ($("btn-skip").style.display = "none"), void ($("btn-focus-set") && ($("btn-focus-set").style.display = "flex"));
     $("logo-img") && ($("logo-img").className = "focus-on");
 
     var t = "work" === e.phase,
         s = $("focus-card");
-    s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
+    s && void 0 !== s._lastPhase && s._lastPhase !== e.phase && (s.classList.add("phase-change"), setTimeout(() => s.classList.remove("phase-change"), 600)), s && (s._lastPhase = e.phase), s && (s.className = "focus-section " + (t ? "work-active" : "break-active")), $("focus-rect") && ($("focus-rect").className = "focus-rect " + (t ? "work-active" : "break-active")), $("fr-fill") && ($("fr-fill").className = "fr-fill " + (t ? "work" : "brk"));
     var a = t ? 60 * window._focusWorkMins : "long_break" === e.phase ? 60 * window._focusLongBreakMins : 60 * window._focusBreakMins;
-    $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0));
+    let pct = Math.max(0, Math.min(100, (1 - Math.min(1, (e.remaining || 0) / a)) * 100));
+    $("fr-bar") && ($("fr-bar").className = "fr-progress-bar " + (t ? "work" : "brk"), $("fr-bar").style.width = pct.toFixed(1) + "%"), $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - Math.min(1, (e.remaining || 0) / a))).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(e.remaining || 0));
     let totalC = e.totalCycles || 4;
     let cycText = "";
     if (e.isSchedule) {
@@ -731,7 +732,8 @@ function startSmoothFocusTick(e) {
     _focusTick && clearInterval(_focusTick), e && e.active && !e.paused && e.phaseEndsAt && (_focusTick = setInterval(function () {
         var t = Math.max(0, Math.round((e.phaseEndsAt - Date.now()) / 1e3)),
             s = "work" === e.phase ? 60 * window._focusWorkMins : "long_break" === e.phase ? 60 * window._focusLongBreakMins : 60 * window._focusBreakMins;
-        $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - t / s)).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(t)), t <= 0 && (clearInterval(_focusTick), _focusTick = null, setTimeout(loadFocus, 1e3))
+        let pct = Math.max(0, Math.min(100, (1 - t / s) * 100));
+        $("fr-bar") && ($("fr-bar").style.width = pct.toFixed(1) + "%"), $("fr-fill") && $("fr-fill").setAttribute("stroke-dashoffset", (FR_C * Math.max(0, 1 - t / s)).toFixed(1)), $("fr-time") && ($("fr-time").textContent = fmtTimer(t)), t <= 0 && (clearInterval(_focusTick), _focusTick = null, setTimeout(loadFocus, 1e3))
     }, 1e3))
 }
 renderFocus = function (e) {
