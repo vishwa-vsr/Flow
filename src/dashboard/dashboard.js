@@ -158,23 +158,45 @@ function toast(e, t) {
     // Bug #7 fix: dfferentiate toast duration by severity
     const TOAST_DURATION = { ok: 3500, er: 5000, err: 5000 };
     var a = $("toast");
-    if (!a) return;
+    if (!a) {
+        a = document.createElement("div");
+        a.id = "toast";
+        document.body.appendChild(a);
+    }
     const isError = t === "er" || t === "err";
     const prefix = isError ? "✗ " : ("ok" === t ? "✓ " : "");
-    a.textContent = prefix + e;
+    a.textContent = prefix + (e || "Settings saved successfully");
+    a.style.position = "fixed";
+    a.style.bottom = "40px";
+    a.style.left = "50%";
+    a.style.transform = "translateX(-50%) translateY(0)";
+    a.style.background = isError ? "#ef4444" : "#05D581";
+    a.style.color = "#000000";
+    a.style.padding = "12px 24px";
+    a.style.borderRadius = "12px";
+    a.style.boxShadow = "0 10px 25px -5px rgba(0, 0, 0, 0.5)";
+    a.style.zIndex = "2147483647";
+    a.style.fontWeight = "800";
+    a.style.fontSize = "14px";
     a.style.display = "flex";
+    a.style.alignItems = "center";
+    a.style.gap = "8px";
     a.style.opacity = "1";
     a.style.visibility = "visible";
+    a.style.pointerEvents = "auto";
+    a.style.transition = "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
     a.className = "toast " + (isError ? "er" : (t || ""));
     void a.offsetHeight;
     clearTimeout(a._tid);
     a._tid = setTimeout(() => {
         a.className = "toast hide";
-        a.style.display = "";
-        a.style.opacity = "";
-        a.style.visibility = "";
+        a.style.opacity = "0";
+        a.style.visibility = "hidden";
+        a.style.transform = "translateX(-50%) translateY(20px)";
+        a.style.pointerEvents = "none";
     }, TOAST_DURATION[t] ?? 3500);
 }
+window.toast = toast;
 initPinEventListeners();
 
 document.addEventListener("keydown", e => {
