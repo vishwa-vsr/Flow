@@ -4201,7 +4201,12 @@ a.appendChild(t)
     $(e) && $(e).addEventListener("change", renderTrend)
 }), $("weekly-goal-input") && $("weekly-goal-input").addEventListener("input", () => {
     renderGoalPreview(parseInt($("weekly-goal-input").value) || 0)
-                eWhitelist: t
+}), $("btn-add-whitelist") && $("btn-add-whitelist").addEventListener("click", async () => {
+    var e = $("whitelist-inp").value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+    if (e) {
+        var t = (await gLocal(["idleWhitelist"])).idleWhitelist || [];
+        t.includes(e) ? toast(t_("alreadyAdded"), "er") : (t.push(e), await sLocal({
+            idleWhitelist: t
         }), $("whitelist-inp").value = "", renderWhitelist(t), toast(t_("exceptionAdded"), "ok"))
     }
 });
