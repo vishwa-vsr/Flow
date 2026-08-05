@@ -182,7 +182,7 @@ async function restoreFlushQueue() {
             if (Array.isArray(q) && q.length) flushQueue = q.concat(flushQueue);
             await chrome.storage.session.remove(["_ffFlushQueue"]);
         }
-}
+    } catch (_) { }
 }
 
 // --- Phase 3: Battery & CPU Storage Write Batching Engine ---
