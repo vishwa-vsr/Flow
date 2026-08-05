@@ -16,44 +16,6 @@
 <body>
   <div class="cinematic-bg"></div>
 
-  <!-- Shared SVG Symbol Sprite Sheet for zero-bloat rendering -->
-  <svg style="display:none;" aria-hidden="true">
-    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </symbol>
-    <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
-    </symbol>
-    <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-    </symbol>
-    <symbol id="icon-lock-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-      <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
-    </symbol>
-    <symbol id="icon-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-      <line x1="12" y1="9" x2="12" y2="13"/>
-      <line x1="12" y1="17" x2="12.01" y2="17"/>
-    </symbol>
-    <symbol id="icon-analytics" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="18" y1="20" x2="18" y2="10"></line>
-      <line x1="12" y1="20" x2="12" y2="4"></line>
-      <line x1="6" y1="20" x2="6" y2="14"></line>
-    </symbol>
-    <symbol id="icon-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="13" r="8"></circle>
-      <path d="M12 9v4l2 2"></path>
-      <line x1="10" y1="2" x2="14" y2="2"></line>
-    </symbol>
-    <symbol id="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="3"></circle>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-    </symbol>
-  </svg>
-
   <nav class="navbar">
     <div class="nav-container">
       <div style="display:flex; align-items:center; gap:16px;">
@@ -62,7 +24,7 @@
           <span class="bname" style="margin-left:4px;">Flow</span>
         </a>
         <button id="btn-dashboard-privacy" class="privacy-btn" data-i18n-title="privacyModeTitle" aria-label="Privacy Mode / Pause Tracking">
-          <svg width="18" height="18"><use href="#icon-shield"></use></svg>
+          <span data-icon="shield" data-icon-size="18"></span>
         </button>
         <div id="dashboard-privacy-status" class="hide" style="font-size:12px; font-weight:700; color:#A855F7; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); padding:6px 12px; border-radius:10px; font-family:monospace; white-space:nowrap; letter-spacing:0.02em;">
           Paused: 29:30
@@ -71,20 +33,20 @@
       <div style="display:flex; align-items:center; gap:12px;">
         <div class="nav-links" role="tablist">
           <button class="ni act" id="tab-btn-analytics" data-tab="analytics" role="tab" aria-selected="true" aria-controls="tab-analytics" aria-current="page">
-            <span class="nic"><svg width="20" height="20"><use href="#icon-analytics"></use></svg></span>
+            <span class="nic"><span data-icon="analytics" data-icon-size="20"></span></span>
             <span data-i18n="analytics">Analytics</span>
           </button>
           <button class="ni" id="tab-btn-focus" data-tab="focus" role="tab" aria-selected="false" aria-controls="tab-focus">
-            <span class="nic"><svg width="20" height="20"><use href="#icon-timer"></use></svg></span>
+            <span class="nic"><span data-icon="timer" data-icon-size="20"></span></span>
             <span data-i18n="focusMode">Focus Mode</span>
           </button>
           <button class="ni" id="tab-btn-sitemanager" data-tab="sitemanager" role="tab" aria-selected="false" aria-controls="tab-sitemanager">
-            <span class="nic"><svg width="20" height="20"><use href="#icon-shield"></use></svg></span>
+            <span class="nic"><span data-icon="shield" data-icon-size="20"></span></span>
             <span data-i18n="siteManager">Site Manager</span>
           </button>
 
           <button class="ni" id="tab-btn-settings" data-tab="settings" role="tab" aria-selected="false" aria-controls="tab-settings">
-            <span class="nic"><svg width="20" height="20"><use href="#icon-gear"></use></svg></span>
+            <span class="nic"><span data-icon="gear" data-icon-size="20"></span></span>
             <span data-i18n="settings">Settings</span>
           </button>
         </div>
@@ -95,7 +57,7 @@
   <div id="pcOverlay" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="pc-title" aria-describedby="pc-desc">
     <div class="card" style="text-align:center;min-width:380px;padding:40px;">
       <div style="display:flex; justify-content:center; margin-bottom:16px;">
-        <svg viewBox="0 0 24 24" width="56" height="56" stroke="var(--amber)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span data-icon="lock" data-icon-size="56" style="color:var(--amber);"></span>
       </div>
       <div id="pc-title" style="font-size:24px;font-weight:800;margin-bottom:8px" data-i18n="settingsLocked">Settings Locked</div>
       <div id="pc-desc" style="font-size:15px;color:var(--tx2);margin-bottom:32px" data-i18n="enterPin">Enter your 6-digit PIN to continue
