@@ -182,8 +182,62 @@ async function restoreFlushQueue() {
             if (Array.isArray(q) && q.length) flushQueue = q.concat(flushQueue);
             await chrome.storage.session.remove(["_ffFlushQueue"]);
         }
-    } catch (_) { }
 }
+}
+
+// --- Phase 3: Battery & CPU Storage Write Batching Engine ---
+let _pendingWriteMap = {};
+let _pendingTotalsMap = {};
+let _batchWriteTimer = null;
+const _BATCH_FLUSH_INTERVAL_MS = 30000; // 30 seconds
+
+function scheduleBatchDiskFlush() {
+    if (_batchWriteTimer) return;
+    _batchWriteTimer = setTimeout(() => {
+        flushBatchDiskNow().catch(() => {});
+    }, _BATCH_FLUSH_INTERVAL_MS);
+}
+
+async function flushBatchDiskNow() {
+    if (_batchWriteTimer) {
+        clearTimeout(_batchWriteTimer);
+        _batchWriteTimer = null;
+    }
+    const writeMap = { ..._pendingWriteMap };
+    _pendingWriteMap = {};
+    
+    const totalsMap = { ..._pendingTotalsMap };
+    _pendingTotalsMap = {};
+
+    const hasWriteMap = Object.keys(writeMap).length > 0;
+    const hasTotals = Object.keys(totalsMap).length > 0;
+
+    if (!hasWriteMap && !hasTotals) return;
+
+    try {
+        await FFDB.ensureMigrated();
+        if (hasWriteMap) {
+            await FFDB.bulkSetDays(writeMap);
+        }
+        if (hasTotals) {
+            const totals = await getAllTimeTotals();
+            for (const dom in totalsMap) {
+                totals[dom] = (totals[dom] || 0) + totalsMap[dom];
+            }
+            await saveAllTimeTotals(totals);
+        }
+    } catch (err) {
+        console.warn("[FF] Batch disk flush warning:", err);
+    }
+}
+
+try {
+    if (chrome?.runtime?.onSuspend) {
+        chrome.runtime.onSuspend.addListener(() => {
+            flushBatchDiskNow().catch(() => {});
+        });
+    }
+} catch (_) {}
 
 // FF v6.16 perf: in-memory cache of the storage values that updateDNRRules() and
 // categorize() read on every tab switch. Invalidated by chrome.storage.onChanged
@@ -291,16 +345,10 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
                     _todayDataCache = cache[k];
                     _todayDataCacheKey = k;
                 }
+                _pendingWriteMap[k] = cache[k];
             }
-            await FFDB.bulkSetDays(writeMap);
-            // Update all-time totals incrementally
-            try {
-                const totals = await getAllTimeTotals();
-                totals[domainStr] = (totals[domainStr] || 0) + elapsedSecs;
-                await saveAllTimeTotals(totals);
-            } catch (err) {
-                console.warn("[FF] Failed to update all-time totals:", err);
-            }
+            _pendingTotalsMap[domainStr] = (_pendingTotalsMap[domainStr] || 0) + elapsedSecs;
+            scheduleBatchDiskFlush();
 
             // Session Limit Check
             try {
@@ -1160,6 +1208,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 });
 chrome.tabs.onRemoved.addListener((tabId) => {
     delete _injectedCSSTabs[tabId];
+    flushBatchDiskNow().catch(() => {});
 });
 chrome.windows.onFocusChanged.addListener(async (windowId) => {
     await restoreState();
@@ -1180,6 +1229,7 @@ chrome.windows.onFocusChanged.addListener(async (windowId) => {
                 activeSession: { domain: null, startTime: null }
             });
         });
+        await flushBatchDiskNow().catch(() => {});
         updateBadge();
     } else {
         // Window gained focus (could be a restore from minimize, tab switch, etc.).
@@ -1795,6 +1845,7 @@ async function handle(t, e) {
                     await sSession({ activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0, tabId: null } });
                 }
             });
+            await flushBatchDiskNow().catch(() => {});
             updateBadge();
             return { ok: !0 };
         }

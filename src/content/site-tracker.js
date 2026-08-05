@@ -33,6 +33,12 @@
   document.addEventListener("visibilitychange", () => {
     _sendVisibility(document.visibilityState);
   });
+  window.addEventListener("beforeunload", () => {
+    _sendVisibility("hidden");
+  });
+  window.addEventListener("pagehide", () => {
+    _sendVisibility("hidden");
+  });
   // Fire immediately to establish the correct visibility state on load.
   _sendVisibility(document.visibilityState);
 
