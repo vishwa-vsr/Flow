@@ -1751,7 +1751,7 @@
     "description": "Toast notice."
   },
   "settingsSaved": {
-    "message": "Settings saved",
+    "message": "Settings saved successfully",
     "description": "Toast notice."
   },
   "errorSavingSettings": {

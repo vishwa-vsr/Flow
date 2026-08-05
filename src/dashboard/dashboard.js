@@ -163,6 +163,7 @@ function toast(e, t) {
     const prefix = isError ? "✗ " : ("ok" === t ? "✓ " : "");
     a.textContent = prefix + e;
     a.className = "toast " + (isError ? "er" : (t || ""));
+    void a.offsetHeight;
     clearTimeout(a._tid);
     a._tid = setTimeout(() => a.className = "toast hide", TOAST_DURATION[t] ?? 3500);
 }
@@ -1937,7 +1938,7 @@ document.querySelectorAll(".ni").forEach(e => {
         let t = [];
         document.querySelectorAll(".goal-cb-cat:checked").forEach(e => t.push(e.value)), e.goalCats = t.length ? t : ["productivity", "learning"], await sSync({
             settings: e
-        }), toast(t_("studyGoalsSaved") || "Study goals saved", "ok"), loadWeeklyGoalSettings(), loadAnalytics()
+        }), toast(t_("settingsSaved") || "Settings saved successfully", "ok"), loadWeeklyGoalSettings(), loadAnalytics()
     }), document.querySelectorAll("[data-atab]").forEach(e => {
         e.addEventListener("click", () => {
             document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend"].forEach(e => {
@@ -4204,7 +4205,7 @@ if ($("btn-save-set")) {
         await sSync({
             settings: e
         });
-        toast(t_("settingsSaved"), "ok");
+        toast(t_("settingsSaved") || "Settings saved successfully", "ok");
         if (langChanged) {
             setTimeout(() => window.location.reload(), 1000);
         }
