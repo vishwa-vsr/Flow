@@ -1608,14 +1608,13 @@
       font-weight: 700;
       color: var(--tx2);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
       user-select: none;
     }
 
     .goal-cb-lbl:hover {
       background: var(--bg4);
       border-color: var(--bd3);
-      transform: translateY(-1px);
     }
 
     .goal-cb-lbl:has(input:checked) {
