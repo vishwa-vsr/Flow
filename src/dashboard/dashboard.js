@@ -162,10 +162,13 @@ function toast(e, t) {
     const isError = t === "er" || t === "err";
     const prefix = isError ? "✗ " : ("ok" === t ? "✓ " : "");
     a.textContent = prefix + e;
+    a.classList.remove("hide");
     a.className = "toast " + (isError ? "er" : (t || ""));
     void a.offsetHeight;
     clearTimeout(a._tid);
-    a._tid = setTimeout(() => a.className = "toast hide", TOAST_DURATION[t] ?? 3500);
+    a._tid = setTimeout(() => {
+        a.className = "toast hide";
+    }, TOAST_DURATION[t] ?? 3500);
 }
 initPinEventListeners();
 

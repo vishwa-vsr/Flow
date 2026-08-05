@@ -75,45 +75,48 @@
     }
 
     .toast {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      background: var(--green);
-      color: #000000;
+      position: fixed !important;
+      bottom: 40px !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(0) !important;
+      background: var(--green) !important;
+      color: #000000 !important;
+      padding: 12px 24px !important;
+      border-radius: var(--btn-radius) !important;
+      box-shadow: var(--shadow-lg) !important;
+      z-index: 2147483647 !important;
+      font-weight: 800 !important;
+      font-size: 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      pointer-events: auto !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: opacity 0.25s ease, transform 0.25s ease !important;
     }
+
     html.light .toast {
-      color: #ffffff;
-    }
-    .toast {
-      padding: 10px 18px;
-      border-radius: var(--btn-radius);
-      box-shadow: var(--shadow-md);
-      z-index: 999999;
-      font-weight: 700;
-      font-size: 13px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      display: flex;
-      align-items: center;
-      gap: 8px
+      color: #ffffff !important;
     }
 
     .toast.hide {
-      opacity: 0;
-      transform: translateX(-50%) translateY(30px);
-      pointer-events: none
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateX(-50%) translateY(20px) !important;
+      pointer-events: none !important;
+      display: none !important;
     }
 
     .toast.ok {
-      border-left: none
+      border-left: none !important;
     }
 
     .toast.er {
-      background: var(--red);
-      color: #000000;
-      box-shadow: var(--shadow-md);
-      border-left: none
+      background: var(--red) !important;
+      color: #000000 !important;
+      box-shadow: var(--shadow-lg) !important;
+      border-left: none !important;
     }
 
     /* @keyframes spin → defined in global.css */
