@@ -523,11 +523,11 @@
           <!-- History Card -->
           <div class="card ff-history-card" style="margin:0; display:flex; flex-direction:column;">
             <div class="ctit" style="justify-content:space-between"><span data-i18n="history">History</span><button class="bic del"
-                id="btn-clear-history" data-i18n-title="clearHistory" aria-label="Clear History" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                id="btn-clear-history" data-i18n-title="clearHistory" aria-label="Clear History" style="width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="trash" data-icon-size="14"></span></button>
             </div>
             <div class="history-scroll" id="history-list">
               <div class="empty" style="padding:40px 10px">
-                <div style="margin-bottom:12px; display:flex; justify-content:center; color:var(--tx3);"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><line x1="9" y1="14" x2="15" y2="14"></line><line x1="9" y1="18" x2="15" y2="18"></line><line x1="9" y1="10" x2="10" y2="10"></line></svg></div>
+                <div style="margin-bottom:12px; display:flex; justify-content:center; color:var(--tx3);"><span data-icon="calendar" data-icon-size="36"></span></div>
                 <p data-i18n="noFocusSessions">No focus sessions yet.</p>
               </div>
             </div>
@@ -557,7 +557,7 @@
           </div>
           <div style="display:flex; gap:10px; align-items:center;">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs report-issue-btn" title="Report Issue" style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; font-size:12px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect width="8" height="14" x="8" y="6" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 13h-4"/><path d="M4 13h4"/><path d="m10 4 1-2"/><path d="m14 4-1-2"/></svg>
+              <span data-icon="bulb" data-icon-size="14"></span>
               <span class="report-btn-text">Report Issue</span>
             </a>
             <input type="text" id="rules-search" class="ff-search" data-i18n-placeholder="searchRules" autocomplete="off" style="width:240px; margin:0;" aria-label="Search rules">
@@ -867,9 +867,9 @@
             <div class="card">
               <div class="ctit" data-i18n="appearance">Appearance</div>
               <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                <button id="btn-dark-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg><span data-i18n="themeDark">Dark</span></button>
-                <button id="btn-light-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg><span data-i18n="themeLight">Light</span></button>
-                <button id="btn-cinematic-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;" aria-hidden="true" focusable="false"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><span data-i18n="themeCinematic">Cinematic</span></button>
+                <button id="btn-dark-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="moon" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeDark">Dark</span></button>
+                <button id="btn-light-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="sun" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeLight">Light</span></button>
+                <button id="btn-cinematic-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="cinematic" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeCinematic">Cinematic</span></button>
               </div>
               <div class="trow" style="padding-top:16px;padding-bottom:0;border-bottom:none;">
                 <div>
@@ -892,12 +892,12 @@
 
             <!-- Merged Access Control & Safety Card -->
             <div class="card">
-              <div class="ctit"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3); margin-right: 8px; vertical-align: middle;" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span data-i18n="accessControlSafety">Access Control & Safety</span></div>
+              <div class="ctit"><span data-icon="lock" data-icon-size="16" style="margin-right:8px; vertical-align:middle; color:var(--tx3);"></span><span data-i18n="accessControlSafety">Access Control & Safety</span></div>
 
               <div style="margin-bottom:24px; padding:16px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd);">
                 <div id="pin-status-wrapper" style="width:100%;">
                   <div class="tlbl" style="margin:0; display:flex; align-items:center;"><span data-i18n="pinProtectionStatus">PIN Protection Status: </span><span id="pin-status-badge"
-                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:var(--bg4); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg><span data-i18n="notSet">Not Set</span></span></div>
+                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:var(--bg4); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><span data-icon="lock-sm" data-icon-size="12"></span><span data-i18n="notSet">Not Set</span></span></div>
                 </div>
               </div>
 
@@ -920,7 +920,7 @@
                 <div id="granular-locks-overlay"
                   style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg3); opacity:0.85; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
                   <div style="display:flex; justify-content:center; margin-bottom:8px;">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span data-icon="lock" data-icon-size="32" style="color:var(--tx3);"></span>
                   </div>
                   <div style="font-size:13px;font-weight:800;color:var(--tx2)" data-i18n="setPinToEnableLocks">Set a PIN to enable these locks</div>
                 </div>
@@ -986,7 +986,7 @@
 
             <!-- Danger Zone Card -->
             <div class="card" style="border-color:var(--red-bd) !important">
-              <div class="ctit red" style="color:var(--red)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--red); margin-right:8px; vertical-align:middle;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span data-i18n="dangerZone">Danger Zone</span></div>
+              <div class="ctit red" style="color:var(--red)"><span data-icon="warning" data-icon-size="16" style="color:var(--red); margin-right:8px; vertical-align:middle;"></span><span data-i18n="dangerZone">Danger Zone</span></div>
               <div class="trow" style="border-top:none;padding-top:0">
                 <div>
                   <div class="tlbl" data-i18n="resetAllStats">Reset all statistics</div>
@@ -1025,37 +1025,37 @@
                   <a href="https://github.com/vishwa-vsr/Flow"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span data-icon="github" data-icon-size="16"></span>
                     <span>GitHub</span>
                   </a>
                   <a href="https://vishwa-vsr.github.io/flow-website/"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span data-icon="home" data-icon-size="16"></span>
                     <span data-i18n="websiteBtn">Website</span>
                   </a>
                   <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--blue) !important; color:#ffffff !important; transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .4 2.5 1.5 3.5.7.8 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
+                    <span data-icon="bulb" data-icon-size="16"></span>
                     <span data-i18n="submitFeedbackBtn">Submit Feedback</span>
                   </a>
                   <a href="https://github.com/vishwa-vsr/Flow/blob/main/TRANSLATING.md"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" /></svg>
+                    <span data-icon="translate" data-icon-size="16"></span>
                     <span data-i18n="helpTranslateBtn">Help Translate</span>
                   </a>
                   <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <span data-icon="cinematic" data-icon-size="16"></span>
                     <span data-i18n="rateUsBtn">Rate 5 Stars</span>
                   </a>
                   <a href="https://github.com/vishwa-vsr/Flow/blob/main/CHANGELOG.md"
                     target="_blank" class="bp"
                     style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span data-icon="doc" data-icon-size="16"></span>
                     <span data-i18n="changelogBtn">Changelog</span>
                   </a>
                 </div>
@@ -1167,11 +1167,11 @@
     <div class="card" style="width: 100%; max-width: 440px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg2); border: 1px solid var(--bd);">
       <div style="padding: 24px 32px 16px; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
         <div style="font-size: 20px; font-weight: 800; color: var(--tx); display: flex; align-items: center; gap: 10px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--tx);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span data-icon="calendar" data-icon-size="20"></span>
           <span id="ft-modal-title" data-i18n="editFreeTime">Edit Free-time</span>
         </div>
         <button id="ft-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;" aria-label="Close Edit Free-time Modal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <span data-icon="close" data-icon-size="18"></span>
         </button>
       </div>
 
@@ -1216,7 +1216,7 @@
         style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-rule-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;" data-i18n="addNewRule">Add New Rule</h2>
         <button class="bic del" id="btn-close-add-modal" aria-label="Close Add Rule Modal"
-          style="width:32px; height:32px; background:transparent; border:none; color:var(--tx2); cursor:pointer; display:inline-flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+          style="width:32px; height:32px; background:transparent; border:none; color:var(--tx2); cursor:pointer; display:inline-flex; align-items:center; justify-content:center;"><span data-icon="close" data-icon-size="16"></span></button>
       </div>
       <div style="padding:24px 32px; overflow-y:auto; flex:1;">
         <!-- Segment Control -->
@@ -1405,12 +1405,12 @@
         <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
           <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
             <span id="confirm-modal-icon-wrap" style="color:var(--amber); display:inline-flex; align-items:center;">
-              <svg width="22" height="22"><use href="#icon-warning"></use></svg>
+              <span data-icon="warning" data-icon-size="22"></span>
             </span>
             <span id="confirm-modal-title" data-i18n="areYouSure">Are you sure?</span>
           </div>
           <button id="confirm-modal-close" aria-label="Close Confirmation Modal"
-            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg width="16" height="16"><use href="#icon-close"></use></svg></button>
+            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><span data-icon="close" data-icon-size="16"></span></button>
         </div>
         <div style="padding:24px 32px; font-size:14px; color:var(--tx2); line-height:1.5; overflow-y:auto; flex:1;">
           <div id="confirm-modal-message" data-i18n="cannotBeUndone">This action cannot be undone.</div>
@@ -1429,12 +1429,12 @@
         <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
           <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
             <span style="color:#A855F7; display:inline-flex; align-items:center;">
-              <svg width="22" height="22"><use href="#icon-shield"></use></svg>
+              <span data-icon="shield" data-icon-size="22"></span>
             </span>
             <span id="privacy-modal-title" data-i18n="privacyMode">Privacy Mode</span>
           </div>
           <button id="privacy-modal-close" aria-label="Close Privacy Modal"
-            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><svg width="16" height="16"><use href="#icon-close"></use></svg></button>
+            style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;"><span data-icon="close" data-icon-size="16"></span></button>
         </div>
         <div style="padding:24px 32px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; flex:1;">
           <div style="font-size:14px; color:var(--tx2); line-height:1.5;" data-i18n="privacyModalDesc">
@@ -1458,7 +1458,7 @@
       <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-preset-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;" data-i18n="createBlockPreset">Create Block Preset</h2>
         <button id="add-preset-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;" aria-label="Close Add/Edit Block Preset Modal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <span data-icon="close" data-icon-size="20"></span>
         </button>
       </div>
 
