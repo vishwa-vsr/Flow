@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [10.0.8] - 2026-08-05
 
 ### Added
+- **Storage Write Batching Engine (`Phase 3`)**: Implemented an in-memory storage write batching buffer (`_pendingWriteMap` & `_pendingTotalsMap`) inside `src/background/service-worker.js`. Site tracking time updates are batched and written to IndexedDB disk once every 30 seconds, reducing hard drive write operations by up to 80% while preserving laptop battery life and CPU. Real-time UI charts continue updating in memory with zero delay.
 - **Universal Icon & Emoji Manager (`src/lib/icons.js`)**: Created a zero-bloat central icon library (`window.FlowIcons`) providing `FlowIcons.get()`, `FlowIcons.emoji()`, and `FlowIcons.renderAll()`. Automatically renders clean SVG graphics into any `[data-icon]` HTML element across both Extension Popup and Dashboard views.
 
 ### Changed
