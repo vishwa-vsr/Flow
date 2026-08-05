@@ -531,7 +531,7 @@ async function renderCombined() {
                 schedText = (schedText !== "—" ? schedText + " / " : "") + freqLabel;
             }
 
-            a.className = "brow brow-rules", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-id="${t.id}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t.domain)} ${_sd}</span>\n      <span><span class="cbadge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)">Blocked</span></span>\n      <span class="mtxt">${ruleMode(t)}</span>\n      <span class="ltxt">${limitText}</span>\n      <span class="stxt">${schedText}</span>\n      <span class="ract"><button class="bic edit-r" data-id="${t.id}" title="Edit Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button><button class="bic del del-r" data-id="${t.id}" title="Delete Rule"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></span>`), document.getElementById("combined-list-rows").appendChild(a)
+            a.className = "brow brow-rules", setSafeHTML(a, `\n      <input type="checkbox" class="bulk-cb" data-id="${t.id}">\n      <span class="dom" style="display:flex;align-items:center;gap:8px;">${getFav(t.domain)} ${_sd}</span>\n      <span><span class="cbadge" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)">Blocked</span></span>\n      <span class="mtxt">${ruleMode(t)}</span>\n      <span class="ltxt">${limitText}</span>\n      <span class="stxt">${schedText}</span>\n      <span class="ract"><button class="bic edit-r" data-id="${t.id}" title="Edit Rule">${FlowIcons.get("edit", { size: 12 })}</button><button class="bic del del-r" data-id="${t.id}" title="Delete Rule">${FlowIcons.get("close", { size: 12 })}</button></span>`), document.getElementById("combined-list-rows").appendChild(a)
         });
     } else if (window.activeRuleTab === "allow") {
         allowList.forEach(function (t) {
@@ -824,10 +824,7 @@ function renderCatSquares() {
         const isEditable = !n && a !== "uncategorized";
         const editBtnHtml = isEditable ? `
             <button type="button" class="cat-sq-edit-btn" title="Edit Category" aria-label="Edit Category">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
+                ${FlowIcons.get("edit", { size: 12 })}
             </button>
         ` : "";
 
@@ -876,14 +873,11 @@ function openEditCategoryModal(catKey) {
       <div class="overlay-card cat-edit-modal-card" style="max-width: 420px; padding: 24px; border-radius: var(--radius-lg, 16px); background: var(--bg2); border: 1px solid var(--bd); box-shadow: 0 16px 40px rgba(0,0,0,0.3);">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
           <h3 style="margin:0; font-size: 18px; font-weight: 800; display:flex; align-items:center; gap: 8px; color:var(--tx);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"></path>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-            </svg>
+            ${FlowIcons.get("edit", { size: 20, style: "color:var(--green);" })}
             ${t_("editCategory") || "Edit Category"}
           </h3>
           <button id="cat-edit-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding: 4px; display:inline-flex; align-items:center; justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ${FlowIcons.get("close", { size: 18 })}
           </button>
         </div>
 
@@ -1237,7 +1231,7 @@ function renderCategories() {
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <button class="bs bs-sm cat-edit-btn" data-cat="${a}" style="padding:6px 12px; font-size:12px;">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              ${FlowIcons.get("edit", { size: 12, style: "vertical-align:middle; margin-right:4px;" })}
               ${t_("edit") || "Edit"}
             </button>
             <span class="bs" style="background:var(--bg3); border-color:var(--bd); color:var(--tx2); font-weight:700;">${totalCountStr}</span>
@@ -1684,11 +1678,11 @@ async function renderInsights() {
               <div class="card" style="width:100%;max-width:460px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
                 <div style="padding:var(--space-lg) var(--space-lg) var(--space-md);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
                   <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:var(--space-xs);">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:middle;flex-shrink:0;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83 2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    ${FlowIcons.get("gear", { size: 20, style: "vertical-align:middle;flex-shrink:0;" })}
                     <span>${t_("heatmapThresholds") || "Heatmap Thresholds"}</span>
                   </div>
                   <button id="hm-close" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:var(--space-xxs);display:inline-flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    ${FlowIcons.get("close", { size: 18 })}
                   </button>
                 </div>
                 <div style="padding:var(--space-lg);display:flex;flex-direction:column;gap:var(--space-lg);overflow-y:auto;flex:1;">
@@ -5931,8 +5925,8 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <label class="tog" style="transform:scale(0.85); transform-origin:right center; margin:0;"><input type="checkbox" class="sched-enabled-cb" data-idx="${t}" ${sched.enabled !== false ? "checked" : ""}><span class="ttrack"></span></label>
-                        <button class="preset-edit-btn edit-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></button>
-                        <button class="preset-edit-btn rm-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+                        <button class="preset-edit-btn edit-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Edit">${FlowIcons.get("edit", { size: 12 })}</button>
+                        <button class="preset-edit-btn rm-sched" data-idx="${t}" style="width:24px;height:24px;font-size:11px;background:var(--bg4);border:1px solid var(--bd2);color:var(--tx2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" title="Delete">${FlowIcons.get("close", { size: 12 })}</button>
                     </div>
                 `);
             }
