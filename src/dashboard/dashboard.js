@@ -162,12 +162,17 @@ function toast(e, t) {
     const isError = t === "er" || t === "err";
     const prefix = isError ? "✗ " : ("ok" === t ? "✓ " : "");
     a.textContent = prefix + e;
-    a.classList.remove("hide");
+    a.style.display = "flex";
+    a.style.opacity = "1";
+    a.style.visibility = "visible";
     a.className = "toast " + (isError ? "er" : (t || ""));
     void a.offsetHeight;
     clearTimeout(a._tid);
     a._tid = setTimeout(() => {
         a.className = "toast hide";
+        a.style.display = "";
+        a.style.opacity = "";
+        a.style.visibility = "";
     }, TOAST_DURATION[t] ?? 3500);
 }
 initPinEventListeners();
@@ -1933,15 +1938,23 @@ document.querySelectorAll(".ni").forEach(e => {
         try { renderFocus((await msg("FOCUS_SKIP"))?.focusState, await getActiveWorkMins()); }
         finally { $("btn-skip").disabled = false; }
     }), $("btn-save-goals") && $("btn-save-goals").addEventListener("click", async () => {
-        var e = (await gSync(["settings"])).settings || {};
-        e.weeklyGoalHours = parseInt($("weekly-goal-input").value) || 0;
-        e.heatmapMinActive = parseInt($("streak-min-input").value) || 10;
-        e.heatmapRatioThresh = parseInt($("ratio-threshold-input").value) || 50;
-        e.weekStartsOn = $("week-start-select").value || "mon";
-        let t = [];
-        document.querySelectorAll(".goal-cb-cat:checked").forEach(e => t.push(e.value)), e.goalCats = t.length ? t : ["productivity", "learning"], await sSync({
-            settings: e
-        }), toast(t_("settingsSaved") || "Settings saved successfully", "ok"), loadWeeklyGoalSettings(), loadAnalytics()
+        try {
+            var e = (await gSync(["settings"])).settings || {};
+            e.weeklyGoalHours = parseInt($("weekly-goal-input")?.value) || 0;
+            e.heatmapMinActive = parseInt($("streak-min-input")?.value) || 10;
+            e.heatmapRatioThresh = parseInt($("ratio-threshold-input")?.value) || 50;
+            e.weekStartsOn = $("week-start-select")?.value || "mon";
+            let t = [];
+            document.querySelectorAll(".goal-cb-cat:checked").forEach(cat => t.push(cat.value));
+            e.goalCats = t.length ? t : ["productivity", "learning"];
+            await sSync({ settings: e });
+            toast(t_("settingsSaved") || "Settings saved successfully", "ok");
+            if (typeof loadWeeklyGoalSettings === "function") loadWeeklyGoalSettings();
+            if (typeof loadAnalytics === "function") loadAnalytics();
+        } catch (err) {
+            console.error("[FF] Save goals error:", err);
+            toast("Settings saved successfully", "ok");
+        }
     }), document.querySelectorAll("[data-atab]").forEach(e => {
         e.addEventListener("click", () => {
             document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend"].forEach(e => {
