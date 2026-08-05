@@ -2,6 +2,33 @@
 // Loaded via importScripts() in the service worker AND via <script src> in pages.
 // Exposes: gSync, sSync, gLocal, sLocal, todayKey on globalThis.
 (function (root) {
+  // Polyfill chrome.storage for environment safety (file://, local testing, or unsupported browsers)
+  if (typeof chrome === "undefined" || !chrome.storage || !chrome.storage.sync) {
+    const memoryStore = {};
+    root.chrome = root.chrome || {};
+    root.chrome.storage = root.chrome.storage || {};
+    root.chrome.storage.sync = {
+      get: (keys, cb) => {
+        let res = {};
+        if (!keys) res = { ...memoryStore };
+        else if (typeof keys === "string") res[keys] = memoryStore[keys];
+        else if (Array.isArray(keys)) keys.forEach(k => res[k] = memoryStore[k]);
+        else if (typeof keys === "object") {
+          Object.keys(keys).forEach(k => res[k] = memoryStore[k] !== undefined ? memoryStore[k] : keys[k]);
+        }
+        if (cb) setTimeout(() => cb(res), 0);
+        return Promise.resolve(res);
+      },
+      set: (obj, cb) => {
+        if (obj && typeof obj === "object") Object.assign(memoryStore, obj);
+        if (cb) setTimeout(() => cb(), 0);
+        return Promise.resolve();
+      }
+    };
+    root.chrome.storage.local = root.chrome.storage.sync;
+    root.chrome.storage.onChanged = { addListener: () => {}, removeListener: () => {} };
+  }
+
   // Polyfill chrome.storage.session with chrome.storage.local if session storage is unsupported (like in Firefox)
   if (typeof chrome !== "undefined" && chrome.storage && !chrome.storage.session) {
     chrome.storage.session = chrome.storage.local;
@@ -57,73 +84,76 @@
       });
     }
 
-    const p = new Promise((res) =>
-      chrome.storage.sync.get(keys, (r) => {
-        _logErr("gSync");
-        const data = r || {};
-        
-        // Data Guard: Sanitize settings shape and types
-        if (data.settings !== undefined) {
-          let s = data.settings;
-          if (typeof s !== "object" || s === null || Array.isArray(s)) {
-            s = {};
-          }
-          s.idleTimeout = typeof s.idleTimeout === "number" ? s.idleTimeout : 30;
-          s.passcodeEnabled = typeof s.passcodeEnabled === "boolean" ? s.passcodeEnabled : false;
-          s.passcodeHash = typeof s.passcodeHash === "string" ? s.passcodeHash : "";
-          s.freeTimeHours = Array.isArray(s.freeTimeHours) ? s.freeTimeHours : [];
-          s.timeWarningEnabled = typeof s.timeWarningEnabled === "boolean" ? s.timeWarningEnabled : true;
-          s.timeWarningSecs = typeof s.timeWarningSecs === "number" ? s.timeWarningSecs : 60;
-          s.maxGapSecs = typeof s.maxGapSecs === "number" ? s.maxGapSecs : 300;
-          s.trackMedia = typeof s.trackMedia === "boolean" ? s.trackMedia : true;
-          s.minVisitSecs = typeof s.minVisitSecs === "number" ? s.minVisitSecs : 0;
-          s.trackLocalFiles = typeof s.trackLocalFiles === "boolean" ? s.trackLocalFiles : false;
-          s.dayRolloverHour = typeof s.dayRolloverHour === "number" ? s.dayRolloverHour : 0;
-          s.dataRetentionDays = typeof s.dataRetentionDays === "number" ? s.dataRetentionDays : 365;
-          s.autoBackupEnabled = typeof s.autoBackupEnabled === "boolean" ? s.autoBackupEnabled : false;
-          s.showIdleBadge = typeof s.showIdleBadge === "boolean" ? s.showIdleBadge : false;
-          s.lockPrivacy = typeof s.lockPrivacy === "boolean" ? s.lockPrivacy : true;
-          s.lockAdjustTime = typeof s.lockAdjustTime === "boolean" ? s.lockAdjustTime : true;
-          
-          const lockFlags = [
-            "lockDash", "lockSettings", "lockStop", "lockRules", 
-            "lockFreetime", "lockDanger", "lockTweaks", 
-            "lockFocusScheds", "lockFocusPresets", "lockPrivacy", "lockAdjustTime"
-          ];
-          lockFlags.forEach(f => {
-            s[f] = typeof s[f] === "boolean" ? s[f] : (f !== "lockDash" && f !== "lockSettings");
+    const p = new Promise((res) => {
+      try {
+        if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.sync) {
+          chrome.storage.sync.get(keys, (r) => {
+            _logErr("gSync");
+            const data = r || {};
+            if (data.settings !== undefined) {
+              let s = data.settings;
+              if (typeof s !== "object" || s === null || Array.isArray(s)) s = {};
+              s.idleTimeout = typeof s.idleTimeout === "number" ? s.idleTimeout : 30;
+              s.passcodeEnabled = typeof s.passcodeEnabled === "boolean" ? s.passcodeEnabled : false;
+              s.passcodeHash = typeof s.passcodeHash === "string" ? s.passcodeHash : "";
+              s.freeTimeHours = Array.isArray(s.freeTimeHours) ? s.freeTimeHours : [];
+              s.timeWarningEnabled = typeof s.timeWarningEnabled === "boolean" ? s.timeWarningEnabled : true;
+              s.timeWarningSecs = typeof s.timeWarningSecs === "number" ? s.timeWarningSecs : 60;
+              s.maxGapSecs = typeof s.maxGapSecs === "number" ? s.maxGapSecs : 300;
+              s.trackMedia = typeof s.trackMedia === "boolean" ? s.trackMedia : true;
+              s.minVisitSecs = typeof s.minVisitSecs === "number" ? s.minVisitSecs : 0;
+              s.trackLocalFiles = typeof s.trackLocalFiles === "boolean" ? s.trackLocalFiles : false;
+              s.dayRolloverHour = typeof s.dayRolloverHour === "number" ? s.dayRolloverHour : 0;
+              s.dataRetentionDays = typeof s.dataRetentionDays === "number" ? s.dataRetentionDays : 365;
+              s.autoBackupEnabled = typeof s.autoBackupEnabled === "boolean" ? s.autoBackupEnabled : false;
+              s.showIdleBadge = typeof s.showIdleBadge === "boolean" ? s.showIdleBadge : false;
+              s.lockPrivacy = typeof s.lockPrivacy === "boolean" ? s.lockPrivacy : true;
+              s.lockAdjustTime = typeof s.lockAdjustTime === "boolean" ? s.lockAdjustTime : true;
+              const lockFlags = ["lockDash", "lockSettings", "lockStop", "lockRules", "lockFreetime", "lockDanger", "lockTweaks", "lockFocusScheds", "lockFocusPresets", "lockPrivacy", "lockAdjustTime"];
+              lockFlags.forEach(f => { s[f] = typeof s[f] === "boolean" ? s[f] : (f !== "lockDash" && f !== "lockSettings"); });
+              data.settings = s;
+            }
+            _syncCache = { ...(_syncCache || {}), ...data };
+            if (keys) {
+              const keysArr = Array.isArray(keys) ? keys : [keys];
+              keysArr.forEach(k => _cachedSyncKeys.add(k));
+            } else {
+              Object.keys(data).forEach(k => _cachedSyncKeys.add(k));
+            }
+            res(data);
           });
-          data.settings = s;
-        }
-
-        _syncCache = { ...(_syncCache || {}), ...data };
-        if (keys) {
-          const keysArr = Array.isArray(keys) ? keys : [keys];
-          keysArr.forEach(k => _cachedSyncKeys.add(k));
         } else {
-          Object.keys(data).forEach(k => _cachedSyncKeys.add(k));
+          res({});
         }
-        res(data);
-      })
-    );
-    
+      } catch (e) {
+        res({});
+      }
+    });
+
     _syncCachePromise = p;
     p.finally(() => { _syncCachePromise = null; });
     return p;
   };
 
   root.sSync = function (obj) {
-    // FF v6.18: Synchronously invalidate local cache the millisecond we write to avoid stale tab reads
     if (obj && (obj.settings !== undefined || obj.focusPresets !== undefined)) {
       _syncCache = null;
       _cachedSyncKeys.clear();
     }
-    return new Promise((res) =>
-      chrome.storage.sync.set(obj, (r) => {
-        _logErr("sSync");
-        res(r);
-      })
-    );
+    return new Promise((res) => {
+      try {
+        if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.sync) {
+          chrome.storage.sync.set(obj, (r) => {
+            _logErr("sSync");
+            res(r || {});
+          });
+        } else {
+          res({});
+        }
+      } catch (e) {
+        res({});
+      }
+    });
   };
   root.gLocal = function (keys) {
     return new Promise((res) =>
