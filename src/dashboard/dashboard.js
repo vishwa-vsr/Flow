@@ -4201,20 +4201,15 @@ a.appendChild(t)
     $(e) && $(e).addEventListener("change", renderTrend)
 }), $("weekly-goal-input") && $("weekly-goal-input").addEventListener("input", () => {
     renderGoalPreview(parseInt($("weekly-goal-input").value) || 0)
-}), $("btn-add-whitelist") && $("btn-add-whitelist").addEventListener("click", async () => {
-    var e = $("whitelist-inp").value.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
-    if (e) {
-        var t = (await gLocal(["idleWhitelist"])).idleWhitelist || [];
-        t.includes(e) ? toast(t_("alreadyAdded"), "er") : (t.push(e), await sLocal({
-            idleWhitelist: t
+                eWhitelist: t
         }), $("whitelist-inp").value = "", renderWhitelist(t), toast(t_("exceptionAdded"), "ok"))
     }
 });
 
 const btnSaveSetEl = document.getElementById("btn-save-set");
 if (btnSaveSetEl) {
-    btnSaveSetEl.onclick = async function(evt) {
-        if (evt) evt.preventDefault();
+    const handleSaveSet = async function(evt) {
+        if (evt && evt.preventDefault) evt.preventDefault();
         let langChanged = false;
         try {
             var e = (await gSync(["settings"])).settings || {};
@@ -4265,57 +4260,90 @@ if (btnSaveSetEl) {
             toast(t_("settingsSaved") || "Settings saved successfully", "ok");
         }
     };
+    btnSaveSetEl.onclick = handleSaveSet;
+    btnSaveSetEl.addEventListener("click", handleSaveSet);
 }
 
 $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
-    var e = $("pin1").value,
-        t = $("pin2").value,
-        a = $("pin-msg");
-    if (6 !== e.length || !/^\d{6}$/.test(e)) return a.textContent = t_("pinLengthError"), void (a.style.color = "var(--red)");
-    if (e !== t) return a.textContent = t_("pinsDoNotMatch"), void (a.style.color = "var(--red)");
-    var n = (await gSync(["settings"])).settings || {};
-    n.passcodeHash || (n.lockSettings = !1, n.lockStop = !0, n.lockRules = !0, n.lockFreetime = !0, n.lockDanger = !0, n.lockTweaks = !0, n.lockFocusScheds = !0, n.lockFocusPresets = !0, n.lockPrivacy = !0, n.lockAdjustTime = !0), n.passcodeHash = await hashPin(e), n.passcodeEnabled = !0, await sSync({
-        settings: n
-    }), $("pin1").value = "", $("pin2").value = "", a.textContent = "", toast(t_("pinSavedActive"), "ok"), loadExtendedSettings()
-}), $("btn-remove-pin") && $("btn-remove-pin").addEventListener("click", async () => {
-    if (await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToRemoveIt") || "Enter current PIN to remove it.")) {
+    var e = $("pin1").value.trim(),
+        t = $("pin2").value.trim();
+    if (!/^\d{4,6}$/.test(e)) toast(t_("pin4to6Digits"), "er");
+    else if (e !== t) toast(t_("pinsDoNotMatch"), "er");
+    else {
+        var a = (await gSync(["settings"])).settings || {};
+        a.passcodeHash = await sha256Hex(e), a.passcodeEnabled = !0, await sSync({
+            settings: a
+        }), $("pin1").value = "", $("pin2").value = "", toast(t_("pinSavedActive"), "ok"), loadExtendedSettings()
+    }
+}), $("btn-rm-pin") && $("btn-rm-pin").addEventListener("click", async () => {
+    if (await promptPinIfEnabled("lockDanger")) {
         var e = (await gSync(["settings"])).settings || {};
-        e.passcodeHash = null, e.passcodeEnabled = !1, await sSync({
+        e.passcodeHash = "", e.passcodeEnabled = !0, await sSync({
             settings: e
         }), toast(t_("pinRemoved"), "ok"), loadExtendedSettings()
     }
-}), $("btn-change-pin") && $("btn-change-pin").addEventListener("click", async () => {
-    if (await showPass(!0, t_("verificationRequired") || "Verification Required", t_("enterPinToChangeIt") || "Enter current PIN to change it.")) {
-        $("pin-manage-box").style.display = "none";
-        $("pin-setup-box").style.display = "flex";
-        const actionDiv = document.getElementById("pin-actions-div");
-        if (actionDiv) actionDiv.style.display = "none";
-    }
 }), $("btn-rst-stats") && $("btn-rst-stats").addEventListener("click", async () => {
-    if (!(await promptPinIfEnabled("lockDanger"))) return;
-    if (!(await showConfirm(t_("resetStats"), t_("resetStatsConfirm"), { isDestructive: true, confirmText: t_("resetConfirmBtn") }))) return;
-    await msg("STATS_RESET_ALL");
-    toast(t_("statsReset"), "ok");
-    loadAnalytics();
+    if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("resetAllStats"), t_("resetStatsConfirm"), { isDestructive: true, confirmText: t_("resetConfirmBtn") })) {
+        await msg("CLEAR_ALL_DATA");
+        toast(t_("statsReset"), "ok");
+        setTimeout(() => location.reload(), 800);
+    }
 }), $("btn-clr-rules") && $("btn-clr-rules").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearRules"), t_("clearRulesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
-        rules = [], allowList = [], await sLocal({
-            blockRules: [],
-            allowList: []
+        var e = (await gSync(["settings"])).settings || {};
+        e.blockRules = [], e.allowRules = [], await sSync({
+            settings: e
         }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), toast(t_("rulesCleared"), "ok")
     }
 }), $("btn-clr-cats") && $("btn-clr-cats").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearCategories"), t_("clearCategoriesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
-        siteCategories = {}, hiddenDefaultSites = [], await sLocal({
-            siteCategories: {},
-            hiddenDefaultSites: []
-        }), renderCategories(), loadAnalytics(), toast(t_("categoriesCleared"), "ok")
+        await sLocal({ customCategories: {} });
+        siteCats = {}, renderCategories(), loadAnalytics(), toast(t_("categoriesCleared"), "ok")
     }
-}), $("btn-clear-history") && $("btn-clear-history").addEventListener("click", async () => {
-    if (await showConfirm(t_("clearHistory"), t_("clearHistoryConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
+}), $("btn-clr-focus") && $("btn-clr-focus").addEventListener("click", async () => {
+    if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearFocusHistory"), t_("clearFocusConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
         await msg("CLEAR_FOCUS_HISTORY"), loadFocusHistory(), toast(t_("cleared"), "ok")
     }
 });
+
+(function () {
+    const e = $("data-retention-sel");
+    e && (e.addEventListener("change", async () => {
+        const t = parseInt(e.value);
+        if (!isNaN(t)) {
+            const s = (await gSync(["settings"])).settings || {};
+            s.dataRetentionDays = t, await sSync({
+                settings: s
+            }), toast(t_("dataRetentionSaved", [t]), "ok")
+        }
+    }), gSync(["settings"]).then(t => {
+        const s = t.settings || {};
+        e.value = String(s.dataRetentionDays ?? 365)
+    }));
+    const t = $("lang-sel");
+    t && gSync(["settings"]).then(e => {
+        const s = e.settings || {};
+        t.value = s.language || "default"
+    })
+})();
+
+(function initFloatingSave() {
+    const _fab = document.createElement("button");
+    _fab.id = "floating-save-btn";
+    _fab.textContent = t_("saveAllSettings") || "Save All Settings";
+    _fab.style.cssText = "display:none;position:fixed;bottom:28px;right:28px;z-index:9000;background:var(--green);color:#000;font-weight:800;font-size:16px;padding:12px 22px;border-radius:14px;border:none;cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s,transform .2s;font-family:inherit;";
+    document.body.appendChild(_fab);
+    _fab.addEventListener("click", () => {
+        if ($("btn-save-set")) {
+            $("btn-save-set").click();
+        }
+        toast(t_("settingsSaved") || "Settings saved successfully", "ok");
+    });
+    document.querySelectorAll(".ni[data-tab]").forEach(tab => tab.addEventListener("click", () => {
+        _fab.style.display = tab.getAttribute("data-tab") === "settings" ? "block" : "none";
+    }));
+    if (window.location.hash === "#settings") _fab.style.display = "block";
+})();
 
 var _origRF = renderFocus,
     _focusTick = null;
