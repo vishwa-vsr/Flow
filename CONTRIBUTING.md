@@ -64,6 +64,7 @@ Before opening a Pull Request, please check that:
 To keep Flow clean, fast, and privacy-first, please follow these guidelines:
 - **No data collection**: Flow is strictly local-first. Do not add any code that tracks users or sends data to external servers.
 - **Keep dependencies minimal**: Avoid adding heavy external libraries. Standard web APIs are preferred.
+- **Universal Icon & Emoji Manager**: Avoid inserting raw inline `<svg>` elements in HTML or JavaScript templates. Use `<span data-icon="iconName"></span>` in HTML or `FlowIcons.get("iconName")` in JavaScript modules via `src/lib/icons.js` for zero-bloat rendering and 100% visual consistency.
 - **Write clean CSS**: Use the global styles defined in `global.css` for consistency.
 
 Thank you again for your support!

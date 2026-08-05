@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [10.0.8] - 2026-08-05
 
+### Added
+- **Universal Icon & Emoji Manager (`src/lib/icons.js`)**: Created a zero-bloat central icon library (`window.FlowIcons`) providing `FlowIcons.get()`, `FlowIcons.emoji()`, and `FlowIcons.renderAll()`. Automatically renders clean SVG graphics into any `[data-icon]` HTML element across both Extension Popup and Dashboard views.
+
+### Changed
+- **HTML & SVG Markup Zero-Bloat Optimization**: Purged over 5,000+ bytes of repetitive raw inline `<svg>` drawing tags and `<symbol>` sprite sheet markup from `src/dashboard/index.html` and `src/popup/index.html`, drastically shrinking HTML bundle sizes by up to 18% across Chrome, Edge, and Firefox builds.
+- **Unified Edit Pencil & Settings Icons**: Standardized all edit pencil buttons (`edit`) and Settings gear icons (`gear`) across HTML templates and JavaScript dynamic modals (`dashboard.js`) to use identical SVG paths.
+
 ### Fixed
+- **Dashboard Save Settings Toast Popup Fix**: Resolved a syntax error in `dashboard.js` and updated `toast()` notification styling to use `setProperty("display", "flex", "important")`, guaranteeing popup notification visibility when clicking "Save All Settings" or the floating bottom-right save button.
+- **Toolbar Popup Window Dimension Collapse Fix**: Fixed an unclosed `<style>` tag boundary in `src/popup/index.html` that caused the extension popup window to collapse into a blank 50px black square.
+- **Analytics SVG Baseline Alignment Fix**: Corrected the starting y-coordinate (`y1="20"`) of the left bar in the Analytics bar chart icon (`analytics`) so all 3 vertical bars sit flat on the bottom baseline.
 - **Firefox Layout Engine Jitter**: Resolved an interactive hover shakiness loop in Firefox's Gecko rendering engine on Goal Checkbox Cards (`.goal-cb-lbl`) by optimizing transition properties and removing vertical transform shifts.
 
 ## [10.0.7] - 2026-08-04
