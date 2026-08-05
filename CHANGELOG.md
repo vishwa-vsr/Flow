@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Firefox Layout Engine Jitter**: Resolved an interactive hover shakiness loop in Firefox's Gecko rendering engine on Goal Checkbox Cards (`.goal-cb-lbl`) by optimizing transition properties and removing vertical transform shifts.
-- **PIN Verification Responsiveness**: Maintained sub-10ms instantaneous PIN lock verification without main UI thread freezing or popup render delay.
 
 ## [10.0.7] - 2026-08-04
 
