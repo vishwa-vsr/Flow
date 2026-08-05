@@ -122,7 +122,7 @@ flow-source/
   │    │    └── global.css         <-- Core shared design CSS tokens
   │    ├── background/             <-- Service workers (tab tracking, blocking)
   │    ├── content/                <-- Content script tracking site focus
-  │    ├── lib/                    <-- Helper scripts (constants, db, storage)
+  │    ├── lib/                    <-- Helper scripts (constants, db, storage, icons.js universal manager)
   │    ├── blocked/                <-- Refined blocked page layout
   │    ├── dashboard/              <-- Premium visual statistics screen
   │    ├── popup/                  <-- Main dropdown focus timer card
