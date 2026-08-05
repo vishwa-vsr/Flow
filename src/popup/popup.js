@@ -9,6 +9,48 @@ var hiddenDefaultSites = [];
 var pcRes = null,
     pcBuf = "";
 
+function toast(e, t) {
+    const TOAST_DURATION = { ok: 3500, er: 5000, err: 5000 };
+    var a = $("toast");
+    if (!a) {
+        a = document.createElement("div");
+        a.id = "toast";
+        document.body.appendChild(a);
+    }
+    const isError = t === "er" || t === "err";
+    const prefix = isError ? "✗ " : ("ok" === t ? "✓ " : "");
+    a.textContent = prefix + (e || "Settings saved successfully");
+    a.style.position = "fixed";
+    a.style.bottom = "20px";
+    a.style.left = "50%";
+    a.style.transform = "translateX(-50%) translateY(0)";
+    a.style.background = isError ? "#ef4444" : "#05D581";
+    a.style.color = "#000000";
+    a.style.padding = "10px 18px";
+    a.style.borderRadius = "10px";
+    a.style.boxShadow = "0 8px 20px -4px rgba(0, 0, 0, 0.4)";
+    a.style.zIndex = "2147483647";
+    a.style.fontWeight = "800";
+    a.style.fontSize = "13px";
+    a.style.display = "flex";
+    a.style.alignItems = "center";
+    a.style.gap = "6px";
+    a.style.opacity = "1";
+    a.style.visibility = "visible";
+    a.style.pointerEvents = "auto";
+    a.style.transition = "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+    a.className = "toast " + (isError ? "er" : (t || ""));
+    void a.offsetHeight;
+    clearTimeout(a._tid);
+    a._tid = setTimeout(() => {
+        a.className = "toast hide";
+        a.style.opacity = "0";
+        a.style.visibility = "hidden";
+        a.style.transform = "translateX(-50%) translateY(15px)";
+        a.style.pointerEvents = "none";
+    }, TOAST_DURATION[t] ?? 3500);
+}
+
 function showPass() {
     if (pcRes) { pcRes(false); pcRes = null; } // Bug#5 fix: resolve dangling promise
     return new Promise(e => {
@@ -783,7 +825,8 @@ $("p-save-focus") && $("p-save-focus").addEventListener("click", async () => {
             await msg("PRESETS_SAVE", { presets: pres.presets });
         }
     }
-    window._focusWorkMins = workVal, window._focusBreakMins = breakVal, window._focusLongBreakMins = longVal, window._focusCycles = cyclesVal, $("focus-set-panel") && ($("focus-set-panel").style.display = "none"), $("focus-card") && ($("focus-card").style.minHeight = ""), loadFocus()
+    window._focusWorkMins = workVal, window._focusBreakMins = breakVal, window._focusLongBreakMins = longVal, window._focusCycles = cyclesVal, $("focus-set-panel") && ($("focus-set-panel").style.display = "none"), $("focus-card") && ($("focus-card").style.minHeight = ""), loadFocus();
+    toast(t_("settingsSaved") || "Settings saved successfully", "ok");
 });
 chrome.runtime.onMessage.addListener(e => {
     "FOCUS_TICK" === e.type && renderFocus(e.focusState)
