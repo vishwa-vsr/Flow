@@ -4267,7 +4267,6 @@ if (btnSaveSetEl) {
             toast(t_("settingsSaved") || "Settings saved successfully", "ok");
         }
     };
-    btnSaveSetEl.onclick = handleSaveSet;
     btnSaveSetEl.addEventListener("click", handleSaveSet);
 }
 
