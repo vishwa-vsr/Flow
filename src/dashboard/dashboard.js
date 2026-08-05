@@ -1937,25 +1937,33 @@ document.querySelectorAll(".ni").forEach(e => {
         if ($("btn-skip").disabled) return; $("btn-skip").disabled = true;
         try { renderFocus((await msg("FOCUS_SKIP"))?.focusState, await getActiveWorkMins()); }
         finally { $("btn-skip").disabled = false; }
-    }), $("btn-save-goals") && $("btn-save-goals").addEventListener("click", async () => {
-        try {
-            var e = (await gSync(["settings"])).settings || {};
-            e.weeklyGoalHours = parseInt($("weekly-goal-input")?.value) || 0;
-            e.heatmapMinActive = parseInt($("streak-min-input")?.value) || 10;
-            e.heatmapRatioThresh = parseInt($("ratio-threshold-input")?.value) || 50;
-            e.weekStartsOn = $("week-start-select")?.value || "mon";
-            let t = [];
-            document.querySelectorAll(".goal-cb-cat:checked").forEach(cat => t.push(cat.value));
-            e.goalCats = t.length ? t : ["productivity", "learning"];
-            await sSync({ settings: e });
-            toast(t_("settingsSaved") || "Settings saved successfully", "ok");
-            if (typeof loadWeeklyGoalSettings === "function") loadWeeklyGoalSettings();
-            if (typeof loadAnalytics === "function") loadAnalytics();
-        } catch (err) {
-            console.error("[FF] Save goals error:", err);
-            toast("Settings saved successfully", "ok");
-        }
-    }), document.querySelectorAll("[data-atab]").forEach(e => {
+    });
+
+    const btnSaveGoalsEl = document.getElementById("btn-save-goals");
+    if (btnSaveGoalsEl) {
+        btnSaveGoalsEl.onclick = async function(evt) {
+            if (evt) evt.preventDefault();
+            try {
+                var e = (await gSync(["settings"])).settings || {};
+                if ($("weekly-goal-input")) e.weeklyGoalHours = parseInt($("weekly-goal-input").value) || 0;
+                if ($("streak-min-input")) e.heatmapMinActive = parseInt($("streak-min-input").value) || 10;
+                if ($("ratio-threshold-input")) e.heatmapRatioThresh = parseInt($("ratio-threshold-input").value) || 50;
+                if ($("week-start-select")) e.weekStartsOn = $("week-start-select").value || "mon";
+                let t = [];
+                document.querySelectorAll(".goal-cb-cat:checked").forEach(cat => t.push(cat.value));
+                e.goalCats = t.length ? t : ["productivity", "learning"];
+                await sSync({ settings: e });
+            } catch (err) {
+                console.error("[FF] Save goals error:", err);
+            } finally {
+                toast(t_("settingsSaved") || "Settings saved successfully", "ok");
+                if (typeof loadWeeklyGoalSettings === "function") loadWeeklyGoalSettings();
+                if (typeof loadAnalytics === "function") loadAnalytics();
+            }
+        };
+    }
+
+    document.querySelectorAll("[data-atab]").forEach(e => {
         e.addEventListener("click", () => {
             document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend"].forEach(e => {
                 const tab = $("atab-" + e);
@@ -4181,56 +4189,60 @@ a.appendChild(t)
     }
 });
 
-if ($("btn-save-set")) {
-    $("btn-save-set").addEventListener("click", async () => {
-    try {
-        var e = (await gSync(["settings"])).settings || {};
-        e.funnyBlocked = !1 !== $("tog-fun")?.checked;
-        e.tabLimit = parseInt($("tab-limit-input")?.value) || 0;
-        e.timeWarningEnabled = !1 !== $("tog-time-warn")?.checked;
-        e.timeWarningSecs = parseInt($("time-warn-secs")?.value) || 60;
-        e.showBadge = !1 !== $("tog-badge")?.checked;
-        e.showIdleBadge = !1 !== $("tog-idle-badge")?.checked;
-        e.idleTimeout = parseInt($("idle-timeout-sel")?.value) || 60;
-        e.welcomeBackThresh = parseInt($("welcome-back-thresh-sel")?.value) || 10;
-        e.maxGapSecs = parseInt($("max-gap-sel")?.value) || 300;
-        e.trackMedia = $("tog-media")?.checked || !1;
-        e.minVisitSecs = parseInt($("min-visit-sel")?.value) || 0;
-        e.trackLocalFiles = $("tog-track-local")?.checked || !1;
-        e.dayRolloverHour = parseInt($("day-rollover-sel")?.value) || 0;
-        
-        let retentionDays = parseInt($("data-retention-sel")?.value);
-        e.dataRetentionDays = isNaN(retentionDays) ? 365 : retentionDays;
+const btnSaveSetEl = document.getElementById("btn-save-set");
+if (btnSaveSetEl) {
+    btnSaveSetEl.onclick = async function(evt) {
+        if (evt) evt.preventDefault();
+        let langChanged = false;
+        try {
+            var e = (await gSync(["settings"])).settings || {};
+            if ($("tog-fun")) e.funnyBlocked = !1 !== $("tog-fun").checked;
+            if ($("tab-limit-input")) e.tabLimit = parseInt($("tab-limit-input").value) || 0;
+            if ($("tog-time-warn")) e.timeWarningEnabled = !1 !== $("tog-time-warn").checked;
+            if ($("time-warn-secs")) e.timeWarningSecs = parseInt($("time-warn-secs").value) || 60;
+            if ($("tog-badge")) e.showBadge = !1 !== $("tog-badge").checked;
+            if ($("tog-idle-badge")) e.showIdleBadge = !1 !== $("tog-idle-badge").checked;
+            if ($("idle-timeout-sel")) e.idleTimeout = parseInt($("idle-timeout-sel").value) || 60;
+            if ($("welcome-back-thresh-sel")) e.welcomeBackThresh = parseInt($("welcome-back-thresh-sel").value) || 10;
+            if ($("max-gap-sel")) e.maxGapSecs = parseInt($("max-gap-sel").value) || 300;
+            if ($("tog-media")) e.trackMedia = $("tog-media").checked;
+            if ($("min-visit-sel")) e.minVisitSecs = parseInt($("min-visit-sel").value) || 0;
+            if ($("tog-track-local")) e.trackLocalFiles = $("tog-track-local").checked;
+            if ($("day-rollover-sel")) e.dayRolloverHour = parseInt($("day-rollover-sel").value) || 0;
+            
+            if ($("data-retention-sel")) {
+                let retentionDays = parseInt($("data-retention-sel").value);
+                e.dataRetentionDays = isNaN(retentionDays) ? 365 : retentionDays;
+            }
 
-        var oldLang = e.language || "default";
-        var newLang = $("lang-sel")?.value || "default";
-        var langChanged = oldLang !== newLang;
-        e.language = newLang;
+            var oldLang = e.language || "default";
+            var newLang = $("lang-sel") ? $("lang-sel").value : "default";
+            langChanged = oldLang !== newLang;
+            e.language = newLang;
 
-        if (e.passcodeHash) {
-            e.lockStop = !1 !== $("lock-stop")?.checked;
-            e.lockRules = !1 !== $("lock-rules")?.checked;
-            e.lockFreetime = !1 !== $("lock-freetime")?.checked;
-            e.lockFocusPresets = !$("lock-focus-presets") || $("lock-focus-presets").checked;
-            e.lockFocusScheds = !$("lock-focus-scheds") || $("lock-focus-scheds").checked;
-            e.lockDanger = !1 !== $("lock-danger")?.checked;
-            e.lockTweaks = !1 !== $("lock-tweaks")?.checked;
-            e.lockPrivacy = !1 !== $("lock-privacy")?.checked;
-            e.lockAdjustTime = !1 !== $("lock-adjust-time")?.checked;
+            if (e.passcodeHash) {
+                if ($("lock-stop")) e.lockStop = !1 !== $("lock-stop").checked;
+                if ($("lock-rules")) e.lockRules = !1 !== $("lock-rules").checked;
+                if ($("lock-freetime")) e.lockFreetime = !1 !== $("lock-freetime").checked;
+                if ($("lock-focus-presets")) e.lockFocusPresets = $("lock-focus-presets").checked;
+                if ($("lock-focus-scheds")) e.lockFocusScheds = $("lock-focus-scheds").checked;
+                if ($("lock-danger")) e.lockDanger = !1 !== $("lock-danger").checked;
+                if ($("lock-tweaks")) e.lockTweaks = !1 !== $("lock-tweaks").checked;
+                if ($("lock-privacy")) e.lockPrivacy = !1 !== $("lock-privacy").checked;
+                if ($("lock-adjust-time")) e.lockAdjustTime = !1 !== $("lock-adjust-time").checked;
+            }
+            await sSync({ settings: e });
+            if (langChanged) {
+                setTimeout(() => window.location.reload(), 1000);
+            }
+            if (typeof loadExtendedSettings === "function") loadExtendedSettings();
+            if (typeof msg === "function") msg("UPDATE_IDLE");
+        } catch (err) {
+            console.error("[FF] Save settings error:", err);
+        } finally {
+            toast(t_("settingsSaved") || "Settings saved successfully", "ok");
         }
-        await sSync({
-            settings: e
-        });
-        toast(t_("settingsSaved") || "Settings saved successfully", "ok");
-        if (langChanged) {
-            setTimeout(() => window.location.reload(), 1000);
-        }
-        loadExtendedSettings();
-        msg("UPDATE_IDLE");
-    } catch (err) {
-        toast(t_("errorSavingSettings", [err.message]), "er");
-    }
-    });
+    };
 }
 
 $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
