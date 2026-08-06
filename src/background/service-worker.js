@@ -292,6 +292,11 @@ async function safeFlush(t, e, a = Date.now() - 1e3 * e) {
             const startKey = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, "0")}-${String(start.getDate()).padStart(2, "0")}`;
             const endKey = `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, "0")}-${String(end.getDate()).padStart(2, "0")}`;
             const cache = await FFDB.getDays([startKey, endKey]);
+            for (const key of [startKey, endKey]) {
+                if (_pendingWriteMap[key]) {
+                    cache[key] = _pendingWriteMap[key];
+                }
+            }
             const apply = (key, secs, sMs, eMs) => {
                 if (!cache[key]) cache[key] = { sites: {}, timeline: [] };
                 const entry = cache[key];
