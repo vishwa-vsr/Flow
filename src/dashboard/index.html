@@ -227,7 +227,7 @@
                       color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1px;
                       background:var(--bg3);border:1px solid var(--bd);border-radius:99px;
                       padding:6px 12px;transition:all .2s ease;white-space:nowrap;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:var(--tx3);"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span data-icon="gear" data-size="14" style="color:var(--tx3);"></span>
               <span data-i18n="less">Less</span>
               <span style="display:inline-block;width:10px;height:10px;background:var(--bg4);border-radius:3px"></span>
               <span style="display:inline-block;width:10px;height:10px;background:rgba(5,213,129,0.3);border-radius:3px"></span>
@@ -276,7 +276,7 @@
           </div>
           <div style="display:flex; gap:10px; align-items:center;">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs report-issue-btn" title="Report Issue" style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; font-size:12px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect width="8" height="14" x="8" y="6" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 13h-4"/><path d="M4 13h4"/><path d="m10 4 1-2"/><path d="m14 4-1-2"/></svg>
+              <span data-icon="bug" data-size="14"></span>
               <span class="report-btn-text">Report Issue</span>
             </a>
             <input type="text" id="top-sites-search" class="ff-search" data-i18n-placeholder="searchSites" autocomplete="off" style="width:240px; margin:0;" aria-label="Search top sites">
@@ -356,7 +356,7 @@
           <!-- Card 2: Productivity vs Distraction Split -->
           <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%; box-sizing: border-box;">
             <div style="font-size: 11px; font-weight: 800; color: var(--tx3); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: 8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tx3);"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10H12V2z"></path></svg>
+              <span data-icon="pie-chart" data-size="14" style="color:var(--tx3);"></span>
               <span data-i18n="focusVsDistraction">Focus vs. Distraction</span>
             </div>
             
@@ -420,13 +420,13 @@
               <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
                 <!-- Row 1: Primary actions (Full-width) -->
                 <div style="width:100%;">
-                  <button id="btn-fs" class="bp" style="width:100%; padding:16px; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span data-i18n="startFocus">Start Focus</span></button>
-                  <button id="btn-fp" class="bs" style="display:none; width:100%; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg><span data-i18n="btnPause">Pause</span></button>
+                  <button id="btn-fs" class="bp" style="width:100%; padding:16px; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:8px;"><span data-icon="play" data-size="16"></span><span data-i18n="startFocus">Start Focus</span></button>
+                  <button id="btn-fp" class="bs" style="display:none; width:100%; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><span data-icon="pause" data-size="16"></span><span data-i18n="btnPause">Pause</span></button>
                 </div>
                 <!-- Row 2: Secondary actions (Stop & Skip, side-by-side) -->
                 <div id="focus-sec-actions" style="display:flex; gap:12px; width:100%;">
-                  <button id="btn-fst" class="bs-danger" style="display:none; flex:1; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg><span data-i18n="btnStop">Stop</span></button>
-                  <button id="btn-skip" class="bs skip" style="display:none; flex:1; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="3" stroke-linecap="round"></line></svg><span data-i18n="btnSkip">Skip</span></button>
+                  <button id="btn-fst" class="bs-danger" style="display:none; flex:1; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><span data-icon="stop" data-size="16"></span><span data-i18n="btnStop">Stop</span></button>
+                  <button id="btn-skip" class="bs skip" style="display:none; flex:1; padding:16px; font-size:15px; align-items:center; justify-content:center; gap:8px;"><span data-icon="skip" data-size="16"></span><span data-i18n="btnSkip">Skip</span></button>
                 </div>
               </div>
             </div>
@@ -607,9 +607,9 @@
             </div>
           </div>
         <p style="font-size:12px;color:var(--tx3);font-weight:600;margin:-4px 0 16px; display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .6 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>
+          <span data-icon="bulb" data-size="14" style="color:#FBBF24;"></span>
           <span data-i18n="tipClick">Tip: Click </span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <span data-icon="edit" data-size="12"></span>
           <span data-i18n="tipRuleDetails"> on any rule to set time limits, schedules, or a cool-down timer.</span>
         </p>
 
@@ -645,7 +645,7 @@
           <span data-i18n="filterByCategory">🔍 Filter by Category</span>
           <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs report-issue-btn" title="Report Issue" style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; font-size:12px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect width="8" height="14" x="8" y="6" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 13h-4"/><path d="M4 13h4"/><path d="m10 4 1-2"/><path d="m14 4-1-2"/></svg>
+              <span data-icon="bug" data-size="14"></span>
               <span class="report-btn-text">Report Issue</span>
             </a>
             <input type="text" id="cat-sites-search" class="ff-search" data-i18n-placeholder="searchSitesInCategories" autocomplete="off" style="width:240px; margin:0;" aria-label="Search sites in categories">

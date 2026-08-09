@@ -40,7 +40,7 @@ export function showEditPresetModal(presetId, state, options = {}) {
               <span id="ep-title">${t("editPreset") || "Edit Preset"}</span>
             </div>
             <button id="ep-close" aria-label="Close Edit Preset Modal" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              ${FlowIcons.get("close", { size: 18 })}
             </button>
           </div>
           
@@ -72,7 +72,7 @@ export function showEditPresetModal(presetId, state, options = {}) {
             <div class="trow" style="padding:16px 0; border-top:none; border-bottom:1px solid var(--bd); margin-top:-10px;">
               <div style="flex:1;">
                 <label for="ep-notify" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                  ${FlowIcons.get("bell", { size: 16 })}
                   ${t("enableNotifications") || "Enable Notifications"}
                 </label>
                 <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">${t("epNotifyDesc") || "Receive push alerts when focus periods or breaks end."}</div>
@@ -86,7 +86,7 @@ export function showEditPresetModal(presetId, state, options = {}) {
             <div class="trow" style="padding:16px 0; border-top:none; border-bottom:1px solid var(--bd); margin-top:-10px;">
               <div style="flex:1;">
                 <label for="ep-autostart" class="tlbl" style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; cursor:pointer;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                  ${FlowIcons.get("repeat", { size: 16 })}
                   ${t("autoStartNextCycle") || "Auto-Start Next Cycle"}
                 </label>
                 <div class="tdesc" style="font-size:12px; color:var(--tx2); margin-top:2px;">${t("epAutoStartDesc") || "Automatically transition to the next work cycle or break."}</div>

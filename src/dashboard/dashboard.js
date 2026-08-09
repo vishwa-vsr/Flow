@@ -6472,9 +6472,7 @@ document.body.appendChild(overlay);
             
             setSafeHTML(row, `
                 <div style="display:flex; align-items:center; gap:12px;">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green); flex-shrink:0;">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
+                    ${FlowIcons.get("lock", { size: 20, style: "color:var(--green); flex-shrink:0;" })}
                     <div>
                         <div style="font-size:14px; font-weight:700; color:var(--tx);">${backup.label}</div>
                         <div style="font-size:12px; color:var(--tx3); margin-top:2px;">${dateStr} &bull; ${sizeStr}</div>
@@ -6482,14 +6480,14 @@ document.body.appendChild(overlay);
                 </div>
                 <div style="display:flex; gap:10px;">
                     <button class="bs btn-restore-backup" data-id="${backup.id}" title="Restore this backup" aria-label="Restore this backup" style="padding:6px 12px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
-                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                        ${FlowIcons.get("refresh", { size: 12 })}
                         Restore
                     </button>
                     <button class="bs btn-download-backup" data-id="${backup.id}" title="Download JSON file" aria-label="Download JSON file" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
-                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        ${FlowIcons.get("download", { size: 12 })}
                     </button>
                     <button class="bs-danger btn-delete-backup" data-id="${backup.id}" title="Delete this backup" aria-label="Delete this backup" style="padding:6px; display:inline-flex; align-items:center; justify-content:center;">
-                        <svg viewBox="0 0 24 24" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        ${FlowIcons.get("trash", { size: 12 })}
                     </button>
                 </div>
             `);

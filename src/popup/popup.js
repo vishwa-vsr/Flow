@@ -123,7 +123,7 @@ document.querySelectorAll(".ttab").forEach(function (e) {
             s = $("today-widgets"),
             leg = $("donut-legend");
         t && t.classList.remove("fade-in"), s && s.classList.remove("fade-in"), t && t.offsetWidth;
-        const spinnerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--tx3);gap:10px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.5; animation:spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg><span style="font-size:13px;font-weight:600">' + t_('loadingData') + '</span></div>';
+        const spinnerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--tx3);gap:10px;">' + FlowIcons.get("spinner", { size: 24, style: "opacity:0.5; animation:spin 1s linear infinite;" }) + '<span style="font-size:13px;font-weight:600">' + t_('loadingData') + '</span></div>';
         if (t) setSafeHTML(t, spinnerHTML);
         if (leg) setSafeHTML(leg, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">' + spinnerHTML + '</div>');
         if ($("donut-total")) $("donut-total").textContent = "—";
@@ -556,7 +556,7 @@ function buildCatSelector(e, t, s) {
           <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
             <span style="display:inline-flex; align-items:center; justify-content:center; width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
             <span>${emoji} ${lbl}</span>
-            ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+            ${isSelected ? FlowIcons.get("check", { size: 14, class: "ff-check-icon" }) : ''}
           </button>
         `;
     });
@@ -565,7 +565,7 @@ function buildCatSelector(e, t, s) {
     <div class="ff-dropdown" data-domain="${escHTML(e)}">
       <button type="button" class="ff-dropdown-btn" style="background:${s}22; color:${s}; border-color:${s}55;">
         <span>${currentEmoji} ${currentLbl}</span>
-        <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        ${FlowIcons.get("chevron-down", { size: 14, class: "ff-dropdown-arrow" })}
       </button>
       <div class="ff-dropdown-menu">
         ${menuItems}
