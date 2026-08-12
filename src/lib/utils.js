@@ -48,23 +48,6 @@ function setSafeHTML(el, html) {
     }
 }
 
-function getRippleLoaderHTML(sizeClass = "") {
-    const cls = sizeClass ? `ff-ripple-loader ${sizeClass}` : "ff-ripple-loader";
-    return `
-      <div class="${cls}">
-        <div class="cell d-0"></div>
-        <div class="cell d-1"></div>
-        <div class="cell d-2"></div>
-        <div class="cell d-1"></div>
-        <div class="cell d-2"></div>
-        <div class="cell d-3"></div>
-        <div class="cell d-2"></div>
-        <div class="cell d-3"></div>
-        <div class="cell d-4"></div>
-      </div>
-    `;
-}
-
 function fmt(e) {
     if (!e || e <= 0) return "0m";
     const m = Math.floor(e / 60);

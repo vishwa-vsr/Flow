@@ -240,14 +240,7 @@
             </div>
           </div>
           <div id="heatmap-wrap" style="overflow-x:auto; position:relative;">
-            <div id="heatmap-loading" class="ff-loading" style="padding:40px 0;">
-              <div class="ff-ripple-loader">
-                <div class="cell d-0"></div><div class="cell d-1"></div><div class="cell d-2"></div>
-                <div class="cell d-1"></div><div class="cell d-2"></div><div class="cell d-3"></div>
-                <div class="cell d-2"></div><div class="cell d-3"></div><div class="cell d-4"></div>
-              </div>
-              <span data-i18n="buildingHeatmap">Building heatmap…</span>
-            </div>
+            <div id="heatmap-loading" class="ff-loading" style="padding:40px 0;" data-i18n="buildingHeatmap">Building heatmap…</div>
             <canvas id="heatmap-canvas" style="display:none" role="img" aria-label="365-day consistency heatmap showing your productivity levels for each day of the past year."></canvas>
           </div>
         </div>
@@ -268,13 +261,8 @@
           <button id="db-apply" class="vtab act" style="font-weight:800" data-i18n="apply">Apply</button>
         </div>
         <div id="daily-breakdown-list">
-          <div class="ff-loading">
-            <div class="ff-ripple-loader">
-              <div class="cell d-0"></div><div class="cell d-1"></div><div class="cell d-2"></div>
-              <div class="cell d-1"></div><div class="cell d-2"></div><div class="cell d-3"></div>
-              <div class="cell d-2"></div><div class="cell d-3"></div><div class="cell d-4"></div>
-            </div>
-            <span data-i18n="loading">Loading...</span>
+          <div class="empty">
+            <p data-i18n="loading">Loading...</p>
           </div>
         </div>
       </div>
@@ -301,14 +289,7 @@
               style="text-align:left; margin-left: 0px;" data-i18n="category">Category</span><span style="text-align:center" data-i18n="total">Total</span><span
               style="text-align:center" data-i18n="avgDay">Avg/Day</span></div>
           <div id="top-sites" style="display:flex; flex-direction:column; width:100%;">
-            <div class="ff-loading">
-              <div class="ff-ripple-loader">
-                <div class="cell d-0"></div><div class="cell d-1"></div><div class="cell d-2"></div>
-                <div class="cell d-1"></div><div class="cell d-2"></div><div class="cell d-3"></div>
-                <div class="cell d-2"></div><div class="cell d-3"></div><div class="cell d-4"></div>
-              </div>
-              <span data-i18n="loadingSites">Loading sites…</span>
-            </div>
+            <div class="ff-loading" data-i18n="loadingSites">Loading sites…</div>
           </div>
         </div>
       </div>

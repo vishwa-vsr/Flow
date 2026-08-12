@@ -399,73 +399,16 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 
 
 
-/* FF v10.0.9: Unified 3x3 Grid Ripple Loader (Flow Brand Palette) */
-.ff-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  color: var(--tx3);
-  gap: 16px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: inherit;
+/* FF v6.7.0: loading spinner — used in dashboard render functions while data loads */
+.ff-loading{
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 20px;color:var(--tx3);gap:10px;
+  font-size:13px;font-weight:700;font-family:inherit;
 }
-
-.ff-ripple-loader {
-  --cell-size: 20px;
-  --cell-spacing: 2px;
-  --cells: 3;
-  --total-size: calc(var(--cells) * (var(--cell-size) + 2 * var(--cell-spacing)));
-  display: flex;
-  flex-wrap: wrap;
-  width: var(--total-size);
-  height: var(--total-size);
-  margin: 0 auto;
-}
-
-.ff-ripple-loader.sm {
-  --cell-size: 10px;
-  --cell-spacing: 1px;
-}
-
-.ff-ripple-loader.lg {
-  --cell-size: 28px;
-  --cell-spacing: 3px;
-}
-
-.ff-ripple-loader .cell {
-  flex: 0 0 var(--cell-size);
-  margin: var(--cell-spacing);
-  background-color: transparent;
-  box-sizing: border-box;
-  border-radius: 4px;
-  animation: 1.5s ripple ease infinite;
-  will-change: background-color;
-  transform: translateZ(0);
-}
-
-.ff-ripple-loader .cell.d-1 { animation-delay: 100ms; }
-.ff-ripple-loader .cell.d-2 { animation-delay: 200ms; }
-.ff-ripple-loader .cell.d-3 { animation-delay: 300ms; }
-.ff-ripple-loader .cell.d-4 { animation-delay: 400ms; }
-
-.ff-ripple-loader .cell:nth-child(1) { --cell-color: #05D581; }
-.ff-ripple-loader .cell:nth-child(2) { --cell-color: #10E38F; }
-.ff-ripple-loader .cell:nth-child(3) { --cell-color: #5C9CFC; }
-.ff-ripple-loader .cell:nth-child(4) { --cell-color: #72A8FD; }
-.ff-ripple-loader .cell:nth-child(5) { --cell-color: #A855F7; }
-.ff-ripple-loader .cell:nth-child(6) { --cell-color: #B96AF8; }
-.ff-ripple-loader .cell:nth-child(7) { --cell-color: #F46B7A; }
-.ff-ripple-loader .cell:nth-child(8) { --cell-color: #F6828F; }
-.ff-ripple-loader .cell:nth-child(9) { --cell-color: #05D581; }
-
-@keyframes ripple {
-  0% { background-color: transparent; }
-  30% { background-color: var(--cell-color); }
-  60% { background-color: transparent; }
-  100% { background-color: transparent; }
+.ff-loading::before{
+  content:"";width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--bd2);border-top-color:var(--green);
+  animation:spin .7s linear infinite;
 }
 
 /* FF v6.7.0: shared search input for Top Sites + Site Manager */

@@ -1371,11 +1371,24 @@ async function loadAnalytics() {
             console.warn("[FF] Failed to load charting library:", err);
         }
     }
+    const tabEl = $("atab-" + currentATab);
+    if (tabEl) {
+        if (tabEl.style.opacity !== "0") {
+            tabEl.style.opacity = "0.5";
+        }
+    }
 
-    if ("overview" === currentATab) await renderOverview();
-    else if ("daily" === currentATab) await renderDailyBreakdown();
-    else if ("topsites" === currentATab) await renderTopSites();
-    else if ("trend" === currentATab) await renderTrend();
+    try {
+        if ("overview" === currentATab) await renderOverview();
+        else if ("daily" === currentATab) await renderDailyBreakdown();
+        else if ("topsites" === currentATab) await renderTopSites();
+        else if ("trend" === currentATab) await renderTrend();
+    } finally {
+        if (tabEl) {
+            tabEl.style.transition = "opacity 0.25s ease";
+            tabEl.style.opacity = "1";
+        }
+    }
 }
 
 // FF v4.2: Insights — 365-day GitHub-style consistency heatmap.
@@ -1976,7 +1989,8 @@ document.querySelectorAll(".ni").forEach(e => {
                 if (tab) {
                     if (e === currentATab) {
                         tab.style.display = "";
-                        tab.style.opacity = "1";
+                        tab.style.opacity = "0";
+                        tab.style.transition = "none";
                     } else {
                         tab.style.display = "none";
                     }
@@ -3067,7 +3081,6 @@ async function renderDailyBreakdown() {
     // Now request only the days we need via STATS_GET_RANGE.
     var t = $("daily-breakdown-list");
     if (!t) return;
-    setSafeHTML(t, '<div class="ff-loading">' + getRippleLoaderHTML() + '<span data-i18n="loading">' + (t_("loading") || "Loading...") + '</span></div>');
     var rangeKeys = [];
     if (dailyRange === "custom" && dailyCustomFrom && dailyCustomTo) {
         const from = new Date(dailyCustomFrom + "T00:00:00");
@@ -3328,8 +3341,6 @@ function drawDailyCanvasTimeline(canvas, timeline, dayKey) {
 }
 async function renderTopSites() {
     var s = {}, _activeDayCount = 0;
-    var topSitesEl = $("top-sites");
-    if (topSitesEl) setSafeHTML(topSitesEl, '<div class="ff-loading">' + getRippleLoaderHTML() + '<span data-i18n="loadingSites">' + (t_("loadingSites") || "Loading sites…") + '</span></div>');
     // FF v6.8: fetch pinned sites from chrome.storage.local
     const storageRes = await new Promise(resolve => {
         chrome.storage.local.get(["pinnedSites"], resolve);
