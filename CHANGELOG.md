@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Dashboard Modal Popup Smoothness & Anti-Jitter Fix**: Resolved modal popup trembling and element vibration during hover and scroll across all dashboard popups (Add Block Rule, Preset Editor, PIN Security, Free Time Hours). Forced GPU hardware rendering layers (`transform: translateZ(0)` / `backface-visibility: hidden`) across modal containers and scrollable card items to eliminate sub-pixel border flickering, and replaced mouse-wheel smooth-scroll interpolation with instant, crisp scroll physics and strict scroll containment (`overscroll-behavior: contain`).
+- **Daily Breakdown High-Performance Render Refactor**: Replaced heavy `DOMParser` XML parsing loops with direct native C++ HTML engine parsing and memory batching (`DocumentFragment`), parallelized background messaging and Chrome Storage requests (`Promise.all`), memoized category resolution lookups, and bypassed unneeded Chart.js library checks on non-chart tabs for near-instantaneous tab rendering.
 
 ## [10.0.8] - 2026-08-05
 

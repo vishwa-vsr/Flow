@@ -1365,10 +1365,12 @@ function ensureChartLibrary() {
 
 async function loadAnalytics() {
     await loadCategories();
-    try {
-        await ensureChartLibrary();
-    } catch (err) {
-        console.warn("[FF] Failed to load charting library:", err);
+    if ("overview" === currentATab || "trend" === currentATab) {
+        try {
+            await ensureChartLibrary();
+        } catch (err) {
+            console.warn("[FF] Failed to load charting library:", err);
+        }
     }
     const tabEl = $("atab-" + currentATab);
     if (tabEl) {
@@ -3097,180 +3099,209 @@ async function renderDailyBreakdown() {
             rangeKeys.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
         }
     }
-    var e = (await msg("STATS_GET_RANGE", { days: rangeKeys }))?.data || {};
+    const [rangeRes, settingsRes] = await Promise.all([
+        msg("STATS_GET_RANGE", { days: rangeKeys }),
+        gSync(["settings"])
+    ]);
+    var e = rangeRes?.data || {};
     recalculateRangeStats(e);
     if (t) {
         t.textContent = "";
-        var a = (await gSync(["settings"])).settings || {},
+        var a = settingsRes?.settings || {},
             n = rangeKeys.filter(k => e[k]); // newest-first already
-        n.length ? (n.forEach(n => {
-            var i = e[n] || {},
-                s = i.productivity || 0,
-                o = i.learning || 0,
-                r = i.communication || 0,
-                l = i.distraction || 0,
-                c = i.uncategorized || 0,
-                d = s + o + r + l + c;
-            if (d < 60) return;
-            var v = document.createElement("div");
-            v.className = "db-card";
-            var h = "";
-            [{
-                c: "productivity",
-                l: catLabel("productivity", false),
-                col: catColor("productivity"),
-                v: s
-            }, {
-                c: "learning",
-                l: catLabel("learning", false),
-                col: catColor("learning"),
-                v: o
-            }, {
-                c: "communication",
-                l: catLabel("communication", false),
-                col: catColor("communication"),
-                v: r
-            }, {
-                c: "distraction",
-                l: catLabel("distraction", false),
-                col: catColor("distraction"),
-                v: l
-            }, {
-                c: "uncategorized",
-                l: catLabel("uncategorized", false),
-                col: catColor("uncategorized"),
-                v: c
-            }].forEach(e => {
-                e.v > 0 && d && (h += `<div class="db-bar-segment" style="width:${e.v / d * 100}%; background:${e.col};"></div>`)
-            });
-            var f = "";
-            let hasTimeline = i.timeline && i.timeline.length > 0;
-            if (hasTimeline) {
-                f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">`;
-                for (let gridIdx = 1; gridIdx < 4; gridIdx++) f += `<div class="db-timeline-gridline" style="left:${25 * gridIdx}%;"></div>`;
-                const dateParts = n.split("-");
-                const yr = parseInt(dateParts[0], 10);
-                const mo = parseInt(dateParts[1], 10) - 1;
-                const dy = parseInt(dateParts[2], 10);
-                const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
-                const midnightEnd = midnightStart + 864e5;
-                i.timeline.forEach(a => {
-                    let sTime, eTime;
-                    if (typeof a.start === "number" && a.start < 86400) {
-                        sTime = midnightStart + a.start * 1000;
-                        eTime = sTime + (a.dur || 0) * 1000;
-                    } else {
-                        sTime = a.start;
-                        eTime = a.end || a.start;
-                    }
-                    sTime = Math.max(midnightStart, sTime);
-                    eTime = Math.min(midnightEnd, eTime);
-                    if (eTime > sTime) {
-                        const blockLeft = ((sTime - midnightStart) / 864e5) * 100;
-                        const blockWidth = ((eTime - sTime) / 864e5) * 100;
-                        const titleStart = new Date(sTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-                        const titleEnd = new Date(eTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-                        f += `<div class="db-timeline-block" style="left:${blockLeft}%;width:${blockWidth}%;background:${catColor(a.cat)};" title="${titleStart} - ${titleEnd}"></div>`;
+        
+        if (n.length) {
+            const fragment = document.createDocumentFragment();
+            const catCache = new Map();
+
+            n.forEach(n => {
+                var i = e[n] || {},
+                    s = i.productivity || 0,
+                    o = i.learning || 0,
+                    r = i.communication || 0,
+                    l = i.distraction || 0,
+                    c = i.uncategorized || 0,
+                    d = s + o + r + l + c;
+                if (d < 60) return;
+                var v = document.createElement("div");
+                v.className = "db-card";
+                var h = "";
+                [{
+                    c: "productivity",
+                    l: catLabel("productivity", false),
+                    col: catColor("productivity"),
+                    v: s
+                }, {
+                    c: "learning",
+                    l: catLabel("learning", false),
+                    col: catColor("learning"),
+                    v: o
+                }, {
+                    c: "communication",
+                    l: catLabel("communication", false),
+                    col: catColor("communication"),
+                    v: r
+                }, {
+                    c: "distraction",
+                    l: catLabel("distraction", false),
+                    col: catColor("distraction"),
+                    v: l
+                }, {
+                    c: "uncategorized",
+                    l: catLabel("uncategorized", false),
+                    col: catColor("uncategorized"),
+                    v: c
+                }].forEach(item => {
+                    item.v > 0 && d && (h += `<div class="db-bar-segment" style="width:${item.v / d * 100}%; background:${item.col};"></div>`)
+                });
+                var f = "";
+                let hasTimeline = i.timeline && i.timeline.length > 0;
+                if (hasTimeline) {
+                    f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">`;
+                    for (let gridIdx = 1; gridIdx < 4; gridIdx++) f += `<div class="db-timeline-gridline" style="left:${25 * gridIdx}%;"></div>`;
+                    const dateParts = n.split("-");
+                    const yr = parseInt(dateParts[0], 10);
+                    const mo = parseInt(dateParts[1], 10) - 1;
+                    const dy = parseInt(dateParts[2], 10);
+                    const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
+                    const midnightEnd = midnightStart + 864e5;
+                    i.timeline.forEach(aItem => {
+                        let sTime, eTime;
+                        if (typeof aItem.start === "number" && aItem.start < 86400) {
+                            sTime = midnightStart + aItem.start * 1000;
+                            eTime = sTime + (aItem.dur || 0) * 1000;
+                        } else {
+                            sTime = aItem.start;
+                            eTime = aItem.end || aItem.start;
+                        }
+                        sTime = Math.max(midnightStart, sTime);
+                        eTime = Math.min(midnightEnd, eTime);
+                        if (eTime > sTime) {
+                            const blockLeft = ((sTime - midnightStart) / 864e5) * 100;
+                            const blockWidth = ((eTime - sTime) / 864e5) * 100;
+                            const titleStart = new Date(sTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                            const titleEnd = new Date(eTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                            f += `<div class="db-timeline-block" style="left:${blockLeft}%;width:${blockWidth}%;background:${catColor(aItem.cat)};" title="${titleStart} - ${titleEnd}"></div>`;
+                        }
+                    });
+                    f += `</div>
+                            <div class="db-timeline-labels">
+                               <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
+                            </div>`;
+                }
+                var y = '<div class="db-sites-grid">',
+                    b = 0;
+                Object.entries(i.sites || {}).sort((entry1, entry2) => entry2[1] - entry1[1]).forEach(([dom, secs]) => {
+                    if (!(secs < 120)) {
+                        b++;
+                        if (!catCache.has(dom)) {
+                            catCache.set(dom, getEffectiveCat(dom));
+                        }
+                        const effCat = catCache.get(dom);
+                        var pillBorder = catColor(effCat ? effCat.cat : "uncategorized");
+                        var safeDom = escHTML(dom);
+                        y += `<div class="db-site-pill" style="--border-color:${pillBorder}; align-items:center;">\n        <div class="db-site-left" style="color:var(--tx); font-size:15px; font-weight:800;">${getFav(dom)}<span class="db-site-dom">${safeDom}</span></div>\n        <span class="db-site-time" style="color:var(--tx); font-size:15px; font-weight:800; display:flex; align-items:center;">${fmt(secs)} <button class="scrub-btn" data-day="${n}" data-dom="${safeDom}" data-secs="${secs}" title="Adjust time" style="background:none;border:none;cursor:pointer;opacity:0.6;transition:all 0.2s;margin-left:6px;display:inline-flex;align-items:center;padding:0;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;display:inline-block;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button><button class="daily-site-rule-btn" data-domain="${safeDom}" title="Add or Edit Rule" style="background:none;border:none;cursor:pointer;opacity:0.6;transition:all 0.2s;margin-left:4px;display:inline-flex;align-items:center;padding:0;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button></span>\n      </div>`;
                     }
                 });
-                f += `</div>
-                        <div class="db-timeline-labels">
-                           <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
-                        </div>`;
-            }
-            var y = '<div class="db-sites-grid">',
-                b = 0;
-            Object.entries(i.sites || {}).sort((e, t) => t[1] - e[1]).forEach(([e, t]) => {
-                if (!(t < 120)) {
-                    b++;
-                    var a = catColor(getEffectiveCat(e).cat);
-                    y += `<div class="db-site-pill" style="--border-color:${a}; align-items:center;">\n        <div class="db-site-left" style="color:var(--tx); font-size:15px; font-weight:800;">${getFav(e)}<span class="db-site-dom">${e}</span></div>\n        <span class="db-site-time" style="color:var(--tx); font-size:15px; font-weight:800; display:flex; align-items:center;">${fmt(t)} <button class="scrub-btn" data-day="${n}" data-dom="${e}" data-secs="${t}" title="Adjust time" style="background:none;border:none;cursor:pointer;opacity:0.6;transition:all 0.2s;margin-left:6px;display:inline-flex;align-items:center;padding:0;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;display:inline-block;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button><button class="daily-site-rule-btn" data-domain="${e}" title="Add or Edit Rule" style="background:none;border:none;cursor:pointer;opacity:0.6;transition:all 0.2s;margin-left:4px;display:inline-flex;align-items:center;padding:0;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button></span>\n      </div>`
-                }
-            }), 0 === b && (y += '<span style="font-size:13px;color:var(--tx3);font-weight:600;grid-column:1/-1;">No major site activity tracked.</span>'), y += "</div>";
-            var $ = `
-              <div class="db-stats-grid">
-                <!-- Total Tracked -->
-                <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1);">
-                  <div class="db-stat-info">
-                    <span class="db-stat-title">${t_("totalTracked") || "Total Tracked"}</span>
-                    <span class="db-stat-value num" style="color: var(--tx);">${fmt(d)}</span>
-                  </div>
-                </div>
-                <!-- Productivity -->
-                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.15) : "rgba(5, 213, 129, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.2) : "rgba(5, 213, 129, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.1) : "rgba(5, 213, 129, 0.1)")}; opacity: ${s > 0 ? "1" : "0.35"};">
-                  <div class="db-stat-info">
-                    <span class="db-stat-title">${catLabel("productivity", false)}</span>
-                    <span class="db-stat-value num" style="color: ${catColor("productivity")};">${fmt(s)}</span>
-                  </div>
-                </div>
-                <!-- Learning -->
-                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.15) : "rgba(168, 85, 247, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.2) : "rgba(168, 85, 247, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.1) : "rgba(168, 85, 247, 0.1)")}; opacity: ${o > 0 ? "1" : "0.35"};">
-                  <div class="db-stat-info">
-                    <span class="db-stat-title">${catLabel("learning", false)}</span>
-                    <span class="db-stat-value num" style="color: ${catColor("learning")};">${fmt(o)}</span>
-                  </div>
-                </div>
-                <!-- Communication -->
-                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.15) : "rgba(92, 156, 252, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.2) : "rgba(92, 156, 252, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.1) : "rgba(92, 156, 252, 0.1)")}; opacity: ${r > 0 ? "1" : "0.35"};">
-                  <div class="db-stat-info">
-                    <span class="db-stat-title">${catLabel("communication", false)}</span>
-                    <span class="db-stat-value num" style="color: ${catColor("communication")};">${fmt(r)}</span>
-                  </div>
-                </div>
-                <!-- Distraction -->
-                <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.15) : "rgba(244, 107, 122, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.2) : "rgba(244, 107, 122, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.1) : "rgba(244, 107, 122, 0.1)")}; opacity: ${l > 0 ? "1" : "0.35"};">
-                  <div class="db-stat-info">
-                    <span class="db-stat-title">${catLabel("distraction", false)}</span>
-                    <span class="db-stat-value num" style="color: ${catColor("distraction")};">${fmt(l)}</span>
-                  </div>
-                </div>
-              </div>
-            `;
-            setSafeHTML(v, `
-              <div class="db-hero" style="margin-bottom: 24px;">
-                <div class="db-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
-                  <div class="db-card-header-txt">
-                    ${(() => {
-                        const parts = n.split("-");
-                        return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)).toLocaleDateString(getLocale(), { weekday: "long", month: "long", day: "numeric" });
-                    })()}
-                  </div>
-                  ${hasTimeline ? `
-                    <div class="db-card-header-txt">
-                      ${t_("activeTimeline") || "24-Hour Active Timeline"}
+                0 === b && (y += '<span style="font-size:13px;color:var(--tx3);font-weight:600;grid-column:1/-1;">No major site activity tracked.</span>');
+                y += "</div>";
+
+                var statsGridHtml = `
+                  <div class="db-stats-grid">
+                    <!-- Total Tracked -->
+                    <div class="db-stat-box" style="--glow-color: rgba(92, 156, 252, 0.15); --glow-border: rgba(92, 156, 252, 0.2); --glow-shadow: rgba(92, 156, 252, 0.1);">
+                      <div class="db-stat-info">
+                        <span class="db-stat-title">${t_("totalTracked") || "Total Tracked"}</span>
+                        <span class="db-stat-value num" style="color: var(--tx);">${fmt(d)}</span>
+                      </div>
                     </div>
-                  ` : ''}
-                </div>
-                ${hasTimeline ? `
-                  <div class="db-timeline-full-wrap" style="width: 100%; margin-bottom: 20px;">
-                    ${f}
+                    <!-- Productivity -->
+                    <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.15) : "rgba(5, 213, 129, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.2) : "rgba(5, 213, 129, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("productivity"), 0.1) : "rgba(5, 213, 129, 0.1)")}; opacity: ${s > 0 ? "1" : "0.35"};">
+                      <div class="db-stat-info">
+                        <span class="db-stat-title">${catLabel("productivity", false)}</span>
+                        <span class="db-stat-value num" style="color: ${catColor("productivity")};">${fmt(s)}</span>
+                      </div>
+                    </div>
+                    <!-- Learning -->
+                    <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.15) : "rgba(168, 85, 247, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.2) : "rgba(168, 85, 247, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("learning"), 0.1) : "rgba(168, 85, 247, 0.1)")}; opacity: ${o > 0 ? "1" : "0.35"};">
+                      <div class="db-stat-info">
+                        <span class="db-stat-title">${catLabel("learning", false)}</span>
+                        <span class="db-stat-value num" style="color: ${catColor("learning")};">${fmt(o)}</span>
+                      </div>
+                    </div>
+                    <!-- Communication -->
+                    <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.15) : "rgba(92, 156, 252, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.2) : "rgba(92, 156, 252, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("communication"), 0.1) : "rgba(92, 156, 252, 0.1)")}; opacity: ${r > 0 ? "1" : "0.35"};">
+                      <div class="db-stat-info">
+                        <span class="db-stat-title">${catLabel("communication", false)}</span>
+                        <span class="db-stat-value num" style="color: ${catColor("communication")};">${fmt(r)}</span>
+                      </div>
+                    </div>
+                    <!-- Distraction -->
+                    <div class="db-stat-box" style="--glow-color: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.15) : "rgba(244, 107, 122, 0.15)")}; --glow-border: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.2) : "rgba(244, 107, 122, 0.2)")}; --glow-shadow: ${(typeof hexToRgba === "function" ? hexToRgba(catColor("distraction"), 0.1) : "rgba(244, 107, 122, 0.1)")}; opacity: ${l > 0 ? "1" : "0.35"};">
+                      <div class="db-stat-info">
+                        <span class="db-stat-title">${catLabel("distraction", false)}</span>
+                        <span class="db-stat-value num" style="color: ${catColor("distraction")};">${fmt(l)}</span>
+                      </div>
+                    </div>
                   </div>
-                ` : ''}
-                ${$}
-              </div>
-              <div class="db-bar-container">
-                <div class="db-bar-wrap">${h}</div>
-                <div class="db-bar-legend">
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("productivity")}"></span> ${catLabel("productivity", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("learning")}"></span> ${catLabel("learning", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("communication")}"></span> ${catLabel("communication", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("distraction")}"></span> ${catLabel("distraction", !1)}</div>
-                  <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("uncategorized")}"></span> ${catLabel("uncategorized", !1)}</div>
-                </div>
-              </div>
-              ${y}
-            `), t.appendChild(v)
-        }), t.querySelectorAll(".scrub-btn").forEach(e => {
-            e.addEventListener("click", async () => {
-                await promptPinIfEnabled("lockAdjustTime") && openScrubModal(e.getAttribute("data-day"), e.getAttribute("data-dom"), parseInt(e.getAttribute("data-secs")))
-            })
-        }), t.querySelectorAll(".daily-site-rule-btn").forEach(e => {
-            e.addEventListener("click", () => {
-                if (window.openAddOrEditModal) {
-                    window.openAddOrEditModal(e.getAttribute("data-domain"));
-                }
-            })
-        })) : setSafeHTML(t, '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <p>No activity data available yet.</p>\n    </div>')
+                `;
+
+                const formattedDateStr = (() => {
+                    const parts = n.split("-");
+                    return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)).toLocaleDateString(getLocale(), { weekday: "long", month: "long", day: "numeric" });
+                })();
+
+                v.innerHTML = `
+                  <div class="db-hero" style="margin-bottom: 24px;">
+                    <div class="db-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
+                      <div class="db-card-header-txt">
+                        ${formattedDateStr}
+                      </div>
+                      ${hasTimeline ? `
+                        <div class="db-card-header-txt">
+                          ${t_("activeTimeline") || "24-Hour Active Timeline"}
+                        </div>
+                      ` : ''}
+                    </div>
+                    ${hasTimeline ? `
+                      <div class="db-timeline-full-wrap" style="width: 100%; margin-bottom: 20px;">
+                        ${f}
+                      </div>
+                    ` : ''}
+                    ${statsGridHtml}
+                  </div>
+                  <div class="db-bar-container">
+                    <div class="db-bar-wrap">${h}</div>
+                    <div class="db-bar-legend">
+                      <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("productivity")}"></span> ${catLabel("productivity", !1)}</div>
+                      <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("learning")}"></span> ${catLabel("learning", !1)}</div>
+                      <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("communication")}"></span> ${catLabel("communication", !1)}</div>
+                      <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("distraction")}"></span> ${catLabel("distraction", !1)}</div>
+                      <div class="db-bar-legend-item"><span class="db-bar-legend-dot" style="background:${catColor("uncategorized")}"></span> ${catLabel("uncategorized", !1)}</div>
+                    </div>
+                  </div>
+                  ${y}
+                `;
+                fragment.appendChild(v);
+            });
+
+            t.appendChild(fragment);
+
+            t.querySelectorAll(".scrub-btn").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    await promptPinIfEnabled("lockAdjustTime") && openScrubModal(btn.getAttribute("data-day"), btn.getAttribute("data-dom"), parseInt(btn.getAttribute("data-secs")))
+                });
+            });
+            t.querySelectorAll(".daily-site-rule-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    if (window.openAddOrEditModal) {
+                        window.openAddOrEditModal(btn.getAttribute("data-domain"));
+                    }
+                });
+            });
+        } else {
+            t.innerHTML = '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <p>No activity data available yet.</p>\n    </div>';
+        }
     }
 }
 async function renderTopSites() {
