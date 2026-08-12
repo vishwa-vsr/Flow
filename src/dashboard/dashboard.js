@@ -3081,6 +3081,7 @@ async function renderDailyBreakdown() {
     // Now request only the days we need via STATS_GET_RANGE.
     var t = $("daily-breakdown-list");
     if (!t) return;
+    setSafeHTML(t, '<div class="ff-loading">' + getRippleLoaderHTML() + '<span data-i18n="loading">' + (t_("loading") || "Loading...") + '</span></div>');
     var rangeKeys = [];
     if (dailyRange === "custom" && dailyCustomFrom && dailyCustomTo) {
         const from = new Date(dailyCustomFrom + "T00:00:00");
@@ -3341,6 +3342,8 @@ function drawDailyCanvasTimeline(canvas, timeline, dayKey) {
 }
 async function renderTopSites() {
     var s = {}, _activeDayCount = 0;
+    var topSitesEl = $("top-sites");
+    if (topSitesEl) setSafeHTML(topSitesEl, '<div class="ff-loading">' + getRippleLoaderHTML() + '<span data-i18n="loadingSites">' + (t_("loadingSites") || "Loading sites…") + '</span></div>');
     // FF v6.8: fetch pinned sites from chrome.storage.local
     const storageRes = await new Promise(resolve => {
         chrome.storage.local.get(["pinnedSites"], resolve);
