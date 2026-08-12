@@ -1047,32 +1047,7 @@
       box-shadow: none;
     }
 
-    .db-timeline-gridline {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: var(--bd2);
-      z-index: 1;
-      opacity: 0.4;
-    }
 
-    .db-timeline-block {
-      position: absolute;
-      height: 100%;
-      top: 0;
-      border-radius: 0;
-      opacity: 0.95;
-      z-index: 2;
-      min-width: 3px;
-      box-shadow: none;
-      transition: filter 0.2s ease;
-    }
-
-    .db-timeline-block:hover {
-      z-index: 3;
-      filter: brightness(1.2) contrast(1.1);
-    }
 
     .db-timeline-labels {
       display: flex;

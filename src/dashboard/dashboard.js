@@ -589,7 +589,6 @@ async function delNever(e) {
     setTimeout(() => { clearInterval(_cdown); _tdN.remove(); _toastStackCount = Math.max(0, _toastStackCount - 1); }, 10000);
 }
 
-// addBlockedSite removed (dead code)
 async function delRule(e) {
     if (!await promptPinIfEnabled("lockRules")) return;
     const _deleted = rules.find(r => r.id === e);
