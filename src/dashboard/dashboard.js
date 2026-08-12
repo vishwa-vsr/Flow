@@ -1371,24 +1371,11 @@ async function loadAnalytics() {
             console.warn("[FF] Failed to load charting library:", err);
         }
     }
-    const tabEl = $("atab-" + currentATab);
-    if (tabEl) {
-        if (tabEl.style.opacity !== "0") {
-            tabEl.style.opacity = "0.5";
-        }
-    }
 
-    try {
-        if ("overview" === currentATab) await renderOverview();
-        else if ("daily" === currentATab) await renderDailyBreakdown();
-        else if ("topsites" === currentATab) await renderTopSites();
-        else if ("trend" === currentATab) await renderTrend();
-    } finally {
-        if (tabEl) {
-            tabEl.style.transition = "opacity 0.25s ease";
-            tabEl.style.opacity = "1";
-        }
-    }
+    if ("overview" === currentATab) await renderOverview();
+    else if ("daily" === currentATab) await renderDailyBreakdown();
+    else if ("topsites" === currentATab) await renderTopSites();
+    else if ("trend" === currentATab) await renderTrend();
 }
 
 // FF v4.2: Insights — 365-day GitHub-style consistency heatmap.
@@ -1989,8 +1976,7 @@ document.querySelectorAll(".ni").forEach(e => {
                 if (tab) {
                     if (e === currentATab) {
                         tab.style.display = "";
-                        tab.style.opacity = "0";
-                        tab.style.transition = "none";
+                        tab.style.opacity = "1";
                     } else {
                         tab.style.display = "none";
                     }
