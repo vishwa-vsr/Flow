@@ -3157,37 +3157,12 @@ async function renderDailyBreakdown() {
                 var f = "";
                 let hasTimeline = i.timeline && i.timeline.length > 0;
                 if (hasTimeline) {
-                    f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">`;
-                    for (let gridIdx = 1; gridIdx < 4; gridIdx++) f += `<div class="db-timeline-gridline" style="left:${25 * gridIdx}%;"></div>`;
-                    const dateParts = n.split("-");
-                    const yr = parseInt(dateParts[0], 10);
-                    const mo = parseInt(dateParts[1], 10) - 1;
-                    const dy = parseInt(dateParts[2], 10);
-                    const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
-                    const midnightEnd = midnightStart + 864e5;
-                    i.timeline.forEach(aItem => {
-                        let sTime, eTime;
-                        if (typeof aItem.start === "number" && aItem.start < 86400) {
-                            sTime = midnightStart + aItem.start * 1000;
-                            eTime = sTime + (aItem.dur || 0) * 1000;
-                        } else {
-                            sTime = aItem.start;
-                            eTime = aItem.end || aItem.start;
-                        }
-                        sTime = Math.max(midnightStart, sTime);
-                        eTime = Math.min(midnightEnd, eTime);
-                        if (eTime > sTime) {
-                            const blockLeft = ((sTime - midnightStart) / 864e5) * 100;
-                            const blockWidth = ((eTime - sTime) / 864e5) * 100;
-                            const titleStart = new Date(sTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-                            const titleEnd = new Date(eTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-                            f += `<div class="db-timeline-block" style="left:${blockLeft}%;width:${blockWidth}%;background:${catColor(aItem.cat)};" title="${titleStart} - ${titleEnd}"></div>`;
-                        }
-                    });
-                    f += `</div>
-                            <div class="db-timeline-labels">
-                               <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
-                            </div>`;
+                    f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">
+                            <canvas class="db-timeline-canvas" data-day="${n}" style="width: 100%; height: 24px; display: block; border-radius: 6px; background: var(--bg3);"></canvas>
+                          </div>
+                          <div class="db-timeline-labels">
+                             <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
+                          </div>`;
                 }
                 var y = '<div class="db-sites-grid">',
                     b = 0;
@@ -3287,6 +3262,13 @@ async function renderDailyBreakdown() {
 
             t.appendChild(fragment);
 
+            t.querySelectorAll(".db-timeline-canvas").forEach(cv => {
+                const dayKey = cv.getAttribute("data-day");
+                if (dayKey && e[dayKey] && e[dayKey].timeline) {
+                    drawDailyCanvasTimeline(cv, e[dayKey].timeline, dayKey);
+                }
+            });
+
             t.querySelectorAll(".scrub-btn").forEach(btn => {
                 btn.addEventListener("click", async () => {
                     await promptPinIfEnabled("lockAdjustTime") && openScrubModal(btn.getAttribute("data-day"), btn.getAttribute("data-dom"), parseInt(btn.getAttribute("data-secs")))
@@ -3303,6 +3285,60 @@ async function renderDailyBreakdown() {
             t.innerHTML = '<div class="empty">\n      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3; margin-bottom:16px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>\n      <p>No activity data available yet.</p>\n    </div>';
         }
     }
+}
+
+function drawDailyCanvasTimeline(canvas, timeline, dayKey) {
+    if (!canvas || !timeline || !timeline.length) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = (canvas.clientWidth || canvas.parentElement?.clientWidth || 800) * dpr;
+    const height = 24 * dpr;
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Background track
+    ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+    ctx.fillRect(0, 0, width, height);
+
+    // Gridlines at 25%, 50%, 75%
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.lineWidth = 1 * dpr;
+    [0.25, 0.5, 0.75].forEach(pct => {
+        ctx.beginPath();
+        ctx.moveTo(width * pct, 0);
+        ctx.lineTo(width * pct, height);
+        ctx.stroke();
+    });
+
+    const dateParts = dayKey.split("-");
+    const yr = parseInt(dateParts[0], 10);
+    const mo = parseInt(dateParts[1], 10) - 1;
+    const dy = parseInt(dateParts[2], 10);
+    const midnightStart = new Date(yr, mo, dy, 0, 0, 0, 0).getTime();
+    const midnightEnd = midnightStart + 864e5;
+
+    timeline.forEach(aItem => {
+        let sTime, eTime;
+        if (typeof aItem.start === "number" && aItem.start < 86400) {
+            sTime = midnightStart + aItem.start * 1000;
+            eTime = sTime + (aItem.dur || 0) * 1000;
+        } else {
+            sTime = aItem.start;
+            eTime = aItem.end || aItem.start;
+        }
+        sTime = Math.max(midnightStart, sTime);
+        eTime = Math.min(midnightEnd, eTime);
+        if (eTime > sTime) {
+            const blockLeft = ((sTime - midnightStart) / 864e5) * width;
+            const blockWidth = Math.max(2 * dpr, ((eTime - sTime) / 864e5) * width);
+            ctx.fillStyle = catColor(aItem.cat);
+            ctx.fillRect(blockLeft, 0, blockWidth, height);
+        }
+    });
 }
 async function renderTopSites() {
     var s = {}, _activeDayCount = 0;
