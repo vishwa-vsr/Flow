@@ -120,13 +120,8 @@ document.querySelectorAll(".ttab").forEach(function (e) {
     e.addEventListener("click", function () {
         document.querySelectorAll(".ttab").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentView = e.getAttribute("data-view");
         var t = $("dynamic-list"),
-            s = $("today-widgets"),
-            leg = $("donut-legend");
+            s = $("today-widgets");
         t && t.classList.remove("fade-in"), s && s.classList.remove("fade-in"), t && t.offsetWidth;
-        const spinnerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0;color:var(--tx3);gap:10px;">' + FlowIcons.get("spinner", { size: 24, style: "opacity:0.5; animation:spin 1s linear infinite;" }) + '<span style="font-size:13px;font-weight:600">' + t_('loadingData') + '</span></div>';
-        if (t) setSafeHTML(t, spinnerHTML);
-        if (leg) setSafeHTML(leg, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">' + spinnerHTML + '</div>');
-        if ($("donut-total")) $("donut-total").textContent = "—";
         loadViewData().then(() => {
             t && t.classList.add("fade-in");
             s && "today" === currentView && s.classList.add("fade-in");
