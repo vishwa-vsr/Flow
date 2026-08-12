@@ -127,7 +127,13 @@ document.querySelectorAll(".ttab").forEach(function (e) {
         if (t) setSafeHTML(t, spinnerHTML);
         if (leg) setSafeHTML(leg, '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--tx3);gap:8px;">' + spinnerHTML + '</div>');
         if ($("donut-total")) $("donut-total").textContent = "—";
-        loadViewData().then(() => {
+        const startTime = Date.now();
+        loadViewData().then(async () => {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(0, 300 - elapsed);
+            if (remaining > 0) {
+                await new Promise(resolve => setTimeout(resolve, remaining));
+            }
             t && t.classList.add("fade-in");
             s && "today" === currentView && s.classList.add("fade-in");
             const totWid = $("total-widgets");

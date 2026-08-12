@@ -1378,14 +1378,20 @@ async function loadAnalytics() {
         }
     }
 
+    const startTime = Date.now();
     try {
         if ("overview" === currentATab) await renderOverview();
         else if ("daily" === currentATab) await renderDailyBreakdown();
         else if ("topsites" === currentATab) await renderTopSites();
         else if ("trend" === currentATab) await renderTrend();
     } finally {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, 300 - elapsed);
+        if (remaining > 0) {
+            await new Promise(resolve => setTimeout(resolve, remaining));
+        }
         if (tabEl) {
-            tabEl.style.transition = "opacity 0.25s ease";
+            tabEl.style.transition = "opacity 0.2s ease";
             tabEl.style.opacity = "1";
         }
     }
