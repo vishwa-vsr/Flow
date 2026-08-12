@@ -22,6 +22,9 @@ Flow currently supports these languages:
 | 🇯🇵 **Japanese** | `ja` | 774/777 | ✅ ~99% Translated |
 | 🇩🇪 **German** | `de` | 764/777 | ✅ ~98% Translated |
 | 🇧🇷 **Brazilian Portuguese** | `pt_BR` | 770/777 | ✅ ~99% Translated |
+| 🇫🇷 **French** | `fr` | 777/777 | ✅ ~99% Translated |
+| 🇰🇷 **Korean** | `ko` | 777/777 | ✅ ~99% Translated |
+| 🇷🇺 **Russian** | `ru` | 777/777 | ✅ ~99% Translated |
 
 > **Note:** The remaining 1-2% of "untranslated" keys are universal terms (like "Pomodoro", "Flow", "Feedback") that are intentionally the same in every language.
 

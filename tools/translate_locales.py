@@ -4,148 +4,149 @@ import urllib.request
 import urllib.parse
 import time
 import re
+import sys
 
-# Use relative paths for portability
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SOURCE_DIR = os.path.dirname(SCRIPT_DIR)
-LOCALES_DIR = os.path.join(SOURCE_DIR, "_locales")
+LOCALES_DIR = os.path.join(SOURCE_DIR, "src", "_locales")
 EN_PATH = os.path.join(LOCALES_DIR, "en", "messages.json")
 
+# Supported target languages for batch translation script
 TARGET_LANGS = {
-    "zh_CN": "zh-CN",  # Simplified Chinese
-    "zh_TW": "zh-TW",  # Traditional Chinese (Taiwan)
-    "zh_HK": "zh-HK"   # Traditional Chinese (Hong Kong)
+    "fr": "fr",     # French
+    "ko": "ko",     # Korean
+    "ru": "ru",     # Russian
+    "es": "es",     # Spanish
+    "de": "de",     # German
+    "ja": "ja",     # Japanese
+    "pt_BR": "pt",  # Brazilian Portuguese
+    "zh_CN": "zh-CN", # Simplified Chinese
+    "zh_TW": "zh-TW", # Traditional Chinese (Taiwan)
+    "zh_HK": "zh-HK"  # Traditional Chinese (Hong Kong)
 }
 
-def translate_api(text, target_lang):
+def translate_batch(texts, target_lang):
+    if not texts:
+        return []
+    
+    DELIMITER = " ||| "
+    processed_texts = []
+    placeholders_map = []
+    
+    for text in texts:
+        ph_list = re.findall(r'\$\w+\$|\$\d+', text)
+        temp_text = text
+        for idx, ph in enumerate(ph_list):
+            temp_text = temp_text.replace(ph, f"[[{idx}]]")
+        processed_texts.append(temp_text)
+        placeholders_map.append(ph_list)
+    
+    combined_text = DELIMITER.join(processed_texts)
+    encoded_text = urllib.parse.quote(combined_text)
+    url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl={target_lang}&dt=t&q={encoded_text}"
+    
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
+    
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            translated_parts = [part[0] for part in data[0] if part[0]]
+            full_translated = "".join(translated_parts)
+            
+            raw_splits = re.split(r'\s*\|\|\|\s*', full_translated)
+            if len(raw_splits) != len(texts):
+                return [translate_single(text, ph_list, target_lang) for text, ph_list in zip(texts, placeholders_map)]
+            
+            results = []
+            for split_item, ph_list in zip(raw_splits, placeholders_map):
+                translated_item = split_item
+                for idx, ph in enumerate(ph_list):
+                    pattern = rf'\[\s*\[\s*{idx}\s*\]\s*\]'
+                    translated_item = re.sub(pattern, ph, translated_item)
+                results.append(translated_item)
+            return results
+    except Exception:
+        return [translate_single(text, ph_list, target_lang) for text, ph_list in zip(texts, placeholders_map)]
+
+def translate_single(text, ph_list, target_lang):
     if not text.strip():
         return text
-
-    # Protect placeholders like $1, $LIMIT$, etc.
-    # We find things like $1 or $LIMIT$ and replace them with [[0]], [[1]], etc.
-    placeholders = re.findall(r'\$\w+\$|\$\d+', text)
     temp_text = text
-    for idx, ph in enumerate(placeholders):
+    for idx, ph in enumerate(ph_list):
         temp_text = temp_text.replace(ph, f"[[{idx}]]")
-
-    # URL encode the text
     encoded_text = urllib.parse.quote(temp_text)
     url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl={target_lang}&dt=t&q={encoded_text}"
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-
+    headers = {'User-Agent': 'Mozilla/5.0'}
     try:
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
-            translated_parts = []
-            for part in data[0]:
-                if part[0]:
-                    translated_parts.append(part[0])
-            translated_text = "".join(translated_parts)
-            
-            # Restore placeholders, removing any accidental spaces around them introduced by translation
-            for idx, ph in enumerate(placeholders):
-                # Search for [[idx]] with optional spaces
+            parts = [part[0] for part in data[0] if part[0]]
+            res = "".join(parts)
+            for idx, ph in enumerate(ph_list):
                 pattern = rf'\[\s*\[\s*{idx}\s*\]\s*\]'
-                translated_text = re.sub(pattern, ph, translated_text)
-                
-            return translated_text
-    except Exception as e:
-        print(f"Error translating '{text}' to {target_lang}: {e}")
-        return None
+                res = re.sub(pattern, ph, res)
+            return res
+    except Exception:
+        return text
 
 def run_translation():
     if not os.path.exists(EN_PATH):
-        print(f"Error: English source file not found at {EN_PATH}")
+        print(f"Error: Source English locale not found at {EN_PATH}")
         return
 
     with open(EN_PATH, "r", encoding="utf-8") as f:
         en_data = json.load(f)
 
-    print(f"Loaded English messages: {len(en_data)} keys.")
+    BATCH_SIZE = 15
 
     for folder_name, lang_code in TARGET_LANGS.items():
         lang_dir = os.path.join(LOCALES_DIR, folder_name)
         os.makedirs(lang_dir, exist_ok=True)
         dest_path = os.path.join(lang_dir, "messages.json")
 
-        # Load existing translations if they exist to avoid re-translating (and save API calls)
         existing_data = {}
         if os.path.exists(dest_path):
             try:
                 with open(dest_path, "r", encoding="utf-8") as f:
                     existing_data = json.load(f)
-                
-                # Clean up keys that match English messages exactly (likely failed fallbacks)
-                cleaned_keys = []
-                for k in list(existing_data.keys()):
-                    if k in en_data and existing_data[k].get("message") == en_data[k].get("message"):
-                        # Only delete if it's long enough to be an actual sentence that should have been translated
-                        if len(en_data[k].get("message", "")) > 4:
-                            del existing_data[k]
-                            cleaned_keys.append(k)
-                if cleaned_keys:
-                    print(f"Cleaned up {len(cleaned_keys)} fallback keys in {folder_name} for re-translation.")
-                print(f"Found existing translations for {folder_name} ({len(existing_data)} keys).")
-            except Exception as e:
-                print(f"Could not parse existing translation file for {folder_name}: {e}")
+            except Exception:
+                pass
 
-        translated_data = {}
+        translated_data = dict(existing_data)
         keys_to_translate = [k for k in en_data.keys() if k not in existing_data]
 
         if not keys_to_translate:
             print(f"All keys for {folder_name} are already translated!")
             continue
 
-        print(f"Translating {len(keys_to_translate)} keys for {folder_name}...")
+        print(f"Translating {len(keys_to_translate)} keys for {folder_name} in batches of {BATCH_SIZE}...")
 
-        # Copy existing ones first
-        for k, v in existing_data.items():
-            translated_data[k] = v
+        for i in range(0, len(keys_to_translate), BATCH_SIZE):
+            batch_keys = keys_to_translate[i:i+BATCH_SIZE]
+            batch_texts = [en_data[k].get("message", "") for k in batch_keys]
 
-        count = 0
-        for key in en_data.keys():
-            if key in existing_data:
-                continue
+            translated_texts = translate_batch(batch_texts, lang_code)
 
-            item = en_data[key]
-            orig_msg = item.get("message", "")
-            desc = item.get("description", "")
-            
-            translated_msg = translate_api(orig_msg, lang_code)
-            if translated_msg is None:
-                # Fallback to English on error
-                translated_msg = orig_msg
+            for key, trans_msg in zip(batch_keys, translated_texts):
+                item = en_data[key]
+                desc = item.get("description", "")
+                translated_data[key] = {"message": trans_msg}
+                if desc:
+                    translated_data[key]["description"] = desc
+                if "placeholders" in item:
+                    translated_data[key]["placeholders"] = item["placeholders"]
 
-            translated_data[key] = {
-                "message": translated_msg
-            }
-            if desc:
-                translated_data[key]["description"] = desc
-            if "placeholders" in item:
-                translated_data[key]["placeholders"] = item["placeholders"]
+            sorted_data = {k: translated_data[k] for k in en_data.keys() if k in translated_data}
+            with open(dest_path, "w", encoding="utf-8") as f:
+                json.dump(sorted_data, f, ensure_ascii=False, indent=2)
 
-            count += 1
-            if count % 20 == 0:
-                print(f"Progress ({folder_name}): {count}/{len(keys_to_translate)} translated.")
-            
-            # Tiny sleep to avoid getting blocked
-            time.sleep(0.05)
+            time.sleep(0.2)
 
-        # Sort the translations based on the original English keys order
-        sorted_translated_data = {}
-        for key in en_data.keys():
-            if key in translated_data:
-                sorted_translated_data[key] = translated_data[key]
-
-        # Write out file
-        with open(dest_path, "w", encoding="utf-8") as f:
-            json.dump(sorted_translated_data, f, ensure_ascii=False, indent=2)
-
-        print(f"Successfully saved {folder_name} translations to {dest_path}")
+        print(f"Saved {folder_name} translations to {dest_path}")
 
 if __name__ == "__main__":
     run_translation()

@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.0.9] - 2026-08-12
+
+### Added
+- **Multi-Language Support Expansion (French, Korean, Russian)**: Added complete UI localization across French (`fr`), Korean (`ko`), and Russian (`ru`), expanding Flow's global multi-language support to 11 full languages.
+- **Fast Batch Translation Tooling (`tools/translate_locales.py`)**: Rebuilt the locale translation script with high-speed request batching (`15 items/batch`), regex placeholder protection, and automatic file saving.
+
+### Fixed
+- **Dashboard Modal Popup Smoothness & Anti-Jitter Fix**: Resolved modal popup trembling and element vibration during hover and scroll across all dashboard popups (Add Block Rule, Preset Editor, PIN Security, Free Time Hours). Forced GPU hardware rendering layers (`transform: translateZ(0)` / `backface-visibility: hidden`) across modal containers and scrollable card items to eliminate sub-pixel border flickering, and replaced mouse-wheel smooth-scroll interpolation with instant, crisp scroll physics and strict scroll containment (`overscroll-behavior: contain`).
+
 ## [10.0.8] - 2026-08-05
 
 ### Added

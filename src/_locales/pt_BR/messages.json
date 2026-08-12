@@ -1142,6 +1142,18 @@
     "message": "Português (Brasil) / Português (Brasil)",
     "description": "Language choice."
   },
+  "langFrench": {
+    "message": "Francês / Francês",
+    "description": "Language choice."
+  },
+  "langKorean": {
+    "message": "Coreano / 한국어",
+    "description": "Language choice."
+  },
+  "langRussian": {
+    "message": "Russo / Russo",
+    "description": "Language choice."
+  },
   "averageLine": {
     "message": "Linha Média",
     "description": "Chart option."

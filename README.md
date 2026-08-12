@@ -17,7 +17,7 @@
     <a href="./LICENSE"><img src="https://img.shields.io/github/license/vishwa-vsr/Flow" alt="License" valign="middle"></a>
   </p>
   
-  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.8</b></i></p>
+  <p><i>Formerly known as FocusFlow. Latest Release: <b>v10.0.9</b></i></p>
 
   <br>
   
@@ -43,7 +43,7 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 | ⏱️ **Premium Pomodoro Timer** | Fully customizable work sessions, short breaks, and long breaks with a glowing progress ring. |
 | 📊 **Visual Time Tracking** | Circular donut chart displays your top-visited websites and shows exactly where your minutes went. |
 | 🚫 **Smart Site Blocker** | Network-level blocking with daily time limits, focus schedules, per-session limits, and redirects. |
-| 🌐 **Multi-language support** | Fully localized user interface across 8 languages (English, Spanish, Simplified Chinese, Traditional Chinese HK/TW, Japanese, German, and Brazilian Portuguese). |
+| 🌐 **Multi-language support** | Fully localized user interface across 11 languages (English, Spanish, Simplified Chinese, Traditional Chinese HK/TW, Japanese, German, Brazilian Portuguese, French, Korean, and Russian). |
 | 🔒 **6-Digit PIN Lock** | Granular locks for Timer Stop, Rule Editing, Free-time Hours, Focus Presets, and Settings Danger Zone. |
 | 🎯 **Weekly Goals & Streaks** | Set focus targets, track your progress, and earn a glowing streak badge for consecutive days. |
 | 🗺️ **365-Day Heatmap** | GitHub-style consistency heatmap with customizable focus thresholds. Green = focused. Red = distracted. |

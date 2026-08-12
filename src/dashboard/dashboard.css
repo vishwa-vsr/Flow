@@ -53,6 +53,7 @@
       visibility: visible;
       pointer-events: auto;
       transition: opacity 0.15s ease, visibility 0.15s ease;
+      overscroll-behavior: contain !important;
     }
 
     .overlay.hide {
@@ -161,6 +162,40 @@
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       max-height: 85vh;
+      transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      will-change: auto;
+    }
+
+    .overlay .card:hover,
+    .overlay-card:hover,
+    .cat-edit-modal:hover,
+    .ff-modal-card:hover {
+      transform: translateZ(0) !important;
+      box-shadow: var(--shadow-lg) !important;
+    }
+
+    /* Crisp & Jitter-Free Modal Scrolling */
+    .overlay .card > div[style*="overflow-y"],
+    .overlay .card > div[style*="overflow-y:auto"],
+    .overlay .card > div[style*="overflow-y: auto"],
+    .overlay [style*="overflow-y:auto"],
+    .overlay [style*="overflow-y: auto"],
+    .cat-edit-modal {
+      overscroll-behavior: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      scroll-behavior: auto !important;
+    }
+
+    /* Lock GPU rendering layers on all popup items to eliminate sub-pixel border flickering during scroll */
+    .overlay label,
+    .overlay .card div,
+    .overlay .card label,
+    .overlay .card input,
+    .overlay .card button {
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     html.light .navbar {

@@ -1,0 +1,3043 @@
+{
+  "extName": {
+    "message": "Flow — блокировщик веб-сайтов и трекер привычек",
+    "description": "Extension name shown in the Chrome Web Store and browser toolbar."
+  },
+  "extDescription": {
+    "message": "Блокируйте отвлекающие веб-сайты, отслеживайте время, проведенное за экраном, и сохраняйте концентрацию с помощью таймеров Pomodoro. Частный и местный.",
+    "description": "Extension description shown in the Chrome Web Store listing."
+  },
+  "verification": {
+    "message": "Проверка"
+  },
+  "enterPin": {
+    "message": "Введите свой 6-значный PIN-код, чтобы продолжить"
+  },
+  "incorrectPin": {
+    "message": "Неправильный PIN-код"
+  },
+  "cancel": {
+    "message": "Отменить"
+  },
+  "ok": {
+    "message": "ОК"
+  },
+  "analytics": {
+    "message": "Аналитика",
+    "description": "Label for the analytics section or button."
+  },
+  "toggleTheme": {
+    "message": "Переключить тему",
+    "description": "Tooltip for the theme toggle button."
+  },
+  "privacyMode": {
+    "message": "Режим конфиденциальности / отслеживание паузы",
+    "description": "Label for the privacy mode toggle that pauses tracking."
+  },
+  "settings": {
+    "message": "Настройки",
+    "description": "Label for the settings button or section."
+  },
+  "pauseTrackingBlocking": {
+    "message": "Отслеживание и блокировка паузы"
+  },
+  "pauseFor30Min": {
+    "message": "Пауза на 30 минут"
+  },
+  "pauseFor1Hour": {
+    "message": "Пауза на 1 час"
+  },
+  "pauseUntilResumed": {
+    "message": "Пауза до возобновления"
+  },
+  "privacyModeActive": {
+    "message": "Режим конфиденциальности активен"
+  },
+  "trackingBlockingPaused": {
+    "message": "Отслеживание и блокировка приостановлены"
+  },
+  "resume": {
+    "message": "Резюме"
+  },
+  "tabToday": {
+    "message": "Сегодня"
+  },
+  "tabAllTime": {
+    "message": "За все время"
+  },
+  "weeklyGoal": {
+    "message": "Цель на неделю"
+  },
+  "goalDone": {
+    "message": "$h$ч $m$м готово",
+    "description": "Shows hours and minutes of weekly goal completed. Example: 2h 30m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "2"
+      },
+      "m": {
+        "content": "$2",
+        "example": "30"
+      }
+    }
+  },
+  "setGoalInSettings": {
+    "message": "Установите цель в настройках"
+  },
+  "goalHit": {
+    "message": "🏆Цель достигнута!"
+  },
+  "timerSettings": {
+    "message": "Настройки таймера"
+  },
+  "workMin": {
+    "message": "Работа (мин)"
+  },
+  "shortBreak": {
+    "message": "Короткий перерыв"
+  },
+  "longBreak": {
+    "message": "Длинный перерыв"
+  },
+  "cycles": {
+    "message": "Циклы"
+  },
+  "saveSettings": {
+    "message": "Сохранить настройки"
+  },
+  "advancedSettings": {
+    "message": "Расширенные настройки"
+  },
+  "focusMode": {
+    "message": "Режим фокусировки",
+    "description": "Label for the focus mode toggle or section."
+  },
+  "pomodoro": {
+    "message": "Помидор"
+  },
+  "readyToFocus": {
+    "message": "Готовы сосредоточиться?"
+  },
+  "autoStopsIn": {
+    "message": "⏱ Автоостановка в"
+  },
+  "btnStart": {
+    "message": "Начать"
+  },
+  "btnStop": {
+    "message": "Стоп"
+  },
+  "btnSkip": {
+    "message": "Пропустить"
+  },
+  "btnPause": {
+    "message": "Пауза"
+  },
+  "btnResume": {
+    "message": "Резюме"
+  },
+  "loading": {
+    "message": "Загрузка..."
+  },
+  "loadingData": {
+    "message": "Загрузка данных..."
+  },
+  "noDataYet": {
+    "message": "Данных пока нет"
+  },
+  "sublblToday": {
+    "message": "сегодня"
+  },
+  "sublblAllTime": {
+    "message": "все время"
+  },
+  "catProductivity": {
+    "message": "Производительность"
+  },
+  "catLearning": {
+    "message": "Обучение"
+  },
+  "catCommunication": {
+    "message": "Общение"
+  },
+  "catDistraction": {
+    "message": "Отвлечение"
+  },
+  "catUncategorized": {
+    "message": "Без категории"
+  },
+  "allSitesToday": {
+    "message": "Все сайты сегодня"
+  },
+  "allTimeSiteUsage": {
+    "message": "Использование сайта за все время"
+  },
+  "clickTagToEdit": {
+    "message": "(Нажмите тег, чтобы изменить)"
+  },
+  "showAllSites": {
+    "message": "Показать все $count$ сайтов",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "42"
+      }
+    }
+  },
+  "rateUs": {
+    "message": "⭐ Оцените нас"
+  },
+  "feedback": {
+    "message": "💬 Обратная связь"
+  },
+  "unblock": {
+    "message": "Разблокировать"
+  },
+  "blockSite": {
+    "message": "Блокировать сайт"
+  },
+  "defaultInstant": {
+    "message": "По умолчанию (мгновенно)",
+    "description": "Label for the default instant-block mode."
+  },
+  "confirmBlockTitle": {
+    "message": "Заблокировать сайт?"
+  },
+  "confirmBlock": {
+    "message": "Вы уверены, что хотите заблокировать $domain$? Это перезагрузит вкладку и заблокирует доступ к этому сайту.",
+    "description": "Confirmation dialog when blocking a site.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "youtube.com"
+      }
+    }
+  },
+  "confirmPauseTitle": {
+    "message": "Приостановить сеанс фокусировки?"
+  },
+  "confirmPauseDesc": {
+    "message": "Сессии можно приостановить не более чем на 5 минут. Через 5 минут ваш сеанс автоматически завершится."
+  },
+  "deepWork": {
+    "message": "Глубокая работа"
+  },
+  "shortBreakPhase": {
+    "message": "Короткий перерыв!"
+  },
+  "longBreakPhase": {
+    "message": "Долгий перерыв!"
+  },
+  "scheduledSession": {
+    "message": "Запланированная сессия"
+  },
+  "schedule": {
+    "message": "Расписание"
+  },
+  "work": {
+    "message": "Работа"
+  },
+  "cyclesDone": {
+    "message": "$count$ выполнено",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "cyclesCompleted": {
+    "message": "$count$ цикл завершен",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "cyclesCompletedPlural": {
+    "message": "$count$ циклов завершено",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "active": {
+    "message": "Активный"
+  },
+  "minWorkBreak": {
+    "message": "$work$ минута работы · $break$ минута перерыва",
+    "placeholders": {
+      "work": {
+        "content": "$1",
+        "example": "25"
+      },
+      "break": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "trackingPausedFor": {
+    "message": "Отслеживание приостановлено на $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5m 30s"
+      }
+    }
+  },
+  "trackingPausedIndefinitely": {
+    "message": "Отслеживание приостановлено на неопределенный срок"
+  },
+  "privacyDisabledDuringFocus": {
+    "message": "Режим конфиденциальности отключен во время сеанса фокусировки"
+  },
+  "hDone": {
+    "message": "$h$ч $m$м готово",
+    "description": "Hours and minutes completed. Example: 1h 45m done.",
+    "placeholders": {
+      "h": {
+        "content": "$1",
+        "example": "1"
+      },
+      "m": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "hLeft": {
+    "message": "слева"
+  },
+  "blockedPageTitle": {
+    "message": "Заблокировано — поток",
+    "description": "Page title for the blocked site page."
+  },
+  "blockedMsg1Emoji": {
+    "message": "🧱",
+    "description": "Emoji for blocked message variant 1."
+  },
+  "blockedMsg1Head": {
+    "message": "Не сегодня, чемпион.",
+    "description": "Heading for blocked message variant 1."
+  },
+  "blockedMsg1Sub": {
+    "message": "Ваше будущее «я» сказало «НЕТ». Они были очень тверды в этом.",
+    "description": "Subtext for blocked message variant 1."
+  },
+  "blockedMsg2Emoji": {
+    "message": "🤖",
+    "description": "Emoji for blocked message variant 2."
+  },
+  "blockedMsg2Head": {
+    "message": "ДОСТУП ЗАПРЕЩЕН.",
+    "description": "Heading for blocked message variant 2."
+  },
+  "blockedMsg2Sub": {
+    "message": "Производительный бот заговорил. Сопротивление бесполезно.",
+    "description": "Subtext for blocked message variant 2."
+  },
+  "blockedMsg3Emoji": {
+    "message": "🧠",
+    "description": "Emoji for blocked message variant 3."
+  },
+  "blockedMsg3Head": {
+    "message": "Большой мозговой переезд.",
+    "description": "Heading for blocked message variant 3."
+  },
+  "blockedMsg3Sub": {
+    "message": "Вы заблокировали это. В прошлом ты был умнее, чем сейчас.",
+    "description": "Subtext for blocked message variant 3."
+  },
+  "blockedMsg4Emoji": {
+    "message": "🚪",
+    "description": "Emoji for blocked message variant 4."
+  },
+  "blockedMsg4Head": {
+    "message": "Дверь заперта.",
+    "description": "Heading for blocked message variant 4."
+  },
+  "blockedMsg4Sub": {
+    "message": "Ты поставь туда замок. Ты дал мне ключ. Не отдавая его обратно.",
+    "description": "Subtext for blocked message variant 4."
+  },
+  "blockedMsg5Emoji": {
+    "message": "🏋️",
+    "description": "Emoji for blocked message variant 5."
+  },
+  "blockedMsg5Head": {
+    "message": "Ваша дисциплина вызвала.",
+    "description": "Heading for blocked message variant 5."
+  },
+  "blockedMsg5Sub": {
+    "message": "Оно хочет, чтобы ты вернулся. Оно скучает по тебе. Иди, сделай дело.",
+    "description": "Subtext for blocked message variant 5."
+  },
+  "blockedMsg6Emoji": {
+    "message": "⛔",
+    "description": "Emoji for blocked message variant 6."
+  },
+  "blockedMsg6Head": {
+    "message": "НЕА. Абсолютно нет.",
+    "description": "Heading for blocked message variant 6."
+  },
+  "blockedMsg6Sub": {
+    "message": "Возвращайся, когда заслужишь это. Вы знаете, что делать.",
+    "description": "Subtext for blocked message variant 6."
+  },
+  "blockedMsg7Emoji": {
+    "message": "🦾",
+    "description": "Emoji for blocked message variant 7."
+  },
+  "blockedMsg7Head": {
+    "message": "Оставайся твердым.",
+    "description": "Heading for blocked message variant 7."
+  },
+  "blockedMsg7Sub": {
+    "message": "Работа не делается сама собой. Вернитесь к этому.",
+    "description": "Subtext for blocked message variant 7."
+  },
+  "blockedMsg8Emoji": {
+    "message": "🐤",
+    "description": "Emoji for blocked message variant 8."
+  },
+  "blockedMsg8Head": {
+    "message": "Бок-бок-бок!",
+    "description": "Heading for blocked message variant 8."
+  },
+  "blockedMsg8Sub": {
+    "message": "Это звук прокрастинации. Не будь курицей.",
+    "description": "Subtext for blocked message variant 8."
+  },
+  "neutralBlockHead": {
+    "message": "Этот сайт заблокирован",
+    "description": "Neutral heading when a site is blocked without a fun message."
+  },
+  "neutralBlockSub": {
+    "message": "Доступ ограничен вашими правилами Flow.",
+    "description": "Neutral subtext for blocked site."
+  },
+  "ruleInstantBlock": {
+    "message": "Мгновенная блокировка активна",
+    "description": "Badge text for an instant block rule."
+  },
+  "ruleScheduleBlock": {
+    "message": "Блокировка расписания активна",
+    "description": "Badge text for a schedule-based block rule."
+  },
+  "ruleTimeLimitReached": {
+    "message": "Дневной лимит достигнут",
+    "description": "Badge text when the daily time limit is reached."
+  },
+  "ruleSessionLimitReached": {
+    "message": "Достигнут лимит сеансов",
+    "description": "Badge text when the per-session time limit is reached."
+  },
+  "ruleManuallyBlocked": {
+    "message": "Заблокировано вручную",
+    "description": "Badge text when a site was manually blocked by the user."
+  },
+  "ruleTweakBlocked": {
+    "message": "Отвлекающий раздел заблокирован",
+    "description": "Badge text when a specific section of a site is blocked via advanced tweaks."
+  },
+  "ruleDetailInstant": {
+    "message": "Этот сайт всегда блокируется.",
+    "description": "Detail text explaining an instant block rule."
+  },
+  "ruleDetailSchedule": {
+    "message": "Этот сайт заблокирован в запланированные часы блокировки.",
+    "description": "Detail text explaining a schedule block rule."
+  },
+  "ruleDetailTimeLimit": {
+    "message": "Вы исчерпали свой дневной лимит времени для этого сайта.",
+    "description": "Detail text explaining the daily time limit was reached."
+  },
+  "ruleDetailSessionLimit": {
+    "message": "Вы исчерпали лимит на количество сеансов для этого сайта. Сделайте перерыв!",
+    "description": "Detail text explaining the session limit was reached."
+  },
+  "ruleDetailManual": {
+    "message": "Вы добавили этот сайт в свой черный список.",
+    "description": "Detail text explaining the site was manually blocked."
+  },
+  "ruleDetailTweak": {
+    "message": "Доступ к этому конкретному разделу заблокирован вашими расширенными настройками сайта.",
+    "description": "Detail text explaining a site tweak block."
+  },
+  "blockRuleActive": {
+    "message": "Правило блокировки активно",
+    "description": "Generic badge for any active block rule."
+  },
+  "blockedByFlow": {
+    "message": "Заблокировано потоком",
+    "description": "Generic blocked indicator."
+  },
+  "dailyLimitBadge": {
+    "message": "Дневной лимит · $mins$ потрачено минут",
+    "description": "Badge showing daily limit and time spent.",
+    "placeholders": {
+      "mins": {
+        "content": "$1",
+        "example": "45"
+      }
+    }
+  },
+  "blockedUntil": {
+    "message": "Заблокировано до $time$",
+    "description": "Shows when the block will be lifted.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "cooldownOver": {
+    "message": "Перезарядка окончена! Обновите страницу, чтобы посетить.",
+    "description": "Message shown when the cooldown timer has expired."
+  },
+  "takeABreak": {
+    "message": "Сделайте перерыв · разблокировка в $time$",
+    "description": "Cooldown message showing time until unblock.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2:30"
+      }
+    }
+  },
+  "blockedUntilSchedule": {
+    "message": "Этот сайт заблокирован до $time$ по вашему расписанию.",
+    "description": "Tells user when the schedule block lifts.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "defaultRuleDetail": {
+    "message": "Этот сайт заблокирован по одному из ваших правил.",
+    "description": "Fallback detail text for an unknown block rule."
+  },
+  "goDoSomethingUseful": {
+    "message": "Иди, сделай что-нибудь полезное:",
+    "description": "Heading above helpful link suggestions on the blocked page."
+  },
+  "takeBackBtn": {
+    "message": "← Верни меня",
+    "description": "Button to navigate back to the previous page."
+  },
+  "manageBlockRules": {
+    "message": "Управление правилами блокировки →",
+    "description": "Link to the dashboard to manage block rules."
+  },
+  "thisSite": {
+    "message": "этот сайт",
+    "description": "Generic label referring to the current site."
+  },
+  "quote1": {
+    "message": "«Будущее, за которым вы наблюдаете. Заставьте их гордиться».",
+    "description": "Motivational quote 1."
+  },
+  "quote2": {
+    "message": "«Дисциплина — это выбор между тем, чего ты хочешь сейчас, и тем, чего ты хочешь больше всего».",
+    "description": "Motivational quote 2."
+  },
+  "quote3": {
+    "message": "«Углубленная работа лучше напряженной работы».",
+    "description": "Motivational quote 3."
+  },
+  "quote4": {
+    "message": "«Маленькие шаги каждый день приводят к большим результатам».",
+    "description": "Motivational quote 4."
+  },
+  "quote5": {
+    "message": "«Вам не нужно больше времени. Вам нужно больше внимания».",
+    "description": "Motivational quote 5."
+  },
+  "quote6": {
+    "message": "«То, что вы делаете сегодня, имеет большее значение, чем вы думаете».",
+    "description": "Motivational quote 6."
+  },
+  "quote7": {
+    "message": "«Препятствие – это путь».",
+    "description": "Motivational quote 7."
+  },
+  "quote8": {
+    "message": "«Страдайте боль дисциплины или страдайте болью сожаления».",
+    "description": "Motivational quote 8."
+  },
+  "quote9": {
+    "message": "«Ваш фокус определяет вашу реальность».",
+    "description": "Motivational quote 9."
+  },
+  "quote10": {
+    "message": "«Будь настолько хорош, что они не смогут игнорировать тебя».",
+    "description": "Motivational quote 10."
+  },
+  "quote11": {
+    "message": "«Дисциплина равна свободе».",
+    "description": "Motivational quote 11."
+  },
+  "privacyModeTitle": {
+    "message": "Режим конфиденциальности / отслеживание паузы",
+    "description": "Tooltip for privacy mode toggle."
+  },
+  "pausedTime": {
+    "message": "Приостановлено: $time$",
+    "description": "Paused timer display.",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "29:30"
+      }
+    }
+  },
+  "siteManager": {
+    "message": "Менеджер сайта",
+    "description": "Label for the site manager button or section."
+  },
+  "settingsLocked": {
+    "message": "Настройки заблокированы",
+    "description": "Title when settings are passcode locked."
+  },
+  "incorrectPinTryAgain": {
+    "message": "Неправильный PIN-код — попробуйте еще раз",
+    "description": "PIN mismatch warning."
+  },
+  "analyticsDesc": {
+    "message": "Ваша полная картина производительности.",
+    "description": "Analytics section description."
+  },
+  "timeDistribution": {
+    "message": "РАСПРЕДЕЛЕНИЕ ВРЕМЕНИ"
+  },
+  "top6Websites": {
+    "message": "ТОП-6 САЙТОВ"
+  },
+  "overview": {
+    "message": "Обзор"
+  },
+  "dailyBreakdown": {
+    "message": "Ежедневная разбивка"
+  },
+  "topSites": {
+    "message": "Лучшие сайты"
+  },
+  "studyVsDistraction": {
+    "message": "Учеба против отвлечения",
+    "description": "Study vs Distraction tab title."
+  },
+  "comparison": {
+    "message": "Сравнение"
+  },
+  "insights": {
+    "message": "Аналитика",
+    "description": "Insights tab title."
+  },
+  "7days": {
+    "message": "7 дней",
+    "description": "Range selection button label."
+  },
+  "30days": {
+    "message": "30 дней",
+    "description": "Range selection button label."
+  },
+  "customRange": {
+    "message": "Пользовательский диапазон"
+  },
+  "last7Days": {
+    "message": "Последние 7 дней",
+    "description": "Default range display label."
+  },
+  "from": {
+    "message": "Из",
+    "description": "Start date label."
+  },
+  "to": {
+    "message": "",
+    "description": "Preposition."
+  },
+  "apply": {
+    "message": "Применить",
+    "description": "Submit date range selection."
+  },
+  "total": {
+    "message": "Итого",
+    "description": "Sum of tracked minutes."
+  },
+  "bestStreak": {
+    "message": "ЛУЧШАЯ СТРИК"
+  },
+  "bestDay": {
+    "message": "ЛУЧШИЙ ДЕНЬ"
+  },
+  "allTimeTotal": {
+    "message": "ОБЩИЙ ОБЩИЙ ЗА ВРЕМЯ"
+  },
+  "dailyAverage": {
+    "message": "СРЕДНЯЯ ЕЖЕДНЕВНАЯ"
+  },
+  "daysTracked": {
+    "message": "ПРОЧИТАННЫЕ ДНИ"
+  },
+  "searchSites": {
+    "message": "Поиск по сайтам…",
+    "description": "Filter placeholder."
+  },
+  "domain": {
+    "message": "Домен",
+    "description": "Site manager table header."
+  },
+  "actions": {
+    "message": "Действия",
+    "description": "Site manager table header."
+  },
+  "category": {
+    "message": "Категория",
+    "description": "Site manager table header."
+  },
+  "avgDay": {
+    "message": "Среднее значение/день",
+    "description": "Average usage per day table header."
+  },
+  "loadingSites": {
+    "message": "Загрузка сайтов…",
+    "description": "Loader text."
+  },
+  "totalWorkStudy": {
+    "message": "Всего работы/учебы",
+    "description": "Focus category sum label."
+  },
+  "totalDistraction": {
+    "message": "Полное отвлечение",
+    "description": "Distraction category sum label."
+  },
+  "productivityRatio": {
+    "message": "Коэффициент производительности",
+    "description": "Comparison ratio label."
+  },
+  "goodDays365d": {
+    "message": "ХОРОШИЕ ДНИ (365D)"
+  },
+  "wastedDays365d": {
+    "message": "Впустую (365d)",
+    "description": "Number of low productivity days."
+  },
+  "consistency365": {
+    "message": "365-ДНЕВНАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ"
+  },
+  "heatmapHelp": {
+    "message": "Каждый квадрат – это один день. Экологичнее = больше времени на концентрацию. Красный = потраченный день.",
+    "description": "Description of yearly heatmap."
+  },
+  "clickToCustomizeThresholds": {
+    "message": "Нажмите, чтобы настроить пороговые значения",
+    "description": "Legend customization tooltip."
+  },
+  "less": {
+    "message": "Меньше",
+    "description": "Heatmap legend lower label."
+  },
+  "more": {
+    "message": "Подробнее",
+    "description": "Heatmap legend higher label."
+  },
+  "wasted": {
+    "message": "Впустую",
+    "description": "Heatmap legend wasted day label."
+  },
+  "buildingHeatmap": {
+    "message": "Построение тепловой карты…",
+    "description": "Heatmap builder indicator."
+  },
+  "weekdayVsWeekend": {
+    "message": "Будний день против выходных",
+    "description": "Split comparison chart label."
+  },
+  "mostProductiveDay": {
+    "message": "Самый продуктивный день",
+    "description": "Day of week with highest productivity."
+  },
+  "focusDesc": {
+    "message": "Зафиксируйте, отслеживайте цели и наращивайте свою серию.",
+    "description": "Focus section subtitle."
+  },
+  "zeroCycles": {
+    "message": "0 циклов",
+    "description": "Zero completed cycles."
+  },
+  "startFocus": {
+    "message": "Начать фокус",
+    "description": "Action button label."
+  },
+  "quickPresets": {
+    "message": "БЫСТРЫЕ ПРЕДСТАНОВКИ"
+  },
+  "focusSchedules": {
+    "message": "ГРАФИК ФОКУСА"
+  },
+  "goalsStreak": {
+    "message": "Голы и серия",
+    "description": "Group title."
+  },
+  "weeklyGoalHrs": {
+    "message": "Цель на неделю (ч)"
+  },
+  "dailyStreakMin": {
+    "message": "Мин. ежедневная серия (м)",
+    "description": "Config label."
+  },
+  "startWeekOn": {
+    "message": "Начало недели",
+    "description": "Config label."
+  },
+  "monday": {
+    "message": "Понедельник",
+    "description": "Weekday name."
+  },
+  "sunday": {
+    "message": "Воскресенье",
+    "description": "Weekday name."
+  },
+  "countTowardsGoals": {
+    "message": "СЧИТАЙТЕ НА ДОСТИЖЕНИЕ ЦЕЛ"
+  },
+  "saveGoals": {
+    "message": "Сохранить цели",
+    "description": "Action button label."
+  },
+  "weekProgress": {
+    "message": "Прогресс за неделю"
+  },
+  "zeroGoalDone": {
+    "message": "0ч 0м готово",
+    "description": "No progress yet."
+  },
+  "noGoal": {
+    "message": "Нет цели",
+    "description": "Missing goal config text."
+  },
+  "history": {
+    "message": "ИСТОРИЯ"
+  },
+  "clearHistory": {
+    "message": "Очистить историю",
+    "description": "Delete history tooltip."
+  },
+  "noFocusSessions": {
+    "message": "Фокус-сессий пока нет.",
+    "description": "Empty state label."
+  },
+  "siteManagerDesc": {
+    "message": "Пометьте сайты для аналитики или полностью заблокируйте их.",
+    "description": "Site manager subtitle."
+  },
+  "ruleManager": {
+    "message": "Менеджер правил",
+    "description": "Block page inner card title."
+  },
+  "blockList": {
+    "message": "Черный список",
+    "description": "Config category."
+  },
+  "allowlist": {
+    "message": "Белый список",
+    "description": "Config category."
+  },
+  "neverTrack": {
+    "message": "Никогда не отслеживать",
+    "description": "Config category."
+  },
+  "searchRules": {
+    "message": "Правила поиска…",
+    "description": "Rules filter placeholder."
+  },
+  "domainName": {
+    "message": "Доменное имя",
+    "description": "Input field label."
+  },
+  "egDomain": {
+    "message": "например reddit.com",
+    "description": "Placeholder."
+  },
+  "redirectToOptional": {
+    "message": "Перенаправление на (необязательно)",
+    "description": "Input field label."
+  },
+  "egRedirect": {
+    "message": "например pw.live",
+    "description": "Placeholder."
+  },
+  "addNewRule": {
+    "message": "+ Добавить новое правило",
+    "description": "Action button."
+  },
+  "bulkEdit": {
+    "message": "Массовое редактирование",
+    "description": "Action button."
+  },
+  "egAllowDomain": {
+    "message": "например gmail.com",
+    "description": "Placeholder."
+  },
+  "addToAllowlist": {
+    "message": "+ Добавить в белый список",
+    "description": "Action button."
+  },
+  "domainNamePlural": {
+    "message": "Доменные имена",
+    "description": "Input field label."
+  },
+  "egNeverTrackDomain": {
+    "message": "например Bank.com, Private.com",
+    "description": "Placeholder."
+  },
+  "addToNeverTrack": {
+    "message": "+ Добавить в Never-Track",
+    "description": "Action button."
+  },
+  "tipClick": {
+    "message": "Совет: нажмите",
+    "description": "Helpful hint start."
+  },
+  "tipRuleDetails": {
+    "message": "в любом правиле можно установить ограничения по времени, расписания или таймер охлаждения.",
+    "description": "Helpful hint body."
+  },
+  "deleteSelected": {
+    "message": "Удалить выбранное",
+    "description": "Bulk action button."
+  },
+  "type": {
+    "message": "Тип",
+    "description": "Table column header."
+  },
+  "mode": {
+    "message": "Режим",
+    "description": "Table column header."
+  },
+  "dailyLimit": {
+    "message": "Дневной лимит",
+    "description": "Table column header."
+  },
+  "noBlockingRules": {
+    "message": "Правил блокировки пока нет.",
+    "description": "Empty state label."
+  },
+  "freeTimeHours": {
+    "message": "Свободное время (без блокировки)",
+    "description": "Card sub-title."
+  },
+  "filterByCategory": {
+    "message": "🔍 Фильтровать по категориям",
+    "description": "Card title."
+  },
+  "searchSitesInCategories": {
+    "message": "Поиск сайтов по категориям…",
+    "description": "Placeholder."
+  },
+  "trackLabelSite": {
+    "message": "+ Сайт отслеживания/лейбла",
+    "description": "Action button."
+  },
+  "settingsDesc": {
+    "message": "Настройте свой опыт Flow.",
+    "description": "Settings section subtitle."
+  },
+  "saveAllSettings": {
+    "message": "Сохранить все настройки"
+  },
+  "securitySystem": {
+    "message": "Безопасность и система"
+  },
+  "trackingBlocking": {
+    "message": "Отслеживание и блокировка"
+  },
+  "trackingEngine": {
+    "message": "МОДУЛЬ СЛЕЖЕНИЯ"
+  },
+  "idleTimeout": {
+    "message": "Тайм-аут простоя"
+  },
+  "idleTimeoutDesc": {
+    "message": "Прекратите отслеживать время, если перестанете двигать мышью."
+  },
+  "after30Sec": {
+    "message": "Через 30 секунд"
+  },
+  "after1Min": {
+    "message": "Через 1 минуту"
+  },
+  "after2Min": {
+    "message": "Через 2 минуты"
+  },
+  "after5Min": {
+    "message": "Через 5 минут"
+  },
+  "computerSleepGap": {
+    "message": "Компьютерный разрыв сна"
+  },
+  "computerSleepGapDesc": {
+    "message": "Ограничение расчета активного времени, если вы переводите компьютер в спящий режим."
+  },
+  "1minute": {
+    "message": "1 минута"
+  },
+  "5minutes": {
+    "message": "5 минут"
+  },
+  "10minutes": {
+    "message": "10 минут"
+  },
+  "15minutes": {
+    "message": "15 минут"
+  },
+  "mediaPlaybackTracking": {
+    "message": "Отслеживание воспроизведения мультимедиа"
+  },
+  "mediaPlaybackTrackingDesc": {
+    "message": "Продолжайте отслеживать время, если воспроизводится аудио или видео (даже в режиме ожидания)."
+  },
+  "ignoreQuickVisits": {
+    "message": "Игнорировать быстрые визиты",
+    "description": "Settings config option."
+  },
+  "ignoreQuickVisitsDesc": {
+    "message": "Игнорируйте посещения короче этой продолжительности, чтобы сохранить данные в чистоте."
+  },
+  "offTrackEverything": {
+    "message": "Выкл. (отслеживать все)"
+  },
+  "3seconds": {
+    "message": "3 секунды",
+    "description": "Dropdown choice."
+  },
+  "5seconds": {
+    "message": "5 секунд",
+    "description": "Dropdown choice."
+  },
+  "10seconds": {
+    "message": "10 секунд",
+    "description": "Dropdown choice."
+  },
+  "dataHistoryRetention": {
+    "message": "Сохранение истории данных"
+  },
+  "dataHistoryRetentionDesc": {
+    "message": "Автоматически удаляйте подробные журналы отслеживания старше этого срока, чтобы сэкономить место."
+  },
+  "after30Days": {
+    "message": "Через 30 дней"
+  },
+  "after90Days": {
+    "message": "Через 90 дней"
+  },
+  "after180Days": {
+    "message": "Через 180 дней"
+  },
+  "after1Year": {
+    "message": "Через 1 год"
+  },
+  "after2Years": {
+    "message": "Через 2 года"
+  },
+  "after3Years": {
+    "message": "Через 3 года"
+  },
+  "foreverKeepAll": {
+    "message": "Навсегда (сохранить все)",
+    "description": "Dropdown choice."
+  },
+  "weeklyAutoBackup": {
+    "message": "Еженедельное автоматическое резервное копирование",
+    "description": "Settings config option."
+  },
+  "weeklyAutoBackupDesc": {
+    "message": "Автоматически экспортируйте и загружайте статистику и правила отслеживания один раз в неделю.",
+    "description": "Settings config option description."
+  },
+  "appearance": {
+    "message": "ВНЕШНИЙ ВИД"
+  },
+  "themeDark": {
+    "message": "Темный"
+  },
+  "themeLight": {
+    "message": "Свет"
+  },
+  "themeCinematic": {
+    "message": "Кинематографичный"
+  },
+  "languageOverride": {
+    "message": "Язык / Идиома",
+    "description": "Settings config option."
+  },
+  "languageOverrideDesc": {
+    "message": "Переопределить язык браузера по умолчанию для расширения.",
+    "description": "Settings config option description."
+  },
+  "systemDefault": {
+    "message": "Системные настройки по умолчанию",
+    "description": "Dropdown choice."
+  },
+  "langEnglish": {
+    "message": "английский",
+    "description": "Language choice."
+  },
+  "langSpanish": {
+    "message": "Испанский (неформальный/грубый)",
+    "description": "Language choice."
+  },
+  "langChineseSimplified": {
+    "message": "Китайский (упрощенный) / 简体中文",
+    "description": "Language choice."
+  },
+  "langChineseTraditional": {
+    "message": "Китайский (традиционный) / 繁體中文",
+    "description": "Language choice."
+  },
+  "langChineseHongKong": {
+    "message": "Китайский (Гонконг) / 繁體中文 (香港)",
+    "description": "Language choice."
+  },
+  "langJapanese": {
+    "message": "Японский / 日本語",
+    "description": "Language choice."
+  },
+  "langGerman": {
+    "message": "немецкий / немецкий",
+    "description": "Language choice."
+  },
+  "langPortugueseBrazil": {
+    "message": "Португальский (Бразилия) / Португальский (Бразилия)",
+    "description": "Language choice."
+  },
+  "langFrench": {
+    "message": "Французский / Français",
+    "description": "Language choice."
+  },
+  "langKorean": {
+    "message": "Корейский / 한국어",
+    "description": "Language choice."
+  },
+  "langRussian": {
+    "message": "Русский / Русский",
+    "description": "Language choice."
+  },
+  "averageLine": {
+    "message": "Средняя линия",
+    "description": "Chart option."
+  },
+  "lineChart": {
+    "message": "Линия",
+    "description": "Chart type toggle."
+  },
+  "barChart": {
+    "message": "Бар",
+    "description": "Chart type toggle."
+  },
+  "reduceTime": {
+    "message": "Сократить время",
+    "description": "Daily stats card action."
+  },
+  "howManyMinutesRemove": {
+    "message": "Сколько минут вы хотите удалить для $1?",
+    "description": "Prompt message in the time reduction modal."
+  },
+  "remove": {
+    "message": "Удалить",
+    "description": "Action button label."
+  },
+  "minutes": {
+    "message": "Минуты",
+    "description": "Input field placeholder."
+  },
+  "momComparison": {
+    "message": "Месяц к месяцу",
+    "description": "Settings card label."
+  },
+  "momComparisonDesc": {
+    "message": "Сравнение активного времени в этом месяце с прошлым месяцем.",
+    "description": "Card description."
+  },
+  "focusVsDistraction": {
+    "message": "Фокус против отвлечения",
+    "description": "Card label."
+  },
+  "pctFocus": {
+    "message": "$focusPct$% Фокус",
+    "description": "Focus percentage summary.",
+    "placeholders": {
+      "focusPct": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
+  },
+  "pctDistraction": {
+    "message": "$distPct$% отвлечения внимания",
+    "description": "Distraction percentage summary.",
+    "placeholders": {
+      "distPct": {
+        "content": "$1",
+        "example": "20"
+      }
+    }
+  },
+  "focusSplitDesc": {
+    "message": "Вы сосредоточились на $focusedTime$ и отвлеклись на $distractedTime$.",
+    "description": "Productivity split description sentence.",
+    "placeholders": {
+      "focusedTime": {
+        "content": "$1",
+        "example": "2h"
+      },
+      "distractedTime": {
+        "content": "$2",
+        "example": "1h"
+      }
+    }
+  },
+  "noFocusDistTimeRange": {
+    "message": "В этом диапазоне не отслеживается время фокусировки или отвлечения внимания.",
+    "description": "Placeholder text."
+  },
+  "pinSiteToTop": {
+    "message": "Закрепить сайт вверху",
+    "description": "Tooltip text."
+  },
+  "unpinSite": {
+    "message": "Открепить сайт",
+    "description": "Tooltip text."
+  },
+  "visitSite": {
+    "message": "Посетите сайт",
+    "description": "Tooltip text."
+  },
+  "addOrEditRule": {
+    "message": "Добавить или изменить правило",
+    "description": "Tooltip text."
+  },
+  "autoCategorized": {
+    "message": "Автоматическая категоризация",
+    "description": "Tooltip text."
+  },
+  "totalTracked": {
+    "message": "Всего отслеживается",
+    "description": "Daily stat title."
+  },
+  "activeTimeline": {
+    "message": "24-часовая активная временная шкала",
+    "description": "Section header."
+  },
+  "heatmapThresholds": {
+    "message": "Пороги тепловой карты",
+    "description": "Modal title."
+  },
+  "minActiveTimeMins": {
+    "message": "Минимальное активное время (минуты)",
+    "description": "Config setting label."
+  },
+  "minActiveTimeDesc": {
+    "message": "Минимальное общее отслеживаемое время на раскрашивание в день.",
+    "description": "Config option helper text."
+  },
+  "ratioThresholdPct": {
+    "message": "Порог отношения (%)",
+    "description": "Config setting label."
+  },
+  "ratioThresholdDesc": {
+    "message": "Если ваш коэффициент концентрации ниже этого процента, день пройден впустую (красный). В противном случае он активен (зеленый).",
+    "description": "Config option helper text."
+  },
+  "showWastedDays": {
+    "message": "Показать потраченные дни (красный)",
+    "description": "Config setting label."
+  },
+  "showWastedDaysDesc": {
+    "message": "Выделите дни, когда вы сильно отвлекаетесь, красными блоками.",
+    "description": "Config option helper text."
+  },
+  "focusCategories": {
+    "message": "Категории фокусов",
+    "description": "Config setting label."
+  },
+  "selectFocusCatsDesc": {
+    "message": "Выберите, какие категории учитываются в вашем ежедневном времени концентрации.",
+    "description": "Config option helper text."
+  },
+  "activeHrs": {
+    "message": "$1 активен",
+    "description": "Label showing tracked active time hours."
+  },
+  "noActiveTimeTracked": {
+    "message": "Активное время пока не отслеживается.",
+    "description": "Placeholder text."
+  },
+  "vsLastMonth": {
+    "message": "против $1 в прошлом месяце ($2)",
+    "description": "MoM status comparison description."
+  },
+  "vsLastMonthNoChange": {
+    "message": "против $1 в прошлом месяце (без изменений)",
+    "description": "MoM status comparison description."
+  },
+  "increase": {
+    "message": "увеличение",
+    "description": "Label indicating value increase."
+  },
+  "decrease": {
+    "message": "уменьшение",
+    "description": "Label indicating value decrease."
+  },
+  "accessControlSafety": {
+    "message": "Контроль доступа и безопасность"
+  },
+  "pinProtectionStatus": {
+    "message": "Статус защиты PIN-кода:"
+  },
+  "notSet": {
+    "message": "Не установлено",
+    "description": "PIN status."
+  },
+  "set6DigitPin": {
+    "message": "Установить 6-значный PIN-код",
+    "description": "Input placeholder."
+  },
+  "confirm6DigitPin": {
+    "message": "Подтвердите 6-значный PIN-код",
+    "description": "Input placeholder."
+  },
+  "savePin": {
+    "message": "Сохранить PIN-код",
+    "description": "Action button."
+  },
+  "changePin": {
+    "message": "Изменить PIN-код"
+  },
+  "removePin": {
+    "message": "Удалить PIN-код"
+  },
+  "setPinToEnableLocks": {
+    "message": "Установите PIN-код, чтобы включить эти блокировки"
+  },
+  "whatToLock": {
+    "message": "Что заблокировать"
+  },
+  "lockTimerStop": {
+    "message": "Блокировка кнопки остановки таймера"
+  },
+  "lockTimerStopDesc": {
+    "message": "Требовать PIN-код, чтобы остановить или приостановить активный сеанс фокусировки."
+  },
+  "lockEditingRules": {
+    "message": "Блокировка правил редактирования/удаления"
+  },
+  "lockEditingRulesDesc": {
+    "message": "Требовать PIN-код для изменения, удаления или очистки списков и правил блокировки веб-сайтов."
+  },
+  "lockFreeTime": {
+    "message": "Блокировка часов свободного времени"
+  },
+  "lockFreeTimeDesc": {
+    "message": "Требовать PIN-код для добавления, редактирования или удаления запланированных интервалов свободного времени."
+  },
+  "lockFocusPresets": {
+    "message": "Блокировка предустановок фокуса редактирования"
+  },
+  "lockFocusPresetsDesc": {
+    "message": "Требовать PIN-код для изменения или удаления пользовательских предустановок фокуса."
+  },
+  "lockFocusSchedules": {
+    "message": "Блокировка редактирования/удаления расписаний фокуса"
+  },
+  "lockFocusSchedulesDesc": {
+    "message": "Требовать PIN-код для изменения или удаления конфигураций расписания фокусировки."
+  },
+  "lockAdvancedTweaks": {
+    "message": "Заблокировать расширенные настройки сайта"
+  },
+  "lockAdvancedTweaksDesc": {
+    "message": "Требовать PIN-код для доступа к пользовательским стилям, внедрению скриптов или расширенным настройкам."
+  },
+  "lockPrivacyMode": {
+    "message": "Блокировка режима конфиденциальности (пауза отслеживания)"
+  },
+  "lockPrivacyModeDesc": {
+    "message": "Требовать PIN-код, чтобы приостановить отслеживание или включить режим конфиденциальности."
+  },
+  "lockAdjustTime": {
+    "message": "Время настройки блокировки (дневная разбивка)"
+  },
+  "lockAdjustTimeDesc": {
+    "message": "Требовать PIN-код для ручной настройки или очистки отслеживаемого времени в ежедневной разбивке."
+  },
+  "lockDangerZone": {
+    "message": "Заблокировать опасную зону (очистить данные)"
+  },
+  "lockDangerZoneDesc": {
+    "message": "Требовать PIN-код для сброса статистики, правил или пользовательских категорий."
+  },
+  "dangerZone": {
+    "message": "Опасная зона"
+  },
+  "resetAllStats": {
+    "message": "Сбросить всю статистику"
+  },
+  "resetAllStatsDesc": {
+    "message": "Сотрите всю записанную историю отслеживания и аналитику веб-сайта. Это невозможно отменить."
+  },
+  "btnResetStats": {
+    "message": "Сбросить статистику"
+  },
+  "clearAllRules": {
+    "message": "Очистить все правила блокировки и разрешения"
+  },
+  "clearAllRulesDesc": {
+    "message": "Удалите все пользовательские списки блокировки веб-сайтов, расписания, ограничения и списки разрешений."
+  },
+  "btnClearRules": {
+    "message": "Четкие правила"
+  },
+  "clearAllCategories": {
+    "message": "Очистить все категории руководства"
+  },
+  "clearAllCategoriesDesc": {
+    "message": "Сбросьте все теги пользовательских категорий веб-сайта до значений по умолчанию."
+  },
+  "btnClearCategories": {
+    "message": "Очистить категории"
+  },
+  "supportFeedbackHeader": {
+    "message": "Поддержка и обратная связь"
+  },
+  "submitFeedbackHeader": {
+    "message": "Отправляйте запросы на добавление функций и отчеты об ошибках"
+  },
+  "submitFeedbackDesc": {
+    "message": "Помогите нам улучшить Flow! Поделитесь своими идеями, предложениями или сообщите об ошибках."
+  },
+  "submitFeedbackBtn": {
+    "message": "Отправить отзыв"
+  },
+  "helpTranslateBtn": {
+    "message": "Помогите перевести"
+  },
+  "websiteBtn": {
+    "message": "Веб-сайт"
+  },
+  "rateUsBtn": {
+    "message": "Оцените 5 звезд"
+  },
+  "changelogBtn": {
+    "message": "Журнал изменений"
+  },
+  "backupRestoreHeader": {
+    "message": "Резервное копирование и восстановление"
+  },
+  "exportDataJson": {
+    "message": "Экспортируйте все данные в формате JSON"
+  },
+  "exportDataJsonDesc": {
+    "message": "Статистика, правила, категории, настройки."
+  },
+  "downloadJson": {
+    "message": "Скачать JSON"
+  },
+  "restoreFromJson": {
+    "message": "Восстановление из JSON"
+  },
+  "restoreFromJsonDesc": {
+    "message": "Заменяет ВСЕ текущие данные. Подтвердите перед восстановлением."
+  },
+  "chooseFile": {
+    "message": "Выберите файл…"
+  },
+  "localStorageUsage": {
+    "message": "Использование локального хранилища"
+  },
+  "localStorageUsageDesc": {
+    "message": "Пространство, используемое настройками, правилами и базой данных истории."
+  },
+  "migrationImportsHeader": {
+    "message": "Миграция и импорт"
+  },
+  "importFromWatt": {
+    "message": "Импорт из трекера времени веб-активности"
+  },
+  "importFromWattDesc": {
+    "message": "Загрузите экспортированный файл CSV, чтобы объединить историю отслеживания.",
+    "description": "Settings config option description."
+  },
+  "importFromTt": {
+    "message": "Импорт из Time Tracker — Web Habit Builder"
+  },
+  "importFromTtDesc": {
+    "message": "Загрузите экспортированный файл JSON, чтобы объединить историю отслеживания."
+  },
+  "importFromWt": {
+    "message": "Импорт из Webtime Tracker"
+  },
+  "importFromWtDesc": {
+    "message": "Загрузите экспортированный файл CSV, чтобы объединить историю отслеживания."
+  },
+  "backupHistory": {
+    "message": "История резервного копирования"
+  },
+  "btnCreateLocalBackup": {
+    "message": "+ Создать локальную резервную копию"
+  },
+  "editFreeTime": {
+    "message": "Редактировать Свободное время",
+    "description": "Modal title."
+  },
+  "fromTime": {
+    "message": "Из времени",
+    "description": "Input field label."
+  },
+  "toTime": {
+    "message": "Времени",
+    "description": "Input field label."
+  },
+  "activeDays": {
+    "message": "Активные дни",
+    "description": "Input field label."
+  },
+  "saveChanges": {
+    "message": "Сохранить изменения",
+    "description": "Action button."
+  },
+  "tagMonitor": {
+    "message": "Тег/Монитор",
+    "description": "Tab segment title."
+  },
+  "quickApplyPreset": {
+    "message": "Быстрое применение пресета",
+    "description": "Select label."
+  },
+  "selectPresetToApply": {
+    "message": "-- Выберите предустановку для применения --",
+    "description": "Option label."
+  },
+  "egDomainNoPrefix": {
+    "message": "reddit.com",
+    "description": "Placeholder."
+  },
+  "activeRulesSelectMultiple": {
+    "message": "Активные правила (выберите несколько)",
+    "description": "Sub-header label."
+  },
+  "dailyTimeLimit": {
+    "message": "Дневной лимит времени",
+    "description": "Rule mode option."
+  },
+  "dailyLimitMinutes": {
+    "message": "Дневной лимит (минуты) (0 = всегда заблокировано)",
+    "description": "Input field label."
+  },
+  "perSessionLimit": {
+    "message": "Лимит на сеанс",
+    "description": "Rule mode option."
+  },
+  "sessionSettings": {
+    "message": "Настройки сеанса",
+    "description": "Input block title."
+  },
+  "timeLimitMinutes": {
+    "message": "Лимит времени (минуты)",
+    "description": "Input field label."
+  },
+  "breakCooldownMinutes": {
+    "message": "Перерыв/перезарядка (минуты)",
+    "description": "Input field label."
+  },
+  "scheduleBased": {
+    "message": "По расписанию",
+    "description": "Rule mode option."
+  },
+  "timeWindows": {
+    "message": "Временные окна",
+    "description": "Input field label."
+  },
+  "addWindow": {
+    "message": "+ Добавить окно",
+    "description": "Action button."
+  },
+  "cooldownSite": {
+    "message": "Площадка для заминки",
+    "description": "Rule mode option."
+  },
+  "cooldownSettings": {
+    "message": "Настройки охлаждения",
+    "description": "Input block title."
+  },
+  "waitTimeSec": {
+    "message": "Время ожидания (сек)",
+    "description": "Input field label."
+  },
+  "frequency": {
+    "message": "Частота",
+    "description": "Input field label."
+  },
+  "everyVisit": {
+    "message": "Каждое посещение",
+    "description": "Option choice."
+  },
+  "oncePerDay": {
+    "message": "Раз в день",
+    "description": "Option choice."
+  },
+  "every10min": {
+    "message": "Каждые 10 минут",
+    "description": "Option choice."
+  },
+  "optDistraction": {
+    "message": "⚡ Отвлечение",
+    "description": "Category choice."
+  },
+  "optProductivity": {
+    "message": "💻 Производительность",
+    "description": "Category choice."
+  },
+  "optLearning": {
+    "message": "📚 Обучение",
+    "description": "Category choice."
+  },
+  "optCommunication": {
+    "message": "💬 Общение",
+    "description": "Category choice."
+  },
+  "optUncategorized": {
+    "message": "❓ Без категории",
+    "description": "Category choice."
+  },
+  "assignCategoryDesc": {
+    "message": "Это присваивает категорию для статистики без блокировки сайта.",
+    "description": "Explanation text."
+  },
+  "saveTag": {
+    "message": "Сохранить тег",
+    "description": "Action button."
+  },
+  "areYouSure": {
+    "message": "Вы уверены?",
+    "description": "Modal title."
+  },
+  "cannotBeUndone": {
+    "message": "Это действие невозможно отменить.",
+    "description": "Modal sub-text warning."
+  },
+  "confirm": {
+    "message": "Подтвердить",
+    "description": "Action button."
+  },
+  "privacyModalDesc": {
+    "message": "Приостановите отслеживание времени и блокировку на уровне сети. Выберите, как долго вы хотите сделать паузу:",
+    "description": "Modal sub-text warning."
+  },
+  "createBlockPreset": {
+    "message": "Создать предустановку блока",
+    "description": "Modal title."
+  },
+  "presetName": {
+    "message": "Имя предустановки",
+    "description": "Label."
+  },
+  "egPresetName": {
+    "message": "например Строгий режим",
+    "description": "Placeholder."
+  },
+  "rulesConfiguration": {
+    "message": "Настройка правил",
+    "description": "Sub-header label."
+  },
+  "savePreset": {
+    "message": "Сохранить предустановку",
+    "description": "Action button."
+  },
+  "timeAdjusted": {
+    "message": "Время скорректировано",
+    "description": "Toast notice."
+  },
+  "adjustFailed": {
+    "message": "Настройка не удалась",
+    "description": "Toast notice."
+  },
+  "undoNeverTrackRestored": {
+    "message": "Отменить: восстановление никогда не отслеживать",
+    "description": "Toast notice."
+  },
+  "undoRuleRestored": {
+    "message": "Отменить: правило восстановлено",
+    "description": "Toast notice."
+  },
+  "undoAllowRuleRestored": {
+    "message": "Отменить: правило разрешения восстановлено",
+    "description": "Toast notice."
+  },
+  "removed": {
+    "message": "Удален",
+    "description": "Toast notice."
+  },
+  "thresholdsUpdated": {
+    "message": "Пороги обновлены",
+    "description": "Toast notice."
+  },
+  "noItemsSelected": {
+    "message": "Ни один элемент не выбран",
+    "description": "Toast notice."
+  },
+  "deleteRules": {
+    "message": "Удалить правила",
+    "description": "Confirm title."
+  },
+  "deleteRulesConfirm": {
+    "message": "Удалить $count$ правил?",
+    "description": "Confirm body.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "itemsDeleted": {
+    "message": "Элементы удалены",
+    "description": "Toast notice."
+  },
+  "enterDomain": {
+    "message": "Введите домен",
+    "description": "Toast notice."
+  },
+  "taggedSuccessfully": {
+    "message": "$domain$ успешно отмечен",
+    "description": "Toast notice.",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "reddit.com"
+      }
+    }
+  },
+  "studyGoalsSaved": {
+    "message": "Цели исследования сохранены",
+    "description": "Toast notice."
+  },
+  "pickBothDates": {
+    "message": "Выберите обе даты",
+    "description": "Toast notice."
+  },
+  "endDateBeforeStart": {
+    "message": "Дата окончания предшествует началу",
+    "description": "Toast notice."
+  },
+  "removedException": {
+    "message": "Удалено исключение",
+    "description": "Toast notice."
+  },
+  "selectAtLeastOneDay": {
+    "message": "Выберите хотя бы один день",
+    "description": "Toast notice."
+  },
+  "freeTimeSaved": {
+    "message": "Свободное время успешно сохранено!",
+    "description": "Toast notice."
+  },
+  "sessionDeleted": {
+    "message": "Сессия удалена",
+    "description": "Toast notice."
+  },
+  "alreadyAdded": {
+    "message": "Уже добавлено",
+    "description": "Toast notice."
+  },
+  "exceptionAdded": {
+    "message": "Исключение добавлено",
+    "description": "Toast notice."
+  },
+  "settingsSaved": {
+    "message": "Настройки успешно сохранены",
+    "description": "Toast notice."
+  },
+  "errorSavingSettings": {
+    "message": "Ошибка сохранения настроек: $error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Unknown error"
+      }
+    }
+  },
+  "pinSavedActive": {
+    "message": "PIN-код сохранен и активен",
+    "description": "Toast notice."
+  },
+  "pinRemoved": {
+    "message": "PIN-код удален",
+    "description": "Toast notice."
+  },
+  "resetStatsConfirm": {
+    "message": "Удалить ВСЮ статистику? Это невозможно отменить.",
+    "description": "Confirm body."
+  },
+  "resetConfirmBtn": {
+    "message": "Сбросить",
+    "description": "Confirm action."
+  },
+  "clearRules": {
+    "message": "Четкие правила",
+    "description": "Confirm title."
+  },
+  "clearRulesConfirm": {
+    "message": "Удалить все правила блокировки/разрешения?",
+    "description": "Confirm body."
+  },
+  "clearConfirmBtn": {
+    "message": "Очистить",
+    "description": "Confirm action."
+  },
+  "rulesCleared": {
+    "message": "Правила удалены",
+    "description": "Toast notice."
+  },
+  "clearCategories": {
+    "message": "Очистить категории",
+    "description": "Confirm title."
+  },
+  "clearCategoriesConfirm": {
+    "message": "Удалить все пользовательские категории?",
+    "description": "Confirm body."
+  },
+  "categoriesCleared": {
+    "message": "Категории очищены",
+    "description": "Toast notice."
+  },
+  "clearHistoryConfirm": {
+    "message": "Очистить историю?",
+    "description": "Confirm body."
+  },
+  "cleared": {
+    "message": "Очищено",
+    "description": "Toast notice."
+  },
+  "exportFailed": {
+    "message": "Экспорт не удался",
+    "description": "Toast notice."
+  },
+  "backupDownloaded": {
+    "message": "Резервная копия загружена",
+    "description": "Toast notice."
+  },
+  "restoreBackup": {
+    "message": "Восстановить резервную копию",
+    "description": "Confirm title."
+  },
+  "restoreBackupConfirm": {
+    "message": "Восстановление ЗАМЕНИТ все текущие данные. Продолжать?",
+    "description": "Confirm body."
+  },
+  "restoreConfirmBtn": {
+    "message": "Восстановить",
+    "description": "Confirm action."
+  },
+  "restoredReloading": {
+    "message": "Восстановлено — перезагрузка…",
+    "description": "Toast notice."
+  },
+  "invalidJsonFile": {
+    "message": "Неверный файл JSON",
+    "description": "Toast notice."
+  },
+  "importLogsWattConfirm": {
+    "message": "Это позволит объединить журналы отслеживания времени веб-активности с историей Flow.\n\nПредупреждение. Если вы импортируете одну и ту же таблицу дважды, отслеживаемое время будет добавлено дважды. Нажмите ОК, чтобы продолжить.",
+    "description": "Confirm body."
+  },
+  "importConfirmBtn": {
+    "message": "Импорт",
+    "description": "Confirm action."
+  },
+  "successfullyImportedDays": {
+    "message": "Успешно импортировано $count$ дней! Перезагрузка...",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "importFailedErr": {
+    "message": "Не удалось импортировать: $error$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "File missing"
+      }
+    }
+  },
+  "invalidFile": {
+    "message": "Неверный файл",
+    "description": "Default error."
+  },
+  "importLogsTtConfirm": {
+    "message": "Это позволит объединить журналы Time Tracker JSON с историей Flow.\n\nПредупреждение. Если вы дважды импортируете один и тот же файл JSON, отслеживаемое время будет добавлено дважды. Нажмите ОК, чтобы продолжить.",
+    "description": "Confirm body."
+  },
+  "importLogsWtConfirm": {
+    "message": "Это позволит объединить журналы Webtime Tracker CSV с историей Flow.\n\nПредупреждение. Если вы импортируете один и тот же файл CSV дважды, отслеживаемое время будет добавлено дважды. Нажмите ОК, чтобы продолжить.",
+    "description": "Confirm body."
+  },
+  "activatedPreset": {
+    "message": "Активированная предустановка: $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetSavedSuccessfully": {
+    "message": "Пресет успешно сохранен!",
+    "description": "Toast notice."
+  },
+  "scheduleDeleted": {
+    "message": "Расписание удалено",
+    "description": "Toast notice."
+  },
+  "scheduleUpdated": {
+    "message": "Расписание обновлено",
+    "description": "Toast notice."
+  },
+  "scheduleAdded": {
+    "message": "Расписание добавлено",
+    "description": "Toast notice."
+  },
+  "enterValidDomain": {
+    "message": "Пожалуйста, введите действительный домен",
+    "description": "Toast notice."
+  },
+  "domainAlreadyAllowed": {
+    "message": "Домен уже разрешен",
+    "description": "Toast notice."
+  },
+  "addedToAllowlist": {
+    "message": "Добавлено в белый список",
+    "description": "Toast notice."
+  },
+  "enterValidDomains": {
+    "message": "Пожалуйста, введите действительные домены",
+    "description": "Toast notice."
+  },
+  "addedDomainsToNeverTrack": {
+    "message": "В Never-Track добавлено $count$ доменов",
+    "description": "Toast notice.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "domainsAlreadyInList": {
+    "message": "Домены уже в списке",
+    "description": "Toast notice."
+  },
+  "trackingResumed": {
+    "message": "Отслеживание возобновлено",
+    "description": "Toast notice."
+  },
+  "privacyModeEnabled": {
+    "message": "Режим конфиденциальности включен",
+    "description": "Toast notice."
+  },
+  "backupRestoredReloading": {
+    "message": "Резервная копия восстановлена ​​— перезагрузка...",
+    "description": "Toast notice."
+  },
+  "downloadStarted": {
+    "message": "Загрузка началась",
+    "description": "Toast notice."
+  },
+  "failedDownloadData": {
+    "message": "Не удалось загрузить данные",
+    "description": "Toast notice."
+  },
+  "deleteBackupConfirm": {
+    "message": "Удалить эту резервную копию из истории навсегда?",
+    "description": "Confirm body."
+  },
+  "deleteConfirmBtn": {
+    "message": "Удалить",
+    "description": "Confirm action."
+  },
+  "backupDeleted": {
+    "message": "Резервная копия удалена",
+    "description": "Toast notice."
+  },
+  "deleteFailed": {
+    "message": "Удалить не удалось",
+    "description": "Toast notice."
+  },
+  "localBackupCreated": {
+    "message": "Локальная резервная копия создана",
+    "description": "Toast notice."
+  },
+  "backupCreationFailed": {
+    "message": "Не удалось создать резервную копию",
+    "description": "Toast notice."
+  },
+  "enterDomainFirstToBlockInstantly": {
+    "message": "Сначала введите доменное имя, чтобы мгновенно заблокировать",
+    "description": "Toast notice."
+  },
+  "siteBlockedUnderPreset": {
+    "message": "Сайт заблокирован под $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "deletePresetConfirm": {
+    "message": "Вы уверены, что хотите удалить пресет «$name$»?",
+    "description": "Confirm body.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "presetDeleted": {
+    "message": "Предустановка удалена",
+    "description": "Toast notice."
+  },
+  "presetNameRequired": {
+    "message": "Требуется имя предустановки",
+    "description": "Toast notice."
+  },
+  "maxCustomPresetsLimit": {
+    "message": "Вы можете добавить до 3 пользовательских пресетов",
+    "description": "Toast notice."
+  },
+  "presetCreated": {
+    "message": "Предустановка создана",
+    "description": "Toast notice."
+  },
+  "presetUpdated": {
+    "message": "Предустановка обновлена ​​",
+    "description": "Toast notice."
+  },
+  "appliedPreset": {
+    "message": "Примененная предустановка: $name$",
+    "description": "Toast notice.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Strict Mode"
+      }
+    }
+  },
+  "undo10s": {
+    "message": "Отменить (10 с)",
+    "description": "Undo text label."
+  },
+  "undoXs": {
+    "message": "Отменить ($secs$с)",
+    "description": "Undo countdown.",
+    "placeholders": {
+      "secs": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "editBlockRule": {
+    "message": "Изменить правило блокировки",
+    "description": "Modal title."
+  },
+  "startWork": {
+    "message": "▶ Начать работу",
+    "description": "Action button."
+  },
+  "startBreak": {
+    "message": "▶ Начать перерыв",
+    "description": "Action button."
+  },
+  "scheduledFocus": {
+    "message": "Запланированный фокус",
+    "description": "Focus mode timer subtext."
+  },
+  "pinLengthError": {
+    "message": "PIN-код должен состоять ровно из 6 цифр",
+    "description": "PIN configuration error."
+  },
+  "pinsDoNotMatch": {
+    "message": "PIN-коды не совпадают",
+    "description": "PIN configuration error."
+  },
+  "readingFile": {
+    "message": "Чтение файла...",
+    "description": "Migration progress status."
+  },
+  "parsingCsvData": {
+    "message": "Анализ данных CSV...",
+    "description": "Migration progress status."
+  },
+  "mergingDaysOfHistory": {
+    "message": "Объединение $count$ дней истории...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "finalizingAndReloading": {
+    "message": "Завершение работы и перезагрузка...",
+    "description": "Migration progress status."
+  },
+  "importingDataDayOf": {
+    "message": "Импорт данных: День $current$ из $total$...",
+    "description": "Migration progress status.",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "10"
+      },
+      "total": {
+        "content": "$2",
+        "example": "100"
+      }
+    }
+  },
+  "creatingPreImportBackup": {
+    "message": "Создание резервной копии перед импортом...",
+    "description": "Migration progress status."
+  },
+  "parsingJsonData": {
+    "message": "Анализ данных JSON...",
+    "description": "Migration progress status."
+  },
+  "creating": {
+    "message": "Создание...",
+    "description": "Button progress indicator."
+  },
+  "editBlockPreset": {
+    "message": "Редактировать предустановку блока",
+    "description": "Modal title."
+  },
+  "pausedAlways": {
+    "message": "Приостановлено (всегда)",
+    "description": "Indefinite pause status."
+  },
+  "delete": {
+    "message": "Удалить",
+    "description": "Generic tooltip or button."
+  },
+  "edit": {
+    "message": "Редактировать",
+    "description": "Generic tooltip or button."
+  },
+  "restoreThisBackup": {
+    "message": "Восстановите эту резервную копию",
+    "description": "Tooltip."
+  },
+  "downloadJsonFile": {
+    "message": "Скачать файл JSON",
+    "description": "Tooltip."
+  },
+  "deleteThisBackup": {
+    "message": "Удалить эту резервную копию",
+    "description": "Tooltip."
+  },
+  "egMorningFocus": {
+    "message": "например Утренний фокус",
+    "description": "Schedule input placeholder."
+  },
+  "quickStart": {
+    "message": "Быстрый старт",
+    "description": "Button tooltip."
+  },
+  "editSettings": {
+    "message": "Изменить настройки",
+    "description": "Button tooltip."
+  },
+  "daySundayLetter": {
+    "message": "С",
+    "description": "Sunday letter."
+  },
+  "dayMondayLetter": {
+    "message": "М",
+    "description": "Monday letter."
+  },
+  "dayTuesdayLetter": {
+    "message": "Т",
+    "description": "Tuesday letter."
+  },
+  "dayWednesdayLetter": {
+    "message": "Вт",
+    "description": "Wednesday letter."
+  },
+  "dayThursdayLetter": {
+    "message": "Т",
+    "description": "Thursday letter."
+  },
+  "dayFridayLetter": {
+    "message": "Ф",
+    "description": "Friday letter."
+  },
+  "daySaturdayLetter": {
+    "message": "С",
+    "description": "Saturday letter."
+  },
+  "range7d": {
+    "message": "7д"
+  },
+  "range14d": {
+    "message": "14д"
+  },
+  "range30d": {
+    "message": "30 дней"
+  },
+  "range45d": {
+    "message": "45д"
+  },
+  "trackLocalFiles": {
+    "message": "Отслеживать локальные файлы",
+    "description": "Track local files option"
+  },
+  "trackLocalFilesDesc": {
+    "message": "Отслеживайте локальные файлы HTML или PDF, открытые в вашем браузере."
+  },
+  "blockingBehavior": {
+    "message": "БЛОКИРУЮЩЕЕ ПОВЕДЕНИЕ"
+  },
+  "showFunnyBlockedPage": {
+    "message": "Показать смешную заблокированную страницу"
+  },
+  "timeLimitWarning": {
+    "message": "Предупреждение об ограничении времени перед блокировкой",
+    "description": "Warning duration option"
+  },
+  "timeLimitWarningDesc": {
+    "message": "Показывать предупреждение за это количество секунд до блокировки сайта."
+  },
+  "sec": {
+    "message": "сек"
+  },
+  "tabLimiter": {
+    "message": "Ограничитель вкладок для каждого домена",
+    "description": "Tab limiter option"
+  },
+  "tabLimiterDesc": {
+    "message": "Установите 0, чтобы отключить."
+  },
+  "tabsMax": {
+    "message": "максимум вкладок",
+    "description": "tabs limit label"
+  },
+  "trackingExceptions": {
+    "message": "ОТСЛЕЖИВАНИЕ ИСКЛЮЧЕНИЙ"
+  },
+  "alwaysTrackEvenIdle": {
+    "message": "Всегда отслеживать (даже в режиме ожидания)"
+  },
+  "alwaysTrackEvenIdleDesc": {
+    "message": "Сайты, которые всегда отслеживают время, даже когда вы уходите (например, pw.live)"
+  },
+  "btnAddException": {
+    "message": "+ Добавить исключение"
+  },
+  "badgeDisplay": {
+    "message": "ДИСПЛЕЙ ЗНАЧКА"
+  },
+  "showTimeSpentBadge": {
+    "message": "Показать время, потраченное на значок расширения"
+  },
+  "showTimeSpentBadgeDesc": {
+    "message": "Отображает минуты, проведенные на текущем сайте."
+  },
+  "showIdlWhenIdle": {
+    "message": "Показывать «idl» в режиме ожидания/без отслеживания"
+  },
+  "showIdlWhenIdleDesc": {
+    "message": "Отображает «idl» на значке расширения, когда отслеживание времени приостановлено или неактивно."
+  },
+  "dataRollover": {
+    "message": "Данные и ролловер",
+    "description": "Data and rollover card header"
+  },
+  "nightOwlRollover": {
+    "message": "Ночная сова, смена дня"
+  },
+  "nightOwlRolloverDesc": {
+    "message": "Определите, когда начнется ваш новый день отслеживания. Полезно, если вы работаете допоздна."
+  },
+  "midnight": {
+    "message": "Полночь (00:00)"
+  },
+  "lastXDays": {
+    "message": "Последние $count$ дней",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "tuesday": {
+    "message": "Вторник",
+    "description": "Weekday name."
+  },
+  "wednesday": {
+    "message": "Среда",
+    "description": "Weekday name."
+  },
+  "thursday": {
+    "message": "Четверг",
+    "description": "Weekday name."
+  },
+  "friday": {
+    "message": "Пятница",
+    "description": "Weekday name."
+  },
+  "saturday": {
+    "message": "Суббота",
+    "description": "Weekday name."
+  },
+  "sun": {
+    "message": "Солнце",
+    "description": "Abbreviated weekday name."
+  },
+  "mon": {
+    "message": "Пн",
+    "description": "Abbreviated weekday name."
+  },
+  "tue": {
+    "message": "Вт",
+    "description": "Abbreviated weekday name."
+  },
+  "wed": {
+    "message": "Ср",
+    "description": "Abbreviated weekday name."
+  },
+  "thu": {
+    "message": "Чт",
+    "description": "Abbreviated weekday name."
+  },
+  "fri": {
+    "message": "Пт",
+    "description": "Abbreviated weekday name."
+  },
+  "sat": {
+    "message": "Сб",
+    "description": "Abbreviated weekday name."
+  },
+  "everyday": {
+    "message": "Ежедневно",
+    "description": "Schedule frequency label."
+  },
+  "weekdays": {
+    "message": "Будни",
+    "description": "Schedule frequency label."
+  },
+  "focusSession": {
+    "message": "Фокус-сессия",
+    "description": "Default focus session name."
+  },
+  "addSchedule": {
+    "message": "Добавить расписание",
+    "description": "Add schedule button."
+  },
+  "notEnoughDataYet": {
+    "message": "Пока недостаточно данных",
+    "description": "Empty state analytics label."
+  },
+  "label": {
+    "message": "Этикетка",
+    "description": "Text input label."
+  },
+  "start": {
+    "message": "Начать",
+    "description": "Time input label."
+  },
+  "end": {
+    "message": "Конец",
+    "description": "Time input label."
+  },
+  "categoriesToBlock": {
+    "message": "Категории для блокировки",
+    "description": "Categories select section header."
+  },
+  "preScheduleNotification": {
+    "message": "Предварительное уведомление",
+    "description": "Option label."
+  },
+  "preScheduleNotificationDesc": {
+    "message": "Получите уведомление до начала сеанса.",
+    "description": "Option sublabel."
+  },
+  "disabled": {
+    "message": "Отключено",
+    "description": "Option setting selection."
+  },
+  "oneMinBefore": {
+    "message": "за 1 минуту до",
+    "description": "Option setting selection."
+  },
+  "fiveMinsBefore": {
+    "message": "за 5 минут до",
+    "description": "Option setting selection."
+  },
+  "tenMinsBefore": {
+    "message": "за 10 минут до",
+    "description": "Option setting selection."
+  },
+  "fifteenMinsBefore": {
+    "message": "за 15 минут до",
+    "description": "Option setting selection."
+  },
+  "editFocusSchedule": {
+    "message": "Изменить расписание фокуса",
+    "description": "Dialog title."
+  },
+  "addFocusSchedule": {
+    "message": "Добавить расписание фокусов",
+    "description": "Dialog title."
+  },
+  "bestDowStat": {
+    "message": "$day$ — среднее значение $time$ фокуса",
+    "description": "Best day of week performance metric.",
+    "placeholders": {
+      "day": {
+        "content": "$1",
+        "example": "Monday"
+      },
+      "time": {
+        "content": "$2",
+        "example": "2h 15m"
+      }
+    }
+  },
+  "editPreset": {
+    "message": "Редактировать предустановку",
+    "description": "Modal title."
+  },
+  "workTimeMin": {
+    "message": "Время работы (мин)",
+    "description": "Input field label."
+  },
+  "breakTimeMin": {
+    "message": "Время перерыва (мин)",
+    "description": "Input field label."
+  },
+  "longBreakMin": {
+    "message": "Длинный перерыв (мин)",
+    "description": "Input field label."
+  },
+  "enableNotifications": {
+    "message": "Включить уведомления",
+    "description": "Toggle switch label."
+  },
+  "epNotifyDesc": {
+    "message": "Получайте push-уведомления, когда периоды фокусировки или перерывы заканчиваются.",
+    "description": "Help text."
+  },
+  "autoStartNextCycle": {
+    "message": "Автоматический запуск следующего цикла",
+    "description": "Toggle switch label."
+  },
+  "epAutoStartDesc": {
+    "message": "Автоматический переход к следующему рабочему циклу или перерыву.",
+    "description": "Help text."
+  },
+  "categoriesToBlockDuringFocus": {
+    "message": "Категории, которые нужно заблокировать во время фокусировки",
+    "description": "Checkbox group header."
+  },
+  "presetPomodoro": {
+    "message": "Помидор",
+    "description": "Built-in preset name."
+  },
+  "presetDeepWork": {
+    "message": "Глубокая работа",
+    "description": "Built-in preset name."
+  },
+  "presetShortSprint": {
+    "message": "Короткий спринт",
+    "description": "Built-in preset name."
+  },
+  "presetFlow": {
+    "message": "Поток",
+    "description": "Built-in preset name."
+  },
+  "noFocusSessionsYet": {
+    "message": "Фокус-сессий пока нет.",
+    "description": "Placeholder text."
+  },
+  "startFirstSession": {
+    "message": "Начать первый сеанс",
+    "description": "Button label."
+  },
+  "siteList": {
+    "message": "Список сайтов",
+    "description": "Tab title."
+  },
+  "smartPresetsAndCategories": {
+    "message": "Умные пресеты и категории",
+    "description": "Tab title."
+  },
+  "advancedTweaks": {
+    "message": "Расширенные настройки",
+    "description": "Tab title."
+  },
+  "addFreetime": {
+    "message": "Добавить свободное время",
+    "description": "Button label."
+  },
+  "addBlockRule": {
+    "message": "Добавить правило блокировки",
+    "description": "Modal title."
+  },
+  "siteCountSingle": {
+    "message": "$count$ сайт",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "siteCountPlural": {
+    "message": "$count$ сайты",
+    "description": "Plural count.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "minActiveTimeShort": {
+    "message": "Минимальное активное время (м)",
+    "description": "Short label for sidebar settings."
+  },
+  "ratioThresholdShort": {
+    "message": "Порог отношения (%)",
+    "description": "Short label for sidebar settings."
+  },
+  "averageFocus": {
+    "message": "Средний фокус",
+    "description": "Chart line label."
+  },
+  "noRulesYet": {
+    "message": "Правил пока нет",
+    "description": "Placeholder header."
+  },
+  "blockSitesToGetStarted": {
+    "message": "Для начала заблокируйте отвлекающие сайты.",
+    "description": "Placeholder description."
+  },
+  "noExceptionsYet": {
+    "message": "Исключений пока нет",
+    "description": "Placeholder header."
+  },
+  "allowSitesDesc": {
+    "message": "Разрешить сайты, которые обходят все правила блокировки.",
+    "description": "Placeholder description."
+  },
+  "noDomainsIgnored": {
+    "message": "Ни один домен не игнорируется",
+    "description": "Placeholder header."
+  },
+  "neverTrackDesc": {
+    "message": "Домены в этом списке никогда не будут отслеживаться для аналитики.",
+    "description": "Placeholder description."
+  },
+  "freetimeHoursTitle": {
+    "message": "Часы свободного времени",
+    "description": "Section header."
+  },
+  "editCategory": {
+    "message": "Редактировать категорию",
+    "description": "Title for custom category edit modal."
+  },
+  "categoryName": {
+    "message": "Название категории",
+    "description": "Label for category name input field."
+  },
+  "emojiIcon": {
+    "message": "Значок эмодзи",
+    "description": "Label for category emoji input field."
+  },
+  "accentColor": {
+    "message": "Акцентный цвет",
+    "description": "Label for category accent color picker."
+  },
+  "presetSwatches": {
+    "message": "Предустановленные образцы",
+    "description": "Label for color preset swatches."
+  },
+  "resetToDefault": {
+    "message": "Сбросить настройки по умолчанию",
+    "description": "Button text to reset category to default settings."
+  },
+  "save": {
+    "message": "Сохранить",
+    "description": "Generic Save button label."
+  },
+  "verificationRequired": {
+    "message": "Требуется проверка",
+    "description": "Title for PIN verification modal."
+  },
+  "enterPinToPerformAction": {
+    "message": "Введите свой PIN-код, чтобы выполнить это действие.",
+    "description": "Subtitle instruction when PIN verification is required."
+  },
+  "enterPinToAccessSettings": {
+    "message": "Введите шестизначный PIN-код для доступа к настройкам.",
+    "description": "Subtitle instruction when accessing locked settings."
+  },
+  "enterPinToRemoveIt": {
+    "message": "Введите текущий PIN-код, чтобы удалить его.",
+    "description": "Subtitle instruction when removing PIN."
+  },
+  "enterPinToChangeIt": {
+    "message": "Введите текущий PIN-код, чтобы изменить его.",
+    "description": "Subtitle instruction when changing PIN."
+  },
+  "addPreset": {
+    "message": "+ Предустановка",
+    "description": "Label for preset button in rule form."
+  },
+  "searchBlockedSites": {
+    "message": "Поиск заблокированных сайтов...",
+    "description": "Placeholder for blocked sites search bar."
+  },
+  "searchAllowedSites": {
+    "message": "Поиск разрешенных сайтов...",
+    "description": "Placeholder for allowed sites search bar."
+  },
+  "searchIgnoredSites": {
+    "message": "Поиск игнорируемых сайтов...",
+    "description": "Placeholder for ignored sites search bar."
+  },
+  "advancedSiteTweaksTitle": {
+    "message": "Расширенные настройки сайта",
+    "description": "Title for Advanced Site Tweaks panel."
+  },
+  "advancedSiteTweaksDesc": {
+    "message": "Скрывайте отвлекающие элементы пользовательского интерфейса на поддерживаемых сайтах (YouTube Shorts, лента Reddit, временная шкала X и т. д.).",
+    "description": "Subtitle for Advanced Site Tweaks panel."
+  },
+  "tweak_yt_shorts": {
+    "message": "Скрыть шорты",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_recom": {
+    "message": "Скрыть ленту главной страницы",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_related": {
+    "message": "Скрыть похожие видео",
+    "description": "Tweak option label."
+  },
+  "tweak_yt_comments": {
+    "message": "Скрыть комментарии",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_feed": {
+    "message": "Скрыть главную ленту",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_comments": {
+    "message": "Скрыть комментарии",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_popular": {
+    "message": "Скрыть популярные, новости, исследование",
+    "description": "Tweak option label."
+  },
+  "tweak_rd_recent_communities": {
+    "message": "Скрыть недавние и сообщества",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_reels": {
+    "message": "Скрыть ссылку на ролики",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_home": {
+    "message": "Скрыть главную ленту",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_explore": {
+    "message": "Скрыть ссылку «Исследовать»",
+    "description": "Tweak option label."
+  },
+  "tweak_ig_suggested": {
+    "message": "Скрыть предложенные вам",
+    "description": "Tweak option label."
+  },
+  "tweak_x_timeline": {
+    "message": "Скрыть для вас / Следуя временной шкале",
+    "description": "Tweak option label."
+  },
+  "tweak_tw_trends": {
+    "message": "Скрыть тренды",
+    "description": "Tweak option label."
+  },
+  "tweak_x_whotofollow": {
+    "message": "Скрыть, за кем следить",
+    "description": "Tweak option label."
+  },
+  "tweak_x_promoted": {
+    "message": "Скрыть продвигаемые сообщения",
+    "description": "Tweak option label."
+  },
+  "tweak_li_feed": {
+    "message": "Скрыть главную ленту",
+    "description": "Tweak option label."
+  },
+  "tweak_li_news": {
+    "message": "Скрыть новости LinkedIn",
+    "description": "Tweak option label."
+  },
+  "tweak_li_promoted": {
+    "message": "Скрыть продвигаемые сообщения",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_autoplay": {
+    "message": "Отключить предварительный просмотр автозапуска",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_recom": {
+    "message": "Скрыть рекомендации",
+    "description": "Tweak option label."
+  },
+  "tweak_nf_billboard": {
+    "message": "Скрыть избранный рекламный щит",
+    "description": "Tweak option label."
+  },
+  "tweak_bw_mode": {
+    "message": "Черно-белый режим",
+    "description": "Tweak option label."
+  },
+  "statTotal": {
+    "message": "ИТОГО"
+  },
+  "statProductivity": {
+    "message": "ПРОИЗВОДИТЕЛЬНОСТЬ"
+  },
+  "statLearning": {
+    "message": "ОБУЧЕНИЕ"
+  },
+  "statDistraction": {
+    "message": "ОТВЛЕЧЕНИЕ"
+  },
+  "statCommunication": {
+    "message": "ОБЩЕНИЕ"
+  },
+  "consistencyDesc": {
+    "message": "Каждый квадрат – это один день. Экологичнее = больше времени на концентрацию. Красный = потраченный день."
+  },
+  "legendLess": {
+    "message": "МЕНЬШЕ"
+  },
+  "legendMore": {
+    "message": "БОЛЬШЕ"
+  },
+  "legendWasted": {
+    "message": "ПОТЕРЯННЫЙ"
+  },
+  "wasted365d": {
+    "message": "ПОТЕРЯНО (365D)"
+  },
+  "focusSubtitle": {
+    "message": "Зафиксируйте, отслеживайте цели и наращивайте свою серию."
+  },
+  "goalsAndStreak": {
+    "message": "ЦЕЛИ И ПОЛИЯ"
+  },
+  "minActiveTimeM": {
+    "message": "Минимальное активное время (м)"
+  },
+  "ratioThreshold": {
+    "message": "Порог отношения (%)"
+  },
+  "darkTheme": {
+    "message": "Темный"
+  },
+  "lightTheme": {
+    "message": "Свет"
+  },
+  "cinematicTheme": {
+    "message": "Кинематографичный"
+  },
+  "supportAndFeedback": {
+    "message": "ПОДДЕРЖКА И ОБРАТНАЯ СВЯЗЬ"
+  },
+  "submitRequestsDesc": {
+    "message": "Помогите нам улучшить Flow! Поделитесь своими идеями, предложениями или сообщите об ошибках."
+  },
+  "submitFeedback": {
+    "message": "Отправить отзыв"
+  },
+  "helpTranslate": {
+    "message": "Помогите перевести"
+  },
+  "rate5Stars": {
+    "message": "Оцените 5 звезд"
+  },
+  "changelog": {
+    "message": "Журнал изменений"
+  },
+  "accessControlAndSafety": {
+    "message": "КОНТРОЛЬ ДОСТУПА И БЕЗОПАСНОСТЬ"
+  },
+  "pinActive": {
+    "message": "PIN-код активен"
+  },
+  "backupAndRestore": {
+    "message": "РЕЗЕРВНОЕ КОПИРОВАНИЕ И ВОССТАНОВЛЕНИЕ"
+  },
+  "exportJsonDesc": {
+    "message": "Экспортируйте все данные в формате JSON"
+  },
+  "restoreJsonDesc": {
+    "message": "Восстановление из JSON"
+  },
+  "productivity": {
+    "message": "生産性"
+  },
+  "learning": {
+    "message": "学習"
+  },
+  "distraction": {
+    "message": "誘惑"
+  },
+  "communication": {
+    "message": "コミュニケーション"
+  },
+  "uncategorized": {
+    "message": "未分類"
+  },
+  "pause": {
+    "message": "一時停止"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "settingsTitle": {
+    "message": "設定"
+  },
+  "tabSecurityAndSystem": {
+    "message": "Безопасность и система"
+  },
+  "tabTrackingAndBlocking": {
+    "message": "Отслеживание и блокировка"
+  },
+  "lockStopTitle": {
+    "message": "Блокировка кнопки остановки таймера"
+  },
+  "lockStopDesc": {
+    "message": "Требовать PIN-код, чтобы остановить или приостановить активный сеанс фокусировки."
+  },
+  "lockRulesTitle": {
+    "message": "Блокировка правил редактирования/удаления"
+  },
+  "lockRulesDesc": {
+    "message": "Требовать PIN-код для изменения, удаления или очистки списков и правил блокировки веб-сайтов."
+  },
+  "lockFreetimeTitle": {
+    "message": "Блокировка часов свободного времени"
+  },
+  "lockFocusPresetsTitle": {
+    "message": "Блокировка настроек фокуса редактирования"
+  },
+  "lockFocusSchedsTitle": {
+    "message": "Lock Editing/Deleting Focus Schedules"
+  },
+  "lockFocusSchedsDesc": {
+    "message": "Требовать PIN-код для изменения или удаления конфигураций расписания фокусировки."
+  },
+  "lockTweaksTitle": {
+    "message": "Блокировка расширенных настроек сайта"
+  },
+  "lockTweaksDesc": {
+    "message": "Требовать PIN-код для доступа к пользовательским стилям, внедрению скриптов или расширенным настройкам."
+  },
+  "lockPrivacyTitle": {
+    "message": "Блокировка режима конфиденциальности (пауза отслеживания)"
+  },
+  "lockPrivacyDesc": {
+    "message": "Требовать PIN-код, чтобы приостановить отслеживание или включить режим конфиденциальности."
+  },
+  "lockAdjustTimeTitle": {
+    "message": "Время настройки блокировки (дневная разбивка)"
+  },
+  "lockDangerTitle": {
+    "message": "Заблокировать опасную зону (очистить данные)"
+  },
+  "lockDangerDesc": {
+    "message": "Требовать PIN-код для сброса статистики, правил или пользовательских категорий."
+  },
+  "extStorageUsage": {
+    "message": "РАСШИРЕНИЕ ИСПОЛЬЗОВАНИЕ ХРАНЕНИЯ"
+  },
+  "extStorageDesc": {
+    "message": "Пространство, используемое настройками, правилами и базой данных истории."
+  },
+  "migrationAndImports": {
+    "message": "МИГРАЦИЯ И ИМПОРТ"
+  },
+  "importWebActivityTitle": {
+    "message": "Импорт из трекера времени веб-активности"
+  },
+  "importWebActivityDesc": {
+    "message": "Загрузите экспортированный файл CSV, чтобы объединить историю отслеживания."
+  },
+  "importHabitBuilderTitle": {
+    "message": "Импорт из Time Tracker – Web Habit Builder"
+  },
+  "importHabitBuilderDesc": {
+    "message": "Загрузите экспортированный файл JSON, чтобы объединить историю отслеживания."
+  },
+  "importWebtimeTrackerTitle": {
+    "message": "Импорт из Webtime Tracker"
+  },
+  "importWebtimeTrackerDesc": {
+    "message": "Загрузите экспортированный файл CSV, чтобы объединить историю отслеживания."
+  },
+  "createLocalBackupBtn": {
+    "message": "+ Создать локальную резервную копию"
+  },
+  "resetStatsTitle": {
+    "message": "Сбросить всю статистику"
+  },
+  "resetStatsDesc": {
+    "message": "Сотрите всю записанную историю отслеживания и аналитику веб-сайта. Это невозможно отменить."
+  },
+  "resetStatsBtn": {
+    "message": "Сбросить статистику"
+  },
+  "clearRulesTitle": {
+    "message": "Очистить все правила блокировки и разрешения"
+  },
+  "clearRulesDesc": {
+    "message": "Удалите все пользовательские списки блокировки веб-сайтов, расписания, ограничения и списки разрешений."
+  },
+  "clearRulesBtn": {
+    "message": "Четкие правила"
+  },
+  "clearCategoriesTitle": {
+    "message": "Очистить все категории руководства"
+  },
+  "clearCategoriesDesc": {
+    "message": "Сбросьте все теги пользовательских категорий веб-сайта до значений по умолчанию."
+  },
+  "clearCategoriesBtn": {
+    "message": "Очистить категории"
+  },
+  "idleTimeoutTitle": {
+    "message": "Тайм-аут простоя"
+  },
+  "after30Secs": {
+    "message": "Через 30 секунд"
+  },
+  "after2Mins": {
+    "message": "Через 2 минуты"
+  },
+  "after5Mins": {
+    "message": "Через 5 минут"
+  },
+  "sleepGapTitle": {
+    "message": "Компьютерный разрыв сна"
+  },
+  "sleepGapDesc": {
+    "message": "Ограничение расчета активного времени, если вы переводите компьютер в спящий режим."
+  },
+  "never": {
+    "message": "Никогда"
+  },
+  "mediaTrackingTitle": {
+    "message": "Отслеживание воспроизведения мультимедиа"
+  },
+  "mediaTrackingDesc": {
+    "message": "Продолжайте отслеживать время, если воспроизводится аудио или видео (даже в режиме ожидания)."
+  },
+  "ignoreQuickVisitsTitle": {
+    "message": "Игнорировать быстрые посещения"
+  },
+  "trackLocalFilesTitle": {
+    "message": "Отслеживать локальные файлы"
+  },
+  "alwaysTrackTitle": {
+    "message": "Всегда отслеживать (даже в режиме ожидания)"
+  },
+  "alwaysTrackDesc": {
+    "message": "Сайты, которые всегда отслеживают время, даже когда вы уходите (например, pw.live)"
+  },
+  "addExceptionBtn": {
+    "message": "+ Добавить исключение"
+  },
+  "noExceptionsAdded": {
+    "message": "Никаких исключений не добавлено."
+  },
+  "showTimeOnBadgeTitle": {
+    "message": "Показать время, потраченное на значок расширения"
+  },
+  "showTimeOnBadgeDesc": {
+    "message": "Отображает минуты, проведенные на текущем сайте."
+  },
+  "showIdlTitle": {
+    "message": "Показывать «idl» в режиме ожидания/без отслеживания"
+  },
+  "showIdlDesc": {
+    "message": "Отображает «idl» на значке расширения, когда отслеживание времени приостановлено или неактивно."
+  },
+  "timeLimitWarningTitle": {
+    "message": "Предупреждение об ограничении времени перед блокировкой"
+  },
+  "tabLimiterTitle": {
+    "message": "Ограничитель вкладок для каждого домена"
+  },
+  "dataAndRollover": {
+    "message": "ДАННЫЕ И РОЛЛОВЕР"
+  },
+  "nightOwlTitle": {
+    "message": "Ночная сова, смена дня"
+  },
+  "nightOwlDesc": {
+    "message": "Определите, когда начнется ваш новый день отслеживания. Полезно, если вы работаете допоздна."
+  },
+  "midnight12am": {
+    "message": "Полночь (00:00)"
+  },
+  "dataRetentionTitle": {
+    "message": "Сохранение истории данных"
+  },
+  "dataRetentionDesc": {
+    "message": "Автоматически удаляйте подробные журналы отслеживания старше этого срока, чтобы сэкономить место."
+  },
+  "tracked": {
+    "message": "Отслеживается"
+  }
+}

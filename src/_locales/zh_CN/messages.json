@@ -1194,6 +1194,18 @@
     "message": "葡萄牙语 (巴西) / Português (Brasil)",
     "description": "Language choice."
   },
+  "langFrench": {
+    "message": "法语/法语",
+    "description": "Language choice."
+  },
+  "langKorean": {
+    "message": "韩语 / 한국어",
+    "description": "Language choice."
+  },
+  "langRussian": {
+    "message": "俄语 / Русский",
+    "description": "Language choice."
+  },
   "averageLine": {
     "message": "平均线",
     "description": "Chart option."
