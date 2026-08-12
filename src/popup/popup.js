@@ -402,7 +402,7 @@ async function loadViewData() {
         });
     }
     var i = computeTotals(s);
-    renderDonut(s, i), renderDynamicList(a, i), "total" === currentView && loadWeeklyGoal()
+    renderDonut(s, i), renderDynamicList(a, i), loadWeeklyGoal();
 }
 
 
