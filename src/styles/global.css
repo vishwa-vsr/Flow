@@ -253,6 +253,107 @@ textarea:focus {
 /* selection */
 ::selection{background:var(--green);color:#0a0a0a}
 
+/* ============================================================
+   FLOW MODERN TAB SYSTEM (Shadcn/Base-UI Architecture)
+   ============================================================ */
+
+.nav-links,
+.view-tabs,
+.time-tabs,
+.rule-tabs,
+.site-tabs,
+.range-selector,
+.ff-tabs-list {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  background: var(--bg3) !important;
+  border: 1px solid var(--bd2) !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+  position: relative !important;
+  width: fit-content !important;
+}
+
+.time-tabs {
+  width: 100% !important;
+}
+
+.ni,
+.vtab,
+.ttab,
+.rule-tab,
+.site-tab,
+.rule-tab,
+.ff-tab-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  color: var(--tx2) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  white-space: nowrap !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none !important;
+}
+
+.ttab {
+  flex: 1 !important;
+}
+
+.ni:hover:not(.act),
+.vtab:hover:not(.act),
+.ttab:hover:not(.act),
+.rule-tab:hover:not(.act),
+.site-tab:hover:not(.act),
+.ff-tab-item:hover:not(.active) {
+  color: var(--tx) !important;
+  background: var(--bg4) !important;
+}
+
+.ni.act,
+.vtab.act,
+.ttab.act,
+.rule-tab.act,
+.site-tab.act,
+.ff-tab-item.active {
+  background: rgba(5, 213, 129, 0.12) !important;
+  color: var(--green) !important;
+  border-color: rgba(5, 213, 129, 0.3) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 6px rgba(5, 213, 129, 0.15) !important;
+}
+
+html.light .ni.act,
+html.light .vtab.act,
+html.light .ttab.act,
+html.light .rule-tab.act,
+html.light .site-tab.act,
+html.light .ff-tab-item.active {
+  background: rgba(5, 213, 129, 0.14) !important;
+  color: #039e5e !important;
+  border-color: rgba(5, 213, 129, 0.4) !important;
+}
+
+.ni:focus-visible,
+.vtab:focus-visible,
+.ttab:focus-visible,
+.rule-tab:focus-visible,
+.site-tab:focus-visible,
+.ff-tab-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--green) !important;
+}
+
+
 /* subtle grain */
 .card::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
