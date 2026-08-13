@@ -1378,12 +1378,8 @@ async function loadAnalytics() {
         else if ("daily" === currentATab) await renderDailyBreakdown();
         else if ("topsites" === currentATab) await renderTopSites();
         else if ("trend" === currentATab) await renderTrend();
-    } finally {
-        if (tabEl) {
-            tabEl.classList.remove("ff-tab-anim");
-            void tabEl.offsetWidth;
-            tabEl.classList.add("ff-tab-anim");
-        }
+    } catch (err) {
+        console.error("[FF] Error rendering analytics view:", err);
     }
 }
 
@@ -1813,8 +1809,22 @@ document.querySelectorAll(".ni").forEach(e => {
             const tab = btn.getAttribute("data-settab");
             const trackingPane = $("settab-tracking");
             const securityPane = $("settab-security");
-            if (trackingPane) trackingPane.style.display = tab === "tracking" ? "" : "none";
-            if (securityPane) securityPane.style.display = tab === "security" ? "" : "none";
+            if (trackingPane) {
+                trackingPane.style.display = tab === "tracking" ? "" : "none";
+                if (tab === "tracking") {
+                    trackingPane.classList.remove("ff-tab-anim");
+                    void trackingPane.offsetWidth;
+                    trackingPane.classList.add("ff-tab-anim");
+                }
+            }
+            if (securityPane) {
+                securityPane.style.display = tab === "security" ? "" : "none";
+                if (tab === "security") {
+                    securityPane.classList.remove("ff-tab-anim");
+                    void securityPane.offsetWidth;
+                    securityPane.classList.add("ff-tab-anim");
+                }
+            }
         });
     }), $("btn-bulk-edit") && $("btn-bulk-edit").addEventListener("click", async () => {
         await promptPinIfEnabled("lockRules") && (isBulkMode = !0, bulkSelected.clear(), $("btn-bulk-edit").style.display = "none", $("bulk-actions").style.display = "flex", renderCombined())
@@ -1978,19 +1988,27 @@ document.querySelectorAll(".ni").forEach(e => {
         };
     }
 
-    document.querySelectorAll("[data-atab]").forEach(e => {
-        e.addEventListener("click", () => {
-            document.querySelectorAll("[data-atab]").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentATab = e.getAttribute("data-atab"), ["overview", "daily", "topsites", "trend"].forEach(e => {
-                const tab = $("atab-" + e);
+    document.querySelectorAll("[data-atab]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll("[data-atab]").forEach(b => b.classList.remove("act"));
+            btn.classList.add("act");
+            currentATab = btn.getAttribute("data-atab");
+            ["overview", "daily", "topsites", "trend"].forEach(name => {
+                const tab = $("atab-" + name);
                 if (tab) {
-                    if (e === currentATab) {
+                    if (name === currentATab) {
                         tab.style.display = "";
+                        tab.classList.remove("ff-tab-anim");
+                        void tab.offsetWidth;
+                        tab.classList.add("ff-tab-anim");
                     } else {
                         tab.style.display = "none";
+                        tab.classList.remove("ff-tab-anim");
                     }
                 }
-            }), setTimeout(() => loadAnalytics(), 50)
-        })
+            });
+            loadAnalytics();
+        });
     }), document.querySelectorAll("[data-range]").forEach(e => {
         e.addEventListener("click", () => {
             document.querySelectorAll("[data-range]").forEach(b => b.classList.remove("act"));
