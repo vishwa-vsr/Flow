@@ -363,6 +363,8 @@
       display: block;
       animation: ffMainTabSlide 0.62s cubic-bezier(0.16, 1, 0.3, 1) !important;
       will-change: opacity, transform;
+      contain: content;
+      backface-visibility: hidden;
     }
 
     @keyframes ffMainTabSlide {
