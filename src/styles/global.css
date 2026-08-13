@@ -276,7 +276,8 @@ textarea:focus {
 }
 
 .time-tabs {
-  width: 100% !important;
+  width: calc(100% - 32px) !important;
+  margin: 16px 16px 0 !important;
 }
 
 .ni,
@@ -284,7 +285,6 @@ textarea:focus {
 .ttab,
 .rule-tab,
 .site-tab,
-.rule-tab,
 .ff-tab-item {
   position: relative !important;
   display: flex !important;
@@ -326,11 +326,11 @@ textarea:focus {
 .rule-tab.act,
 .site-tab.act,
 .ff-tab-item.active {
-  background: rgba(5, 213, 129, 0.12) !important;
-  color: var(--green) !important;
-  border-color: rgba(5, 213, 129, 0.3) !important;
+  background: var(--bg2) !important;
+  color: var(--tx) !important;
+  border-color: var(--bd2) !important;
   font-weight: 700 !important;
-  box-shadow: 0 1px 6px rgba(5, 213, 129, 0.15) !important;
+  box-shadow: none !important;
 }
 
 html.light .ni.act,
@@ -339,9 +339,10 @@ html.light .ttab.act,
 html.light .rule-tab.act,
 html.light .site-tab.act,
 html.light .ff-tab-item.active {
-  background: rgba(5, 213, 129, 0.14) !important;
-  color: #039e5e !important;
-  border-color: rgba(5, 213, 129, 0.4) !important;
+  background: #ffffff !important;
+  color: #0f0f11 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 .ni:focus-visible,
