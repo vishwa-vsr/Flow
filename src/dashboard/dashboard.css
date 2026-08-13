@@ -361,7 +361,7 @@
 
     .tab.act {
       display: block;
-      animation: ffTabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .ph {

@@ -534,13 +534,13 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .sm-tab:hover:not(.is-active) { color:var(--tx); background:rgba(255,255,255,0.03); }
 .sm-tab.is-active { background:var(--bg4); color:var(--tx); box-shadow:var(--shadow-sm); border:1px solid var(--bd2); }
 .sm-pane { display:none; }
-.sm-pane.is-active { display:block; animation: ffTabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+.sm-pane.is-active { display:block; animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
 
-/* Universal Tab Transition Animation */
+/* Universal Tab Transition Animation (75% Slower Smooth Glide) */
 @keyframes ffTabFadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -549,7 +549,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 }
 
 .ff-tab-anim {
-  animation: ffTabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
 }
 
 
