@@ -4514,13 +4514,18 @@ renderFocus = function (e, t) {
         window.__glowPresetId = params.get("preset") || params.get("glow") || "";
     }
 
-    // Programmatically click the navigation button for the active tab to trigger its load sequence
-    const navBtn = document.querySelector(`.ni[data-tab="${initialTab}"]`);
-    if (navBtn) {
-        navBtn.click();
-    } else {
-        loadAnalytics();
-    }
+    document.querySelectorAll(".ni").forEach(b => {
+        if (b.getAttribute("data-tab") === initialTab) b.classList.add("act");
+        else b.classList.remove("act");
+    });
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("act"));
+    const initTabEl = $("tab-" + initialTab);
+    if (initTabEl) initTabEl.classList.add("act");
+
+    if ("analytics" === initialTab) loadAnalytics();
+    else if ("settings" === initialTab) loadExtendedSettings();
+    else if ("focus" === initialTab) { loadFocusUI(); loadWeeklyGoalSettings(); loadFocusHistory(); }
+    else if ("sitemanager" === initialTab) { (async () => { await Promise.all([loadRules(), loadCategories(), loadVisitedSites(), loadExtendedSettings()]); renderCategories(); renderGranularBlocksUI(); })(); }
     // FF v6.7: Floating "Save All Settings" button that follows the user when on the Settings tab
     (function initFloatingSave() {
         const _fab = document.createElement("button");
