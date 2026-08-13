@@ -262,6 +262,7 @@ textarea:focus {
 .time-tabs,
 .rule-tabs,
 .site-tabs,
+.sm-tabs,
 .range-selector,
 .ff-tabs-list {
   display: flex !important;
@@ -275,7 +276,8 @@ textarea:focus {
   width: fit-content !important;
 }
 
-.view-tabs {
+.view-tabs,
+.sm-tabs {
   margin-bottom: 20px !important;
 }
 
@@ -289,6 +291,7 @@ textarea:focus {
 .ttab,
 .rule-tab,
 .site-tab,
+.sm-tab,
 .ff-tab-item {
   position: relative !important;
   display: flex !important;
@@ -319,6 +322,7 @@ textarea:focus {
 .ttab:hover:not(.act),
 .rule-tab:hover:not(.act),
 .site-tab:hover:not(.act),
+.sm-tab:hover:not(.is-active),
 .ff-tab-item:hover:not(.active) {
   color: var(--tx) !important;
   background: var(--bg4) !important;
@@ -329,6 +333,7 @@ textarea:focus {
 .ttab.act,
 .rule-tab.act,
 .site-tab.act,
+.sm-tab.is-active,
 .ff-tab-item.active {
   background: var(--bg2) !important;
   color: var(--tx) !important;
@@ -342,6 +347,7 @@ html.light .vtab.act,
 html.light .ttab.act,
 html.light .rule-tab.act,
 html.light .site-tab.act,
+html.light .sm-tab.is-active,
 html.light .ff-tab-item.active {
   background: #ffffff !important;
   color: #0f0f11 !important;
@@ -354,18 +360,21 @@ html.light .ff-tab-item.active {
 .ttab:focus,
 .rule-tab:focus,
 .site-tab:focus,
+.sm-tab:focus,
 .ff-tab-item:focus,
 .ni:focus-visible,
 .vtab:focus-visible,
 .ttab:focus-visible,
 .rule-tab:focus-visible,
 .site-tab:focus-visible,
+.sm-tab:focus-visible,
 .ff-tab-item:focus-visible,
 .ni:active,
 .vtab:active,
 .ttab:active,
 .rule-tab:active,
 .site-tab:active,
+.sm-tab:active,
 .ff-tab-item:active {
   outline: none !important;
   box-shadow: none !important;
