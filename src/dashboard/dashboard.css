@@ -261,30 +261,7 @@
       color: var(--tx)
     }
 
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      background: var(--bg3);
-      padding: 6px;
-      border-radius: 14px;
-      border: 1px solid var(--bd);
-      margin-right: 12px
-    }
 
-    .ni {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: transparent;
-      border: none;
-      color: var(--tx2);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--trans)
-    }
 
     .privacy-btn {
       width: 40px;
@@ -362,16 +339,7 @@
       border-color: var(--red);
     }
 
-    .ni:hover {
-      color: var(--tx);
-      background: var(--surface-elevated)
-    }
 
-    .ni.act {
-      background: var(--bg4);
-      color: var(--tx);
-      box-shadow: var(--shadow-sm)
-    }
 
     .nic {
       display: flex;
@@ -582,40 +550,7 @@
       opacity: 1 !important;
     }
 
-    .view-tabs {
-      display: flex;
-      gap: 6px;
-      background: var(--bg3);
-      border-radius: 14px;
-      padding: 6px;
-      margin-bottom: 20px;
-      width: fit-content;
-      border: 1px solid var(--bd)
-    }
 
-    .vtab {
-      padding: 8px 20px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      background: none;
-      color: var(--tx2);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--trans)
-    }
-
-    .vtab.act {
-      background: var(--bg4);
-      color: var(--tx);
-      box-shadow: var(--shadow-sm);
-      border-color: var(--bd2)
-    }
-
-    .vtab:hover:not(.act) {
-      color: var(--tx);
-      background: var(--surface-elevated)
-    }
 
     .compact-grid {
       display: grid;
@@ -1804,28 +1739,7 @@
       padding: 40px !important;
     }
 
-    .rule-tab {
-      background: transparent;
-      color: var(--tx2);
-      border: none;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 6px 12px;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .rule-tab:hover {
-      color: var(--tx1);
-      background: var(--bg2);
-    }
-    .rule-tab.act {
-      background: var(--bg3);
-      color: var(--tx1);
-      font-weight: 700;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      border: 1px solid var(--bd);
-    }
+
 
     /* Pause animations when the tab is hidden */
     html.tab-hidden #logo-img.on,
