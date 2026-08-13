@@ -1372,11 +1372,6 @@ async function loadAnalytics() {
         }
     }
     const tabEl = $("atab-" + currentATab);
-    if (tabEl) {
-        if (tabEl.style.opacity !== "0") {
-            tabEl.style.opacity = "0.5";
-        }
-    }
 
     try {
         if ("overview" === currentATab) await renderOverview();
@@ -1385,8 +1380,9 @@ async function loadAnalytics() {
         else if ("trend" === currentATab) await renderTrend();
     } finally {
         if (tabEl) {
-            tabEl.style.transition = "opacity 0.25s ease";
-            tabEl.style.opacity = "1";
+            tabEl.classList.remove("ff-tab-anim");
+            void tabEl.offsetWidth;
+            tabEl.classList.add("ff-tab-anim");
         }
     }
 }
@@ -1989,13 +1985,11 @@ document.querySelectorAll(".ni").forEach(e => {
                 if (tab) {
                     if (e === currentATab) {
                         tab.style.display = "";
-                        tab.style.opacity = "0";
-                        tab.style.transition = "none";
                     } else {
                         tab.style.display = "none";
                     }
                 }
-            }), setTimeout(() => loadAnalytics(), 100)
+            }), setTimeout(() => loadAnalytics(), 50)
         })
     }), document.querySelectorAll("[data-range]").forEach(e => {
         e.addEventListener("click", () => {

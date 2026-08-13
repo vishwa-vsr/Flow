@@ -357,27 +357,11 @@
 
     .tab {
       display: none;
-      animation: fadeIn 0.3s ease
     }
 
     .tab.act {
-      display: block
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    #atab-overview, #atab-daily, #atab-topsites, #atab-trend, #atab-insights {
-      transition: opacity 0.25s ease;
+      display: block;
+      animation: ffTabFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .ph {

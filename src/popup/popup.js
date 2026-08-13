@@ -121,12 +121,14 @@ document.querySelectorAll(".ttab").forEach(function (e) {
         document.querySelectorAll(".ttab").forEach(e => e.classList.remove("act")), e.classList.add("act"), currentView = e.getAttribute("data-view");
         var t = $("dynamic-list"),
             s = $("today-widgets");
-        t && t.classList.remove("fade-in"), s && s.classList.remove("fade-in"), t && t.offsetWidth;
+        t && t.classList.remove("ff-tab-anim"), s && s.classList.remove("ff-tab-anim");
+        const totWid = $("total-widgets");
+        totWid && totWid.classList.remove("ff-tab-anim");
+        t && t.offsetWidth;
         loadViewData().then(() => {
-            t && t.classList.add("fade-in");
-            s && "today" === currentView && s.classList.add("fade-in");
-            const totWid = $("total-widgets");
-            totWid && "total" === currentView && totWid.classList.add("fade-in");
+            t && t.classList.add("ff-tab-anim");
+            s && "today" === currentView && s.classList.add("ff-tab-anim");
+            totWid && "total" === currentView && totWid.classList.add("ff-tab-anim");
         });
     })
 });
