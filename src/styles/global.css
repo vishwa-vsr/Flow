@@ -540,16 +540,26 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 @keyframes ffTabFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate3d(0, 10px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .ff-tab-anim {
   animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  backface-visibility: hidden !important;
+  transform-style: preserve-3d !important;
+}
+
+#atab-overview,
+#atab-daily,
+#atab-topsites,
+#atab-trend {
+  min-height: 420px;
+  contain: layout style;
 }
 
 
