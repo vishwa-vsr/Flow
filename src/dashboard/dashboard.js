@@ -1794,7 +1794,15 @@ document.querySelectorAll(".ni").forEach(e => {
         e.setAttribute("aria-selected", "true");
         e.setAttribute("aria-current", "page");
         $("tab-" + t).classList.add("act");
-        "analytics" === t && loadAnalytics();
+        "analytics" === t && (async () => {
+            await loadAnalytics();
+            const activeSubTab = $("atab-" + currentATab);
+            if (activeSubTab) {
+                activeSubTab.classList.remove("ff-tab-anim");
+                void activeSubTab.offsetWidth;
+                activeSubTab.classList.add("ff-tab-anim");
+            }
+        })();
         "settings" === t && loadExtendedSettings();
         "focus" === t && (loadFocusUI(), loadWeeklyGoalSettings(), loadFocusHistory());
         "sitemanager" === t && (async () => { await Promise.all([loadRules(), loadCategories(), loadVisitedSites(), loadExtendedSettings()]); renderCategories(); renderGranularBlocksUI(); })();
@@ -1989,7 +1997,7 @@ document.querySelectorAll(".ni").forEach(e => {
     }
 
     document.querySelectorAll("[data-atab]").forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", async () => {
             document.querySelectorAll("[data-atab]").forEach(b => b.classList.remove("act"));
             btn.classList.add("act");
             currentATab = btn.getAttribute("data-atab");
@@ -1998,16 +2006,19 @@ document.querySelectorAll(".ni").forEach(e => {
                 if (tab) {
                     if (name === currentATab) {
                         tab.style.display = "";
-                        tab.classList.remove("ff-tab-anim");
-                        void tab.offsetWidth;
-                        tab.classList.add("ff-tab-anim");
                     } else {
                         tab.style.display = "none";
                         tab.classList.remove("ff-tab-anim");
                     }
                 }
             });
-            loadAnalytics();
+            await loadAnalytics();
+            const targetTab = $("atab-" + currentATab);
+            if (targetTab) {
+                targetTab.classList.remove("ff-tab-anim");
+                void targetTab.offsetWidth;
+                targetTab.classList.add("ff-tab-anim");
+            }
         });
     }), document.querySelectorAll("[data-range]").forEach(e => {
         e.addEventListener("click", () => {
