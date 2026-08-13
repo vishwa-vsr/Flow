@@ -550,6 +550,17 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   animation: ffSubTabFade 0.2s ease-out forwards !important;
 }
 
+/* Standardized Sub-Tab Header Control Bar Row (Zero Vertical Shift Across Tabs) */
+.atab-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  margin-bottom: 20px !important;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 
 
 /* FF v6.7.0: loading spinner — used in dashboard render functions while data loads */

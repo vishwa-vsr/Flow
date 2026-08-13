@@ -99,8 +99,8 @@
       </div>
 
       <div id="atab-overview">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <div class="range-selector">
+        <div class="atab-header-row">
+          <div class="range-selector" style="margin:0;">
             <button class="vtab act" data-range="7" data-i18n="range7d">7d</button>
             <button class="vtab" data-range="14" data-i18n="range14d">14d</button>
             <button class="vtab" data-range="30" data-i18n="range30d">30d</button>
@@ -247,11 +247,13 @@
       </div>
 
       <div id="atab-daily" style="display:none">
-        <div class="range-selector" style="margin-bottom:16px;">
-          <button class="vtab act" data-dailyrange="7" data-i18n="range7d">7d</button>
-          <button class="vtab" data-dailyrange="14" data-i18n="range14d">14d</button>
-          <button class="vtab" data-dailyrange="30" data-i18n="range30d">30d</button>
-          <button class="vtab" data-dailyrange="custom" id="db-custom-btn" data-i18n="customRange">Custom Range</button>
+        <div class="atab-header-row">
+          <div class="range-selector" style="margin:0;">
+            <button class="vtab act" data-dailyrange="7" data-i18n="range7d">7d</button>
+            <button class="vtab" data-dailyrange="14" data-i18n="range14d">14d</button>
+            <button class="vtab" data-dailyrange="30" data-i18n="range30d">30d</button>
+            <button class="vtab" data-dailyrange="custom" id="db-custom-btn" data-i18n="customRange">Custom Range</button>
+          </div>
         </div>
         <div id="db-custom-panel" class="custom-date-panel">
           <label for="db-from" class="date-label" data-i18n="from">From</label>
@@ -268,14 +270,14 @@
       </div>
 
       <div id="atab-topsites" style="display:none">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
+        <div class="atab-header-row">
           <div class="range-selector" style="margin:0;">
             <button class="vtab act" data-siterange="7" data-i18n="7days">7 days</button>
             <button class="vtab" data-siterange="30" data-i18n="30days">30 days</button>
             <button class="vtab" data-siterange="all" data-i18n="tabAllTime">All time</button>
           </div>
           <div style="display:flex; gap:10px; align-items:center;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs report-issue-btn" title="Report Issue" style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; font-size:12px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs report-issue-btn" title="Report Issue" style="display:inline-flex; align-items:center; gap:6px; padding:0 16px; height:38px; border-radius:10px; font-size:13px; font-weight:600; text-decoration:none; white-space:nowrap; flex-shrink:0;">
               <span class="report-btn-text">Report Issue</span>
             </a>
             <input type="text" id="top-sites-search" class="ff-search" data-i18n-placeholder="searchSites" autocomplete="off" style="width:240px; margin:0;" aria-label="Search top sites">
@@ -294,12 +296,14 @@
       </div>
 
       <div id="atab-trend" style="display:none">
-        <div class="range-selector" style="margin-bottom:20px;">
-          <button class="vtab act" data-trendrange="7" data-i18n="range7d">7d</button>
-          <button class="vtab" data-trendrange="14" data-i18n="range14d">14d</button>
-          <button class="vtab" data-trendrange="30" data-i18n="range30d">30d</button>
-          <button class="vtab" data-trendrange="45" data-i18n="range45d">45d</button>
-          <button class="vtab" data-trendrange="custom" id="trend-custom-btn" data-i18n="customRange">Custom Range</button>
+        <div class="atab-header-row">
+          <div class="range-selector" style="margin:0;">
+            <button class="vtab act" data-trendrange="7" data-i18n="range7d">7d</button>
+            <button class="vtab" data-trendrange="14" data-i18n="range14d">14d</button>
+            <button class="vtab" data-trendrange="30" data-i18n="range30d">30d</button>
+            <button class="vtab" data-trendrange="45" data-i18n="range45d">45d</button>
+            <button class="vtab" data-trendrange="custom" id="trend-custom-btn" data-i18n="customRange">Custom Range</button>
+          </div>
         </div>
         <div id="trend-custom-panel" class="custom-date-panel">
           <label for="trend-from" class="date-label" data-i18n="from">From</label>
