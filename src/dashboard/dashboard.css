@@ -361,13 +361,14 @@
 
     .tab.act {
       display: block;
-      animation: ffMainTabSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      animation: ffMainTabSlide 0.62s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      will-change: opacity, transform;
     }
 
     @keyframes ffMainTabSlide {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(14px);
       }
       to {
         opacity: 1;
