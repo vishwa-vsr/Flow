@@ -275,6 +275,10 @@ textarea:focus {
   width: fit-content !important;
 }
 
+.view-tabs {
+  margin-bottom: 20px !important;
+}
+
 .time-tabs {
   width: calc(100% - 32px) !important;
   margin: 16px 16px 0 !important;
@@ -345,13 +349,26 @@ html.light .ff-tab-item.active {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
+.ni:focus,
+.vtab:focus,
+.ttab:focus,
+.rule-tab:focus,
+.site-tab:focus,
+.ff-tab-item:focus,
 .ni:focus-visible,
 .vtab:focus-visible,
 .ttab:focus-visible,
 .rule-tab:focus-visible,
 .site-tab:focus-visible,
-.ff-tab-item:focus-visible {
-  box-shadow: 0 0 0 2px var(--green) !important;
+.ff-tab-item:focus-visible,
+.ni:active,
+.vtab:active,
+.ttab:active,
+.rule-tab:active,
+.site-tab:active,
+.ff-tab-item:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 
