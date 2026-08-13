@@ -534,32 +534,20 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .sm-tab:hover:not(.is-active) { color:var(--tx); background:rgba(255,255,255,0.03); }
 .sm-tab.is-active { background:var(--bg4); color:var(--tx); box-shadow:var(--shadow-sm); border:1px solid var(--bd2); }
 .sm-pane { display:none; }
-.sm-pane.is-active { display:block; animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+.sm-pane.is-active { display:block; animation: ffSubTabFade 0.2s ease-out forwards !important; }
 
-/* Universal Tab Transition Animation (75% Slower Smooth Glide) */
-@keyframes ffTabFadeIn {
+/* Sub-Tab & Pane Fade Animation (Zero Shake / Pure Crisp Opacity) */
+@keyframes ffSubTabFade {
   from {
     opacity: 0;
-    transform: translate3d(0, 10px, 0);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
   }
 }
 
 .ff-tab-anim {
-  animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-  backface-visibility: hidden !important;
-  transform-style: preserve-3d !important;
-}
-
-#atab-overview,
-#atab-daily,
-#atab-topsites,
-#atab-trend {
-  min-height: 420px;
-  contain: layout style;
+  animation: ffSubTabFade 0.2s ease-out forwards !important;
 }
 
 

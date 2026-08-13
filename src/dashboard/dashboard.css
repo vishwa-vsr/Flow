@@ -361,7 +361,18 @@
 
     .tab.act {
       display: block;
-      animation: ffTabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      animation: ffMainTabSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    @keyframes ffMainTabSlide {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .ph {
