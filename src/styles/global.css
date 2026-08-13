@@ -269,7 +269,7 @@ textarea:focus {
   align-items: center !important;
   gap: 4px !important;
   background: var(--bg3) !important;
-  border: 1px solid var(--bd2) !important;
+  border: none !important;
   border-radius: 12px !important;
   padding: 4px !important;
   position: relative !important;
@@ -337,7 +337,7 @@ textarea:focus {
 .ff-tab-item.active {
   background: var(--bg2) !important;
   color: var(--tx) !important;
-  border-color: var(--bd2) !important;
+  border-color: transparent !important;
   font-weight: 700 !important;
   box-shadow: none !important;
 }
@@ -351,7 +351,7 @@ html.light .sm-tab.is-active,
 html.light .ff-tab-item.active {
   background: #ffffff !important;
   color: #0f0f11 !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: transparent !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
