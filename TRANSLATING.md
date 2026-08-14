@@ -14,19 +14,19 @@ Flow currently supports these languages:
 
 | Language | Code | Keys Translated | Status |
 | :--- | :--- | :---: | :--- |
-| 🇺🇸 **English** | `en` | 777/777 | ✅ Source Language |
-| 🇪🇸 **Spanish** | `es` | 770/777 | ✅ ~99% Translated |
-| 🇨🇳 **Simplified Chinese** | `zh_CN` | 776/777 | ✅ ~99% Translated |
-| 🇭🇰 **Traditional Chinese (Hong Kong)** | `zh_HK` | 776/777 | ✅ ~99% Translated |
-| 🇹🇼 **Traditional Chinese (Taiwan)** | `zh_TW` | 776/777 | ✅ ~99% Translated |
-| 🇯🇵 **Japanese** | `ja` | 774/777 | ✅ ~99% Translated |
-| 🇩🇪 **German** | `de` | 764/777 | ✅ ~98% Translated |
-| 🇧🇷 **Brazilian Portuguese** | `pt_BR` | 770/777 | ✅ ~99% Translated |
-| 🇫🇷 **French** | `fr` | 777/777 | ✅ ~99% Translated |
-| 🇰🇷 **Korean** | `ko` | 777/777 | ✅ ~99% Translated |
-| 🇷🇺 **Russian** | `ru` | 777/777 | ✅ ~99% Translated |
+| 🇺🇸 **English** | `en` | 779/779 | ✅ Source Language |
+| 🇪🇸 **Spanish** | `es` | 779/779 | ✅ 100% Translated (772 localized + 7 universal) |
+| 🇨🇳 **Simplified Chinese** | `zh_CN` | 779/779 | ✅ 100% Translated (778 localized + 1 universal) |
+| 🇭🇰 **Traditional Chinese (Hong Kong)** | `zh_HK` | 779/779 | ✅ 100% Translated (778 localized + 1 universal) |
+| 🇹🇼 **Traditional Chinese (Taiwan)** | `zh_TW` | 779/779 | ✅ 100% Translated (778 localized + 1 universal) |
+| 🇯🇵 **Japanese** | `ja` | 779/779 | ✅ 100% Translated (776 localized + 3 universal) |
+| 🇩🇪 **German** | `de` | 779/779 | ✅ 100% Translated (766 localized + 13 universal) |
+| 🇧🇷 **Brazilian Portuguese** | `pt_BR` | 779/779 | ✅ 100% Translated (770 localized + 9 universal) |
+| 🇫🇷 **French** | `fr` | 779/779 | ✅ 100% Translated (757 localized + 22 universal) |
+| 🇰🇷 **Korean** | `ko` | 779/779 | ✅ 100% Translated (777 localized + 2 universal) |
+| 🇷🇺 **Russian** | `ru` | 779/779 | ✅ 100% Translated (774 localized + 5 universal) |
 
-> **Note:** The remaining 1-2% of "untranslated" keys are universal terms (like "Pomodoro", "Flow", "Feedback") that are intentionally the same in every language.
+> **Note:** Universal terms (like "Pomodoro", "Flow", "PIN", "Feedback", "JSON") are intentionally identical across languages.
 
 If you want to add a new language, or fix spelling errors in the existing ones, we would love your help!
 

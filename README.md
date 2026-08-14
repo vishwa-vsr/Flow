@@ -12,6 +12,13 @@
   </p>
 
   <p>
+    <a href="https://github.com/vishwa-vsr/Flow/stargazers"><img src="https://img.shields.io/github/stars/vishwa-vsr/Flow?style=social" alt="GitHub Stars"></a>
+    <a href="https://github.com/vishwa-vsr/Flow/issues"><img src="https://img.shields.io/github/issues/vishwa-vsr/Flow" alt="Open Issues"></a>
+    <a href="https://github.com/vishwa-vsr/Flow/graphs/contributors"><img src="https://img.shields.io/github/contributors/vishwa-vsr/Flow" alt="Contributors"></a>
+    <a href="https://github.com/vishwa-vsr/Flow/releases"><img src="https://img.shields.io/github/v/release/vishwa-vsr/Flow" alt="Latest Release"></a>
+  </p>
+
+  <p>
     <a href="https://vishwa-vsr.github.io/flow-website/">🌐 Product Website</a> • 
     <a href="CHANGELOG.md">📄 Changelog</a> • 
     <a href="./LICENSE"><img src="https://img.shields.io/github/license/vishwa-vsr/Flow" alt="License" valign="middle"></a>
@@ -28,11 +35,13 @@
 
 ## ✨ What is Flow?
 
-Flow is a high-end web assistant designed for people who want to work smarter, not longer. It blends a state-of-the-art **Pomodoro Focus Timer** with **Visual Site Analytics**, a **Smart Distraction Blocker**, and a **365-Day Consistency Heatmap** to create the ultimate distraction-free environment.
+Flow is a browser extension I built because I was spending 4+ hours a day on YouTube and Reddit instead of studying. It combines a **website blocker**, **screen time tracker**, and **Pomodoro focus timer** into one tool — with all your data staying 100% on your computer.
 
-Whether you are studying, coding, writing, or designing, Flow keeps you in "the zone" while gently helping you build healthier screen-time habits.
+Whether you're studying for exams, coding on a deadline, or just trying to stop doomscrolling — Flow helps you see where your time goes and take control of it.
 
-**🔒 Privacy first** — All your data is stored locally on your device. Zero tracking, zero data collection.
+**🔒 Privacy first** — All data is stored locally. Zero tracking, zero data collection, zero accounts required.
+
+**💸 100% free** — No premium tier, no subscriptions, no ads. Ever.
 
 ---
 
@@ -40,41 +49,76 @@ Whether you are studying, coding, writing, or designing, Flow keeps you in "the 
 
 | Feature | Description |
 | :--- | :--- |
-| ⏱️ **Premium Pomodoro Timer** | Fully customizable work sessions, short breaks, and long breaks with a glowing progress ring. |
-| 📊 **Visual Time Tracking** | Circular donut chart displays your top-visited websites and shows exactly where your minutes went. |
-| 🚫 **Smart Site Blocker** | Network-level blocking with daily time limits, focus schedules, per-session limits, and redirects. |
-| 🌐 **Multi-language support** | Fully localized user interface across 11 languages (English, Spanish, Simplified Chinese, Traditional Chinese HK/TW, Japanese, German, Brazilian Portuguese, French, Korean, and Russian). |
-| 🔒 **6-Digit PIN Lock** | Granular locks for Timer Stop, Rule Editing, Free-time Hours, Focus Presets, and Settings Danger Zone. |
-| 🎯 **Weekly Goals & Streaks** | Set focus targets, track your progress, and earn a glowing streak badge for consecutive days. |
-| 🗺️ **365-Day Heatmap** | GitHub-style consistency heatmap with customizable focus thresholds. Green = focused. Red = distracted. |
-| 📈 **Study vs Distraction Trends** | Color-coded trend charts with category toggles (Productivity, Learning, Communication, Distraction). |
-| 🏷️ **Site Categorization** | Tag every website as Productivity, Learning, Communication, Distraction, or Uncategorized. |
-| ⏰ **Focus Schedules** | Set recurring daily or weekly focus sessions that automatically govern your browser. |
-| 🌗 **Dark, Light & Cinematic Themes** | Premium styling options including a glassmorphic cinematic mode with animated gradient blurs. |
-| 💾 **Data Backup & Import** | Export your logs as JSON, or import past data from Webtime Tracker, Time Tracker, and Web Activity Tracker. |
+| ⏱️ **Pomodoro Focus Timer** | Customizable work sessions, breaks, and quick presets (Deep Work, Short Sprint). Auto-blocks distracting sites during focus. |
+| 📊 **Visual Time Tracking** | See exactly where your hours go with daily breakdowns, category splits, and top-site rankings. |
+| 🚫 **Smart Site Blocker** | Block any website with daily limits, per-session limits, schedule-based blocks, or instant blocks. |
+| 🌐 **Multi-Language Support** | Fully localized user interface across 11 languages (English, Spanish, Simplified Chinese, Traditional Chinese HK/TW, Japanese, German, Brazilian Portuguese, French, Korean, and Russian). |
+| 🔒 **6-Digit PIN Lock** | Prevent self-cheating by locking rule edits, timer stops, and settings behind a PIN code. |
+| 🎯 **Weekly Goals & Streaks** | Set focus hour targets, track daily streaks, and earn visual badges for consistency. |
+| 🗺️ **365-Day Consistency Heatmap** | GitHub-style yearly heatmap to visualize your study habits. Greener = focused, red = wasted. |
+| 📈 **Study vs Distraction Trends** | Color-coded breakdown comparing productive study hours against leisure and distraction time. |
+| 🏷️ **Site Categorization** | Tag websites as Productivity, Learning, Communication, Distraction, or Uncategorized. |
+| ⏰ **Focus Schedules** | Automate your routine with recurring daily or weekly blocking schedules. |
+| 🌗 **Dark, Light & Cinematic Themes** | Clean theme options including a dark OLED mode, clean light mode, and cinematic visual styling. |
+| 💾 **Data Backup & Import** | 100% offline data export (JSON), plus one-click history migration from other time-tracker extensions. |
+
+---
+
+## 🤔 Why Flow over alternatives?
+
+| Feature | Flow | BlockSite | StayFocusd | Freedom | Forest |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **100% Free & Open-Source** | ✅ | ❌ Paid Tier | ⚠️ Free / Closed | ❌ Paid | ❌ Paid |
+| **100% Local & Private** | ✅ | ❌ Cloud / Tracking | ✅ | ❌ Cloud | ❌ Cloud |
+| **No Account Required** | ✅ | ❌ Required | ✅ | ❌ Required | ❌ Required |
+| **Screen Time Tracking** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Pomodoro Focus Timer** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **Distraction Feeds Hider** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **365-Day Consistency Heatmap** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **6-Digit PIN Lock** | ✅ | ❌ Paid Tier | ❌ | ✅ | ❌ |
+| **Multi-Browser Support** | ✅ | ✅ | ❌ Chrome only | ✅ | ✅ |
+
+### The Competitive Landscape (2×2 Matrix)
+
+```text
+                 High Price / Subscriptions
+                      │
+                      │      [Freedom.to]
+                      │
+                      │                 [Momentum]
+                      │
+    [Cold Turkey]     │      [BlockSite]
+──────────────────────┼────────────────────── Modern & Clean UI
+    [StayFocusd]      │
+                      │    ★ FLOW (100% Free, Private & Open-Source)
+                      │
+    [Webtime Tracker] │
+                      │
+                 100% Free / Open-Source
+```
 
 ---
 
 ## 📸 Screenshots
 
 <div align="center">
-  <h3>⏱️ Pomodoro Focus Timer & Presets</h3>
-  <img src="media/flow_preview4.png" width="90%" alt="Focus Mode and Schedules" style="border-radius: 8px;">
+  <h3>🚀 Lock In. Block Distractions. Stop Doomscrolling.</h3>
+  <img src="media/flow_preview2.png" width="90%" alt="Flow Overview" style="border-radius: 8px;">
 
   <br><br>
 
-  <h3>📊 Detailed Daily Analytics & Consistency Heatmap</h3>
-  <img src="media/flow_preview2.png" width="90%" alt="Detailed Daily Analytics" style="border-radius: 8px;">
-
-  <br><br>
-
-  <h3>🚫 Smart Site Blocker (Rules & Redirects)</h3>
+  <h3>🚫 Smart Site Blocker (Rules & Time Limits)</h3>
   <img src="media/flow_preview3.png" width="90%" alt="Block and Allow Rules" style="border-radius: 8px;">
 
   <br><br>
 
-  <h3>⚙️ Personalize Workspace</h3>
-  <img src="media/flow_preview5.png" width="90%" alt="Personalize Workspace" style="border-radius: 8px;">
+  <h3>🏷️ Website Categorization & Usage Breakdown</h3>
+  <img src="media/flow_preview4.png" width="90%" alt="Categorized Site Usage" style="border-radius: 8px;">
+
+  <br><br>
+
+  <h3>📈 Visual Daily Analytics & Trend Comparison</h3>
+  <img src="media/flow_preview5.png" width="90%" alt="Daily Analytics and Trends" style="border-radius: 8px;">
 </div>
 
 ---
@@ -112,38 +156,25 @@ To help contributors understand where files are located, here is the organized l
 
 ```text
 flow-source/
-  ├── src/                         <-- ALL extension code goes here!
-  │    ├── manifest.json           <-- Extension configurations
-  │    ├── _locales/               <-- Localized translation files
-  │    ├── assets/                 <-- Media assets (fonts, icons)
+  ├── src/                         <-- Extension source code
+  │    ├── manifest.json           <-- Extension configuration & permissions
+  │    ├── _locales/               <-- 11 localized translation packages
+  │    ├── assets/                 <-- Typography fonts and app icons
   │    │    ├── fonts/
   │    │    └── icons/
   │    ├── styles/
-  │    │    └── global.css         <-- Core shared design CSS tokens
-  │    ├── background/             <-- Service workers (tab tracking, blocking)
-  │    ├── content/                <-- Content script tracking site focus
-  │    ├── lib/                    <-- Helper scripts (constants, db, storage, icons.js universal manager)
-  │    ├── blocked/                <-- Refined blocked page layout
-  │    ├── dashboard/              <-- Premium visual statistics screen
-  │    ├── popup/                  <-- Main dropdown focus timer card
-  │    └── utils.js                <-- DOM/UI interface helper functions
-  ├── dist/                        <-- Compiled browser builds (ignored by git)
-  │    ├── chrome/                 <-- Unpacked Chrome extension build
-  │    ├── edge/                   <-- Unpacked Edge extension build
-  │    └── firefox/                <-- Unpacked Firefox extension build
-  ├── release/                     <-- Packaged store upload zip archives (ignored by git)
-  ├── docs/                        <-- Documentation & roadmap notes (ignored by git)
-  │    ├── master_user_feedback.md <-- Consolidated user feedback log
-  │    ├── IDEAS.md                <-- Ideas & feature roadmap
-  │    └── market_research_report.md
-  ├── tools/
-  │    ├── build.js                <-- Standard optimized minifier builder
-  │    ├── languages_analysis.html <-- Translation stats checking interface
-  │    ├── languages_analysis.py   <-- Translation statistics checking tool
-  │    └── translate_locales.py    <-- Machine translator utility helper
-  ├── media/                       <-- Marketing posters and preview banners
-  │    ├── flow_preview6.jpg
-  │    └── ...
+  │    │    └── global.css         <-- Core shared design tokens & variables
+  │    ├── background/             <-- Service worker (tab tracking, rule engine, alarms)
+  │    ├── content/                <-- Content scripts (site activity & UI tweaks)
+  │    ├── lib/                    <-- Shared libraries (storage, IndexedDB, icons manager)
+  │    ├── blocked/                <-- Blocked site overlay page
+  │    ├── dashboard/              <-- Full-page analytics dashboard & settings
+  │    └── popup/                  <-- Toolbar dropdown timer and quick stats
+  ├── dist/                        <-- Compiled browser builds (Chrome, Edge, Firefox)
+  ├── release/                     <-- Packaged store-ready zip archives
+  ├── docs/                        <-- Project roadmaps & feedback notes (local dev)
+  ├── tools/                       <-- Build script (build.js) and translation utilities
+  ├── media/                       <-- Store screenshots and preview banners
   ├── .gitignore                 
   ├── package.json               
   ├── README.md                  
@@ -211,7 +242,7 @@ To generate the minified production packages submitted to browser extension stor
 <details>
   <summary><b>How can I install Flow on Google Chrome?</b></summary>
   <br>
-  You can install Flow directly from the <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp">Chrome Web Store</a>. Alternatively, if you want to install it manually, you can download the latest <code>flow-dist-v10.0.1.zip</code> file from our Releases page and load it in Developer Mode.
+  You can install Flow directly from the <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp">Chrome Web Store</a>. Alternatively, if you want to install it manually, you can download the latest package from our <a href="https://github.com/vishwa-vsr/Flow/releases">Releases page</a> and load it in Developer Mode.
 </details>
 
 <details>
@@ -227,6 +258,14 @@ To generate the minified production packages submitted to browser extension stor
 We welcome contributions of all kinds! Please check out our [Contributing Guide](./CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, suggest features, or help with translations.
 
 If you like Flow, leaving a 5-star review on the [Chrome Web Store](https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp), [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/flow-website-blocker/), or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic) is also a massive help!
+
+## 👥 Contributors
+
+<a href="https://github.com/vishwa-vsr/Flow/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vishwa-vsr/Flow" alt="Flow Contributors" />
+</a>
+
+<p>Want to see your face here? Check out our <a href="./CONTRIBUTING.md">Contributing Guide</a>!</p>
 
 ---
 

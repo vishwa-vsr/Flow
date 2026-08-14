@@ -12,9 +12,10 @@ body:
     attributes:
       label: Which browser are you using?
       options:
+        - Google Chrome
+        - Google Chrome (Beta/Dev)
         - Microsoft Edge
         - Firefox
-        - Google Chrome (Beta/Manual)
         - Brave
         - Other
     validations:
@@ -24,7 +25,7 @@ body:
     attributes:
       label: Flow Extension Version
       description: You can find this in the extension popup or browser settings page.
-      placeholder: e.g., 6.8.6
+      placeholder: e.g., 10.1.0
     validations:
       required: true
   - type: dropdown
