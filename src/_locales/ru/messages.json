@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow — блокировщик веб-сайтов и трекер привычек",
+    "message": "Flow: Блокировщик сайтов и таймер фокуса — Трекер экранного времени",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Блокируйте отвлекающие веб-сайты, отслеживайте время, проведенное за экраном, и сохраняйте концентрацию с помощью таймеров Pomodoro. Частный и местный.",
+    "message": "Блокируйте отвлекающие сайты, считайте экранное время и учитесь с таймерами Pomodoro. Бесплатно, надежно и с открытым кодом.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

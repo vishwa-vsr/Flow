@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - Bloqueur de sites Web et suivi des habitudes",
+    "message": "Flow : Bloqueur de Sites & Minuteur — Suivi du Temps d'Écran",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Bloquez les sites Web distrayants, suivez le temps passé devant un écran et restez concentré grâce aux minuteries Pomodoro. Privé et local.",
+    "message": "Bloquez les sites distrayants, suivez votre temps d'écran et étudiez avec les minuteurs Pomodoro. Gratuit, privé et open-source.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

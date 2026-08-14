@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [10.1.0] - 2026-08-14
+
+### Changed
+- **Extension Rebranding & SEO Title Enhancement**: Updated the extension title to `"Flow: Website Blocker & Focus Timer — Screen Time Tracker"` across the manifest and all 11 supported localization packages for enhanced clarity and Web Store discoverability. Added `"short_name": "Flow"` to ensure compact, clean toolbar and browser menu rendering.
+- **Store Short Description**: Rewritten short description to highlight core value propositions: *"Block distracting websites, track screen time, and study with Pomodoro focus timers. Free, private & open-source."* Full translations updated across all 11 supported locales.
+- **Version Bump**: Bumped release version to `10.1.0`.
+
 ## [10.0.9] - 2026-08-13
 
 ### Added

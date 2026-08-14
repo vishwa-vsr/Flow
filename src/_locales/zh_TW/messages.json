@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - 網站攔截器和習慣追蹤器",
+    "message": "Flow: 網站攔截器與專注計時器 — 螢幕使用時間追蹤器",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "攔截分心網站，記錄螢幕使用時間，借助番茄鐘保持專注。私密且本地運行。",
+    "message": "攔截分心網站，追蹤螢幕使用時間，並透過番茄工作法專注計時器高效學習。免費、注重隱私且開源。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

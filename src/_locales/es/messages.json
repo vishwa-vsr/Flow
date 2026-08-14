@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - Bloqueador de Sitios y Rastreador de Hábitos",
+    "message": "Flow: Bloqueador de Sitios & Temporizador — Tiempo en Pantalla",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Bloquea sitios distractores, rastrea tu tiempo en pantalla y concéntrate con temporizadores Pomodoro. Privado y local.",
+    "message": "Bloquea sitios distractores, rastrea el tiempo en pantalla y estudia con Pomodoro. Gratis, privado y de código abierto.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

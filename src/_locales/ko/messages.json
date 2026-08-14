@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - 웹사이트 차단기 및 습관 추적기",
+    "message": "Flow: 웹사이트 차단기 & 집중 타이머 — 스크린 타임 트래커",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "방해가 되는 웹사이트를 차단하고, 화면 시간을 추적하고, Pomodoro 타이머로 집중력을 유지하세요. 개인 및 지역.",
+    "message": "방해가 되는 웹사이트를 차단하고, 스크린 타임을 추적하며, 뽀모도로 타이머로 공부하세요. 무료, 개인정보 보호 및 오픈 소스.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

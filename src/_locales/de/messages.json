@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - Website-Blocker & Gewohnheits-Tracker",
+    "message": "Flow: Website-Blocker & Fokus-Timer — Bildschirmzeit-Tracker",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "Ablenkende Websites blockieren, Bildschirmzeit verfolgen und mit Pomodoro-Timern fokussiert bleiben. Privat & lokal.",
+    "message": "Ablenkende Websites blockieren, Bildschirmzeit verfolgen und mit Pomodoro-Fokus-Timern lernen. Kostenlos, privat & Open-Source.",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {

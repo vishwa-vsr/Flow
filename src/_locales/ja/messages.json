@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Flow - ウェブサイトブロッカー＆習慣トラッカー",
+    "message": "Flow: Webサイトブロッカー＆集中タイマー — スクリーンタイムトラッカー",
     "description": "Extension name shown in the Chrome Web Store and browser toolbar."
   },
   "extDescription": {
-    "message": "集中を妨げるサイトをブロックし、画面時間を記録。ポモドーロタイマーで作業効率を向上。プライベート＆ローカル。",
+    "message": "集中を妨げるサイトをブロックし、画面時間を記録。ポモドーロタイマーで効率的に勉強。無料、プライベート＆オープンソース。",
     "description": "Extension description shown in the Chrome Web Store listing."
   },
   "verification": {
