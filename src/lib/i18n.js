@@ -69,13 +69,15 @@
       if (typeof gSync === "function") {
         var res = await gSync(["settings"]);
         var settings = res && res.settings ? res.settings : {};
-        var lang = settings.language || "default";
+        var lang = settings.language || "auto";
         root.currentLanguage = lang;
 
-        if (lang !== "default") {
+        if (lang !== "default" && lang !== "auto") {
           var url = chrome.runtime.getURL("_locales/" + lang + "/messages.json");
           var response = await fetch(url);
           root.customMessages = await response.json();
+        } else {
+          root.customMessages = null;
         }
       }
     } catch (e) {

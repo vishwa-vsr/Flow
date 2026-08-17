@@ -52,20 +52,23 @@ var FCIRC = 2 * Math.PI * 106,
 const GRANULAR_SITES_DASHBOARD = self.GRANULAR_SITES || {};
 
 function getLocale() {
-    let loc = "en-US";
-    if (typeof currentLanguage !== "undefined" && currentLanguage && currentLanguage !== "default") {
+    let loc = "";
+    if (typeof currentLanguage !== "undefined" && currentLanguage && currentLanguage !== "default" && currentLanguage !== "auto") {
         loc = currentLanguage;
     } else {
         const sel = document.getElementById("lang-sel")?.value;
-        if (sel && sel !== "default") {
+        if (sel && sel !== "default" && sel !== "auto") {
             loc = sel;
-        } else if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
+        }
+    }
+    if (!loc || loc === "auto" || loc === "default") {
+        if (typeof chrome !== "undefined" && chrome.i18n && typeof chrome.i18n.getUILanguage === "function") {
             loc = chrome.i18n.getUILanguage();
         } else {
             loc = navigator.language || "en-US";
         }
     }
-    return loc.replace(/_/g, "-").replace(/\s+/g, "-");
+    return (loc || "en-US").replace(/_/g, "-").replace(/\s+/g, "-");
 }
 
 function hideAnalyticsHeader() {
@@ -3999,7 +4002,7 @@ async function loadExtendedSettings(preloadedSettings) {
         $("tog-track-local") && ($("tog-track-local").checked = !!e.trackLocalFiles),
         $("day-rollover-sel") && ($("day-rollover-sel").value = e.dayRolloverHour !== undefined ? e.dayRolloverHour : 0),
         $("data-retention-sel") && ($("data-retention-sel").value = e.dataRetentionDays !== undefined ? e.dataRetentionDays : 365),
-        $("lang-sel") && ($("lang-sel").value = e.language || "default"),
+        $("lang-sel") && ($("lang-sel").value = e.language || "auto"),
         upgradeAllSettingsSelects(),
         renderWhitelist((await gLocal(["idleWhitelist"])).idleWhitelist || []), 
         $("pin-status-badge")) {
@@ -4316,8 +4319,8 @@ if (btnSaveSetEl) {
                 e.dataRetentionDays = isNaN(retentionDays) ? 365 : retentionDays;
             }
 
-            var oldLang = e.language || "default";
-            var newLang = $("lang-sel") ? $("lang-sel").value : "default";
+            var oldLang = e.language || "auto";
+            var newLang = $("lang-sel") ? $("lang-sel").value : "auto";
             langChanged = oldLang !== newLang;
             e.language = newLang;
 
@@ -4406,7 +4409,7 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
     const t = $("lang-sel");
     t && gSync(["settings"]).then(e => {
         const s = e.settings || {};
-        t.value = s.language || "default"
+        t.value = s.language || "auto"
     })
 })();
 
