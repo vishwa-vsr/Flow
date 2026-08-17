@@ -9,10 +9,10 @@
       --space-xxl: 48px;
 
       /* Border Radius Tokens */
-      --radius-xs: 4px;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
+      --radius-xs: 2px;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
     }
 
     /* FF v6.7.0: @font-face removed — fonts now loaded exclusively from global.css (Problem 10). 
@@ -44,7 +44,9 @@
       position: fixed;
       inset: 0;
       z-index: 9000;
-      background: rgba(0, 0, 0, .8);
+      background: rgba(0, 0, 0, .4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,11 +127,13 @@
     .navbar {
       display: flex;
       justify-content: center;
-      background: var(--bg2);
+      background: transparent;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--bd-subtle);
+      border-bottom: 1px solid var(--bd);
       padding: 16px 24px;
       transition: var(--trans)
     }
@@ -137,7 +141,7 @@
     .card,
     .ac,
     .at-card {
-      background: var(--bg2);
+      background: transparent;
       border: 1px solid var(--bd);
       border-radius: var(--card-radius);
       position: relative;
@@ -145,22 +149,37 @@
       transition: var(--trans);
     }
 
+    .card:hover,
+    .ac:hover,
+    .at-card:hover {
+      border-color: var(--bd2);
+    }
+
     html.light .card,
     html.light .ac,
     html.light .at-card {
-      background: var(--bg2);
+      background: transparent;
       border: 1px solid var(--bd);
     }
 
+    html.light .card:hover,
+    html.light .ac:hover,
+    html.light .at-card:hover {
+      border-color: var(--bd2);
+    }
+
     .overlay .card,
+    .overlay > .card,
     .overlay-card,
     .cat-edit-modal,
-    .ff-modal-card {
-      background: var(--bg2) !important;
-      border: 1px solid var(--bd2) !important;
+    .cat-edit-modal-card,
+    .ff-modal-card,
+    .hm-modal-overlay .card {
+      background: transparent !important;
+      border: 1px solid var(--bd) !important;
       box-shadow: var(--shadow-lg) !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
       max-height: 85vh;
       transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease !important;
       transform: translateZ(0) !important;
@@ -199,8 +218,10 @@
     }
 
     html.light .navbar {
-      background: var(--glass-bg);
-      border-bottom: 1px solid var(--glass-bd)
+      background: transparent;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--bd);
     }
 
     html.light .ni:hover {
@@ -270,7 +291,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg3);
+      background: transparent;
       border: 1px solid var(--bd);
       color: var(--tx2);
       cursor: pointer;
@@ -280,12 +301,14 @@
 
     .privacy-btn:hover {
       color: var(--tx);
-      background: var(--surface-elevated);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--bd2);
       transform: scale(1.06);
     }
 
     html.light .privacy-btn:hover {
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(0, 0, 0, 0.04);
+      border-color: var(--bd2);
       color: var(--tx)
     }
 
@@ -485,8 +508,8 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: var(--bg4);
-      border: 1px solid var(--bd2);
+      background: transparent;
+      border: 1px solid var(--bd);
       color: var(--tx2);
       cursor: pointer;
       font-size: 15px;
@@ -498,15 +521,20 @@
     }
 
     .bic:hover {
-      background: var(--bg3);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--tx);
-      border-color: var(--bd3);
+      border-color: var(--bd2);
     }
 
     .bic.del:hover {
       background: var(--red-bg);
       color: var(--red);
       border-color: var(--red-bd)
+    }
+
+    html.light .bic:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: var(--bd2);
     }
 
     .scrub-btn {
@@ -660,11 +688,26 @@
       position: relative;
       border: 1px solid var(--bd);
       border-radius: var(--card-radius);
-      background: var(--bg2);
-      box-shadow: var(--shadow-sm);
+      background: transparent;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
-      overflow: hidden
+      overflow: hidden;
+      transition: var(--trans);
+    }
+
+    .chart-container:hover {
+      border-color: var(--bd2);
+    }
+
+    html.light .chart-container {
+      background: transparent;
+      border: 1px solid var(--bd);
+      box-shadow: none;
+    }
+
+    html.light .chart-container:hover {
+      border-color: var(--bd2);
     }
 
     .chart-hdr {
@@ -688,8 +731,8 @@
       top: 0;
       bottom: 35px;
       width: 50px;
-      background: rgba(24, 24, 24, 0.85);
-      border-right: 1px solid var(--bd);
+      background: transparent;
+      border-right: none;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -703,13 +746,13 @@
       left: auto;
       right: 0;
       border-right: none;
-      border-left: 1px solid var(--bd);
+      border-left: none;
       align-items: flex-start;
       padding: 20px 0 0 10px
     }
 
     html.light .y-axis {
-      background: rgba(248, 250, 252, 0.92)
+      background: transparent
     }
 
     .y-lbl {
@@ -809,7 +852,7 @@
          ========================================================================== */
     .db-card {
       padding: 32px;
-      background: var(--bg2);
+      background: transparent;
       border: 1px solid var(--bd);
       border-radius: var(--card-radius);
       margin-bottom: 24px;
@@ -817,7 +860,7 @@
     }
 
     html.light .db-card {
-      background: var(--bg2);
+      background: transparent;
       border: 1px solid var(--bd);
     }
 
@@ -863,8 +906,8 @@
 
     .db-stat-box {
       position: relative;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-bd);
+      background: transparent;
+      border: 1px solid var(--bd);
       border-radius: var(--card-radius);
       padding: var(--space-md) var(--space-lg);
       display: flex;
@@ -888,9 +931,14 @@
     }
 
     .db-stat-box:hover {
-      background: var(--surface-elevated);
+      background: rgba(255, 255, 255, 0.02);
       border-color: var(--glow-border, var(--bd2));
-      box-shadow: var(--shadow-sm);
+      box-shadow: none;
+    }
+
+    html.light .db-stat-box:hover {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: var(--glow-border, var(--bd2));
     }
 
     .db-stat-info {
@@ -1008,18 +1056,25 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--space-sm) var(--space-md);
-      background: var(--glass-bg);
+      background: transparent;
       border-radius: var(--btn-radius);
-      border: 1px solid var(--glass-bd);
+      border: 1px solid var(--bd);
       border-left: 4px solid var(--border-color, transparent);
-      box-shadow: var(--shadow-xs);
+      box-shadow: none;
       transition: var(--trans);
     }
 
     .db-site-pill:hover {
-      background: var(--surface-elevated);
+      background: rgba(255, 255, 255, 0.02);
       border-color: var(--bd2);
-      box-shadow: var(--shadow-sm);
+      border-left-color: var(--border-color, transparent);
+      box-shadow: none;
+    }
+
+    html.light .db-site-pill:hover {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: var(--bd2);
+      border-left-color: var(--border-color, transparent);
     }
 
     .db-site-left {
@@ -1083,7 +1138,7 @@
     }
 
     .brow {
-      background: var(--bg3);
+      background: transparent;
       border: 1px solid var(--bd);
       border-radius: var(--radius-md);
       margin-bottom: var(--space-xs);
@@ -1092,9 +1147,14 @@
     }
 
     .brow:hover {
-      border-color: var(--bd3);
-      background: var(--bg4);
-      box-shadow: var(--shadow-sm)
+      border-color: var(--bd2);
+      background: rgba(255, 255, 255, 0.02);
+      box-shadow: none;
+    }
+
+    html.light .brow:hover {
+      border-color: var(--bd2);
+      background: rgba(0, 0, 0, 0.02);
     }
 
     .lhdr-rules,
@@ -1200,15 +1260,16 @@
     }
 
     .stat-pill {
-      background: var(--bg4);
-      border: 1px solid var(--bd2);
+      background: transparent;
+      border: 1px solid var(--bd);
       border-radius: 8px;
       padding: 6px 4px;
       font-family: 'Manrope', system-ui, sans-serif;
       font-weight: 800;
       color: var(--tx);
       font-size: 13px;
-      text-align: center
+      text-align: center;
+      transition: var(--trans);
     }
 
     .trow {
@@ -1250,12 +1311,12 @@
     .cat-sq {
       position: relative;
       border-radius: var(--radius-lg);
-      border: 2px solid var(--bd);
+      border: 1px solid var(--bd);
       padding: var(--space-md) var(--space-xs);
       text-align: center;
       cursor: pointer;
       transition: var(--trans);
-      background: var(--bg3)
+      background: transparent;
     }
 
     .cat-sq-edit-btn {
@@ -1265,8 +1326,8 @@
       width: 24px;
       height: 24px;
       border-radius: 6px;
-      border: 1px solid var(--bd2);
-      background: var(--bg2);
+      border: 1px solid var(--bd);
+      background: transparent;
       color: var(--tx2);
       display: inline-flex;
       align-items: center;
@@ -1279,20 +1340,30 @@
 
     .cat-sq-edit-btn:hover {
       opacity: 1;
-      background: var(--green);
-      color: #000;
-      border-color: var(--green);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--tx);
+      border-color: var(--bd2);
       transform: scale(1.1);
     }
 
     .cat-sq:hover {
-      border-color: var(--bd3);
-      background: var(--bg4)
+      border-color: var(--bd2);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .cat-sq.selected {
-      border-width: 2px;
-      background: var(--bg4)
+      border-color: var(--bd2);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    html.light .cat-sq:hover {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: var(--bd2);
+    }
+
+    html.light .cat-sq.selected {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: var(--bd2);
     }
 
     .cat-sq-icon {
@@ -1547,8 +1618,8 @@
       align-items: center;
       gap: 10px;
       padding: 12px 16px;
-      background: var(--bg3);
-      border: 1px solid var(--bd2);
+      background: transparent;
+      border: 1px solid var(--bd);
       border-radius: 12px;
       font-size: 14px;
       font-weight: 700;
@@ -1559,15 +1630,47 @@
     }
 
     .goal-cb-lbl:hover {
-      background: var(--bg4);
-      border-color: var(--bd3);
+      background: rgba(255, 255, 255, 0.02);
+      border-color: var(--bd2);
     }
 
     .goal-cb-lbl:has(input:checked) {
-      background: var(--green-bg) !important;
-      border-color: var(--green) !important;
-      color: var(--green) !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: var(--bd2) !important;
+      color: var(--tx) !important;
       box-shadow: none;
+    }
+
+    html.light .goal-cb-lbl:hover {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: var(--bd2);
+    }
+
+    html.light .goal-cb-lbl:has(input:checked) {
+      background: rgba(0, 0, 0, 0.06) !important;
+      border-color: var(--bd2) !important;
+      color: #0C0A09 !important;
+    }
+
+    #goal-preview {
+      background: transparent !important;
+      border: 1px solid var(--bd) !important;
+    }
+
+    .free-hour-card {
+      background: transparent !important;
+      border: 1px solid var(--bd) !important;
+      transition: var(--trans) !important;
+    }
+
+    .free-hour-card:hover {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border-color: var(--bd2) !important;
+    }
+
+    html.light .free-hour-card:hover {
+      background: rgba(0, 0, 0, 0.02) !important;
+      border-color: var(--bd2) !important;
     }
 
     .goal-cb-lbl input {
@@ -1596,27 +1699,44 @@
 
     /* Tactile Preset Switches & Edit Modal CSS */
     .preset-card {
-      background: var(--glass-bg) !important;
-      border: 1px solid var(--glass-bd) !important;
+      background: transparent !important;
+      border: 1px solid var(--bd) !important;
       border-radius: var(--btn-radius) !important;
-      box-shadow: var(--shadow-xs) !important;
+      box-shadow: none !important;
       transition: var(--trans) !important;
     }
 
     .preset-card:hover {
-      background: var(--surface-elevated) !important;
-      border-color: var(--bd3) !important;
-      box-shadow: var(--shadow-sm) !important;
+      background: rgba(255, 255, 255, 0.02) !important;
+      border-color: var(--bd2) !important;
+      box-shadow: none !important;
     }
 
     .preset-card.is-active {
-      background: var(--green-bg) !important;
-      border-color: var(--green) !important;
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid var(--bd2) !important;
       box-shadow: none !important;
     }
 
     .preset-card.is-active:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: var(--bd2) !important;
       box-shadow: none !important;
+    }
+
+    html.light .preset-card:hover {
+      background: rgba(0, 0, 0, 0.02) !important;
+      border-color: var(--bd2) !important;
+    }
+
+    html.light .preset-card.is-active {
+      background: rgba(0, 0, 0, 0.06) !important;
+      border: 1px solid var(--bd2) !important;
+    }
+
+    html.light .preset-card.is-active:hover {
+      background: rgba(0, 0, 0, 0.08) !important;
+      border-color: var(--bd2) !important;
     }
 
     /* Quick Play & Options Hover Show-up */
@@ -1663,12 +1783,12 @@
     #ff-preset-edit-modal .card {
       animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: var(--shadow-lg);
-      background: var(--bg2) !important;
+      background: transparent !important;
       border: 1px solid var(--bd) !important;
     }
 
     html.light #ff-preset-edit-modal .card {
-      background: var(--bg2) !important;
+      background: transparent !important;
       border: 1px solid var(--bd) !important;
     }
 

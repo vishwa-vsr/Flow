@@ -33,7 +33,7 @@ export function showEditPresetModal(presetId, state, options = {}) {
     
     if (typeof setSafeHTML === "function") {
         setSafeHTML(overlay, `
-        <div class="card" style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
+        <div class="card" style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden;">
           <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
               ${modalHeaderIcon}

@@ -596,9 +596,9 @@ function renderDynamicList(e, t) {
                     ? "https://microsoftedge.microsoft.com/addons/detail/jlcdkibfogehgkbhkkkglifbanenkmic"
                     : "https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp";
             let overlayHtml = `
-              <div id="feedback-overlay" style="display:flex; justify-content:center; gap:8px; align-items:center; width:100%; background:var(--bg2); border-radius:12px; padding:4px;">
+              <div id="feedback-overlay" style="display:flex; justify-content:center; gap:8px; align-items:center; width:100%; background:transparent; border:1px solid var(--bd); border-radius:12px; padding:4px;">
                 <a href="${rateUrl}" target="_blank" class="bs bs-sm" style="color:var(--amber); border-color:var(--amber-bd); background:var(--amber-bg); text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('rateUs')}</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog" target="_blank" class="bs bs-sm" style="color:var(--blue); border-color:var(--bd); background:var(--bg3); text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('feedback')}</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog" target="_blank" class="bs bs-sm" style="color:var(--blue); border-color:var(--bd); background:transparent; text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('feedback')}</a>
                 <button id="feedback-close-btn" class="icon-btn" style="width:24px;height:24px;border:none;flex-shrink:0;">✕</button>
               </div>
             `;

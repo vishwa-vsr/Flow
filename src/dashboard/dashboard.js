@@ -100,6 +100,10 @@ async function applyTheme() {
     document.documentElement.classList.toggle("cinematic", a);
     document.documentElement.classList.remove("custom");
     document.documentElement.setAttribute("data-os-theme", "nothing");
+    
+    $("btn-dark-mode") && $("btn-dark-mode").classList.toggle("act", currentTheme === "dark");
+    $("btn-light-mode") && $("btn-light-mode").classList.toggle("act", currentTheme === "light");
+    $("btn-cinematic-mode") && $("btn-cinematic-mode").classList.toggle("act", currentTheme === "cinematic");
 }
 
 applyTheme();
@@ -356,7 +360,7 @@ async function renderGranularBlocksUI(force = false) {
            <div style="font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:24px 0 12px;display:flex;align-items:center;gap:8px">
                <span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Advanced Site Tweaks
            </div>
-           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:32px;"></div>
+           <div id="granular-blocks-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;margin-bottom:16px;"></div>
         `);
         host.appendChild(t);
     } else if (t.parentElement !== host) {
@@ -869,7 +873,7 @@ function openEditCategoryModal(catKey) {
     ];
 
     setSafeHTML(overlay, `
-      <div class="overlay-card cat-edit-modal-card" style="max-width: 420px; padding: 24px; border-radius: var(--radius-lg, 16px); background: var(--bg2); border: 1px solid var(--bd); box-shadow: 0 16px 40px rgba(0,0,0,0.3);">
+      <div class="overlay-card cat-edit-modal-card" style="max-width: 420px; padding: 24px; border-radius: var(--radius-lg, 16px); box-shadow: 0 16px 40px rgba(0,0,0,0.3);">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
           <h3 style="margin:0; font-size: 18px; font-weight: 800; display:flex; align-items:center; gap: 8px; color:var(--tx);">
             ${FlowIcons.get("edit", { size: 20, style: "color:var(--green);" })}
@@ -1233,7 +1237,7 @@ function renderCategories() {
               ${FlowIcons.get("edit", { size: 12, style: "vertical-align:middle; margin-right:4px;" })}
               ${t_("edit") || "Edit"}
             </button>
-            <span class="bs" style="background:var(--bg3); border-color:var(--bd); color:var(--tx2); font-weight:700;">${totalCountStr}</span>
+            <span class="bs" style="background:transparent; border-color:var(--bd); color:var(--tx2); font-weight:700;">${totalCountStr}</span>
           </div>
         </div>
         <div class="cat-group-list"></div>
@@ -1241,7 +1245,9 @@ function renderCategories() {
             var i = n.querySelector(".cat-group-list");
             t[a].forEach(e => {
                 var t = document.createElement("div");
-                t.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px 16px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px";
+                t.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px 16px;background:transparent;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;transition:var(--trans)";
+                t.onmouseover = () => t.style.borderColor = "var(--bd2)";
+                t.onmouseout = () => t.style.borderColor = "var(--bd)";
                 const cleanDom = sanitizeDomain(e.domain);
                 var n = buildCustomDropdownHtml(cleanDom, a);
                 setSafeHTML(t, `<span style="font-family:monospace;font-size:15px;font-weight:700;flex:1;word-break:break-all;display:flex;align-items:center;gap:8px;">${getFav(e.domain)} ${cleanDom}</span>${n}<button class="bic cat-rule-btn" data-domain="${cleanDom}" title="Add or Edit Rule"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></button><button class="bic del rm-cat" data-domain="${cleanDom}">✕</button>`);
@@ -1668,7 +1674,7 @@ async function renderInsights() {
             overlay.className = "overlay hm-modal-overlay";
             overlay.style.zIndex = "9999";
             setSafeHTML(overlay, `
-              <div class="card" style="width:100%;max-width:460px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
+              <div class="card" style="width:100%;max-width:460px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;">
                 <div style="padding:var(--space-lg) var(--space-lg) var(--space-md);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
                   <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:var(--space-xs);">
                     ${FlowIcons.get("gear", { size: 20, style: "vertical-align:middle;flex-shrink:0;" })}
@@ -3170,7 +3176,7 @@ async function renderDailyBreakdown() {
                 let hasTimeline = i.timeline && i.timeline.length > 0;
                 if (hasTimeline) {
                     f = `<div class="db-timeline-container" style="width: 100% !important; margin: 0; position: relative;">
-                            <canvas class="db-timeline-canvas" data-day="${n}" style="width: 100%; height: 24px; display: block; border-radius: 6px; background: var(--bg3);"></canvas>
+                            <canvas class="db-timeline-canvas" data-day="${n}" style="width: 100%; height: 24px; display: block; border-radius: 6px; background: transparent; border: 1px solid var(--bd); box-sizing: border-box;"></canvas>
                           </div>
                           <div class="db-timeline-labels">
                              <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11:59 PM</span>
@@ -3312,12 +3318,8 @@ function drawDailyCanvasTimeline(canvas, timeline, dayKey) {
 
     ctx.clearRect(0, 0, width, height);
 
-    // Background track
-    ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
-    ctx.fillRect(0, 0, width, height);
-
     // Gridlines at 25%, 50%, 75%
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.06)";
     ctx.lineWidth = 1 * dpr;
     [0.25, 0.5, 0.75].forEach(pct => {
         ctx.beginPath();
@@ -4244,7 +4246,7 @@ async function loadFocusHistory() {
             const pName = getPresetName(e.presetId, pObj.name);
             const dateStr = new Date(e.date + "T00:00:00").toLocaleDateString(getLocale(), { weekday: "short", month: "short", day: "numeric" });
             const timeStr = e.startedAt ? new Date(e.startedAt).toLocaleTimeString(getLocale(), { hour: "2-digit", minute: "2-digit" }) : "—";
-            t.style.cssText = "display:flex;align-items:center;padding:14px 16px;background:var(--bg3);border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;transition:var(--trans)";
+            t.style.cssText = "display:flex;align-items:center;padding:14px 16px;background:transparent;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;transition:var(--trans)";
             t.onmouseover = () => t.style.borderColor = "var(--bd2)";
             t.onmouseout = () => t.style.borderColor = "var(--bd)";
             setSafeHTML(t, `
@@ -5653,7 +5655,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     .pb-card {
       padding: 18px 16px !important;
       gap: 6px !important;
-      border-radius: 16px !important;
+      border-radius: 8px !important;
       border: 1px solid var(--bd2) !important;
       background: var(--bg3) !important;
       box-shadow: var(--shadow-sm) !important;
@@ -5710,7 +5712,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
       backdrop-filter: blur(12px) !important;
       -webkit-backdrop-filter: blur(12px) !important;
       border: 1px solid var(--bd) !important;
-      border-radius: 18px !important;
+      border-radius: 8px !important;
       padding: 24px !important;
       gap: 20px !important;
       box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.02) !important;
@@ -6066,7 +6068,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
             `<label class="nsched-day-lbl" style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg3)"><input type="checkbox" class="nsched-day" value="${i}" ${schedDays.includes(i) ? "checked" : ""}> ${d}</label>`
         ).join("");
         setSafeHTML(overlay, `
-      <div class="card" style="width:100%;max-width:480px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;background:var(--bg2);border:1px solid var(--bd);">
+      <div class="card" style="width:100%;max-width:480px;padding:0;display:flex;flex-direction:column;max-height:85vh;overflow:hidden;">
         <div style="padding:24px 32px 16px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
           <div style="font-size:20px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:10px;">
             <span>⏰</span>

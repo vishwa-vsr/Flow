@@ -29,8 +29,8 @@
   --shadow-sm:0 4px 12px rgba(0,0,0,.35);
   --shadow-md:0 8px 24px rgba(0,0,0,.45);
   --shadow-lg:0 20px 56px rgba(0,0,0,.6);
-  --card-radius:18px;
-  --btn-radius:12px;
+  --card-radius:9px;
+  --btn-radius:8px;
   --trans:background .22s cubic-bezier(.4,0,.2,1), color .22s cubic-bezier(.4,0,.2,1), border-color .22s cubic-bezier(.4,0,.2,1), box-shadow .22s cubic-bezier(.4,0,.2,1), transform .22s cubic-bezier(.4,0,.2,1), opacity .22s cubic-bezier(.4,0,.2,1);
   --trans-fast:background .15s cubic-bezier(.4,0,.2,1), color .15s cubic-bezier(.4,0,.2,1), border-color .15s cubic-bezier(.4,0,.2,1), box-shadow .15s cubic-bezier(.4,0,.2,1), transform .15s cubic-bezier(.4,0,.2,1), opacity .15s cubic-bezier(.4,0,.2,1);
 
@@ -116,17 +116,89 @@ body{
   transition:background .35s ease,color .35s ease;
 }
 
-/* card primitive */
-.card{
-  background:var(--bg2);
-  border:1px solid var(--bd);
-  border-radius:var(--card-radius);
-  box-shadow:none;
-  position:relative;overflow:hidden;margin-bottom:16px;
-  transition:var(--trans);
+/* card primitive — universal transparent card styling */
+.card,
+.focus-section,
+.ac,
+.at-card,
+.db-card {
+  background: transparent;
+  border: 1px solid var(--bd);
+  border-radius: var(--card-radius);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+  transition: var(--trans);
 }
-.card:hover{border-color:var(--bd2)}
-html.light .card{box-shadow:none}
+.card:hover,
+.focus-section:hover,
+.ac:hover,
+.at-card:hover,
+.db-card:hover {
+  border-color: var(--bd2);
+}
+html.light .card,
+html.light .focus-section,
+html.light .ac,
+html.light .at-card,
+html.light .db-card {
+  background: transparent;
+  border: 1px solid var(--bd);
+  box-shadow: none;
+}
+html.light .card:hover,
+html.light .focus-section:hover,
+html.light .ac:hover,
+html.light .at-card:hover,
+html.light .db-card:hover {
+  border-color: var(--bd2);
+}
+
+/* modal dialogs & overlays - universal transparent card with border */
+.overlay .card,
+.overlay-card,
+.cat-edit-modal,
+.cat-edit-modal-card,
+.ff-modal-card,
+.hm-modal-overlay .card,
+.overlay > .card,
+#ff-preset-edit-modal .card,
+#free-time-modal .card,
+#add-rule-modal .card,
+#confirm-modal .card,
+#privacy-modal .card,
+#add-preset-modal .card,
+#block-confirm-modal > div,
+#heatmap-config-modal .card,
+#pcOverlay .card {
+  background: transparent !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--bd) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+html.light .overlay .card,
+html.light .overlay-card,
+html.light .cat-edit-modal,
+html.light .cat-edit-modal-card,
+html.light .ff-modal-card,
+html.light .hm-modal-overlay .card,
+html.light .overlay > .card,
+html.light #ff-preset-edit-modal .card,
+html.light #free-time-modal .card,
+html.light #add-rule-modal .card,
+html.light #confirm-modal .card,
+html.light #privacy-modal .card,
+html.light #add-preset-modal .card,
+html.light #block-confirm-modal > div,
+html.light #heatmap-config-modal .card,
+html.light #pcOverlay .card {
+  background: transparent !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--bd) !important;
+}
 
 /* buttons */
 .bp{
@@ -148,9 +220,10 @@ html.light .card{box-shadow:none}
   border-radius:var(--btn-radius);padding:11px 22px;
   font-family:inherit;font-size:14px;font-weight:700;letter-spacing:-.01em;
   cursor:pointer;transition:var(--trans);white-space:nowrap;
-  background:var(--bg3);color:var(--tx);border:1px solid var(--bd2);
+  background:transparent;color:var(--tx);border:1px solid var(--bd);
 }
-.bs:hover{background:var(--bg4);border-color:var(--bd3)}
+.bs:hover{background:rgba(255, 255, 255, 0.04);border-color:var(--bd2)}
+html.light .bs:hover{background:rgba(0, 0, 0, 0.04);border-color:var(--bd2)}
 .bs:active{filter:brightness(.95)}
 .bs-sm{padding:5px 14px;font-size:11px;border-radius:99px;letter-spacing:.02em}
 .bs-danger{
@@ -208,40 +281,72 @@ button:focus-visible{
 
 /* universal, premium text input styling to avoid visual inconsistency */
 input[type="text"],
+input[type="search"],
 input[type="number"],
 input[type="date"],
 input[type="password"],
+input[type="url"],
 select,
-textarea {
-  background: var(--bg3);
-  border: 1px solid var(--bd2);
+textarea,
+.inp,
+.sel {
+  background: transparent;
+  border: 1px solid var(--bd);
   color: var(--tx);
   border-radius: 10px;
   outline: none !important;
   transition: var(--trans);
 }
 input[type="text"]:hover,
+input[type="search"]:hover,
 input[type="number"]:hover,
 input[type="date"]:hover,
 input[type="password"]:hover,
+input[type="url"]:hover,
 select:hover,
-textarea:hover {
-  border-color: var(--bd3);
+textarea:hover,
+.inp:hover,
+.sel:hover {
+  border-color: var(--bd2);
 }
 input[type="text"]:focus,
+input[type="search"]:focus,
 input[type="number"]:focus,
 input[type="date"]:focus,
 input[type="password"]:focus,
+input[type="url"]:focus,
 input[type="text"]:focus-visible,
+input[type="search"]:focus-visible,
 input[type="number"]:focus-visible,
 input[type="date"]:focus-visible,
 input[type="password"]:focus-visible,
+input[type="url"]:focus-visible,
 select:focus,
-textarea:focus {
-  border-color: var(--bd3) !important;
+textarea:focus,
+.inp:focus,
+.sel:focus {
+  border-color: var(--bd2) !important;
   box-shadow: none !important;
   outline: none !important;
-  background-color: var(--bg4) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+html.light input[type="text"]:focus,
+html.light input[type="search"]:focus,
+html.light input[type="number"]:focus,
+html.light input[type="date"]:focus,
+html.light input[type="password"]:focus,
+html.light input[type="url"]:focus,
+html.light select:focus,
+html.light textarea:focus,
+html.light .inp:focus,
+html.light .sel:focus {
+  border-color: var(--bd2) !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+select option {
+  background: var(--bg2);
+  color: var(--tx);
 }
 
 .sel-cat:focus,
@@ -254,7 +359,7 @@ textarea:focus {
 ::selection{background:var(--green);color:#0a0a0a}
 
 /* ============================================================
-   FLOW MODERN TAB SYSTEM (Shadcn/Base-UI Architecture)
+   FLOW MODERN TAB SYSTEM (Universal Transparent Navigation)
    ============================================================ */
 
 .nav-links,
@@ -267,13 +372,14 @@ textarea:focus {
 .ff-tabs-list {
   display: flex !important;
   align-items: center !important;
-  gap: 4px !important;
-  background: var(--bg3) !important;
+  gap: 6px !important;
+  background: transparent !important;
   border: none !important;
   border-radius: 12px !important;
-  padding: 4px !important;
+  padding: 0 !important;
   position: relative !important;
   width: fit-content !important;
+  box-sizing: border-box !important;
 }
 
 .view-tabs,
@@ -292,7 +398,11 @@ textarea:focus {
 .rule-tab,
 .site-tab,
 .sm-tab,
-.ff-tab-item {
+.ff-tab-item,
+#btn-chart-line,
+#btn-chart-bar,
+#btn-trend-view-line,
+#btn-trend-view-bar {
   position: relative !important;
   display: flex !important;
   align-items: center !important;
@@ -311,6 +421,7 @@ textarea:focus {
   white-space: nowrap !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   user-select: none !important;
+  box-sizing: border-box !important;
 }
 
 .ttab {
@@ -323,9 +434,30 @@ textarea:focus {
 .rule-tab:hover:not(.act),
 .site-tab:hover:not(.act),
 .sm-tab:hover:not(.is-active),
-.ff-tab-item:hover:not(.active) {
+.ff-tab-item:hover:not(.active),
+#btn-chart-line:hover:not(.act),
+#btn-chart-bar:hover:not(.act),
+#btn-trend-view-line:hover:not(.act),
+#btn-trend-view-bar:hover:not(.act) {
   color: var(--tx) !important;
-  background: var(--bg4) !important;
+  border-color: var(--bd) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+html.light .ni:hover:not(.act),
+html.light .vtab:hover:not(.act),
+html.light .ttab:hover:not(.act),
+html.light .rule-tab:hover:not(.act),
+html.light .site-tab:hover:not(.act),
+html.light .sm-tab:hover:not(.is-active),
+html.light .ff-tab-item:hover:not(.active),
+html.light #btn-chart-line:hover:not(.act),
+html.light #btn-chart-bar:hover:not(.act),
+html.light #btn-trend-view-line:hover:not(.act),
+html.light #btn-trend-view-bar:hover:not(.act) {
+  color: #0C0A09 !important;
+  border-color: var(--bd) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
 }
 
 .ni.act,
@@ -334,10 +466,14 @@ textarea:focus {
 .rule-tab.act,
 .site-tab.act,
 .sm-tab.is-active,
-.ff-tab-item.active {
-  background: var(--bg2) !important;
+.ff-tab-item.active,
+#btn-chart-line.act,
+#btn-chart-bar.act,
+#btn-trend-view-line.act,
+#btn-trend-view-bar.act {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid var(--bd2) !important;
   color: var(--tx) !important;
-  border-color: transparent !important;
   font-weight: 700 !important;
   box-shadow: none !important;
 }
@@ -348,11 +484,16 @@ html.light .ttab.act,
 html.light .rule-tab.act,
 html.light .site-tab.act,
 html.light .sm-tab.is-active,
-html.light .ff-tab-item.active {
-  background: #ffffff !important;
-  color: #0f0f11 !important;
-  border-color: transparent !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+html.light .ff-tab-item.active,
+html.light #btn-chart-line.act,
+html.light #btn-chart-bar.act,
+html.light #btn-trend-view-line.act,
+html.light #btn-trend-view-bar.act {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid var(--bd2) !important;
+  color: #0C0A09 !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
 }
 
 .ni:focus,
@@ -404,9 +545,24 @@ html.light .ff-tab-item.active {
 a{color:var(--green);text-decoration:none;transition:var(--trans-fast)}
 a:hover{text-decoration:underline;text-underline-offset:3px}
 
-/* enhanced focus ring on icon buttons (popup/dashboard share class) */
-.icon-btn{transition:var(--trans)}
-.icon-btn:hover{transform:translateY(-1px)}
+/* enhanced icon buttons (popup/dashboard share class) */
+.icon-btn {
+  background: transparent !important;
+  border: 1px solid var(--bd) !important;
+  color: var(--tx2) !important;
+  transition: var(--trans) !important;
+}
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--bd2) !important;
+  color: var(--tx) !important;
+  transform: translateY(-1px);
+}
+html.light .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: var(--bd2) !important;
+  color: #0C0A09 !important;
+}
 
 /* logo - disable glow & pulse fading animation during focus session */
 #logo-img, #logo-img.on, #logo-img.focus-on, .logo-dot.focus-on {
@@ -431,6 +587,19 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   white-space: nowrap !important;
   flex-shrink: 0 !important;
   transition: var(--trans-fast) !important;
+  background: transparent !important;
+  border: 1px solid var(--bd) !important;
+  color: var(--tx2) !important;
+}
+.report-issue-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--bd2) !important;
+  color: var(--tx) !important;
+}
+html.light .report-issue-btn:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: var(--bd2) !important;
+  color: #0C0A09 !important;
 }
 
 @media (max-width: 768px) {
@@ -590,8 +759,8 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* FF v6.7.0: shared search input for Top Sites + Site Manager */
 .ff-search{
-  width:100%;max-width:320px;background:var(--bg3);
-  border:1px solid var(--bd2);border-radius:10px;
+  width:100%;max-width:320px;background:transparent;
+  border:1px solid var(--bd);border-radius:10px;
   height:38px !important;box-sizing:border-box !important;
   padding:0 14px 0 36px !important;color:var(--tx);
   font-size:13px;font-weight:600;font-family:inherit;
@@ -599,7 +768,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:12px center;
 }
-.ff-search:focus, .ff-search:focus-visible, .ff-search:hover { border-color: var(--bd3) !important; box-shadow: none !important; outline: none !important; background-color: var(--bg4) !important; }
+.ff-search:focus, .ff-search:focus-visible, .ff-search:hover { border-color: var(--bd2) !important; box-shadow: none !important; outline: none !important; background-color: transparent !important; }
 .hide { display: none !important; }
 
 /* Dashboard inline event replacements */
@@ -788,15 +957,20 @@ html.light * {
   padding: 8px 12px;
   font-size: 13px;
   font-weight: 700;
-  background: var(--bg3);
-  border: 1px solid var(--bd2);
+  background: transparent;
+  border: 1px solid var(--bd);
   color: var(--tx);
   text-transform: none;
 }
 
 .ff-dropdown-settings .ff-dropdown-btn:hover {
-  background: var(--bg4);
-  border-color: var(--bd3);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--bd2);
+}
+
+html.light .ff-dropdown-settings .ff-dropdown-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--bd2);
 }
 
 .ff-dropdown-settings .ff-dropdown-menu {

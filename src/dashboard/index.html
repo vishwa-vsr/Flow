@@ -118,7 +118,7 @@
           <button id="ov-apply" class="vtab act" style="font-weight:800" data-i18n="apply">Apply</button>
         </div>
 
-        <div class="compact-grid" style="gap: 16px; margin-bottom: 16px;">
+        <div class="compact-grid" style="gap: 12px; margin-bottom: 12px;">
           <div class="ac">
             <div class="acv w" id="an-total">0m</div>
             <div class="aclbl" data-i18n="total">Total</div>
@@ -163,7 +163,7 @@
         </div>
 
         <!-- New Symmetrical Overview Layout Grid -->
-        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); margin-bottom: 16px; gap: 16px; align-items: stretch;">
+        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); margin-bottom: 12px; gap: 12px; align-items: stretch;">
           <!-- Left Column: Category Donut & Ratio Bar -->
           <div class="card" style="padding:24px; display:flex; flex-direction:column; gap:20px; min-height:380px; height:100%; box-sizing:border-box;">
             <div class="ctit" data-i18n="timeDistribution">Time Distribution</div>
@@ -205,7 +205,7 @@
         </div>
 
         <!-- Insights Summary Grid -->
-        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 16px; gap: 16px;">
+        <div class="compact-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 12px; gap: 12px;">
           <div class="at-card" style="border-color:var(--green-bd)">
             <div class="at-val" style="color:var(--green)" id="ins-good-days">0</div>
             <div class="at-lbl" data-i18n="goodDays365d">Good Days (365d)</div>
@@ -217,7 +217,7 @@
         </div>
 
         <!-- 365-Day Consistency Heatmap card (moved here) -->
-        <div class="card" style="padding:24px; margin-bottom:16px;">
+        <div class="card" style="padding:24px; margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
             <div>
               <div class="ctit" style="margin:0" data-i18n="consistency365">365-Day Consistency</div>
@@ -225,7 +225,7 @@
             </div>
             <div id="heatmap-legend" data-i18n-title="clickToCustomizeThresholds" style="cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;
                       color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:1px;
-                      background:var(--bg3);border:1px solid var(--bd);border-radius:99px;
+                      background:transparent;border:1px solid var(--bd);border-radius:99px;
                       padding:6px 12px;transition:all .2s ease;white-space:nowrap;">
               <span data-icon="gear" data-size="14" style="color:var(--tx3);"></span>
               <span data-i18n="less">Less</span>
@@ -334,7 +334,7 @@
               </label>
             </div>
             
-            <div class="range-selector" id="trend-view-selector" style="margin: 0; display:flex; gap:4px; background:var(--bg3); padding:4px; border-radius:8px; border:1px solid var(--bd);">
+            <div class="range-selector" id="trend-view-selector" style="margin: 0; display:flex; gap:4px;">
                 <button class="vtab" id="btn-trend-view-line" style="padding:6px 12px; font-size:12px; font-weight:700;" data-i18n="lineChart">Line</button>
                 <button class="vtab" id="btn-trend-view-bar" style="padding:6px 12px; font-size:12px; font-weight:700;" data-i18n="barChart">Bar</button>
             </div>
@@ -860,29 +860,29 @@
             <!-- Appearance Card -->
             <div class="card">
               <div class="ctit" data-i18n="appearance">Appearance</div>
-              <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                <button id="btn-dark-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="moon" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeDark">Dark</span></button>
-                <button id="btn-light-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="sun" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeLight">Light</span></button>
-                <button id="btn-cinematic-mode" class="bs" style="flex:1;min-width:100px;padding:16px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="cinematic" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeCinematic">Cinematic</span></button>
+              <div class="theme-selector range-selector" style="display:flex;gap:4px;margin-bottom:16px;background:transparent;border:1px solid var(--bd);border-radius:12px;padding:4px;">
+                <button id="btn-dark-mode" class="ni" style="flex:1;min-width:100px;padding:12px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="moon" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeDark">Dark</span></button>
+                <button id="btn-light-mode" class="ni" style="flex:1;min-width:100px;padding:12px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="sun" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeLight">Light</span></button>
+                <button id="btn-cinematic-mode" class="ni" style="flex:1;min-width:100px;padding:12px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;"><span data-icon="cinematic" data-icon-size="16" style="margin-right:8px;"></span><span data-i18n="themeCinematic">Cinematic</span></button>
               </div>
               <div class="trow" style="padding-top:16px;padding-bottom:0;border-bottom:none;">
                 <div>
                   <label for="lang-sel" class="tlbl" style="display:block; cursor:pointer;" data-i18n="languageOverride">Language / Idioma</label>
                   <div class="tdesc" data-i18n="languageOverrideDesc">Override the default browser language for the extension.</div>
                 </div>
-                <select id="lang-sel" class="sel" style="width:200px">
-                  <option value="default" data-i18n="systemDefault">System Default</option>
-                  <option value="en" data-i18n="langEnglish">English</option>
-                  <option value="es" data-i18n="langSpanish">Español (Informal/Blunt)</option>
-                  <option value="fr" data-i18n="langFrench">Français (French)</option>
-                  <option value="ko" data-i18n="langKorean">한국어 (Korean)</option>
-                  <option value="ru" data-i18n="langRussian">Русский (Russian)</option>
-                  <option value="zh_CN" data-i18n="langChineseSimplified">简体中文 (Simplified)</option>
-                  <option value="zh_TW" data-i18n="langChineseTraditional">繁體中文 (Traditional)</option>
-                  <option value="zh_HK" data-i18n="langChineseHongKong">繁體中文 (香港)</option>
-                  <option value="ja" data-i18n="langJapanese">日本語 (Japanese)</option>
-                  <option value="de" data-i18n="langGerman">Deutsch (German)</option>
-                  <option value="pt_BR" data-i18n="langPortugueseBrazil">Português (Brasil)</option>
+                <select id="lang-sel" class="sel" style="width:160px; padding:6px; background:transparent; border:1px solid var(--bd); color:var(--tx); border-radius:8px; outline:none;">
+                  <option value="auto" data-i18n="langAuto">System Default</option>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="de">Deutsch</option>
+                  <option value="pt_BR">Português (Brasil)</option>
+                  <option value="ru">Русский</option>
+                  <option value="ja">日本語</option>
+                  <option value="ko">한국어</option>
+                  <option value="zh_CN">简体中文</option>
+                  <option value="zh_TW">繁體中文 (台灣)</option>
+                  <option value="zh_HK">繁體中文 (香港)</option>
                 </select>
               </div>
             </div>
@@ -891,31 +891,31 @@
             <div class="card">
               <div class="ctit"><span data-icon="lock" data-icon-size="16" style="margin-right:8px; vertical-align:middle; color:var(--tx3);"></span><span data-i18n="accessControlSafety">Access Control & Safety</span></div>
 
-              <div style="margin-bottom:24px; padding:16px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd);">
+              <div style="margin-bottom:12px; padding:16px; background:transparent; border-radius:8px; border:1px solid var(--bd);">
                 <div id="pin-status-wrapper" style="width:100%;">
                   <div class="tlbl" style="margin:0; display:flex; align-items:center;"><span data-i18n="pinProtectionStatus">PIN Protection Status: </span><span id="pin-status-badge"
-                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:var(--bg4); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><span data-icon="lock-sm" data-icon-size="12"></span><span data-i18n="notSet">Not Set</span></span></div>
+                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:transparent; border:1px solid var(--bd); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><span data-icon="lock-sm" data-icon-size="12"></span><span data-i18n="notSet">Not Set</span></span></div>
                 </div>
               </div>
 
-              <div id="pin-setup-box" class="ar" style="margin-top:20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <div id="pin-setup-box" class="ar" style="margin-top:12px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                 <input type="password" id="pin1" class="inp num" maxlength="6" data-i18n-placeholder="set6DigitPin"
                   style="max-width:180px" aria-label="Set 6-digit PIN" />
                 <input type="password" id="pin2" class="inp num" maxlength="6" data-i18n-placeholder="confirm6DigitPin"
                   style="max-width:180px" aria-label="Confirm 6-digit PIN" />
                 <button class="bp" id="btn-pin" data-i18n="savePin">Save PIN</button>
               </div>
-              <div id="pin-manage-box" class="ar" style="margin-top:20px; display:none; gap:12px; align-items:center;">
+              <div id="pin-manage-box" class="ar" style="margin-top:12px; display:none; gap:12px; align-items:center;">
                 <button class="bs" id="btn-change-pin" style="padding: 6px 14px; font-size: 13px;" data-i18n="changePin">Change PIN</button>
                 <button class="bs-danger" id="btn-remove-pin" style="padding: 6px 14px; font-size: 13px;" data-i18n="removePin">Remove PIN</button>
               </div>
 
-              <div id="pin-msg" style="font-size:14px;font-weight:700;margin-top:12px; margin-bottom:12px;"></div>
+              <div id="pin-msg" style="font-size:14px;font-weight:700;margin-top:8px; margin-bottom:8px;"></div>
 
               <div id="granular-locks"
-                style="margin-top:24px; padding:20px; background:var(--bg3); border-radius:12px; border:1px solid var(--bd); position:relative;">
+                style="margin-top:12px; padding:20px; background:transparent; border-radius:8px; border:1px solid var(--bd); position:relative;">
                 <div id="granular-locks-overlay"
-                  style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg3); opacity:0.85; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                  style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg2); opacity:0.95; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
                   <div style="display:flex; justify-content:center; margin-bottom:8px;">
                     <span data-icon="lock" data-icon-size="32" style="color:var(--tx3);"></span>
                   </div>
@@ -930,71 +930,69 @@
                 </div>
                 <div class="trow">
                   <div>
-                    <label for="lock-rules" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockEditingRules">Lock Editing/Deleting Rules</label>
-                    <div class="tdesc" data-i18n="lockEditingRulesDesc">Require PIN to modify, delete, or clear website blocking lists and rules.</div>
+                    <label for="lock-extend" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockTimerExtend">Lock Timer Extension (+5m)</label>
+                    <div class="tdesc" data-i18n="lockTimerExtendDesc">Require PIN to extend a focus session.</div>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-extend" /><span class="ttrack"></span></label>
+                </div>
+                <div class="trow">
+                  <div>
+                    <label for="lock-rules" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockRulesMod">Lock Rule Creation/Deletion</label>
+                    <div class="tdesc" data-i18n="lockRulesModDesc">Require PIN to add, edit, or delete blocking rules.</div>
                   </div><label class="tog tog-lg"><input type="checkbox" id="lock-rules" /><span class="ttrack"></span></label>
                 </div>
                 <div class="trow">
                   <div>
-                    <label for="lock-freetime" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockFreeTime">Lock Free-time Hours</label>
-                    <div class="tdesc" data-i18n="lockFreeTimeDesc">Require PIN to add, edit, or remove scheduled free-time slots.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-freetime" /><span class="ttrack"></span></label>
+                    <label for="lock-settings" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockSettingsPage">Lock Settings &amp; Limits</label>
+                    <div class="tdesc" data-i18n="lockSettingsPageDesc">Require PIN to change daily limits, emergency breaks, and extension settings.</div>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-settings" /><span class="ttrack"></span></label>
                 </div>
                 <div class="trow">
                   <div>
-                    <label for="lock-focus-presets" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockFocusPresets">Lock Editing Focus Presets</label>
-                    <div class="tdesc" data-i18n="lockFocusPresetsDesc">Require PIN to modify or delete customized focus presets.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-presets" /><span
-                      class="ttrack"></span></label>
+                    <label for="lock-danger" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockDangerZone">Lock Danger Zone</label>
+                    <div class="tdesc" data-i18n="lockDangerZoneDesc">Require PIN to clear data, reset rules, or delete history.</div>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-danger" /><span class="ttrack"></span></label>
                 </div>
                 <div class="trow">
                   <div>
-                    <label for="lock-focus-scheds" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockFocusSchedules">Lock Editing/Deleting Focus Schedules</label>
-                    <div class="tdesc" data-i18n="lockFocusSchedulesDesc">Require PIN to change or remove focus schedule configurations.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-scheds" /><span
-                      class="ttrack"></span></label>
+                    <label for="lock-analytics" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockAnalytics">Lock Analytics Tab</label>
+                    <div class="tdesc" data-i18n="lockAnalyticsDesc">Require PIN to view detailed browsing analytics and website usage breakdown.</div>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-analytics" /><span class="ttrack"></span></label>
                 </div>
                 <div class="trow">
                   <div>
-                    <label for="lock-tweaks" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockAdvancedTweaks">Lock Advanced Site Tweaks</label>
-                    <div class="tdesc" data-i18n="lockAdvancedTweaksDesc">Require PIN to access custom styles, script injections, or advanced tweaks.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-tweaks" /><span class="ttrack"></span></label>
-                </div>
-                <div class="trow">
-                  <div>
-                    <label for="lock-privacy" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockPrivacyMode">Lock Privacy Mode (Pause Tracking)</label>
-                    <div class="tdesc" data-i18n="lockPrivacyModeDesc">Require PIN to pause tracking or enable privacy mode.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-privacy" /><span class="ttrack"></span></label>
-                </div>
-                <div class="trow">
-                  <div>
-                    <label for="lock-adjust-time" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockAdjustTime">Lock Adjust Time (Daily Breakdown)</label>
+                    <label for="lock-adjust-time" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockAdjustTime">Lock Manual Time Adjustment</label>
                     <div class="tdesc" data-i18n="lockAdjustTimeDesc">Require PIN to manually adjust or scrub tracked time in daily breakdown.</div>
                   </div><label class="tog tog-lg"><input type="checkbox" id="lock-adjust-time" /><span class="ttrack"></span></label>
                 </div>
                 <div class="trow" style="border-bottom:none; padding-bottom:0;">
                   <div>
-                    <label for="lock-danger" class="tlbl" style="font-size:14px; color:var(--red); cursor:pointer; display:block;" data-i18n="lockDangerZone">Lock Danger Zone (Clear Data)</label>
-                    <div class="tdesc" data-i18n="lockDangerZoneDesc">Require PIN to reset statistics, rules, or custom categories.</div>
-                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-danger" /><span class="ttrack"></span></label>
+                    <label for="lock-focus-scheds" class="tlbl" style="font-size:14px; cursor:pointer; display:block;" data-i18n="lockFocusScheds">Lock Focus Schedules</label>
+                    <div class="tdesc" data-i18n="lockFocusSchedsDesc">Require PIN to add, edit, or remove recurring automated focus schedules.</div>
+                  </div><label class="tog tog-lg"><input type="checkbox" id="lock-focus-scheds" /><span class="ttrack"></span></label>
                 </div>
               </div>
             </div>
 
             <!-- Danger Zone Card -->
-            <div class="card" style="border-color:var(--red-bd) !important">
-              <div class="ctit red" style="color:var(--red)"><span data-icon="warning" data-icon-size="16" style="color:var(--red); margin-right:8px; vertical-align:middle;"></span><span data-i18n="dangerZone">Danger Zone</span></div>
+            <div class="card card-danger">
+              <div class="ctit" style="color:var(--red)"><span data-icon="alert-triangle" data-icon-size="16" style="margin-right:8px; vertical-align:middle;"></span><span data-i18n="dangerZone">Danger Zone</span></div>
               <div class="trow" style="border-top:none;padding-top:0">
                 <div>
-                  <div class="tlbl" data-i18n="resetAllStats">Reset all statistics</div>
-                  <div class="tdesc" data-i18n="resetAllStatsDesc">Wipe all recorded website tracking history and analytics. This cannot be undone.</div>
-                </div><button class="bs-danger" id="btn-rst-stats" data-i18n="btnResetStats">Reset Stats</button>
+                  <div class="tlbl" data-i18n="clearAllData">Clear all tracked data</div>
+                  <div class="tdesc" data-i18n="clearAllDataDesc">Reset daily time records, trends, and top sites list.</div>
+                </div><button class="bs-danger" id="btn-clr-data" data-i18n="btnClearData">Clear Data</button>
               </div>
               <div class="trow">
                 <div>
-                  <div class="tlbl" data-i18n="clearAllRules">Clear all block & allow rules</div>
-                  <div class="tdesc" data-i18n="clearAllRulesDesc">Remove all custom website blocking lists, schedules, limits, and allowlists.</div>
+                  <div class="tlbl" data-i18n="clearAllRules">Clear all rules</div>
+                  <div class="tdesc" data-i18n="clearAllRulesDesc">Delete all custom site blocking rules and redirects.</div>
                 </div><button class="bs-danger" id="btn-clr-rules" data-i18n="btnClearRules">Clear Rules</button>
+              </div>
+              <div class="trow">
+                <div>
+                  <div class="tlbl" data-i18n="clearFocusHistory">Clear Focus History</div>
+                  <div class="tdesc" data-i18n="clearFocusHistoryDesc">Delete all recorded focus session history records.</div>
+                </div><button class="bs-danger" id="btn-clr-focus" data-i18n="btnClearFocus">Clear Focus History</button>
               </div>
               <div class="trow" style="border-bottom:none;padding-bottom:0">
                 <div>
@@ -1020,14 +1018,14 @@
                 </div>
                 <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                   <a href="https://github.com/vishwa-vsr/Flow"
-                    target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
+                    target="_blank" class="bs support-btn"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-weight:700; border-radius:12px; font-size:13px; background:transparent !important; color:var(--tx2) !important; border:1px solid var(--bd) !important; transition:var(--trans);">
                     <span data-icon="github" data-icon-size="16"></span>
                     <span>GitHub</span>
                   </a>
                   <a href="https://vishwa-vsr.github.io/flow-website/"
-                    target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
+                    target="_blank" class="bs support-btn"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-weight:700; border-radius:12px; font-size:13px; background:transparent !important; color:var(--tx2) !important; border:1px solid var(--bd) !important; transition:var(--trans);">
                     <span data-icon="home" data-icon-size="16"></span>
                     <span data-i18n="websiteBtn">Website</span>
                   </a>
@@ -1038,20 +1036,20 @@
                     <span data-i18n="submitFeedbackBtn">Submit Feedback</span>
                   </a>
                   <a href="https://github.com/vishwa-vsr/Flow/blob/main/TRANSLATING.md"
-                    target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
+                    target="_blank" class="bs support-btn"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-weight:700; border-radius:12px; font-size:13px; background:transparent !important; color:var(--tx2) !important; border:1px solid var(--bd) !important; transition:var(--trans);">
                     <span data-icon="translate" data-icon-size="16"></span>
                     <span data-i18n="helpTranslateBtn">Help Translate</span>
                   </a>
                   <a href="https://chromewebstore.google.com/detail/flow-website-blocker-habi/heinimoclnopjnkpicmonhgichbjejcp"
-                    target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
+                    target="_blank" class="bs support-btn"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-weight:700; border-radius:12px; font-size:13px; background:transparent !important; color:var(--tx2) !important; border:1px solid var(--bd) !important; transition:var(--trans);">
                     <span data-icon="cinematic" data-icon-size="16"></span>
                     <span data-i18n="rateUsBtn">Rate 5 Stars</span>
                   </a>
                   <a href="https://github.com/vishwa-vsr/Flow/blob/main/CHANGELOG.md"
-                    target="_blank" class="bp"
-                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-weight:800; border-radius:12px; font-size:14px; background:var(--bg3) !important; color:var(--tx) !important; border:1px solid var(--bd); transition:transform 0.2s ease;">
+                    target="_blank" class="bs support-btn"
+                    style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:12px 20px; font-weight:700; border-radius:12px; font-size:13px; background:transparent !important; color:var(--tx2) !important; border:1px solid var(--bd) !important; transition:var(--trans);">
                     <span data-icon="doc" data-icon-size="16"></span>
                     <span data-i18n="changelogBtn">Changelog</span>
                   </a>
@@ -1161,7 +1159,7 @@
 
   <!-- ═══════ FREE TIME EDIT MODAL ═══════ -->
   <div id="free-time-modal" class="overlay hide" style="z-index: 9999;" role="dialog" aria-modal="true" aria-labelledby="ft-modal-title">
-    <div class="card" style="width: 100%; max-width: 440px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg2); border: 1px solid var(--bd);">
+    <div class="card" style="width: 100%; max-width: 440px; padding: 0; display: flex; flex-direction: column; overflow: hidden;">
       <div style="padding: 24px 32px 16px; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
         <div style="font-size: 20px; font-weight: 800; color: var(--tx); display: flex; align-items: center; gap: 10px;">
           <span data-icon="calendar" data-icon-size="20"></span>
@@ -1208,7 +1206,7 @@
   <!-- ═══════ UNIFIED ADD RULE MODAL ═══════ -->
   <div id="add-rule-modal" class="overlay hide" style="z-index:9000;" role="dialog" aria-modal="true" aria-labelledby="add-rule-modal-title">
     <div class="card"
-      style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
+      style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden;">
       <div
         style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-rule-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;" data-i18n="addNewRule">Add New Rule</h2>
@@ -1218,7 +1216,7 @@
       <div style="padding:24px 32px; overflow-y:auto; flex:1;">
         <!-- Segment Control -->
         <div id="add-rule-tabs"
-          style="display:none; gap:8px; background:var(--bg3); padding:6px; border-radius:14px; border:1px solid var(--bd); margin-bottom:24px;">
+          style="display:none; gap:8px; margin-bottom:24px;">
           <button class="vtab act add-rule-tab" style="flex:1; text-align:center;" data-ruletype="block" data-i18n="blockSite">Block
             Site</button>
           <button class="vtab add-rule-tab" style="flex:1; text-align:center;" data-ruletype="monitor" data-i18n="tagMonitor">Tag /
@@ -1398,7 +1396,7 @@
     <!-- ═══════ CUSTOM CONFIRMATION MODAL ═══════ -->
     <div id="confirm-modal" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-describedby="confirm-modal-message">
       <div class="card"
-        style="width:100%; max-width:440px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd2); box-shadow:var(--shadow-lg);">
+        style="width:100%; max-width:440px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden;">
         <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
           <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
             <span id="confirm-modal-icon-wrap" style="color:var(--amber); display:inline-flex; align-items:center;">
@@ -1422,7 +1420,7 @@
     <!-- ═══════ PRIVACY MODE MODAL ═══════ -->
     <div id="privacy-modal" class="overlay hide" style="z-index: 100000;" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
       <div class="card"
-        style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2); border:1px solid var(--bd);">
+        style="width:100%; max-width:460px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden;">
         <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
           <div style="font-size:20px; font-weight:800; color:var(--tx); display:flex; align-items:center; gap:10px;">
             <span style="color:#A855F7; display:inline-flex; align-items:center;">
@@ -1451,7 +1449,7 @@
 
   <!-- ═══════ ADD/EDIT BLOCK PRESET MODAL ═══════ -->
   <div id="add-preset-modal" class="overlay hide" style="z-index:9000;" role="dialog" aria-modal="true" aria-labelledby="add-preset-modal-title">
-    <div class="card" style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden; background:var(--bg2);">
+    <div class="card" style="width:100%; max-width:600px; padding:0; display:flex; flex-direction:column; max-height:85vh; overflow:hidden;">
       <div style="padding:24px 32px 16px; border-bottom:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
         <h2 id="add-preset-modal-title" style="font-size:20px; font-weight:800; color:var(--tx); margin:0;" data-i18n="createBlockPreset">Create Block Preset</h2>
         <button id="add-preset-modal-close" style="background:none; border:none; color:var(--tx3); cursor:pointer; padding:4px; display:inline-flex; align-items:center; justify-content:center;" aria-label="Close Add/Edit Block Preset Modal">
