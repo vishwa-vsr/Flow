@@ -1072,9 +1072,6 @@
   "themeLight": {
     "message": "빛"
   },
-  "themeCinematic": {
-    "message": "시네마틱"
-  },
   "languageOverride": {
     "message": "언어 / 관용어",
     "description": "Settings config option."
@@ -2784,9 +2781,6 @@
   },
   "lightTheme": {
     "message": "빛"
-  },
-  "cinematicTheme": {
-    "message": "시네마틱"
   },
   "supportAndFeedback": {
     "message": "지원 및 피드백"

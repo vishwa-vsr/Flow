@@ -1097,9 +1097,6 @@
   "themeLight": {
     "message": "Hell"
   },
-  "themeCinematic": {
-    "message": "Kinematografisch"
-  },
   "languageOverride": {
     "message": "Sprache / Idioma",
     "description": "Settings config option."
@@ -2809,9 +2806,6 @@
   },
   "lightTheme": {
     "message": "Hell"
-  },
-  "cinematicTheme": {
-    "message": "Kinematografisch"
   },
   "supportAndFeedback": {
     "message": "Support & Feedback"

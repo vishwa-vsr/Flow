@@ -1146,9 +1146,6 @@
   "themeLight": {
     "message": "Claro"
   },
-  "themeCinematic": {
-    "message": "Cinematográfico"
-  },
   "languageOverride": {
     "message": "Language / Idioma",
     "description": "Settings config option."
@@ -2859,9 +2856,6 @@
   },
   "lightTheme": {
     "message": "Claro"
-  },
-  "cinematicTheme": {
-    "message": "Cinematográfico"
   },
   "supportAndFeedback": {
     "message": "SOPORTE Y COMENTARIOS"

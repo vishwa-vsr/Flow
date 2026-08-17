@@ -93,19 +93,7 @@ html.light .pb-badge-strict {
   color: #ffffff !important;
 }
 
-html.cinematic body{background:#070310}
-.cinematic-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;visibility:hidden;
-  transition:opacity 1s ease, visibility 1s ease}
-html.cinematic .cinematic-bg{opacity:1;visibility:visible;
-  animation:cinematicDrift 18s infinite alternate ease-in-out}
-html.light .cinematic-bg{display:none}
-html.tab-hidden .cinematic-bg{animation-play-state:paused !important}
-html.cinematic .cinematic-bg{
-  background:
-    radial-gradient(circle at 15% 50%,rgba(92,156,252,.18),transparent 50%),
-    radial-gradient(circle at 85% 30%,rgba(168,85,247,.18),transparent 50%);
-}
-@keyframes cinematicDrift{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.08) translate(-2%,2%)}}
+
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -630,7 +618,6 @@ html.light .report-issue-btn:hover {
 /* reduce motion */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .cinematic-bg{animation:none!important}
 }
 
 /* =====================================================================

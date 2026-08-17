@@ -89,24 +89,21 @@ function hideAnalyticsHeader() {
 
 async function applyTheme() {
     const e = await gLocal(["theme"]);
-    let currentTheme = e.theme;
+    let currentTheme = e ? e.theme : "dark";
     
-    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain") {
+    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain" || currentTheme === "cinematic") {
         currentTheme = "dark";
         await sLocal({ theme: "dark" });
     }
     
-    const t = "light" === currentTheme,
-          a = "cinematic" === currentTheme;
+    const t = "light" === currentTheme;
           
     document.documentElement.classList.toggle("light", t);
-    document.documentElement.classList.toggle("cinematic", a);
-    document.documentElement.classList.remove("custom");
+    document.documentElement.classList.remove("cinematic", "custom");
     document.documentElement.setAttribute("data-os-theme", "nothing");
     
     $("btn-dark-mode") && $("btn-dark-mode").classList.toggle("act", currentTheme === "dark");
     $("btn-light-mode") && $("btn-light-mode").classList.toggle("act", currentTheme === "light");
-    $("btn-cinematic-mode") && $("btn-cinematic-mode").classList.toggle("act", currentTheme === "cinematic");
 }
 
 applyTheme();
@@ -156,8 +153,6 @@ chrome.storage.onChanged.addListener((e, t) => {
     theme: "dark"
 })), $("btn-light-mode") && $("btn-light-mode").addEventListener("click", () => sLocal({
     theme: "light"
-})), $("btn-cinematic-mode") && $("btn-cinematic-mode").addEventListener("click", () => sLocal({
-    theme: "cinematic"
 }));
 var fmtT = fmtTimer;
 

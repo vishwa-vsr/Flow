@@ -17,7 +17,6 @@
 
     /* FF v6.7.0: @font-face removed — fonts now loaded exclusively from global.css (Problem 10). 
          All :root variables below intentionally removed too — they live in global.css now. */
-    /* .cinematic-bg, html.cinematic, @keyframes cinematicDrift → defined in global.css */
 
 
     html,

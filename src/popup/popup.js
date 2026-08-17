@@ -104,17 +104,14 @@ $("btn-analytics") && $("btn-analytics").addEventListener("click", () => chrome.
 $("btn-settings") && $("btn-settings").addEventListener("click", () => chrome.tabs.create({
     url: chrome.runtime.getURL("dashboard/index.html#settings")
 }));
-applyTheme("theme-icon");
+applyTheme("btn-theme");
 $("btn-theme") && $("btn-theme").addEventListener("click", async function () {
     const e = await gLocal(["theme"]);
-    let t = "dark";
-    if (e.theme === "dark") t = "light";
-    else if (e.theme === "light") t = "cinematic";
-    else t = "dark";
+    let t = (e && e.theme === "light") ? "dark" : "light";
     await sLocal({
         theme: t
     });
-    applyTheme("theme-icon");
+    applyTheme("btn-theme");
 });
 document.querySelectorAll(".ttab").forEach(function (e) {
     e.addEventListener("click", function () {
@@ -853,6 +850,9 @@ async function initPopup() {
     } catch (_) {}
 
     chrome.storage.onChanged.addListener((changes, areaName) => {
+        if (areaName === "local" && changes.theme) {
+            applyTheme("btn-theme");
+        }
         if (areaName === "sync" && changes.customCategories) {
             if (typeof applyCustomCategories === "function") {
                 applyCustomCategories(changes.customCategories.newValue);

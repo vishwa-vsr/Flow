@@ -1072,9 +1072,6 @@
   "themeLight": {
     "message": "Light"
   },
-  "themeCinematic": {
-    "message": "Cinematic"
-  },
   "languageOverride": {
     "message": "Language / Idioma",
     "description": "Settings config option."
@@ -2784,9 +2781,6 @@
   },
   "lightTheme": {
     "message": "Light"
-  },
-  "cinematicTheme": {
-    "message": "Cinematic"
   },
   "supportAndFeedback": {
     "message": "SUPPORT & FEEDBACK"

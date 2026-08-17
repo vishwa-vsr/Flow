@@ -1072,9 +1072,6 @@
   "themeLight": {
     "message": "Свет"
   },
-  "themeCinematic": {
-    "message": "Кинематографичный"
-  },
   "languageOverride": {
     "message": "Язык / Идиома",
     "description": "Settings config option."
@@ -2784,9 +2781,6 @@
   },
   "lightTheme": {
     "message": "Свет"
-  },
-  "cinematicTheme": {
-    "message": "Кинематографичный"
   },
   "supportAndFeedback": {
     "message": "ПОДДЕРЖКА И ОБРАТНАЯ СВЯЗЬ"

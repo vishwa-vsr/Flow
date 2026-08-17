@@ -1097,9 +1097,6 @@
   "themeLight": {
     "message": "ライト"
   },
-  "themeCinematic": {
-    "message": "シネマティック"
-  },
   "languageOverride": {
     "message": "言語 / Idioma",
     "description": "Settings config option."
@@ -2833,9 +2830,6 @@
   },
   "lightTheme": {
     "message": "ライト"
-  },
-  "cinematicTheme": {
-    "message": "シネマティック"
   },
   "supportAndFeedback": {
     "message": "サポートとフィードバック"

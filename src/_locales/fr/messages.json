@@ -1072,9 +1072,6 @@
   "themeLight": {
     "message": "Lumière"
   },
-  "themeCinematic": {
-    "message": "Cinématographique"
-  },
   "languageOverride": {
     "message": "Langue/idiome",
     "description": "Settings config option."
@@ -2784,9 +2781,6 @@
   },
   "lightTheme": {
     "message": "Lumière"
-  },
-  "cinematicTheme": {
-    "message": "Cinématographique"
   },
   "supportAndFeedback": {
     "message": "ASSISTANCE ET COMMENTAIRES"

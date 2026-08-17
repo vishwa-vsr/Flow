@@ -1147,9 +1147,6 @@
   "themeLight": {
     "message": "淺色"
   },
-  "themeCinematic": {
-    "message": "影院"
-  },
   "languageOverride": {
     "message": "語言/慣用語",
     "description": "Settings config option."
@@ -2860,9 +2857,6 @@
   },
   "lightTheme": {
     "message": "淺色"
-  },
-  "cinematicTheme": {
-    "message": "影院"
   },
   "supportAndFeedback": {
     "message": "支持與反饋"

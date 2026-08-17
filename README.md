@@ -59,7 +59,7 @@ Whether you're studying for exams, coding on a deadline, or just trying to stop 
 | 📈 **Study vs Distraction Trends** | Color-coded breakdown comparing productive study hours against leisure and distraction time. |
 | 🏷️ **Site Categorization** | Tag websites as Productivity, Learning, Communication, Distraction, or Uncategorized. |
 | ⏰ **Focus Schedules** | Automate your routine with recurring daily or weekly blocking schedules. |
-| 🌗 **Dark, Light & Cinematic Themes** | Clean theme options including a dark OLED mode, clean light mode, and cinematic visual styling. |
+| 🌗 **Dark & Light Themes** | Clean theme options including a dark OLED mode and a clean light mode. |
 | 💾 **Data Backup & Import** | 100% offline data export (JSON), plus one-click history migration from other time-tracker extensions. |
 
 ---

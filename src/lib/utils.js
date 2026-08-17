@@ -270,23 +270,22 @@ function msg(e, t, retries = 3) {
 }
 async function applyTheme(e) {
     const t = await gLocal(["theme"]);
-    let currentTheme = t.theme;
-    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain") {
+    let currentTheme = t ? t.theme : "dark";
+    if (currentTheme === "custom" || currentTheme === "rain" || currentTheme === "mountain" || currentTheme === "cinematic") {
         currentTheme = "dark";
         await sLocal({ theme: "dark" });
     }
-    const n = "light" === currentTheme,
-        r = "cinematic" === currentTheme;
+    const n = "light" === currentTheme;
     document.documentElement.classList.toggle("light", n);
-    document.documentElement.classList.toggle("cinematic", r);
-    document.documentElement.classList.remove("custom");
+    document.documentElement.classList.remove("cinematic", "custom");
     document.documentElement.setAttribute("data-os-theme", "nothing");
 
-    const i = e ? $(e) : null;
-        setSafeHTML(i, n ? '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' : r ? '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>');
-
-    if (typeof syncCinematicParticles === "function") {
-        await syncCinematicParticles();
+    const btn = e ? $(e) : $("btn-theme");
+    if (btn) {
+        btn.setAttribute("data-icon", n ? "sun" : "moon");
+        if (typeof FlowIcons !== "undefined" && FlowIcons.get) {
+            btn.innerHTML = FlowIcons.get(n ? "sun" : "moon", { size: 16 });
+        }
     }
 }
 document.addEventListener("error", e => {
@@ -303,27 +302,3 @@ document.addEventListener("error", e => {
         }
     }
 }, !0);
-
-let cinematicAnimationId = null;
-let particleCanvases = [];
-
-async function syncCinematicParticles() {
-    const bgContainers = document.querySelectorAll(".cinematic-bg");
-    
-    if (cinematicAnimationId) {
-        cancelAnimationFrame(cinematicAnimationId);
-        cinematicAnimationId = null;
-    }
-
-    bgContainers.forEach(bg => {
-        const canvas = bg.querySelector("canvas.cinematic-particles");
-        if (canvas) canvas.remove();
-        
-        // Also remove any legacy mountain layers
-        const mountainLayers = bg.querySelectorAll(".parallax-layer");
-        mountainLayers.forEach(layer => layer.remove());
-        
-        bg.style.backgroundImage = "";
-    });
-    particleCanvases = [];
-}

@@ -5,10 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [10.1.0] - 2026-08-14
+## [10.1.0] - 2026-08-17
 
 ### Added
-- **Universal Transparent Card UI System**: Standardized all cards and widget surfaces across the Dashboard (Analytics, Focus Mode, Site Manager, Settings) and Popup to use a sleek transparent card design with subtle 1px border outlines, seamlessly adapting across Dark, Light, and Cinematic themes.
+- **Streamlined Dual-Theme System**: Refined the theme engine to deliver two distraction-free visual styles: Dark OLED Mode and Clean Light Mode.
+- **Two-Way Quick Theme Switcher**: The header toggle in the extension popup now smoothly flips between Dark and Light mode with matching Sun and Moon icons.
+- **Universal Transparent Card UI System**: Standardized all cards and widget surfaces across the Dashboard (Analytics, Focus Mode, Site Manager, Settings) and Popup to use a sleek transparent card design with subtle 1px border outlines, seamlessly adapting across Dark and Light themes.
 - **Translucent Frosted Popups & Modal Dialogs**: Upgraded all popup dialogs and modals (Heatmap Thresholds, Category Editor, Rule Editor, PIN Verification, Preset Editor, Privacy Mode, and Focus Schedule) with soft backdrop blur and clean border outlines.
 
 ### Changed
@@ -17,7 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Symmetrical Grid & Equalized Spacing**: Harmonized vertical spacing to match horizontal grid gaps across the entire dashboard, including the Analytics stat cards grid, Heatmap Consistency cards, Site Manager Tweaks grid, and Settings Access Control cards.
 - **Transparent Chart & Timeline Polish**: Converted the 24-Hour Active Timeline track and Comparison chart sidebars to transparent surfaces, eliminating solid dark overlays.
 - **Transparent Action Buttons & Rows**: Updated Site Manager rule rows, site action icon buttons (Shield and Delete), and search input bars to use transparent backgrounds with crisp border outlines.
-- **Softened Modal Backdrop Overlay**: Replaced the heavy dark screen overlay with a soft, translucent blur that lets the background dashboard and wallpapers show through naturally.
+- **Softened Modal Backdrop Overlay**: Replaced the heavy dark screen overlay with a soft, translucent blur that lets the background dashboard show through naturally.
+
+### Removed
+- **Cinematic Theme**: Fully removed the Cinematic theme option, background glow layers, and particle animation scripts to keep the extension super fast, lightweight, and distraction-free.
 
 ## [10.0.9] - 2026-08-13
 
