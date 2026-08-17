@@ -1787,10 +1787,11 @@ function getDays(e) {
     }
     return { days: t, labels: a };
 }
-document.querySelectorAll(".ni").forEach(e => {
+document.querySelectorAll(".nav-links .ni").forEach(e => {
     e.addEventListener("click", async () => {
         var t = e.getAttribute("data-tab");
-        document.querySelectorAll(".ni").forEach(button => {
+        if (!t) return;
+        document.querySelectorAll(".nav-links .ni").forEach(button => {
             button.classList.remove("act");
             button.setAttribute("aria-selected", "false");
             button.removeAttribute("aria-current");
@@ -1799,7 +1800,8 @@ document.querySelectorAll(".ni").forEach(e => {
         e.classList.add("act");
         e.setAttribute("aria-selected", "true");
         e.setAttribute("aria-current", "page");
-        $("tab-" + t).classList.add("act");
+        const targetTab = $("tab-" + t);
+        if (targetTab) targetTab.classList.add("act");
         "analytics" === t && loadAnalytics();
         "settings" === t && loadExtendedSettings();
         "focus" === t && (loadFocusUI(), loadWeeklyGoalSettings(), loadFocusHistory());
