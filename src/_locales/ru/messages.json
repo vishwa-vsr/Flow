@@ -3033,5 +3033,95 @@
   },
   "tracked": {
     "message": "Отслеживается"
+  },
+  "langAuto": {
+    "message": "По умолчанию"
+  },
+  "lockTimerExtend": {
+    "message": "Заблокировать продление таймера (+5м)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "Требовать PIN для продления сеанса концентрации."
+  },
+  "lockRulesMod": {
+    "message": "Заблокировать создание/удаление правил"
+  },
+  "lockRulesModDesc": {
+    "message": "Требовать PIN для добавления, изменения или удаления правил блокировки."
+  },
+  "lockSettingsPage": {
+    "message": "Заблокировать настройки и лимиты"
+  },
+  "lockSettingsPageDesc": {
+    "message": "Требовать PIN для изменения дневных лимитов, экстренных перерывов и настроек расширения."
+  },
+  "lockAnalytics": {
+    "message": "Заблокировать вкладку аналитики"
+  },
+  "lockAnalyticsDesc": {
+    "message": "Требовать PIN для просмотра подробной аналитики посещений и статистики сайтов."
+  },
+  "lockFocusScheds": {
+    "message": "Заблокировать расписания концентрации"
+  },
+  "clearAllData": {
+    "message": "Очистить все отслеживаемые данные"
+  },
+  "clearAllDataDesc": {
+    "message": "Сбросить ежедневные записи времени, тренды и список популярных сайтов."
+  },
+  "btnClearData": {
+    "message": "Очистить данные"
+  },
+  "clearFocusHistory": {
+    "message": "Очистить историю концентрации"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Удалить все сохраненные записи истории сеансов концентрации."
+  },
+  "btnClearFocus": {
+    "message": "Очистить историю"
+  },
+  "noSitesTracked": {
+    "message": "За этот период нет отслеживаемых сайтов."
+  },
+  "allSites": {
+    "message": "Все сайты"
+  },
+  "cat": {
+    "message": "Категория"
+  },
+  "focus": {
+    "message": "Фокус"
+  },
+  "pin4to6Digits": {
+    "message": "PIN должен состоять из 4–6 цифр."
+  },
+  "statsReset": {
+    "message": "Статистика отслеживания сброшена."
+  },
+  "clearFocusConfirm": {
+    "message": "Вы уверены, что хотите очистить всю историю концентрации?"
+  },
+  "dataRetentionSaved": {
+    "message": "Настройки хранения данных сохранены."
+  },
+  "restoreFailed": {
+    "message": "Сбой восстановления."
+  },
+  "importLogs": {
+    "message": "Импорт журналов"
+  },
+  "deleteBackup": {
+    "message": "Удалить резервную копию"
+  },
+  "deletePreset": {
+    "message": "Удалить пресет"
+  },
+  "blockedMsg": {
+    "message": "Сохраняйте концентрацию"
+  },
+  "quote": {
+    "message": "Сосредоточьтесь на продуктивности, а не на занятости."
   }
 }

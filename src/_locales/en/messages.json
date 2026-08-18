@@ -3033,5 +3033,95 @@
   },
   "tracked": {
     "message": "Tracked"
+  },
+  "langAuto": {
+    "message": "System Default"
+  },
+  "lockTimerExtend": {
+    "message": "Lock Timer Extension (+5m)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "Require PIN to extend a focus session."
+  },
+  "lockRulesMod": {
+    "message": "Lock Rule Creation/Deletion"
+  },
+  "lockRulesModDesc": {
+    "message": "Require PIN to add, edit, or delete blocking rules."
+  },
+  "lockSettingsPage": {
+    "message": "Lock Settings & Limits"
+  },
+  "lockSettingsPageDesc": {
+    "message": "Require PIN to change daily limits, emergency breaks, and extension settings."
+  },
+  "lockAnalytics": {
+    "message": "Lock Analytics Tab"
+  },
+  "lockAnalyticsDesc": {
+    "message": "Require PIN to view detailed browsing analytics and website usage breakdown."
+  },
+  "lockFocusScheds": {
+    "message": "Lock Focus Schedules"
+  },
+  "clearAllData": {
+    "message": "Clear all tracked data"
+  },
+  "clearAllDataDesc": {
+    "message": "Reset daily time records, trends, and top sites list."
+  },
+  "btnClearData": {
+    "message": "Clear Data"
+  },
+  "clearFocusHistory": {
+    "message": "Clear Focus History"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Delete all recorded focus session history records."
+  },
+  "btnClearFocus": {
+    "message": "Clear Focus History"
+  },
+  "noSitesTracked": {
+    "message": "No websites tracked for this period."
+  },
+  "allSites": {
+    "message": "All Sites"
+  },
+  "cat": {
+    "message": "Category"
+  },
+  "focus": {
+    "message": "Focus"
+  },
+  "pin4to6Digits": {
+    "message": "PIN must be 4 to 6 digits."
+  },
+  "statsReset": {
+    "message": "Tracking statistics have been reset."
+  },
+  "clearFocusConfirm": {
+    "message": "Are you sure you want to clear all focus history?"
+  },
+  "dataRetentionSaved": {
+    "message": "Data retention settings saved."
+  },
+  "restoreFailed": {
+    "message": "Restore failed."
+  },
+  "importLogs": {
+    "message": "Import Logs"
+  },
+  "deleteBackup": {
+    "message": "Delete Backup"
+  },
+  "deletePreset": {
+    "message": "Delete Preset"
+  },
+  "blockedMsg": {
+    "message": "Stay Focused"
+  },
+  "quote": {
+    "message": "Focus on being productive instead of busy."
   }
 }

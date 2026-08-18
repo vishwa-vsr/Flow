@@ -140,9 +140,10 @@
     .card,
     .ac,
     .at-card {
-      background: transparent;
-      border: 1px solid var(--bd);
-      border-radius: var(--card-radius);
+      background: #000000 !important;
+      border: none !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
       position: relative;
       overflow: hidden;
       transition: var(--trans);
@@ -151,20 +152,26 @@
     .card:hover,
     .ac:hover,
     .at-card:hover {
-      border-color: var(--bd2);
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
 
     html.light .card,
     html.light .ac,
     html.light .at-card {
-      background: transparent;
-      border: 1px solid var(--bd);
+      background: #FFFFFF !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 16px !important;
     }
 
     html.light .card:hover,
     html.light .ac:hover,
     html.light .at-card:hover {
-      border-color: var(--bd2);
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
 
     .overlay .card,
@@ -685,10 +692,10 @@
 
     .chart-container {
       position: relative;
-      border: 1px solid var(--bd);
-      border-radius: var(--card-radius);
-      background: transparent;
-      box-shadow: none;
+      border: none !important;
+      border-radius: 16px;
+      background: #000000 !important;
+      box-shadow: none !important;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -696,17 +703,22 @@
     }
 
     .chart-container:hover {
-      border-color: var(--bd2);
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
 
     html.light .chart-container {
-      background: transparent;
-      border: 1px solid var(--bd);
-      box-shadow: none;
+      background: #FFFFFF !important;
+      border: none !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
     }
 
     html.light .chart-container:hover {
-      border-color: var(--bd2);
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
 
     .chart-hdr {
@@ -816,7 +828,7 @@
     .settings-two-col-layout {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
+      gap: var(--space-xl);
       align-items: start;
       width: 100%;
     }
@@ -834,11 +846,73 @@
     .settings-col {
       display: flex;
       flex-direction: column;
-      gap: var(--space-lg); /* Equal spacing vertically for stacked cards inside a column */
+      gap: var(--space-xl); /* Generous 32px vertical breathing room between stacked cards */
     }
 
     .settings-col .card {
       margin-bottom: 0;
+    }
+
+    .card-danger {
+      border-color: rgba(239, 68, 68, 0.25) !important;
+      position: relative;
+    }
+    .card-danger:hover {
+      border-color: rgba(239, 68, 68, 0.45) !important;
+    }
+    html.light .card-danger {
+      border-color: rgba(239, 68, 68, 0.3) !important;
+    }
+
+    /* Danger Zone Live Count Badges */
+    .danger-count-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: var(--bg3);
+      color: var(--tx2);
+      border: 1px solid var(--bd);
+      transition: var(--trans);
+    }
+    html.light .danger-count-badge {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: var(--bd);
+    }
+
+    /* Analytics Metric Trend Pills */
+    .stat-trend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-top: 8px;
+      background: var(--bg3);
+      color: var(--tx3);
+      border: 1px solid var(--bd);
+      width: fit-content;
+      transition: var(--trans);
+    }
+    .stat-trend-pill.positive {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.28);
+    }
+    .stat-trend-pill.negative {
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--red);
+      border-color: rgba(239, 68, 68, 0.28);
+    }
+    .stat-trend-pill.neutral {
+      background: var(--bg3);
+      color: var(--tx2);
+      border-color: var(--bd);
     }
     
 
@@ -1881,4 +1955,473 @@
       transform: translateX(4px);
       filter: brightness(1.2);
       cursor: pointer;
+    }
+
+    /* ==========================================================================
+       FIGMA-STYLE DASHBOARD METRIC HERO CARDS
+       ========================================================================== */
+    .figma-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (max-width: 1100px) {
+      .figma-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .figma-metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .figma-stat-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+      transition: var(--trans);
+      overflow: hidden;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    .figma-stat-card:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .figma-stat-card.compact {
+      min-height: 94px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .figma-stat-card.compact:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .figma-stat-card.compact .figma-stat-top {
+      margin-bottom: 8px;
+    }
+    .figma-stat-card.compact .figma-stat-title {
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0.8;
+      letter-spacing: 0.03em;
+    }
+    .figma-stat-card.compact .figma-icon-pill {
+      width: 26px;
+      height: 26px;
+    }
+    .figma-stat-card.compact .figma-icon-pill svg {
+      width: 13px;
+      height: 13px;
+    }
+    .figma-stat-card.compact .figma-stat-val {
+      font-size: clamp(17px, 1.4vw, 21px);
+      font-weight: 800;
+    }
+    .figma-stat-card.compact .figma-trend-badge {
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      border: none !important;
+    }
+
+    /* Themed icon pills for compact cards */
+    .figma-icon-pill.icon-purple {
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--purple);
+    }
+    .figma-icon-pill.icon-blue {
+      background: rgba(92, 156, 252, 0.2);
+      color: var(--blue);
+    }
+    .figma-icon-pill.icon-amber {
+      background: rgba(246, 184, 70, 0.2);
+      color: var(--amber);
+    }
+    .figma-icon-pill.icon-slate {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--tx2);
+    }
+    html.light .figma-icon-pill.icon-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #9333ea;
+    }
+    html.light .figma-icon-pill.icon-blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: #2563eb;
+    }
+    html.light .figma-icon-pill.icon-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #d97706;
+    }
+    html.light .figma-icon-pill.icon-slate {
+      background: rgba(0, 0, 0, 0.05);
+      color: #4b5563;
+    }
+
+    .figma-companion-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 1100px) {
+      .figma-companion-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 700px) {
+      .figma-companion-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .figma-companion-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Accent Blue Card (Figma Style) */
+    .figma-stat-card.accent-blue {
+      background: linear-gradient(135deg, #1d72fe 0%, #0052cc 100%);
+      color: #ffffff;
+      border: none !important;
+    }
+
+    /* Accent Emerald Card */
+    .figma-stat-card.accent-emerald {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      border: none !important;
+    }
+
+    /* Dark Slate Glass Card (Figma Style) */
+    .figma-stat-card.dark-slate {
+      background: #000000 !important;
+      backdrop-filter: blur(12px);
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--tx);
+    }
+    .figma-stat-card.dark-slate:hover {
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Light Theme Overrides (Completely Flat & Borderless) */
+    html.light .figma-stat-card {
+      box-shadow: none !important;
+      border: none !important;
+    }
+    html.light .figma-stat-card:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+    html.light .figma-stat-card.dark-slate {
+      background: #ffffff !important;
+      border: none !important;
+      color: #111827;
+      box-shadow: none !important;
+    }
+    html.light .figma-stat-card.dark-slate:hover {
+      border: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Card Top Section: Title + Circular Icon Pill */
+    .figma-stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .figma-stat-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      opacity: 0.85;
+      text-transform: capitalize;
+    }
+
+    .figma-icon-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      flex-shrink: 0;
+      transition: var(--trans);
+      border: none !important;
+    }
+    .figma-icon-pill svg {
+      display: block;
+      width: 16px;
+      height: 16px;
+      color: inherit;
+    }
+    .figma-stat-card:hover .figma-icon-pill {
+      transform: none !important;
+    }
+    .figma-stat-card.accent-blue .figma-icon-pill {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+    .figma-stat-card.accent-emerald .figma-icon-pill {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+    .figma-stat-card.dark-slate .figma-icon-pill.icon-emerald {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+    .figma-stat-card.dark-slate .figma-icon-pill.icon-red {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+    html.light .figma-stat-card.dark-slate .figma-icon-pill {
+      background: rgba(0, 0, 0, 0.06);
+      color: #374151;
+    }
+
+    /* Card Bottom Section: Value + Trend Badge */
+    .figma-stat-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .figma-stat-val {
+      font-size: clamp(24px, 2.2vw, 30px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .figma-trend-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+      border: none !important;
+    }
+
+    .figma-stat-card.dark-slate .figma-trend-badge {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--tx2);
+      border: none !important;
+    }
+    .figma-stat-card.dark-slate .figma-trend-badge.positive {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      border: none !important;
+    }
+    .figma-stat-card.dark-slate .figma-trend-badge.negative {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red);
+      border: none !important;
+    }
+    html.light .figma-stat-card.dark-slate .figma-trend-badge {
+      background: rgba(0, 0, 0, 0.05);
+      color: #4b5563;
+      border: none !important;
+    }
+
+    .figma-companion-grid {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    }
+    .figma-sub-card {
+      padding: 14px 16px !important;
+      border-radius: 14px !important;
+      background: #000000 !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    html.light .figma-sub-card {
+      background: #ffffff !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ==========================================================================
+       PIN VERIFICATION MODAL & KEYPAD POLISH
+       ========================================================================== */
+    #pcOverlay .card {
+      max-width: 380px;
+      width: 100%;
+      border-radius: 20px !important;
+      padding: 36px 32px !important;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    #pc-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: var(--tx);
+    }
+
+    #pc-desc {
+      font-size: 14px;
+      color: var(--tx2);
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+
+    .pdots {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .pdots span {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--bd3);
+      background: transparent;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+    }
+
+    .pdots span.on {
+      background: var(--green);
+      border-color: var(--green);
+      transform: scale(1.18);
+      box-shadow: 0 0 12px rgba(5, 213, 129, 0.4);
+    }
+
+    .pk {
+      height: 52px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg3);
+      border: 1px solid var(--bd2);
+      color: var(--tx);
+      cursor: pointer;
+      user-select: none;
+      transition: var(--trans-fast);
+      padding: 0;
+    }
+
+    .pk:hover {
+      background: var(--bg4);
+      border-color: var(--bd3);
+      transform: translateY(-1px);
+    }
+
+    .pk:active {
+      transform: scale(0.96);
+    }
+
+    #pclr {
+      font-size: 16px;
+      color: var(--tx2);
+    }
+
+    #pcok {
+      background: var(--green) !important;
+      color: #000000 !important;
+      border: none !important;
+      font-weight: 800;
+    }
+
+    #pcok:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    #pccancel {
+      background: transparent !important;
+      border: none !important;
+      color: var(--tx3) !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: var(--trans-fast);
+    }
+
+    #pccancel:hover {
+      color: var(--tx) !important;
+    }
+
+    /* Light Mode PIN Modal Styles */
+    html.light #pc-title {
+      color: #0C0A09 !important;
+    }
+
+    html.light #pc-desc {
+      color: #52525B !important;
+    }
+
+    html.light .pdots span {
+      border-color: rgba(0, 0, 0, 0.18) !important;
+    }
+
+    html.light .pdots span.on {
+      background: #05D581 !important;
+      border-color: #05D581 !important;
+      box-shadow: 0 0 10px rgba(5, 213, 129, 0.35) !important;
+    }
+
+    html.light .pk {
+      background: #F4F4F5 !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #0C0A09 !important;
+    }
+
+    html.light .pk:hover {
+      background: #E4E4E7 !important;
+      border-color: rgba(0, 0, 0, 0.16) !important;
+    }
+
+    html.light #pclr {
+      color: #71717A !important;
+    }
+
+    html.light #pcok {
+      background: #05D581 !important;
+      color: #ffffff !important;
+    }
+
+    html.light #pccancel {
+      color: #71717A !important;
+    }
+
+    html.light #pccancel:hover {
+      color: #0C0A09 !important;
     }

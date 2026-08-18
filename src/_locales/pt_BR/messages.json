@@ -3056,5 +3056,95 @@
   },
   "tracked": {
     "message": "Rastreado"
+  },
+  "langAuto": {
+    "message": "Padrão do Sistema"
+  },
+  "lockTimerExtend": {
+    "message": "Bloquear Extensão do Temporizador (+5m)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "Exigir PIN para estender uma sessão de foco."
+  },
+  "lockRulesMod": {
+    "message": "Bloquear Criação/Exclusão de Regras"
+  },
+  "lockRulesModDesc": {
+    "message": "Exigir PIN para adicionar, editar ou excluir regras de bloqueio."
+  },
+  "lockSettingsPage": {
+    "message": "Bloquear Configurações e Limites"
+  },
+  "lockSettingsPageDesc": {
+    "message": "Exigir PIN para alterar limites diários, pausas de emergência e configurações da extensão."
+  },
+  "lockAnalytics": {
+    "message": "Bloquear Aba de Análises"
+  },
+  "lockAnalyticsDesc": {
+    "message": "Exigir PIN para visualizar análises detalhadas de navegação e detalhamento de uso de sites."
+  },
+  "lockFocusScheds": {
+    "message": "Bloquear Agendamentos de Foco"
+  },
+  "clearAllData": {
+    "message": "Limpar todos os dados rastreados"
+  },
+  "clearAllDataDesc": {
+    "message": "Redefinir registros de tempo diários, tendências e lista de principais sites."
+  },
+  "btnClearData": {
+    "message": "Limpar Dados"
+  },
+  "clearFocusHistory": {
+    "message": "Limpar Histórico de Foco"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Excluir todos os registros do histórico de sessões de foco."
+  },
+  "btnClearFocus": {
+    "message": "Limpar Histórico"
+  },
+  "noSitesTracked": {
+    "message": "Nenhum site rastreado para este período."
+  },
+  "allSites": {
+    "message": "Todos os Sites"
+  },
+  "cat": {
+    "message": "Categoria"
+  },
+  "focus": {
+    "message": "Foco"
+  },
+  "pin4to6Digits": {
+    "message": "O PIN deve ter de 4 a 6 dígitos."
+  },
+  "statsReset": {
+    "message": "As estatísticas de rastreamento foram redefinidas."
+  },
+  "clearFocusConfirm": {
+    "message": "Tem certeza de que deseja limpar todo o histórico de foco?"
+  },
+  "dataRetentionSaved": {
+    "message": "Configurações de retenção de dados salvas."
+  },
+  "restoreFailed": {
+    "message": "Falha na restauração."
+  },
+  "importLogs": {
+    "message": "Importar Registros"
+  },
+  "deleteBackup": {
+    "message": "Excluir Backup"
+  },
+  "deletePreset": {
+    "message": "Excluir Predefinição"
+  },
+  "blockedMsg": {
+    "message": "Mantenha o Foco"
+  },
+  "quote": {
+    "message": "Foque em ser produtivo em vez de ocupado."
   }
 }

@@ -117,47 +117,168 @@
           <button id="ov-apply" class="vtab act" style="font-weight:800" data-i18n="apply">Apply</button>
         </div>
 
-        <div class="compact-grid" style="gap: 12px; margin-bottom: 12px;">
-          <div class="ac">
-            <div class="acv w" id="an-total">0m</div>
-            <div class="aclbl" data-i18n="total">Total</div>
-          </div>
-          <div class="ac">
-            <div class="acv g" id="an-prod">0m</div>
-            <div class="aclbl" data-i18n="catProductivity">Productivity</div>
-          </div>
-          <div class="ac">
-            <div class="acv a" id="an-lrn" style="color:var(--purple)">0m</div>
-            <div class="aclbl" data-i18n="catLearning">Learning</div>
-          </div>
-          <div class="ac">
-            <div class="acv r" id="an-dist">0m</div>
-            <div class="aclbl" data-i18n="catDistraction">Distraction</div>
-          </div>
-          <div class="ac">
-            <div class="acv b" id="an-comms">0m</div>
-            <div class="aclbl" data-i18n="catCommunication">Communication</div>
+        <!-- Figma-Style Hero 4-Card Metric Grid -->
+        <div class="figma-metrics-grid" style="margin-bottom: 16px;">
+          <!-- Card 1: Total Screen Time (Accent Blue) -->
+          <div class="figma-stat-card accent-blue">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="total">Total Screen Time</span>
+              <div class="figma-icon-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-total">0m</div>
+              <div class="figma-trend-badge" id="trend-total">
+                <span class="trend-icon">↑</span>
+                <span class="trend-text">Today</span>
+              </div>
+            </div>
           </div>
 
-          <div class="ac">
-            <div class="acv w" id="an-bs">0d</div>
-            <div class="aclbl" data-i18n="bestStreak">Best streak</div>
+          <!-- Card 2: Productivity (Dark Slate) -->
+          <div class="figma-stat-card dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="catProductivity">Productivity</span>
+              <div class="figma-icon-pill icon-emerald">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-prod" style="color:var(--green);">0m</div>
+              <div class="figma-trend-badge positive" id="trend-prod">
+                <span class="trend-icon">↑</span>
+                <span class="trend-text">0%</span>
+              </div>
+            </div>
           </div>
-          <div class="ac">
-            <div class="acv w" id="an-bd">—</div>
-            <div class="aclbl" data-i18n="bestDay">Best day</div>
+
+          <!-- Card 3: Distraction (Dark Slate) -->
+          <div class="figma-stat-card dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="catDistraction">Distraction</span>
+              <div class="figma-icon-pill icon-red">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-dist" style="color:var(--red);">0m</div>
+              <div class="figma-trend-badge neutral" id="trend-dist">
+                <span class="trend-icon">↓</span>
+                <span class="trend-text">0%</span>
+              </div>
+            </div>
           </div>
-          <div class="ac">
-            <div class="acv w" id="at-total">0h</div>
-            <div class="aclbl" data-i18n="allTimeTotal">All-time total</div>
+
+          <!-- Card 4: Best Streak (Accent Emerald) -->
+          <div class="figma-stat-card accent-emerald">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="bestStreak">Best Streak</span>
+              <div class="figma-icon-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-bs">0d</div>
+              <div class="figma-trend-badge" id="trend-streak">
+                <span class="trend-icon">🔥</span>
+                <span class="trend-text">Record</span>
+              </div>
+            </div>
           </div>
-          <div class="ac">
-            <div class="acv w" id="at-daily-avg">0m</div>
-            <div class="aclbl" data-i18n="dailyAverage">Daily average</div>
+        </div>
+
+        <!-- Companion Secondary Metrics Row (Figma Compact Cards) -->
+        <div class="figma-companion-grid">
+          <!-- Card 1: Learning (Purple Icon Pill) -->
+          <div class="figma-stat-card compact dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="catLearning">Learning</span>
+              <div class="figma-icon-pill icon-purple">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-lrn" style="color:var(--purple)">0m</div>
+              <div class="figma-trend-badge" id="trend-lrn">
+                <span class="trend-icon">↑</span>
+                <span class="trend-text">0%</span>
+              </div>
+            </div>
           </div>
-          <div class="ac">
-            <div class="acv w" id="at-days">0</div>
-            <div class="aclbl" data-i18n="daysTracked">Days tracked</div>
+
+          <!-- Card 2: Communication (Blue Icon Pill) -->
+          <div class="figma-stat-card compact dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="catCommunication">Communication</span>
+              <div class="figma-icon-pill icon-blue">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-comms" style="color:var(--blue)">0m</div>
+              <div class="figma-trend-badge" id="trend-comms">
+                <span class="trend-icon">↑</span>
+                <span class="trend-text">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Best Day (Amber Icon Pill) -->
+          <div class="figma-stat-card compact dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="bestDay">Best Day</span>
+              <div class="figma-icon-pill icon-amber">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="an-bd">—</div>
+              <div class="figma-trend-badge">
+                <span class="trend-icon" style="display:inline-flex; align-items:center;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="#f59e0b" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </span>
+                <span class="trend-text">Peak</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Daily Average (Slate Icon Pill) -->
+          <div class="figma-stat-card compact dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="dailyAverage">Daily Average</span>
+              <div class="figma-icon-pill icon-slate">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="at-daily-avg">0m</div>
+              <div class="figma-trend-badge" id="trend-avg">
+                <span class="trend-icon" style="display:inline-flex; align-items:center;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </span>
+                <span class="trend-text">Pace</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: All-Time Total (Slate Icon Pill) -->
+          <div class="figma-stat-card compact dark-slate">
+            <div class="figma-stat-top">
+              <span class="figma-stat-title" data-i18n="allTimeTotal">All-Time Total</span>
+              <div class="figma-icon-pill icon-slate">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+            </div>
+            <div class="figma-stat-bottom">
+              <div class="figma-stat-val" id="at-total">0h</div>
+              <div class="figma-trend-badge" id="at-days-sub">
+                <span class="trend-icon" style="display:inline-flex; align-items:center;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </span>
+                <span class="trend-text"><span id="at-days">0</span> days</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -887,23 +1008,25 @@
 
             <!-- Merged Access Control & Safety Card -->
             <div class="card">
-              <div class="ctit"><span data-icon="lock" data-icon-size="16" style="margin-right:8px; vertical-align:middle; color:var(--tx3);"></span><span data-i18n="accessControlSafety">Access Control & Safety</span></div>
-
-              <div style="margin-bottom:12px; padding:16px; background:transparent; border-radius:8px; border:1px solid var(--bd);">
-                <div id="pin-status-wrapper" style="width:100%;">
-                  <div class="tlbl" style="margin:0; display:flex; align-items:center;"><span data-i18n="pinProtectionStatus">PIN Protection Status: </span><span id="pin-status-badge"
-                    style="margin-left:8px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:transparent; border:1px solid var(--bd); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><span data-icon="lock-sm" data-icon-size="12"></span><span data-i18n="notSet">Not Set</span></span></div>
+              <div class="ctit" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+                <div style="display:flex; align-items:center;">
+                  <span data-icon="lock" data-icon-size="16" style="margin-right:8px; vertical-align:middle; color:var(--tx3);"></span>
+                  <span data-i18n="accessControlSafety">Access Control & Safety</span>
+                </div>
+                <div id="pin-status-wrapper">
+                  <span id="pin-status-badge"
+                    style="padding:4px 10px; border-radius:99px; font-size:12px; font-weight:800; background:transparent; border:1px solid var(--bd); color:var(--tx2); display: inline-flex; align-items: center; gap: 4px;"><span data-icon="lock-sm" data-icon-size="12"></span><span data-i18n="notSet">Not Set</span></span>
                 </div>
               </div>
 
-              <div id="pin-setup-box" class="ar" style="margin-top:12px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <div id="pin-setup-box" class="ar" style="margin-top:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                 <input type="password" id="pin1" class="inp num" maxlength="6" data-i18n-placeholder="set6DigitPin"
                   style="max-width:180px" aria-label="Set 6-digit PIN" />
                 <input type="password" id="pin2" class="inp num" maxlength="6" data-i18n-placeholder="confirm6DigitPin"
                   style="max-width:180px" aria-label="Confirm 6-digit PIN" />
                 <button class="bp" id="btn-pin" data-i18n="savePin">Save PIN</button>
               </div>
-              <div id="pin-manage-box" class="ar" style="margin-top:12px; display:none; gap:12px; align-items:center;">
+              <div id="pin-manage-box" class="ar" style="margin-top:16px; display:none; gap:12px; align-items:center;">
                 <button class="bs" id="btn-change-pin" style="padding: 6px 14px; font-size: 13px;" data-i18n="changePin">Change PIN</button>
                 <button class="bs-danger" id="btn-remove-pin" style="padding: 6px 14px; font-size: 13px;" data-i18n="removePin">Remove PIN</button>
               </div>
@@ -911,9 +1034,9 @@
               <div id="pin-msg" style="font-size:14px;font-weight:700;margin-top:8px; margin-bottom:8px;"></div>
 
               <div id="granular-locks"
-                style="margin-top:12px; padding:20px; background:transparent; border-radius:8px; border:1px solid var(--bd); position:relative;">
+                style="margin-top:20px; padding-top:20px; border-top:1px solid var(--bd); position:relative;">
                 <div id="granular-locks-overlay"
-                  style="display:none; position:absolute; inset:0; border-radius:12px; background:var(--bg2); opacity:0.95; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+                  style="display:none; position:absolute; inset:-4px; border-radius:12px; background:var(--bg2); opacity:0.95; z-index:10; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
                   <div style="display:flex; justify-content:center; margin-bottom:8px;">
                     <span data-icon="lock" data-icon-size="32" style="color:var(--tx3);"></span>
                   </div>
@@ -976,25 +1099,37 @@
               <div class="ctit" style="color:var(--red)"><span data-icon="alert-triangle" data-icon-size="16" style="margin-right:8px; vertical-align:middle;"></span><span data-i18n="dangerZone">Danger Zone</span></div>
               <div class="trow" style="border-top:none;padding-top:0">
                 <div>
-                  <div class="tlbl" data-i18n="clearAllData">Clear all tracked data</div>
+                  <div class="tlbl" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <span data-i18n="clearAllData">Clear all tracked data</span>
+                    <span class="danger-count-badge" id="danger-count-data">0 days</span>
+                  </div>
                   <div class="tdesc" data-i18n="clearAllDataDesc">Reset daily time records, trends, and top sites list.</div>
                 </div><button class="bs-danger" id="btn-clr-data" data-i18n="btnClearData">Clear Data</button>
               </div>
               <div class="trow">
                 <div>
-                  <div class="tlbl" data-i18n="clearAllRules">Clear all rules</div>
+                  <div class="tlbl" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <span data-i18n="clearAllRules">Clear all rules</span>
+                    <span class="danger-count-badge" id="danger-count-rules">0 rules</span>
+                  </div>
                   <div class="tdesc" data-i18n="clearAllRulesDesc">Delete all custom site blocking rules and redirects.</div>
                 </div><button class="bs-danger" id="btn-clr-rules" data-i18n="btnClearRules">Clear Rules</button>
               </div>
               <div class="trow">
                 <div>
-                  <div class="tlbl" data-i18n="clearFocusHistory">Clear Focus History</div>
+                  <div class="tlbl" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <span data-i18n="clearFocusHistory">Clear Focus History</span>
+                    <span class="danger-count-badge" id="danger-count-focus">0 sessions</span>
+                  </div>
                   <div class="tdesc" data-i18n="clearFocusHistoryDesc">Delete all recorded focus session history records.</div>
                 </div><button class="bs-danger" id="btn-clr-focus" data-i18n="btnClearFocus">Clear Focus History</button>
               </div>
               <div class="trow" style="border-bottom:none;padding-bottom:0">
                 <div>
-                  <div class="tlbl" data-i18n="clearAllCategories">Clear all manual categories</div>
+                  <div class="tlbl" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <span data-i18n="clearAllCategories">Clear all manual categories</span>
+                    <span class="danger-count-badge" id="danger-count-cats">0 tags</span>
+                  </div>
                   <div class="tdesc" data-i18n="clearAllCategoriesDesc">Reset all custom website category tags back to default.</div>
                 </div><button class="bs-danger" id="btn-clr-cats" data-i18n="btnClearCategories">Clear Categories</button>
               </div>

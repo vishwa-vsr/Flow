@@ -3033,5 +3033,95 @@
   },
   "tracked": {
     "message": "추적됨"
+  },
+  "langAuto": {
+    "message": "시스템 기본값"
+  },
+  "lockTimerExtend": {
+    "message": "타이머 연장 잠금 (+5분)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "집중 세션을 연장하려면 PIN이 필요합니다."
+  },
+  "lockRulesMod": {
+    "message": "규칙 생성/삭제 잠금"
+  },
+  "lockRulesModDesc": {
+    "message": "차단 규칙을 추가, 수정 또는 삭제하려면 PIN이 필요합니다."
+  },
+  "lockSettingsPage": {
+    "message": "설정 및 제한 잠금"
+  },
+  "lockSettingsPageDesc": {
+    "message": "일일 제한, 긴급 휴식 및 확장 설정을 변경하려면 PIN이 필요합니다."
+  },
+  "lockAnalytics": {
+    "message": "분석 탭 잠금"
+  },
+  "lockAnalyticsDesc": {
+    "message": "상세한 브라우징 분석 및 웹사이트 사용 내역을 보려면 PIN이 필요합니다."
+  },
+  "lockFocusScheds": {
+    "message": "집중 일정 잠금"
+  },
+  "clearAllData": {
+    "message": "추적된 모든 데이터 삭제"
+  },
+  "clearAllDataDesc": {
+    "message": "일일 시간 기록, 트렌드 및 인기 사이트 목록을 초기화합니다."
+  },
+  "btnClearData": {
+    "message": "데이터 삭제"
+  },
+  "clearFocusHistory": {
+    "message": "집중 기록 삭제"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "기록된 모든 집중 세션 내역을 삭제합니다."
+  },
+  "btnClearFocus": {
+    "message": "기록 삭제"
+  },
+  "noSitesTracked": {
+    "message": "이 기간 동안 추적된 웹사이트가 없습니다."
+  },
+  "allSites": {
+    "message": "모든 사이트"
+  },
+  "cat": {
+    "message": "카테고리"
+  },
+  "focus": {
+    "message": "집중"
+  },
+  "pin4to6Digits": {
+    "message": "PIN은 4~6자리 숫자여야 합니다."
+  },
+  "statsReset": {
+    "message": "추적 통계가 초기화되었습니다."
+  },
+  "clearFocusConfirm": {
+    "message": "정말로 모든 집중 기록을 삭제하시겠습니까?"
+  },
+  "dataRetentionSaved": {
+    "message": "데이터 보존 설정이 저장되었습니다."
+  },
+  "restoreFailed": {
+    "message": "복원에 실패했습니다."
+  },
+  "importLogs": {
+    "message": "로그 가져오기"
+  },
+  "deleteBackup": {
+    "message": "백업 삭제"
+  },
+  "deletePreset": {
+    "message": "프리셋 삭제"
+  },
+  "blockedMsg": {
+    "message": "집중을 유지하세요"
+  },
+  "quote": {
+    "message": "바쁜 것보다 생산적인 것에 집중하세요."
   }
 }

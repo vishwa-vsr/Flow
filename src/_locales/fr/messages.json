@@ -3033,5 +3033,95 @@
   },
   "tracked": {
     "message": "Suivi"
+  },
+  "langAuto": {
+    "message": "Par défaut du système"
+  },
+  "lockTimerExtend": {
+    "message": "Verrouiller l'extension du minuteur (+5m)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "Exiger un code PIN pour prolonger une session de concentration."
+  },
+  "lockRulesMod": {
+    "message": "Verrouiller la création/suppression de règles"
+  },
+  "lockRulesModDesc": {
+    "message": "Exiger un code PIN pour ajouter, modifier ou supprimer des règles de blocage."
+  },
+  "lockSettingsPage": {
+    "message": "Verrouiller les paramètres et limites"
+  },
+  "lockSettingsPageDesc": {
+    "message": "Exiger un code PIN pour modifier les limites quotidiennes, les pauses d'urgence et les paramètres d'extension."
+  },
+  "lockAnalytics": {
+    "message": "Verrouiller l'onglet Statistiques"
+  },
+  "lockAnalyticsDesc": {
+    "message": "Exiger un code PIN pour afficher les statistiques de navigation détaillées et l'utilisation des sites web."
+  },
+  "lockFocusScheds": {
+    "message": "Verrouiller les plannings de concentration"
+  },
+  "clearAllData": {
+    "message": "Effacer toutes les données suivies"
+  },
+  "clearAllDataDesc": {
+    "message": "Réinitialiser les enregistrements de temps quotidiens, les tendances et la liste des meilleurs sites."
+  },
+  "btnClearData": {
+    "message": "Effacer les données"
+  },
+  "clearFocusHistory": {
+    "message": "Effacer l'historique de concentration"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Supprimer tous les enregistrements de l'historique des sessions de concentration."
+  },
+  "btnClearFocus": {
+    "message": "Effacer l'historique"
+  },
+  "noSitesTracked": {
+    "message": "Aucun site web suivi pour cette période."
+  },
+  "allSites": {
+    "message": "Tous les sites"
+  },
+  "cat": {
+    "message": "Catégorie"
+  },
+  "focus": {
+    "message": "Concentration"
+  },
+  "pin4to6Digits": {
+    "message": "Le code PIN doit comporter 4 à 6 chiffres."
+  },
+  "statsReset": {
+    "message": "Les statistiques de suivi ont été réinitialisées."
+  },
+  "clearFocusConfirm": {
+    "message": "Voulez-vous vraiment effacer tout l'historique de concentration ?"
+  },
+  "dataRetentionSaved": {
+    "message": "Paramètres de conservation des données enregistrés."
+  },
+  "restoreFailed": {
+    "message": "La restauration a échoué."
+  },
+  "importLogs": {
+    "message": "Importer les journaux"
+  },
+  "deleteBackup": {
+    "message": "Supprimer la sauvegarde"
+  },
+  "deletePreset": {
+    "message": "Supprimer le préréglage"
+  },
+  "blockedMsg": {
+    "message": "Restez concentré"
+  },
+  "quote": {
+    "message": "Concentrez-vous sur la productivité plutôt que sur l'occupation."
   }
 }

@@ -3082,5 +3082,95 @@
   },
   "tracked": {
     "message": "追跡済み"
+  },
+  "langAuto": {
+    "message": "システムデフォルト"
+  },
+  "lockTimerExtend": {
+    "message": "タイマー延長をロック (+5分)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "フォーカスセッションを延長するにはPINが必要です。"
+  },
+  "lockRulesMod": {
+    "message": "ルールの作成・削除をロック"
+  },
+  "lockRulesModDesc": {
+    "message": "ブロックルールを追加、編集、削除するにはPINが必要です。"
+  },
+  "lockSettingsPage": {
+    "message": "設定と制限をロック"
+  },
+  "lockSettingsPageDesc": {
+    "message": "デイリー制限、緊急休憩、拡張設定を変更するにはPINが必要です。"
+  },
+  "lockAnalytics": {
+    "message": "分析タブをロック"
+  },
+  "lockAnalyticsDesc": {
+    "message": "詳細な閲覧分析やウェブサイト使用内訳を表示するにはPINが必要です。"
+  },
+  "lockFocusScheds": {
+    "message": "フォーカススケジュールをロック"
+  },
+  "clearAllData": {
+    "message": "追跡されたすべてのデータを消去"
+  },
+  "clearAllDataDesc": {
+    "message": "毎日の時間記録、トレンド、上位サイトリストをリセットします。"
+  },
+  "btnClearData": {
+    "message": "データを消去"
+  },
+  "clearFocusHistory": {
+    "message": "フォーカス履歴を消去"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "記録されたすべてのフォーカスセッション履歴を削除します。"
+  },
+  "btnClearFocus": {
+    "message": "履歴を消去"
+  },
+  "noSitesTracked": {
+    "message": "この期間に追跡されたウェブサイトはありません。"
+  },
+  "allSites": {
+    "message": "すべてのサイト"
+  },
+  "cat": {
+    "message": "カテゴリー"
+  },
+  "focus": {
+    "message": "フォーカス"
+  },
+  "pin4to6Digits": {
+    "message": "PINは4〜6桁である必要があります。"
+  },
+  "statsReset": {
+    "message": "追跡統計情報がリセットされました。"
+  },
+  "clearFocusConfirm": {
+    "message": "フォーカス履歴をすべて消去してもよろしいですか？"
+  },
+  "dataRetentionSaved": {
+    "message": "データ保持設定が保存されました。"
+  },
+  "restoreFailed": {
+    "message": "復元に失敗しました。"
+  },
+  "importLogs": {
+    "message": "ログをインポート"
+  },
+  "deleteBackup": {
+    "message": "バックアップを削除"
+  },
+  "deletePreset": {
+    "message": "プリセットを削除"
+  },
+  "blockedMsg": {
+    "message": "集中を維持しましょう"
+  },
+  "quote": {
+    "message": "忙しさよりも生産性に集中しましょう。"
   }
 }

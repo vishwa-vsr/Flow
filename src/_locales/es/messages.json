@@ -3108,5 +3108,95 @@
   },
   "tracked": {
     "message": "Registrado"
+  },
+  "langAuto": {
+    "message": "Predeterminado del sistema"
+  },
+  "lockTimerExtend": {
+    "message": "Bloquear extensión de temporizador (+5m)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "Requerir PIN para extender una sesión de enfoque."
+  },
+  "lockRulesMod": {
+    "message": "Bloquear creación/eliminación de reglas"
+  },
+  "lockRulesModDesc": {
+    "message": "Requerir PIN para agregar, editar o eliminar reglas de bloqueo."
+  },
+  "lockSettingsPage": {
+    "message": "Bloquear configuración y límites"
+  },
+  "lockSettingsPageDesc": {
+    "message": "Requerir PIN para cambiar límites diarios, pausas de emergencia y configuración de extensiones."
+  },
+  "lockAnalytics": {
+    "message": "Bloquear pestaña de análisis"
+  },
+  "lockAnalyticsDesc": {
+    "message": "Requerir PIN para ver análisis detallados de navegación y desglose del uso de sitios web."
+  },
+  "lockFocusScheds": {
+    "message": "Bloquear horarios de enfoque"
+  },
+  "clearAllData": {
+    "message": "Borrar todos los datos registrados"
+  },
+  "clearAllDataDesc": {
+    "message": "Restablecer registros de tiempo diarios, tendencias y lista de sitios principales."
+  },
+  "btnClearData": {
+    "message": "Borrar datos"
+  },
+  "clearFocusHistory": {
+    "message": "Borrar historial de enfoque"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Eliminar todos los registros de historial de sesiones de enfoque."
+  },
+  "btnClearFocus": {
+    "message": "Borrar historial"
+  },
+  "noSitesTracked": {
+    "message": "No se registraron sitios web para este período."
+  },
+  "allSites": {
+    "message": "Todos los sitios"
+  },
+  "cat": {
+    "message": "Categoría"
+  },
+  "focus": {
+    "message": "Enfoque"
+  },
+  "pin4to6Digits": {
+    "message": "El PIN debe tener entre 4 y 6 dígitos."
+  },
+  "statsReset": {
+    "message": "Las estadísticas de seguimiento se han restablecido."
+  },
+  "clearFocusConfirm": {
+    "message": "¿Estás seguro de que deseas borrar todo el historial de enfoque?"
+  },
+  "dataRetentionSaved": {
+    "message": "Configuración de retención de datos guardada."
+  },
+  "restoreFailed": {
+    "message": "Error en la restauración."
+  },
+  "importLogs": {
+    "message": "Importar registros"
+  },
+  "deleteBackup": {
+    "message": "Eliminar copia de seguridad"
+  },
+  "deletePreset": {
+    "message": "Eliminar ajuste preestablecido"
+  },
+  "blockedMsg": {
+    "message": "Mantén el enfoque"
+  },
+  "quote": {
+    "message": "Concéntrate en ser productivo en lugar de estar ocupado."
   }
 }

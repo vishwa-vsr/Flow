@@ -5,16 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [10.1.0] - 2026-08-17
+## [10.1.0] - 2026-08-18
+
+### Added
+- **Modern Borderless Card Design**: Completely redesigned all dashboard stat cards, analytics charts, and content sections with a clean, flat, borderless card surface.
+- **High-Contrast Light & Dark Themes**:
+  - **Light Mode**: Pure white cards elevated on a cool slate gray canvas for maximum readability.
+  - **Dark Mode**: Solid pure black cards resting on a refined dark charcoal canvas for a stealth aesthetic.
+- **Polished PIN Security Keypad**: Redesigned PIN verification with glowing dot indicators, tactile keypad buttons, and high-contrast styling across both themes.
+- **Crisp SVG Icons**: Replaced legacy emoji indicators with pixel-perfect scalable SVG icons across analytics metrics.
 
 ### Changed
-- **Borderless Floating Tab Navigation**: Removed outer box borders and rail containers from all tab groups across the extension (Main Navigation, Analytics sub-tabs, Date range selectors, Block list filters, and Site Manager tabs), giving tabs a modern, borderless floating appearance.
-- **50% Refined Card Corner Curves**: Reduced rounded corner curves across all cards, stat widgets, and modal containers by 50% for a sharper, more compact, and modern silhouette.
-- **Symmetrical Grid & Equalized Spacing**: Harmonized vertical spacing to match horizontal grid gaps across the entire dashboard, including the Analytics stat cards grid, Heatmap Consistency cards, Site Manager Tweaks grid, and Settings Access Control cards.
-- **Transparent Action Buttons & Rows**: Updated Site Manager rule rows, site action icon buttons (Shield and Delete), and search input bars to use transparent backgrounds with crisp border outlines.
+- **Floating Tab Navigation**: Cleaned up navigation and filter tabs with borderless floating pill selectors across all extension views.
+- **Calm, Static Cursor Experience**: Removed hover bouncing and card lift animations for a completely flat, distraction-free interface.
+- **Theme-Consistent Modals & Popups**: Standardized all dashboard popups, add-rule dialogs, and settings panels with solid, high-contrast backgrounds in both Light and Dark modes.
 
 ### Removed
-- **Cinematic Theme**: Fully removed the Cinematic theme option, background glow layers, and particle animation scripts to keep the extension super fast, lightweight, and distraction-free.
+- **Cinematic Theme**: Fully removed the legacy glowing cinematic theme and background animations to keep the extension fast, lightweight, and focused.
 
 ## [10.0.9] - 2026-08-13
 

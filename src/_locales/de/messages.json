@@ -3058,5 +3058,95 @@
   },
   "tracked": {
     "message": "Erfasst"
+  },
+  "langAuto": {
+    "message": "Systemstandard"
+  },
+  "lockTimerExtend": {
+    "message": "Timer-Verlängerung sperren (+5m)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "PIN erforderlich, um eine Fokus-Sitzung zu verlängern."
+  },
+  "lockRulesMod": {
+    "message": "Regelerstellung/-löschung sperren"
+  },
+  "lockRulesModDesc": {
+    "message": "PIN erforderlich, um Blockierungsregeln hinzuzufügen, zu bearbeiten oder zu löschen."
+  },
+  "lockSettingsPage": {
+    "message": "Einstellungen & Limits sperren"
+  },
+  "lockSettingsPageDesc": {
+    "message": "PIN erforderlich, um Tageslimits, Notfallpausen und Erweiterungseinstellungen zu ändern."
+  },
+  "lockAnalytics": {
+    "message": "Analyse-Tab sperren"
+  },
+  "lockAnalyticsDesc": {
+    "message": "PIN erforderlich, um detaillierte Browser-Analysen und Website-Nutzungsstatistiken anzuzeigen."
+  },
+  "lockFocusScheds": {
+    "message": "Fokus-Zeitpläne sperren"
+  },
+  "clearAllData": {
+    "message": "Alle getrackten Daten löschen"
+  },
+  "clearAllDataDesc": {
+    "message": "Tägliche Zeitaufzeichnungen, Trends und Top-Websites zurücksetzen."
+  },
+  "btnClearData": {
+    "message": "Daten löschen"
+  },
+  "clearFocusHistory": {
+    "message": "Fokus-Verlauf löschen"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "Alle aufgezeichneten Fokus-Sitzungsverläufe löschen."
+  },
+  "btnClearFocus": {
+    "message": "Fokus-Verlauf löschen"
+  },
+  "noSitesTracked": {
+    "message": "Für diesen Zeitraum wurden keine Websites getrackt."
+  },
+  "allSites": {
+    "message": "Alle Websites"
+  },
+  "cat": {
+    "message": "Kategorie"
+  },
+  "focus": {
+    "message": "Fokus"
+  },
+  "pin4to6Digits": {
+    "message": "PIN muss 4 bis 6 Ziffern lang sein."
+  },
+  "statsReset": {
+    "message": "Tracking-Statistiken wurden zurückgesetzt."
+  },
+  "clearFocusConfirm": {
+    "message": "Möchten Sie wirklich den gesamten Fokus-Verlauf löschen?"
+  },
+  "dataRetentionSaved": {
+    "message": "Datenaufbewahrungseinstellungen gespeichert."
+  },
+  "restoreFailed": {
+    "message": "Wiederherstellung fehlgeschlagen."
+  },
+  "importLogs": {
+    "message": "Protokolle importieren"
+  },
+  "deleteBackup": {
+    "message": "Backup löschen"
+  },
+  "deletePreset": {
+    "message": "Voreinstellung löschen"
+  },
+  "blockedMsg": {
+    "message": "Fokussiert bleiben"
+  },
+  "quote": {
+    "message": "Konzentriere dich darauf, produktiv zu sein, anstatt nur beschäftigt."
   }
 }

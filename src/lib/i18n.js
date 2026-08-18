@@ -131,7 +131,12 @@
     for (var i = 0; i < nodes.length; i++) {
       var key = nodes[i].getAttribute("data-i18n");
       if (key) {
-        nodes[i].textContent = root.t_(key);
+        var translated = root.t_(key);
+        if (translated && translated !== key) {
+          nodes[i].textContent = translated;
+        } else if (!nodes[i].textContent.trim()) {
+          nodes[i].textContent = translated || key;
+        }
       }
     }
 
@@ -140,7 +145,12 @@
     for (var j = 0; j < titleNodes.length; j++) {
       var titleKey = titleNodes[j].getAttribute("data-i18n-title");
       if (titleKey) {
-        titleNodes[j].title = root.t_(titleKey);
+        var translatedTitle = root.t_(titleKey);
+        if (translatedTitle && translatedTitle !== titleKey) {
+          titleNodes[j].title = translatedTitle;
+        } else if (!titleNodes[j].title) {
+          titleNodes[j].title = translatedTitle || titleKey;
+        }
       }
     }
 
@@ -149,7 +159,12 @@
     for (var k = 0; k < phNodes.length; k++) {
       var phKey = phNodes[k].getAttribute("data-i18n-placeholder");
       if (phKey) {
-        phNodes[k].placeholder = root.t_(phKey);
+        var translatedPh = root.t_(phKey);
+        if (translatedPh && translatedPh !== phKey) {
+          phNodes[k].placeholder = translatedPh;
+        } else if (!phNodes[k].placeholder) {
+          phNodes[k].placeholder = translatedPh || phKey;
+        }
       }
     }
   };

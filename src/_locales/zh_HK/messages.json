@@ -3109,5 +3109,95 @@
   },
   "tracked": {
     "message": "已追蹤"
+  },
+  "langAuto": {
+    "message": "系統預設"
+  },
+  "lockTimerExtend": {
+    "message": "鎖定計時器延長 (+5分鐘)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "延長專注時段需要輸入 PIN 碼。"
+  },
+  "lockRulesMod": {
+    "message": "鎖定規則建立/刪除"
+  },
+  "lockRulesModDesc": {
+    "message": "新增、編輯或刪除封鎖規則需要輸入 PIN 碼。"
+  },
+  "lockSettingsPage": {
+    "message": "鎖定設定與限制"
+  },
+  "lockSettingsPageDesc": {
+    "message": "修改每日限制、緊急休息及擴充設定需要輸入 PIN 碼。"
+  },
+  "lockAnalytics": {
+    "message": "鎖定分析分頁"
+  },
+  "lockAnalyticsDesc": {
+    "message": "查看詳細的瀏覽分析及網站使用明細需要輸入 PIN 碼。"
+  },
+  "lockFocusScheds": {
+    "message": "鎖定專注時間表"
+  },
+  "clearAllData": {
+    "message": "清除所有追蹤資料"
+  },
+  "clearAllDataDesc": {
+    "message": "重設每日時間記錄、趨勢及熱門網站列表。"
+  },
+  "btnClearData": {
+    "message": "清除資料"
+  },
+  "clearFocusHistory": {
+    "message": "清除專注歷史記錄"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "刪除所有已記錄的專注時段歷史。"
+  },
+  "btnClearFocus": {
+    "message": "清除歷史"
+  },
+  "noSitesTracked": {
+    "message": "該時段未有追蹤到任何網站。"
+  },
+  "allSites": {
+    "message": "所有網站"
+  },
+  "cat": {
+    "message": "分類"
+  },
+  "focus": {
+    "message": "專注"
+  },
+  "pin4to6Digits": {
+    "message": "PIN 碼必須為 4 至 6 位數字。"
+  },
+  "statsReset": {
+    "message": "追蹤統計數據已重設。"
+  },
+  "clearFocusConfirm": {
+    "message": "您確定要清除所有專注歷史記錄嗎？"
+  },
+  "dataRetentionSaved": {
+    "message": "資料保留設定已儲存。"
+  },
+  "restoreFailed": {
+    "message": "還原失敗。"
+  },
+  "importLogs": {
+    "message": "匯入記錄"
+  },
+  "deleteBackup": {
+    "message": "刪除備份"
+  },
+  "deletePreset": {
+    "message": "刪除預設"
+  },
+  "blockedMsg": {
+    "message": "保持專注"
+  },
+  "quote": {
+    "message": "專注於保持高效，而非單純忙碌。"
   }
 }

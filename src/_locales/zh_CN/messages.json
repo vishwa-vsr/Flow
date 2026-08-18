@@ -3109,5 +3109,95 @@
   },
   "tracked": {
     "message": "已追踪"
+  },
+  "langAuto": {
+    "message": "系统默认"
+  },
+  "lockTimerExtend": {
+    "message": "锁定计时器延长 (+5分钟)"
+  },
+  "lockTimerExtendDesc": {
+    "message": "延长专注时段需要输入 PIN 码。"
+  },
+  "lockRulesMod": {
+    "message": "锁定规则创建/删除"
+  },
+  "lockRulesModDesc": {
+    "message": "添加、编辑或删除屏蔽规则需要输入 PIN 码。"
+  },
+  "lockSettingsPage": {
+    "message": "锁定设置与限额"
+  },
+  "lockSettingsPageDesc": {
+    "message": "修改每日限额、紧急休息和扩展设置需要输入 PIN 码。"
+  },
+  "lockAnalytics": {
+    "message": "锁定分析标签页"
+  },
+  "lockAnalyticsDesc": {
+    "message": "查看详细的浏览分析和网站使用明细需要输入 PIN 码。"
+  },
+  "lockFocusScheds": {
+    "message": "锁定专注计划"
+  },
+  "clearAllData": {
+    "message": "清除所有追踪数据"
+  },
+  "clearAllDataDesc": {
+    "message": "重置每日时间记录、趋势和热门网站列表。"
+  },
+  "btnClearData": {
+    "message": "清除数据"
+  },
+  "clearFocusHistory": {
+    "message": "清除专注历史记录"
+  },
+  "clearFocusHistoryDesc": {
+    "message": "删除所有已记录的专注时段历史。"
+  },
+  "btnClearFocus": {
+    "message": "清除历史"
+  },
+  "noSitesTracked": {
+    "message": "该时段没有追踪到任何网站。"
+  },
+  "allSites": {
+    "message": "所有网站"
+  },
+  "cat": {
+    "message": "分类"
+  },
+  "focus": {
+    "message": "专注"
+  },
+  "pin4to6Digits": {
+    "message": "PIN 码必须为 4 到 6 位数字。"
+  },
+  "statsReset": {
+    "message": "追踪统计数据已重置。"
+  },
+  "clearFocusConfirm": {
+    "message": "您确定要清除所有专注历史记录吗？"
+  },
+  "dataRetentionSaved": {
+    "message": "数据保留设置已保存。"
+  },
+  "restoreFailed": {
+    "message": "恢复失败。"
+  },
+  "importLogs": {
+    "message": "导入日志"
+  },
+  "deleteBackup": {
+    "message": "删除备份"
+  },
+  "deletePreset": {
+    "message": "删除预设"
+  },
+  "blockedMsg": {
+    "message": "保持专注"
+  },
+  "quote": {
+    "message": "专注于保持高效，而非单纯忙碌。"
   }
 }

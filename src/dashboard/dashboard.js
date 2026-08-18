@@ -2907,6 +2907,49 @@ async function renderOverview() {
     const uncSecs = i.uncategorized || 0;
     const totalSecs = prodSecs + learnSecs + commSecs + distractSecs + uncSecs;
 
+    // Update Figma Trend Badges & Companion Pills
+    if (totalSecs > 0) {
+        const prodPct = Math.round((prodSecs / totalSecs) * 100);
+        const lrnPct = Math.round((learnSecs / totalSecs) * 100);
+        const distPct = Math.round((distractSecs / totalSecs) * 100);
+        const commPct = Math.round((commSecs / totalSecs) * 100);
+
+        if ($("trend-total")) {
+            $("trend-total").innerHTML = `<span class="trend-icon">↑</span><span class="trend-text">${totalSecs > 3600 ? "Active" : "Today"}</span>`;
+        }
+        if ($("trend-prod")) {
+            $("trend-prod").innerHTML = `<span class="trend-icon">↑</span><span class="trend-text">+${prodPct}%</span>`;
+            $("trend-prod").className = `figma-trend-badge ${prodPct >= 40 ? "positive" : ""}`;
+        }
+        if ($("trend-lrn")) {
+            $("trend-lrn").innerHTML = `<span class="trend-icon">↑</span><span class="trend-text">${lrnPct}%</span>`;
+            $("trend-lrn").className = `figma-trend-badge ${lrnPct > 0 ? "positive" : ""}`;
+        }
+        if ($("trend-dist")) {
+            $("trend-dist").innerHTML = `<span class="trend-icon">${distPct > 25 ? "↑" : "↓"}</span><span class="trend-text">${distPct}%</span>`;
+            $("trend-dist").className = `figma-trend-badge ${distPct > 35 ? "negative" : "neutral"}`;
+        }
+        if ($("trend-comms")) {
+            $("trend-comms").innerHTML = `<span class="trend-icon">↑</span><span class="trend-text">${commPct}%</span>`;
+            $("trend-comms").className = "figma-trend-badge";
+        }
+    } else {
+        if ($("trend-total")) $("trend-total").innerHTML = `<span class="trend-icon">—</span><span class="trend-text">0m</span>`;
+        if ($("trend-prod")) $("trend-prod").innerHTML = `<span class="trend-icon">—</span><span class="trend-text">0%</span>`;
+        if ($("trend-lrn")) $("trend-lrn").innerHTML = `<span class="trend-icon">—</span><span class="trend-text">0%</span>`;
+        if ($("trend-dist")) $("trend-dist").innerHTML = `<span class="trend-icon">—</span><span class="trend-text">0%</span>`;
+        if ($("trend-comms")) $("trend-comms").innerHTML = `<span class="trend-icon">—</span><span class="trend-text">0%</span>`;
+    }
+
+    if ($("trend-streak")) {
+        const streakCount = d.bestStreak || 0;
+        $("trend-streak").innerHTML = `<span class="trend-icon">🔥</span><span class="trend-text">${streakCount > 0 ? streakCount + "d record" : "Record"}</span>`;
+    }
+    if ($("trend-avg")) {
+        const iconSvg = window.FlowIcons ? window.FlowIcons.get("analytics", { size: 11 }) : '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>';
+        $("trend-avg").innerHTML = `<span class="trend-icon" style="display:inline-flex; align-items:center;">${iconSvg}</span><span class="trend-text">Pace</span>`;
+    }
+
     // Update donut center label
     if ($("ov-donut-total-lbl")) {
         $("ov-donut-total-lbl").textContent = fmt(totalSecs);
@@ -3979,9 +4022,44 @@ async function updateStorageUsageIndicator() {
     }
 }
 
+async function updateDangerCounts() {
+    try {
+        const totalDaysResp = await msg("STATS_GET_TOTAL_DAYS");
+        const days = totalDaysResp?.totalDays || 0;
+        if ($("danger-count-data")) {
+            $("danger-count-data").textContent = days === 1 ? "1 day recorded" : `${days} days recorded`;
+        }
+
+        const syncRes = await gSync(["settings"]);
+        const s = syncRes && syncRes.settings ? syncRes.settings : {};
+        const blockCount = (s.blockRules || []).length;
+        const allowCount = (s.allowRules || []).length;
+        const totalRules = blockCount + allowCount;
+        if ($("danger-count-rules")) {
+            $("danger-count-rules").textContent = totalRules === 1 ? "1 active rule" : `${totalRules} active rules`;
+        }
+
+        const locRes = await gLocal(["focusHistory", "customCategories"]);
+        const fHist = locRes && locRes.focusHistory ? locRes.focusHistory : [];
+        if ($("danger-count-focus")) {
+            const count = Array.isArray(fHist) ? fHist.length : 0;
+            $("danger-count-focus").textContent = count === 1 ? "1 session" : `${count} sessions`;
+        }
+
+        const customCats = locRes && locRes.customCategories ? locRes.customCategories : {};
+        const catKeys = Object.keys(customCats);
+        if ($("danger-count-cats")) {
+            $("danger-count-cats").textContent = catKeys.length === 1 ? "1 custom tag" : `${catKeys.length} custom tags`;
+        }
+    } catch (e) {
+        console.warn("Failed to update danger counts:", e);
+    }
+}
+
 // Bug #5 fix: accept pre-loaded settings to avoid double gSync when called alongside loadSettings
 async function loadExtendedSettings(preloadedSettings) {
     updateStorageUsageIndicator();
+    updateDangerCounts();
     var e = preloadedSettings || (await gSync(["settings"])).settings || {};
     if ($("tog-fun") && ($("tog-fun").checked = !1 !== e.funnyBlocked), 
         $("tab-limit-input") && ($("tab-limit-input").value = e.tabLimit || 0), 
@@ -4363,10 +4441,11 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
             settings: e
         }), toast(t_("pinRemoved"), "ok"), loadExtendedSettings()
     }
-}), $("btn-rst-stats") && $("btn-rst-stats").addEventListener("click", async () => {
+}), ($("btn-clr-data") || $("btn-rst-stats")) && ($("btn-clr-data") || $("btn-rst-stats")).addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("resetAllStats"), t_("resetStatsConfirm"), { isDestructive: true, confirmText: t_("resetConfirmBtn") })) {
         await msg("CLEAR_ALL_DATA");
         toast(t_("statsReset"), "ok");
+        updateDangerCounts();
         setTimeout(() => location.reload(), 800);
     }
 }), $("btn-clr-rules") && $("btn-clr-rules").addEventListener("click", async () => {
@@ -4374,16 +4453,16 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
         var e = (await gSync(["settings"])).settings || {};
         e.blockRules = [], e.allowRules = [], await sSync({
             settings: e
-        }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), toast(t_("rulesCleared"), "ok")
+        }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), updateDangerCounts(), toast(t_("rulesCleared"), "ok")
     }
 }), $("btn-clr-cats") && $("btn-clr-cats").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearCategories"), t_("clearCategoriesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
         await sLocal({ customCategories: {} });
-        siteCats = {}, renderCategories(), loadAnalytics(), toast(t_("categoriesCleared"), "ok")
+        siteCats = {}, renderCategories(), loadAnalytics(), updateDangerCounts(), toast(t_("categoriesCleared"), "ok")
     }
 }), $("btn-clr-focus") && $("btn-clr-focus").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearFocusHistory"), t_("clearFocusConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
-        await msg("CLEAR_FOCUS_HISTORY"), loadFocusHistory(), toast(t_("cleared"), "ok")
+        await msg("CLEAR_FOCUS_HISTORY"), loadFocusHistory(), updateDangerCounts(), toast(t_("cleared"), "ok")
     }
 });
 

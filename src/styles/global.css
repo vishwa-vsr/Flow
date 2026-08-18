@@ -10,13 +10,13 @@
   --purple:#A855F7;--purple-bg:rgba(168,85,247,.12);--purple-bd:rgba(168,85,247,.3);
 
   /* surface — refined dark */
-  --bg:#0E0E10;
-  --bg2:#161618;
-  --bg3:#1D1D20;
-  --bg4:#26262A;
-  --bd:rgba(255,255,255,0.06);
-  --bd2:rgba(255,255,255,0.10);
-  --bd3:rgba(255,255,255,0.18);
+  --bg:#0C0D11;
+  --bg2:#000000;
+  --bg3:#15161B;
+  --bg4:#1E2026;
+  --bd:rgba(255,255,255,0.05);
+  --bd2:rgba(255,255,255,0.08);
+  --bd3:rgba(255,255,255,0.15);
 
   /* text */
   --tx:#F4F4F5;
@@ -29,7 +29,7 @@
   --shadow-sm:0 4px 12px rgba(0,0,0,.35);
   --shadow-md:0 8px 24px rgba(0,0,0,.45);
   --shadow-lg:0 20px 56px rgba(0,0,0,.6);
-  --card-radius:9px;
+  --card-radius:16px;
   --btn-radius:8px;
   --trans:background .22s cubic-bezier(.4,0,.2,1), color .22s cubic-bezier(.4,0,.2,1), border-color .22s cubic-bezier(.4,0,.2,1), box-shadow .22s cubic-bezier(.4,0,.2,1), transform .22s cubic-bezier(.4,0,.2,1), opacity .22s cubic-bezier(.4,0,.2,1);
   --trans-fast:background .15s cubic-bezier(.4,0,.2,1), color .15s cubic-bezier(.4,0,.2,1), border-color .15s cubic-bezier(.4,0,.2,1), box-shadow .15s cubic-bezier(.4,0,.2,1), transform .15s cubic-bezier(.4,0,.2,1), opacity .15s cubic-bezier(.4,0,.2,1);
@@ -45,10 +45,10 @@
 }
 
 html.light{
-  --bg:#FAFAF9;
+  --bg:#F0F2F5;
   --bg2:#FFFFFF;
-  --bg3:#F4F4F5;
-  --bg4:#E7E5E4;
+  --bg3:#E4E7EC;
+  --bg4:#D8DCE3;
   --bd:rgba(0,0,0,0.06);
   --bd2:rgba(0,0,0,0.10);
   --bd3:rgba(0,0,0,0.20);
@@ -93,7 +93,12 @@ html.light .pb-badge-strict {
   color: #ffffff !important;
 }
 
-
+html.light .navbar {
+  background: rgba(240, 242, 245, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -104,16 +109,16 @@ body{
   transition:background .35s ease,color .35s ease;
 }
 
-/* card primitive — universal transparent card styling */
+/* card primitive — universal solid jet black card styling */
 .card,
 .focus-section,
 .ac,
 .at-card,
 .db-card {
-  background: transparent;
-  border: 1px solid var(--bd);
-  border-radius: var(--card-radius);
-  box-shadow: none;
+  background: #000000 !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
   position: relative;
   overflow: hidden;
   margin-bottom: 16px;
@@ -124,26 +129,30 @@ body{
 .ac:hover,
 .at-card:hover,
 .db-card:hover {
-  border-color: var(--bd2);
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 html.light .card,
 html.light .focus-section,
 html.light .ac,
 html.light .at-card,
 html.light .db-card {
-  background: transparent;
-  border: 1px solid var(--bd);
-  box-shadow: none;
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
 }
 html.light .card:hover,
 html.light .focus-section:hover,
 html.light .ac:hover,
 html.light .at-card:hover,
 html.light .db-card:hover {
-  border-color: var(--bd2);
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* modal dialogs & overlays - universal transparent card with border */
+/* modal dialogs & overlays - solid glass cards with border */
 .overlay .card,
 .overlay-card,
 .cat-edit-modal,
@@ -160,12 +169,19 @@ html.light .db-card:hover {
 #block-confirm-modal > div,
 #heatmap-config-modal .card,
 #pcOverlay .card {
-  background: transparent !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid var(--bd) !important;
+  background: var(--bg2) !important;
+  color: var(--tx) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--bd2) !important;
+  border-radius: 18px !important;
   box-shadow: var(--shadow-lg) !important;
 }
+
+html.light .overlay {
+  background: rgba(0, 0, 0, 0.28) !important;
+}
+
 html.light .overlay .card,
 html.light .overlay-card,
 html.light .cat-edit-modal,
@@ -182,10 +198,43 @@ html.light #add-preset-modal .card,
 html.light #block-confirm-modal > div,
 html.light #heatmap-config-modal .card,
 html.light #pcOverlay .card {
-  background: transparent !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid var(--bd) !important;
+  background: #ffffff !important;
+  color: #0C0A09 !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Light Theme Inner Modal Styling */
+html.light .overlay .inp,
+html.light .overlay .sel,
+html.light .overlay input.num {
+  background: #F4F4F5 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #0C0A09 !important;
+}
+
+html.light .overlay .inp:focus,
+html.light .overlay .sel:focus,
+html.light .overlay input.num:focus {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+html.light #pf-tl, html.light #pf-session, html.light #pf-sc, html.light #pf-cd,
+html.light #mf-tl, html.light #mf-session, html.light #mf-sc, html.light #mf-cd {
+  background: #FAFAFA !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light #p-days-grid label,
+html.light #m-days-grid label,
+html.light #ft-days-grid label {
+  background: #F4F4F5 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #0C0A09 !important;
 }
 
 /* buttons */
@@ -398,7 +447,7 @@ select option {
   gap: 6px !important;
   padding: 8px 16px !important;
   border-radius: 8px !important;
-  border: 1px solid transparent !important;
+  border: none !important;
   background: transparent !important;
   color: var(--tx2) !important;
   font-size: 13px !important;
@@ -428,8 +477,8 @@ select option {
 #btn-trend-view-line:hover:not(.act),
 #btn-trend-view-bar:hover:not(.act) {
   color: var(--tx) !important;
-  border-color: var(--bd) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
 html.light .ni:hover:not(.act),
@@ -444,8 +493,8 @@ html.light #btn-chart-bar:hover:not(.act),
 html.light #btn-trend-view-line:hover:not(.act),
 html.light #btn-trend-view-bar:hover:not(.act) {
   color: #0C0A09 !important;
-  border-color: var(--bd) !important;
-  background: rgba(0, 0, 0, 0.02) !important;
+  border: none !important;
+  background: rgba(0, 0, 0, 0.03) !important;
 }
 
 .ni.act,
@@ -459,8 +508,8 @@ html.light #btn-trend-view-bar:hover:not(.act) {
 #btn-chart-bar.act,
 #btn-trend-view-line.act,
 #btn-trend-view-bar.act {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid var(--bd2) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: none !important;
   color: var(--tx) !important;
   font-weight: 700 !important;
   box-shadow: none !important;
@@ -478,7 +527,7 @@ html.light #btn-chart-bar.act,
 html.light #btn-trend-view-line.act,
 html.light #btn-trend-view-bar.act {
   background: rgba(0, 0, 0, 0.06) !important;
-  border: 1px solid var(--bd2) !important;
+  border: none !important;
   color: #0C0A09 !important;
   font-weight: 700 !important;
   box-shadow: none !important;
