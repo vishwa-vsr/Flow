@@ -174,31 +174,140 @@
       transform: none !important;
     }
 
+    .overlay,
+    .overlay *,
     .overlay .card,
     .overlay > .card,
     .overlay-card,
     .cat-edit-modal,
     .cat-edit-modal-card,
     .ff-modal-card,
-    .hm-modal-overlay .card {
-      background: transparent !important;
-      border: 1px solid var(--bd) !important;
-      box-shadow: var(--shadow-lg) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
+    .hm-modal-overlay,
+    .hm-modal-overlay *,
+    .hm-modal-overlay .card,
+    #ff-preset-edit-modal .card,
+    #free-time-modal .card,
+    #add-rule-modal .card,
+    #confirm-modal .card,
+    #privacy-modal .card,
+    #add-preset-modal .card,
+    #block-confirm-modal > div,
+    #heatmap-config-modal .card,
+    #pcOverlay .card,
+    #scrubModal .card {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .overlay .card,
+    .overlay > .card,
+    .overlay-card,
+    .cat-edit-modal,
+    .cat-edit-modal-card,
+    .ff-modal-card,
+    .hm-modal-overlay .card,
+    #ff-preset-edit-modal .card,
+    #free-time-modal .card,
+    #add-rule-modal .card,
+    #confirm-modal .card,
+    #privacy-modal .card,
+    #add-preset-modal .card,
+    #block-confirm-modal > div,
+    #heatmap-config-modal .card,
+    #pcOverlay .card,
+    #scrubModal .card {
+      background: #161618 !important;
+      color: #F4F4F5 !important;
+      border: 1px solid var(--bd2) !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
       max-height: 85vh;
-      transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease !important;
-      transform: translateZ(0) !important;
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
       backface-visibility: hidden !important;
-      will-change: auto;
     }
 
     .overlay .card:hover,
     .overlay-card:hover,
     .cat-edit-modal:hover,
-    .ff-modal-card:hover {
-      transform: translateZ(0) !important;
-      box-shadow: var(--shadow-lg) !important;
+    .ff-modal-card:hover,
+    .hm-modal-overlay .card:hover,
+    #ff-preset-edit-modal .card:hover,
+    #free-time-modal .card:hover,
+    #add-rule-modal .card:hover,
+    #confirm-modal .card:hover,
+    #privacy-modal .card:hover,
+    #add-preset-modal .card:hover,
+    #block-confirm-modal > div:hover,
+    #heatmap-config-modal .card:hover,
+    #pcOverlay .card:hover,
+    #scrubModal .card:hover {
+      background: #161618 !important;
+      border-color: var(--bd2) !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    html.light .overlay .card,
+    html.light .overlay > .card,
+    html.light .overlay-card,
+    html.light .cat-edit-modal,
+    html.light .cat-edit-modal-card,
+    html.light .ff-modal-card,
+    html.light .hm-modal-overlay .card,
+    html.light #ff-preset-edit-modal .card,
+    html.light #free-time-modal .card,
+    html.light #add-rule-modal .card,
+    html.light #confirm-modal .card,
+    html.light #privacy-modal .card,
+    html.light #add-preset-modal .card,
+    html.light #block-confirm-modal > div,
+    html.light #heatmap-config-modal .card,
+    html.light #pcOverlay .card,
+    html.light #scrubModal .card {
+      background: #ffffff !important;
+      color: #0C0A09 !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    html.light .overlay .card:hover,
+    html.light .overlay > .card:hover,
+    html.light .overlay-card:hover,
+    html.light .cat-edit-modal:hover,
+    html.light .ff-modal-card:hover,
+    html.light .hm-modal-overlay .card:hover,
+    html.light #ff-preset-edit-modal .card:hover,
+    html.light #free-time-modal .card:hover,
+    html.light #add-rule-modal .card:hover,
+    html.light #confirm-modal .card:hover,
+    html.light #privacy-modal .card:hover,
+    html.light #add-preset-modal .card:hover,
+    html.light #block-confirm-modal > div:hover,
+    html.light #heatmap-config-modal .card:hover,
+    html.light #pcOverlay .card:hover,
+    html.light #scrubModal .card:hover {
+      background: #ffffff !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .overlay .pk:hover,
+    .overlay .icon-btn:hover {
+      transform: none !important;
+      transition: none !important;
     }
 
     /* Crisp & Jitter-Free Modal Scrolling */
@@ -2425,3 +2534,37 @@
     html.light #pccancel:hover {
       color: #0C0A09 !important;
     }
+
+    /* Grid children margin normalization to ensure equal vertical gap */
+    .figma-metrics-grid > *,
+    .compact-grid > *,
+    .figma-companion-grid > *,
+    .chart-grid > *,
+    #granular-blocks-grid > * {
+      margin-bottom: 0 !important;
+    }
+
+    /* Advanced Site Tweaks Sub-Cards Outline */
+    #granular-blocks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    #granular-blocks-grid .card,
+    .sm-pane .card .card {
+      background: var(--bg3) !important;
+      border: 1px solid var(--bd) !important;
+      border-radius: 14px !important;
+      margin-bottom: 0 !important;
+      box-shadow: none !important;
+    }
+
+    html.light #granular-blocks-grid .card,
+    html.light .sm-pane .card .card {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+

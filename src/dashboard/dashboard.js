@@ -1315,11 +1315,16 @@ function renderFocus(e, t = 25) {
         $("btn-fp").style.display = "inline-flex";
         $("btn-fp").dataset.state = e.paused ? "paused" : "running";
         const fpTxt = e.paused ? (e.remaining === n ? ("work" === e.phase ? t_("startWork") : t_("startBreak")) : t_("btnResume")) : t_("btnPause");
-        const fpSpan = $("btn-fp").querySelector("span");
-        if (fpSpan) {
-            fpSpan.textContent = fpTxt;
+        const fpLabel = $("btn-fp-label") || $("btn-fp").querySelector("span[data-i18n]") || $("btn-fp").querySelector("span:last-child");
+        if (fpLabel) {
+            fpLabel.textContent = fpTxt;
         } else {
             $("btn-fp").textContent = fpTxt;
+        }
+        const fpIcon = $("btn-fp-icon") || $("btn-fp").querySelector("[data-icon]");
+        if (fpIcon && typeof FlowIcons !== "undefined") {
+            const iconName = e.paused ? "play" : "pause";
+            setSafeHTML(fpIcon, FlowIcons.get(iconName, { size: 16 }));
         }
         if ($("frf")) $("frf").style.opacity = e.paused ? "0.5" : "1";
     }
@@ -1705,15 +1710,15 @@ async function renderInsights() {
                   </div>
                   <div>
                     <label class="slbl" style="display:block;margin-bottom:var(--space-xs);">${t_("focusCategories") || "Focus Categories"}</label>
-                    <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
+                    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:8px;">
                       ${["productivity", "learning", "communication", "distraction", "uncategorized"].map(c => `
-                        <label style="display:flex;align-items:center;gap:var(--space-xs);font-size:14px;color:var(--tx);cursor:pointer;">
-                          <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="accent-color:var(--green);width:16px;height:16px;"/>
-                          <span>${catEmoji(c)} ${catLabel(c, false)}</span>
+                        <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3);">
+                          <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;"/>
+                          <span style="font-weight:700;font-size:14px;color:var(--tx);">${catEmoji(c)} ${catLabel(c, false)}</span>
                         </label>
                       `).join('')}
                     </div>
-                    <div style="font-size:12px;color:var(--tx3);margin-top:var(--space-xs);">${t_("selectFocusCatsDesc") || "Select which categories count towards your daily Focus Time."}</div>
+                    <div style="font-size:12px;color:var(--tx3);">${t_("selectFocusCatsDesc") || "Select which categories count towards your daily Focus Time."}</div>
                   </div>
                 </div>
                 <div style="padding:var(--space-md) var(--space-lg) var(--space-lg);border-top:1px solid var(--bd);display:flex;gap:var(--space-sm);justify-content:flex-end;flex-shrink:0;">

@@ -152,7 +152,65 @@ html.light .db-card:hover {
   box-shadow: none !important;
 }
 
-/* modal dialogs & overlays - solid glass cards with border */
+/* Grid children margin normalization to ensure equal vertical gap */
+.figma-metrics-grid > *,
+.compact-grid > *,
+.figma-companion-grid > *,
+.chart-grid > *,
+#granular-blocks-grid > * {
+  margin-bottom: 0 !important;
+}
+
+/* Advanced Site Tweaks Sub-Cards Outline */
+#granular-blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+#granular-blocks-grid .card,
+.sm-pane .card .card {
+  background: var(--bg3) !important;
+  border: 1px solid var(--bd) !important;
+  border-radius: 14px !important;
+  margin-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+html.light #granular-blocks-grid .card,
+html.light .sm-pane .card .card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* modal dialogs & overlays - static solid cards with crisp border, zero hover animation, zero glow */
+.overlay,
+.overlay *,
+.overlay .card,
+.overlay-card,
+.cat-edit-modal,
+.cat-edit-modal-card,
+.ff-modal-card,
+.hm-modal-overlay,
+.hm-modal-overlay *,
+.hm-modal-overlay .card,
+.overlay > .card,
+#ff-preset-edit-modal .card,
+#free-time-modal .card,
+#add-rule-modal .card,
+#confirm-modal .card,
+#privacy-modal .card,
+#add-preset-modal .card,
+#block-confirm-modal > div,
+#heatmap-config-modal .card,
+#pcOverlay .card,
+#scrubModal .card {
+  transition: none !important;
+  animation: none !important;
+}
+
 .overlay .card,
 .overlay-card,
 .cat-edit-modal,
@@ -168,14 +226,47 @@ html.light .db-card:hover {
 #add-preset-modal .card,
 #block-confirm-modal > div,
 #heatmap-config-modal .card,
-#pcOverlay .card {
+#pcOverlay .card,
+#scrubModal .card {
   background: var(--bg2) !important;
   color: var(--tx) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid var(--bd2) !important;
   border-radius: 18px !important;
-  box-shadow: var(--shadow-lg) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+  transform: none !important;
+}
+
+.overlay .card:hover,
+.overlay-card:hover,
+.cat-edit-modal:hover,
+.cat-edit-modal-card:hover,
+.ff-modal-card:hover,
+.hm-modal-overlay .card:hover,
+.overlay > .card:hover,
+#ff-preset-edit-modal .card:hover,
+#free-time-modal .card:hover,
+#add-rule-modal .card:hover,
+#confirm-modal .card:hover,
+#privacy-modal .card:hover,
+#add-preset-modal .card:hover,
+#block-confirm-modal > div:hover,
+#heatmap-config-modal .card:hover,
+#pcOverlay .card:hover,
+#scrubModal .card:hover {
+  background: var(--bg2) !important;
+  border-color: var(--bd2) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+.overlay .pk:hover,
+.overlay .icon-btn:hover {
+  transform: none !important;
+  transition: none !important;
 }
 
 html.light .overlay {
@@ -197,14 +288,43 @@ html.light #privacy-modal .card,
 html.light #add-preset-modal .card,
 html.light #block-confirm-modal > div,
 html.light #heatmap-config-modal .card,
-html.light #pcOverlay .card {
+html.light #pcOverlay .card,
+html.light #scrubModal .card {
   background: #ffffff !important;
   color: #0C0A09 !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
   border-radius: 18px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+html.light .overlay .card:hover,
+html.light .overlay-card:hover,
+html.light .cat-edit-modal:hover,
+html.light .cat-edit-modal-card:hover,
+html.light .ff-modal-card:hover,
+html.light .hm-modal-overlay .card:hover,
+html.light .overlay > .card:hover,
+html.light #ff-preset-edit-modal .card:hover,
+html.light #free-time-modal .card:hover,
+html.light #add-rule-modal .card:hover,
+html.light #confirm-modal .card:hover,
+html.light #privacy-modal .card:hover,
+html.light #add-preset-modal .card:hover,
+html.light #block-confirm-modal > div:hover,
+html.light #heatmap-config-modal .card:hover,
+html.light #pcOverlay .card:hover,
+html.light #scrubModal .card:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
 }
 
 /* Light Theme Inner Modal Styling */
