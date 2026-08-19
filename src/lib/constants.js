@@ -69,12 +69,12 @@
   };
 
   root.getCatLabel = function (key) {
-    if (root.CAT_LABELS && root.CAT_LABELS[key]) return root.CAT_LABELS[key];
     if (typeof t_ === "function") {
       var k = "cat" + key.charAt(0).toUpperCase() + key.slice(1);
       var tr = t_(k);
       if (tr && tr !== k) return tr;
     }
+    if (root.CAT_LABELS && root.CAT_LABELS[key]) return root.CAT_LABELS[key];
     return key;
   };
 

@@ -1965,13 +1965,13 @@
     #ff-preset-edit-modal .card {
       animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: var(--shadow-lg);
-      background: transparent !important;
-      border: 1px solid var(--bd) !important;
+      background: var(--bg2) !important;
+      border: 1px solid var(--bd2) !important;
     }
 
     html.light #ff-preset-edit-modal .card {
-      background: transparent !important;
-      border: 1px solid var(--bd) !important;
+      background: #FFFFFF !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
     }
 
     @keyframes preset-edit-glow {

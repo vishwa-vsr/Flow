@@ -34,16 +34,18 @@ export function catEmoji(e) {
 }
 
 export function catLabel(e, t) {
-    const labels = (typeof CAT_LABELS !== "undefined" && CAT_LABELS) ? CAT_LABELS : null;
-    const meta = (typeof CAT_META !== "undefined" && CAT_META) ? CAT_META : {};
     const tr = (typeof t_ === "function") ? t_ : (k => k);
-    var label = (labels && labels[e]) ? labels[e] : null;
+    var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
+    var trans = tr(key);
+    var label = (trans && trans !== key) ? trans : null;
     if (!label) {
-        var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
-        var trans = tr(key);
-        if (trans && trans !== key) label = trans;
+        const labels = (typeof CAT_LABELS !== "undefined" && CAT_LABELS) ? CAT_LABELS : null;
+        if (labels && labels[e]) label = labels[e];
     }
-    if (!label) label = (meta[e] || { label: e }).label;
+    if (!label) {
+        const meta = (typeof CAT_META !== "undefined" && CAT_META) ? CAT_META : {};
+        label = (meta[e] || { label: e }).label;
+    }
     return t ? label + " ✨" : label;
 }
 

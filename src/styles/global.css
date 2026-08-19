@@ -1016,6 +1016,11 @@ html.light * {
   user-select: none;
 }
 
+.ff-dropdown.open {
+  z-index: 100000 !important;
+  position: relative !important;
+}
+
 .ff-dropdown-btn {
   display: inline-flex;
   align-items: center;
@@ -1073,11 +1078,12 @@ html.light * {
   top: calc(100% + 4px);
   right: 0;
   min-width: 170px;
-  background: var(--bg2);
+  background: #161618 !important;
+  background-color: #161618 !important;
   border: 1px solid var(--bd2);
   border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  z-index: 99999;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  z-index: 100000 !important;
   padding: 4px;
   display: none;
   opacity: 0;
@@ -1085,9 +1091,16 @@ html.light * {
   transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+html.light .ff-dropdown-menu {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
 .ff-dropdown.open .ff-dropdown-menu {
-  display: block;
-  opacity: 1;
+  display: block !important;
+  opacity: 1 !important;
   transform: translateY(0) scale(1);
 }
 
@@ -1160,7 +1173,7 @@ html.light .ff-dropdown-settings .ff-dropdown-btn:hover {
   overflow-y: auto;
   left: 0;
   right: auto;
-  z-index: 999999 !important;
+  z-index: 100000 !important;
 }
 
 .ff-dropdown-settings .ff-dropdown-item {
@@ -1173,13 +1186,24 @@ html.light .ff-dropdown-settings .ff-dropdown-btn:hover {
   position: relative;
 }
 
-/* Ensure cards & rows containing open dropdowns don't clip them */
+/* Ensure cards, rows & modal containers containing open dropdowns don't clip them */
 .card.ff-card-open,
 .trow.ff-trow-open,
 .card:has(.ff-dropdown.open),
 .trow:has(.ff-dropdown.open),
-.settings-col:has(.ff-dropdown.open) {
+.settings-col:has(.ff-dropdown.open),
+.add-form-pane:has(.ff-dropdown.open),
+.add-form-pane div:has(.ff-dropdown.open),
+div:has(> .ff-dropdown.open) {
   overflow: visible !important;
-  z-index: 10000 !important;
+  z-index: 100000 !important;
   position: relative !important;
+}
+
+/* PIN Lock confirm button responsive font size */
+#pcok {
+  font-size: 13px !important;
+  padding: 0 4px !important;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }

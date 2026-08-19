@@ -1086,7 +1086,13 @@ if (!window._ffGlobalDropdownClickOutsideAdded) {
 }
 
 function upgradeSelectToCustomDropdown(selectEl) {
-    if (!selectEl || selectEl.dataset.ffUpgraded === "true") return;
+    if (!selectEl) return;
+    if (selectEl.dataset.ffUpgraded === "true") {
+        if (selectEl._ffWrapper && typeof selectEl._ffWrapper._updateUI === "function") {
+            selectEl._ffWrapper._updateUI();
+        }
+        return;
+    }
     selectEl.dataset.ffUpgraded = "true";
 
     const wrapper = document.createElement("div");
@@ -1102,8 +1108,14 @@ function upgradeSelectToCustomDropdown(selectEl) {
             btnLabel.textContent = selectedOpt.textContent;
         }
         wrapper.querySelectorAll(".ff-dropdown-item").forEach(itemBtn => {
-            const isSelected = itemBtn.getAttribute("data-value") === selectEl.value;
+            const val = itemBtn.getAttribute("data-value");
+            const isSelected = val === selectEl.value;
             itemBtn.classList.toggle("selected", isSelected);
+            const matchOpt = Array.from(selectEl.options).find(o => o.value === val);
+            if (matchOpt) {
+                const itemSpan = itemBtn.querySelector("span:first-child");
+                if (itemSpan) itemSpan.textContent = matchOpt.textContent;
+            }
             let chk = itemBtn.querySelector(".ff-check-icon");
             if (isSelected && !chk) {
                 const checkSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -1123,6 +1135,9 @@ function upgradeSelectToCustomDropdown(selectEl) {
             }
         });
     };
+
+    wrapper._updateUI = updateUI;
+    selectEl._ffWrapper = wrapper;
 
     const selectedOpt = selectEl.options[selectEl.selectedIndex] || selectEl.options[0];
     const initialLabel = selectedOpt ? selectedOpt.textContent : "";
@@ -1710,11 +1725,11 @@ async function renderInsights() {
                   </div>
                   <div>
                     <label class="slbl" style="display:block;margin-bottom:var(--space-xs);">${t_("focusCategories") || "Focus Categories"}</label>
-                    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:8px;">
+                    <div class="c-checkbox-group" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
                       ${["productivity", "learning", "communication", "distraction", "uncategorized"].map(c => `
-                        <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3);">
+                        <label class="c-checkbox-lbl" style="padding:10px;font-size:13px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--bd);border-radius:10px;background:var(--bg3);">
                           <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;"/>
-                          <span style="font-weight:700;font-size:14px;color:var(--tx);">${catEmoji(c)} ${catLabel(c, false)}</span>
+                          <span>${catEmoji(c)} ${catLabel(c, false)}</span>
                         </label>
                       `).join('')}
                     </div>
@@ -3936,7 +3951,10 @@ async function loadWeeklyGoalSettings() {
     $("weekly-goal-input") && ($("weekly-goal-input").value = e.weeklyGoalHours || 0);
     $("streak-min-input") && ($("streak-min-input").value = e.heatmapMinActive || 10);
     $("ratio-threshold-input") && ($("ratio-threshold-input").value = e.heatmapRatioThresh || 50);
-    $("week-start-select") && ($("week-start-select").value = e.weekStartsOn || "mon");
+    if ($("week-start-select")) {
+        $("week-start-select").value = e.weekStartsOn || "mon";
+        $("week-start-select").dispatchEvent(new Event("change", { bubbles: true }));
+    }
     let t = e.goalCats || ["productivity", "learning"];
     document.querySelectorAll(".goal-cb-cat").forEach(cb => {
         cb.checked = t.includes(cb.value);
@@ -4580,6 +4598,7 @@ renderFocus = function (e, t) {
     await initI18n();
     translatePage();
     hideAnalyticsHeader();
+    upgradeAllSettingsSelects();
     const e = await msg("GET_AUTO_CATEGORIES");
     e && e.autoCategories && (AUTO_CATEGORIES = e.autoCategories), await checkGate();
     // Bug #5 fix: fetch settings once and share with loadSettings
@@ -6148,7 +6167,8 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
         overlay.setAttribute("aria-modal", "true");
         overlay.setAttribute("aria-labelledby", "nsched-title");
         const schedDays = sched.days || [1, 2, 3, 4, 5];
-        const DAY_CBS = DAY_LABELS.map((d, i) =>
+        const currentDayLabels = [t_("sun"), t_("mon"), t_("tue"), t_("wed"), t_("thu"), t_("fri"), t_("sat")];
+        const DAY_CBS = currentDayLabels.map((d, i) =>
             `<label class="nsched-day-lbl" style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg3)"><input type="checkbox" class="nsched-day" value="${i}" ${schedDays.includes(i) ? "checked" : ""}> ${d}</label>`
         ).join("");
         setSafeHTML(overlay, `
@@ -6175,10 +6195,13 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
 
           <div class="pb-cats-section" id="nsched-cats-sec">
             <div class="pb-cats-title" style="font-size:13px;font-weight:800;color:var(--tx2);text-transform:uppercase;margin-bottom:12px;" data-i18n="categoriesToBlock">Categories to Block</div>
-            <div class="pb-cats" id="nsched-cats" style="display:flex;flex-direction:column;gap:12px;">
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="distraction" ${!sched.blockCats || sched.blockCats.includes("distraction") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("distraction")} ${catLabel("distraction", false)}</span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="communication" ${!sched.blockCats || sched.blockCats.includes("communication") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("communication")} ${catLabel("communication", false)}</span></label>
-              <label style="display:flex;align-items:center;gap:16px;cursor:pointer;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--bg3)"><input type="checkbox" value="uncategorized" ${!sched.blockCats || sched.blockCats.includes("uncategorized") ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green)"/><span style="font-weight:700;font-size:14px">${catEmoji("uncategorized")} ${catLabel("uncategorized", false)}</span></label>
+            <div class="pb-cats c-checkbox-group" id="nsched-cats" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              ${["distraction", "communication", "uncategorized", "productivity", "learning"].map(c => `
+                <label class="c-checkbox-lbl" style="padding:10px;font-size:13px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--bd);border-radius:10px;background:var(--bg3);">
+                  <input type="checkbox" value="${c}" ${(!sched.blockCats || sched.blockCats.includes(c)) ? "checked" : ""} style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;"/>
+                  <span>${catEmoji(c)} ${catLabel(c, false)}</span>
+                </label>
+              `).join("")}
             </div>
           </div>
           <div class="pb-strict-row" style="padding-top:16px;border-top:1px solid var(--bd)">
@@ -6186,7 +6209,7 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
               <label for="nsched-notify-time" class="tlbl" style="font-size:14px; display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber); vertical-align:middle; display:inline-block;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span data-i18n="preScheduleNotification">Pre-Schedule Notification</span></label>
               <div class="tdesc" data-i18n="preScheduleNotificationDesc">Get notified before the session starts.</div>
             </div>
-            <select id="nsched-notify-time" class="inp" style="width:140px;padding:6px 12px">
+            <select id="nsched-notify-time" class="sel" style="width:140px;">
               <option value="0" ${sched.notifyMinsBefore === 0 ? "selected" : ""} data-i18n="disabled">Disabled</option>
               <option value="1" ${sched.notifyMinsBefore === 1 ? "selected" : ""} data-i18n="oneMinBefore">1 min before</option>
               <option value="5" ${(sched.notifyMinsBefore === undefined || sched.notifyMinsBefore === 5) ? "selected" : ""} data-i18n="fiveMinsBefore">5 mins before</option>
@@ -6203,6 +6226,10 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     `);
 document.body.appendChild(overlay);
         if (typeof translatePage === "function") translatePage();
+        const notifySel = overlay.querySelector("#nsched-notify-time");
+        if (notifySel) {
+            upgradeSelectToCustomDropdown(notifySel);
+        }
 
         const catsSec = overlay.querySelector("#nsched-cats-sec");
         const catsInputs = catsSec.querySelectorAll("input");
