@@ -140,7 +140,7 @@
     .card,
     .ac,
     .at-card {
-      background: #000000 !important;
+      background: #161618 !important;
       border: none !important;
       border-radius: 16px !important;
       box-shadow: none !important;
@@ -694,7 +694,7 @@
       position: relative;
       border: none !important;
       border-radius: 16px;
-      background: #000000 !important;
+      background: #161618 !important;
       box-shadow: none !important;
       display: flex;
       flex-direction: column;
@@ -2111,7 +2111,7 @@
 
     /* Dark Slate Glass Card (Figma Style) */
     .figma-stat-card.dark-slate {
-      background: #000000 !important;
+      background: #161618 !important;
       backdrop-filter: blur(12px);
       border: none !important;
       box-shadow: none !important;
@@ -2260,7 +2260,7 @@
     .figma-sub-card {
       padding: 14px 16px !important;
       border-radius: 14px !important;
-      background: #000000 !important;
+      background: #161618 !important;
       border: none !important;
       box-shadow: none !important;
     }

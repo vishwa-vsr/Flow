@@ -9,14 +9,14 @@
   --amber:#F6B846;--amber-bg:rgba(246,184,70,.12);--amber-bd:rgba(246,184,70,.3);
   --purple:#A855F7;--purple-bg:rgba(168,85,247,.12);--purple-bd:rgba(168,85,247,.3);
 
-  /* surface — refined dark */
-  --bg:#0C0D11;
-  --bg2:#000000;
-  --bg3:#15161B;
-  --bg4:#1E2026;
-  --bd:rgba(255,255,255,0.05);
-  --bd2:rgba(255,255,255,0.08);
-  --bd3:rgba(255,255,255,0.15);
+  /* surface — refined dark (Classic Image 2 Matte Palette) */
+  --bg:#0E0E10;
+  --bg2:#161618;
+  --bg3:#1D1D20;
+  --bg4:#26262A;
+  --bd:rgba(255,255,255,0.06);
+  --bd2:rgba(255,255,255,0.10);
+  --bd3:rgba(255,255,255,0.18);
 
   /* text */
   --tx:#F4F4F5;
@@ -109,13 +109,13 @@ body{
   transition:background .35s ease,color .35s ease;
 }
 
-/* card primitive — universal solid jet black card styling */
+/* card primitive — universal solid dark slate card styling */
 .card,
 .focus-section,
 .ac,
 .at-card,
 .db-card {
-  background: #000000 !important;
+  background: #161618 !important;
   border: none !important;
   border-radius: 16px !important;
   box-shadow: none !important;
@@ -396,7 +396,7 @@ select option {
 ::selection{background:var(--green);color:#0a0a0a}
 
 /* ============================================================
-   FLOW MODERN TAB SYSTEM (Universal Transparent Navigation)
+   FLOW MODERN TAB SYSTEM (Shadcn/Base-UI Architecture)
    ============================================================ */
 
 .nav-links,
@@ -409,11 +409,11 @@ select option {
 .ff-tabs-list {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  background: transparent !important;
+  gap: 4px !important;
+  background: var(--bg3) !important;
   border: none !important;
   border-radius: 12px !important;
-  padding: 0 !important;
+  padding: 4px !important;
   position: relative !important;
   width: fit-content !important;
   box-sizing: border-box !important;
@@ -447,7 +447,7 @@ select option {
   gap: 6px !important;
   padding: 8px 16px !important;
   border-radius: 8px !important;
-  border: none !important;
+  border: 1px solid transparent !important;
   background: transparent !important;
   color: var(--tx2) !important;
   font-size: 13px !important;
@@ -477,8 +477,8 @@ select option {
 #btn-trend-view-line:hover:not(.act),
 #btn-trend-view-bar:hover:not(.act) {
   color: var(--tx) !important;
-  border: none !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: var(--bg4) !important;
+  border-color: transparent !important;
 }
 
 html.light .ni:hover:not(.act),
@@ -493,8 +493,8 @@ html.light #btn-chart-bar:hover:not(.act),
 html.light #btn-trend-view-line:hover:not(.act),
 html.light #btn-trend-view-bar:hover:not(.act) {
   color: #0C0A09 !important;
-  border: none !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  background: var(--bg4) !important;
+  border-color: transparent !important;
 }
 
 .ni.act,
@@ -508,9 +508,9 @@ html.light #btn-trend-view-bar:hover:not(.act) {
 #btn-chart-bar.act,
 #btn-trend-view-line.act,
 #btn-trend-view-bar.act {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: none !important;
+  background: var(--bg2) !important;
   color: var(--tx) !important;
+  border-color: transparent !important;
   font-weight: 700 !important;
   box-shadow: none !important;
 }
@@ -526,10 +526,34 @@ html.light #btn-chart-line.act,
 html.light #btn-chart-bar.act,
 html.light #btn-trend-view-line.act,
 html.light #btn-trend-view-bar.act {
-  background: rgba(0, 0, 0, 0.06) !important;
-  border: none !important;
-  color: #0C0A09 !important;
-  font-weight: 700 !important;
+  background: #ffffff !important;
+  color: #0f0f11 !important;
+  border-color: transparent !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.ni:focus,
+.vtab:focus,
+.ttab:focus,
+.rule-tab:focus,
+.site-tab:focus,
+.sm-tab:focus,
+.ff-tab-item:focus,
+.ni:focus-visible,
+.vtab:focus-visible,
+.ttab:focus-visible,
+.rule-tab:focus-visible,
+.site-tab:focus-visible,
+.sm-tab:focus-visible,
+.ff-tab-item:focus-visible,
+.ni:active,
+.vtab:active,
+.ttab:active,
+.rule-tab:active,
+.site-tab:active,
+.sm-tab:active,
+.ff-tab-item:active {
+  outline: none !important;
   box-shadow: none !important;
 }
 
