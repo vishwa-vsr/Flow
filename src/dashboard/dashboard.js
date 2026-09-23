@@ -1033,7 +1033,7 @@ function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
 
     return `
     <div class="ff-dropdown ${customClass}" data-domain="${escHTML(cleanDom)}">
-      <button type="button" class="ff-dropdown-btn" style="background:${color}22; color:${color}; border-color:${color}55;">
+      <button type="button" class="ff-dropdown-btn" style="background:transparent; color:${color}; border:1.5px solid ${color};">
         <span>${currentLbl}</span>
         <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>

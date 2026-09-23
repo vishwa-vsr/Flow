@@ -1013,6 +1013,7 @@ html.light * {
 .ff-dropdown {
   position: relative;
   display: inline-block;
+  width: fit-content;
   user-select: none;
 }
 
@@ -1024,19 +1025,20 @@ html.light * {
 .ff-dropdown-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 6px;
-  padding: 5px 10px;
-  width: 128px;
+  padding: 4px 10px;
+  width: auto;
+  max-width: 100%;
   box-sizing: border-box;
   border-radius: 999px;
   font-family: 'Manrope', system-ui, -apple-system, sans-serif;
   font-size: 11px;
   font-weight: 800;
   cursor: pointer;
-  background: var(--bg3);
+  background: transparent;
   color: var(--tx);
-  border: 1px solid var(--bd2);
+  border: 1.5px solid var(--bd2);
   transition: var(--trans-fast);
   outline: none;
   text-transform: capitalize;
@@ -1044,21 +1046,26 @@ html.light * {
 }
 
 #dynamic-list .ff-dropdown-btn {
-  width: 115px;
-  padding: 4px 8px;
+  width: auto;
+  padding: 4px 10px;
 }
 
 .ff-dropdown-btn > span:first-child {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex: 1;
   text-align: left;
+  flex: 0 1 auto;
 }
 
 .ff-dropdown-btn:hover {
-  background: var(--bg4);
-  border-color: var(--bd3);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: currentColor;
+}
+
+html.light .ff-dropdown-btn:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: currentColor;
 }
 
 .ff-dropdown-arrow {

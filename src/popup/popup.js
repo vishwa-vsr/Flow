@@ -555,7 +555,7 @@ function buildCatSelector(e, t, s) {
 
     return `
     <div class="ff-dropdown" data-domain="${escHTML(e)}">
-      <button type="button" class="ff-dropdown-btn" style="background:${s}22; color:${s}; border-color:${s}55;">
+      <button type="button" class="ff-dropdown-btn" style="background:transparent; color:${s}; border:1.5px solid ${s};">
         <span>${currentLbl}</span>
         ${FlowIcons.get("chevron-down", { size: 14, class: "ff-dropdown-arrow" })}
       </button>
