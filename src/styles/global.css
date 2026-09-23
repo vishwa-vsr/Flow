@@ -1025,10 +1025,10 @@ html.light * {
 .ff-dropdown-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 6px;
   padding: 4px 10px;
-  width: auto;
+  width: 120px;
   max-width: 100%;
   box-sizing: border-box;
   border-radius: 999px;
@@ -1046,7 +1046,7 @@ html.light * {
 }
 
 #dynamic-list .ff-dropdown-btn {
-  width: auto;
+  width: 120px;
   padding: 4px 10px;
 }
 
@@ -1055,7 +1055,7 @@ html.light * {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
-  flex: 0 1 auto;
+  flex: 1;
 }
 
 .ff-dropdown-btn:hover {
