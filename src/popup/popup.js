@@ -539,17 +539,15 @@ function renderDonut(e, t) {
 
 function buildCatSelector(e, t, s) {
     const currentLbl = (typeof getCatLabel === "function" ? getCatLabel(t) : (CAT_LABELS?.[t] || t));
-    const currentEmoji = (typeof catEmoji === "function" ? catEmoji(t) : "");
     let menuItems = "";
     ["productivity", "learning", "distraction", "communication", "uncategorized"].forEach(catKey => {
         const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (CAT_LABELS?.[catKey] || catKey));
-        const emoji = (typeof catEmoji === "function" ? catEmoji(catKey) : "");
         const isSelected = catKey === t;
         const color = CAT_COLORS[catKey] || "#555555";
         menuItems += `
           <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
             <span style="display:inline-flex; align-items:center; justify-content:center; width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
-            <span>${emoji} ${lbl}</span>
+            <span>${lbl}</span>
             ${isSelected ? FlowIcons.get("check", { size: 14, class: "ff-check-icon" }) : ''}
           </button>
         `;
@@ -558,7 +556,7 @@ function buildCatSelector(e, t, s) {
     return `
     <div class="ff-dropdown" data-domain="${escHTML(e)}">
       <button type="button" class="ff-dropdown-btn" style="background:${s}22; color:${s}; border-color:${s}55;">
-        <span>${currentEmoji} ${currentLbl}</span>
+        <span>${currentLbl}</span>
         ${FlowIcons.get("chevron-down", { size: 14, class: "ff-dropdown-arrow" })}
       </button>
       <div class="ff-dropdown-menu">
@@ -595,7 +593,7 @@ function renderDynamicList(e, t) {
             let overlayHtml = `
               <div id="feedback-overlay" style="display:flex; justify-content:center; gap:8px; align-items:center; width:100%; background:transparent; border:1px solid var(--bd); border-radius:12px; padding:4px;">
                 <a href="${rateUrl}" target="_blank" class="bs bs-sm" style="color:var(--amber); border-color:var(--amber-bd); background:var(--amber-bg); text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('rateUs')}</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdWc7nYA3D1BqFtqtphDzdJ8UKa4DVw5WteEaAJsQlYAT1Rfg/viewform?usp=dialog" target="_blank" class="bs bs-sm" style="color:var(--blue); border-color:var(--bd); background:transparent; text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('feedback')}</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScyRCRzsfjyENSWmHfn8oo6gLbvi3mKi5TRv0Z27lFOtnDb-Q/viewform?usp=dialog" target="_blank" class="bs bs-sm" style="color:var(--blue); border-color:var(--bd); background:transparent; text-decoration:none; padding:8px; font-size:11px; white-space:nowrap; flex:1; justify-content:center;">${t_('feedback')}</a>
                 <button id="feedback-close-btn" class="icon-btn" style="width:24px;height:24px;border:none;flex-shrink:0;">✕</button>
               </div>
             `;

@@ -1522,6 +1522,7 @@
       cursor: pointer;
       transition: var(--trans);
       background: transparent;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
     }
 
     .cat-sq-edit-btn {
@@ -1577,12 +1578,14 @@
     }
 
     .cat-sq-name {
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       font-size: 13px;
       font-weight: 800;
       line-height: 1.2
     }
 
     .cat-sq-count {
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       font-size: 11px;
       color: var(--tx3);
       margin-top: 4px;

@@ -1026,10 +1026,11 @@ html.light * {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 5px 12px;
-  width: 160px;
+  padding: 5px 10px;
+  width: 128px;
   box-sizing: border-box;
   border-radius: 999px;
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
   font-size: 11px;
   font-weight: 800;
   cursor: pointer;
@@ -1110,6 +1111,7 @@ html.light .ff-dropdown-menu {
   gap: 8px;
   width: 100%;
   padding: 7px 10px;
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;

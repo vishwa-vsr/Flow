@@ -829,7 +829,7 @@ function renderCatSquares() {
             </button>
         ` : "";
 
-        setSafeHTML(o, `${editBtnHtml}<div class="cat-sq-icon">${i.emoji}</div><div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${countStr}</div>`);
+        setSafeHTML(o, `${editBtnHtml}<div class="cat-sq-name" style="color:${selectedCat === a ? i.color : "var(--tx)"}">${i.label}</div><div class="cat-sq-count">${countStr}</div>`);
 
         if (isEditable) {
             const editBtn = o.querySelector(".cat-sq-edit-btn");
@@ -1014,20 +1014,18 @@ function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
     const cleanDom = typeof sanitizeDomain === "function" ? sanitizeDomain(domain) : domain;
     const catKeys = (typeof allCats === "function" ? allCats() : ["productivity", "learning", "distraction", "communication", "uncategorized"]);
     const currentLbl = (typeof getCatLabel === "function" ? getCatLabel(currentCat) : (typeof catLabel === "function" ? catLabel(currentCat, !1) : currentCat));
-    const currentEmoji = (typeof catEmoji === "function" ? catEmoji(currentCat) : "");
     const color = (typeof catColor === "function" ? catColor(currentCat) : (CAT_COLORS?.[currentCat] || "#555555"));
 
     let itemsHtml = "";
     catKeys.forEach(catKey => {
         const lbl = (typeof getCatLabel === "function" ? getCatLabel(catKey) : (typeof catLabel === "function" ? catLabel(catKey, !1) : catKey));
-        const emoji = (typeof catEmoji === "function" ? catEmoji(catKey) : "");
         const isSelected = catKey === currentCat;
         const itemColor = (typeof catColor === "function" ? catColor(catKey) : (CAT_COLORS?.[catKey] || "#555555"));
 
         itemsHtml += `
           <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${itemColor}; flex-shrink:0;"></span>
-            <span>${emoji} ${lbl}</span>
+            <span>${lbl}</span>
             ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
           </button>
         `;
@@ -1036,7 +1034,7 @@ function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
     return `
     <div class="ff-dropdown ${customClass}" data-domain="${escHTML(cleanDom)}">
       <button type="button" class="ff-dropdown-btn" style="background:${color}22; color:${color}; border-color:${color}55;">
-        <span>${currentEmoji} ${currentLbl}</span>
+        <span>${currentLbl}</span>
         <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
       <div class="ff-dropdown-menu">
@@ -1249,7 +1247,7 @@ function renderCategories() {
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--bd); padding-bottom:16px; margin-bottom:16px;">
           <div style="display:flex; align-items:center; gap:10px;">
             <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${catColor(a)};"></span>
-            <span style="font-size:18px; font-weight:800; color:var(--tx);">${catEmojiStr} ${catLabelStr}</span>
+            <span style="font-size:18px; font-weight:800; color:var(--tx);">${catLabelStr}</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <button class="bs cat-edit-btn" data-cat="${a}">
@@ -3325,7 +3323,7 @@ async function renderTopSites() {
                 var t = getEffectiveCat(e[0]),
                     a = document.createElement("div");
                 a.className = "siterow";
-                a.style.gridTemplateColumns = "minmax(140px, 1fr) 110px 170px 75px 75px";
+                a.style.gridTemplateColumns = "minmax(140px, 1fr) 110px 135px 75px 75px";
                 const isPinned = pinnedSites.includes(e[0]);
                 var n = buildCustomDropdownHtml(e[0], t.cat);
 
