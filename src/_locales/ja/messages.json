@@ -3172,5 +3172,14 @@
   },
   "quote": {
     "message": "忙しさよりも生産性に集中しましょう。"
+  },
+  "movedToUncategorized": {
+    "message": "未分類に移動しました"
+  },
+  "siteRemoved": {
+    "message": "サイトを削除しました"
+  },
+  "enterNewPin": {
+    "message": "新しい4〜6桁のPINを入力してください"
   }
 }

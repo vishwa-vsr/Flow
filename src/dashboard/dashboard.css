@@ -611,37 +611,6 @@
       border-radius: 99px !important;
     }
 
-    .cat-edit-btn {
-      height: 30px !important;
-      padding: 6px 12px !important;
-      font-size: 12px !important;
-      font-weight: 700 !important;
-      border-radius: 8px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-sizing: border-box !important;
-      line-height: 1 !important;
-    }
-
-    .cat-site-count-badge {
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      height: 30px !important;
-      padding: 6px 12px !important;
-      font-size: 12px !important;
-      font-weight: 700 !important;
-      border-radius: 8px !important;
-      border: 1px solid var(--bd) !important;
-      color: var(--tx2) !important;
-      background: transparent !important;
-      box-sizing: border-box !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-    }
-
-
     .bic {
       width: 36px;
       height: 36px;

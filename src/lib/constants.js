@@ -343,4 +343,34 @@
 
     return { cat: "uncategorized", auto: false };
   };
+
+  root.isDefaultSiteHidden = function (dom, hiddenSites) {
+    const hidden = hiddenSites || root.hiddenDefaultSites || (typeof hiddenDefaultSites !== "undefined" ? hiddenDefaultSites : []);
+    if (!dom || !Array.isArray(hidden) || hidden.length === 0) return false;
+    const cleanDom = dom.toLowerCase().trim().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+    if (hidden.includes(cleanDom) || hidden.includes(dom)) return true;
+    const parts = cleanDom.split(".");
+    for (let i = 1; i < parts.length - 1; i++) {
+      const sub = parts.slice(i).join(".");
+      if (hidden.includes(sub)) return true;
+    }
+    return false;
+  };
+
+  root.getPresetName = function (id, name) {
+    const normId = id === "deep_work" ? "deep-work" : (id === "sprint" ? "short-sprint" : id);
+    if (name) {
+      if (normId === "pomodoro" && name !== "Pomodoro") return name;
+      if (normId === "deep-work" && name !== "Deep Work") return name;
+      if (normId === "short-sprint" && name !== "Short Sprint") return name;
+      if (normId === "custom" && name !== "Flow") return name;
+      if (normId !== "pomodoro" && normId !== "deep-work" && normId !== "short-sprint" && normId !== "custom") return name;
+    }
+    const t = (typeof t_ === "function") ? t_ : (k => k);
+    if (normId === "pomodoro") return t("presetPomodoro") || name || "Pomodoro";
+    if (normId === "deep-work") return t("presetDeepWork") || name || "Deep Work";
+    if (normId === "short-sprint") return t("presetShortSprint") || name || "Short Sprint";
+    if (normId === "custom") return t("presetFlow") || name || "Flow";
+    return name || id;
+  };
 })(typeof self !== "undefined" ? self : this);

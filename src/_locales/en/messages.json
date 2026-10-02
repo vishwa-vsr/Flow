@@ -3123,5 +3123,14 @@
   },
   "quote": {
     "message": "Focus on being productive instead of busy."
+  },
+  "movedToUncategorized": {
+    "message": "Moved to Uncategorized"
+  },
+  "siteRemoved": {
+    "message": "Site removed"
+  },
+  "enterNewPin": {
+    "message": "Enter your new 4-6 digit PIN"
   }
 }

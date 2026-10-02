@@ -3123,5 +3123,14 @@
   },
   "quote": {
     "message": "바쁜 것보다 생산적인 것에 집중하세요."
+  },
+  "movedToUncategorized": {
+    "message": "미분류로 이동되었습니다"
+  },
+  "siteRemoved": {
+    "message": "사이트가 제거되었습니다"
+  },
+  "enterNewPin": {
+    "message": "새로운 4~6자리 PIN을 입력하세요"
   }
 }

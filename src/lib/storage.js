@@ -245,4 +245,70 @@
       String(d.getDate()).padStart(2, "0")
     );
   };
+
+  root.buildBlockRuleFromConfig = function (domainStr, cfg) {
+    const c = cfg || { instantBlock: true };
+    const catObj = typeof root.getEffectiveCat === "function" ? root.getEffectiveCat(domainStr) : { cat: "distraction" };
+    return {
+      id: Math.random().toString(36).substring(2, 9),
+      domain: domainStr,
+      category: (catObj && catObj.cat) || "distraction",
+      redirectUrl: c.redirectUrl || null,
+      instantBlock: !!c.instantBlock,
+      focusOnly: !!c.focusOnly,
+      timeLimitEnabled: !!c.timeLimitEnabled,
+      dailyLimitSecs: Number(c.dailyLimitSecs) || 0,
+      scheduleEnabled: !!c.scheduleEnabled,
+      schedules: Array.isArray(c.schedules) ? c.schedules : [],
+      sessionLimitEnabled: !!c.sessionLimitEnabled,
+      sessionLimitSecs: Number(c.sessionLimitSecs) || 300,
+      sessionCooldownSecs: Number(c.sessionCooldownSecs) || 600,
+      cooldownEnabled: !!c.cooldownEnabled,
+      cooldownTimer: Number(c.cooldownTimer) || 10,
+      cooldownFrequency: c.cooldownFrequency || "always",
+      activeDays: c.activeDays !== undefined ? c.activeDays : [0, 1, 2, 3, 4, 5, 6],
+    };
+  };
+
+  root.saveBlockRulesAndSync = async function (newRules) {
+    const safeRules = Array.isArray(newRules) ? newRules : [];
+    await root.sLocal({ blockRules: safeRules });
+    const cds = [];
+    const css = {};
+    safeRules.forEach((r) => {
+      if (r && r.cooldownEnabled && r.domain) {
+        cds.push(r.domain);
+        css[r.domain] = {
+          timer: parseInt(r.cooldownTimer, 10) || 10,
+          frequency: r.cooldownFrequency || "always",
+        };
+      }
+    });
+    const send = typeof root.msg === "function" ? root.msg : null;
+    if (send) {
+      await send("SET_COOLDOWNS", { cooldowns: cds });
+      await send("SET_COOLDOWN_SETTINGS", { settings: css });
+    }
+  };
+
+  root.clearAllRulesAndSync = async function () {
+    await root.sLocal({
+      blockRules: [],
+      allowList: [],
+      neverTrackDomains: [],
+    });
+    const syncRes = await root.gSync(["settings"]);
+    const s = (syncRes && syncRes.settings) || {};
+    if (s.blockRules || s.allowRules) {
+      s.blockRules = [];
+      s.allowRules = [];
+      await root.sSync({ settings: s });
+    }
+    const send = typeof root.msg === "function" ? root.msg : null;
+    if (send) {
+      await send("SET_COOLDOWNS", { cooldowns: [] });
+      await send("SET_COOLDOWN_SETTINGS", { settings: {} });
+      await send("TRIGGER_DNR_UPDATE");
+    }
+  };
 })(typeof self !== "undefined" ? self : this);

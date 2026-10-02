@@ -19,6 +19,10 @@ export function showPass(cancelable = false, titleText, descText) {
     const tr = (typeof t_ === "function") ? t_ : (k => k);
     const title = titleText || tr("settingsLocked") || "Settings Locked";
     const desc = descText || tr("enterPin") || "Enter your 6-digit PIN to continue";
+    if (pcRes) {
+        pcRes(false);
+        pcRes = null;
+    }
     return new Promise(n => {
         pcRes = n;
         pcBuf = "";
@@ -49,6 +53,18 @@ export async function promptPinIfEnabled(key) {
     const fetchSync = (typeof gSync === "function") ? gSync : (async () => ({}));
     var t = (await fetchSync(["settings"])).settings || {};
     return !t.passcodeHash || !1 === t[key] || await showPass(!0, tr("verificationRequired") || "Verification Required", tr("enterPinToPerformAction") || "Enter your PIN to perform this action.");
+}
+
+export async function requirePin(titleText, descText) {
+    const tr = (typeof t_ === "function") ? t_ : (k => k);
+    const fetchSync = (typeof gSync === "function") ? gSync : (async () => ({}));
+    var t = (await fetchSync(["settings"])).settings || {};
+    if (!t.passcodeHash) return true;
+    return await showPass(
+        true,
+        titleText || tr("verificationRequired") || "Verification Required",
+        descText || tr("enterPinToPerformAction") || "Enter your PIN to perform this action."
+    );
 }
 
 export function initPinEventListeners() {

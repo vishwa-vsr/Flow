@@ -3123,5 +3123,14 @@
   },
   "quote": {
     "message": "Concentrez-vous sur la productivité plutôt que sur l'occupation."
+  },
+  "movedToUncategorized": {
+    "message": "Déplacé vers Non classé"
+  },
+  "siteRemoved": {
+    "message": "Site supprimé"
+  },
+  "enterNewPin": {
+    "message": "Entrez votre nouveau code PIN à 4–6 chiffres"
   }
 }

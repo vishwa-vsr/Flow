@@ -4,22 +4,27 @@
  */
 
 export function getPresetName(id, name) {
+    if (typeof self !== "undefined" && typeof self.getPresetName === "function") {
+        return self.getPresetName(id, name);
+    }
+    const normId = id === "deep_work" ? "deep-work" : (id === "sprint" ? "short-sprint" : id);
     if (name) {
-        if (id === "pomodoro" && name !== "Pomodoro") return name;
-        if (id === "deep-work" && name !== "Deep Work") return name;
-        if (id === "short-sprint" && name !== "Short Sprint") return name;
-        if (id === "custom" && name !== "Flow") return name;
-        if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
+        if (normId === "pomodoro" && name !== "Pomodoro") return name;
+        if (normId === "deep-work" && name !== "Deep Work") return name;
+        if (normId === "short-sprint" && name !== "Short Sprint") return name;
+        if (normId === "custom" && name !== "Flow") return name;
+        if (normId !== "pomodoro" && normId !== "deep-work" && normId !== "short-sprint" && normId !== "custom") return name;
     }
     const t = (typeof t_ === "function") ? t_ : (k => k);
-    if (id === "pomodoro") return t("presetPomodoro") || name || "Pomodoro";
-    if (id === "deep-work") return t("presetDeepWork") || name || "Deep Work";
-    if (id === "short-sprint") return t("presetShortSprint") || name || "Short Sprint";
-    if (id === "custom") return t("presetFlow") || name || "Flow";
+    if (normId === "pomodoro") return t("presetPomodoro") || name || "Pomodoro";
+    if (normId === "deep-work") return t("presetDeepWork") || name || "Deep Work";
+    if (normId === "short-sprint") return t("presetShortSprint") || name || "Short Sprint";
+    if (normId === "custom") return t("presetFlow") || name || "Flow";
     return name || id;
 }
 
 export function catColor(e) {
+    if (typeof getCatColor === "function") return getCatColor(e);
     const colors = (typeof CAT_COLORS !== "undefined" && CAT_COLORS) ? CAT_COLORS : null;
     const meta = (typeof CAT_META !== "undefined" && CAT_META) ? CAT_META : {};
     if (colors && colors[e]) return colors[e];
@@ -27,6 +32,7 @@ export function catColor(e) {
 }
 
 export function catEmoji(e) {
+    if (typeof getCatEmoji === "function") return getCatEmoji(e);
     const emojis = (typeof CAT_EMOJI !== "undefined" && CAT_EMOJI) ? CAT_EMOJI : null;
     const meta = (typeof CAT_META !== "undefined" && CAT_META) ? CAT_META : {};
     if (emojis && emojis[e]) return emojis[e];
@@ -34,6 +40,10 @@ export function catEmoji(e) {
 }
 
 export function catLabel(e, t) {
+    if (typeof getCatLabel === "function") {
+        const lbl = getCatLabel(e);
+        return t ? lbl + " ✨" : lbl;
+    }
     const tr = (typeof t_ === "function") ? t_ : (k => k);
     var key = "cat" + e.charAt(0).toUpperCase() + e.slice(1);
     var trans = tr(key);
@@ -50,5 +60,24 @@ export function catLabel(e, t) {
 }
 
 export function allCats() {
-    return ["productivity", "learning", "distraction", "communication", "uncategorized"];
+    return (typeof DEFAULT_CATS !== "undefined" && Array.isArray(DEFAULT_CATS))
+        ? DEFAULT_CATS
+        : ["productivity", "learning", "distraction", "communication", "uncategorized"];
 }
+
+export function isDefaultSiteHidden(d, hiddenList) {
+    if (typeof self !== "undefined" && typeof self.isDefaultSiteHidden === "function") {
+        return self.isDefaultSiteHidden(d, hiddenList);
+    }
+    const list = Array.isArray(hiddenList)
+        ? hiddenList
+        : (typeof window !== "undefined" && Array.isArray(window.hiddenDefaultSites) ? window.hiddenDefaultSites : []);
+    if (!list.length || !d) return false;
+    if (list.includes(d)) return true;
+    const parts = d.split(".");
+    for (let i = 1; i < parts.length - 1; i++) {
+        if (list.includes(parts.slice(i).join("."))) return true;
+    }
+    return false;
+}
+

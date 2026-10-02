@@ -1,15 +1,12 @@
 import { uid, sanitizeDomain, formatTime12 } from "./modules/utils-helpers.js";
-import { getPresetName, catColor, catEmoji, catLabel, allCats } from "./modules/category-helpers.js";
+import { getPresetName, catColor, catEmoji, catLabel, allCats, isDefaultSiteHidden } from "./modules/category-helpers.js";
 import { showEditPresetModal as showEditPresetModalModule } from "./modules/preset-editor.js";
-import { updDots, showPass, checkGate, promptPinIfEnabled, initPinEventListeners } from "./modules/pin-security.js";
+import { updDots, showPass, checkGate, promptPinIfEnabled, requirePin, initPinEventListeners } from "./modules/pin-security.js";
 
 var $ = function (e) {
     return document.getElementById(e)
 },
-    _barChartInstance = null,
-    _trendChartInstance = null,
-    _donutChartInstance = null,
-    _trendBarChartInstance = null,
+    _donutRedraw = null,
     activeTrendView = "line",
     _currentFocusState = null,
     _lastFavPct = -1,
@@ -406,6 +403,10 @@ async function renderGranularBlocksUI(force = false) {
 window.renderGranularBlocksUI = renderGranularBlocksUI;
 async function saveRulesAndSync(newRules) {
     rules = newRules;
+    if (typeof saveBlockRulesAndSync === "function") {
+        await saveBlockRulesAndSync(newRules);
+        return;
+    }
     await sLocal({ blockRules: newRules });
 
     // Sync to cooldownDomains and cooldownSettings for the backend content script
@@ -763,16 +764,6 @@ async function loadCategories() {
     loadWeeklyGoalSettings();
 }
 
-function isDefaultSiteHidden(d) {
-    if (typeof hiddenDefaultSites === "undefined" || !hiddenDefaultSites) return false;
-    if (hiddenDefaultSites.includes(d)) return true;
-    const parts = d.split(".");
-    for (let i = 1; i < parts.length - 1; i++) {
-        if (hiddenDefaultSites.includes(parts.slice(i).join("."))) return true;
-    }
-    return false;
-}
-
 function recalculateRangeStats(data) {
     if (!data) return;
     Object.values(data).forEach(entry => {
@@ -890,10 +881,6 @@ function openEditCategoryModal(catKey) {
 
           <div style="display:flex; gap: 16px;">
             <div style="flex:1;">
-              <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("emojiIcon") || "Emoji Icon"}</label>
-              <input type="text" id="cat-edit-emoji" value="${sanitizeDomain(currentEmoji)}" maxlength="4" style="width:100%; padding: 10px 14px; border-radius: 10px; border:1px solid var(--bd); background:var(--bg3); color:var(--tx); font-size:16px; text-align:center;" />
-            </div>
-            <div style="flex:1;">
               <label style="display:block; font-size:12px; font-weight:700; color:var(--tx2); margin-bottom:6px;">${t_("accentColor") || "Accent Color"}</label>
               <div style="display:flex; align-items:center; gap: 8px;">
                 <input type="color" id="cat-edit-color" value="${currentColor}" style="width:42px; height:42px; padding:2px; border-radius:10px; border:1px solid var(--bd); background:var(--bg3); cursor:pointer;" />
@@ -914,14 +901,14 @@ function openEditCategoryModal(catKey) {
 
         <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 24px; padding-top: 16px; border-top:1px solid var(--bd);">
           <button id="cat-edit-reset" type="button" style="background:none; border:1px solid var(--bd); color:var(--tx2); padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor:pointer; display:inline-flex; align-items:center; gap: 6px; transition:var(--trans);">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            ${FlowIcons.get("refresh", { size: 14 })}
             ${t_("resetToDefault") || "Reset to Default"}
           </button>
 
           <div style="display:flex; gap: 8px;">
             <button id="cat-edit-cancel" type="button" style="background:var(--bg3); border:1px solid var(--bd); color:var(--tx); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor:pointer;">${t_("cancel") || "Cancel"}</button>
             <button id="cat-edit-save" type="button" style="background:var(--green); border:none; color:#000; padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor:pointer; display:inline-flex; align-items:center; gap: 6px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              ${FlowIcons.get("check", { size: 14 })}
               ${t_("save") || "Save"}
             </button>
           </div>
@@ -966,13 +953,12 @@ function openEditCategoryModal(catKey) {
 
     overlay.querySelector("#cat-edit-save")?.addEventListener("click", async () => {
         const newLabel = (overlay.querySelector("#cat-edit-label").value || "").trim();
-        const newEmoji = (overlay.querySelector("#cat-edit-emoji").value || "").trim() || "🏷️";
         const newColor = overlay.querySelector("#cat-edit-color").value || currentColor;
 
         if (!newLabel) return;
 
         const syncRes = (await gSync(["customCategories"])).customCategories || {};
-        syncRes[catKey] = { label: newLabel, emoji: newEmoji, color: newColor };
+        syncRes[catKey] = { label: newLabel, color: newColor };
 
         await sSync({ customCategories: syncRes });
         if (typeof applyCustomCategories === "function") applyCustomCategories(syncRes);
@@ -1026,7 +1012,7 @@ function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
           <button type="button" class="ff-dropdown-item${isSelected ? ' selected' : ''}" data-cat="${catKey}">
             <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${itemColor}; flex-shrink:0;"></span>
             <span>${lbl}</span>
-            ${isSelected ? '<svg class="ff-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+            ${isSelected ? FlowIcons.get("check", { size: 14, class: "ff-check-icon" }) : ''}
           </button>
         `;
     });
@@ -1035,7 +1021,7 @@ function buildCustomDropdownHtml(domain, currentCat, customClass = "") {
     <div class="ff-dropdown ${customClass}" data-domain="${escHTML(cleanDom)}">
       <button type="button" class="ff-dropdown-btn" style="background:transparent; color:${color}; border:1.5px solid ${color};">
         <span>${currentLbl}</span>
-        <svg class="ff-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        ${FlowIcons.get("chevron-down", { size: 14, class: "ff-dropdown-arrow" })}
       </button>
       <div class="ff-dropdown-menu">
         ${itemsHtml}
@@ -1395,19 +1381,8 @@ async function loadSettings(preloadedSettings) {
     if ($("welcome-back-thresh-sel")) $("welcome-back-thresh-sel").value = e.welcomeBackThresh || 10;
 }
 
-function ensureChartLibrary() {
-    return Promise.resolve();
-}
-
 async function loadAnalytics() {
     await loadCategories();
-    if ("overview" === currentATab || "trend" === currentATab) {
-        try {
-            await ensureChartLibrary();
-        } catch (err) {
-            console.warn("[FF] Failed to load charting library:", err);
-        }
-    }
     const tabEl = $("atab-" + currentATab);
 
     try {
@@ -1739,7 +1714,8 @@ async function renderInsights() {
                       ${["productivity", "learning", "communication", "distraction", "uncategorized"].map(c => `
                         <label class="c-checkbox-lbl" style="padding:10px;font-size:13px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;cursor:pointer;border:1px solid var(--bd);border-radius:10px;background:var(--bg3);">
                           <input type="checkbox" class="hm-cat-cb" value="${c}" ${goalCats.includes(c) ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;"/>
-                          <span>${catEmoji(c)} ${catLabel(c, false)}</span>
+                          <span style="width:8px;height:8px;border-radius:50%;background:${catColor(c)};flex-shrink:0;"></span>
+                          <span>${catLabel(c, false)}</span>
                         </label>
                       `).join('')}
                     </div>
@@ -1832,7 +1808,7 @@ document.querySelectorAll(".nav-links .ni").forEach(e => {
         if (targetTab) targetTab.classList.add("act");
         "analytics" === t && loadAnalytics();
         "settings" === t && loadExtendedSettings();
-        "focus" === t && (loadFocusUI(), loadWeeklyGoalSettings(), loadFocusHistory());
+        "focus" === t && (loadFocusUI(), loadWeeklyGoalSettings());
         "sitemanager" === t && (async () => { await Promise.all([loadRules(), loadCategories(), loadVisitedSites(), loadExtendedSettings()]); renderCategories(); renderGranularBlocksUI(); })();
 
     })
@@ -1977,7 +1953,7 @@ document.querySelectorAll(".nav-links .ni").forEach(e => {
         if ($("btn-fst").disabled) return; $("btn-fst").disabled = true;
         try {
             if (await promptPinIfEnabled("lockStop")) {
-                renderFocus((await msg("FOCUS_STOP"))?.focusState, await getActiveWorkMins()), loadFocusHistory()
+                renderFocus((await msg("FOCUS_STOP"))?.focusState, await getActiveWorkMins())
             }
         } finally { $("btn-fst").disabled = false; }
     }), $("btn-fp") && $("btn-fp").addEventListener("click", async () => {
@@ -2235,7 +2211,7 @@ function attachChartWheelScroll(scrollEl) {
     }, { passive: false });
 }
 
-function renderYAxisLabels(yAxisId, maxVal, topPad, bottomPad, plotH, textColor) {
+function renderYAxisLabels(yAxisId, maxVal, topPad, plotH, textColor) {
     const yAxisEl = document.getElementById(yAxisId);
     
     if (yAxisEl) {
@@ -2337,7 +2313,7 @@ function drawBarChart(canvasId, yAxisId, scrollId, labels, dayKeys, dayStats, se
     const plotH = 450 - topPad - bottomPad;
     const colW = chartWidth / labels.length;
 
-    renderYAxisLabels(yAxisId, maxVal, topPad, bottomPad, plotH, textColor);
+    renderYAxisLabels(yAxisId, maxVal, topPad, plotH, textColor);
 
     function render(hoveredColIdx = -1, hoveredCat = null) {
         ctx.clearRect(0, 0, chartWidth, 450);
@@ -2550,7 +2526,7 @@ function drawTrendChart(canvasId, yAxisId, scrollId, labels, prod, learn, comm, 
     const plotH = 450 - topPad - bottomPad;
     const colW = chartWidth / labels.length;
 
-    renderYAxisLabels(yAxisId, maxVal, topPad, bottomPad, plotH, textColor);
+    renderYAxisLabels(yAxisId, maxVal, topPad, plotH, textColor);
 
     function getPoints(data) {
         return data.map((v, i) => {
@@ -2870,6 +2846,7 @@ async function renderOverview() {
         }
 
         drawDonut();
+        _donutRedraw = drawDonut;
 
         donutCanvas.onmousemove = (ev) => {
             if (total <= 0) return;
@@ -2944,17 +2921,15 @@ async function renderOverview() {
                 `);
                 row.addEventListener("mouseenter", () => {
                     const dataIndex = ["productivity", "learning", "communication", "distraction", "uncategorized"].indexOf(c.id);
-                    if (_donutChartInstance && dataIndex !== -1) {
-                        _donutChartInstance.setActiveElements([{ datasetIndex: 0, index: dataIndex }]);
-                        _donutChartInstance.update();
+                    if (typeof _donutRedraw === "function" && dataIndex !== -1) {
+                        _donutRedraw(dataIndex);
                     }
                     if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(secs);
                     if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = c.label;
                 });
                 row.addEventListener("mouseleave", () => {
-                    if (_donutChartInstance) {
-                        _donutChartInstance.setActiveElements([]);
-                        _donutChartInstance.update();
+                    if (typeof _donutRedraw === "function") {
+                        _donutRedraw(-1);
                     }
                     if ($("ov-donut-total-lbl")) $("ov-donut-total-lbl").textContent = fmt(totalSecs);
                     if ($("ov-donut-sub-lbl")) $("ov-donut-sub-lbl").textContent = t_("tracked") || "tracked";
@@ -3323,7 +3298,7 @@ async function renderTopSites() {
                 var t = getEffectiveCat(e[0]),
                     a = document.createElement("div");
                 a.className = "siterow";
-                a.style.gridTemplateColumns = "minmax(140px, 1fr) 110px 135px 75px 75px";
+                a.style.gridTemplateColumns = "minmax(140px, 1fr) 110px 120px 75px 75px";
                 const isPinned = pinnedSites.includes(e[0]);
                 var n = buildCustomDropdownHtml(e[0], t.cat);
 
@@ -3511,7 +3486,7 @@ async function renderTrend() {
             }) : "—";
         }
         if ($("trend-avg")) {
-            const iconSvg = window.FlowIcons ? window.FlowIcons.get("analytics", { size: 11 }) : '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>';
+            const iconSvg = FlowIcons.get("analytics", { size: 11 });
             $("trend-avg").innerHTML = `<span class="trend-icon" style="display:inline-flex; align-items:center;">${iconSvg}</span><span class="trend-text">Pace</span>`;
         }
     } catch (err) {
@@ -3790,11 +3765,10 @@ async function loadWeeklyGoalSettings() {
         const lbl = cb.closest(".goal-cb-lbl");
         if (lbl) {
             const catKey = cb.value;
-            const emoji = catEmoji(catKey);
             const label = catLabel(catKey, false);
             lbl.innerHTML = "";
             lbl.appendChild(cb);
-            const txtNode = document.createTextNode(` ${emoji} ${label}`);
+            const txtNode = document.createTextNode(` ${label}`);
             lbl.appendChild(txtNode);
         }
     }), await renderGoalPreview(e.weeklyGoalHours || 0);
@@ -3871,20 +3845,22 @@ async function updateDangerCounts() {
             $("danger-count-data").textContent = days === 1 ? "1 day recorded" : `${days} days recorded`;
         }
 
-        const syncRes = await gSync(["settings"]);
-        const s = syncRes && syncRes.settings ? syncRes.settings : {};
-        const blockCount = (s.blockRules || []).length;
-        const allowCount = (s.allowRules || []).length;
+        const locRes = await gLocal(["blockRules", "allowList", "siteCategories", "hiddenDefaultSites"]);
+        const blockCount = (locRes?.blockRules || []).length;
+        const allowCount = (locRes?.allowList || []).length;
         const totalRules = blockCount + allowCount;
         if ($("danger-count-rules")) {
             $("danger-count-rules").textContent = totalRules === 1 ? "1 active rule" : `${totalRules} active rules`;
         }
 
-        const locRes = await gLocal(["siteCategories"]);
         const customCats = locRes && locRes.siteCategories ? locRes.siteCategories : {};
-        const catKeys = Object.keys(customCats).filter(k => !k.startsWith("www."));
+        const hiddenSites = (locRes && Array.isArray(locRes.hiddenDefaultSites) ? locRes.hiddenDefaultSites : []).filter(k => !k.startsWith("www."));
+        const catSyncRes = await gSync(["customCategories"]);
+        const customCatDefs = catSyncRes && catSyncRes.customCategories ? Object.keys(catSyncRes.customCategories) : [];
+        const modifiedSiteKeys = Object.keys(customCats).filter(k => !k.startsWith("www.") && (!AUTO_CATEGORIES[k] || customCats[k] !== AUTO_CATEGORIES[k]));
+        const totalCatMods = new Set([...modifiedSiteKeys, ...hiddenSites]).size + customCatDefs.length;
         if ($("danger-count-cats")) {
-            $("danger-count-cats").textContent = catKeys.length === 1 ? "1 modified site" : `${catKeys.length} modified sites`;
+            $("danger-count-cats").textContent = totalCatMods === 1 ? "1 modified site" : `${totalCatMods} modified sites`;
         }
     } catch (e) {
         console.warn("Failed to update danger counts:", e);
@@ -3926,7 +3902,7 @@ async function loadExtendedSettings(preloadedSettings) {
         updateIdleBadgeVisibility();
 
         if (e.passcodeHash) {
-            setSafeHTML($("pin-status-badge"), '<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;flex-shrink:0;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>PIN Active');
+            setSafeHTML($("pin-status-badge"), `${FlowIcons.get("lock", { size: 13, style: "margin-right:4px;flex-shrink:0;" })}PIN Active`);
             $("pin-status-badge").className = "pin-status-badge";
             $("pin-status-badge").style.color = "";
             var t = $("pin-status-wrapper") || $("pin-status-badge").parentElement;
@@ -3963,7 +3939,7 @@ async function loadExtendedSettings(preloadedSettings) {
             $("lock-adjust-time") && ($("lock-adjust-time").checked = !1 !== e.lockAdjustTime);
         } else {
             var a;
-            setSafeHTML($("pin-status-badge"), '<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;flex-shrink:0;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Not Set');
+            setSafeHTML($("pin-status-badge"), `${FlowIcons.get("lock-sm", { size: 13, style: "margin-right:4px;flex-shrink:0;" })}Not Set`);
             $("pin-status-badge").className = "pin-status-badge pin-not-set";
             $("pin-status-badge").style.color = "";
             if ($("granular-locks")) $("granular-locks").style.display = "block";
@@ -4136,7 +4112,6 @@ async function loadExtendedSettings(preloadedSettings) {
         };
     }
 }
-async function loadFocusHistory() {} 
 ["tog-ov-prod", "tog-ov-lrn", "tog-ov-dist", "tog-ov-comm", "tog-ov-unc"].forEach(e => {
     $(e) && $(e).addEventListener("change", renderOverview)
 }), ["tog-trend-prod", "tog-trend-lrn", "tog-trend-comm", "tog-trend-dist", "tog-trend-unc", "tog-trend-avg"].forEach(e => {
@@ -4217,7 +4192,7 @@ $("btn-pin") && $("btn-pin").addEventListener("click", async () => {
 
 const btnChangePin = $("btn-change-pin") || $("btn-chg-pin");
 btnChangePin && btnChangePin.addEventListener("click", async () => {
-    if (await promptPinIfEnabled("lockDanger")) {
+    if (await requirePin()) {
         if ($("pin-setup-box")) $("pin-setup-box").style.display = "flex";
         if ($("pin-manage-box")) $("pin-manage-box").style.display = "none";
         const actionsDiv = document.getElementById("pin-actions-div");
@@ -4233,7 +4208,7 @@ btnChangePin && btnChangePin.addEventListener("click", async () => {
 
 const btnRemovePin = $("btn-remove-pin") || $("btn-rm-pin");
 btnRemovePin && btnRemovePin.addEventListener("click", async () => {
-    if (await promptPinIfEnabled("lockDanger")) {
+    if (await requirePin()) {
         var e = (await gSync(["settings"])).settings || {};
         e.passcodeHash = "";
         e.passcodeEnabled = false;
@@ -4254,10 +4229,21 @@ btnRemovePin && btnRemovePin.addEventListener("click", async () => {
     }
 }), $("btn-clr-rules") && $("btn-clr-rules").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearRules"), t_("clearRulesConfirm"), { isDestructive: true, confirmText: t_("clearConfirmBtn") })) {
-        var e = (await gSync(["settings"])).settings || {};
-        e.blockRules = [], e.allowRules = [], await sSync({
-            settings: e
-        }), await msg("TRIGGER_DNR_UPDATE"), renderCombined(), updateDangerCounts(), toast(t_("rulesCleared"), "ok")
+        rules = [];
+        allowList = [];
+        neverTrackDomains = [];
+        if (typeof clearAllRulesAndSync === "function") {
+            await clearAllRulesAndSync();
+        } else {
+            await sLocal({ blockRules: [], allowList: [], neverTrackDomains: [], granularRules: {} });
+            await msg("SET_COOLDOWNS", { cooldowns: [] });
+            await msg("SET_COOLDOWN_SETTINGS", { settings: {} });
+            await msg("TRIGGER_DNR_UPDATE");
+        }
+        renderCombined();
+        renderGranularBlocksUI(true);
+        updateDangerCounts();
+        toast(t_("rulesCleared"), "ok");
     }
 }), $("btn-clr-cats") && $("btn-clr-cats").addEventListener("click", async () => {
     if (await promptPinIfEnabled("lockDanger") && await showConfirm(t_("clearCategories") || "Reset Categories", t_("clearCategoriesConfirm") || "Are you sure you want to reset all custom categories to default assumptions?", { isDestructive: true, confirmText: t_("clearConfirmBtn") || "Reset" })) {
@@ -4308,7 +4294,6 @@ btnRemovePin && btnRemovePin.addEventListener("click", async () => {
         if ($("btn-save-set")) {
             $("btn-save-set").click();
         }
-        toast(t_("settingsSaved") || "Settings saved successfully", "ok");
     });
     document.querySelectorAll(".ni[data-tab]").forEach(tab => tab.addEventListener("click", () => {
         _fab.style.display = tab.getAttribute("data-tab") === "settings" ? "block" : "none";
@@ -4344,7 +4329,7 @@ function startSmoothFocusTick(e) {
 
         t <= 0 && (clearInterval(_focusTick), _focusTick = null, setTimeout(async () => {
             var e = await msg("FOCUS_GET_STATE");
-            renderFocus(e?.focusState, await getActiveWorkMins()), loadFocusHistory()
+            renderFocus(e?.focusState, await getActiveWorkMins())
         }, 1500))
     };
     tick();
@@ -4376,7 +4361,6 @@ renderFocus = function (e, t) {
         try {
             const state = await msg("FOCUS_GET_STATE");
             renderFocus(state?.focusState, await getActiveWorkMins());
-            loadFocusHistory();
         } catch (_) {}
         if (typeof window.updateDashboardPrivacyUI === "function") {
             window.updateDashboardPrivacyUI();
@@ -4418,22 +4402,8 @@ renderFocus = function (e, t) {
 
     if ("analytics" === initialTab) loadAnalytics();
     else if ("settings" === initialTab) loadExtendedSettings();
-    else if ("focus" === initialTab) { loadFocusUI(); loadWeeklyGoalSettings(); loadFocusHistory(); }
+    else if ("focus" === initialTab) { loadFocusUI(); loadWeeklyGoalSettings(); }
     else if ("sitemanager" === initialTab) { (async () => { await Promise.all([loadRules(), loadCategories(), loadVisitedSites(), loadExtendedSettings()]); renderCategories(); renderGranularBlocksUI(); })(); }
-    // FF v6.7: Floating "Save All Settings" button that follows the user when on the Settings tab
-    (function initFloatingSave() {
-        const _fab = document.createElement("button");
-        _fab.id = "floating-save-btn";
-        _fab.textContent = t_("saveAllSettings");
-        _fab.style.cssText = "display:none;position:fixed;bottom:28px;right:28px;z-index:9000;background:var(--green);color:#000;font-weight:800;font-size:16px;padding:12px 22px;border-radius:14px;border:none;cursor:pointer;box-shadow:var(--shadow-md);transition:opacity .2s,transform .2s;font-family:inherit;";
-        document.body.appendChild(_fab);
-        _fab.addEventListener("click", () => { $("btn-save-set") && $("btn-save-set").click(); });
-        // Show only on settings tab
-        document.querySelectorAll(".ni[data-tab]").forEach(tab => tab.addEventListener("click", () => {
-            _fab.style.display = tab.getAttribute("data-tab") === "settings" ? "block" : "none";
-        }));
-        if (window.location.hash === "#settings") _fab.style.display = "block";
-    })()
 }();
 // ============================================================
 // FF v4.7 — Backup/Restore + Cool-downs wiring
@@ -5507,11 +5477,11 @@ if ($("file-migrate-wt")) $("file-migrate-wt").addEventListener("change", async 
     #tab-focus .focus-layout {
       display: grid !important;
       grid-template-columns: 1.8fr 1fr !important;
-      gap: 24px !important;
+      gap: 16px !important;
       align-items: stretch !important;
     }
     #tab-focus .focus-layout > .ff-col {
-      display: flex; flex-direction: column; gap: 24px; min-width: 0; height: 100%;
+      display: flex; flex-direction: column; gap: 16px; min-width: 0; height: 100%;
     }
     #tab-focus .focus-layout .card { margin: 0 !important; }
     #tab-focus .focus-layout #focus-allowlist-container {
@@ -6644,30 +6614,32 @@ listContainer.appendChild(row);
                         }
                         
                         const c = p.config || {};
-                        const newRule = {
-                            id: Math.random().toString(36).substring(2, 9),
-                            domain: sanitizedDom,
-                            category: getEffectiveCat(sanitizedDom).cat || "distraction",
-                            redirectUrl: c.redirectUrl || null,
-                            instantBlock: !!c.instantBlock,
-                            focusOnly: !!c.focusOnly,
-                            timeLimitEnabled: !!c.timeLimitEnabled,
-                            dailyLimitSecs: Number(c.dailyLimitSecs) || 0,
-                            scheduleEnabled: !!c.scheduleEnabled,
-                            schedules: c.schedules || [],
-                            sessionLimitEnabled: !!c.sessionLimitEnabled,
-                            sessionLimitSecs: Number(c.sessionLimitSecs) || 300,
-                            sessionCooldownSecs: Number(c.sessionCooldownSecs) || 600,
-                            cooldownEnabled: !!c.cooldownEnabled,
-                            cooldownTimer: Number(c.cooldownTimer) || 10,
-                            cooldownFrequency: c.cooldownFrequency || "always",
-                            activeDays: c.activeDays !== undefined ? c.activeDays : [0, 1, 2, 3, 4, 5, 6]
-                        };
+                        const catName = getEffectiveCat(sanitizedDom).cat || "distraction";
+                        const newRule = typeof buildBlockRuleFromConfig === "function"
+                            ? buildBlockRuleFromConfig(sanitizedDom, c, catName)
+                            : {
+                                id: Math.random().toString(36).substring(2, 9),
+                                domain: sanitizedDom,
+                                category: catName,
+                                redirectUrl: c.redirectUrl || null,
+                                instantBlock: !!c.instantBlock,
+                                focusOnly: !!c.focusOnly,
+                                timeLimitEnabled: !!c.timeLimitEnabled,
+                                dailyLimitSecs: Number(c.dailyLimitSecs) || 0,
+                                scheduleEnabled: !!c.scheduleEnabled,
+                                schedules: c.schedules || [],
+                                sessionLimitEnabled: !!c.sessionLimitEnabled,
+                                sessionLimitSecs: Number(c.sessionLimitSecs) || 300,
+                                sessionCooldownSecs: Number(c.sessionCooldownSecs) || 600,
+                                cooldownEnabled: !!c.cooldownEnabled,
+                                cooldownTimer: Number(c.cooldownTimer) || 10,
+                                cooldownFrequency: c.cooldownFrequency || "always",
+                                activeDays: c.activeDays !== undefined ? c.activeDays : [0, 1, 2, 3, 4, 5, 6]
+                            };
                         
                         let { blockRules = [] } = await gLocal(["blockRules"]);
                         blockRules.push(newRule);
-                        await sLocal({ blockRules });
-                        await msg("TRIGGER_DNR_UPDATE");
+                        await saveRulesAndSync(blockRules);
                         
                         domInput.value = "";
                         const redirInput = $("quick-redir");

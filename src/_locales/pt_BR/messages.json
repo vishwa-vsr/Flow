@@ -3146,5 +3146,14 @@
   },
   "quote": {
     "message": "Foque em ser produtivo em vez de ocupado."
+  },
+  "movedToUncategorized": {
+    "message": "Movido para Sem categoria"
+  },
+  "siteRemoved": {
+    "message": "Site removido"
+  },
+  "enterNewPin": {
+    "message": "Digite seu novo PIN de 4 a 6 dígitos"
   }
 }

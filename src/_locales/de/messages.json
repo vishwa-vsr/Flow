@@ -3148,5 +3148,14 @@
   },
   "quote": {
     "message": "Konzentriere dich darauf, produktiv zu sein, anstatt nur beschäftigt."
+  },
+  "movedToUncategorized": {
+    "message": "Nach Unkategorisiert verschoben"
+  },
+  "siteRemoved": {
+    "message": "Website entfernt"
+  },
+  "enterNewPin": {
+    "message": "Geben Sie Ihre neue 4- bis 6-stellige PIN ein"
   }
 }

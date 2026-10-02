@@ -51,13 +51,13 @@ Flow is a free, local-first browser extension that blocks distracting websites, 
 | :--- | :--- |
 | ⏱️ **Pomodoro Focus Timer** | 4 built-in presets — Pomodoro (25/5), Deep Work (90/15), Short Sprint (15/2), and a fully custom slot. Automatically blocks distracting sites during active work cycles. |
 | 🚫 **Network-Level Website Blocker** | Blocks domains using Chrome's `declarativeNetRequest` API — blocked pages never load or consume bandwidth. SSO login pages (Google, Microsoft, Apple) are automatically excluded so you never get locked out. |
-| 📊 **Screen Time Tracking** | Tracks active tab time using visibility heartbeats and idle detection. Visualizes daily usage by domain and category with Chart.js charts. Detects media playback so timers don't pause while you watch a video or lecture. |
+| 📊 **Screen Time Tracking** | Tracks active tab time using visibility heartbeats and idle detection. Visualizes daily usage by domain and category with custom native HTML5 Canvas charts. Detects media playback so timers don't pause while you watch a video or lecture. |
 | 🧹 **Feed & Distraction Hiding** | Per-site CSS tweaks to hide distracting elements on **YouTube** (Shorts, home feed, related videos, comments), **Reddit** (feed, popular, comments, communities), **Instagram** (Reels, explore, home feed, suggested), **X / Twitter** (timeline, trending, who-to-follow, promoted posts), **LinkedIn** (feed, news, promoted), and **Netflix** (autoplay previews, recommendations, billboard). |
 | 🎨 **Black & White Mode** | Converts any supported site (YouTube, Reddit, Instagram, X, LinkedIn, Netflix) to grayscale to reduce visual dopamine triggers. |
 | ⏳ **Cooldown & Nudge Warnings** | Optional "Take a breath" full-screen countdown before opening distracting sites (configurable: every visit, every 10 min, or once per day). Warning banner slides in when your daily time limit on a site is nearly exhausted. |
 | 🔒 **PIN Lock Security** | Optional 4–6 digit PIN (hashed with SHA-256) to prevent impulsively changing block rules, stopping timers, or editing settings. |
 | 📅 **365-Day Consistency Heatmap** | GitHub-style annual heatmap showing productive days versus distraction-heavy days over the course of the year. |
-| 🏷️ **Domain Categorization** | Automatically and manually groups websites into Productivity, Learning, Communication, Distraction, or Uncategorized. Supports custom categories with user-defined colors and emoji. |
+| 🏷️ **Domain Categorization** | Automatically and manually groups websites into Productivity, Learning, Communication, Distraction, or Uncategorized. Supports custom categories with user-defined colors. |
 | 🌐 **11 Languages (i18n)** | Fully localized UI supporting English, Spanish, Simplified Chinese, Traditional Chinese (HK/TW), Japanese, German, Brazilian Portuguese, French, Korean, and Russian. |
 | 💾 **Data Backup & Migration** | Full JSON data export/import with one-click migration from legacy extensions (Webtime Tracker, Web Activity Time Tracker). |
 | 🌙 **Dark & Light Theme** | OLED-friendly dark mode and light mode, switchable from the popup. |
@@ -130,9 +130,6 @@ npm run build
 
 # 3. Build + create store-ready .zip archives → outputs to release/
 npm run zip
-
-# 4. Re-bundle Chart.js into src/lib/chart.min.js (only needed if upgrading Chart.js)
-npm run bundle-chart
 ```
 
 > **Windows PowerShell Note:** If script execution is restricted on your system, run the build script directly with Node:
@@ -146,10 +143,10 @@ npm run bundle-chart
 
 * **Frontend & Logic:** Vanilla JavaScript (ES2022) with native DOM APIs.
 * **Extension Standard:** WebExtensions API (Manifest V3) — `declarativeNetRequest`, `alarms`, `idle`, `storage`, `notifications`, `scripting`.
-* **Data Visualization:** [Chart.js 4.5](https://www.chartjs.org/) (bundled locally in `src/lib/chart.min.js`, zero external CDN requests).
+* **Data Visualization:** Custom zero-dependency HTML5 Canvas 2D charting engine (donut, stacked bar, multi-line trend, and 365-day heatmap).
 * **Storage Engine:** `chrome.storage.local` for block rules and local config, `chrome.storage.sync` for user settings and presets, and **IndexedDB** (`FocusFlowDB`) for daily and monthly browsing history.
 * **Styling:** Pure CSS with custom design tokens, responsive layouts, and OLED dark mode.
-* **Build Pipeline:** Node.js + `esbuild` for minification, with a multi-stage i18n parity validator that checks key coverage, case-insensitive duplicates, placeholder syntax, and untranslated strings across all 11 locales.
+* **Build Pipeline:** Node.js + `esbuild` for bundling and minification, with a multi-stage i18n parity validator that checks key coverage, case-insensitive duplicates, placeholder syntax, and untranslated strings across all 11 locales.
 
 ---
 
@@ -170,13 +167,12 @@ Flow/
 │    │    ├── constants.js       ← Default categories, site tweak maps, auto-categorization
 │    │    ├── db.js              ← IndexedDB wrapper (FocusFlowDB)
 │    │    ├── storage.js         ← chrome.storage helpers (local, sync, session)
-│    │    ├── icons.js           ← FlowIcons SVG icon engine (44 icons)
+│    │    ├── icons.js           ← FlowIcons SVG icon engine (45 icons)
 │    │    ├── i18n.js            ← Localization helper and dynamic language switching
-│    │    ├── utils.js           ← Shared utility functions
-│    │    └── chart.min.js       ← Bundled Chart.js 4.5 (local, no CDN)
+│    │    └── utils.js           ← Shared utility functions
 │    ├── popup/                  ← Toolbar popup (timer UI, quick controls, theme toggle)
 │    └── styles/                 ← Global CSS variables & design tokens
-├── tools/                       ← Build compiler (build.js) and Chart.js bundler
+├── tools/                       ← Build compiler and i18n validator (build.js)
 ├── dist/                        ← Production build outputs (chrome/, edge/, firefox/)
 ├── release/                     ← Store-ready .zip archives (generated by npm run zip)
 ├── media/                       ← Store screenshots & preview images

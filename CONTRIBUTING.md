@@ -76,7 +76,6 @@ graph TD
 * **`src/lib/storage.js`** — `chrome.storage` helpers (local, sync, session) with in-memory cache.
 * **`src/lib/icons.js`** — FlowIcons SVG icon engine (auto-renders `data-icon` attributes).
 * **`src/lib/i18n.js`** — Localization helper and dynamic language switching.
-* **`src/lib/chart.min.js`** — Bundled Chart.js 4.5 (local, zero CDN).
 
 ---
 
@@ -108,7 +107,6 @@ All build tooling is defined in `package.json` and runs via Node.js:
 | :--- | :--- |
 | `npm run build` | Validates i18n parity, minifies JavaScript/CSS with `esbuild`, adjusts Firefox manifests, and outputs to `dist/chrome/`, `dist/edge/`, and `dist/firefox/`. |
 | `npm run zip` | Runs the build and generates store-ready archives in `release/`. |
-| `npm run bundle-chart` | Rebundles `Chart.js` into `src/lib/chart.min.js`. |
 
 > **Skip Prompt Flag:** To run the build without interactive CLI prompts, use `npm run build -- --yes`.
 

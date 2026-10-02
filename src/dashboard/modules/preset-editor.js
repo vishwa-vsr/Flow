@@ -108,8 +108,8 @@ export function showEditPresetModal(presetId, state, options = {}) {
         let nameVal = rawName;
         if (!nameVal) {
             if (p.id === "pomodoro") nameVal = "Pomodoro";
-            else if (p.id === "deep-work") nameVal = "Deep Work";
-            else if (p.id === "short-sprint") nameVal = "Short Sprint";
+            else if (p.id === "deep-work" || p.id === "deep_work") nameVal = "Deep Work";
+            else if (p.id === "short-sprint" || p.id === "sprint") nameVal = "Short Sprint";
             else if (p.id === "custom") nameVal = "Flow";
             else nameVal = p.name || "Custom";
         }

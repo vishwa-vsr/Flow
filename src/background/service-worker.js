@@ -1162,12 +1162,19 @@ chrome.windows.onFocusChanged.addListener(async (windowId) => {
                 if (t > 0) {
                     const elapsed = capElapsed(t);
                     if (elapsed > 0) {
-                        await safeFlush(o.domain, elapsed, o.startTime);
+                        const syncData = await getCachedSync();
+                        const settings = syncData.settings || {};
+                        const minVisitSecs = settings.minVisitSecs || 0;
+                        const visitDuration = Math.floor((Date.now() - (o.visitStartTime || o.startTime)) / 1000);
+                        if (visitDuration >= minVisitSecs) {
+                            const flushSecs = elapsed + (o.accumulatedTime || 0);
+                            await safeFlush(o.domain, flushSecs, o.startTime);
+                        }
                     }
                 }
             }
             await sSession({
-                activeSession: { domain: null, startTime: null }
+                activeSession: { domain: null, startTime: null, visitStartTime: null, accumulatedTime: 0, tabId: null }
             });
         });
         updateBadge();
@@ -2403,7 +2410,7 @@ async function handle(t, e) {
                 _storCache.local.data.siteCategories = e;
                 _storCache.local.data.hiddenDefaultSites = newHidden;
             }
-            await updateRules();
+            await updateDNRRules();
             return {
                 ok: !0
             };
@@ -2931,8 +2938,8 @@ chrome.runtime.onStartup.addListener(async () => {
 // =====================================================================
 const FF_DEFAULT_PRESETS = [
     { id: "pomodoro", emoji: "🍅", name: "Pomodoro", work: 25, brk: 5, longBrk: 15, cycles: 4, strict: false, notify: true, autoStart: true },
-    { id: "deep_work", emoji: "🧠", name: "Deep Work", work: 90, brk: 15, longBrk: 30, cycles: 2, strict: false, notify: true, autoStart: true },
-    { id: "sprint", emoji: "⚡", name: "Short Sprint", work: 15, brk: 2, longBrk: 10, cycles: 4, strict: false, notify: true, autoStart: true },
+    { id: "deep-work", emoji: "🧠", name: "Deep Work", work: 90, brk: 15, longBrk: 30, cycles: 2, strict: false, notify: true, autoStart: true },
+    { id: "short-sprint", emoji: "⚡", name: "Short Sprint", work: 15, brk: 2, longBrk: 10, cycles: 4, strict: false, notify: true, autoStart: true },
 ];
 
 async function ensurePresets() {
@@ -2997,6 +3004,8 @@ async function ensurePresets() {
 
         focusPresets.forEach(p => { 
             if (p.autoStart === undefined) { p.autoStart = true; changed = true; }
+            if (p.id === "deep_work") { p.id = "deep-work"; changed = true; }
+            if (p.id === "sprint") { p.id = "short-sprint"; changed = true; }
             if (p.id === "custom" && p.name === "Custom") {
                 p.name = "Flow";
                 p.emoji = "🌊";

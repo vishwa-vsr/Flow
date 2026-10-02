@@ -3199,5 +3199,14 @@
   },
   "quote": {
     "message": "專注於保持高效，而非單純忙碌。"
+  },
+  "movedToUncategorized": {
+    "message": "已移至未分類"
+  },
+  "siteRemoved": {
+    "message": "已移除網站"
+  },
+  "enterNewPin": {
+    "message": "請輸入您的新 4-6 位 PIN 碼"
   }
 }

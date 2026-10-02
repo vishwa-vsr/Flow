@@ -219,7 +219,11 @@ async function checkCurrentTabForGranularRules() {
                     if (await promptPinIfEnabled("lockRules")) {
                         let { blockRules = [] } = await gLocal(["blockRules"]);
                         blockRules = blockRules.filter(r => r.id !== existingRule.id);
-                        await sLocal({ blockRules });
+                        if (typeof saveBlockRulesAndSync === "function") {
+                            await saveBlockRulesAndSync(blockRules);
+                        } else {
+                            await sLocal({ blockRules });
+                        }
                         await msg("TRIGGER_DNR_UPDATE");
                         chrome.tabs.reload(e[0].id);
                         window.close();
@@ -279,29 +283,35 @@ async function checkCurrentTabForGranularRules() {
                         const selectedPreset = items.find(p => p.id === selectedId);
                         const presetConfig = selectedPreset ? selectedPreset.config : { instantBlock: true };
 
-                        const newRule = {
-                            id: Math.random().toString(36).substring(2, 9),
-                            domain: s,
-                            category: getEffectiveCat(s).cat || "distraction",
-                            redirectUrl: presetConfig.redirectUrl || null,
-                            instantBlock: !!presetConfig.instantBlock,
-                            focusOnly: !!presetConfig.focusOnly,
-                            timeLimitEnabled: !!presetConfig.timeLimitEnabled,
-                            dailyLimitSecs: Number(presetConfig.dailyLimitSecs) || 0,
-                            scheduleEnabled: !!presetConfig.scheduleEnabled,
-                            schedules: presetConfig.schedules || [],
-                            sessionLimitEnabled: !!presetConfig.sessionLimitEnabled,
-                            sessionLimitSecs: Number(presetConfig.sessionLimitSecs) || 300,
-                            sessionCooldownSecs: Number(presetConfig.sessionCooldownSecs) || 600,
-                            cooldownEnabled: !!presetConfig.cooldownEnabled,
-                            cooldownTimer: Number(presetConfig.cooldownTimer) || 10,
-                            cooldownFrequency: presetConfig.cooldownFrequency || "always",
-                            activeDays: presetConfig.activeDays !== undefined ? presetConfig.activeDays : [0, 1, 2, 3, 4, 5, 6]
-                        };
+                        const newRule = (typeof buildBlockRuleFromConfig === "function")
+                            ? buildBlockRuleFromConfig(s, presetConfig)
+                            : {
+                                id: Math.random().toString(36).substring(2, 9),
+                                domain: s,
+                                category: getEffectiveCat(s).cat || "distraction",
+                                redirectUrl: presetConfig.redirectUrl || null,
+                                instantBlock: !!presetConfig.instantBlock,
+                                focusOnly: !!presetConfig.focusOnly,
+                                timeLimitEnabled: !!presetConfig.timeLimitEnabled,
+                                dailyLimitSecs: Number(presetConfig.dailyLimitSecs) || 0,
+                                scheduleEnabled: !!presetConfig.scheduleEnabled,
+                                schedules: presetConfig.schedules || [],
+                                sessionLimitEnabled: !!presetConfig.sessionLimitEnabled,
+                                sessionLimitSecs: Number(presetConfig.sessionLimitSecs) || 300,
+                                sessionCooldownSecs: Number(presetConfig.sessionCooldownSecs) || 600,
+                                cooldownEnabled: !!presetConfig.cooldownEnabled,
+                                cooldownTimer: Number(presetConfig.cooldownTimer) || 10,
+                                cooldownFrequency: presetConfig.cooldownFrequency || "always",
+                                activeDays: presetConfig.activeDays !== undefined ? presetConfig.activeDays : [0, 1, 2, 3, 4, 5, 6]
+                            };
 
                         let { blockRules = [] } = await gLocal(["blockRules"]);
                         blockRules.push(newRule);
-                        await sLocal({ blockRules });
+                        if (typeof saveBlockRulesAndSync === "function") {
+                            await saveBlockRulesAndSync(blockRules);
+                        } else {
+                            await sLocal({ blockRules });
+                        }
                         await msg("TRIGGER_DNR_UPDATE");
                         chrome.tabs.reload(e[0].id);
                         window.close();
@@ -765,17 +775,18 @@ $("btn-skip") && $("btn-skip").addEventListener("click", async () => {
     finally { _focusBusy = false; }
 });
 function getPresetName(id, name) {
+    const normId = id === "deep_work" ? "deep-work" : (id === "sprint" ? "short-sprint" : id);
     if (name) {
-        if (id === "pomodoro" && name !== "Pomodoro") return name;
-        if (id === "deep-work" && name !== "Deep Work") return name;
-        if (id === "short-sprint" && name !== "Short Sprint") return name;
-        if (id === "custom" && name !== "Flow") return name;
-        if (id !== "pomodoro" && id !== "deep-work" && id !== "short-sprint" && id !== "custom") return name;
+        if (normId === "pomodoro" && name !== "Pomodoro") return name;
+        if (normId === "deep-work" && name !== "Deep Work") return name;
+        if (normId === "short-sprint" && name !== "Short Sprint") return name;
+        if (normId === "custom" && name !== "Flow") return name;
+        if (normId !== "pomodoro" && normId !== "deep-work" && normId !== "short-sprint" && normId !== "custom") return name;
     }
-    if (id === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
-    if (id === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
-    if (id === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
-    if (id === "custom") return t_("presetFlow") || name || "Flow";
+    if (normId === "pomodoro") return t_("presetPomodoro") || name || "Pomodoro";
+    if (normId === "deep-work") return t_("presetDeepWork") || name || "Deep Work";
+    if (normId === "short-sprint") return t_("presetShortSprint") || name || "Short Sprint";
+    if (normId === "custom") return t_("presetFlow") || name || "Flow";
     return name || id;
 }
 

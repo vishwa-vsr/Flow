@@ -3199,5 +3199,14 @@
   },
   "quote": {
     "message": "专注于保持高效，而非单纯忙碌。"
+  },
+  "movedToUncategorized": {
+    "message": "已移至未分类"
+  },
+  "siteRemoved": {
+    "message": "已移除网站"
+  },
+  "enterNewPin": {
+    "message": "请输入您的新 4-6 位 PIN 码"
   }
 }

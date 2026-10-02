@@ -92,8 +92,15 @@ function minifyJsFallback(code) {
   return out.filter(Boolean).join('\n');
 }
 
+let hasEsbuild = false;
+try {
+  require.resolve('esbuild');
+  hasEsbuild = true;
+} catch (_) {}
+
 // Minify JavaScript using esbuild
 function minifyJs(srcPath, dstPath) {
+  if (!hasEsbuild) return false;
   try {
     const esbuild = require('esbuild');
     const content = fs.readFileSync(srcPath, 'utf8');
@@ -108,6 +115,7 @@ function minifyJs(srcPath, dstPath) {
     });
     return true;
   } catch (e) {
+    console.warn(`  [esbuild warning] Failed to bundle/minify ${path.basename(srcPath)}:`, e.message || e);
     return false;
   }
 }
@@ -210,7 +218,7 @@ function buildTarget(targetName, isFirefox = false) {
   function walkAndProcess(currentDir, relativeSubdir = '') {
     const list = fs.readdirSync(currentDir);
     list.forEach(item => {
-      if (SKIP.has(item)) return;
+      if (SKIP.has(item) || (hasEsbuild && item === 'modules' && relativeSubdir === 'dashboard')) return;
 
       const srcPath = path.join(currentDir, item);
       const relPath = path.join(relativeSubdir, item);
@@ -326,7 +334,7 @@ async function checkVersionAndBackup(skipPrompt) {
 
   let ans = 'n';
   if (!skipPrompt) {
-    ans = await askQuestion(`Would you like to bump the version from {currentVersion} to {nextVersion} and create a backup of the old code? (y/n) [n]: `);
+    ans = await askQuestion(`Would you like to bump the version from ${currentVersion} to ${nextVersion} and create a backup of the old code? (y/n) [n]: `);
     ans = ans.trim().toLowerCase();
   }
 
@@ -368,7 +376,7 @@ async function checkVersionAndBackup(skipPrompt) {
       // Update version in manifest
       manifest.version = nextVersion;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
-      console.log(`Version successfully updated to {nextVersion} in manifest.json.`);
+      console.log(`Version successfully updated to ${nextVersion} in manifest.json.`);
     } catch (e) {
       console.error('Failed to create backup:', e);
       process.exit(1);
