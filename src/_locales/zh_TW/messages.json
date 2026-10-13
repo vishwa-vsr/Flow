@@ -76,7 +76,7 @@
     "description": "Tab label for today's data view."
   },
   "tabAllTime": {
-    "message": "所有時間",
+    "message": "累計",
     "description": "Tab label for all-time data view."
   },
   "weeklyGoal": {
@@ -118,7 +118,7 @@
     "description": "Label for the short break duration input."
   },
   "longBreak": {
-    "message": "長假",
+    "message": "長休息",
     "description": "Label for the long break duration input."
   },
   "cycles": {
@@ -134,7 +134,7 @@
     "description": "Label for the advanced settings link or button."
   },
   "focusMode": {
-    "message": "對焦模式",
+    "message": "專注模式",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
@@ -146,7 +146,7 @@
     "description": "Prompt shown before a focus session begins."
   },
   "autoStopsIn": {
-    "message": "⏱ 自動停止",
+    "message": "⏱ 距離自動停止還有",
     "description": "Label indicating when focus mode will automatically stop."
   },
   "btnStart": {
@@ -183,11 +183,11 @@
     "description": "Lowercase sub-label for the today tab."
   },
   "sublblAllTime": {
-    "message": "所有時間",
+    "message": "累計",
     "description": "Lowercase sub-label for the all-time tab."
   },
   "catProductivity": {
-    "message": "生產力",
+    "message": "高效活動",
     "description": "Display name for the Productivity category."
   },
   "catLearning": {
@@ -211,7 +211,7 @@
     "description": "Heading for the list of all sites visited today."
   },
   "allTimeSiteUsage": {
-    "message": "所有時間的網站使用情況",
+    "message": "累計網站使用情況",
     "description": "Heading for the list of all-time site usage."
   },
   "clickTagToEdit": {
@@ -241,7 +241,7 @@
     "description": "Button to unblock a currently blocked site."
   },
   "blockSite": {
-    "message": "區塊站點",
+    "message": "封鎖網站",
     "description": "Button to block the current site."
   },
   "defaultInstant": {
@@ -263,7 +263,7 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "暫停焦點會話？",
+    "message": "暫停本次專注？",
     "description": "Title of the confirmation modal when pausing a session."
   },
   "confirmPauseDesc": {
@@ -279,11 +279,11 @@
     "description": "Status text during a Pomodoro short break phase."
   },
   "longBreakPhase": {
-    "message": "長假！",
+    "message": "長休息！",
     "description": "Status text during a Pomodoro long break phase."
   },
   "scheduledSession": {
-    "message": "預定會議",
+    "message": "排定的專注時段",
     "description": "Label for a focus session that was triggered by a schedule."
   },
   "schedule": {
@@ -325,11 +325,11 @@
     }
   },
   "active": {
-    "message": "積極的",
+    "message": "進行中",
     "description": "Status label indicating something is currently active."
   },
   "minWorkBreak": {
-    "message": "$work$ 最短工作時間 · $break$ 最短休息時間",
+    "message": "$work$ 分鐘工作 · $break$ 分鐘休息",
     "description": "Shows the current work and break durations.",
     "placeholders": {
       "work": {
@@ -375,7 +375,7 @@
     }
   },
   "hLeft": {
-    "message": "還剩 $h$ 小時 $m$ 米",
+    "message": "還剩 $h$ 小時 $m$ 分鐘",
     "description": "Hours and minutes remaining. Example: 0h 15m left.",
     "placeholders": {
       "h": {
@@ -389,7 +389,7 @@
     }
   },
   "blockedPageTitle": {
-    "message": "阻塞 — 流量",
+    "message": "已封鎖 — Flow",
     "description": "Page title for the blocked site page."
   },
   "blockedMsg1Emoji": {
@@ -397,7 +397,7 @@
     "description": "Emoji for blocked message variant 1."
   },
   "blockedMsg1Head": {
-    "message": "不是今天，冠軍。",
+    "message": "今天先別看啦！",
     "description": "Heading for blocked message variant 1."
   },
   "blockedMsg1Sub": {
@@ -421,7 +421,7 @@
     "description": "Emoji for blocked message variant 3."
   },
   "blockedMsg3Head": {
-    "message": "大腦動。",
+    "message": "明智之舉！",
     "description": "Heading for blocked message variant 3."
   },
   "blockedMsg3Sub": {
@@ -445,7 +445,7 @@
     "description": "Emoji for blocked message variant 5."
   },
   "blockedMsg5Head": {
-    "message": "你的紀律召喚了。",
+    "message": "自律在召喚你。",
     "description": "Heading for blocked message variant 5."
   },
   "blockedMsg5Sub": {
@@ -457,7 +457,7 @@
     "description": "Emoji for blocked message variant 6."
   },
   "blockedMsg6Head": {
-    "message": "沒有。絕對不是。",
+    "message": "不行，絕對不行。",
     "description": "Heading for blocked message variant 6."
   },
   "blockedMsg6Sub": {
@@ -481,11 +481,11 @@
     "description": "Emoji for blocked message variant 8."
   },
   "blockedMsg8Head": {
-    "message": "博克博克博克！",
+    "message": "咯咯咯！",
     "description": "Heading for blocked message variant 8."
   },
   "blockedMsg8Sub": {
-    "message": "那是拖延的聲音。別當一隻雞。",
+    "message": "這是拖延的聲音。別臨陣退縮。",
     "description": "Subtext for blocked message variant 8."
   },
   "neutralBlockHead": {
@@ -501,7 +501,7 @@
     "description": "Badge text for an instant block rule."
   },
   "ruleScheduleBlock": {
-    "message": "計劃塊活動",
+    "message": "定時封鎖已生效",
     "description": "Badge text for a schedule-based block rule."
   },
   "ruleTimeLimitReached": {
@@ -549,7 +549,7 @@
     "description": "Generic badge for any active block rule."
   },
   "blockedByFlow": {
-    "message": "被流量阻塞",
+    "message": "已被 Flow 封鎖",
     "description": "Generic blocked indicator."
   },
   "dailyLimitBadge": {
@@ -573,11 +573,11 @@
     }
   },
   "cooldownOver": {
-    "message": "冷卻結束！刷新頁面即可存取。",
+    "message": "休息結束！重新整理頁面即可造訪。",
     "description": "Message shown when the cooldown timer has expired."
   },
   "takeABreak": {
-    "message": "休息一下·在$time$解鎖",
+    "message": "休息一下 · $time$ 後解除封鎖",
     "description": "Cooldown message showing time until unblock.",
     "placeholders": {
       "time": {
@@ -617,11 +617,11 @@
     "description": "Generic label referring to the current site."
   },
   "quote1": {
-    "message": "“未來你正在看著。讓他們感到驕傲。”",
+    "message": "「未來的你正看著你。讓自己引以為傲。」",
     "description": "Motivational quote 1."
   },
   "quote2": {
-    "message": "“紀律就是在你現在想要的和你最想要的之間做出選擇。”",
+    "message": "「自律是在眼前的慾望和最重要的目標之間做出選擇。」",
     "description": "Motivational quote 2."
   },
   "quote3": {
@@ -645,7 +645,7 @@
     "description": "Motivational quote 7."
   },
   "quote8": {
-    "message": "「要么承受紀律的痛苦，要么承受後悔的痛苦。”",
+    "message": "「要麼承受自律的辛苦，要麼承受後悔的痛苦。」",
     "description": "Motivational quote 8."
   },
   "quote9": {
@@ -657,7 +657,7 @@
     "description": "Motivational quote 10."
   },
   "quote11": {
-    "message": "“紀律等於自由。”",
+    "message": "「自律帶來自由。」",
     "description": "Motivational quote 11."
   },
   "privacyModeTitle": {
@@ -675,7 +675,7 @@
     }
   },
   "siteManager": {
-    "message": "現場經理",
+    "message": "網站管理器",
     "description": "Label for the site manager button or section."
   },
   "settingsLocked": {
@@ -694,7 +694,7 @@
     "message": "時間分佈"
   },
   "top6Websites": {
-    "message": "前 6 大網站"
+    "message": "使用最多的 6 個網站"
   },
   "overview": {
     "message": "概覽"
@@ -703,7 +703,7 @@
     "message": "每日明細"
   },
   "topSites": {
-    "message": "熱門網站"
+    "message": "使用最多的網站"
   },
   "studyVsDistraction": {
     "message": "學習與分心",
@@ -713,7 +713,7 @@
     "message": "比較"
   },
   "insights": {
-    "message": "見解",
+    "message": "資料洞察",
     "description": "Insights tab title."
   },
   "7days": {
@@ -740,7 +740,7 @@
     "description": "End date label."
   },
   "apply": {
-    "message": "申請",
+    "message": "套用",
     "description": "Submit date range selection."
   },
   "total": {
@@ -748,7 +748,7 @@
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "最佳連續記錄"
+    "message": "最長連續達標天數"
   },
   "bestDay": {
     "message": "最佳的一天"
@@ -767,11 +767,11 @@
     "description": "Filter placeholder."
   },
   "domain": {
-    "message": "領域",
+    "message": "網域",
     "description": "Site manager table header."
   },
   "actions": {
-    "message": "行動",
+    "message": "操作",
     "description": "Site manager table header."
   },
   "category": {
@@ -791,11 +791,11 @@
     "description": "Focus category sum label."
   },
   "totalDistraction": {
-    "message": "完全分心",
+    "message": "分心總時長",
     "description": "Distraction category sum label."
   },
   "productivityRatio": {
-    "message": "生產力比",
+    "message": "高效活動佔比",
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
@@ -809,7 +809,7 @@
     "message": "365天持續性"
   },
   "heatmapHelp": {
-    "message": "每個方格就是一天。更環保=更多的專注時間。紅色=浪費了一天。",
+    "message": "每個方格代表一天。綠色越深，專注時間越多。紅色表示浪費的一天。",
     "description": "Description of yearly heatmap."
   },
   "clickToCustomizeThresholds": {
@@ -841,7 +841,7 @@
     "description": "Day of week with highest productivity."
   },
   "focusDesc": {
-    "message": "鎖定目標、追蹤目標並建立連續記錄。",
+    "message": "保持專注，追蹤目標，累積連續達標記錄。",
     "description": "Focus section subtitle."
   },
   "zeroCycles": {
@@ -849,7 +849,7 @@
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "開始對焦",
+    "message": "開始專注",
     "description": "Action button label."
   },
   "quickPresets": {
@@ -859,14 +859,14 @@
     "message": "專注排程"
   },
   "goalsStreak": {
-    "message": "進球數和連勝數",
+    "message": "目標與連續達標記錄",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
     "message": "每週目標 (小時)"
   },
   "dailyStreakMin": {
-    "message": "每日最少連續步行距離（公尺）",
+    "message": "每日連續達標所需時間（分鐘）",
     "description": "Config label."
   },
   "startWeekOn": {
@@ -907,7 +907,7 @@
     "description": "Delete history tooltip."
   },
   "noFocusSessions": {
-    "message": "還沒有焦點會議。",
+    "message": "尚無專注記錄。",
     "description": "Empty state label."
   },
   "siteManagerDesc": {
@@ -947,7 +947,7 @@
     "description": "Input field label."
   },
   "egRedirect": {
-    "message": "例如密碼直播",
+    "message": "例如 pw.live",
     "description": "Placeholder."
   },
   "addNewRule": {
@@ -971,7 +971,7 @@
     "description": "Input field label."
   },
   "egNeverTrackDomain": {
-    "message": "例如銀行.com、私人.com",
+    "message": "例如 bank.com, private.com",
     "description": "Placeholder."
   },
   "addToNeverTrack": {
@@ -1019,7 +1019,7 @@
     "description": "Placeholder."
   },
   "trackLabelSite": {
-    "message": "+ 追蹤/標籤站點",
+    "message": "+ 追蹤／標記網站",
     "description": "Action button."
   },
   "settingsDesc": {
@@ -1103,10 +1103,10 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "資料歷史保留"
+    "message": "使用記錄保留期限"
   },
   "dataHistoryRetentionDesc": {
-    "message": "自動刪除早於此時間的詳細追蹤日誌，以節省空間。"
+    "message": "自動刪除超過保留期限的詳細使用記錄，以節省空間。"
   },
   "after30Days": {
     "message": "30天後"
@@ -1148,7 +1148,7 @@
     "message": "淺色"
   },
   "languageOverride": {
-    "message": "語言/慣用語",
+    "message": "介面語言",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
@@ -1192,7 +1192,7 @@
     "description": "Language choice."
   },
   "langFrench": {
-    "message": "法語/法語",
+    "message": "法語 / Français",
     "description": "Language choice."
   },
   "langKorean": {
@@ -1212,7 +1212,7 @@
     "description": "Chart type toggle."
   },
   "barChart": {
-    "message": "酒吧",
+    "message": "長條圖",
     "description": "Chart type toggle."
   },
   "reduceTime": {
@@ -1244,7 +1244,7 @@
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$focusPct$% 焦點",
+    "message": "$focusPct$% 專注",
     "description": "Focus percentage summary.",
     "placeholders": {
       "focusPct": {
@@ -1264,7 +1264,7 @@
     }
   },
   "focusSplitDesc": {
-    "message": "您專注於 $focusedTime$，卻因 $distractedTime$ 而分心。",
+    "message": "專注時長為 $focusedTime$，分心時長為 $distractedTime$。",
     "description": "Productivity split description sentence.",
     "placeholders": {
       "focusedTime": {
@@ -1302,7 +1302,7 @@
     "description": "Tooltip text."
   },
   "totalTracked": {
-    "message": "總跟蹤數",
+    "message": "記錄總時長",
     "description": "Daily stat title."
   },
   "activeTimeline": {
@@ -1338,7 +1338,7 @@
     "description": "Config option helper text."
   },
   "focusCategories": {
-    "message": "焦點類別",
+    "message": "專注類別",
     "description": "Config setting label."
   },
   "selectFocusCatsDesc": {
@@ -1388,7 +1388,7 @@
     "description": "Input placeholder."
   },
   "savePin": {
-    "message": "儲存密碼",
+    "message": "儲存 PIN 碼",
     "description": "Action button."
   },
   "changePin": {
@@ -1479,13 +1479,13 @@
     "message": "清除規則"
   },
   "clearAllCategories": {
-    "message": "清除所有手動類別"
+    "message": "重設網站分類"
   },
   "clearAllCategoriesDesc": {
     "message": "將所有自訂網站類別標籤重設為預設值。"
   },
   "btnClearCategories": {
-    "message": "清除類別"
+    "message": "還原預設"
   },
   "supportFeedbackHeader": {
     "message": "支援與意見回饋"
@@ -1571,15 +1571,15 @@
     "description": "Modal title."
   },
   "fromTime": {
-    "message": "從時間",
+    "message": "開始時間",
     "description": "Input field label."
   },
   "toTime": {
-    "message": "到時間",
+    "message": "結束時間",
     "description": "Input field label."
   },
   "activeDays": {
-    "message": "活躍天數",
+    "message": "每週生效日",
     "description": "Input field label."
   },
   "saveChanges": {
@@ -1587,7 +1587,7 @@
     "description": "Action button."
   },
   "tagMonitor": {
-    "message": "標籤/監控",
+    "message": "標記／追蹤",
     "description": "Tab segment title."
   },
   "quickApplyPreset": {
@@ -1615,11 +1615,11 @@
     "description": "Input field label."
   },
   "perSessionLimit": {
-    "message": "每次會話限制",
+    "message": "單次使用時長限制",
     "description": "Rule mode option."
   },
   "sessionSettings": {
-    "message": "會話設定",
+    "message": "單次使用設定",
     "description": "Input block title."
   },
   "timeLimitMinutes": {
@@ -1627,7 +1627,7 @@
     "description": "Input field label."
   },
   "breakCooldownMinutes": {
-    "message": "休息/冷卻（分鐘）",
+    "message": "再次造訪前的休息時間（分鐘）",
     "description": "Input field label."
   },
   "scheduleBased": {
@@ -1635,19 +1635,19 @@
     "description": "Rule mode option."
   },
   "timeWindows": {
-    "message": "時間視窗",
+    "message": "生效時段",
     "description": "Input field label."
   },
   "addWindow": {
-    "message": "+ 新增視窗",
+    "message": "+ 新增時段",
     "description": "Action button."
   },
   "cooldownSite": {
-    "message": "降溫場地",
+    "message": "造訪前等待",
     "description": "Rule mode option."
   },
   "cooldownSettings": {
-    "message": "冷卻設定",
+    "message": "造訪等待設定",
     "description": "Input block title."
   },
   "waitTimeSec": {
@@ -1655,7 +1655,7 @@
     "description": "Input field label."
   },
   "frequency": {
-    "message": "頻率",
+    "message": "觸發頻率",
     "description": "Input field label."
   },
   "everyVisit": {
@@ -1667,7 +1667,7 @@
     "description": "Option choice."
   },
   "every10min": {
-    "message": "每10分鐘一班",
+    "message": "每 10 分鐘",
     "description": "Option choice."
   },
   "optDistraction": {
@@ -1675,7 +1675,7 @@
     "description": "Category choice."
   },
   "optProductivity": {
-    "message": "💻 生產力",
+    "message": "💻 高效活動",
     "description": "Category choice."
   },
   "optLearning": {
@@ -1715,7 +1715,7 @@
     "description": "Modal sub-text warning."
   },
   "createBlockPreset": {
-    "message": "建立區塊預設",
+    "message": "建立封鎖預設",
     "description": "Modal title."
   },
   "presetName": {
@@ -1743,7 +1743,7 @@
     "description": "Toast notice."
   },
   "undoNeverTrackRestored": {
-    "message": "撤銷：永不恢復軌道",
+    "message": "已復原：不追蹤規則已恢復",
     "description": "Toast notice."
   },
   "undoRuleRestored": {
@@ -1811,7 +1811,7 @@
     "description": "Toast notice."
   },
   "removedException": {
-    "message": "刪除了異常",
+    "message": "例外已移除",
     "description": "Toast notice."
   },
   "selectAtLeastOneDay": {
@@ -1865,7 +1865,7 @@
     "description": "Confirm action."
   },
   "clearRules": {
-    "message": "明確的規則",
+    "message": "清除規則",
     "description": "Confirm title."
   },
   "clearRulesConfirm": {
@@ -1881,15 +1881,15 @@
     "description": "Toast notice."
   },
   "clearCategories": {
-    "message": "清除類別",
+    "message": "重設網站分類",
     "description": "Confirm title."
   },
   "clearCategoriesConfirm": {
-    "message": "刪除所有自訂類別？",
+    "message": "將所有網站分類還原為 Flow 的預設設定？",
     "description": "Confirm body."
   },
   "categoriesCleared": {
-    "message": "類別已清除",
+    "message": "網站分類已還原為預設設定",
     "description": "Toast notice."
   },
   "clearHistoryConfirm": {
@@ -1933,7 +1933,7 @@
     "description": "Confirm body."
   },
   "importConfirmBtn": {
-    "message": "進口",
+    "message": "匯入",
     "description": "Confirm action."
   },
   "successfullyImportedDays": {
@@ -2011,7 +2011,7 @@
     "description": "Toast notice."
   },
   "addedDomainsToNeverTrack": {
-    "message": "將 $count$ 網域新增至 Never-Track",
+    "message": "已將 $count$ 個網域加入不追蹤清單",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -2021,7 +2021,7 @@
     }
   },
   "domainsAlreadyInList": {
-    "message": "網域已在清單中",
+    "message": "這些網域已在清單中",
     "description": "Toast notice."
   },
   "trackingResumed": {
@@ -2149,7 +2149,7 @@
     "description": "Action button."
   },
   "scheduledFocus": {
-    "message": "預定焦點",
+    "message": "排定的專注",
     "description": "Focus mode timer subtext."
   },
   "pinLengthError": {
@@ -2183,7 +2183,7 @@
     "description": "Migration progress status."
   },
   "importingDataDayOf": {
-    "message": "導入資料：第 $current$ 天 $total$...",
+    "message": "正在匯入：第 $current$ 天，共 $total$ 天…",
     "description": "Migration progress status.",
     "placeholders": {
       "current": {
@@ -2205,11 +2205,11 @@
     "description": "Migration progress status."
   },
   "creating": {
-    "message": "創造...",
+    "message": "正在建立…",
     "description": "Button progress indicator."
   },
   "editBlockPreset": {
-    "message": "編輯區塊預設",
+    "message": "編輯封鎖預設",
     "description": "Modal title."
   },
   "pausedAlways": {
@@ -2249,31 +2249,31 @@
     "description": "Button tooltip."
   },
   "daySundayLetter": {
-    "message": "S",
+    "message": "日",
     "description": "Sunday letter."
   },
   "dayMondayLetter": {
-    "message": "中號",
+    "message": "一",
     "description": "Monday letter."
   },
   "dayTuesdayLetter": {
-    "message": "時間",
+    "message": "二",
     "description": "Tuesday letter."
   },
   "dayWednesdayLetter": {
-    "message": "瓦",
+    "message": "三",
     "description": "Wednesday letter."
   },
   "dayThursdayLetter": {
-    "message": "時間",
+    "message": "四",
     "description": "Thursday letter."
   },
   "dayFridayLetter": {
-    "message": "F",
+    "message": "五",
     "description": "Friday letter."
   },
   "daySaturdayLetter": {
-    "message": "S",
+    "message": "六",
     "description": "Saturday letter."
   },
   "range7d": {
@@ -2313,14 +2313,14 @@
     "description": "seconds abbreviation"
   },
   "tabLimiter": {
-    "message": "每個域的製表符限制器",
+    "message": "每個網域的分頁數量限制",
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
     "message": "設為 0 以停用。"
   },
   "tabsMax": {
-    "message": "最大標籤數",
+    "message": "最多分頁數",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
@@ -2351,11 +2351,11 @@
     "message": "暫停或未啟用時間追蹤時，在擴充功能徽章上顯示「idl」。"
   },
   "dataRollover": {
-    "message": "數據和滾動",
+    "message": "資料與換日設定",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "夜貓子換日時間"
+    "message": "每日統計起始時間"
   },
   "nightOwlRolloverDesc": {
     "message": "定義新追蹤日的開始時間。如果您工作到很晚，這會很有用。"
@@ -2393,7 +2393,7 @@
     "description": "Weekday name."
   },
   "sun": {
-    "message": "太陽",
+    "message": "週日",
     "description": "Abbreviated weekday name."
   },
   "mon": {
@@ -2401,7 +2401,7 @@
     "description": "Abbreviated weekday name."
   },
   "tue": {
-    "message": "星期二",
+    "message": "週二",
     "description": "Abbreviated weekday name."
   },
   "wed": {
@@ -2409,7 +2409,7 @@
     "description": "Abbreviated weekday name."
   },
   "thu": {
-    "message": "星期四",
+    "message": "週四",
     "description": "Abbreviated weekday name."
   },
   "fri": {
@@ -2417,7 +2417,7 @@
     "description": "Abbreviated weekday name."
   },
   "sat": {
-    "message": "星期六",
+    "message": "週六",
     "description": "Abbreviated weekday name."
   },
   "everyday": {
@@ -2429,7 +2429,7 @@
     "description": "Schedule frequency label."
   },
   "focusSession": {
-    "message": "焦點會議",
+    "message": "專注時段",
     "description": "Default focus session name."
   },
   "addSchedule": {
@@ -2449,7 +2449,7 @@
     "description": "Time input label."
   },
   "end": {
-    "message": "結尾",
+    "message": "結束",
     "description": "Time input label."
   },
   "categoriesToBlock": {
@@ -2461,11 +2461,11 @@
     "description": "Option label."
   },
   "preScheduleNotificationDesc": {
-    "message": "在會議開始前收到通知。",
+    "message": "在專注時段開始前收到提醒。",
     "description": "Option sublabel."
   },
   "disabled": {
-    "message": "殘障人士",
+    "message": "停用",
     "description": "Option setting selection."
   },
   "oneMinBefore": {
@@ -2551,15 +2551,15 @@
     "description": "Built-in preset name."
   },
   "presetShortSprint": {
-    "message": "短距離衝刺",
+    "message": "短時間衝刺",
     "description": "Built-in preset name."
   },
   "presetFlow": {
-    "message": "流動",
+    "message": "Flow",
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "還沒有焦點會議。",
+    "message": "尚無專注記錄。",
     "description": "Placeholder text."
   },
   "startFirstSession": {
@@ -2571,7 +2571,7 @@
     "description": "Tab title."
   },
   "smartPresetsAndCategories": {
-    "message": "智慧預設和類別",
+    "message": "網站分類",
     "description": "Tab title."
   },
   "advancedTweaks": {
@@ -2607,7 +2607,7 @@
     }
   },
   "minActiveTimeShort": {
-    "message": "最短活動時間（公尺）",
+    "message": "最少活躍時間（分鐘）",
     "description": "Short label for sidebar settings."
   },
   "ratioThresholdShort": {
@@ -2615,7 +2615,7 @@
     "description": "Short label for sidebar settings."
   },
   "averageFocus": {
-    "message": "平均焦點",
+    "message": "平均專注時長",
     "description": "Chart line label."
   },
   "noRulesYet": {
@@ -2814,7 +2814,7 @@
     "message": "總計"
   },
   "statProductivity": {
-    "message": "生產力"
+    "message": "高效活動"
   },
   "statLearning": {
     "message": "學習"
@@ -2826,7 +2826,7 @@
     "message": "通訊"
   },
   "consistencyDesc": {
-    "message": "每個方塊代表一天。越綠=專注時間越多。紅色=浪費的一天。"
+    "message": "每個方格代表一天。綠色越深，專注時間越多。紅色表示浪費的一天。"
   },
   "legendLess": {
     "message": "較少"
@@ -2841,10 +2841,10 @@
     "message": "浪費 (365天)"
   },
   "focusSubtitle": {
-    "message": "鎖定目標，追蹤進度，並建立您的連續記錄。"
+    "message": "保持專注，追蹤目標，累積連續達標記錄。"
   },
   "goalsAndStreak": {
-    "message": "目標與連續記錄"
+    "message": "目標與連續達標記錄"
   },
   "minActiveTimeM": {
     "message": "最少活躍時間 (分鐘)"
@@ -3087,13 +3087,13 @@
     "message": "封鎖前的時間限制警告"
   },
   "tabLimiterTitle": {
-    "message": "每個網域的分頁限制"
+    "message": "每個網域的分頁數量限制"
   },
   "dataAndRollover": {
-    "message": "資料與換日"
+    "message": "資料與換日設定"
   },
   "nightOwlTitle": {
-    "message": "夜貓子換日時間"
+    "message": "每日統計起始時間"
   },
   "nightOwlDesc": {
     "message": "定義新追蹤日的開始時間。如果您工作到很晚，這會很有用。"
@@ -3102,10 +3102,10 @@
     "message": "午夜 (12:00 AM)"
   },
   "dataRetentionTitle": {
-    "message": "資料歷史保留"
+    "message": "使用記錄保留期限"
   },
   "dataRetentionDesc": {
-    "message": "自動刪除早於此時間的詳細追蹤日誌，以節省空間。"
+    "message": "自動刪除超過保留期限的詳細使用記錄，以節省空間。"
   },
   "tracked": {
     "message": "已追蹤"

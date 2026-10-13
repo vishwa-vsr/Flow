@@ -76,7 +76,7 @@
     "description": "Tab label for today's data view."
   },
   "tabAllTime": {
-    "message": "所有时间",
+    "message": "累计",
     "description": "Tab label for all-time data view."
   },
   "weeklyGoal": {
@@ -118,7 +118,7 @@
     "description": "Label for the short break duration input."
   },
   "longBreak": {
-    "message": "长假",
+    "message": "长休息",
     "description": "Label for the long break duration input."
   },
   "cycles": {
@@ -134,7 +134,7 @@
     "description": "Label for the advanced settings link or button."
   },
   "focusMode": {
-    "message": "对焦模式",
+    "message": "专注模式",
     "description": "Label for the focus mode toggle or section."
   },
   "pomodoro": {
@@ -146,7 +146,7 @@
     "description": "Prompt shown before a focus session begins."
   },
   "autoStopsIn": {
-    "message": "⏱ 自动停止",
+    "message": "⏱ 距自动停止还有",
     "description": "Label indicating when focus mode will automatically stop."
   },
   "btnStart": {
@@ -183,11 +183,11 @@
     "description": "Lowercase sub-label for the today tab."
   },
   "sublblAllTime": {
-    "message": "所有时间",
+    "message": "累计",
     "description": "Lowercase sub-label for the all-time tab."
   },
   "catProductivity": {
-    "message": "生产率",
+    "message": "高效活动",
     "description": "Display name for the Productivity category."
   },
   "catLearning": {
@@ -211,7 +211,7 @@
     "description": "Heading for the list of all sites visited today."
   },
   "allTimeSiteUsage": {
-    "message": "所有时间的网站使用情况",
+    "message": "累计网站使用情况",
     "description": "Heading for the list of all-time site usage."
   },
   "clickTagToEdit": {
@@ -241,7 +241,7 @@
     "description": "Button to unblock a currently blocked site."
   },
   "blockSite": {
-    "message": "块站点",
+    "message": "屏蔽网站",
     "description": "Button to block the current site."
   },
   "defaultInstant": {
@@ -263,7 +263,7 @@
     }
   },
   "confirmPauseTitle": {
-    "message": "暂停焦点会话？",
+    "message": "暂停本次专注？",
     "description": "Title of the confirmation modal when pausing a session."
   },
   "confirmPauseDesc": {
@@ -279,11 +279,11 @@
     "description": "Status text during a Pomodoro short break phase."
   },
   "longBreakPhase": {
-    "message": "长假！",
+    "message": "长休息！",
     "description": "Status text during a Pomodoro long break phase."
   },
   "scheduledSession": {
-    "message": "预定会议",
+    "message": "预约专注时段",
     "description": "Label for a focus session that was triggered by a schedule."
   },
   "schedule": {
@@ -325,11 +325,11 @@
     }
   },
   "active": {
-    "message": "积极的",
+    "message": "进行中",
     "description": "Status label indicating something is currently active."
   },
   "minWorkBreak": {
-    "message": "$work$ 最短工作时间 · $break$ 最短休息时间",
+    "message": "$work$ 分钟工作 · $break$ 分钟休息",
     "description": "Shows the current work and break durations.",
     "placeholders": {
       "work": {
@@ -375,7 +375,7 @@
     }
   },
   "hLeft": {
-    "message": "还剩 $h$ 小时 $m$ 米",
+    "message": "还剩 $h$ 小时 $m$ 分钟",
     "description": "Hours and minutes remaining. Example: 0h 15m left.",
     "placeholders": {
       "h": {
@@ -389,7 +389,7 @@
     }
   },
   "blockedPageTitle": {
-    "message": "阻塞 — 流量",
+    "message": "已屏蔽 — Flow",
     "description": "Page title for the blocked site page."
   },
   "blockedMsg1Emoji": {
@@ -397,7 +397,7 @@
     "description": "Emoji for blocked message variant 1."
   },
   "blockedMsg1Head": {
-    "message": "不是今天，冠军。",
+    "message": "今天先别看啦！",
     "description": "Heading for blocked message variant 1."
   },
   "blockedMsg1Sub": {
@@ -421,7 +421,7 @@
     "description": "Emoji for blocked message variant 3."
   },
   "blockedMsg3Head": {
-    "message": "大脑动。",
+    "message": "明智之举！",
     "description": "Heading for blocked message variant 3."
   },
   "blockedMsg3Sub": {
@@ -445,7 +445,7 @@
     "description": "Emoji for blocked message variant 5."
   },
   "blockedMsg5Head": {
-    "message": "你的纪律召唤了。",
+    "message": "自律在召唤你。",
     "description": "Heading for blocked message variant 5."
   },
   "blockedMsg5Sub": {
@@ -457,7 +457,7 @@
     "description": "Emoji for blocked message variant 6."
   },
   "blockedMsg6Head": {
-    "message": "没有。绝对不是。",
+    "message": "不行，绝对不行。",
     "description": "Heading for blocked message variant 6."
   },
   "blockedMsg6Sub": {
@@ -481,11 +481,11 @@
     "description": "Emoji for blocked message variant 8."
   },
   "blockedMsg8Head": {
-    "message": "博克博克博克！",
+    "message": "咯咯咯！",
     "description": "Heading for blocked message variant 8."
   },
   "blockedMsg8Sub": {
-    "message": "那是拖延的声音。别当一只鸡。",
+    "message": "这是拖延的声音。别临阵退缩。",
     "description": "Subtext for blocked message variant 8."
   },
   "neutralBlockHead": {
@@ -501,7 +501,7 @@
     "description": "Badge text for an instant block rule."
   },
   "ruleScheduleBlock": {
-    "message": "计划块活动",
+    "message": "定时屏蔽已生效",
     "description": "Badge text for a schedule-based block rule."
   },
   "ruleTimeLimitReached": {
@@ -549,7 +549,7 @@
     "description": "Generic badge for any active block rule."
   },
   "blockedByFlow": {
-    "message": "被流量阻塞",
+    "message": "已被 Flow 屏蔽",
     "description": "Generic blocked indicator."
   },
   "dailyLimitBadge": {
@@ -573,11 +573,11 @@
     }
   },
   "cooldownOver": {
-    "message": "冷却结束！刷新页面即可访问。",
+    "message": "休息结束！刷新页面即可访问。",
     "description": "Message shown when the cooldown timer has expired."
   },
   "takeABreak": {
-    "message": "休息一下·在$time$解锁",
+    "message": "休息一下 · $time$ 后解除屏蔽",
     "description": "Cooldown message showing time until unblock.",
     "placeholders": {
       "time": {
@@ -617,11 +617,11 @@
     "description": "Generic label referring to the current site."
   },
   "quote1": {
-    "message": "“未来你正在注视着。让他们感到骄傲。”",
+    "message": "“未来的你正看着你。让自己引以为傲。”",
     "description": "Motivational quote 1."
   },
   "quote2": {
-    "message": "“纪律就是在你现在想要的和你最想要的之间做出选择。”",
+    "message": "“自律是在眼前的欲望和最重要的目标之间做出选择。”",
     "description": "Motivational quote 2."
   },
   "quote3": {
@@ -645,7 +645,7 @@
     "description": "Motivational quote 7."
   },
   "quote8": {
-    "message": "“要么承受纪律的痛苦，要么承受后悔的痛苦。”",
+    "message": "“要么承受自律的辛苦，要么承受后悔的痛苦。”",
     "description": "Motivational quote 8."
   },
   "quote9": {
@@ -657,7 +657,7 @@
     "description": "Motivational quote 10."
   },
   "quote11": {
-    "message": "“纪律等于自由。”",
+    "message": "“自律带来自由。”",
     "description": "Motivational quote 11."
   },
   "privacyModeTitle": {
@@ -675,7 +675,7 @@
     }
   },
   "siteManager": {
-    "message": "现场经理",
+    "message": "网站管理器",
     "description": "Label for the site manager button or section."
   },
   "settingsLocked": {
@@ -694,7 +694,7 @@
     "message": "时间分配"
   },
   "top6Websites": {
-    "message": "热门网站 TOP 6"
+    "message": "使用最多的 6 个网站"
   },
   "overview": {
     "message": "概览"
@@ -703,7 +703,7 @@
     "message": "每日明细"
   },
   "topSites": {
-    "message": "热门网站"
+    "message": "使用最多的网站"
   },
   "studyVsDistraction": {
     "message": "学习与分心",
@@ -713,7 +713,7 @@
     "message": "对比"
   },
   "insights": {
-    "message": "见解",
+    "message": "数据洞察",
     "description": "Insights tab title."
   },
   "7days": {
@@ -740,7 +740,7 @@
     "description": "End date label."
   },
   "apply": {
-    "message": "申请",
+    "message": "应用",
     "description": "Submit date range selection."
   },
   "total": {
@@ -748,7 +748,7 @@
     "description": "Sum of tracked minutes."
   },
   "bestStreak": {
-    "message": "最佳连续"
+    "message": "最长连续达标天数"
   },
   "bestDay": {
     "message": "最佳单日"
@@ -767,11 +767,11 @@
     "description": "Filter placeholder."
   },
   "domain": {
-    "message": "领域",
+    "message": "域名",
     "description": "Site manager table header."
   },
   "actions": {
-    "message": "行动",
+    "message": "操作",
     "description": "Site manager table header."
   },
   "category": {
@@ -791,11 +791,11 @@
     "description": "Focus category sum label."
   },
   "totalDistraction": {
-    "message": "完全分心",
+    "message": "分心总时长",
     "description": "Distraction category sum label."
   },
   "productivityRatio": {
-    "message": "生产率比",
+    "message": "高效活动占比",
     "description": "Comparison ratio label."
   },
   "goodDays365d": {
@@ -809,7 +809,7 @@
     "message": "365天持续度"
   },
   "heatmapHelp": {
-    "message": "每个方格就是一天。更环保=更多的专注时间。红色=浪费了一天。",
+    "message": "每个方格代表一天。绿色越深，专注时间越多。红色表示浪费的一天。",
     "description": "Description of yearly heatmap."
   },
   "clickToCustomizeThresholds": {
@@ -841,7 +841,7 @@
     "description": "Day of week with highest productivity."
   },
   "focusDesc": {
-    "message": "锁定目标、跟踪目标并建立连续记录。",
+    "message": "保持专注，追踪目标，积累连续达标记录。",
     "description": "Focus section subtitle."
   },
   "zeroCycles": {
@@ -849,7 +849,7 @@
     "description": "Zero completed cycles."
   },
   "startFocus": {
-    "message": "开始聚焦",
+    "message": "开始专注",
     "description": "Action button label."
   },
   "quickPresets": {
@@ -859,14 +859,14 @@
     "message": "计划排期"
   },
   "goalsStreak": {
-    "message": "进球数和连胜数",
+    "message": "目标与连续达标记录",
     "description": "Group title."
   },
   "weeklyGoalHrs": {
     "message": "每周目标 (小时)"
   },
   "dailyStreakMin": {
-    "message": "每日最少连续行走距离（米）",
+    "message": "每日连续达标所需时间（分钟）",
     "description": "Config label."
   },
   "startWeekOn": {
@@ -907,7 +907,7 @@
     "description": "Delete history tooltip."
   },
   "noFocusSessions": {
-    "message": "还没有焦点会议。",
+    "message": "暂无专注记录。",
     "description": "Empty state label."
   },
   "siteManagerDesc": {
@@ -947,7 +947,7 @@
     "description": "Input field label."
   },
   "egRedirect": {
-    "message": "例如密码直播",
+    "message": "例如 pw.live",
     "description": "Placeholder."
   },
   "addNewRule": {
@@ -971,7 +971,7 @@
     "description": "Input field label."
   },
   "egNeverTrackDomain": {
-    "message": "例如银行.com、私人.com",
+    "message": "例如 bank.com, private.com",
     "description": "Placeholder."
   },
   "addToNeverTrack": {
@@ -1019,7 +1019,7 @@
     "description": "Placeholder."
   },
   "trackLabelSite": {
-    "message": "+ 跟踪/标签站点",
+    "message": "+ 追踪／标记网站",
     "description": "Action button."
   },
   "settingsDesc": {
@@ -1103,10 +1103,10 @@
     "description": "Dropdown choice."
   },
   "dataHistoryRetention": {
-    "message": "数据历史保留"
+    "message": "使用记录保留期限"
   },
   "dataHistoryRetentionDesc": {
-    "message": "自动删除长于此持续时间的详细跟踪日志以节省空间。"
+    "message": "自动删除超过保留期限的详细使用记录，以节省空间。"
   },
   "after30Days": {
     "message": "30 天后"
@@ -1148,7 +1148,7 @@
     "message": "浅色"
   },
   "languageOverride": {
-    "message": "语言/习语",
+    "message": "界面语言",
     "description": "Settings config option."
   },
   "languageOverrideDesc": {
@@ -1192,7 +1192,7 @@
     "description": "Language choice."
   },
   "langFrench": {
-    "message": "法语/法语",
+    "message": "法语 / Français",
     "description": "Language choice."
   },
   "langKorean": {
@@ -1212,7 +1212,7 @@
     "description": "Chart type toggle."
   },
   "barChart": {
-    "message": "酒吧",
+    "message": "柱状图",
     "description": "Chart type toggle."
   },
   "reduceTime": {
@@ -1244,7 +1244,7 @@
     "description": "Card label."
   },
   "pctFocus": {
-    "message": "$focusPct$% 焦点",
+    "message": "$focusPct$% 专注",
     "description": "Focus percentage summary.",
     "placeholders": {
       "focusPct": {
@@ -1264,7 +1264,7 @@
     }
   },
   "focusSplitDesc": {
-    "message": "您专注于 $focusedTime$，却因 $distractedTime$ 而分心。",
+    "message": "专注时长为 $focusedTime$，分心时长为 $distractedTime$。",
     "description": "Productivity split description sentence.",
     "placeholders": {
       "focusedTime": {
@@ -1302,7 +1302,7 @@
     "description": "Tooltip text."
   },
   "totalTracked": {
-    "message": "总跟踪数",
+    "message": "记录总时长",
     "description": "Daily stat title."
   },
   "activeTimeline": {
@@ -1338,7 +1338,7 @@
     "description": "Config option helper text."
   },
   "focusCategories": {
-    "message": "焦点类别",
+    "message": "专注类别",
     "description": "Config setting label."
   },
   "selectFocusCatsDesc": {
@@ -1388,7 +1388,7 @@
     "description": "Input placeholder."
   },
   "savePin": {
-    "message": "保存密码",
+    "message": "保存 PIN 码",
     "description": "Action button."
   },
   "changePin": {
@@ -1479,13 +1479,13 @@
     "message": "清除规则"
   },
   "clearAllCategories": {
-    "message": "清除所有手动分类"
+    "message": "重置网站分类"
   },
   "clearAllCategoriesDesc": {
     "message": "将所有自定义网站分类标签重置为默认值。"
   },
   "btnClearCategories": {
-    "message": "清除分类"
+    "message": "恢复默认"
   },
   "supportFeedbackHeader": {
     "message": "支持与反馈"
@@ -1571,15 +1571,15 @@
     "description": "Modal title."
   },
   "fromTime": {
-    "message": "从时间",
+    "message": "开始时间",
     "description": "Input field label."
   },
   "toTime": {
-    "message": "到时间",
+    "message": "结束时间",
     "description": "Input field label."
   },
   "activeDays": {
-    "message": "活跃天数",
+    "message": "每周生效日",
     "description": "Input field label."
   },
   "saveChanges": {
@@ -1587,7 +1587,7 @@
     "description": "Action button."
   },
   "tagMonitor": {
-    "message": "标签/监控",
+    "message": "标记／追踪",
     "description": "Tab segment title."
   },
   "quickApplyPreset": {
@@ -1615,11 +1615,11 @@
     "description": "Input field label."
   },
   "perSessionLimit": {
-    "message": "每次会话限制",
+    "message": "单次使用时长限制",
     "description": "Rule mode option."
   },
   "sessionSettings": {
-    "message": "会话设置",
+    "message": "单次使用设置",
     "description": "Input block title."
   },
   "timeLimitMinutes": {
@@ -1627,7 +1627,7 @@
     "description": "Input field label."
   },
   "breakCooldownMinutes": {
-    "message": "休息/冷却（分钟）",
+    "message": "再次访问前的休息时间（分钟）",
     "description": "Input field label."
   },
   "scheduleBased": {
@@ -1635,19 +1635,19 @@
     "description": "Rule mode option."
   },
   "timeWindows": {
-    "message": "时间窗口",
+    "message": "生效时段",
     "description": "Input field label."
   },
   "addWindow": {
-    "message": "+ 添加窗口",
+    "message": "+ 添加时段",
     "description": "Action button."
   },
   "cooldownSite": {
-    "message": "降温场地",
+    "message": "访问前等待",
     "description": "Rule mode option."
   },
   "cooldownSettings": {
-    "message": "冷却设置",
+    "message": "访问等待设置",
     "description": "Input block title."
   },
   "waitTimeSec": {
@@ -1655,7 +1655,7 @@
     "description": "Input field label."
   },
   "frequency": {
-    "message": "频率",
+    "message": "触发频率",
     "description": "Input field label."
   },
   "everyVisit": {
@@ -1667,7 +1667,7 @@
     "description": "Option choice."
   },
   "every10min": {
-    "message": "每10分钟一班",
+    "message": "每 10 分钟",
     "description": "Option choice."
   },
   "optDistraction": {
@@ -1675,7 +1675,7 @@
     "description": "Category choice."
   },
   "optProductivity": {
-    "message": "💻 生产力",
+    "message": "💻 高效活动",
     "description": "Category choice."
   },
   "optLearning": {
@@ -1715,7 +1715,7 @@
     "description": "Modal sub-text warning."
   },
   "createBlockPreset": {
-    "message": "创建块预设",
+    "message": "创建屏蔽预设",
     "description": "Modal title."
   },
   "presetName": {
@@ -1743,7 +1743,7 @@
     "description": "Toast notice."
   },
   "undoNeverTrackRestored": {
-    "message": "撤消：永不恢复轨道",
+    "message": "已撤销：不追踪规则已恢复",
     "description": "Toast notice."
   },
   "undoRuleRestored": {
@@ -1811,7 +1811,7 @@
     "description": "Toast notice."
   },
   "removedException": {
-    "message": "删除了异常",
+    "message": "例外已移除",
     "description": "Toast notice."
   },
   "selectAtLeastOneDay": {
@@ -1865,7 +1865,7 @@
     "description": "Confirm action."
   },
   "clearRules": {
-    "message": "明确的规则",
+    "message": "清除规则",
     "description": "Confirm title."
   },
   "clearRulesConfirm": {
@@ -1881,15 +1881,15 @@
     "description": "Toast notice."
   },
   "clearCategories": {
-    "message": "清除类别",
+    "message": "重置网站分类",
     "description": "Confirm title."
   },
   "clearCategoriesConfirm": {
-    "message": "删除所有自定义类别？",
+    "message": "将所有网站分类恢复为 Flow 的默认设置？",
     "description": "Confirm body."
   },
   "categoriesCleared": {
-    "message": "类别已清除",
+    "message": "网站分类已恢复默认",
     "description": "Toast notice."
   },
   "clearHistoryConfirm": {
@@ -1933,7 +1933,7 @@
     "description": "Confirm body."
   },
   "importConfirmBtn": {
-    "message": "进口",
+    "message": "导入",
     "description": "Confirm action."
   },
   "successfullyImportedDays": {
@@ -2011,7 +2011,7 @@
     "description": "Toast notice."
   },
   "addedDomainsToNeverTrack": {
-    "message": "将 $count$ 域添加到 Never-Track",
+    "message": "已将 $count$ 个域名加入不追踪列表",
     "description": "Toast notice.",
     "placeholders": {
       "count": {
@@ -2021,7 +2021,7 @@
     }
   },
   "domainsAlreadyInList": {
-    "message": "域已在列表中",
+    "message": "这些域名已在列表中",
     "description": "Toast notice."
   },
   "trackingResumed": {
@@ -2149,7 +2149,7 @@
     "description": "Action button."
   },
   "scheduledFocus": {
-    "message": "预定焦点",
+    "message": "预约专注",
     "description": "Focus mode timer subtext."
   },
   "pinLengthError": {
@@ -2183,7 +2183,7 @@
     "description": "Migration progress status."
   },
   "importingDataDayOf": {
-    "message": "导入数据：第 $current$ 天 $total$...",
+    "message": "正在导入：第 $current$ 天，共 $total$ 天…",
     "description": "Migration progress status.",
     "placeholders": {
       "current": {
@@ -2205,11 +2205,11 @@
     "description": "Migration progress status."
   },
   "creating": {
-    "message": "创造...",
+    "message": "正在创建…",
     "description": "Button progress indicator."
   },
   "editBlockPreset": {
-    "message": "编辑块预设",
+    "message": "编辑屏蔽预设",
     "description": "Modal title."
   },
   "pausedAlways": {
@@ -2249,31 +2249,31 @@
     "description": "Button tooltip."
   },
   "daySundayLetter": {
-    "message": "S",
+    "message": "日",
     "description": "Sunday letter."
   },
   "dayMondayLetter": {
-    "message": "中号",
+    "message": "一",
     "description": "Monday letter."
   },
   "dayTuesdayLetter": {
-    "message": "时间",
+    "message": "二",
     "description": "Tuesday letter."
   },
   "dayWednesdayLetter": {
-    "message": "瓦",
+    "message": "三",
     "description": "Wednesday letter."
   },
   "dayThursdayLetter": {
-    "message": "时间",
+    "message": "四",
     "description": "Thursday letter."
   },
   "dayFridayLetter": {
-    "message": "F",
+    "message": "五",
     "description": "Friday letter."
   },
   "daySaturdayLetter": {
-    "message": "S",
+    "message": "六",
     "description": "Saturday letter."
   },
   "range7d": {
@@ -2313,14 +2313,14 @@
     "description": "seconds abbreviation"
   },
   "tabLimiter": {
-    "message": "每个域的制表符限制器",
+    "message": "每个域名的标签页数量限制",
     "description": "Tab limiter option"
   },
   "tabLimiterDesc": {
     "message": "设置为 0 以禁用。"
   },
   "tabsMax": {
-    "message": "最大标签数",
+    "message": "最多标签页数",
     "description": "tabs limit label"
   },
   "trackingExceptions": {
@@ -2351,11 +2351,11 @@
     "message": "当时间跟踪暂停或未激活时在徽章上显示 \"idl\"。"
   },
   "dataRollover": {
-    "message": "数据和滚动",
+    "message": "数据与换日设置",
     "description": "Data and rollover card header"
   },
   "nightOwlRollover": {
-    "message": "夜猫子重置时间"
+    "message": "每日统计起始时间"
   },
   "nightOwlRolloverDesc": {
     "message": "定义新跟踪天的开始时间。对于深夜工作很有用。"
@@ -2393,7 +2393,7 @@
     "description": "Weekday name."
   },
   "sun": {
-    "message": "太阳",
+    "message": "周日",
     "description": "Abbreviated weekday name."
   },
   "mon": {
@@ -2401,7 +2401,7 @@
     "description": "Abbreviated weekday name."
   },
   "tue": {
-    "message": "星期二",
+    "message": "周二",
     "description": "Abbreviated weekday name."
   },
   "wed": {
@@ -2409,7 +2409,7 @@
     "description": "Abbreviated weekday name."
   },
   "thu": {
-    "message": "星期四",
+    "message": "周四",
     "description": "Abbreviated weekday name."
   },
   "fri": {
@@ -2417,7 +2417,7 @@
     "description": "Abbreviated weekday name."
   },
   "sat": {
-    "message": "星期六",
+    "message": "周六",
     "description": "Abbreviated weekday name."
   },
   "everyday": {
@@ -2429,7 +2429,7 @@
     "description": "Schedule frequency label."
   },
   "focusSession": {
-    "message": "焦点会议",
+    "message": "专注时段",
     "description": "Default focus session name."
   },
   "addSchedule": {
@@ -2449,7 +2449,7 @@
     "description": "Time input label."
   },
   "end": {
-    "message": "结尾",
+    "message": "结束",
     "description": "Time input label."
   },
   "categoriesToBlock": {
@@ -2461,11 +2461,11 @@
     "description": "Option label."
   },
   "preScheduleNotificationDesc": {
-    "message": "在会议开始前收到通知。",
+    "message": "在专注时段开始前收到提醒。",
     "description": "Option sublabel."
   },
   "disabled": {
-    "message": "残疾人",
+    "message": "关闭",
     "description": "Option setting selection."
   },
   "oneMinBefore": {
@@ -2551,15 +2551,15 @@
     "description": "Built-in preset name."
   },
   "presetShortSprint": {
-    "message": "短距离冲刺",
+    "message": "短时冲刺",
     "description": "Built-in preset name."
   },
   "presetFlow": {
-    "message": "流动",
+    "message": "Flow",
     "description": "Built-in preset name."
   },
   "noFocusSessionsYet": {
-    "message": "还没有焦点会议。",
+    "message": "暂无专注记录。",
     "description": "Placeholder text."
   },
   "startFirstSession": {
@@ -2571,7 +2571,7 @@
     "description": "Tab title."
   },
   "smartPresetsAndCategories": {
-    "message": "智能预设和类别",
+    "message": "网站分类",
     "description": "Tab title."
   },
   "advancedTweaks": {
@@ -2607,7 +2607,7 @@
     }
   },
   "minActiveTimeShort": {
-    "message": "最短活动时间（米）",
+    "message": "最少活跃时间（分钟）",
     "description": "Short label for sidebar settings."
   },
   "ratioThresholdShort": {
@@ -2615,7 +2615,7 @@
     "description": "Short label for sidebar settings."
   },
   "averageFocus": {
-    "message": "平均焦点",
+    "message": "平均专注时长",
     "description": "Chart line label."
   },
   "noRulesYet": {
@@ -2814,7 +2814,7 @@
     "message": "总计"
   },
   "statProductivity": {
-    "message": "生产力"
+    "message": "高效活动"
   },
   "statLearning": {
     "message": "学习"
@@ -2826,7 +2826,7 @@
     "message": "沟通"
   },
   "consistencyDesc": {
-    "message": "每个方块代表一天。绿色越深 = 专注时间越多。红色 = 浪费的一天。"
+    "message": "每个方格代表一天。绿色越深，专注时间越多。红色表示浪费的一天。"
   },
   "legendLess": {
     "message": "少"
@@ -2841,10 +2841,10 @@
     "message": "浪费天数 (365天)"
   },
   "focusSubtitle": {
-    "message": "保持专注，跟踪目标，建立连胜记录。"
+    "message": "保持专注，追踪目标，积累连续达标记录。"
   },
   "goalsAndStreak": {
-    "message": "目标与连胜"
+    "message": "目标与连续达标记录"
   },
   "minActiveTimeM": {
     "message": "最短活动时间 (分钟)"
@@ -3087,13 +3087,13 @@
     "message": "拦截前的时间限制警告"
   },
   "tabLimiterTitle": {
-    "message": "每个域名的标签页限制"
+    "message": "每个域名的标签页数量限制"
   },
   "dataAndRollover": {
-    "message": "数据与重置"
+    "message": "数据与换日设置"
   },
   "nightOwlTitle": {
-    "message": "夜猫子重置时间"
+    "message": "每日统计起始时间"
   },
   "nightOwlDesc": {
     "message": "定义新跟踪天的开始时间。对于深夜工作很有用。"
@@ -3102,10 +3102,10 @@
     "message": "午夜 (12:00 AM)"
   },
   "dataRetentionTitle": {
-    "message": "数据历史保留"
+    "message": "使用记录保留期限"
   },
   "dataRetentionDesc": {
-    "message": "自动删除长于此持续时间的详细跟踪日志以节省空间。"
+    "message": "自动删除超过保留期限的详细使用记录，以节省空间。"
   },
   "tracked": {
     "message": "已追踪"
